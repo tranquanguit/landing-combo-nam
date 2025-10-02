@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xóa Mờ Nám – Lấy Lại Làn Da Tự Tin</title>
+    <meta name="description"
+        content="Combo trị nám Mocha giúp làm mờ vết nám sau 2 tuần, an toàn cho da nhạy cảm. Giải pháp cho phụ nữ muốn lấy lại làn da sáng mịn và tự tin.">
+    <meta name="keywords" content="trị nám, trị nám sau sinh, combo trị nám Mocha, da sáng mịn, mỹ phẩm Mocha">
+    <meta property="og:title" content="Combo Trị Nám Mocha - Da Sáng Đều Màu">
+    <meta property="og:description" content="Chỉ sau 2 tuần, nám mờ rõ rệt, da sáng hơn, đều màu. Giải pháp an toàn cho phụ nữ sau sinh.">
+    <meta property="og:image" content="https://mochatrinam.vn/images/hero-full.jpg">
+    <meta property="og:url" content="https://mochatrinam.vn">    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/flowbite@1.8.1/dist/flowbite.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="./images/favicon.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        section {
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+
+        /* Enhanced CTA Button Styles with SEO-friendly animations */
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.75);
+            cursor: pointer;
+            border: none;
+            outline: none;
+            text-decoration: none;
+            display: inline-block;
+            /* SEO: Ensure buttons are focusable and accessible */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 25px 0 rgba(236, 72, 153, 0.9);
+            background: linear-gradient(135deg, #ec4899, #be185d);
+        }
+
+        .cta-button:focus {
+            outline: 3px solid rgba(236, 72, 153, 0.5);
+            outline-offset: 2px;
+        }
+
+        .cta-button:active {
+            transform: translateY(-2px) scale(0.98);
+            transition: all 0.1s ease;
+        }
+
+        /* Floating animation for eye-catching effect */
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Ripple effect for click feedback */
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .cta-button.clicked::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Pulse animation for urgency */
+        .cta-button.pulse {
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.75);
+            }
+
+            50% {
+                box-shadow: 0 4px 25px 0 rgba(236, 72, 153, 1);
+            }
+
+            100% {
+                box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.75);
+            }
+        }
+
+        /* Bounce animation for special emphasis */
+        .cta-button.bounce {
+            animation: bounce-attention 1s ease-in-out;
+        }
+
+        @keyframes bounce-attention {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Shake animation for attention-grabbing effect */
+        .cta-button.shake {
+            animation: shake-attention 0.8s ease-in-out;
+        }
+
+        @keyframes shake-attention {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-3px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(3px);
+            }
+        }
+
+        /* Wiggle animation for playful movement */
+        .cta-button.wiggle {
+            animation: wiggle-attention 1.2s ease-in-out;
+        }
+
+        @keyframes wiggle-attention {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-2deg);
+            }
+
+            75% {
+                transform: rotate(2deg);
+            }
+        }
+
+        /* Vibrate animation for urgency */
+        .cta-button.vibrate {
+            animation: vibrate-attention 0.5s ease-in-out;
+        }
+
+        @keyframes vibrate-attention {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(-1px, -1px);
+            }
+
+            50% {
+                transform: translate(1px, 1px);
+            }
+
+            75% {
+                transform: translate(-1px, 1px);
+            }
+        }
+
+        /* Float animation for gentle movement */
+        .cta-button.float {
+            animation: float-gentle 3s ease-in-out infinite;
+        }
+
+        @keyframes float-gentle {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Rock animation for subtle swaying */
+        .cta-button.rock {
+            animation: rock-gentle 4s ease-in-out infinite;
+        }
+
+        @keyframes rock-gentle {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(0.5deg);
+            }
+
+            75% {
+                transform: rotate(-0.5deg);
+            }
+        }
+
+        /* Continuous flashing light effects */
+        .cta-button.flash {
+            animation: flash-light 2s ease-in-out infinite;
+        }
+
+        @keyframes flash-light {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.75);
+                background: #ec4899;
+            }
+
+            25% {
+                box-shadow: 0 8px 30px 0 rgba(236, 72, 153, 1);
+                background: linear-gradient(135deg, #ec4899, #f472b6);
+            }
+
+            50% {
+                box-shadow: 0 12px 40px 0 rgba(236, 72, 153, 1);
+                background: linear-gradient(135deg, #f472b6, #fb7185);
+            }
+
+            75% {
+                box-shadow: 0 8px 30px 0 rgba(236, 72, 153, 1);
+                background: linear-gradient(135deg, #fb7185, #ec4899);
+            }
+        }
+
+        /* Rapid flash for urgency */
+        .cta-button.rapid-flash {
+            animation: rapid-flash 1s ease-in-out infinite;
+        }
+
+        @keyframes rapid-flash {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.75);
+                background: #ec4899;
+            }
+
+            50% {
+                box-shadow: 0 10px 35px 0 rgba(255, 255, 255, 0.8), 0 0 20px 0 rgba(236, 72, 153, 1);
+                background: linear-gradient(135deg, #ffffff, #ec4899);
+            }
+        }
+
+        /* Shimmer flash effect */
+        .cta-button.shimmer-flash {
+            position: relative;
+            overflow: hidden;
+            animation: shimmer-flash 3s ease-in-out infinite;
+        }
+
+        .cta-button.shimmer-flash::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            animation: shimmer-sweep 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer-flash {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.75);
+            }
+
+            50% {
+                box-shadow: 0 8px 25px 0 rgba(236, 72, 153, 1);
+            }
+        }
+
+        @keyframes shimmer-sweep {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Neon glow flash */
+        .cta-button.neon-flash {
+            animation: neon-flash 2.5s ease-in-out infinite;
+        }
+
+        @keyframes neon-flash {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.75);
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 20px 0 rgba(236, 72, 153, 1), 0 0 40px 0 rgba(236, 72, 153, 0.8);
+                text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+            }
+        }
+
+        /* Rainbow flash effect */
+        .cta-button.rainbow-flash {
+            animation: rainbow-flash 4s ease-in-out infinite;
+        }
+
+        @keyframes rainbow-flash {
+            0% {
+                box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.75);
+                background: #ec4899;
+            }
+
+            16.66% {
+                box-shadow: 0 8px 25px 0 rgba(255, 0, 0, 0.8);
+                background: #ff0000;
+            }
+
+            33.33% {
+                box-shadow: 0 8px 25px 0 rgba(255, 165, 0, 0.8);
+                background: #ffa500;
+            }
+
+            50% {
+                box-shadow: 0 8px 25px 0 rgba(255, 255, 0, 0.8);
+                background: #ffff00;
+            }
+
+            66.66% {
+                box-shadow: 0 8px 25px 0 rgba(0, 255, 0, 0.8);
+                background: #00ff00;
+            }
+
+            83.33% {
+                box-shadow: 0 8px 25px 0 rgba(0, 0, 255, 0.8);
+                background: #0000ff;
+            }
+
+            100% {
+                box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.75);
+                background: #ec4899;
+            }
+        }
+
+        .gold-border {
+            border: 2px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(to right, #FBBF24, #D97706);
+        }
+
+        .gold-text {
+            background: -webkit-linear-gradient(#FBBF24, #D97706);
+            background: linear-gradient(#FBBF24, #D97706);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .faq-question.active+.faq-answer {
+            max-height: 200px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                background-attachment: scroll;
+                min-height: 80vh;
+            }
+
+            /* Mobile-optimized button animations */
+            .cta-button {
+                -webkit-tap-highlight-color: rgba(236, 72, 153, 0.3);
+                touch-action: manipulation;
+            }
+
+            .cta-button:hover {
+                transform: translateY(-2px) scale(1.01);
+            }
+
+            .cta-button:active {
+                transform: translateY(0) scale(0.99);
+                transition: all 0.1s ease;
+            }
+
+            /* Reduce animation intensity on mobile for better performance */
+            .cta-button.pulse {
+                animation: pulse-glow-mobile 3s infinite;
+            }
+
+            @keyframes pulse-glow-mobile {
+                0% {
+                    box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.6);
+                }
+
+                50% {
+                    box-shadow: 0 4px 20px 0 rgba(236, 72, 153, 0.8);
+                }
+
+                100% {
+                    box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.6);
+                }
+            }
+
+            /* Mobile-optimized shake animations */
+            .cta-button.shake {
+                animation: shake-mobile 0.6s ease-in-out;
+            }
+
+            @keyframes shake-mobile {
+
+                0%,
+                100% {
+                    transform: translateX(0);
+                }
+
+                25% {
+                    transform: translateX(-2px);
+                }
+
+                75% {
+                    transform: translateX(2px);
+                }
+            }
+
+            /* Mobile-optimized wiggle */
+            .cta-button.wiggle {
+                animation: wiggle-mobile 1s ease-in-out;
+            }
+
+            @keyframes wiggle-mobile {
+
+                0%,
+                100% {
+                    transform: rotate(0deg);
+                }
+
+                50% {
+                    transform: rotate(1deg);
+                }
+            }
+
+            /* Mobile-optimized flash effects */
+            .cta-button.flash {
+                animation: flash-mobile 3s ease-in-out infinite;
+            }
+
+            @keyframes flash-mobile {
+
+                0%,
+                100% {
+                    box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.6);
+                }
+
+                50% {
+                    box-shadow: 0 6px 20px 0 rgba(236, 72, 153, 0.9);
+                }
+            }
+
+            .cta-button.rapid-flash {
+                animation: rapid-flash-mobile 2s ease-in-out infinite;
+            }
+
+            @keyframes rapid-flash-mobile {
+
+                0%,
+                100% {
+                    box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.6);
+                }
+
+                50% {
+                    box-shadow: 0 6px 20px 0 rgba(255, 255, 255, 0.6), 0 0 15px 0 rgba(236, 72, 153, 0.8);
+                }
+            }
+
+            .cta-button.neon-flash {
+                animation: neon-flash-mobile 3s ease-in-out infinite;
+            }
+
+            @keyframes neon-flash-mobile {
+
+                0%,
+                100% {
+                    box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.6);
+                }
+
+                50% {
+                    box-shadow: 0 0 15px 0 rgba(236, 72, 153, 0.8);
+                }
+            }
+
+            /* Mobile-optimized shimmer-flash */
+            .cta-button.shimmer-flash {
+                animation: shimmer-flash-mobile 3s ease-in-out infinite;
+            }
+
+            @keyframes shimmer-flash-mobile {
+
+                0%,
+                100% {
+                    box-shadow: 0 4px 15px 0 rgba(236, 72, 153, 0.6);
+                }
+
+                50% {
+                    box-shadow: 0 6px 20px 0 rgba(236, 72, 153, 0.9);
+                }
+            }
+
+            /* Optimize ripple effect for touch devices */
+            .cta-button::after {
+                transition: width 0.2s ease, height 0.2s ease;
+            }
+
+            .cta-button.clicked::after {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            .cta-button {
+                transition: none;
+                animation: none;
+            }
+
+            .cta-button:hover {
+                transform: none;
+            }
+
+            .cta-button::before,
+            .cta-button::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800">
+
+    <!-- Sticky Header/CTA -->
+    <header id="sticky-header"
+        class="sticky top-0 bg-white bg-opacity-90 backdrop-blur-sm shadow-md z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <span class="text-xl font-bold blue-text text-blue-600">MOCHA</span>
+            <a href="#order-form"
+                class="cta-button shimmer-flash bg-pink-600 text-white font-bold py-2 px-6 rounded-full uppercase text-sm md:text-base"
+                aria-label="Đặt mua sản phẩm kem trị nám ngay bây giờ" role="button">
+                Đặt Mua Ngay
+            </a>
+        </div>
+    </header>
+
+    <!-- 1. Hero Section -->
+    <section
+        class="relative bg-cover bg-center w-full hero-section bg-[url('./images/hero.jpg')] md:bg-[url('./images/hero-full.jpg')]">
+        <div class="absolute inset-0 bg-gradient-to-b from-white/80 via-white/20 to-white/0 md:hidden"></div>
+
+        <div class="container mx-auto relative z-10 pt-10 pb-20 px-4 text-center md:hidden block">
+            <h1 class="text-3xl font-extrabold leading-tight">
+                <span class="bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent">
+                    ✨ Tạm biệt nám ✨
+                </span>
+            </h1>
+            <h2 class="mt-2 text-xl font-bold text-gray-800">Lấy Lại Làn Da Tự Tin Sau 2 Tuần</h2>
+
+            <p class="mt-3 text-lg text-gray-700">
+                👩‍⚕️ Bác sĩ da liễu khuyên dùng – Siêu phẩm từ viện nghiên cứu MOCHA
+            </p>
+
+            <a href="#order-form"
+                class="inline-block bg-yellow-400 text-gray-900 font-extrabold py-4 px-10 rounded-full uppercase mt-6 text-lg shadow-lg hover:bg-yellow-500 transition transform hover:scale-105 animate-bounce">
+                🛒 Đặt Mua Ngay
+            </a>
+        </div>
+        <div class="hidden md:block absolute bottom-8 left-1/2 transform -translate-x-1/2 mb-10">
+            <a href="#order-form"
+                class="cta-button pulse vibrate shimmer-flash inline-block bg-yellow-400 text-gray-900 font-extrabold py-4 px-4 rounded-full uppercase mt-4 text-xl shadow-lg hover:bg-yellow-500 transition transform hover:scale-105 flex items-center justify-center gap-2"
+                aria-label="Đặt mua ngay combo giảm giá 40%" role="button">
+                🛒 Đặt Ngay – Giảm 40%
+            </a>
+        </div>
+    </section>
+
+
+    <!-- 2. Image highlight Section -->
+    <section class="bg-gray-50" style="background-image: linear-gradient(to right, #ffffff, #d6f6f6);">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-2 grid-cols-1 gap-1 items-center">
+                <!-- Ảnh 1: Luôn hiển thị -->
+                <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100">
+                    <img src="./images/17.jpg" alt="Diễn Viên Vân Trang"
+                        class="rounded-md mx-auto h-full w-auto object-cover">
+                </div>
+                <!-- Ảnh 2: Chỉ hiện trên desktop -->
+                <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100 hidden md:block">
+                    <img src="./images/17.jpg" alt="Báo chí" class="rounded-md mx-auto h-full w-auto object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Ưu đãi đặc biệt -->
+    <section class="py-2 bg-pink-600 text-white" style="background-image: linear-gradient(to right, #ec4899, #d946ef);">
+        <div class="container mx-auto text-center">
+            <!-- Tiêu đề -->
+            <h2 class="text-3xl font-extrabold uppercase flex justify-center items-center gap-2">
+                🔥 Ưu Đãi Sốc Cho 100 Khách Hàng Đầu Tiên Hôm Nay 🔥
+            </h2>
+            <p class="mt-2 text-xl font-bold animate-pulse">
+                ⏰ Chỉ còn <span class="text-white font-extrabold">8 suất cuối cùng</span> – Nhanh tay kẻo lỡ!
+            </p>
+
+            <!-- Khung ưu đãi -->
+            <div class="mt-4 bg-white text-gray-900 rounded-lg shadow-2xl p-4 max-w-2xl mx-auto">
+                <p class="text-2xl font-bold">Giảm ngay <span class="text-red-600 text-4xl">40%</span></p>
+                <p class="text-xl font-semibold mt-4">Giá gốc: <span class="line-through">1.680.000đ</span></p>
+                <p class="text-2xl font-bold text-pink-600 mt-2">Chỉ còn:
+                    <span class="text-red-600 text-3xl">1.050.000đ</span>
+                </p>
+
+                <!-- Combo -->
+                <div class="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 rounded-md">
+                    <p class="font-bold text-lg leading-relaxed">
+                        🎁 COMBO: KEM NÁM + SERUM NÁM <br>
+                        + Tặng Kem chống nắng 🌞 <br>
+                        + Sữa rửa mặt + Miễn Phí Giao Hàng 🚚
+                    </p>
+                </div>
+
+                <!-- Lợi ích cảm xúc -->
+                <p class="mt-4 text-pink-700 font-semibold text-lg">
+                    ✨ Tạm biệt nám – Tự tin rạng rỡ sau 2 tuần ✨
+                </p>
+
+                <!-- Countdown -->
+                <div id="countdown-1"
+                    class="mt-6 text-2xl font-bold text-gray-800 flex justify-center items-center space-x-4">
+                    <span>Kết thúc sau:</span>
+                    <div class="flex space-x-2">
+                        <div class="bg-gray-200 p-2 rounded-md"><span id="hours-1" class="text-red-500">00</span></div>
+                        <span class="pt-2">:</span>
+                        <div class="bg-gray-200 p-2 rounded-md"><span id="minutes-1" class="text-red-500">36</span>
+                        </div>
+                        <span class="pt-2">:</span>
+                        <div class="bg-gray-200 p-2 rounded-md"><span id="seconds-1" class="text-red-500">59</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <a href="#order-form"
+                    class="cta-button pulse vibrate shimmer-flash inline-block bg-yellow-400 text-gray-900 font-extrabold py-4 px-4 rounded-full uppercase mt-4 text-xl shadow-lg hover:bg-yellow-500 transition transform hover:scale-105 flex items-center justify-center gap-2"
+                    aria-label="Đặt mua ngay combo giảm giá 40%" role="button">
+                    🛒 Đặt Ngay – Giảm 40%
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Video highlight Section -->
+    <section class="bg-gray-50" style="background-image: linear-gradient(to right, #DDDDDD, #CCFFFF);">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 items-center justify-center">
+                <!-- Video 1: luôn hiển thị -->
+                <div class="md:w-full">
+                    <video class="w-full h-auto max-w-full rounded-lg shadow-lg" autoplay controls
+                        poster="./images/17.jpg">
+                        <source src="./videos/video-van-trang.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <!-- Video 2: ẩn trên mobile, hiện trên desktop -->
+                <div class="md:w-full hidden md:block">
+                    <video class="w-full h-auto max-w-full rounded-lg shadow-lg" autoplay controls
+                        poster="./images/17.jpg">
+                        <source src="./videos/video-van-trang.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Nỗi đau khách hàng -->
+    <section class="py-2">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold text-gray-900">Da nám, tàn nhang khiến bạn <span class="text-pink-600">mất tự
+                    tin?</span></h2>
+            <div class="mt-4 mb-4 grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                <div class="text-right space-y-2 p-2">
+                    <p class="text-gray-700 text-lg" style="font-size: 15px;">"Trang điểm cũng không che hết..."</p>
+                    <p class="text-gray-700 text-lg" style="font-size: 15px;">"Da xỉn màu khiến bạn trông già hơn tuổi
+                        thật..."</p>
+                </div>
+
+                <div class="px-2">
+                    <div id="default-carousel" class="relative w-full" data-carousel="slide">
+                        <!-- Carousel wrapper -->
+                        <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="./images/tuong-phan-1.webp"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                    alt="...">
+                            </div>
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="./images/tuong-phan-2.webp"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                    alt="...">
+                            </div>
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="./images/tuong-phan-3.webp"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                    alt="...">
+                            </div>
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="./images/tuong-phan-4.webp"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                    alt="...">
+                            </div>
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="./images/tuong-phan-5.webp"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                    alt="...">
+                            </div>
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="./images/tuong-phan-6.webp"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                    alt="...">
+                            </div>
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="./images/tuong-phan-7.webp"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                    alt="...">
+                            </div>
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="./images/tuong-phan-8.webp"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                    alt="...">
+                            </div>
+                        </div>
+                        <!-- Slider indicators -->
+                        <div
+                            class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
+                                data-carousel-slide-to="0"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
+                                data-carousel-slide-to="1"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
+                                data-carousel-slide-to="2"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4"
+                                data-carousel-slide-to="3"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5"
+                                data-carousel-slide-to="4"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5"
+                                data-carousel-slide-to="5"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5"
+                                data-carousel-slide-to="6"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5"
+                                data-carousel-slide-to="7"></button>
+                        </div>
+                        <!-- Slider controls -->
+                        <button type="button"
+                            class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                            data-carousel-prev>
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M5 1 1 5l4 4" />
+                                </svg>
+                                <span class="sr-only">Previous</span>
+                            </span>
+                        </button>
+                        <button type="button"
+                            class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                            data-carousel-next>
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 9 4-4-4-4" />
+                                </svg>
+                                <span class="sr-only">Next</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-left space-y-2 p-2">
+                    <p class="text-gray-700 text-lg" style="font-size: 15px;">"Bạn dùng nhiều mỹ phẩm nhưng chưa hiệu
+                        quả?"</p>
+                    <p class="text-gray-700 text-lg" style="font-size: 15px;">"Đau khổ vì tái phát nám lại nhiều lần?"
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 mb-4 grid grid-cols-1 md:grid-cols-3 gap-2 items-stretch">
+                <div
+                    class="p-1 flex flex-row items-center bg-white border-2 border-blue-600 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
+                    <img class="object-cover w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-l-lg flex-shrink-0"
+                        src="./images/nam_01.webp" alt="Nám mảng">
+                    <div class="flex flex-col justify-between leading-normal flex-1">
+                        <h5 class="mb-2 text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-blue-600">
+                            Nám mảng</h5>
+                        <p class="text-sm sm:text-base font-normal text-gray-700">Nám mảng là
+                            những mảng nâu nhạt đến nâu sẫm, bờ rõ, đều màu trên lớp biểu bì, thường do tia UV, rối loạn
+                            nội tiết và mỹ phẩm chứa corticoid.</p>
+                    </div>
+                </div>
+                <div
+                    class="p-1 flex flex-row items-center bg-white border-2 border-blue-600 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
+                    <img class="object-cover w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-l-lg flex-shrink-0"
+                        src="./images/nam_02.webp" alt="Nám chân sâu">
+                    <div class="flex flex-col justify-between leading-normal flex-1">
+                        <h5 class="mb-2 text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-blue-600">
+                            Nám chân sâu</h5>
+                        <p class="text-sm sm:text-base font-normal text-gray-700">Nám trung bì thường là nốt hoặc mảng
+                            nâu xám, bờ mờ, không đều màu do melanin ở lớp trung bì; nguyên nhân phổ biến là di truyền,
+                            nội tiết, nắng và stress.</p>
+                    </div>
+                </div>
+                <div
+                    class="p-1 flex flex-row items-center bg-white border-2 border-blue-600 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
+                    <img class="object-cover w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-l-lg flex-shrink-0"
+                        src="./images/nam_03.webp" alt="Nám hỗn hợp">
+                    <div class="flex flex-col justify-between leading-normal flex-1">
+                        <h5 class="mb-2 text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-blue-600">
+                            Nám hỗn hợp</h5>
+                        <p class="text-sm sm:text-base font-normal text-gray-700">Là sự kết hợp giữa nám
+                            mảng và nám chân sâu, gồm cả vùng sẫm màu rõ ràng và vùng loang lổ mờ nhạt; điều trị phức
+                            tạp, cần nhiều liệu pháp và phục hồi lâu hơn.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Lợi ích sản phẩm (USP) -->
+    <section class="py-2 bg-gray-50">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold text-gray-900">Giải Pháp Vượt Trội Từ <span
+                    class="text-2xl text-blue-600">VIỆN NGHIÊN CỨU MOCHA</span></h2>
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/2">
+                    <img src="./images/4.jpg" alt="Thành phần thiên nhiên" class="rounded-lg shadow-lg">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-900">GIẢM SẠM NÁM CHỈ SAU
+                        <span class="gold-text">2 TUẦN</span>
+                    </h2>
+                    <ul class="space-y-4 text-lg text-left">
+                        <li class="flex items-start"><span class="text-green-500 text-2xl mr-3">✅</span> Giảm nám rõ rệt
+                            chỉ sau 14 ngày.</li>
+                        <li class="flex items-start"><span class="text-green-500 text-2xl mr-3">✅</span> Ngăn ngừa tái
+                            phát, duy trì hiệu quả lâu dài.</li>
+                        <li class="flex items-start"><span class="text-green-500 text-2xl mr-3">✅</span> Thành phần
+                            thiên nhiên an toàn, nhập khẩu từ Hàn Quốc.</li>
+                        <li class="flex items-start"><span class="text-green-500 text-2xl mr-3">✅</span> Phù hợp cho mọi
+                            loại da, kể cả da nhạy cảm nhất.</li>
+                    </ul>
+                    <a href="#order-form"
+                        class="cta-button bounce wiggle shimmer-flash inline-block bg-orange-500 text-white font-bold py-3 px-8 rounded-full uppercase mt-4 text-base"
+                        aria-label="Thử sản phẩm kem trị nám ngay hôm nay" role="button">
+                        Thử ngay hôm nay
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Bằng chứng  -->
+    <section class="py-2">
+        <div class="container mx-auto text-center p-2">
+            <h2 class="text-3xl font-bold text-gray-900">Chuyên Gia Khuyên Dùng</h2>
+            <p class="text-gray-700 text-lg">Được chứng nhận bởi các tổ chức uy tín</p>
+            <div class="flex justify-center items-center gap-8 mt-8 flex-wrap">
+                <img src="./images/logo-byt.png" alt="Logo Bộ Y Tế" class="h-12">
+                <img src="./images/logo-kipo.png" alt="Logo FDA" class="h-12">
+                <img src="./images/logo-tuv.svg" alt="Logo ISO" class="h-12">
+            </div>
+            <div class="mt-4 grid md:grid-cols-2 grid-cols-2 gap-3">
+                <div class="flex flex-col items-center text-center">
+                    <img src="./images/logo-ellead.webp" alt="Logo Ellead" class="h-32 mb-3">
+                    <p style="font-size: 12px;">Được kiểm nghiệm tại trung tâm hàng đầu châu Á, chứng minh hiệu quả rõ
+                        ràng và đáng tin cậy.</p>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                    <img src="./images/logo-fda.webp" alt="Logo FDA" class="h-32 mb-3">
+                    <p style="font-size: 12px;">Sản phẩm đã được FDA Hoa Kỳ kiểm nghiệm lâm sàng, đảm bảo an toàn tuyệt
+                        đối cho làn da.</p>
+                </div>
+            </div>
+            <div class="mt-4 grid md:grid-cols-4 grid-cols-1 gap-2 items-center">
+                <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100">
+                    <img src="./images/chung-nhan.webp" alt="Chứng nhận uy tín"
+                        class="rounded-md mx-auto h-full w-auto object-cover">
+                </div>
+                <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100 hidden hidden:block">
+                    <img src="./images/chung-nhan.webp" alt="Chứng nhận uy tín"
+                        class="rounded-md mx-auto h-full w-auto object-cover">
+                </div>
+                <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100 hidden hidden:block">
+                    <img src="./images/chung-nhan.webp" alt="Chứng nhận uy tín"
+                        class="rounded-md mx-auto h-full w-auto object-cover">
+                </div>
+                <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100 hidden hidden:block">
+                    <img src="./images/chung-nhan.webp" alt="Chứng nhận uy tín"
+                        class="rounded-md mx-auto h-full w-auto object-cover">
+                </div>
+            </div>
+            <p class="mt-2 text-blue-600 text-xl font-bold pt-2">Chia sẻ từ chuyên gia da liễu</p>
+            <div class="mt-2 grid md:grid-cols-2 gap-4 items-center">
+                <div class="bg-white p-2 rounded-lg shadow-lg border border-gray-100">
+                    <video class="rounded-md mx-auto mb-4 w-full object-cover" autoplay controls
+                        poster="./images/09.webp" alt="Chuyên gia da liễu">
+                        <source src="./videos/bs-truc-mai.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p class="text-gray-600 italic">"Với sự kết hợp giữa Tranexamic Acid và Vitamin,
+                        bộ sản phẩm kem nám MOCHA hỗ trợ ức chế hình thành sắc tố, nuôi dưỡng làn da sáng khỏe,
+                        cải thiện nám da rõ rệt chỉ sau thời gian ngắn."
+                    </p>
+                    <p class="mt-2 font-bold text-gray-800">- Bác sĩ Nguyễn Thị Anh -</p>
+                </div>
+                <div class="bg-white p-2 rounded-lg shadow-lg border border-gray-100">
+                    <video class="rounded-md mx-auto mb-4 w-full object-cover" autoplay controls
+                        poster="./images/10.webp" alt="MC Vân Hugo">
+                        <source src="./videos/video-van-hugo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p class="text-gray-600 italic">"Bộ sản phẩm kem nám MOCHA thật sự hiệu quả, chỉ sau khoảng 2 tuần
+                        da đã cải thiện rõ rệt.
+                        Vân cảm thấy rất xứng đáng với số tiền bỏ ra, nhất là khi giá đang được ưu đãi."
+                    </p>
+                    <p class="mt-2 font-bold text-gray-800">- MC Vân Hugo -</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Niềm tin -->
+    <section class="py-2">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold text-gray-900">Khách Hàng Tin Tưởng</h2>
+            <div class="mt-4 grid gap-4 items-center justify-center">
+                <div class="space-y-2">
+                    <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100 text-left">
+                        <div class="flex items-center gap-4">
+                            <img src="./images/chi-lan-anh.webp" class="w-24 h-24 rounded-full object-cover">
+                            <div>
+                                <p class="font-bold">Chị Lan Anh, 40 tuổi, Hà Nội</p>
+                                <p class="text-gray-600 italic">"Sau sinh tôi bị nám dai dẳng, thử nhiều sản phẩm không
+                                    hiệu quả.
+                                    Dùng combo Mocha chỉ 2 tuần, nám mờ rõ, da sáng và đều màu.
+                                    Tôi thật sự hài lòng và tự tin trở lại."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100 text-left">
+                        <div class="flex items-center gap-4">
+                            <img src="./images/chi-huong.webp" class="w-24 h-24 rounded-full object-cover">
+                            <div>
+                                <p class="font-bold">Chị Hương, 29 tuổi, HCM</p>
+                                <p class="text-gray-600 italic">"Bao năm tự ti vì nám, nhưng Mocha đã thay đổi làn da
+                                    tôi.
+                                    Thấm nhanh, không nhờn, an toàn cho da nhạy cảm. Đúng là ‘cứu tinh’ của phụ nữ bị
+                                    nám."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100 text-left">
+                        <div class="flex items-center gap-4">
+                            <img src="./images/chi-phuong-thao.webp" class="w-24 h-24 rounded-full object-cover">
+                            <div>
+                                <p class="font-bold">Chị Phương Thảo, 34 tuổi, Cần Thơ</p>
+                                <p class="text-gray-600 italic">"Lần đầu tôi thấy sản phẩm trị nám hiệu quả nhanh như
+                                    vậy.
+                                    Da mềm mịn, nám mờ dần, giá hợp lý và được tư vấn tận tình.
+                                    Tôi sẽ giới thiệu Mocha cho bạn bè."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Ưu đãi đặc biệt -->
+    <!-- <section class="py-2 bg-pink-600 text-white" style="background-image: linear-gradient(to right, #ec4899, #d946ef);">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-extrabold uppercase">Ưu Đãi Đặc Biệt Cho 100 Khách Hàng Đầu Tiên Hôm Nay</h2>
+            <p class="mt-2 text-lg">Chỉ còn 8 suất!</p>
+            <div class="mt-4 bg-white text-gray-900 rounded-lg shadow-2xl p-2 max-w-2xl mx-auto">
+                <p class="text-2xl font-bold">Giảm ngay <span class="text-red-600 text-4xl">40%</span></p>
+                <p class="text-xl font-semibold mt-4">Giá gốc: <span class="line-through">1.680.000đ</span></p>
+                <p class="text-2xl font-bold text-pink-600 mt-2">Chỉ còn: <span
+                        class="text-red-600 text-3xl">1.050.000đ</span></p>
+                <div class="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 rounded-md">
+                    <p class="font-bold text-xl">COMBO: KEM NÁM + SERUM NÁM + Tặng Kem chống nắng + Sữa rửa mặt + Miễn
+                        Phí Giao Hàng Toàn Quốc</p>
+                </div>
+                <div id="countdown-2"
+                    class="mt-6 text-2xl font-bold text-gray-800 flex justify-center items-center space-x-4">
+                    <span>Kết thúc sau:</span>
+                    <div class="flex space-x-2">
+                        <div class="bg-gray-200 p-2 rounded-md"><span id="hours-2" class="text-red-500">23</span></div>
+                        <span class="pt-2">:</span>
+                        <div class="bg-gray-200 p-2 rounded-md"><span id="minutes-2" class="text-red-500">59</span>
+                        </div>
+                        <span class="pt-2">:</span>
+                        <div class="bg-gray-200 p-2 rounded-md"><span id="seconds-2" class="text-red-500">59</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="#order-form"
+                    class="cta-button pulse vibrate shimmer-flash inline-block bg-pink-600 text-white font-bold py-4 px-12 rounded-full uppercase mt-8 text-lg"
+                    aria-label="Nhận ưu đãi giảm giá 30% cho combo sản phẩm kem trị nám" role="button">
+                    nhận ưu đãi
+                </a>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="py-2 bg-pink-600 text-white" style="background-image: linear-gradient(to right, #ec4899, #d946ef);">
+        <div class="container mx-auto text-center">
+            <!-- Tiêu đề -->
+            <h2 class="text-3xl font-extrabold uppercase flex justify-center items-center gap-2">
+                🔥 Ưu Đãi Sốc Cho 100 Khách Hàng Đầu Tiên Hôm Nay 🔥
+            </h2>
+            <p class="mt-2 text-xl font-bold animate-pulse">
+                ⏰ Chỉ còn <span class="text-white font-extrabold">8 suất cuối cùng</span> – Nhanh tay kẻo lỡ!
+            </p>
+
+            <!-- Khung ưu đãi -->
+            <div class="mt-4 bg-white text-gray-900 rounded-lg shadow-2xl p-4 max-w-2xl mx-auto">
+                <p class="text-2xl font-bold">Giảm ngay <span class="text-red-600 text-4xl">40%</span></p>
+                <p class="text-xl font-semibold mt-4">Giá gốc: <span class="line-through">1.680.000đ</span></p>
+                <p class="text-2xl font-bold text-pink-600 mt-2">Chỉ còn:
+                    <span class="text-red-600 text-3xl">1.050.000đ</span>
+                </p>
+
+                <!-- Combo -->
+                <div class="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 rounded-md">
+                    <p class="font-bold text-lg leading-relaxed">
+                        🎁 COMBO: KEM NÁM + SERUM NÁM <br>
+                        + Tặng Kem chống nắng 🌞 <br>
+                        + Sữa rửa mặt + Miễn Phí Giao Hàng 🚚
+                    </p>
+                </div>
+
+                <!-- Lợi ích cảm xúc -->
+                <p class="mt-4 text-pink-700 font-semibold text-lg">
+                    ✨ Tạm biệt nám – Tự tin rạng rỡ sau 2 tuần ✨
+                </p>
+
+                <!-- Countdown -->
+                <div id="countdown-2"
+                    class="mt-6 text-2xl font-bold text-gray-800 flex justify-center items-center space-x-4">
+                    <span>Kết thúc sau:</span>
+                    <div class="flex space-x-2">
+                        <div class="bg-gray-200 p-2 rounded-md"><span id="hours-2" class="text-red-500">00</span></div>
+                        <span class="pt-2">:</span>
+                        <div class="bg-gray-200 p-2 rounded-md"><span id="minutes-2" class="text-red-500">36</span>
+                        </div>
+                        <span class="pt-2">:</span>
+                        <div class="bg-gray-200 p-2 rounded-md"><span id="seconds-2" class="text-red-500">59</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <a href="#order-form"
+                    class="cta-button pulse vibrate shimmer-flash inline-block bg-yellow-400 text-gray-900 font-extrabold py-4 px-4 rounded-full uppercase mt-4 text-xl shadow-lg hover:bg-yellow-500 transition transform hover:scale-105 flex items-center justify-center gap-2"
+                    aria-label="Đặt mua ngay combo giảm giá 40%" role="button">
+                    🛒 Đặt Ngay – Giảm 40%
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 6. Chi tiết sản phẩm & hướng dẫn sử dụng -->
+    <section class="py-2">
+        <div class="container mx-auto">
+            <div class="mt-4 grid md:grid-cols-2 gap-6">
+                <div class="flex flex-col items-center justify-top text-center">
+                    <h2 class="text-4xl font-bold mb-4 text-gray-900">Thành Phần Chính <span class="gold-text">Vượt
+                            Trội</span></h2>
+                    <div class="space-y-2 text-left max-w-2xl">
+                        <div
+                            class="flex items-start gap-1 p-1 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl border border-amber-200 shadow-lg hover:shadow-xl transition-all duration-300 items-center justify-center">
+                            <div class="flex-shrink-0">
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="text-2xl">💊</span>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-gray-900 mb-2">Tranexamic Acid</h3>
+                                <p class="text-gray-700 leading-relaxed">Hoạt chất giảm nám mạnh mẽ, được đánh giá hiệu
+                                    quả hàng đầu hiện nay. Tác động trực tiếp vào gốc rễ của vấn đề nám da.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-start gap-1 p-1 bg-gradient-to-r from-sky-50 to-blue-50 rounded-xl border border-sky-200 shadow-lg hover:shadow-xl transition-all duration-300 items-center justify-center">
+                            <div class="flex-shrink-0">
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-br from-sky-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="text-2xl">🍊</span>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-gray-900 mb-2">Bakuchiol</h3>
+                                <p class="text-gray-700 leading-relaxed">"Retinol thực vật" giúp loại bỏ tế bào sạm màu,
+                                    tái tạo tế bào mới; an toàn cho da nhạy cảm, không gây bong tróc hay kích ứng.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-start gap-1 p-1 bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl border border-rose-200 shadow-lg hover:shadow-xl transition-all duration-300 items-center justify-center">
+                            <div class="flex-shrink-0">
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-br from-rose-400 to-pink-500 rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="text-2xl">💧</span>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-gray-900 mb-2">NIO-NAG</h3>
+                                <p class="text-gray-700 leading-relaxed">Tăng đàn hồi, làm da căng mịn. Hoạt chất tác
+                                    động sâu, cải thiện rối loạn sắc tố và hỗ trợ đều màu da một cách tự nhiên.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-start gap-1 p-1 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200 shadow-lg hover:shadow-xl transition-all duration-300 items-center justify-center">
+                            <div class="flex-shrink-0">
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="text-2xl">🌿</span>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-gray-900 mb-2">Niacinamide</h3>
+                                <p class="text-gray-700 leading-relaxed">Thành phần dưỡng sáng, mờ thâm, tăng cường hàng
+                                    rào bảo vệ da và cải thiện kết cấu da một cách toàn diện.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 md:mt-0">
+                        <img src="./images/5.jpg" alt="Hũ kem và người mẫu với làn da sáng mịn"
+                            class="rounded-lg mt-8 w-full">
+                    </div>
+                </div>
+                <div class="flex flex-col items-center justify-top text-center">
+                    <h3 class="text-4xl font-bold mb-4 text-gray-900">Hướng dẫn sử dụng</h3>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700 text-left">
+                        <li><strong>Bước 1:</strong> Làm sạch da mặt trước khi dùng.</li>
+                        <li><strong>Bước 2:</strong> Lấy 1 lượng vừa đủ khoảng 1 đốt ngón tay trỏ, sau đó thoa nhẹ nhàng
+                            lên da mặt và cổ (tránh vùng mắt).</li>
+                        <li><strong>Bước 3:</strong> Massage da nhẹ nhàng để dưỡng chất thẩm thấu sâu vào da và nhanh
+                            chóng phát huy tác dụng.</li>
+                        <li><strong>Liều lượng:</strong> Sử dụng 1–2 lần mỗi ngày.</li>
+                    </ol>
+                    <div class="md:w-1/2 md:mt-0">
+                        <img src="./images/11.jpg" alt="Hũ kem và người mẫu với làn da sáng mịn"
+                            class="rounded-lg mt-8 w-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-2">
+        <div class="container mx-auto p-2">
+            <div class="flex flex-col items-center justify-center">
+                <div class="flex flex-col items-center justify-center">
+                    <h3 class="text-2xl font-bold mb-4">Câu Hỏi Thường Gặp (FAQ)</h3>
+                    <div id="faq-container" class="space-y-4">
+                        <div class="faq-item border-b">
+                            <button
+                                class="faq-question w-full text-left py-4 font-semibold flex justify-between items-center">
+                                <span>Sản phẩm có hợp với da nhạy cảm không?</span>
+                                <span class="transform transition-transform duration-300 ">▼</span>
+                            </button>
+                            <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300 text-gray-600">
+                                <p>Chào bạn, Kem Nám MOCHA có thành phần từ thiên nhiên, đã được kiểm nghiệm da
+                                    liễu và thích ứng tốt cho cả làn da nhạy cảm.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item border-b">
+                            <button
+                                class="faq-question w-full text-left py-4 font-semibold flex justify-between items-center">
+                                <span>Bao lâu thì thấy được kết quả?</span>
+                                <span class="transform transition-transform duration-300 ">▼</span>
+                            </button>
+                            <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300 text-gray-600">
+                                <p>Hiệu quả có thể thấy rõ sau 14-28 ngày (khoảng 2 tuần) sử dụng đều đặn, tùy thuộc vào
+                                    cơ địa và tình
+                                    trạng nám của mỗi người.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item border-b">
+                            <button
+                                class="faq-question w-full text-left py-4 font-semibold flex justify-between items-center">
+                                <span>Dùng xong nám có tái phát không?</span>
+                                <span class="transform transition-transform duration-300 ">▼</span>
+                            </button>
+                            <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300 text-gray-600">
+                                <p>Sản phẩm giúp giảm tối đa nguy cơ tái phát khi bạn sử dụng đủ liệu trình và kết hợp
+                                    chống nắng, chăm sóc da khoa học.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Form chốt đơn cuối trang -->
+    <section id="order-form" class="py-2" style="background-image: linear-gradient(to right, #fff, #fef7e9);">
+        <div class="container mx-auto max-w-lg p-2">
+            <div class="bg-white p-2 rounded-lg shadow-2xl gold-border">
+                <h2 class="text-3xl font-bold text-center text-gray-900">ĐẶT HÀNG NGAY</h2>
+                <p class="text-center text-gray-600 mt-2">Điền thông tin để nhận ưu đãi!</p>
+                <div id="countdown-3"
+                    class="mt-4 text-2xl font-bold text-gray-800 flex justify-center items-center space-x-4">
+                    <div class="flex space-x-2">
+                        <div class="bg-gray-200 p-2 rounded-md"><span id="hours-3" class="text-red-500">00</span></div>
+                        <span class="pt-2">:</span>
+                        <div class="bg-gray-200 p-2 rounded-md"><span id="minutes-3" class="text-red-500">12</span>
+                        </div>
+                        <span class="pt-2">:</span>
+                        <div class="bg-gray-200 p-2 rounded-md"><span id="seconds-3" class="text-red-500">45</span>
+                        </div>
+                    </div>
+                </div>
+                <form class="mt-4 space-y-3">
+                    <div>
+                        <label for="name" class="sr-only">Họ tên</label>
+                        <input type="text" name="name" id="name"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500"
+                            placeholder="Họ và tên" required>
+                    </div>
+                    <div>
+                        <label for="phone" class="sr-only">Số điện thoại</label>
+                        <input type="tel" name="phone" id="phone"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500"
+                            placeholder="Số điện thoại" required>
+                    </div>
+                    <div>
+                        <label for="address" class="sr-only">Địa chỉ</label>
+                        <input type="text" name="address" id="address"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500"
+                            placeholder="Địa chỉ nhận hàng" required>
+                    </div>
+                    <div class="rounded-lg shadow-1xl border border-gray-300 rounded-md p-1">
+                        <div class="flex items-center py-1">
+                            <input id="default-radio-1" type="radio" value="" name="default-radio"
+                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="default-radio-1" class="ms-2 text-sm font-medium">Combo Nám 1050K (Tặng 1 SRM B5
+                                & 1 KCN)</label>
+                        </div>
+                        <div class="flex items-center py-1">
+                            <input checked id="default-radio-2" type="radio" value="" name="default-radio"
+                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="default-radio-2" class="ms-2 text-sm font-medium">Mua 1 Kem Nám 590K (Tặng 1 SRM
+                                B5)</label>
+                        </div>
+                        <div class="flex items-center py-1">
+                            <input id="default-radio-1" type="radio" value="" name="default-radio"
+                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="default-radio-1" class="ms-2 text-sm font-medium">Mua 1 Serum Nám 550K</label>
+                        </div>
+                        <div class="flex items-center py-1">
+                            <input checked id="default-radio-2" type="radio" value="" name="default-radio"
+                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="default-radio-2" class="ms-2 text-sm font-medium">Tư vấn thêm liệu trình cá nhân
+                                hóa chuyên sâu</label>
+                        </div>
+                    </div>
+                    <button type="submit"
+                        class="cta-button pulse rock shimmer-flash w-full bg-pink-600 text-white font-bold py-4 px-6 rounded-full uppercase text-lg"
+                        aria-label="Đặt hàng ngay sản phẩm kem trị nám với giao hàng tận nơi">
+                        ĐẶT MUA NGAY
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Chính sách & bảo đảm -->
+    <section class="bg-gray-50 py-2">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-3 gap-4 text-center">
+                <div class="flex flex-col items-center">
+                    <div class="text-4xl mb-2">🛡️</div>
+                    <h4 class="font-bold text-lg">Bảo hành chính hãng 100%</h4>
+                    <p class="text-gray-600">Sản phẩm có tem chống hàng giả hàng nhái của Bộ Công Thương.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="text-4xl mb-2">🚚</div>
+                    <h4 class="font-bold text-lg">Giao Hàng Nhanh</h4>
+                    <p class="text-gray-600">Miễn phí vận chuyển toàn quốc, nhận hàng sau 2-5 ngày.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="text-4xl mb-2">💬</div>
+                    <h4 class="font-bold text-lg">Hỗ Trợ 24/7</h4>
+                    <p class="text-gray-600">Đội ngũ chuyên viên sẵn sàng tư vấn mọi thắc mắc của bạn.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video chuyên gia khuyên dùng -->
+    <section class="py-2">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold text-gray-900">Đánh giá thực tế</h2>
+            <div class="mt-4 grid md:grid-cols-2 gap-4 items-center">
+
+                <!-- Video 1 -->
+                <div class="bg-white p-2 rounded-lg shadow-lg border border-gray-100">
+                    <div class="relative w-full" style="padding-bottom: 56.25%;">
+                        <iframe class="absolute top-0 left-0 w-full h-full rounded-md"
+                            src="https://www.youtube.com/watch?v=aLl4uJsmfiE" title="Phản hồi khách hàng 1"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="mt-2 font-bold text-gray-800">- Chị Nguyễn Thị Anh -</p>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="bg-white p-2 rounded-lg shadow-lg border border-gray-100">
+                    <div class="relative w-full" style="padding-bottom: 56.25%;">
+                        <iframe class="absolute top-0 left-0 w-full h-full rounded-md"
+                            src="https://www.youtube.com/watch?v=M0icOdVKjdk" title="Phản hồi khách hàng 2"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="mt-2 font-bold text-gray-800">- Chị Nguyễn Thị Anh -</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Video chuyên gia khuyên dùng -->
+    <section class="py-2">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold text-gray-900">Nền tảng đánh giá</h2>
+            <div class="mt-4 grid md:grid-cols-4 grid-cols-2 gap-2 items-center">
+                <div class="bg-white p-2 rounded-lg shadow-lg border border-gray-100">
+                    <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100">
+                        <img src="./images/shopee.jpg" alt="Chuyên gia da liễu"
+                            class="rounded-md mx-auto h-full w-auto object-cover">
+                    </div>
+                    <p class="mt-2 font-bold text-gray-800">- Shopee -</p>
+                </div>
+                <div class="bg-white p-2 rounded-lg shadow-lg border border-gray-100">
+                    <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100">
+                        <img src="./images/tiktok.jpg" alt="Chuyên gia da liễu"
+                            class="rounded-md mx-auto h-full w-auto object-cover">
+                    </div>
+                    <p class="mt-2 font-bold text-gray-800">- Tiktok -</p>
+                </div>
+                <div class="bg-white p-2 rounded-lg shadow-lg border border-gray-100">
+                    <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100">
+                        <img src="./images/facebook.jpg" alt="Chuyên gia da liễu"
+                            class="rounded-md mx-auto h-full w-auto object-cover">
+                    </div>
+                    <p class="mt-2 font-bold text-gray-800">- Facebook -</p>
+                </div>
+                <div class="bg-white p-2 rounded-lg shadow-lg border border-gray-100">
+                    <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100">
+                        <img src="./images/lazada.jpg" alt="Chuyên gia da liễu"
+                            class="rounded-md mx-auto h-full w-auto object-cover">
+                    </div>
+                    <p class="mt-2 font-bold text-gray-800">- Lazada -</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hình ảnh phản hồi  -->
+    <section class="py-2">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold text-gray-900">Phản hồi từ khách hàng</h2>
+            <div class="mt-4 grid md:grid-cols-4 grid-cols-2 gap-2 items-center">
+                <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100">
+                    <img src="./images/24.webp" alt="Chuyên gia da liễu"
+                        class="rounded-md mx-auto h-full w-auto object-cover">
+                </div>
+                <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100">
+                    <img src="./images/25.webp" alt="Chuyên gia da liễu"
+                        class="rounded-md mx-auto h-full w-auto object-cover">
+                </div>
+                <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100">
+                    <img src="./images/26.webp" alt="Chuyên gia da liễu"
+                        class="rounded-md mx-auto h-full w-auto object-cover">
+                </div>
+                <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100">
+                    <img src="./images/27.webp" alt="Chuyên gia da liễu"
+                        class="rounded-md mx-auto h-full w-auto object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hình ảnh kho-shop  -->
+    <section class="py-2">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold text-gray-900">Kho hàng công ty</h2>
+            <div class="mt-4 grid md:grid-cols-2 grid-cols-2 gap-2 items-center">
+                <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100">
+                    <img src="./images/kho-hang-01.webp" alt="Chuyên gia da liễu"
+                        class="rounded-md mx-auto h-full w-auto object-cover">
+                </div>
+                <div class="bg-white p-1 rounded-lg shadow-lg border border-gray-100">
+                    <img src="./images/kho-hang-02.webp" alt="Chuyên gia da liễu"
+                        class="rounded-md mx-auto h-full w-auto object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-blue-600 p-2">
+        <h2 class="py-2 text-3xl text-white font-bold text-gray-900 text-center uppercase">
+            CAM KẾT CỦA CHÚNG TÔI
+        </h2>
+        <div class="container bg-white p-4 rounded-2xl border border-gray-200 max-w-xl mx-auto">
+            <ul class="space-y-4 text-gray-700">
+                <li class="flex items-start">
+                    <svg class="w-5 h-5 text-blue-500 animate-spin mr-2" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582M20 20v-5h-.581M4 20h5v.581M20 4h-5V3.419" />
+                    </svg>
+                    <span>Hàng <strong>chính hãng 100%</strong>, được Bộ Y Tế cấp phép.</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="w-5 h-5 text-blue-500 animate-spin mr-2" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582M20 20v-5h-.581M4 20h5v.581M20 4h-5V3.419" />
+                    </svg>
+                    <span><strong>Giao hàng nhanh chóng</strong>, an toàn và đúng hẹn.</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="w-5 h-5 text-blue-500 animate-spin mr-2" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582M20 20v-5h-.581M4 20h5v.581M20 4h-5V3.419" />
+                    </svg>
+                    <span><strong>Miễn phí vận chuyển 100%</strong> toàn quốc.</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="w-5 h-5 text-blue-500 animate-spin mr-2" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582M20 20v-5h-.581M4 20h5v.581M20 4h-5V3.419" />
+                    </svg>
+                    <span>Đội ngũ <strong>tư vấn 24/7</strong>, hỗ trợ miễn phí.</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="w-5 h-5 text-blue-500 animate-spin mr-2" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582M20 20v-5h-.581M4 20h5v.581M20 4h-5V3.419" />
+                    </svg>
+                    <span><strong>Đổi trả dễ dàng </strong> nếu sản phẩm bị lỗi hoặc thiếu hàng.</span>
+                </li>
+                <span>Nếu bạn cần tư vấn thêm cứ ib trực tiếp cho shop nhé!</span>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- Floating Social Buttons -->
+    <div class="fixed bottom-4 right-4 space-y-3 z-40">
+        <a href="#"
+            class="block w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center text-white shadow-lg">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 2.92 1.2 5.58 3.18 7.47l-1.6 5.82 6-1.57c1.86.95 3.96 1.48 6.13 1.48 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zM12.04 22.09c-1.89 0-3.7-.49-5.26-1.42l-5.48 1.44 1.47-5.36C.9 14.96.13 12.15.13 12c0-4.33 3.53-7.85 7.85-7.85h.02c4.33 0 7.87 3.52 7.87 7.85 0 4.34-3.54 7.87-7.87 7.87h-.02z" />
+            </svg>
+        </a>
+    </div>
+
+    <footer class="bg-gray-800 text-white pb-4">
+        <div class="flex justify-center items-center py-4">
+            <img src="./images/logo.jpg" alt="Logo MOCHA" class="h-12">
+        </div>
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p><strong>DƯỢC MỸ PHẨM MOCHA VIỆT NAM</strong></p>
+            <p>Địa chỉ: 290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, TP. Hồ Chí Minh, Việt Nam</p>
+            <p>Hotline: +84 367 848 918</p>
+            <!-- <p>Email: kemnammocha@gmail.com</p> -->
+            <p>Website: www.mochatrinam.com</p>
+            <p class="mt-4 opacity-70">&copy; 2025 Mocha Vietnam. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Countdown Timer
+            function startCountdown(countdownId, hoursId, minutesId, secondsId) {
+                const countdownElement = document.getElementById(countdownId);
+                if (!countdownElement) return;
+
+                let duration = 1 * 36 * 60;
+                const timer = setInterval(function () {
+                    if (duration <= 0) {
+                        clearInterval(timer);
+                        countdownElement.innerHTML = "<p>Ưu đãi đã kết thúc!</p>";
+                        return;
+                    }
+
+                    duration--;
+
+                    let hours = Math.floor(duration / 3600);
+                    let minutes = Math.floor((duration % 3600) / 60);
+                    let seconds = duration % 60;
+
+                    const hoursElement = document.getElementById(hoursId);
+                    const minutesElement = document.getElementById(minutesId);
+                    const secondsElement = document.getElementById(secondsId);
+
+                    if (hoursElement) hoursElement.textContent = String(hours).padStart(2, '0');
+                    if (minutesElement) minutesElement.textContent = String(minutes).padStart(2, '0');
+                    if (secondsElement) secondsElement.textContent = String(seconds).padStart(2, '0');
+
+                }, 1000);
+            }
+
+            // Start both countdown timers
+            startCountdown('countdown-1', 'hours-1', 'minutes-1', 'seconds-1');
+            startCountdown('countdown-2', 'hours-2', 'minutes-2', 'seconds-2');
+            startCountdown('countdown-3', 'hours-3', 'minutes-3', 'seconds-3');
+
+            // FAQ Accordion
+            const faqContainer = document.getElementById('faq-container');
+            if (faqContainer) {
+                const questions = faqContainer.querySelectorAll('.faq-question');
+                questions.forEach(question => {
+                    question.addEventListener('click', () => {
+                        const currentlyActive = faqContainer.querySelector('.faq-question.active');
+                        if (currentlyActive && currentlyActive !== question) {
+                            currentlyActive.classList.remove('active');
+                            currentlyActive.querySelector('span:last-child').style.transform = 'rotate(0deg)';
+                        }
+
+                        question.classList.toggle('active');
+                        const icon = question.querySelector('span:last-child');
+                        if (question.classList.contains('active')) {
+                            icon.style.transform = 'rotate(180deg)';
+                        } else {
+                            icon.style.transform = 'rotate(0deg)';
+                        }
+                    });
+                });
+            }
+
+            // Enhanced CTA button interactions with click effects
+            const ctaButtons = document.querySelectorAll('.cta-button');
+            ctaButtons.forEach(button => {
+                // Add click ripple effect
+                button.addEventListener('click', function (e) {
+                    // Add clicked class for ripple effect
+                    this.classList.add('clicked');
+
+                    // Remove clicked class after animation
+                    setTimeout(() => {
+                        this.classList.remove('clicked');
+                    }, 300);
+
+                    // For links, prevent default and scroll smoothly
+                    if (this.tagName === 'A') {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+
+                // Add keyboard accessibility
+                button.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+
+                // Add focus management for better accessibility
+                button.addEventListener('focus', function () {
+                    this.style.outline = '3px solid rgba(236, 72, 153, 0.5)';
+                    this.style.outlineOffset = '2px';
+                });
+
+                button.addEventListener('blur', function () {
+                    this.style.outline = 'none';
+                    this.style.outlineOffset = '0';
+                });
+            });
+
+            // Add intersection observer for scroll-triggered animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all CTA buttons for scroll animations
+            ctaButtons.forEach(button => {
+                button.style.opacity = '0';
+                button.style.transform = 'translateY(20px)';
+                button.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(button);
+            });
+
+            // Add periodic movement animations to CTA buttons
+            if (window.innerWidth > 768) {
+                // Bounce animation every 10 seconds
+                setInterval(() => {
+                    const mainButtons = document.querySelectorAll('.cta-button.pulse');
+                    mainButtons.forEach(button => {
+                        if (document.visibilityState === 'visible') {
+                            button.classList.add('bounce');
+                            setTimeout(() => {
+                                button.classList.remove('bounce');
+                            }, 1000);
+                        }
+                    });
+                }, 10000);
+
+                // Shake animation every 15 seconds for urgency
+                setInterval(() => {
+                    const urgentButtons = document.querySelectorAll('.cta-button.shake, .cta-button.vibrate');
+                    urgentButtons.forEach(button => {
+                        if (document.visibilityState === 'visible') {
+                            button.classList.add('shake');
+                            setTimeout(() => {
+                                button.classList.remove('shake');
+                            }, 800);
+                        }
+                    });
+                }, 15000);
+
+                // Wiggle animation every 20 seconds for variety
+                setInterval(() => {
+                    const wiggleButtons = document.querySelectorAll('.cta-button.wiggle');
+                    wiggleButtons.forEach(button => {
+                        if (document.visibilityState === 'visible') {
+                            button.classList.add('wiggle');
+                            setTimeout(() => {
+                                button.classList.remove('wiggle');
+                            }, 1200);
+                        }
+                    });
+                }, 20000);
+            }
+
+            // Add touch-specific optimizations
+            if ('ontouchstart' in window) {
+                ctaButtons.forEach(button => {
+                    // Add touch feedback
+                    button.addEventListener('touchstart', function () {
+                        this.style.transform = 'scale(0.98)';
+                    });
+
+                    button.addEventListener('touchend', function () {
+                        this.style.transform = '';
+                    });
+
+                    // Prevent double-tap zoom on buttons
+                    button.addEventListener('touchend', function (e) {
+                        e.preventDefault();
+                    });
+                });
+            }
+
+            // Performance optimization: reduce animations on low-end devices
+            if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+                document.documentElement.style.setProperty('--animation-duration', '0.2s');
+            }
+
+            // Add random movement effects for more dynamic interaction
+            function addRandomMovement() {
+                const buttons = document.querySelectorAll('.cta-button');
+                buttons.forEach(button => {
+                    // Add random shake on hover for desktop
+                    if (window.innerWidth > 768) {
+                        button.addEventListener('mouseenter', function () {
+                            if (Math.random() < 0.3) { // 30% chance
+                                this.classList.add('shake');
+                                setTimeout(() => {
+                                    this.classList.remove('shake');
+                                }, 800);
+                            }
+                        });
+                    }
+                });
+            }
+
+            // Add scroll-triggered shake effects
+            let lastScrollY = window.scrollY;
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+                const scrollDiff = Math.abs(currentScrollY - lastScrollY);
+
+                // Trigger shake on significant scroll
+                if (scrollDiff > 100) {
+                    const visibleButtons = document.querySelectorAll('.cta-button:not(.shake)');
+                    if (visibleButtons.length > 0) {
+                        const randomButton = visibleButtons[Math.floor(Math.random() * visibleButtons.length)];
+                        randomButton.classList.add('shake');
+                        setTimeout(() => {
+                            randomButton.classList.remove('shake');
+                        }, 800);
+                    }
+                }
+                lastScrollY = currentScrollY;
+            });
+
+            // Initialize random movement effects
+            addRandomMovement();
+
+            // Add dynamic shimmer-flash effects
+            function addDynamicShimmerFlashing() {
+                const shimmerButtons = document.querySelectorAll('.cta-button.shimmer-flash');
+
+                shimmerButtons.forEach(button => {
+                    // Add random intensity changes
+                    setInterval(() => {
+                        if (document.visibilityState === 'visible' && Math.random() < 0.3) {
+                            button.style.animationDuration = '0.5s';
+                            setTimeout(() => {
+                                button.style.animationDuration = '';
+                            }, 2000);
+                        }
+                    }, 8000);
+
+                    // Add hover shimmer boost
+                    button.addEventListener('mouseenter', function () {
+                        this.style.animationDuration = '0.3s';
+                    });
+
+                    button.addEventListener('mouseleave', function () {
+                        this.style.animationDuration = '';
+                    });
+                });
+            }
+
+            // Add scroll-triggered shimmer bursts
+            let shimmerTimeout;
+            window.addEventListener('scroll', () => {
+                clearTimeout(shimmerTimeout);
+                const shimmerButtons = document.querySelectorAll('.cta-button.shimmer-flash');
+
+                shimmerButtons.forEach(button => {
+                    button.style.animationDuration = '0.2s';
+                });
+
+                shimmerTimeout = setTimeout(() => {
+                    shimmerButtons.forEach(button => {
+                        button.style.animationDuration = '';
+                    });
+                }, 1000);
+            });
+
+            // Add click flash burst
+            ctaButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const originalDuration = this.style.animationDuration;
+                    this.style.animationDuration = '0.1s';
+
+                    setTimeout(() => {
+                        this.style.animationDuration = originalDuration;
+                    }, 500);
+                });
+            });
+
+            // Initialize dynamic shimmer-flashing
+            addDynamicShimmerFlashing();
+
+        });
+    </script>
+</body>
+
+</html>
