@@ -50,7 +50,7 @@
     },
     {
       "label": "I have questions first",
-      "note": "We reply by email or WhatsApp",
+      "note": "We reply by email within one business day",
       "price": null,
       "recommended": false
     }
@@ -68,7 +68,8 @@
       "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
       "Discontinue use if irritation occurs. Avoid direct contact with the eyes.",
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
-      "Results vary between individuals and depend on consistent daily sun protection."
+      "Results vary between individuals and depend on consistent daily sun protection.",
+      "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
     ]
   },
   "blocks": [
@@ -265,7 +266,7 @@
       "items": [
         {
           "q": "What does the duo cost?",
-          "a": "The Smart Brightening Cream X3 and Smart First Care Serum together are <strong>1,050,000₫</strong> (roughly US$40), including the SPF50 sunscreen and cleanser. Individually they are 590,000₫ and 550,000₫, so the duo saves 90,000₫ and adds two products."
+          "a": "The Smart Brightening Cream X3 and Smart First Care Serum together are <strong>1,050,000₫</strong>, including the SPF50 sunscreen and cleanser. Individually they are 590,000₫ and 550,000₫, so the duo saves 90,000₫ and adds two products. We quote shipping to your country before you pay."
         },
         {
           "q": "How long before I see a difference?",
@@ -285,7 +286,7 @@
         },
         {
           "q": "Do you ship outside Vietnam?",
-          "a": "Yes, from Ho Chi Minh City. Send us your country through the form and we will confirm shipping cost and delivery time before you pay."
+          "a": "Yes, from Ho Chi Minh City. Tell us your country in the order form and we will confirm shipping cost and delivery time before anything is charged."
         }
       ]
     },
@@ -293,12 +294,12 @@
       "type": "order",
       "eyebrow": "Order",
       "heading": "Tell us where you are and we'll confirm shipping before you pay",
-      "body": "International orders are confirmed by email or WhatsApp within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
       "points": [
-        "<strong>Ships worldwide</strong> from Ho Chi Minh City.",
-        "<strong>Shipping quoted before payment</strong> — no surprise charges at checkout.",
-        "<strong>7-day return</strong> if the product arrives faulty, incorrect, or unopened.",
-        "<strong>Support through the full routine</strong> by email or WhatsApp."
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City — tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support through the full routine</strong> by email."
       ]
     }
   ],

@@ -5,12 +5,15 @@ interface Props { data: any; product: any; locale: Locale; }
 const { data, product: p, locale } = Astro.props;
 const save = p.compareAtPrice ? p.compareAtPrice - p.price : 0;
 
-// Trang tĩnh không tự biết hôm nay là ngày nào. Nếu hạn ưu đãi đã qua tại thời điểm
-// build thì dừng build, thay vì lặng lẽ phục vụ một ưu đãi đã hết hạn.
-if (data.validUntil && new Date(data.validUntil) < new Date()) {
-  throw new Error(
-    `Hạn ưu đãi ${data.validUntil} của "${p.slug}/${locale}" đã qua. ` +
-    `Cập nhật validUntil trong file nội dung, hoặc bỏ trường này đi.`
+// Trang tĩnh không tự biết hôm nay là ngày nào. Nếu hạn ưu đãi đã qua tại thời
+// điểm build thì ẩn dòng hạn và cảnh báo to, thay vì lặng lẽ phục vụ ưu đãi đã
+// hết hạn. Cố ý KHÔNG dừng build: một dự án không deploy được bản vá khẩn chỉ vì
+// một ngày khuyến mãi trôi qua là tệ hơn.
+const offerExpired = !!data.validUntil && new Date(data.validUntil) < new Date();
+if (offerExpired) {
+  console.warn(
+    `\n⚠️  Hạn ưu đãi ${data.validUntil} của "${p.slug}/${locale}" ĐÃ QUA.\n` +
+    `   Dòng hạn ưu đãi đã được ẩn khỏi trang. Cập nhật validUntil trong file nội dung.\n`
   );
 }
 ---
@@ -25,7 +28,7 @@ if (data.validUntil && new Date(data.validUntil) < new Date()) {
       )}
     </div>
 
-    <div class="price-card">
+    <div class="price-card on-light">
       <p class="price-row">
         <span class="now tabular">{money(p.price, p.currency, locale)}</span>
         {p.compareAtPrice && (
@@ -41,11 +44,11 @@ if (data.validUntil && new Date(data.validUntil) < new Date()) {
           <li><strong>{i.name}</strong>{i.note && <span class="muted"> — {i.note}</span>}</li>
         ))}
         {p.gifts.map((g: any) => (
-          <li><span class="gift-tag">Quà tặng</span> <strong>{g.name}</strong>{g.note && <span class="muted"> — {g.note}</span>}</li>
+          <li><span class="gift-tag">{t(locale, 'gift.tag')}</span> <strong>{g.name}</strong>{g.note && <span class="muted"> — {g.note}</span>}</li>
         ))}
       </ul>
 
-      {data.validUntil && (
+      {data.validUntil && !offerExpired && (
         <p class="valid">{t(locale, 'offer.validUntil')} <strong>{shortDate(data.validUntil, locale)}</strong></p>
       )}
 

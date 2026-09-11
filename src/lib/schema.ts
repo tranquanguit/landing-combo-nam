@@ -23,8 +23,11 @@ export function productGraph(opts: {
   faq?: { q: string; a: string }[];
   /** Chỉ có với sản phẩm không nằm ở gốc tên miền. */
   breadcrumb?: { name: string; url: string }[];
+  /** URL tuyệt đối đã giải qua pipeline ảnh. */
+  imageUrls?: string[];
+  logoUrl?: string;
 }) {
-  const { product: p, brand: b, site, url, locale, faq, breadcrumb } = opts;
+  const { product: p, brand: b, site, url, locale, faq, breadcrumb, imageUrls = [], logoUrl } = opts;
   const orgId = `${site}/#organization`;
   const offerBlock = p.blocks.find((x) => x.type === 'offer');
   const offerValidUntil = offerBlock && offerBlock.type === 'offer' ? offerBlock.validUntil : undefined;
@@ -36,7 +39,7 @@ export function productGraph(opts: {
       name: b.legalName,
       alternateName: b.tradingName,
       url: site,
-      logo: { '@type': 'ImageObject', url: `${site}${b.logo}` },
+      ...(logoUrl ? { logo: { '@type': 'ImageObject', url: logoUrl } } : {}),
       email: b.email,
       address: { '@type': 'PostalAddress', streetAddress: b.address, addressCountry: 'VN' },
       contactPoint: [{
@@ -63,6 +66,7 @@ export function productGraph(opts: {
       name: p.name,
       sku: p.sku,
       description: p.seo.description,
+      ...(imageUrls.length ? { image: imageUrls } : {}),
       brand: { '@type': 'Brand', name: b.tradingName },
       manufacturer: { '@id': orgId },
       ...(p.includes.length
@@ -103,10 +107,13 @@ export function productGraph(opts: {
               hasMerchantReturnPolicy: {
                 '@type': 'MerchantReturnPolicy',
                 applicableCountry: p.returnPolicy.country,
+                // Chính sách thật chỉ nhận đổi trả khi hàng lỗi, sai hoặc chưa mở seal.
+                // Khai MerchantReturnNotPermitted cho phần còn lại thay vì khai rộng hơn sự thật.
                 returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
                 merchantReturnDays: p.returnPolicy.days,
                 returnMethod: 'https://schema.org/ReturnByMail',
                 returnFees: 'https://schema.org/FreeReturn',
+                refundType: 'https://schema.org/ExchangeRefund',
               },
             }
           : {}),

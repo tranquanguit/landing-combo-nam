@@ -133,3 +133,75 @@ Một kiểm định viên độc lập (không tham gia dựng sản phẩm) đ
 - Nội dung JSON vẫn nhúng HTML thô render qua `set:html`, người không biết code gõ sai thẻ là vỡ trang.
 - 4/7 hoạt chất chưa có nguồn tham chiếu. Riêng dòng Niacinamide cần kiểm lại: nghiên cứu
   kinh điển dùng 5%, sản phẩm khai 1% — nguồn hiện tại có thể không chống lưng được cho claim.
+
+---
+
+# Vòng 5–6 — kiểm định lần 2 và các sửa chữa
+
+Một kiểm định viên thứ hai (không liên quan người trước) chạy lại bộ 32 câu và **kiểm
+chứng từng tuyên bố sửa chữa của vòng 4**. Kết quả: **11 ĐẠT / 21 CHƯA ĐẠT**, và ba lỗi
+P0 nặng hơn cả vòng trước.
+
+## Ba lỗi P0
+
+**1. Mọi nút "Đặt hàng" trượt khỏi form 2.100px.** Đo trên 390×844: cả 4 CTA sau khi bấm
+đều dừng cách `#dat-hang` hơn 2.000px, người dùng rơi vào giữa thư viện ảnh. Nguyên nhân
+là `content-visibility: auto` khai chiều cao giả 720px cho mọi section, trình duyệt chốt
+đích cuộn theo chiều cao giả rồi section nở ra giữa lúc cuộn mượt.
+→ Đã gỡ `content-visibility` hoàn toàn. Một trang mà mọi CTA đều là liên kết neo thì không
+dùng được thủ thuật này; tiết kiệm vài chục ms render không đáng đổi lấy việc không ai
+bấm được nút đặt hàng.
+
+**2. Chữ trắng trên nền trắng, tương phản 1.00:1.** `.surface-navy` đổi màu chữ cho **mọi
+hậu duệ**, kể cả nội dung nằm trong các thẻ nền trắng bên trong nó. Bốn vùng bị ảnh hưởng,
+trong đó có **chính ô cảnh báo "form này không gửi đơn đi đâu cả"** ở mức 1.03:1 — lời
+cảnh báo trung thực duy nhất trên trang thì người dùng không đọc được.
+→ Đánh dấu `.on-light` cho các thẻ nền sáng và giới hạn selector. Đo lại: 6.73–17.12:1.
+
+**3. Form vẫn có thể báo "đặt hàng thành công" giả.** Vòng 4 kiểm `if (!form.action)`.
+Theo HTML spec thuộc tính này **không bao giờ rỗng** — thiếu `action` thì IDL trả về URL
+của chính tài liệu. Thực tế JS POST về chính trang; host tĩnh nào trả 200 cho POST là
+hiện màn hình cảm ơn giả. Tắt JS thì POST → 501, mất sạch dữ liệu khách đã gõ.
+→ Kiểm cờ do build đặt thay vì kiểm thuộc tính DOM; nút gửi bị `disabled` khi chưa cấu
+hình endpoint nên tắt JS cũng không submit được.
+
+## Bài học lặp lại
+
+Kiểm định viên chỉ ra rằng vòng 4 **lặp lại đúng thói quen mà chính nó phê phán**: sửa cái
+nhìn thấy rồi tuyên bố xong. Lần trước là ảnh còn trong `dist/`; lần này là `form.action`
+chưa từng được mở trình duyệt kiểm, là "630.000đ" còn nguyên trong JSON, là ảnh chuyển thư
+mục mà quên `og:image` và `Organization.logo` (cả hai trả 404).
+
+Vì vậy vòng này thêm **hàng rào tự động thay cho lời hứa**: schema quét mọi chuỗi tiền
+trong nội dung và chặn build nếu xuất hiện con số không thuộc tập giá hợp lệ. Đã thử cố ý
+ghi sai — build dừng và chỉ đúng vị trí `blocks[1].body`.
+
+## Bảng sửa chữa
+
+| Vấn đề | Đo trước | Đo sau |
+|---|---|---|
+| CTA cuộn trượt form | 2.173px (vi) / 2.069px (en) | **72px, cả 8 lượt bấm** |
+| Tương phản chữ trong thẻ giá và thẻ form | 1.00–1.07:1 | **6.73–17.12:1** |
+| Form báo thành công giả | có thể xảy ra | nút `disabled`, **không hiện màn hình cảm ơn** |
+| CLS bản EN trên 3G | 0.2382 | **0.0079** |
+| `og:image`, `Organization.logo` | 404 | URL `/_astro/` tồn tại |
+| `Product.image` trong JSON-LD | thiếu | có |
+| "tiết kiệm 630.000đ" | còn trong dữ liệu | **90.000đ**, có hàng rào build |
+| Số điện thoại quốc tế trên trang EN | bị chặn 100% | chấp nhận; thêm ô quốc gia bắt buộc |
+| Chuỗi tiếng Việt rò sang EN | ≥6 chỗ | 0 |
+| canonical vs sitemap | lệch dấu `/` | khớp |
+| Không có liên kết nội bộ nào | 0 | thêm bộ chuyển ngôn ngữ |
+| Ưu đãi hết hạn | **dừng build hẳn** | cảnh báo to + ẩn dòng hạn |
+
+Điểm cuối đáng nói: cổng chặn của vòng 4 khiến sau 30/9/2026 **không deploy được gì cả**,
+kể cả bản vá khẩn. Một hàng rào an toàn không được phép biến thành khoá cửa.
+
+## Còn nợ
+
+- `evidence` và `source` trong schema vẫn chưa được component nào hiển thị — cơ chế kiểm
+  soát bằng chứng hiện mới là dữ liệu, chưa thành giao diện.
+- 4/7 hoạt chất chưa có nghiên cứu công khai để dẫn.
+- Claim "cảm nhận sau 4–6 tuần" chưa nêu cỡ mẫu và đơn vị khảo sát.
+- Chưa có cụm nội dung chuyên đề, chưa có trang danh mục.
+- Ảnh trước–sau chưa có tuyên bố đồng ý, và mỗi cặp khác nhau về ánh sáng lẫn trang điểm.
+- Chưa đo trên mạng thật tại Việt Nam; mọi số LCP ở trên là localhost, thiếu RTT và TLS.

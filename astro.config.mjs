@@ -6,7 +6,8 @@ export const SITE = 'https://mochatrinam.com';
 
 export default defineConfig({
   site: SITE,
-  trailingSlash: 'ignore',
+  // Một dạng URL duy nhất: canonical và sitemap phải khớp nhau tuyệt đối
+  trailingSlash: 'always',
 
   i18n: {
     defaultLocale: 'vi',

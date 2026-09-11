@@ -6,8 +6,9 @@ export const FLAGSHIP = 'combo-nam';
 
 /** Đường dẫn của một sản phẩm theo ngôn ngữ. */
 export function productPath(slug: string, locale: Locale): string {
-  const base = slug === FLAGSHIP ? '/' : `/${slug}`;
-  return localePath(locale, base);
+  const base = slug === FLAGSHIP ? '/' : `/${slug}/`;
+  const path = localePath(locale, base);
+  return path.endsWith('/') ? path : `${path}/`;
 }
 
 /**

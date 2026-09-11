@@ -15,6 +15,7 @@ import Order from '../components/blocks/Order.astro';
 import Faq from '../components/blocks/Faq.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { productGraph } from '../lib/schema';
+import { resolveAssetUrl } from '../lib/images';
 import { FLAGSHIP, productPath } from '../lib/routes';
 import { localePath, type Locale } from '../i18n/ui';
 
@@ -37,8 +38,15 @@ const breadcrumb = p.slug === FLAGSHIP ? undefined : [
   { name: p.shortName ?? p.name, url: new URL(productPath(p.slug, locale), site).href },
 ];
 
+// og:image và ảnh trong schema phải là URL sau khi build, không phải đường dẫn nguồn
+const heroBlock = p.blocks.find((x: any) => x.type === 'hero');
+const ogImage = await resolveAssetUrl(p.seo.ogImage ?? heroBlock?.image?.src, site, 1200);
+const logoUrl = await resolveAssetUrl(b.logo, site, 512);
+
 const jsonLd = productGraph({
   product: p, brand: b, site, url: canonical, locale, faq: faqBlock?.items, breadcrumb,
+  imageUrls: ogImage ? [ogImage] : [],
+  logoUrl,
 });
 
 // Nền xen kẽ giữa các khối dạng thẻ, tính sẵn theo thứ tự xuất hiện
@@ -53,11 +61,11 @@ p.blocks.forEach((block: any, i: number) => {
   title={p.seo.title}
   description={p.seo.description}
   canonical={canonical}
-  ogImage={p.seo.ogImage ? `${site}${p.seo.ogImage}` : undefined}
+  ogImage={ogImage}
   alternates={alternates}
   jsonLd={jsonLd}
 >
-  <SiteHeader brand={b} locale={locale} />
+  <SiteHeader brand={b} locale={locale} alternates={alternates} />
   {breadcrumb && <Breadcrumb items={breadcrumb} />}
 
   <main id="main">
@@ -70,7 +78,7 @@ p.blocks.forEach((block: any, i: number) => {
         case 'ingredients':  return <Ingredients data={block} id={block.id} locale={locale} />;
         case 'steps':        return <Steps data={block} id={block.id} />;
         case 'gallery':      return <Gallery data={block} id={block.id ?? 'hieu-qua'} />;
-        case 'testimonials': return <Testimonials data={block} id={block.id} />;
+        case 'testimonials': return <Testimonials data={block} id={block.id} locale={locale} />;
         case 'order':        return <Order data={block} product={p} brand={b} locale={locale} />;
         case 'faq':          return <Faq data={block} id={block.id} />;
         default:             return null;

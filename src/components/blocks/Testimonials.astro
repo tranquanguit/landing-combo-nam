@@ -1,7 +1,8 @@
 ---
 import Section from '../Section.astro';
-interface Props { data: any; id?: string; }
-const { data, id = 'danh-gia' } = Astro.props;
+import { t, type Locale } from '../../i18n/ui';
+interface Props { data: any; id?: string; locale: Locale; }
+const { data, id = 'danh-gia', locale } = Astro.props;
 ---
 <Section id={id} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} center>
   <ul class="quotes">
@@ -23,7 +24,7 @@ const { data, id = 'danh-gia' } = Astro.props;
             <span>
               <strong>{item.name}</strong>
               {item.meta && <span class="muted">{item.meta}</span>}
-              {item.sponsored && <span class="sponsored">Nội dung có tài trợ</span>}
+              {item.sponsored && <span class="sponsored">{t(locale, 'testimonial.sponsored')}</span>}
             </span>
           </figcaption>
         </figure>

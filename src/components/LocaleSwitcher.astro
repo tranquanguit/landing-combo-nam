@@ -1,0 +1,27 @@
+---
+import { htmlLang, type Locale } from '../i18n/ui';
+
+/** Chỉ hiện khi sản phẩm thật sự có bản dịch khác đã xuất bản. */
+interface Props { current: Locale; alternates: { locale: Locale; url: string }[]; }
+const { current, alternates } = Astro.props;
+
+const labels: Record<Locale, string> = {
+  vi: 'Tiếng Việt', en: 'English', th: 'ไทย', id: 'Bahasa Indonesia',
+};
+---
+{alternates.length > 1 && (
+  <nav class="locales" aria-label="Language">
+    {alternates.map((a) => (
+      a.locale === current
+        ? <span aria-current="true" lang={htmlLang[a.locale]}>{labels[a.locale]}</span>
+        : <a href={a.url} hreflang={htmlLang[a.locale]} lang={htmlLang[a.locale]}>{labels[a.locale]}</a>
+    ))}
+  </nav>
+)}
+
+<style>
+  .locales { display: flex; gap: var(--s-3); align-items: center; font-size: var(--t-xs); }
+  .locales a { color: var(--ink-muted); text-decoration: none; }
+  .locales a:hover { color: var(--indigo); text-decoration: underline; }
+  .locales [aria-current] { color: var(--ink-navy); font-weight: 600; }
+</style>

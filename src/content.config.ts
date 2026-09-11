@@ -208,6 +208,44 @@ const products = defineCollection({
     }),
 
     blocks: z.array(blocks).min(1),
+  }).superRefine((p, ctx) => {
+    /**
+     * Giá bị nhắc lại ở nhiều chỗ trong nội dung (khối ưu đãi, FAQ, ghi chú biến thể).
+     * Ở vòng trước, "tiết kiệm 630.000đ" sống sót qua hai lần dọn dẹp vì không ai
+     * đối chiếu con số trong câu chữ với con số trong dữ liệu. Hàng rào này quét
+     * mọi chuỗi tiền trong nội dung và chặn build nếu xuất hiện số không thuộc
+     * tập hợp giá hợp lệ.
+     */
+    const legit = new Set<number>([p.price, ...(p.compareAtPrice ? [p.compareAtPrice] : [])]);
+    for (const v of p.variants) if (v.price !== null) legit.add(v.price);
+    if (p.compareAtPrice) legit.add(p.compareAtPrice - p.price);
+
+    const seen = new Set<string>();
+    const scan = (node: unknown, path: string): void => {
+      if (typeof node === 'string') {
+        // Bắt 1.050.000đ, 1,050,000₫, 1.140.000 VND
+        const re = /(\d{1,3}(?:[.,]\d{3}){1,3})\s*(?:đ|₫|VND)/gi;
+        for (const m of node.matchAll(re)) {
+          const n = Number(m[1].replace(/[.,]/g, ''));
+          if (!legit.has(n)) seen.add(`${n.toLocaleString('vi-VN')} (tại ${path})`);
+        }
+      } else if (Array.isArray(node)) {
+        node.forEach((v, i) => scan(v, `${path}[${i}]`));
+      } else if (node && typeof node === 'object') {
+        for (const [k, v] of Object.entries(node)) scan(v, `${path}.${k}`);
+      }
+    };
+    scan(p.blocks, 'blocks');
+
+    if (seen.size) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          `Câu chữ nhắc tới số tiền không khớp dữ liệu giá: ${[...seen].join('; ')}. ` +
+          `Các số hợp lệ: ${[...legit].map((n) => n.toLocaleString('vi-VN')).join(', ')}. ` +
+          `Sửa câu chữ hoặc sửa giá — đừng để hai nơi nói hai con số.`,
+      });
+    }
   }),
 });
 
