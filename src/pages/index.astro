@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import ProductLanding from '../layouts/ProductLanding.astro';
+import { alternatesFor } from '../lib/routes';
 
 const products = await getCollection('products', ({ data }) =>
   data.locale === 'vi' && data.status === 'published'
@@ -13,5 +14,12 @@ const brand = await getEntry('brand', 'mocha');
 if (!brand) throw new Error('Thiếu src/data/mocha.json');
 
 const canonical = new URL('/', Astro.site).href;
+const alternates = await alternatesFor(entry.data.translationKey, Astro.site);
 ---
-<ProductLanding product={entry.data} brand={brand.data} locale="vi" canonical={canonical} />
+<ProductLanding
+  product={entry.data}
+  brand={brand.data}
+  locale="vi"
+  canonical={canonical}
+  alternates={alternates}
+/>

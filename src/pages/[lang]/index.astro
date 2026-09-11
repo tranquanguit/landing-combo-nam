@@ -1,0 +1,33 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, getEntry } from 'astro:content';
+import ProductLanding from '../../layouts/ProductLanding.astro';
+import { alternatesFor, productPath } from '../../lib/routes';
+import { defaultLocale, type Locale } from '../../i18n/ui';
+
+export const getStaticPaths = (async () => {
+  const products = await getCollection('products', ({ data }) =>
+    data.status === 'published' && data.locale !== defaultLocale && data.slug === 'combo-nam'
+  );
+  return products.map((p) => ({
+    params: { lang: p.data.locale },
+    props: { entry: p },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const locale = entry.data.locale as Locale;
+
+const brand = await getEntry('brand', 'mocha');
+if (!brand) throw new Error('Thiếu src/data/mocha.json');
+
+const canonical = new URL(productPath(entry.data.slug, locale), Astro.site).href;
+const alternates = await alternatesFor(entry.data.translationKey, Astro.site);
+---
+<ProductLanding
+  product={entry.data}
+  brand={brand.data}
+  locale={locale}
+  canonical={canonical}
+  alternates={alternates}
+/>

@@ -1,0 +1,298 @@
+{
+  "slug": "combo-nam",
+  "locale": "en",
+  "translationKey": "combo-nam",
+  "status": "published",
+  "name": "Mocha Dark Spot Duo – Smart Brightening Cream X3 + Smart First Care Serum",
+  "shortName": "Mocha Dark Spot Duo",
+  "sku": "MOCHA-COMBO-NAM",
+  "includes": [
+    {
+      "name": "Mocha Smart Brightening Cream X3",
+      "note": "night cream"
+    },
+    {
+      "name": "Mocha Smart First Care Serum",
+      "note": "dark-spot serum, morning and night"
+    }
+  ],
+  "gifts": [
+    {
+      "name": "Mocha UV-Block SPF50 sunscreen",
+      "note": "the step that protects your progress"
+    },
+    {
+      "name": "Mocha Bio-Active Cleanser",
+      "note": "gentle, pH 5.5"
+    }
+  ],
+  "price": 1050000,
+  "compareAtPrice": 1680000,
+  "currency": "VND",
+  "variants": [
+    {
+      "label": "The full duo – cream + serum",
+      "note": "Includes both gifts",
+      "price": 1050000,
+      "recommended": true
+    },
+    {
+      "label": "Smart Brightening Cream X3 only",
+      "note": "Includes the cleanser",
+      "price": 590000,
+      "recommended": false
+    },
+    {
+      "label": "Smart First Care Serum only",
+      "note": "Morning and night",
+      "price": 550000,
+      "recommended": false
+    },
+    {
+      "label": "I have questions first",
+      "note": "We reply by email or WhatsApp",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "seo": {
+    "title": "Mocha Dark Spot Duo – Tranexamic Acid 3% + Bakuchiol 2%",
+    "description": "Two-step routine for dark spots and uneven tone: Tranexamic Acid 3%, Bakuchiol 2%, NIO-NAG 2%, Niacinamide 1%. Every percentage published.",
+    "ogImage": "/images/packshot-combo.jpg"
+  },
+  "compliance": {
+    "declaringOrganization": "Mocha Vietnam Cosmeceuticals",
+    "declaringAddress": "290/2 Nam Ky Khoi Nghia, Vo Thi Sau Ward, District 3, Ho Chi Minh City, Vietnam",
+    "functions": "helps visibly reduce the look of dark spots and supports a more even-looking skin tone",
+    "warnings": [
+      "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
+      "Discontinue use if irritation occurs. Avoid direct contact with the eyes.",
+      "If you are pregnant or breastfeeding, speak to your doctor before use.",
+      "Results vary between individuals and depend on consistent daily sun protection."
+    ]
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Liposome · Fermentation · Aminovector delivery",
+      "heading": "A two-step routine for dark spots, with every percentage published",
+      "lead": "<strong>Smart Brightening Cream X3</strong> and <strong>Smart First Care Serum</strong>, used together: Tranexamic Acid 3%, Bakuchiol 2%, NIO-NAG 2%, Niacinamide 1%. Formulated for skin dealing with stubborn discolouration and uneven tone.",
+      "usp": [
+        {
+          "text": "<strong>No corticosteroids, no hydroquinone, no drying alcohol</strong>",
+          "evidence": "ingredient"
+        },
+        {
+          "text": "<strong>Full percentages on the label</strong> — nothing hidden inside a “proprietary complex”",
+          "evidence": "verified"
+        },
+        {
+          "text": "<strong>Most people notice a more even tone at four to six weeks</strong>",
+          "evidence": "survey",
+          "qualifier": "results vary between individuals"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-combo.jpg",
+        "alt": "Mocha Smart Brightening Cream X3 jar beside the Smart First Care Serum bottle",
+        "width": 1002,
+        "height": 762
+      },
+      "primaryCta": "Order the duo",
+      "secondaryCta": "See the formula",
+      "trustBadges": [
+        "Ships from Ho Chi Minh City",
+        "7-day return if the product arrives faulty"
+      ]
+    },
+    {
+      "type": "offer",
+      "eyebrow": "The duo",
+      "heading": "Both steps together, because one without the other does half the job",
+      "body": "The serum works on pigment; the cream repairs and seals it in. Bought separately they come to 1,680,000₫. Together the duo is <strong>1,050,000₫</strong>, with the SPF50 sunscreen and cleanser included.",
+      "validUntil": "2026-09-30",
+      "notes": [
+        "Sunscreen included",
+        "Cleanser included",
+        "Ships worldwide from Vietnam"
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "The problem",
+      "heading": "Why dark spots fade and then come straight back",
+      "quotes": [
+        "“Three different serums, and each one worked for about a fortnight.”",
+        "“Foundation doesn't really cover the patches on my cheeks.”",
+        "“I've been burned by a cream that turned out to have steroids in it.”",
+        "“Everything promises results in seven days and nothing delivers.”"
+      ],
+      "explainer": {
+        "heading": "Most products only work on the surface layer",
+        "body": [
+          "Brightening the epidermis alone leaves the melanocytes underneath doing exactly what they were doing before. Stop using the product and the pigment returns, sometimes darker than it started.",
+          "This routine takes a different route: it limits the signal that triggers pigment production, supports the turnover of discoloured cells, and rebuilds the skin barrier so the improvement holds.",
+          "Which also means <strong>progress is measured in weeks, not days</strong>. The realistic timelines for each type of discolouration are further down this page, because setting the wrong expectation is how people end up disappointed."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Know what you have",
+      "heading": "Three patterns of hyperpigmentation, and honest timelines",
+      "intro": "Knowing which one you have tells you what to expect. This is why we do not quote a single number for everybody.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Epidermal patches",
+          "body": "Light to dark brown patches with defined edges, sitting in the upper layer. Usually linked to UV exposure, hormonal change, or a previous steroid cream.",
+          "meta": "Typical improvement: 4–8 weeks",
+          "image": {
+            "src": "/images/nam_01.webp",
+            "alt": "Light brown patches with defined edges across the cheekbone",
+            "width": 600,
+            "height": 450
+          }
+        },
+        {
+          "heading": "Dermal pigmentation",
+          "body": "Grey-brown spots or patches with soft edges, where pigment sits deeper in the skin. Linked to genetics, hormones, sun exposure and prolonged stress.",
+          "meta": "Typical improvement: 8–12 weeks",
+          "image": {
+            "src": "/images/nam_02.webp",
+            "alt": "Grey-brown pigmentation with soft edges",
+            "width": 600,
+            "height": 450
+          }
+        },
+        {
+          "heading": "Mixed pigmentation",
+          "body": "Both at once: clearly defined dark areas alongside diffuse, patchy ones. It takes longer and demands stricter sun protection.",
+          "meta": "Typical improvement: 8–16 weeks",
+          "image": {
+            "src": "/images/nam_03.webp",
+            "alt": "Mixed pigmentation with both defined and diffuse areas",
+            "width": 600,
+            "height": 450
+          }
+        }
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "The formula",
+      "heading": "Every active, its percentage, and what it is doing there",
+      "intro": "No corticosteroids, no hydroquinone, no synthetic fragrance.",
+      "caption": "Table 1 — Key actives in the Mocha Dark Spot Duo and their role in the routine.",
+      "rows": [
+        {
+          "name": "Tranexamic Acid 3%",
+          "role": "Widely used in brightening formulations; supports the appearance of a more even tone.",
+          "suitedFor": "Hormonal and post-pregnancy discolouration",
+          "reference": "https://pubmed.ncbi.nlm.nih.gov/28994488/"
+        },
+        {
+          "name": "Bakuchiol 2%",
+          "role": "Studied as a gentler alternative to retinol; supports cell turnover without peeling.",
+          "suitedFor": "Sensitive skin, retinol-intolerant skin",
+          "reference": "https://pubmed.ncbi.nlm.nih.gov/29947134/"
+        },
+        {
+          "name": "Niacinamide 1% + NIO-NAG (Glucosamine) 2%",
+          "role": "Supports barrier function, texture, and the appearance of brightness.",
+          "suitedFor": "All skin types, including oily and blemish-prone",
+          "reference": "https://pubmed.ncbi.nlm.nih.gov/12100180/"
+        },
+        {
+          "name": "Vietnam Bio-White Complex 3%",
+          "role": "Fermented botanical blend; soothing, supports a brighter-looking complexion.",
+          "suitedFor": "Reactive or dull-looking skin"
+        },
+        {
+          "name": "SEPICALM™ VG WP",
+          "role": "Aminovector-class active with a calming, brightening profile.",
+          "suitedFor": "Skin that flushes easily"
+        },
+        {
+          "name": "Ceramide 1% + Bioyoga",
+          "role": "Reinforces the skin barrier and reduces water loss, helping results hold.",
+          "suitedFor": "Dry skin, skin recovering from active treatment"
+        },
+        {
+          "name": "Black Truffle & Bio-Placenta",
+          "role": "Polyphenol-rich antioxidants that support skin renewal.",
+          "suitedFor": "Skin showing early signs of ageing"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use it",
+      "heading": "Four steps, about five minutes",
+      "intro": "Once or twice daily. The morning sunscreen is not optional — skip it and the other two steps are largely wasted.",
+      "totalTime": "PT5M",
+      "items": [
+        {
+          "heading": "Cleanse",
+          "body": "Wash with the Bio-Active Cleanser and pat dry with a clean towel."
+        },
+        {
+          "heading": "Serum",
+          "body": "Three to four drops over the affected areas and the whole face. Press in, don't rub."
+        },
+        {
+          "heading": "Cream",
+          "body": "About a fingertip's worth across face and neck, avoiding the eye area."
+        },
+        {
+          "heading": "Sunscreen",
+          "body": "Every morning, without exception, using the SPF50 included in the duo."
+        }
+      ],
+      "footnote": "Recommended run: <strong>8–12 weeks without gaps</strong>. Unprotected sun exposure brings pigment back regardless of which product you use."
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Questions",
+      "heading": "What people ask before ordering",
+      "items": [
+        {
+          "q": "What does the duo cost?",
+          "a": "The Smart Brightening Cream X3 and Smart First Care Serum together are <strong>1,050,000₫</strong> (about US$40), including the SPF50 sunscreen and cleanser. Individually: cream 590,000₫, serum 550,000₫."
+        },
+        {
+          "q": "How long before I see a difference?",
+          "a": "Most people report a more even-looking tone at <strong>four to six weeks</strong> of consistent use. Surface patches tend to shift in 4–8 weeks; deeper and mixed pigmentation takes 8–16 weeks. This varies between individuals and depends heavily on daily sun protection."
+        },
+        {
+          "q": "Is it suitable for sensitive skin?",
+          "a": "The formula uses Bakuchiol rather than retinol and contains no corticosteroids, hydroquinone or drying alcohol. Patch test on the jawline for 24 hours before applying to the whole face."
+        },
+        {
+          "q": "Can I use it while pregnant or breastfeeding?",
+          "a": "The formula is retinoid-free. Even so, speak to your doctor before adding any new product to your routine during pregnancy or breastfeeding."
+        },
+        {
+          "q": "Will the spots come back?",
+          "a": "Pigmentation returns readily when skin is exposed to UV without protection. Completing the 8–12 week run and wearing sunscreen every morning is what makes the improvement hold."
+        },
+        {
+          "q": "Do you ship outside Vietnam?",
+          "a": "Yes, from Ho Chi Minh City. Send us your country through the form and we will confirm shipping cost and delivery time before you pay."
+        }
+      ]
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email or WhatsApp within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City.",
+        "<strong>Shipping quoted before payment</strong> — no surprise charges at checkout.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect, or unopened.",
+        "<strong>Support through the full routine</strong> by email or WhatsApp."
+      ]
+    }
+  ]
+}

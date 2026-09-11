@@ -132,7 +132,13 @@ const blocks = z.discriminatedUnion('type', [
 ]);
 
 const products = defineCollection({
-  loader: glob({ pattern: '**/*.json', base: './src/content/products' }),
+  // Không để loader tự suy id từ trường `slug`: các bản dịch dùng chung slug
+  // nên sẽ đè lên nhau. Id phải là <slug>/<locale>.
+  loader: glob({
+    pattern: '**/*.json',
+    base: './src/content/products',
+    generateId: ({ entry }) => entry.replace(/\.json$/, ''),
+  }),
   schema: z.object({
     slug: z.string(),
     locale: z.enum(['vi', 'en', 'th', 'id']),
