@@ -1,0 +1,54 @@
+# robots.txt — mochatrinam.com
+# Cho phép công cụ tìm kiếm truyền thống
+User-agent: *
+Allow: /
+Disallow: /*?utm_
+Disallow: /*?fbclid
+
+# ==== AI / LLM crawlers: cho phép thu thập để hiển thị trong câu trả lời AI ====
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+Sitemap: https://mochatrinam.com/sitemap.xml
