@@ -27,7 +27,7 @@
     }
   ],
   "price": 1050000,
-  "compareAtPrice": 1680000,
+  "compareAtPrice": 1140000,
   "currency": "VND",
   "variants": [
     {
@@ -93,7 +93,7 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-combo.jpg",
+        "src": "/images/packshot-combo.webp",
         "alt": "Hũ kem Mocha Smart Brightening Cream X3 và chai serum Mocha Smart First Care Serum",
         "width": 1002,
         "height": 762
@@ -109,8 +109,8 @@
     {
       "type": "offer",
       "eyebrow": "Ưu đãi",
-      "heading": "Mua theo combo đủ hai bước, tiết kiệm 630.000đ",
-      "body": "Mua riêng kem và serum tốn 1.680.000đ. Mua theo combo còn <strong>1.050.000đ</strong>, kèm kem chống nắng SPF50 và sữa rửa mặt — hai bước bắt buộc để giữ kết quả.",
+      "heading": "Mua đủ hai bước, rẻ hơn mua lẻ và được tặng thêm hai sản phẩm",
+      "body": "Mua lẻ kem 590.000đ và serum 550.000đ là 1.140.000đ. Mua theo combo còn <strong>1.050.000đ</strong>, và được tặng thêm kem chống nắng SPF50 cùng sữa rửa mặt — hai bước bắt buộc để giữ kết quả.",
       "validUntil": "2026-09-30",
       "notes": [
         "Miễn phí vận chuyển",
@@ -151,8 +151,8 @@
           "image": {
             "src": "/images/nam_01.webp",
             "alt": "Nám mảng với các mảng nâu nhạt bờ rõ trên gò má",
-            "width": 600,
-            "height": 450
+            "width": 800,
+            "height": 449
           }
         },
         {
@@ -162,8 +162,8 @@
           "image": {
             "src": "/images/nam_02.webp",
             "alt": "Nám chân sâu dạng nốt nâu xám bờ mờ",
-            "width": 600,
-            "height": 450
+            "width": 500,
+            "height": 316
           }
         },
         {
@@ -173,8 +173,8 @@
           "image": {
             "src": "/images/nam_03.webp",
             "alt": "Nám hỗn hợp gồm vùng sẫm màu và vùng loang lổ",
-            "width": 600,
-            "height": 450
+            "width": 800,
+            "height": 533
           }
         }
       ]
@@ -260,29 +260,29 @@
         {
           "src": "/images/tuong-phan-1.webp",
           "alt": "So sánh làn da trước và sau 4 tuần",
-          "width": 450,
-          "height": 600,
+          "width": 463,
+          "height": 463,
           "caption": "Sau 4 tuần"
         },
         {
           "src": "/images/tuong-phan-3.webp",
           "alt": "Vùng gò má sau 6 tuần sử dụng",
-          "width": 450,
-          "height": 600,
+          "width": 462,
+          "height": 462,
           "caption": "Sau 6 tuần"
         },
         {
           "src": "/images/tuong-phan-5.webp",
           "alt": "Da đều màu hơn sau 8 tuần",
-          "width": 450,
-          "height": 600,
+          "width": 500,
+          "height": 500,
           "caption": "Sau 8 tuần"
         },
         {
           "src": "/images/tuong-phan-7.webp",
           "alt": "Kết quả sau 12 tuần dùng đủ chu kỳ",
-          "width": 450,
-          "height": 600,
+          "width": 550,
+          "height": 550,
           "caption": "Sau 12 tuần"
         }
       ],
@@ -297,36 +297,18 @@
           "quote": "Sau sinh tôi bị nám dai dẳng, thử nhiều thứ không ăn thua. Dùng combo này thì da sáng và đều màu hơn, tôi thấy rõ nhất từ tuần thứ tư.",
           "name": "Chị Lan Anh, 40 tuổi",
           "meta": "Hà Nội",
-          "avatar": {
-            "src": "/images/chi-lan-anh.webp",
-            "alt": "Chân dung chị Lan Anh",
-            "width": 48,
-            "height": 48
-          },
           "sponsored": false
         },
         {
           "quote": "Kem thấm nhanh, không nhờn, da nhạy cảm của tôi dùng không bị châm chích. Điều tôi thích là hộp ghi rõ tỉ lệ từng chất.",
           "name": "Chị Hương, 29 tuổi",
           "meta": "TP.HCM",
-          "avatar": {
-            "src": "/images/chi-huong.webp",
-            "alt": "Chân dung chị Hương",
-            "width": 48,
-            "height": 48
-          },
           "sponsored": false
         },
         {
           "quote": "Da mềm mịn hơn, vùng sạm nhạt dần. Được tư vấn nhắc chống nắng mỗi ngày nên tôi làm đều hơn hẳn trước.",
           "name": "Chị Phương Thảo, 34 tuổi",
           "meta": "Cần Thơ",
-          "avatar": {
-            "src": "/images/chi-phuong-thao.webp",
-            "alt": "Chân dung chị Phương Thảo",
-            "width": 48,
-            "height": 48
-          },
           "sponsored": false
         }
       ]
@@ -350,7 +332,7 @@
       "items": [
         {
           "q": "Combo Nám Mocha giá bao nhiêu?",
-          "a": "Combo gồm Smart Brightening Cream X3 và Smart First Care Serum, giá niêm yết 1.680.000đ, hiện ưu đãi còn <strong>1.050.000đ</strong>, kèm kem chống nắng UV-Block SPF50 và sữa rửa mặt Bio-Active Cleanser, miễn phí vận chuyển. Mua lẻ: kem 590.000đ, serum 550.000đ."
+          "a": "Combo gồm Smart Brightening Cream X3 và Smart First Care Serum, giá <strong>1.050.000đ</strong>, kèm kem chống nắng UV-Block SPF50 và sữa rửa mặt Bio-Active Cleanser, miễn phí vận chuyển. Mua lẻ từng món: kem 590.000đ, serum 550.000đ — tức là mua combo rẻ hơn 90.000đ và được thêm hai sản phẩm tặng kèm."
         },
         {
           "q": "Bao lâu thì thấy khác biệt?",
@@ -378,5 +360,16 @@
         }
       ]
     }
-  ]
+  ],
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7
+  }
 }

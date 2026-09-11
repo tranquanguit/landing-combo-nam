@@ -4,6 +4,15 @@ import { t, type Locale } from '../../i18n/ui';
 interface Props { data: any; product: any; locale: Locale; }
 const { data, product: p, locale } = Astro.props;
 const save = p.compareAtPrice ? p.compareAtPrice - p.price : 0;
+
+// Trang tĩnh không tự biết hôm nay là ngày nào. Nếu hạn ưu đãi đã qua tại thời điểm
+// build thì dừng build, thay vì lặng lẽ phục vụ một ưu đãi đã hết hạn.
+if (data.validUntil && new Date(data.validUntil) < new Date()) {
+  throw new Error(
+    `Hạn ưu đãi ${data.validUntil} của "${p.slug}/${locale}" đã qua. ` +
+    `Cập nhật validUntil trong file nội dung, hoặc bỏ trường này đi.`
+  );
+}
 ---
 <section class="surface-navy offer" aria-labelledby="uu-dai-title">
   <div class="wrap offer-grid">

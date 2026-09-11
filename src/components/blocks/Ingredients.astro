@@ -1,14 +1,19 @@
 ---
 import Section from '../Section.astro';
-interface Props { data: any; id?: string; }
-const { data, id = 'thanh-phan' } = Astro.props;
+import { t, type Locale } from '../../i18n/ui';
+interface Props { data: any; id?: string; locale: Locale; }
+const { data, id = 'thanh-phan', locale } = Astro.props;
 ---
 <Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} center>
   <div class="scroll">
     <table>
       {data.caption && <caption>{data.caption}</caption>}
       <thead>
-        <tr><th scope="col">Hoạt chất</th><th scope="col">Vai trò</th><th scope="col">Phù hợp với</th></tr>
+        <tr>
+          <th scope="col">{t(locale, 'table.ingredient')}</th>
+          <th scope="col">{t(locale, 'table.role')}</th>
+          <th scope="col">{t(locale, 'table.suitedFor')}</th>
+        </tr>
       </thead>
       <tbody>
         {data.rows.map((r: any) => (
@@ -16,7 +21,7 @@ const { data, id = 'thanh-phan' } = Astro.props;
             <th scope="row">
               {r.name}
               {r.reference && (
-                <> <a href={r.reference} rel="noopener nofollow" target="_blank" class="ref">nguồn</a></>
+                <> <a href={r.reference} rel="noopener nofollow" target="_blank" class="ref">{t(locale, 'table.source')}</a></>
               )}
             </th>
             <td>{r.role}</td>

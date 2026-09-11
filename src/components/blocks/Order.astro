@@ -3,6 +3,11 @@ import { money } from '../../lib/format';
 import { t, type Locale } from '../../i18n/ui';
 interface Props { data: any; product: any; brand: any; locale: Locale; }
 const { data, product: p, brand: b, locale } = Astro.props;
+
+// Endpoint nhận đơn. Chưa cấu hình thì form KHÔNG giả vờ đã gửi thành công —
+// thay vào đó hiện lối liên hệ thật, vì một đơn hàng rơi vào hư không tệ hơn
+// nhiều so với một nút không hoạt động.
+const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
 ---
 <section id="dat-hang" class="surface-navy defer" aria-labelledby="dat-hang-title">
   <div class="wrap order-grid">
@@ -20,20 +25,25 @@ const { data, product: p, brand: b, locale } = Astro.props;
     </div>
 
     <div class="form-card">
-      <form id="order-form" novalidate>
+      <form id="order-form" method="post" action={endpoint ?? undefined} novalidate>
         {p.variants.length > 0 && (
           <fieldset>
-            <legend class="sr-only">Chọn gói sản phẩm</legend>
+            <legend class="sr-only">{t(locale, 'form.selectPack')}</legend>
             <div class="packs">
               {p.variants.map((v: any, i: number) => (
                 <label class="pack">
-                  <input type="radio" name="pack" value={v.label} checked={v.recommended || i === 0} />
+                  <input
+                    type="radio" name="pack" value={v.label}
+                    data-price={v.price ?? ''}
+                    data-price-text={v.price === null ? '' : money(v.price, p.currency, locale)}
+                    checked={v.recommended || i === 0}
+                  />
                   <span class="pack-text">
                     <strong>{v.label}</strong>
                     {v.note && <span class="muted">{v.note}</span>}
                   </span>
                   <span class="pack-price tabular">
-                    {v.price === null ? 'Miễn phí' : money(v.price, p.currency, locale)}
+                    {v.price === null ? t(locale, 'form.noPrice') : money(v.price, p.currency, locale)}
                   </span>
                 </label>
               ))}
@@ -68,9 +78,9 @@ const { data, product: p, brand: b, locale } = Astro.props;
           <textarea id="note" name="note" rows="2"></textarea>
         </div>
 
-        <p class="total">
-          Tổng tiền trả cho shipper: <strong class="tabular">{money(p.price, p.currency, locale)}</strong>
-          <span class="muted"> (đã gồm phí giao hàng)</span>
+        <p class="total" id="order-total" data-currency={p.currency} data-locale={locale}>
+          {t(locale, 'form.total')} <strong class="tabular" data-total>{money(p.price, p.currency, locale)}</strong>
+          <span class="muted"> {t(locale, 'form.totalNote')}</span>
         </p>
 
         <button type="submit" class="btn btn-primary btn-lg btn-block" data-cta="form-submit">
@@ -79,6 +89,18 @@ const { data, product: p, brand: b, locale } = Astro.props;
       </form>
 
       <p class="ok" id="form-success" role="status" hidden>{t(locale, 'form.success')}</p>
+
+      <p class="fail" id="form-error" role="alert" hidden>
+        {t(locale, 'form.failed')} <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a>
+      </p>
+
+      {!endpoint && (
+        <p class="todo" data-todo>
+          ⚠️ Chưa cấu hình <code>PUBLIC_ORDER_ENDPOINT</code>. Cho tới khi cấu hình, biểu mẫu này
+          không gửi đơn đi đâu cả — hãy đặt hàng qua hotline
+          <a href={`tel:${b.phone}`}> {b.phoneDisplay}</a>.
+        </p>
+      )}
     </div>
   </div>
 </section>
@@ -100,7 +122,7 @@ const { data, product: p, brand: b, locale } = Astro.props;
   .packs { display: grid; gap: var(--s-2); }
   .pack {
     display: flex; align-items: flex-start; gap: var(--s-3);
-    border: 1.5px solid var(--line); border-radius: var(--r-card);
+    border: 1.5px solid var(--line-control); border-radius: var(--r-card);
     padding: var(--s-3) var(--s-4); cursor: pointer; background: var(--bone);
   }
   .pack:hover { border-color: var(--indigo-lift); }
@@ -114,7 +136,7 @@ const { data, product: p, brand: b, locale } = Astro.props;
   .field label { display: block; font-weight: 600; font-size: var(--t-sm); margin-bottom: 5px; color: var(--ink-navy); }
   input, textarea {
     width: 100%; font: inherit; font-size: var(--t-base); padding: 12px 14px;
-    border: 1.5px solid var(--line); border-radius: var(--r-input);
+    border: 1.5px solid var(--line-control); border-radius: var(--r-input);
     background: var(--bone); color: var(--ink);
   }
   input:focus, textarea:focus { border-color: var(--indigo); background: var(--paper); outline: none; box-shadow: 0 0 0 3px rgba(42, 47, 160, .14); }
@@ -125,6 +147,11 @@ const { data, product: p, brand: b, locale } = Astro.props;
 
   .total { font-size: var(--t-sm); margin: var(--s-4) 0; }
   .total strong { color: var(--ink-navy); }
+  .fail {
+    background: #fdeceb; border: 1.5px solid #b3261e; color: #7c1d16;
+    border-radius: var(--r-card); padding: var(--s-4); font-weight: 600; margin: var(--s-3) 0 0;
+  }
+  button[data-busy] { opacity: .6; pointer-events: none; }
   .ok {
     background: #e6f4ee; border: 1.5px solid var(--green-clinic); color: #0a4b38;
     border-radius: var(--r-card); padding: var(--s-4); font-weight: 600; margin: 0;
@@ -133,10 +160,16 @@ const { data, product: p, brand: b, locale } = Astro.props;
 
 <script>
   const form = document.getElementById('order-form') as HTMLFormElement | null;
+
   if (form) {
+    /* Chấp nhận cả 0912345678, +84912345678 và 84912345678 — khách hay dán
+       số ở định dạng quốc tế từ Zalo. Chuẩn hóa về dạng 0xxxxxxxxx rồi mới kiểm. */
+    const normalisePhone = (v: string) =>
+      v.replace(/[\s.\-()]/g, '').replace(/^\+?84/, '0');
+
     const rules: Record<string, (v: string) => boolean> = {
       name: (v) => v.trim().length >= 2,
-      phone: (v) => /^0\d{9}$/.test(v.replace(/[\s.\-()]/g, '')),
+      phone: (v) => /^0\d{9}$/.test(normalisePhone(v)),
       address: (v) => v.trim().length >= 8,
     };
 
@@ -152,34 +185,61 @@ const { data, product: p, brand: b, locale } = Astro.props;
       el?.addEventListener('blur', () => check(el));
     }
 
+    /* Tổng tiền phải đi theo gói đang chọn, nếu không con số này là nói dối. */
+    const totalBox = document.getElementById('order-total');
+    const totalValue = totalBox?.querySelector('[data-total]');
+    const syncTotal = () => {
+      const picked = form.querySelector<HTMLInputElement>('input[name="pack"]:checked');
+      if (!totalBox || !totalValue || !picked) return;
+      const text = picked.dataset.priceText ?? '';
+      totalBox.hidden = text === '';
+      if (text) totalValue.textContent = text;
+    };
+    form.querySelectorAll<HTMLInputElement>('input[name="pack"]')
+      .forEach((r) => r.addEventListener('change', syncTotal));
+    syncTotal();
+
     form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      let first: HTMLInputElement | null = null;
+      let firstBad: HTMLInputElement | null = null;
       for (const n of Object.keys(rules)) {
         const el = form.elements.namedItem(n) as HTMLInputElement | null;
-        if (el && !check(el) && !first) first = el;
+        if (el && !check(el) && !firstBad) firstBad = el;
       }
-      if (first) { first.focus(); return; }
+      if (firstBad) {
+        e.preventDefault();
+        firstBad.focus();
+        return;
+      }
 
+      /* Không có endpoint thì để form submit thật (nó sẽ báo lỗi thật),
+         chứ không chặn rồi hiện màn hình cảm ơn giả. */
+      if (!form.action) return;
+
+      e.preventDefault();
       const payload = Object.fromEntries(new FormData(form).entries());
-      window.dispatchEvent(new CustomEvent('mocha:lead', { detail: payload }));
+      payload.phone = normalisePhone(String(payload.phone ?? ''));
 
-      const endpoint = document.documentElement.dataset.orderEndpoint;
-      const done = () => {
-        form.hidden = true;
-        const ok = document.getElementById('form-success');
-        if (ok) { ok.hidden = false; ok.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
-      };
-      if (endpoint) {
-        fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        }).then(done).catch(done);
-      } else {
-        console.info('[Mocha] Chưa cấu hình data-order-endpoint. Đơn hàng:', payload);
-        done();
-      }
+      const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (submit) { submit.disabled = true; submit.dataset.busy = 'true'; }
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error(String(res.status));
+          form.hidden = true;
+          const ok = document.getElementById('form-success');
+          if (ok) { ok.hidden = false; ok.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+          window.dispatchEvent(new CustomEvent('mocha:lead', { detail: payload }));
+        })
+        .catch(() => {
+          /* Gửi hỏng thì nói thật và đưa lối liên hệ khác, không nuốt lỗi. */
+          const fail = document.getElementById('form-error');
+          if (fail) { fail.hidden = false; fail.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+          if (submit) { submit.disabled = false; delete submit.dataset.busy; }
+        });
     });
   }
 </script>

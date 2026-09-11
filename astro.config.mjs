@@ -32,11 +32,9 @@ export default defineConfig({
     inlineStylesheets: 'always',
   },
 
-  image: {
-    responsiveStyles: true,
-    layout: 'constrained',
-    breakpoints: [360, 414, 640, 750, 1080, 1440],
-  },
+  // Chưa bật astro:assets: ảnh hiện được tham chiếu bằng đường dẫn chuỗi trong JSON
+  // nên pipeline ảnh của Astro không chạm tới. Ảnh đang được nén thủ công.
+  // Việc còn lại: chuyển sang import.meta.glob để có srcset tự động.
 
   vite: {
     build: { cssMinify: 'lightningcss' },

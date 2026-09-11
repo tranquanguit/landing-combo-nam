@@ -1,4 +1,4 @@
-import { defineCollection, z, reference } from 'astro:content';
+import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 /* ------------------------------------------------------------------
@@ -28,6 +28,9 @@ const image = z.object({
   caption: z.string().optional(),
 });
 
+/** Id neo dùng cho liên kết trong trang. Để trống thì component dùng id mặc định. */
+const anchorId = z.string().regex(/^[a-z0-9-]+$/).optional();
+
 const blocks = z.discriminatedUnion('type', [
   z.object({
     type: z.literal('hero'),
@@ -51,6 +54,7 @@ const blocks = z.discriminatedUnion('type', [
   }),
   z.object({
     type: z.literal('problem'),
+    id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
     intro: z.string().optional(),
@@ -59,6 +63,7 @@ const blocks = z.discriminatedUnion('type', [
   }),
   z.object({
     type: z.literal('cards'),
+    id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
     intro: z.string().optional(),
@@ -73,6 +78,7 @@ const blocks = z.discriminatedUnion('type', [
   }),
   z.object({
     type: z.literal('ingredients'),
+    id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
     intro: z.string().optional(),
@@ -86,6 +92,7 @@ const blocks = z.discriminatedUnion('type', [
   }),
   z.object({
     type: z.literal('steps'),
+    id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
     intro: z.string().optional(),
@@ -95,6 +102,7 @@ const blocks = z.discriminatedUnion('type', [
   }),
   z.object({
     type: z.literal('gallery'),
+    id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
     intro: z.string().optional(),
@@ -103,6 +111,7 @@ const blocks = z.discriminatedUnion('type', [
   }),
   z.object({
     type: z.literal('testimonials'),
+    id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
     intro: z.string().optional(),
@@ -125,6 +134,7 @@ const blocks = z.discriminatedUnion('type', [
   }),
   z.object({
     type: z.literal('faq'),
+    id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
     items: z.array(z.object({ q: z.string(), a: z.string() })),
@@ -156,6 +166,18 @@ const products = defineCollection({
     price: money,
     compareAtPrice: money.optional(),
     currency: z.string().default('VND'),
+    /** Trạng thái bán thật, không mặc định InStock trong mã sinh schema. */
+    availability: z.enum(['InStock', 'OutOfStock', 'PreOrder', 'BackOrder']).default('InStock'),
+    shipping: z.object({
+      country: z.string().length(2),
+      rate: z.number().int().nonnegative(),
+      transitDaysMin: z.number().int().positive(),
+      transitDaysMax: z.number().int().positive(),
+    }).optional(),
+    returnPolicy: z.object({
+      country: z.string().length(2),
+      days: z.number().int().positive(),
+    }).optional(),
     /** Các lựa chọn mua hiển thị trong form đặt hàng. */
     variants: z.array(z.object({
       label: z.string(),

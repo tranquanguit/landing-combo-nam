@@ -27,7 +27,7 @@
     }
   ],
   "price": 1050000,
-  "compareAtPrice": 1680000,
+  "compareAtPrice": 1140000,
   "currency": "VND",
   "variants": [
     {
@@ -93,7 +93,7 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-combo.jpg",
+        "src": "/images/packshot-combo.webp",
         "alt": "Mocha Smart Brightening Cream X3 jar beside the Smart First Care Serum bottle",
         "width": 1002,
         "height": 762
@@ -108,8 +108,8 @@
     {
       "type": "offer",
       "eyebrow": "The duo",
-      "heading": "Both steps together, because one without the other does half the job",
-      "body": "The serum works on pigment; the cream repairs and seals it in. Bought separately they come to 1,680,000₫. Together the duo is <strong>1,050,000₫</strong>, with the SPF50 sunscreen and cleanser included.",
+      "heading": "Both steps together, cheaper than buying them apart",
+      "body": "Bought separately the cream is 590,000₫ and the serum 550,000₫ — 1,140,000₫ in total. The duo is <strong>1,050,000₫</strong> and adds the SPF50 sunscreen and the cleanser on top.",
       "validUntil": "2026-09-30",
       "notes": [
         "Sunscreen included",
@@ -150,8 +150,8 @@
           "image": {
             "src": "/images/nam_01.webp",
             "alt": "Light brown patches with defined edges across the cheekbone",
-            "width": 600,
-            "height": 450
+            "width": 800,
+            "height": 449
           }
         },
         {
@@ -161,8 +161,8 @@
           "image": {
             "src": "/images/nam_02.webp",
             "alt": "Grey-brown pigmentation with soft edges",
-            "width": 600,
-            "height": 450
+            "width": 500,
+            "height": 316
           }
         },
         {
@@ -172,8 +172,8 @@
           "image": {
             "src": "/images/nam_03.webp",
             "alt": "Mixed pigmentation with both defined and diffuse areas",
-            "width": 600,
-            "height": 450
+            "width": 800,
+            "height": 533
           }
         }
       ]
@@ -258,7 +258,7 @@
       "items": [
         {
           "q": "What does the duo cost?",
-          "a": "The Smart Brightening Cream X3 and Smart First Care Serum together are <strong>1,050,000₫</strong> (about US$40), including the SPF50 sunscreen and cleanser. Individually: cream 590,000₫, serum 550,000₫."
+          "a": "The Smart Brightening Cream X3 and Smart First Care Serum together are <strong>1,050,000₫</strong> (roughly US$40), including the SPF50 sunscreen and cleanser. Individually they are 590,000₫ and 550,000₫, so the duo saves 90,000₫ and adds two products."
         },
         {
           "q": "How long before I see a difference?",
@@ -294,5 +294,16 @@
         "<strong>Support through the full routine</strong> by email or WhatsApp."
       ]
     }
-  ]
+  ],
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7
+  }
 }

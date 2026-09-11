@@ -73,3 +73,63 @@ Những mục có dấu ⚠️ trong trang là chỗ đang thiếu dữ liệu t
 6. Hợp đồng với MC Vân Hugo để gắn nhãn nội dung tài trợ.
 7. Chính sách đổi trả và chính sách bảo vệ dữ liệu cá nhân thành văn.
 8. Danh mục sản phẩm Mocha đầy đủ, để thiết kế schema dữ liệu dùng chung.
+
+---
+
+# Vòng 4 — kết quả kiểm định độc lập và các sửa chữa
+
+Một kiểm định viên độc lập (không tham gia dựng sản phẩm) đã chạy bộ 32 câu hỏi và
+đo bằng Playwright. Kết quả: **22/32 CHƯA ĐẠT**. Ba phát hiện nặng nhất:
+
+1. **Trang không bán được hàng, chỉ giả vờ bán.** Form không gửi đi đâu nhưng vẫn hiện
+   "Đơn hàng đã được ghi nhận, chuyên viên sẽ gọi trong 2 giờ". Tắt JS thì nó đẩy tên,
+   số điện thoại và địa chỉ khách lên query string rồi vứt đi.
+2. **Đợt dọn pháp lý ở vòng 1 chỉ dọn phần chữ nhìn thấy.** `public/llms.txt` vẫn có mục
+   "Chuyên gia liên quan" giới thiệu BSCKI Trúc Mai và bệnh viện; `public/images/hero.jpg`
+   vẫn là ảnh áo blouse có chữ nung; `logo-byt.png` là con dấu Sở Y tế; video bác sĩ 6,8MB
+   vẫn nằm trong `dist/`. Đã sửa cái nhìn thấy trong trình duyệt rồi tuyên bố xong việc.
+3. **Trang tự mâu thuẫn về giá.** Giá gốc khai 1.680.000đ trong khi chính trang ghi mua lẻ
+   kem 590.000đ + serum 550.000đ = 1.140.000đ. "Tiết kiệm 630.000đ" chỉ đúng nếu người đọc
+   không biết cộng.
+
+## Đã sửa
+
+| Vấn đề | Cách sửa |
+|---|---|
+| Form báo thành công giả | Không có endpoint thì **không** hiện màn hình cảm ơn; hiện cảnh báo và hotline. Gửi hỏng thì báo lỗi thật kèm số điện thoại |
+| Dữ liệu cá nhân lọt vào URL khi tắt JS | `method="post"`; không có endpoint thì không có `action`, form không submit được thay vì submit sai |
+| `llms.txt` lệch khỏi trang | Xoá bản viết tay, **sinh tự động từ dữ liệu sản phẩm** lúc build. Không thể lệch nữa |
+| 47MB ảnh/video vi phạm và không dùng | Xoá khỏi repo, không chỉ khỏi trang. `public/` từ 51MB còn 912KB |
+| Giá gốc ảo | `compareAtPrice` = 1.140.000đ, đúng bằng tổng giá lẻ. Copy viết lại quanh "rẻ hơn 90.000đ và được thêm hai sản phẩm" |
+| 3 ảnh chân dung khách trùng md5 với ảnh trước–sau | Bỏ avatar khỏi testimonial |
+| Tổng tiền không đổi theo gói | Cập nhật theo lựa chọn; gói tư vấn thì ẩn dòng tổng |
+| Regex loại bỏ `+84...` | Chuẩn hoá `+84`/`84` về `0` trước khi kiểm |
+| Sticky CTA che disclaimer ở đáy trang | `padding-bottom` 64px cho body trên mobile |
+| Viền input 1,33:1, trượt WCAG 1.4.11 | Token riêng `--line-control` |
+| Skip link không bao giờ hiện | Thêm luật `:focus` |
+| Schema hardcode `InStock`, phí ship, ngôn ngữ | Đưa vào schema dữ liệu; thêm `priceValidUntil`, `hasMerchantReturnPolicy`; `areaServed`/`availableLanguage` theo locale |
+| Bản EN rò 6 chuỗi tiếng Việt, in giá kiểu `1.050.000đ` | Đưa vào `i18n/ui.ts`; tiền và ngày format theo locale trang |
+| Sản phẩm thứ 2 không có route | Gộp thành một route `[...path].astro` phục vụ mọi sản phẩm × mọi ngôn ngữ |
+| Cấu hình ảnh và `sharp` không được dùng | Gỡ bỏ, ghi rõ việc còn lại thay vì để đó như trang trí |
+| Ưu đãi hết hạn vẫn hiển thị | Build **dừng lại** nếu `validUntil` đã qua |
+| Trang khẳng định có gian hàng chính hãng nhưng không dẫn đi đâu | Hiện ô cảnh báo vàng cho tới khi có link thật |
+
+## Số đo sau khi sửa
+
+| | Trước | Sau |
+|---|---|---|
+| Tổng tải lần đầu | ~375 KB / 61 ảnh thừa trong dist | **216 KB, 9 request** |
+| `public/` | 51 MB | **912 KB** |
+| LCP (lab, localhost) | 740 ms | **124 ms** |
+| CLS | 0.000 | **0.0004** |
+| Ảnh lớn nhất (logo cho ô 92×34) | 107.388 B | **4.598 B** |
+
+## Chưa xử lý, để vòng 5
+
+- Chưa có `srcset`: ảnh vẫn là đường dẫn chuỗi trong JSON nên pipeline ảnh của Astro
+  không chạm tới. Cần chuyển sang `import.meta.glob`.
+- Chưa có cụm nội dung chuyên đề, nên trang vẫn không có cơ hội với truy vấn thông tin.
+- Chưa có breadcrumb và `BreadcrumbList`.
+- Nội dung JSON vẫn nhúng HTML thô render qua `set:html`, người không biết code gõ sai thẻ là vỡ trang.
+- 4/7 hoạt chất chưa có nguồn tham chiếu. Riêng dòng Niacinamide cần kiểm lại: nghiên cứu
+  kinh điển dùng 5%, sản phẩm khai 1% — nguồn hiện tại có thể không chống lưng được cho claim.

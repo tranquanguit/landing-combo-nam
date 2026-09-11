@@ -24,6 +24,8 @@ export function productGraph(opts: {
 }) {
   const { product: p, brand: b, site, url, locale, faq } = opts;
   const orgId = `${site}/#organization`;
+  const offerBlock = p.blocks.find((x) => x.type === 'offer');
+  const offerValidUntil = offerBlock && offerBlock.type === 'offer' ? offerBlock.validUntil : undefined;
 
   const graph: Record<string, unknown>[] = [
     {
@@ -39,8 +41,8 @@ export function productGraph(opts: {
         '@type': 'ContactPoint',
         telephone: b.phone,
         contactType: 'customer service',
-        areaServed: 'VN',
-        availableLanguage: ['Vietnamese'],
+        areaServed: locale === 'vi' ? 'VN' : 'Worldwide',
+        availableLanguage: locale === 'vi' ? ['Vietnamese'] : ['Vietnamese', 'English'],
       }],
       ...(b.taxId ? { taxID: b.taxId } : {}),
     },
@@ -69,19 +71,43 @@ export function productGraph(opts: {
         url: `${url}#dat-hang`,
         priceCurrency: p.currency,
         price: String(p.price),
-        availability: 'https://schema.org/InStock',
+        // Chỉ khai khi nội dung thật sự nêu hạn ưu đãi, không bịa ra một ngày.
+        ...(offerValidUntil ? { priceValidUntil: offerValidUntil } : {}),
+        availability: `https://schema.org/${p.availability ?? 'InStock'}`,
         itemCondition: 'https://schema.org/NewCondition',
         seller: { '@id': orgId },
-        shippingDetails: {
-          '@type': 'OfferShippingDetails',
-          shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: p.currency },
-          shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'VN' },
-          deliveryTime: {
-            '@type': 'ShippingDeliveryTime',
-            handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' },
-            transitTime: { '@type': 'QuantitativeValue', minValue: 2, maxValue: 5, unitCode: 'DAY' },
-          },
-        },
+        // Giao hàng miễn phí chỉ đúng trong nước; bản quốc tế báo phí trước khi thanh toán.
+        ...(locale === 'vi' && p.shipping
+          ? {
+              shippingDetails: {
+                '@type': 'OfferShippingDetails',
+                shippingRate: { '@type': 'MonetaryAmount', value: String(p.shipping.rate), currency: p.currency },
+                shippingDestination: { '@type': 'DefinedRegion', addressCountry: p.shipping.country },
+                deliveryTime: {
+                  '@type': 'ShippingDeliveryTime',
+                  handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' },
+                  transitTime: {
+                    '@type': 'QuantitativeValue',
+                    minValue: p.shipping.transitDaysMin,
+                    maxValue: p.shipping.transitDaysMax,
+                    unitCode: 'DAY',
+                  },
+                },
+              },
+            }
+          : {}),
+        ...(p.returnPolicy
+          ? {
+              hasMerchantReturnPolicy: {
+                '@type': 'MerchantReturnPolicy',
+                applicableCountry: p.returnPolicy.country,
+                returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+                merchantReturnDays: p.returnPolicy.days,
+                returnMethod: 'https://schema.org/ReturnByMail',
+                returnFees: 'https://schema.org/FreeReturn',
+              },
+            }
+          : {}),
       },
     },
   ];

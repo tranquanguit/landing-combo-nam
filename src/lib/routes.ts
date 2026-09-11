@@ -1,9 +1,12 @@
 import { getCollection } from 'astro:content';
 import { defaultLocale, localePath, type Locale } from '../i18n/ui';
 
-/** Đường dẫn của một sản phẩm theo ngôn ngữ. Sản phẩm chủ lực nằm ở gốc. */
-export function productPath(slug: string, locale: Locale, flagship = 'combo-nam'): string {
-  const base = slug === flagship ? '/' : `/${slug}`;
+/** Sản phẩm được đặt ở gốc tên miền. Mọi sản phẩm khác nằm dưới /<slug>. */
+export const FLAGSHIP = 'combo-nam';
+
+/** Đường dẫn của một sản phẩm theo ngôn ngữ. */
+export function productPath(slug: string, locale: Locale): string {
+  const base = slug === FLAGSHIP ? '/' : `/${slug}`;
   return localePath(locale, base);
 }
 

@@ -1,0 +1,42 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, getEntry } from 'astro:content';
+import ProductLanding from '../layouts/ProductLanding.astro';
+import { alternatesFor, productPath, FLAGSHIP } from '../lib/routes';
+import { defaultLocale, type Locale } from '../i18n/ui';
+
+/**
+ * Một route duy nhất phục vụ mọi sản phẩm ở mọi ngôn ngữ.
+ * Thêm sản phẩm = thêm file JSON, không đụng vào đây.
+ *
+ *   sản phẩm chủ lực, tiếng Việt   -> /
+ *   sản phẩm chủ lực, tiếng Anh    -> /en/
+ *   sản phẩm khác, tiếng Việt      -> /serum-x3
+ *   sản phẩm khác, tiếng Anh       -> /en/serum-x3
+ */
+export const getStaticPaths = (async () => {
+  const products = await getCollection('products', ({ data }) => data.status === 'published');
+
+  return products.map((entry) => {
+    const { slug, locale } = entry.data;
+    const path = productPath(slug, locale as Locale).replace(/^\/|\/$/g, '');
+    return { params: { path: path || undefined }, props: { entry } };
+  });
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const locale = entry.data.locale as Locale;
+
+const brand = await getEntry('brand', 'mocha');
+if (!brand) throw new Error('Thiếu src/data/mocha.json');
+
+const canonical = new URL(productPath(entry.data.slug, locale), Astro.site).href;
+const alternates = await alternatesFor(entry.data.translationKey, Astro.site);
+---
+<ProductLanding
+  product={entry.data}
+  brand={brand.data}
+  locale={locale}
+  canonical={canonical}
+  alternates={alternates}
+/>
