@@ -13,8 +13,10 @@ import Gallery from '../components/blocks/Gallery.astro';
 import Testimonials from '../components/blocks/Testimonials.astro';
 import Order from '../components/blocks/Order.astro';
 import Faq from '../components/blocks/Faq.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import { productGraph } from '../lib/schema';
-import type { Locale } from '../i18n/ui';
+import { FLAGSHIP, productPath } from '../lib/routes';
+import { localePath, type Locale } from '../i18n/ui';
 
 interface Props {
   product: any;
@@ -28,8 +30,15 @@ const { product: p, brand: b, locale, canonical, alternates = [] } = Astro.props
 const site = Astro.site?.origin ?? 'https://mochatrinam.com';
 
 const faqBlock = p.blocks.find((x: any) => x.type === 'faq');
+
+// Sản phẩm chủ lực nằm ở gốc nên không có đường dẫn phân cấp để hiển thị.
+const breadcrumb = p.slug === FLAGSHIP ? undefined : [
+  { name: b.tradingName, url: new URL(localePath(locale, '/'), site).href },
+  { name: p.shortName ?? p.name, url: new URL(productPath(p.slug, locale), site).href },
+];
+
 const jsonLd = productGraph({
-  product: p, brand: b, site, url: canonical, locale, faq: faqBlock?.items,
+  product: p, brand: b, site, url: canonical, locale, faq: faqBlock?.items, breadcrumb,
 });
 
 // Nền xen kẽ giữa các khối dạng thẻ, tính sẵn theo thứ tự xuất hiện
@@ -49,6 +58,7 @@ p.blocks.forEach((block: any, i: number) => {
   jsonLd={jsonLd}
 >
   <SiteHeader brand={b} locale={locale} />
+  {breadcrumb && <Breadcrumb items={breadcrumb} />}
 
   <main id="main">
     {p.blocks.map((block: any, i: number) => {

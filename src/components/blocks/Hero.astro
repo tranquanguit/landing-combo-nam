@@ -1,5 +1,6 @@
 ---
 import type { Locale } from '../../i18n/ui';
+import Picture from '../Picture.astro';
 interface Props { data: any; locale: Locale; }
 const { data } = Astro.props;
 ---
@@ -41,11 +42,13 @@ const { data } = Astro.props;
     </div>
 
     <div class="hero-media">
-      <img
+      <Picture
         src={data.image.src}
         alt={data.image.alt}
         width={data.image.width}
         height={data.image.height}
+        sizes="(min-width: 900px) 44vw, 100vw"
+        loading="eager"
         fetchpriority="high"
         decoding="sync"
       />
@@ -61,7 +64,7 @@ const { data } = Astro.props;
   .hero-grid { display: grid; gap: var(--s-6); align-items: center; }
   @media (min-width: 900px) { .hero-grid { grid-template-columns: 1.05fr .95fr; gap: var(--s-7); } }
 
-  .hero-media img {
+  .hero-media :global(img) {
     width: 100%;
     border-radius: var(--r-media);
     box-shadow: var(--shadow-2);

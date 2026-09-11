@@ -1,12 +1,14 @@
 ---
 import { t, type Locale } from '../i18n/ui';
+import Picture from '../components/Picture.astro';
 interface Props { brand: any; locale: Locale; }
 const { brand: b, locale } = Astro.props;
 ---
 <header>
   <div class="wrap bar">
     <a class="brand" href="#main">
-      <img src={b.logo} alt={b.tradingName} width="92" height="34" />
+      <Picture src={b.logo} alt={b.tradingName} width={92} height={34}
+        sizes="92px" widths={[92, 184]} loading="eager" />
     </a>
     <div class="actions">
       <a class="tel" href={`tel:${b.phone}`} data-cta="header-call">{b.phoneDisplay}</a>
@@ -23,7 +25,7 @@ const { brand: b, locale } = Astro.props;
     border-bottom: 1px solid var(--line);
   }
   .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s-4); min-height: var(--header-h); }
-  .brand img { height: 30px; width: auto; object-fit: contain; }
+  .brand :global(img) { height: 30px; width: auto; object-fit: contain; }
   .actions { display: flex; align-items: center; gap: var(--s-4); }
   .tel { display: none; font-weight: 600; font-size: var(--t-sm); color: var(--ink-navy); text-decoration: none; }
   @media (min-width: 620px) { .tel { display: inline; } }

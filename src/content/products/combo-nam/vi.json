@@ -184,45 +184,52 @@
       "eyebrow": "Bảng thành phần",
       "heading": "Từng hoạt chất, từng tỉ lệ, và vai trò của nó",
       "intro": "Không corticoid, không hydroquinone, không hương liệu tổng hợp gây kích ứng.",
-      "caption": "Bảng 1 — Hoạt chất chính của Combo Nám Mocha và vai trò trong chu kỳ chăm sóc da.",
+      "caption": "Bảng 1 — Hoạt chất chính, nồng độ, và nghiên cứu tham chiếu. Khi nồng độ trong nghiên cứu khác nồng độ trong sản phẩm, điều đó được ghi rõ.",
       "rows": [
         {
           "name": "Tranexamic Acid 3%",
           "role": "Hoạt chất được dùng phổ biến trong sản phẩm dưỡng sáng, hỗ trợ cải thiện vùng da sạm màu.",
           "suitedFor": "Nám mảng, nám nội tiết, nám sau sinh",
-          "reference": "https://pubmed.ncbi.nlm.nih.gov/28994488/"
+          "reference": "https://pubmed.ncbi.nlm.nih.gov/36606378/",
+          "referenceNote": "Tổng quan 2023 về tranexamic acid trong nám; các nghiên cứu dùng nhiều đường dùng và nồng độ khác nhau."
         },
         {
           "name": "Bakuchiol 2%",
           "role": "Được nghiên cứu như lựa chọn thay thế retinol, hỗ trợ tái tạo tế bào mà không gây bong tróc.",
           "suitedFor": "Da nhạy cảm, da không dùng được retinol",
-          "reference": "https://pubmed.ncbi.nlm.nih.gov/29947134/"
+          "reference": "https://pubmed.ncbi.nlm.nih.gov/29947134/",
+          "referenceNote": "Thử nghiệm mù đôi 12 tuần dùng bakuchiol nồng độ 0,5%, thấp hơn nồng độ trong sản phẩm này."
         },
         {
           "name": "Niacinamide 1% + NIO-NAG (Glucosamine) 2%",
           "role": "Hỗ trợ làm sáng, phục hồi chức năng bảo vệ da và cải thiện kết cấu da.",
           "suitedFor": "Mọi loại da, kể cả da dầu mụn",
-          "reference": "https://pubmed.ncbi.nlm.nih.gov/12100180/"
+          "reference": "https://pubmed.ncbi.nlm.nih.gov/12100180/",
+          "referenceNote": "Nghiên cứu Hakozaki 2002 dùng niacinamide nồng độ 5%, cao hơn nồng độ trong sản phẩm này."
         },
         {
           "name": "Vietnam Bio-White Complex 3%",
           "role": "Hỗn hợp chiết xuất lên men, làm dịu và hỗ trợ làm sáng da.",
-          "suitedFor": "Da đang kích ứng, da xỉn màu"
+          "suitedFor": "Da đang kích ứng, da xỉn màu",
+          "referenceNote": "Chưa có nghiên cứu công khai để dẫn cho riêng hoạt chất này."
         },
         {
           "name": "SEPICALM™ VG WP",
           "role": "Hoạt chất nhóm Aminovector, làm dịu và hỗ trợ làm sáng da.",
-          "suitedFor": "Da dễ đỏ, dễ kích ứng"
+          "suitedFor": "Da dễ đỏ, dễ kích ứng",
+          "referenceNote": "Chưa có nghiên cứu công khai để dẫn cho riêng hoạt chất này."
         },
         {
           "name": "Ceramide 1% + Bioyoga",
           "role": "Củng cố hàng rào bảo vệ da, giảm mất nước, hạn chế sạm màu quay lại.",
-          "suitedFor": "Da khô, da sau giai đoạn đặc trị"
+          "suitedFor": "Da khô, da sau giai đoạn đặc trị",
+          "referenceNote": "Chưa có nghiên cứu công khai để dẫn cho riêng hoạt chất này."
         },
         {
           "name": "Black Truffle & Bio-Placenta",
           "role": "Giàu polyphenol chống oxy hóa, hỗ trợ tái tạo tế bào.",
-          "suitedFor": "Da bắt đầu lão hóa"
+          "suitedFor": "Da bắt đầu lão hóa",
+          "referenceNote": "Chưa có nghiên cứu công khai để dẫn cho riêng hoạt chất này."
         }
       ]
     },

@@ -7,11 +7,19 @@
   "zalo": "https://zalo.me/0367848918",
   "email": "kemnammocha@gmail.com",
   "hours": "8:00 – 21:00 mỗi ngày",
-  "logo": "/images/logo.jpg",
+  "logo": "/images/logo.webp",
   "marketplaces": [
-    { "name": "Shopee" },
-    { "name": "Lazada" },
-    { "name": "TikTok Shop" },
-    { "name": "Facebook" }
+    {
+      "name": "Shopee"
+    },
+    {
+      "name": "Lazada"
+    },
+    {
+      "name": "TikTok Shop"
+    },
+    {
+      "name": "Facebook"
+    }
   ]
 }

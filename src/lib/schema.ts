@@ -21,8 +21,10 @@ export function productGraph(opts: {
   url: string;
   locale: Locale;
   faq?: { q: string; a: string }[];
+  /** Chỉ có với sản phẩm không nằm ở gốc tên miền. */
+  breadcrumb?: { name: string; url: string }[];
 }) {
-  const { product: p, brand: b, site, url, locale, faq } = opts;
+  const { product: p, brand: b, site, url, locale, faq, breadcrumb } = opts;
   const orgId = `${site}/#organization`;
   const offerBlock = p.blocks.find((x) => x.type === 'offer');
   const offerValidUntil = offerBlock && offerBlock.type === 'offer' ? offerBlock.validUntil : undefined;
@@ -111,6 +113,20 @@ export function productGraph(opts: {
       },
     },
   ];
+
+  if (breadcrumb?.length) {
+    graph.push({
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: breadcrumb.map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: c.name,
+        // Mục cuối là trang hiện tại nên không cần item, theo hướng dẫn của Google.
+        ...(i < breadcrumb.length - 1 ? { item: c.url } : {}),
+      })),
+    });
+  }
 
   if (faq?.length) {
     graph.push({

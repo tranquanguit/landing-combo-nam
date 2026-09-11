@@ -88,6 +88,12 @@ const blocks = z.discriminatedUnion('type', [
       role: z.string(),
       suitedFor: z.string(),
       reference: z.string().url().optional(),
+      /**
+       * Nồng độ và bối cảnh mà nghiên cứu được dẫn thật sự đã thử nghiệm.
+       * Bắt buộc phải ghi khi nó khác với nồng độ trong sản phẩm — dẫn một nghiên
+       * cứu dùng 5% để chống lưng cho công thức 1% là dẫn nguồn gây hiểu nhầm.
+       */
+      referenceNote: z.string().optional(),
     })),
   }),
   z.object({

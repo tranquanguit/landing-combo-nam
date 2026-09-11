@@ -1,0 +1,69 @@
+---
+import { getImage } from 'astro:assets';
+
+/**
+ * Ảnh responsive cho ảnh được tham chiếu bằng đường dẫn chuỗi trong file nội dung JSON.
+ *
+ * astro:assets chỉ xử lý ảnh được import, mà nội dung sản phẩm lại là dữ liệu thuần
+ * nên không import trực tiếp được. import.meta.glob dựng sẵn bản đồ từ đường dẫn
+ * "/images/x.webp" tới ImageMetadata, nhờ đó vẫn có srcset và AVIF tự động mà
+ * người biên tập nội dung chỉ cần viết một chuỗi.
+ */
+const assets = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/**/*.{jpg,jpeg,png,webp,avif}',
+  { eager: true }
+);
+
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  sizes: string;
+  widths?: number[];
+  loading?: 'eager' | 'lazy';
+  fetchpriority?: 'high' | 'auto' | 'low';
+  decoding?: 'sync' | 'async' | 'auto';
+  class?: string;
+}
+
+const {
+  src, alt, width, height, sizes,
+  widths = [360, 480, 720, 960, 1200],
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  decoding = 'async',
+  class: className,
+} = Astro.props;
+
+const key = `/src/assets${src}`;
+const mod = assets[key];
+
+// Ảnh chưa được chuyển vào src/assets thì vẫn render bình thường từ public/,
+// không làm vỡ trang — nhưng cũng không có srcset.
+const meta = mod?.default;
+const candidates = meta ? widths.filter((w) => w <= meta.width) : [];
+const list = candidates.length ? candidates : meta ? [meta.width] : [];
+
+const avif = meta ? await Promise.all(list.map((w) => getImage({ src: meta, width: w, format: 'avif' }))) : [];
+const webp = meta ? await Promise.all(list.map((w) => getImage({ src: meta, width: w, format: 'webp' }))) : [];
+const fallback = meta ? await getImage({ src: meta, width: list[list.length - 1], format: 'webp' }) : null;
+
+const srcset = (set: { src: string; options: { width?: number } }[]) =>
+  set.map((i) => `${i.src} ${i.options.width}w`).join(', ');
+---
+{meta ? (
+  <picture>
+    <source type="image/avif" srcset={srcset(avif)} sizes={sizes} />
+    <source type="image/webp" srcset={srcset(webp)} sizes={sizes} />
+    <img
+      src={fallback!.src} alt={alt} width={width} height={height}
+      loading={loading} fetchpriority={fetchpriority} decoding={decoding} class={className}
+    />
+  </picture>
+) : (
+  <img
+    src={src} alt={alt} width={width} height={height}
+    loading={loading} fetchpriority={fetchpriority} decoding={decoding} class={className}
+  />
+)}

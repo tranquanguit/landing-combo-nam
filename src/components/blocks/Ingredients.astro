@@ -23,6 +23,7 @@ const { data, id = 'thanh-phan', locale } = Astro.props;
               {r.reference && (
                 <> <a href={r.reference} rel="noopener nofollow" target="_blank" class="ref">{t(locale, 'table.source')}</a></>
               )}
+              {r.referenceNote && <span class="ref-note">{r.referenceNote}</span>}
             </th>
             <td>{r.role}</td>
             <td>{r.suitedFor}</td>
@@ -43,4 +44,5 @@ const { data, id = 'thanh-phan', locale } = Astro.props;
   tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
   tbody th { color: var(--ink-navy); font-weight: 600; }
   .ref { font-size: var(--t-xs); font-weight: 400; white-space: nowrap; }
+  .ref-note { display: block; margin-top: 4px; font-size: var(--t-xs); font-weight: 400; color: var(--ink-muted); }
 </style>
