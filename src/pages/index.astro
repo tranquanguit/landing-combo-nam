@@ -1,0 +1,17 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import ProductLanding from '../layouts/ProductLanding.astro';
+
+const products = await getCollection('products', ({ data }) =>
+  data.locale === 'vi' && data.status === 'published'
+);
+// Trang chủ hiển thị sản phẩm chủ lực; khi có nhiều sản phẩm sẽ chuyển thành trang danh mục.
+const entry = products.find((p) => p.data.slug === 'combo-nam') ?? products[0];
+if (!entry) throw new Error('Chưa có sản phẩm tiếng Việt nào ở trạng thái published.');
+
+const brand = await getEntry('brand', 'mocha');
+if (!brand) throw new Error('Thiếu src/data/mocha.json');
+
+const canonical = new URL('/', Astro.site).href;
+---
+<ProductLanding product={entry.data} brand={brand.data} locale="vi" canonical={canonical} />

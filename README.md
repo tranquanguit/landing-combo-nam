@@ -1,73 +1,59 @@
-# Landing page — Combo Nám Mocha
+# Mocha — nền tảng landing page sản phẩm
 
-Landing page một trang (single-file), chuẩn SEO + AI Search, tối ưu cho quảng cáo
-Meta / Google / TikTok.
+Astro 7, xuất HTML tĩnh. Mỗi sản phẩm là **một file JSON**; bố cục và thứ tự khối do
+chính file đó quyết định, không phải sửa code.
 
 ```
-index.html      — toàn bộ landing page (HTML + CSS + JS inline, không phụ thuộc thư viện ngoài)
-robots.txt      — cho phép cả bot tìm kiếm truyền thống và AI crawler (GPTBot, ClaudeBot, PerplexityBot…)
-sitemap.xml     — sitemap kèm image sitemap
-llms.txt        — bản tóm tắt dữ kiện dạng văn bản cho các mô hình AI trích dẫn
-images/ videos/ — tài sản hình ảnh và video
+src/
+  content.config.ts          schema Zod cho catalog + các khối nội dung
+  content/products/<slug>/<locale>.json
+  data/mocha.json            thông tin pháp nhân, hotline, kênh bán
+  i18n/ui.ts                 chuỗi giao diện + quy tắc đường dẫn theo ngôn ngữ
+  layouts/                   BaseLayout (head, font, schema) + ProductLanding (ghép khối)
+  components/blocks/         Hero, Offer, Problem, Cards, Ingredients, Steps,
+                             Gallery, Testimonials, Order, Faq
+  lib/                       định dạng tiền/ngày, sinh JSON-LD
+  styles/tokens.css          design tokens
+public/                      ảnh, video, font self-host, robots.txt
+legacy/index.html            bản HTML viết tay trước đây, giữ để đối chiếu
 ```
 
-## Trước khi lên production — 5 việc bắt buộc
+## Thêm một sản phẩm mới
 
-1. **Tên miền.** Toàn bộ URL tuyệt đối đang dùng `https://mochatrinam.com`.
-   Nếu chạy tên miền khác, thay đồng loạt:
-   `grep -rl 'mochatrinam.com' . | xargs sed -i 's#mochatrinam\.com#TEN-MIEN-MOI#g'`
+1. Tạo `src/content/products/<slug>/vi.json`.
+2. Điền các trường bắt buộc; `blocks` liệt kê khối theo đúng thứ tự muốn hiển thị.
+3. Đặt `status: "published"`.
 
-2. **Endpoint nhận đơn hàng.** Trong `index.html`, tìm `var ENDPOINT = '';`
-   và điền URL nhận POST (Google Apps Script, CRM, Zapier, n8n…). Payload JSON gồm:
-   `name, phone, address, note, pack, page, utm`. Khi để trống, form vẫn chạy và
-   chỉ log ra console — chỉ dùng để demo.
+Build sẽ **từ chối** file thiếu trường bắt buộc hoặc sai kiểu — schema là hàng rào,
+không phải tài liệu. Ví dụ meta description quá 170 ký tự là build fail ngay.
 
-3. **Mã đo lường.** Dán GA4 / Meta Pixel / TikTok Pixel vào ngay trước `</head>`.
-   Trang đã tự bắn sự kiện qua `dataLayer`, `gtag`, `fbq`, `ttq`:
-   `begin_checkout` (mọi nút CTA), `contact` (gọi điện / Zalo), `form_start`,
-   `generate_lead` (gửi form thành công), `scroll_depth` (25/50/75/90%).
-   Mỗi nút có `data-cta="..."` để biết CTA nào tạo ra lead.
+## Lệnh
 
-4. **Số liệu social proof.** `4,9/5 · 1.284 đánh giá` và `8/100 suất` là số mẫu.
-   Phải thay bằng số thật trước khi chạy ads — schema `aggregateRating` khai báo
-   sai số liệu có thể bị Google phạt rich result và vi phạm chính sách quảng cáo.
+```bash
+npm install
+npm run dev      # máy chủ phát triển
+npm run build    # xuất ra dist/
+npm run preview  # xem thử bản đã build
+```
 
-5. **Ảnh Open Graph.** `images/hero-full.jpg` nên được cắt đúng 1200×630 để
-   preview quảng cáo và mạng xã hội không bị méo.
+## Ràng buộc đã chốt
 
-## Những gì đã tối ưu
+**Tuân thủ.** Trường `compliance` là bắt buộc trong schema vì Nghị định 342/2025/NĐ-CP
+yêu cầu quảng cáo mỹ phẩm phải nêu tên sản phẩm, tính năng công dụng, tên và địa chỉ tổ chức
+công bố, cùng các cảnh báo. Thiếu số công bố thì trang tự hiển thị ô cảnh báo vàng — cố ý,
+để dữ liệu thiếu không lọt lên production.
 
-**SEO kỹ thuật**
-- Một `<h1>` duy nhất, phân cấp `h2`/`h3` theo chủ đề; landmark `header/main/section/footer`.
-- Title + meta description viết theo intent tìm kiếm ("combo nám mocha", "kem trị nám",
-  "trị nám sau sinh", "giá bao nhiêu"), canonical, hreflang, robots directives đầy đủ.
-- Structured data `@graph`: Organization, WebSite, WebPage (+ speakable), BreadcrumbList,
-  Product (offers, shippingDetails, returnPolicy, aggregateRating, review), FAQPage, HowTo.
-- Sitemap + image sitemap, robots.txt khai báo sitemap.
+Cũng theo nghị định đó, **không được dùng hình ảnh, trang phục, tên gọi của cơ sở y tế,
+bác sĩ, dược sĩ hay nhân viên y tế**. Đừng đưa lại nội dung dạng này vào bất kỳ landing nào.
 
-**Hiệu năng (Core Web Vitals)**
-- Bỏ hoàn toàn Tailwind CDN và Flowbite (~150KB JS chặn render ở bản cũ) — CSS viết tay inline.
-- Preload ảnh hero theo breakpoint, font tải bất đồng bộ, video `preload="none"`.
-- Mọi ảnh có `width`/`height` + `loading="lazy"` để tránh CLS.
+**Structured data.** Không khai `aggregateRating` và `review` cho tới khi có hệ thống review
+thật hiển thị trên trang — khai sai dẫn tới manual action của Google.
 
-**AI Search / GEO**
-- `llms.txt` cung cấp dữ kiện có cấu trúc cho mô hình AI trích dẫn.
-- robots.txt allow-list các AI crawler chính.
-- Nội dung viết theo lối "trả lời trước" (answer-first): mỗi mục giải đáp trọn một câu hỏi,
-  có bảng thành phần và mốc thời gian cụ thể — dạng dữ liệu mà AI dễ trích dẫn.
+**Hiệu năng.** Ngân sách: LCP ≤ 2.0s, INP ≤ 150ms, CLS ≤ 0.03, JS first-party ≤ 12KB brotli,
+ảnh màn đầu ≤ 180KB, tổng tải đầu ≤ 700KB. Không dùng GTM, không Partytown, không ClientRouter.
+Font self-host tách subset latin/vietnamese qua `unicode-range`.
 
-**Chuyển đổi & quảng cáo**
-- CTA lặp lại theo từng chặng cuộn, sticky bar trên mobile, nút gọi/Zalo nổi.
-- Đếm ngược lưu `localStorage` (không reset mỗi lần tải lại — trung thực hơn với người dùng).
-- Form có validate số điện thoại Việt Nam, thông báo lỗi rõ ràng, trạng thái thành công.
-- Giữ tham số UTM để quy kết nguồn quảng cáo.
+**Cần cấu hình trước khi chạy thật.** Endpoint nhận đơn đọc từ `data-order-endpoint`
+trên thẻ `<html>`; chưa đặt thì form chỉ log ra console.
 
-**Khả năng tiếp cận**
-- Skip link, `aria-label`, `aria-labelledby`, focus-visible rõ ràng, tôn trọng
-  `prefers-reduced-motion`, FAQ dùng `<details>` gốc (hoạt động cả khi tắt JS).
-
-## Tuân thủ quảng cáo mỹ phẩm
-
-Trang đã ghi rõ miễn trừ: *"là mỹ phẩm chăm sóc da, không phải là thuốc và không có
-tác dụng thay thế thuốc chữa bệnh"* và không dùng từ "điều trị"/"chữa khỏi" trong các
-tuyên bố hiệu quả — điều kiện cần để duyệt quảng cáo Meta/Google ngành mỹ phẩm.
+Xem `docs/round-1-synthesis.md` để biết vì sao từng ràng buộc tồn tại.

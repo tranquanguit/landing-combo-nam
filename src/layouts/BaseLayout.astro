@@ -1,0 +1,62 @@
+---
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+import { htmlLang, type Locale, localePath, t } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  canonical: string;
+  ogImage?: string;
+  /** Các bản dịch cùng sản phẩm, dùng sinh hreflang. Chỉ liệt kê bản đã xuất bản. */
+  alternates?: { locale: Locale; url: string }[];
+  jsonLd?: unknown;
+}
+
+const { locale, title, description, canonical, ogImage, alternates = [], jsonLd } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang={htmlLang[locale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0e1250" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    {alternates.length > 1 && alternates.map((a) => (
+      <link rel="alternate" hreflang={htmlLang[a.locale]} href={a.url} />
+    ))}
+    {alternates.length > 1 && (
+      <link rel="alternate" hreflang="x-default" href={alternates.find((a) => a.locale === 'vi')?.url ?? canonical} />
+    )}
+
+    <meta property="og:type" content="product" />
+    <meta property="og:site_name" content="Mocha Việt Nam" />
+    <meta property="og:locale" content={htmlLang[locale].replace('-', '_')} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    {/* Font self-host, tách subset latin và vietnamese qua unicode-range.
+        Chỉ preload hai file cần ngay cho màn hình đầu: body 400 và tiêu đề Fraunces 600. */}
+    <link rel="preload" href="/fonts/bvp-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/bvp-400-vietnamese.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/fraunces-600-vietnamese.woff2" as="font" type="font/woff2" crossorigin />
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+
+  <body>
+    <a class="sr-only" href="#main">{t(locale, 'nav.skip')}</a>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,22 @@
+---
+import { t, type Locale } from '../i18n/ui';
+interface Props { brand: any; locale: Locale; }
+const { brand: b, locale } = Astro.props;
+---
+<div class="sticky">
+  <a class="btn btn-ghost" href={`tel:${b.phone}`} data-cta="sticky-call">{t(locale, 'cta.call')}</a>
+  <a class="btn btn-primary" href="#dat-hang" data-cta="sticky-order">{t(locale, 'cta.order')}</a>
+</div>
+
+<style>
+  .sticky {
+    position: fixed; inset-inline: 0; bottom: 0; z-index: 60;
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2);
+    padding: var(--s-2) var(--s-4) calc(var(--s-2) + env(safe-area-inset-bottom));
+    background: rgba(247, 245, 242, .96);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--line);
+  }
+  .sticky .btn { padding: 12px 10px; font-size: var(--t-sm); }
+  @media (min-width: 900px) { .sticky { display: none; } }
+</style>

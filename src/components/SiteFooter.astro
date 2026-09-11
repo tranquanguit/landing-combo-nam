@@ -1,0 +1,57 @@
+---
+import { t, type Locale } from '../i18n/ui';
+interface Props { brand: any; product: any; locale: Locale; }
+const { brand: b, product: p, locale } = Astro.props;
+const c = p.compliance;
+---
+<footer>
+  <div class="wrap grid">
+    <div>
+      <h3>{t(locale, 'footer.product')}</h3>
+      <p>
+        <strong>{p.name}</strong><br />
+        {t(locale, 'footer.functions')}: {c.functions}<br />
+        {t(locale, 'footer.declaredBy')}: {c.declaringOrganization}, {c.declaringAddress}
+      </p>
+      {c.productNotificationNumber
+        ? <p>Số tiếp nhận phiếu công bố sản phẩm mỹ phẩm: <strong>{c.productNotificationNumber}</strong></p>
+        : <p class="todo">⚠️ {t(locale, 'todo')}: số tiếp nhận phiếu công bố sản phẩm mỹ phẩm —
+            nội dung bắt buộc theo Nghị định 342/2025/NĐ-CP.</p>}
+      {!b.taxId && <p class="todo">⚠️ {t(locale, 'todo')}: mã số thuế doanh nghiệp.</p>}
+    </div>
+
+    <div>
+      <h3>{t(locale, 'footer.warning')}</h3>
+      <ul class="warnings">
+        {c.warnings.map((w: string) => <li>{w}</li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h3>{t(locale, 'footer.contact')}</h3>
+      <p>
+        {b.legalName}<br />
+        {b.address}<br />
+        <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a><br />
+        <a href={`mailto:${b.email}`}>{b.email}</a><br />
+        {t(locale, 'footer.hours')}: {b.hours}
+      </p>
+      <p class="todo">⚠️ {t(locale, 'todo')}: Chính sách đổi trả và Chính sách bảo vệ dữ liệu cá nhân
+        (bắt buộc theo Luật 91/2025/QH15 và Nghị định 13/2023/NĐ-CP).</p>
+    </div>
+  </div>
+
+  <div class="wrap bottom">
+    <span>© {new Date().getFullYear()} {b.legalName}</span>
+  </div>
+</footer>
+
+<style>
+  footer { background: var(--ink); color: rgba(255, 255, 255, .74); padding-block: var(--s-7) var(--s-6); font-size: var(--t-sm); }
+  footer h3 { color: #fff; font-size: var(--t-base); font-family: var(--font-body); font-weight: 600; }
+  footer a { color: #b9c0ff; }
+  .grid { display: grid; gap: var(--s-6); }
+  @media (min-width: 800px) { .grid { grid-template-columns: 1.3fr 1fr 1fr; } }
+  .warnings { padding-left: 1.1em; margin: 0; display: grid; gap: var(--s-2); }
+  .bottom { border-top: 1px solid rgba(255, 255, 255, .12); margin-top: var(--s-6); padding-top: var(--s-4); font-size: var(--t-xs); }
+</style>

@@ -1,0 +1,17 @@
+{
+  "legalName": "Công ty Dược Mỹ Phẩm Mocha Việt Nam",
+  "tradingName": "Mocha Việt Nam",
+  "address": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, TP. Hồ Chí Minh",
+  "phone": "+84367848918",
+  "phoneDisplay": "0367 848 918",
+  "zalo": "https://zalo.me/0367848918",
+  "email": "kemnammocha@gmail.com",
+  "hours": "8:00 – 21:00 mỗi ngày",
+  "logo": "/images/logo.jpg",
+  "marketplaces": [
+    { "name": "Shopee" },
+    { "name": "Lazada" },
+    { "name": "TikTok Shop" },
+    { "name": "Facebook" }
+  ]
+}

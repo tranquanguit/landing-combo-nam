@@ -1,0 +1,70 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import StickyCta from '../components/StickyCta.astro';
+import Hero from '../components/blocks/Hero.astro';
+import Offer from '../components/blocks/Offer.astro';
+import Problem from '../components/blocks/Problem.astro';
+import Cards from '../components/blocks/Cards.astro';
+import Ingredients from '../components/blocks/Ingredients.astro';
+import Steps from '../components/blocks/Steps.astro';
+import Gallery from '../components/blocks/Gallery.astro';
+import Testimonials from '../components/blocks/Testimonials.astro';
+import Order from '../components/blocks/Order.astro';
+import Faq from '../components/blocks/Faq.astro';
+import { productGraph } from '../lib/schema';
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  product: any;
+  brand: any;
+  locale: Locale;
+  canonical: string;
+  alternates?: { locale: Locale; url: string }[];
+}
+
+const { product: p, brand: b, locale, canonical, alternates = [] } = Astro.props;
+const site = Astro.site?.origin ?? 'https://mochatrinam.com';
+
+const faqBlock = p.blocks.find((x: any) => x.type === 'faq');
+const jsonLd = productGraph({
+  product: p, brand: b, site, url: canonical, locale, faq: faqBlock?.items,
+});
+
+// Đổi nền xen kẽ để các khối liền nhau không dính vào nhau
+let toggle = false;
+const nextSurface = () => (toggle = !toggle) ? 'bone' : 'paper';
+---
+<BaseLayout
+  locale={locale}
+  title={p.seo.title}
+  description={p.seo.description}
+  canonical={canonical}
+  ogImage={p.seo.ogImage ? `${site}${p.seo.ogImage}` : undefined}
+  alternates={alternates}
+  jsonLd={jsonLd}
+>
+  <SiteHeader brand={b} locale={locale} />
+
+  <main id="main">
+    {p.blocks.map((block: any) => {
+      switch (block.type) {
+        case 'hero':         return <Hero data={block} locale={locale} />;
+        case 'offer':        return <Offer data={block} product={p} locale={locale} />;
+        case 'problem':      return <Problem data={block} />;
+        case 'cards':        return <Cards data={block} surface={nextSurface()} />;
+        case 'ingredients':  return <Ingredients data={block} />;
+        case 'steps':        return <Steps data={block} />;
+        case 'gallery':      return <Gallery data={block} id="hieu-qua" />;
+        case 'testimonials': return <Testimonials data={block} />;
+        case 'order':        return <Order data={block} product={p} brand={b} locale={locale} />;
+        case 'faq':          return <Faq data={block} />;
+        default:             return null;
+      }
+    })}
+  </main>
+
+  <SiteFooter brand={b} product={p} locale={locale} />
+  <StickyCta brand={b} locale={locale} />
+</BaseLayout>

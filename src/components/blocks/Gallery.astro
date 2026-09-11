@@ -1,0 +1,26 @@
+---
+import Section from '../Section.astro';
+interface Props { data: any; id?: string; }
+const { data, id } = Astro.props;
+---
+<Section id={id} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} center>
+  <ul class="gallery">
+    {data.images.map((img: any) => (
+      <li>
+        <img src={img.src} alt={img.alt} width={img.width} height={img.height}
+          loading="lazy" decoding="async" />
+        {img.caption && <p class="cap">{img.caption}</p>}
+      </li>
+    ))}
+  </ul>
+  {data.disclaimer && <p class="disclaimer">{data.disclaimer}</p>}
+</Section>
+
+<style>
+  .gallery { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-4); grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 860px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+  .gallery li { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden; }
+  .gallery img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top center; }
+  .cap { padding: var(--s-2) var(--s-3); margin: 0; font-size: var(--t-xs); color: var(--ink-muted); text-align: center; }
+  .disclaimer { margin-top: var(--s-4); text-align: center; font-size: var(--t-xs); color: var(--ink-muted); max-width: 70ch; margin-inline: auto; }
+</style>

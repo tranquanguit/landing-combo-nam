@@ -1,0 +1,185 @@
+---
+import { money } from '../../lib/format';
+import { t, type Locale } from '../../i18n/ui';
+interface Props { data: any; product: any; brand: any; locale: Locale; }
+const { data, product: p, brand: b, locale } = Astro.props;
+---
+<section id="dat-hang" class="surface-navy defer" aria-labelledby="dat-hang-title">
+  <div class="wrap order-grid">
+    <div>
+      {data.eyebrow && <p class="eyebrow">{data.eyebrow}</p>}
+      <h2 id="dat-hang-title">{data.heading}</h2>
+      <p class="lead" set:html={data.body} />
+      <ul class="points">
+        {data.points.map((pt: string) => <li set:html={pt} />)}
+      </ul>
+      <p class="hotline">
+        <a href={`tel:${b.phone}`} data-cta="order-call">{b.phoneDisplay}</a>
+        {b.zalo && <> · <a href={b.zalo} rel="noopener" data-cta="order-zalo">Zalo</a></>}
+      </p>
+    </div>
+
+    <div class="form-card">
+      <form id="order-form" novalidate>
+        {p.variants.length > 0 && (
+          <fieldset>
+            <legend class="sr-only">Chọn gói sản phẩm</legend>
+            <div class="packs">
+              {p.variants.map((v: any, i: number) => (
+                <label class="pack">
+                  <input type="radio" name="pack" value={v.label} checked={v.recommended || i === 0} />
+                  <span class="pack-text">
+                    <strong>{v.label}</strong>
+                    {v.note && <span class="muted">{v.note}</span>}
+                  </span>
+                  <span class="pack-price tabular">
+                    {v.price === null ? 'Miễn phí' : money(v.price, p.currency, locale)}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        )}
+
+        <div class="field" data-field="name">
+          <label for="name">{t(locale, 'form.name')} <span aria-hidden="true">*</span></label>
+          <input type="text" id="name" name="name" autocomplete="name" required
+            aria-describedby="name-err" placeholder="Nguyễn Thu Hà" />
+          <p class="err" id="name-err">{t(locale, 'form.errName')}</p>
+        </div>
+
+        <div class="field" data-field="phone">
+          <label for="phone">{t(locale, 'form.phone')} <span aria-hidden="true">*</span></label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="numeric" required
+            aria-describedby="phone-hint phone-err" placeholder="0912 345 678" />
+          <p class="hint" id="phone-hint">{t(locale, 'form.privacy')}</p>
+          <p class="err" id="phone-err">{t(locale, 'form.errPhone')}</p>
+        </div>
+
+        <div class="field" data-field="address">
+          <label for="address">{t(locale, 'form.address')} <span aria-hidden="true">*</span></label>
+          <input type="text" id="address" name="address" autocomplete="street-address" required
+            aria-describedby="address-err" placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành" />
+          <p class="err" id="address-err">{t(locale, 'form.errAddress')}</p>
+        </div>
+
+        <div class="field">
+          <label for="note">{t(locale, 'form.note')}</label>
+          <textarea id="note" name="note" rows="2"></textarea>
+        </div>
+
+        <p class="total">
+          Tổng tiền trả cho shipper: <strong class="tabular">{money(p.price, p.currency, locale)}</strong>
+          <span class="muted"> (đã gồm phí giao hàng)</span>
+        </p>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" data-cta="form-submit">
+          {t(locale, 'form.submit')}
+        </button>
+      </form>
+
+      <p class="ok" id="form-success" role="status" hidden>{t(locale, 'form.success')}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .order-grid { display: grid; gap: var(--s-6); align-items: start; }
+  @media (min-width: 940px) { .order-grid { grid-template-columns: 1fr 1.05fr; gap: var(--s-7); } }
+
+  .points { list-style: none; padding: 0; margin: var(--s-5) 0; display: grid; gap: var(--s-3); }
+  .points li { padding-left: var(--s-5); position: relative; color: rgba(255, 255, 255, .88); }
+  .points li::before {
+    content: ""; position: absolute; left: 0; top: .62em;
+    width: 8px; height: 8px; border-radius: 50%; background: #7de0b4;
+  }
+  .hotline a { color: #b9c0ff; font-weight: 600; }
+
+  .form-card { background: var(--paper); color: var(--ink); border-radius: var(--r-card); padding: var(--s-5); box-shadow: var(--shadow-2); }
+  fieldset { border: 0; padding: 0; margin: 0 0 var(--s-4); }
+  .packs { display: grid; gap: var(--s-2); }
+  .pack {
+    display: flex; align-items: flex-start; gap: var(--s-3);
+    border: 1.5px solid var(--line); border-radius: var(--r-card);
+    padding: var(--s-3) var(--s-4); cursor: pointer; background: var(--bone);
+  }
+  .pack:hover { border-color: var(--indigo-lift); }
+  .pack:has(input:checked) { border-color: var(--indigo); background: var(--paper); }
+  .pack input { margin-top: 5px; width: 18px; height: 18px; accent-color: var(--indigo); flex: 0 0 auto; }
+  .pack-text strong { display: block; color: var(--ink-navy); font-size: var(--t-sm); }
+  .pack-text .muted { font-size: var(--t-xs); }
+  .pack-price { margin-left: auto; font-weight: 600; color: var(--ink-navy); white-space: nowrap; font-size: var(--t-sm); }
+
+  .field { margin-bottom: var(--s-4); }
+  .field label { display: block; font-weight: 600; font-size: var(--t-sm); margin-bottom: 5px; color: var(--ink-navy); }
+  input, textarea {
+    width: 100%; font: inherit; font-size: var(--t-base); padding: 12px 14px;
+    border: 1.5px solid var(--line); border-radius: var(--r-input);
+    background: var(--bone); color: var(--ink);
+  }
+  input:focus, textarea:focus { border-color: var(--indigo); background: var(--paper); outline: none; box-shadow: 0 0 0 3px rgba(42, 47, 160, .14); }
+  .hint { font-size: var(--t-xs); color: var(--ink-muted); margin: 5px 0 0; }
+  .err { font-size: var(--t-xs); color: #b3261e; margin: 5px 0 0; display: none; }
+  .field[data-invalid] input { border-color: #b3261e; }
+  .field[data-invalid] .err { display: block; }
+
+  .total { font-size: var(--t-sm); margin: var(--s-4) 0; }
+  .total strong { color: var(--ink-navy); }
+  .ok {
+    background: #e6f4ee; border: 1.5px solid var(--green-clinic); color: #0a4b38;
+    border-radius: var(--r-card); padding: var(--s-4); font-weight: 600; margin: 0;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('order-form') as HTMLFormElement | null;
+  if (form) {
+    const rules: Record<string, (v: string) => boolean> = {
+      name: (v) => v.trim().length >= 2,
+      phone: (v) => /^0\d{9}$/.test(v.replace(/[\s.\-()]/g, '')),
+      address: (v) => v.trim().length >= 8,
+    };
+
+    const check = (el: HTMLInputElement) => {
+      const ok = rules[el.name] ? rules[el.name](el.value) : true;
+      el.closest('.field')?.toggleAttribute('data-invalid', !ok);
+      el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+      return ok;
+    };
+
+    for (const n of Object.keys(rules)) {
+      const el = form.elements.namedItem(n) as HTMLInputElement | null;
+      el?.addEventListener('blur', () => check(el));
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let first: HTMLInputElement | null = null;
+      for (const n of Object.keys(rules)) {
+        const el = form.elements.namedItem(n) as HTMLInputElement | null;
+        if (el && !check(el) && !first) first = el;
+      }
+      if (first) { first.focus(); return; }
+
+      const payload = Object.fromEntries(new FormData(form).entries());
+      window.dispatchEvent(new CustomEvent('mocha:lead', { detail: payload }));
+
+      const endpoint = document.documentElement.dataset.orderEndpoint;
+      const done = () => {
+        form.hidden = true;
+        const ok = document.getElementById('form-success');
+        if (ok) { ok.hidden = false; ok.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+      };
+      if (endpoint) {
+        fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }).then(done).catch(done);
+      } else {
+        console.info('[Mocha] Chưa cấu hình data-order-endpoint. Đơn hàng:', payload);
+        done();
+      }
+    });
+  }
+</script>

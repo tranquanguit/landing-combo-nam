@@ -1,0 +1,31 @@
+---
+import { t, type Locale } from '../i18n/ui';
+interface Props { brand: any; locale: Locale; }
+const { brand: b, locale } = Astro.props;
+---
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#main">
+      <img src={b.logo} alt={b.tradingName} width="92" height="34" />
+    </a>
+    <div class="actions">
+      <a class="tel" href={`tel:${b.phone}`} data-cta="header-call">{b.phoneDisplay}</a>
+      <a class="btn btn-primary compact" href="#dat-hang" data-cta="header-order">{t(locale, 'nav.order')}</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(247, 245, 242, .94);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s-4); min-height: var(--header-h); }
+  .brand img { height: 30px; width: auto; object-fit: contain; }
+  .actions { display: flex; align-items: center; gap: var(--s-4); }
+  .tel { display: none; font-weight: 600; font-size: var(--t-sm); color: var(--ink-navy); text-decoration: none; }
+  @media (min-width: 620px) { .tel { display: inline; } }
+  .compact { padding: 9px 18px; font-size: var(--t-sm); }
+</style>

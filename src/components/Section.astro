@@ -1,0 +1,31 @@
+---
+interface Props {
+  id?: string;
+  surface?: 'bone' | 'paper' | 'mist' | 'navy';
+  eyebrow?: string;
+  heading?: string;
+  intro?: string;
+  center?: boolean;
+  /** Khối đầu trang không được defer, nếu không sẽ ảnh hưởng LCP. */
+  aboveFold?: boolean;
+}
+const { id, surface = 'bone', eyebrow, heading, intro, center = false, aboveFold = false } = Astro.props;
+const surfaceClass = surface === 'bone' ? '' : `surface-${surface}`;
+const headingId = id ? `${id}-title` : undefined;
+---
+<section
+  id={id}
+  class:list={[surfaceClass, !aboveFold && 'defer']}
+  aria-labelledby={headingId}
+>
+  <div class="wrap">
+    {heading && (
+      <div class:list={['section-head', center && 'center']}>
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        <h2 id={headingId}>{heading}</h2>
+        {intro && <p class="lead">{intro}</p>}
+      </div>
+    )}
+    <slot />
+  </div>
+</section>

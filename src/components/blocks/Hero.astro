@@ -1,0 +1,84 @@
+---
+import type { Locale } from '../../i18n/ui';
+interface Props { data: any; locale: Locale; }
+const { data } = Astro.props;
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div>
+      {data.eyebrow && <p class="eyebrow">{data.eyebrow}</p>}
+      <h1 id="hero-title">{data.heading}</h1>
+      <p class="lead" set:html={data.lead} />
+
+      <ul class="usp">
+        {data.usp.map((u: any) => (
+          <li>
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <circle cx="10" cy="10" r="9.25" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <path d="M5.8 10.3l2.7 2.7 5.7-5.9" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>
+              <span set:html={u.text} />
+              {u.qualifier && <em class="qualifier"> — {u.qualifier}</em>}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="#dat-hang" data-cta="hero-primary">{data.primaryCta}</a>
+        {data.secondaryCta && (
+          <a class="btn btn-ghost" href="#thanh-phan" data-cta="hero-secondary">{data.secondaryCta}</a>
+        )}
+      </div>
+
+      {data.trustBadges.length > 0 && (
+        <ul class="trust">
+          {data.trustBadges.map((b: string) => <li>{b}</li>)}
+        </ul>
+      )}
+    </div>
+
+    <div class="hero-media">
+      <img
+        src={data.image.src}
+        alt={data.image.alt}
+        width={data.image.width}
+        height={data.image.height}
+        fetchpriority="high"
+        decoding="sync"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(36px, 5vw, 72px) clamp(32px, 4vw, 56px);
+    background: linear-gradient(180deg, var(--violet-mist) 0%, var(--bone) 100%);
+  }
+  .hero-grid { display: grid; gap: var(--s-6); align-items: center; }
+  @media (min-width: 900px) { .hero-grid { grid-template-columns: 1.05fr .95fr; gap: var(--s-7); } }
+
+  .hero-media img {
+    width: 100%;
+    border-radius: var(--r-media);
+    box-shadow: var(--shadow-2);
+    background: var(--violet-mist);
+  }
+
+  .usp { list-style: none; padding: 0; margin: var(--s-5) 0; display: grid; gap: var(--s-3); }
+  .usp li { display: flex; gap: var(--s-3); align-items: flex-start; }
+  .usp svg { flex: 0 0 20px; margin-top: 5px; color: var(--green-clinic); }
+  .qualifier { color: var(--ink-muted); font-style: normal; font-size: var(--t-sm); }
+
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+
+  .trust {
+    list-style: none; padding: 0;
+    margin: var(--s-5) 0 0;
+    display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5);
+    font-size: var(--t-sm); color: var(--ink-muted);
+  }
+</style>

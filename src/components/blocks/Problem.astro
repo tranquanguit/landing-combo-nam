@@ -1,0 +1,30 @@
+---
+import Section from '../Section.astro';
+interface Props { data: any; id?: string; }
+const { data, id = 'van-de' } = Astro.props;
+---
+<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
+  <div class="split">
+    <ul class="quotes">
+      {data.quotes.map((q: string) => <li>{q}</li>)}
+    </ul>
+    <div class="measure">
+      <h3>{data.explainer.heading}</h3>
+      {data.explainer.body.map((para: string) => <p set:html={para} />)}
+    </div>
+  </div>
+</Section>
+
+<style>
+  .split { display: grid; gap: var(--s-6); }
+  @media (min-width: 820px) { .split { grid-template-columns: 1fr 1fr; gap: var(--s-7); } }
+  .quotes { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-3); align-content: start; }
+  .quotes li {
+    border-left: 3px solid var(--indigo-lift);
+    padding: var(--s-3) var(--s-4);
+    background: var(--bone);
+    border-radius: 0 var(--r-card) var(--r-card) 0;
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+</style>

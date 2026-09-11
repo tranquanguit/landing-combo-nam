@@ -1,0 +1,41 @@
+---
+import Section from '../Section.astro';
+interface Props { data: any; id?: string; }
+const { data, id = 'thanh-phan' } = Astro.props;
+---
+<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} center>
+  <div class="scroll">
+    <table>
+      {data.caption && <caption>{data.caption}</caption>}
+      <thead>
+        <tr><th scope="col">Hoạt chất</th><th scope="col">Vai trò</th><th scope="col">Phù hợp với</th></tr>
+      </thead>
+      <tbody>
+        {data.rows.map((r: any) => (
+          <tr>
+            <th scope="row">
+              {r.name}
+              {r.reference && (
+                <> <a href={r.reference} rel="noopener nofollow" target="_blank" class="ref">nguồn</a></>
+              )}
+            </th>
+            <td>{r.role}</td>
+            <td>{r.suitedFor}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Section>
+
+<style>
+  .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-card); }
+  table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: var(--t-sm); }
+  caption { text-align: left; padding: var(--s-4) var(--s-4) 0; color: var(--ink-muted); font-size: var(--t-xs); }
+  th, td { padding: 13px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+  thead th { background: var(--ink-navy); color: #fff; font-weight: 600; border-bottom: 0; }
+  tbody tr:nth-child(even) { background: var(--bone); }
+  tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+  tbody th { color: var(--ink-navy); font-weight: 600; }
+  .ref { font-size: var(--t-xs); font-weight: 400; white-space: nowrap; }
+</style>

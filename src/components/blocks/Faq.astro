@@ -1,0 +1,34 @@
+---
+import Section from '../Section.astro';
+interface Props { data: any; id?: string; }
+const { data, id = 'faq' } = Astro.props;
+---
+<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading} center>
+  <div class="faq">
+    {data.items.map((item: any, i: number) => (
+      <details open={i === 0}>
+        <summary>{item.q}</summary>
+        <div class="answer"><p set:html={item.a} /></div>
+      </details>
+    ))}
+  </div>
+</Section>
+
+<style>
+  .faq { display: grid; gap: var(--s-2); max-width: 68ch; margin-inline: auto; }
+  details { border: 1px solid var(--line); border-radius: var(--r-card); background: var(--paper); }
+  details[open] { border-color: var(--indigo-lift); }
+  summary {
+    cursor: pointer; list-style: none; font-weight: 600; color: var(--ink-navy);
+    padding: var(--s-4) 44px var(--s-4) var(--s-4); position: relative;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: ""; position: absolute; right: 20px; top: 50%;
+    width: 9px; height: 9px; margin-top: -6px;
+    border-right: 2px solid var(--indigo); border-bottom: 2px solid var(--indigo);
+    transform: rotate(45deg); transition: transform .18s ease;
+  }
+  details[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
+  .answer { padding: 0 var(--s-4) var(--s-4); color: var(--ink-muted); font-size: var(--t-sm); }
+</style>
