@@ -1,9 +1,10 @@
 ---
 import { t, type Locale } from '../../i18n/ui';
+import { money } from '../../lib/format';
 import { richText } from '../../lib/richtext';
 import Picture from '../Picture.astro';
-interface Props { data: any; locale: Locale; }
-const { data, locale } = Astro.props;
+interface Props { data: any; locale: Locale; product: any; }
+const { data, locale, product: p } = Astro.props;
 
 /** Nhãn cho biết mỗi tuyên bố dựa trên cái gì. */
 const evidenceLabel: Record<string, string> = {
@@ -19,6 +20,21 @@ const evidenceLabel: Record<string, string> = {
       {data.eyebrow && <p class="eyebrow">{data.eyebrow}</p>}
       <h1 id="hero-title">{data.heading}</h1>
       <p class="lead" set:html={richText(data.lead)} />
+
+      {/* Giá ngay ở màn hình đầu: đo được trước đây khách phải cuộn gần ba màn
+          hình mới biết sản phẩm bao nhiêu tiền. */}
+      <p class="hero-price">
+        <span class="now tabular">{money(p.price, p.currency, locale)}</span>
+        {p.compareAtPrice && p.compareAtPrice > p.price && (
+          <>
+            <span class="was tabular">{money(p.compareAtPrice, p.currency, locale)}</span>
+            <span class="save">
+              {t(locale, 'price.save')} {money(p.compareAtPrice - p.price, p.currency, locale)}
+            </span>
+          </>
+        )}
+      </p>
+
 
       <ul class="usp">
         {data.usp.map((u: any) => (
@@ -100,6 +116,21 @@ const evidenceLabel: Record<string, string> = {
     display: inline-block; min-height: 24px; line-height: 24px;
   }
   .basis a:hover { color: var(--indigo); }
+
+  .hero-price {
+    display: flex; align-items: baseline; flex-wrap: wrap;
+    gap: var(--s-2) var(--s-3);
+    margin: 0 0 var(--s-4);
+  }
+  .hero-price .now {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: var(--t-xl); color: var(--ink-navy); line-height: 1;
+  }
+  .hero-price .was { color: var(--ink-muted); text-decoration: line-through; font-size: var(--t-sm); }
+  .hero-price .save {
+    font-size: var(--t-xs); font-weight: 600; color: var(--green-clinic);
+    background: #e4f3ec; padding: 3px 10px; border-radius: 999px;
+  }
 
   .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
 

@@ -37,6 +37,74 @@ export function productGraph(opts: {
   const offerBlock = p.blocks.find((x) => x.type === 'offer');
   const offerValidUntil = offerBlock && offerBlock.type === 'offer' ? offerBlock.validUntil : undefined;
 
+  /**
+   * Mỗi gói bán là một Offer riêng.
+   *
+   * Trước đây chỉ khai một Offer cho cả bốn lựa chọn, nên máy đọc được giá combo
+   * mà không đọc được giá mua lẻ — trong khi trang hiển thị đủ cả bốn.
+   */
+  const offerBase = {
+    priceCurrency: p.currency,
+    availability: `https://schema.org/${p.availability ?? 'InStock'}`,
+    itemCondition: 'https://schema.org/NewCondition',
+    seller: { '@id': orgId },
+    ...(offerValidUntil ? { priceValidUntil: offerValidUntil } : {}),
+    ...(locale === 'vi' && p.shipping
+      ? {
+          shippingDetails: {
+            '@type': 'OfferShippingDetails',
+            shippingRate: { '@type': 'MonetaryAmount', value: String(p.shipping.rate), currency: p.currency },
+            shippingDestination: { '@type': 'DefinedRegion', addressCountry: p.shipping.country },
+            deliveryTime: {
+              '@type': 'ShippingDeliveryTime',
+              handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' },
+              transitTime: {
+                '@type': 'QuantitativeValue',
+                minValue: p.shipping.transitDaysMin,
+                maxValue: p.shipping.transitDaysMax,
+                unitCode: 'DAY',
+              },
+            },
+          },
+        }
+      : {}),
+    ...(p.returnPolicy
+      ? {
+          hasMerchantReturnPolicy: {
+            '@type': 'MerchantReturnPolicy',
+            applicableCountry: p.returnPolicy.country,
+            returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+            merchantReturnDays: p.returnPolicy.days,
+            returnMethod: 'https://schema.org/ReturnByMail',
+            returnFees: 'https://schema.org/FreeReturn',
+            refundType: 'https://schema.org/ExchangeRefund',
+          },
+        }
+      : {}),
+  };
+
+  function buildOffers() {
+    const paid = p.variants.filter((v) => v.price !== null);
+    if (paid.length < 2) {
+      return { '@type': 'Offer', url: `${url}#dat-hang`, price: String(p.price), ...offerBase };
+    }
+    return {
+      '@type': 'AggregateOffer',
+      url: `${url}#dat-hang`,
+      priceCurrency: p.currency,
+      lowPrice: String(Math.min(...paid.map((v) => v.price as number))),
+      highPrice: String(Math.max(...paid.map((v) => v.price as number))),
+      offerCount: paid.length,
+      offers: paid.map((v) => ({
+        '@type': 'Offer',
+        name: v.label,
+        price: String(v.price),
+        url: `${url}#dat-hang`,
+        ...offerBase,
+      })),
+    };
+  }
+
   const graph: Record<string, unknown>[] = [
     {
       '@type': 'Organization',
@@ -78,53 +146,7 @@ export function productGraph(opts: {
       ...(p.includes.length
         ? { isRelatedTo: p.includes.map((i) => ({ '@type': 'Product', name: i.name, description: i.note })) }
         : {}),
-      offers: {
-        '@type': 'Offer',
-        url: `${url}#dat-hang`,
-        priceCurrency: p.currency,
-        price: String(p.price),
-        // Chỉ khai khi nội dung thật sự nêu hạn ưu đãi, không bịa ra một ngày.
-        ...(offerValidUntil ? { priceValidUntil: offerValidUntil } : {}),
-        availability: `https://schema.org/${p.availability ?? 'InStock'}`,
-        itemCondition: 'https://schema.org/NewCondition',
-        seller: { '@id': orgId },
-        // Giao hàng miễn phí chỉ đúng trong nước. Bản quốc tế không khai
-        // shippingRate vì phí được báo riêng cho từng nước trước khi thanh toán.
-        ...(p.shipping
-          ? {
-              shippingDetails: {
-                '@type': 'OfferShippingDetails',
-                shippingRate: { '@type': 'MonetaryAmount', value: String(p.shipping.rate), currency: p.currency },
-                shippingDestination: { '@type': 'DefinedRegion', addressCountry: p.shipping.country },
-                deliveryTime: {
-                  '@type': 'ShippingDeliveryTime',
-                  handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' },
-                  transitTime: {
-                    '@type': 'QuantitativeValue',
-                    minValue: p.shipping.transitDaysMin,
-                    maxValue: p.shipping.transitDaysMax,
-                    unitCode: 'DAY',
-                  },
-                },
-              },
-            }
-          : {}),
-        ...(p.returnPolicy
-          ? {
-              hasMerchantReturnPolicy: {
-                '@type': 'MerchantReturnPolicy',
-                applicableCountry: p.returnPolicy.country,
-                // Chính sách thật chỉ nhận đổi trả khi hàng lỗi, sai hoặc chưa mở seal.
-                // Khai MerchantReturnNotPermitted cho phần còn lại thay vì khai rộng hơn sự thật.
-                returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-                merchantReturnDays: p.returnPolicy.days,
-                returnMethod: 'https://schema.org/ReturnByMail',
-                returnFees: 'https://schema.org/FreeReturn',
-                refundType: 'https://schema.org/ExchangeRefund',
-              },
-            }
-          : {}),
-      },
+      offers: buildOffers(),
     },
   ];
 

@@ -30,3 +30,11 @@ jobs:
 
       - name: Ngân sách trọng lượng trang
         run: node scripts/check-budget.mjs
+
+      # Nhánh gửi đơn khi ĐÃ cấu hình endpoint từng là nhánh chết suốt bốn vòng
+      # kiểm định — không ai chạy nó. Nay nó là một phép thử bắt buộc.
+      - name: Cài trình duyệt cho kiểm thử
+        run: npx playwright install --with-deps chromium
+
+      - name: Kiểm thử gửi đơn hàng
+        run: PUBLIC_ORDER_ENDPOINT=http://localhost:8132/orders npm run build && npm run test:order

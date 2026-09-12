@@ -107,3 +107,20 @@ nạp gì cho tới khi người dùng bấm Đồng ý. Bấm Từ chối thì 
 
 **Sự kiện**: `view_item`, `begin_checkout` (mọi CTA, kèm `cta_id`), `contact`
 (gọi điện / Zalo), `form_start`, `generate_lead`, `scroll_depth`.
+
+## Kiểm thử
+
+```bash
+npm run build          # schema từ chối nội dung vi phạm ngay lúc build
+npm run check          # kiểm kiểu, 0 lỗi
+node scripts/check-budget.mjs
+PUBLIC_ORDER_ENDPOINT=http://localhost:8132/orders npm run build && npm run test:order
+```
+
+`npm run test:order` dựng một endpoint thật và đi qua ba kịch bản người dùng
+thật sẽ gặp: gửi thành công, máy chủ trả 500, mạng đứt. Trang phải nói đúng sự
+thật trong cả ba — đặc biệt là **không được báo thành công khi chưa gửi được**.
+
+Nhánh này từng là nhánh chết suốt bốn vòng kiểm định: mọi lần đo đều ở trạng thái
+"chưa cấu hình endpoint", nên phần code xử lý đơn hàng thật chưa ai chạy. Nay nó
+chạy trong CI.

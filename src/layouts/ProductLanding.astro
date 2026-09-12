@@ -82,7 +82,7 @@ p.blocks.forEach((block: any, i: number) => {
   <main id="main">
     {p.blocks.map((block: any, i: number) => {
       switch (block.type) {
-        case 'hero':         return <Hero data={block} locale={locale} />;
+        case 'hero':         return <Hero data={block} locale={locale} product={p} />;
         case 'offer':        return <Offer data={block} product={p} locale={locale} />;
         case 'problem':      return <Problem data={block} id={block.id} />;
         case 'cards':        return <Cards data={block} id={block.id} surface={surfaceFor.get(i)} />;
