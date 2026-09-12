@@ -1,6 +1,7 @@
 ---
 import { money } from '../../lib/format';
 import { t, type Locale } from '../../i18n/ui';
+import { richText } from '../../lib/richtext';
 interface Props { data: any; product: any; brand: any; locale: Locale; }
 const { data, product: p, brand: b, locale } = Astro.props;
 
@@ -8,15 +9,24 @@ const { data, product: p, brand: b, locale } = Astro.props;
 // thay vào đó hiện lối liên hệ thật, vì một đơn hàng rơi vào hư không tệ hơn
 // nhiều so với một nút không hoạt động.
 const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
+
+/**
+ * Chưa có endpoint thì KHÔNG render thẻ <form>.
+ *
+ * Trước đây form vẫn tồn tại với nút aria-disabled. Nhưng khi tắt JavaScript,
+ * nhấn Enter trong một ô nhập vẫn submit ngầm, POST về chính trang và trả 501:
+ * khách mất sạch dữ liệu đã gõ. Không có phần tử form thì không có gì để submit.
+ */
+const Wrapper = endpoint ? 'form' : 'div';
 ---
 <section id="dat-hang" class="surface-navy defer" aria-labelledby="dat-hang-title">
   <div class="wrap order-grid">
     <div>
       {data.eyebrow && <p class="eyebrow">{data.eyebrow}</p>}
       <h2 id="dat-hang-title">{data.heading}</h2>
-      <p class="lead" set:html={data.body} />
+      <p class="lead" set:html={richText(data.body)} />
       <ul class="points">
-        {data.points.map((pt: string) => <li set:html={pt} />)}
+        {data.points.map((pt: string) => <li set:html={richText(pt)} />)}
       </ul>
       <p class="hotline">
         <a href={`tel:${b.phone}`} data-cta="order-call">{b.phoneDisplay}</a>
@@ -25,13 +35,13 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
     </div>
 
     <div class="form-card on-light">
-      <form
+      <Wrapper
         id="order-form"
-        method="post"
+        method={endpoint ? 'post' : undefined}
         action={endpoint ?? undefined}
         data-endpoint={endpoint ? 'configured' : 'missing'}
         data-action={endpoint ?? undefined}
-        novalidate
+        novalidate={endpoint ? true : undefined}
       >
         {p.variants.length > 0 && (
           <fieldset>
@@ -60,14 +70,14 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
 
         <div class="field" data-field="name">
           <label for="name">{t(locale, 'form.name')} <span aria-hidden="true">*</span></label>
-          <input type="text" id="name" name="name" autocomplete="name" required
+          <input type="text" id="name" name="name" disabled={!endpoint} autocomplete="name" required
             aria-describedby="name-err" placeholder={t(locale, 'form.phName')} />
           <p class="err" id="name-err">{t(locale, 'form.errName')}</p>
         </div>
 
         <div class="field" data-field="phone">
           <label for="phone">{t(locale, 'form.phone')} <span aria-hidden="true">*</span></label>
-          <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="numeric" required
+          <input type="tel" id="phone" name="phone" disabled={!endpoint} autocomplete="tel" inputmode="numeric" required
             aria-describedby="phone-hint phone-err" placeholder={t(locale, 'form.phPhone')} />
           <p class="hint" id="phone-hint">{t(locale, 'form.privacy')}</p>
           <p class="err" id="phone-err">{t(locale, 'form.errPhone')}</p>
@@ -75,7 +85,7 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
 
         <div class="field" data-field="address">
           <label for="address">{t(locale, 'form.address')} <span aria-hidden="true">*</span></label>
-          <input type="text" id="address" name="address" autocomplete="street-address" required
+          <input type="text" id="address" name="address" disabled={!endpoint} autocomplete="street-address" required
             aria-describedby="address-err" placeholder={t(locale, 'form.phAddress')} />
           <p class="err" id="address-err">{t(locale, 'form.errAddress')}</p>
         </div>
@@ -83,7 +93,7 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
         {locale !== 'vi' && (
           <div class="field" data-field="country">
             <label for="country">{t(locale, 'form.country')} <span aria-hidden="true">*</span></label>
-            <input type="text" id="country" name="country" autocomplete="country-name" required
+            <input type="text" id="country" name="country" disabled={!endpoint} autocomplete="country-name" required
               aria-describedby="country-err" />
             <p class="err" id="country-err">{t(locale, 'form.errCountry')}</p>
           </div>
@@ -91,7 +101,7 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
 
         <div class="field">
           <label for="note">{t(locale, 'form.note')}</label>
-          <textarea id="note" name="note" rows="2"></textarea>
+          <textarea id="note" name="note" rows="2" disabled={!endpoint}></textarea>
         </div>
 
         <p class="total" id="order-total" data-currency={p.currency} data-locale={locale}>
@@ -99,16 +109,20 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
           <span class="muted"> {t(locale, 'form.totalNote')}</span>
         </p>
 
+        {/* Chưa có endpoint: nút là <button type="button"> đã disabled, và bên
+            ngoài không có thẻ <form> nào, nên không đường nào submit được —
+            kể cả nhấn Enter trong ô nhập khi JavaScript tắt. */}
         <button
-          type="submit"
+          type={endpoint ? 'submit' : 'button'}
           class="btn btn-primary btn-lg btn-block"
           data-cta="form-submit"
-          aria-disabled={endpoint ? undefined : 'true'}
+          disabled={!endpoint}
           aria-describedby={endpoint ? undefined : 'form-no-endpoint'}
         >
           {t(locale, 'form.submit')}
         </button>
-      </form>
+
+      </Wrapper>
 
       <p class="ok" id="form-success" role="status" hidden>{t(locale, 'form.success')}</p>
 
@@ -189,6 +203,8 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
   /* aria-disabled thay cho disabled để nút vẫn nhận được focus và trình đọc
      màn hình vẫn đọc được lời giải thích kèm theo. Màu giữ đủ tương phản. */
   button[aria-disabled='true'] { background: #6b7280; cursor: not-allowed; }
+  button[disabled] { background: #6b7280; cursor: not-allowed; }
+  input[disabled], textarea[disabled] { opacity: .6; cursor: not-allowed; }
   .ok {
     background: #e6f4ee; border: 1.5px solid var(--green-clinic); color: #0a4b38;
     border-radius: var(--r-card); padding: var(--s-4); font-weight: 600; margin: 0;
@@ -196,7 +212,10 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
 </style>
 
 <script>
-  const form = document.getElementById('order-form') as HTMLFormElement | null;
+  /* Khi chưa cấu hình endpoint, #order-form là một <div> chứ không phải <form>:
+     không có form.elements, không submit được. Script chỉ chạy khi có form thật. */
+  const node = document.getElementById('order-form');
+  const form = node instanceof HTMLFormElement ? node : null;
 
   if (form) {
     /* Chấp nhận cả 0912345678, +84912345678 và 84912345678 — khách hay dán

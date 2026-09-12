@@ -1,5 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { findHandwrittenMoney, MONEY_TOKENS } from './lib/money-text';
+import { findForbiddenClaims } from './lib/claims-lexicon';
 
 /* ------------------------------------------------------------------
    Khối nội dung dùng chung cho mọi landing.
@@ -84,7 +86,24 @@ const blocks = z.discriminatedUnion('type', [
     eyebrow: z.string().optional(),
     heading: z.string(),
     intro: z.string().optional(),
-    quotes: z.array(z.string()),
+    /**
+     * Câu trích mô tả nỗi lo chung của người mua, KHÔNG phải lời chứng của
+     * người thật. Cổng consent chỉ áp cho `gallery` và `testimonials`, nên nếu
+     * ở đây cho phép nêu tên/tuổi/nơi ở thì chỉ cần đổi `type` là lách được.
+     * Schema chặn luôn từ đầu: câu trích ở khối này không được chứa danh tính.
+     */
+    quotes: z.array(z.string().superRefine((q, ctx) => {
+      const identity = /\b(chị|anh|cô|bác|chú|em)\s+[A-ZĐÀ-Ỹ][\p{L}]+|\b\d{2}\s*tuổi|\b(Mrs?|Ms)\.\s+[A-Z]/u;
+      if (identity.test(q)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message:
+            `Câu trích trong khối "problem" nêu danh tính người thật: "${q.slice(0, 60)}…". ` +
+            `Lời chứng của khách phải nằm ở khối "testimonials", nơi có cổng consent. ` +
+            `Khối này chỉ dành cho nỗi lo chung, viết ẩn danh.`,
+        });
+      }
+    })),
     explainer: z.object({ heading: z.string(), body: z.array(z.string()) }),
   }),
   z.object({
@@ -255,62 +274,63 @@ const products = defineCollection({
     blocks: z.array(blocks).min(1),
   }).superRefine((p, ctx) => {
     /**
-     * Giá bị nhắc lại ở nhiều chỗ trong nội dung. Hàng rào này quét MỌI chuỗi
-     * của sản phẩm — không chỉ `blocks` — và chặn build nếu xuất hiện con số
-     * tiền không thuộc tập giá hợp lệ.
+     * Giá chỉ được nhắc bằng token ({{price}}, {{compareAtPrice}}, {{save}}).
+     * Bất kỳ số tiền nào viết tay trong nội dung đều bị chặn — không cần đoán
+     * nó đúng hay sai, vì đã có cách viết duy nhất được phép.
      *
-     * Bản đầu chỉ quét `blocks` và chỉ bắt dạng "1.050.000đ", nên bị lách dễ
-     * dàng bằng: đặt số vào `variants[].note`, `gifts[].note` hay `seo.description`;
-     * viết "1050000đ" không dấu phân cách; viết "990k"; viết "630 nghìn đồng";
-     * hay viết "1.140.000 đồng". Tất cả những cách đó nay đều bị bắt.
+     * Đây là thay đổi hình dạng bài toán sau ba vòng siết regex thất bại:
+     * hàng rào cũ vừa lọt 10 cách viết né, vừa chặn nhầm những câu hợp lệ như
+     * "gọi 1900 1000 đồng hành cùng bạn".
      */
-    const legit = new Set<number>([p.price, ...(p.compareAtPrice ? [p.compareAtPrice] : [])]);
-    for (const v of p.variants) if (v.price !== null) legit.add(v.price);
-    if (p.compareAtPrice) legit.add(p.compareAtPrice - p.price);
-
-    // Cố ý không nhận đơn vị 'd' trần: nó bắt nhầm chuỗi như "Hakozaki 2002 dùng…"
-    const unit = String.raw`(?:đ|₫|VND|đồng)`;
-    const patterns: [RegExp, (m: RegExpMatchArray) => number][] = [
-      // 1.050.000đ | 1,050,000 ₫ | 1.140.000 đồng | 1050000đ | 1050000 VND
-      [new RegExp(String.raw`(\d[\d.,\s]{2,})\s*${unit}`, 'gi'),
-        (m) => Number(m[1].replace(/[.,\s]/g, ''))],
-      // 990k | 1.050k | 990 k
-      [/(\d+(?:[.,]\d+)?)\s*k\b/gi,
-        (m) => Math.round(Number(m[1].replace(',', '.')) * 1000)],
-      // 630 nghìn | 1,2 triệu
-      [/(\d+(?:[.,]\d+)?)\s*(nghìn|ngàn|triệu)/gi,
-        (m) => Math.round(Number(m[1].replace(',', '.')) * (m[2] === 'triệu' ? 1_000_000 : 1_000))],
-    ];
-
-    const found = new Set<string>();
+    const found = new Map<string, string[]>();
     const scan = (node: unknown, path: string): void => {
       if (typeof node === 'string') {
-        for (const [re, toNumber] of patterns) {
-          for (const m of node.matchAll(re)) {
-            const n = toNumber(m);
-            // Bỏ qua số quá nhỏ để không bắt nhầm "3%" hay "SPF50"
-            if (n < 1000) continue;
-            if (!legit.has(n)) found.add(`"${m[0].trim()}" = ${n.toLocaleString('vi-VN')} (tại ${path})`);
-          }
-        }
+        const hits = findHandwrittenMoney(node);
+        if (hits.length) found.set(path, hits);
       } else if (Array.isArray(node)) {
         node.forEach((v, i) => scan(v, `${path}[${i}]`));
       } else if (node && typeof node === 'object') {
         for (const [k, v] of Object.entries(node)) scan(v, path ? `${path}.${k}` : k);
       }
     };
-    // Quét toàn bộ sản phẩm, trừ chính các trường giá dạng số
-    const { price, compareAtPrice, variants, ...rest } = p;
+    const { price, compareAtPrice, currency, variants, ...rest } = p;
     scan(rest, '');
     scan(variants.map((v) => ({ label: v.label, note: v.note })), 'variants');
 
+    /* Từ ngữ bị cấm, quét trên MỌI trường chuỗi — cổng evidence chỉ soi
+       hero.usp[] nên mọi tuyên bố kết quả đặt chỗ khác đều lọt. */
+    const claims = new Map<string, { match: string; why: string; instead: string }[]>();
+    const scanClaims = (node: unknown, path: string): void => {
+      if (typeof node === 'string') {
+        const hits = findForbiddenClaims(node);
+        if (hits.length) claims.set(path, hits);
+      } else if (Array.isArray(node)) {
+        node.forEach((v, i) => scanClaims(v, `${path}[${i}]`));
+      } else if (node && typeof node === 'object') {
+        for (const [k, v] of Object.entries(node)) scanClaims(v, path ? `${path}.${k}` : k);
+      }
+    };
+    // Bỏ qua compliance: đó là cảnh báo bắt buộc theo luật, không phải lời rao.
+    const { compliance, ...marketing } = rest as Record<string, unknown>;
+    scanClaims(marketing, '');
+
+    if (claims.size) {
+      const lines = [...claims].flatMap(([path, hits]) =>
+        hits.map((h) => `${path}: "${h.match}" — ${h.why}. Thay bằng: ${h.instead}`));
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `Nội dung chứa tuyên bố bị cấm với mỹ phẩm:\n    ${lines.join('\n    ')}`,
+      });
+    }
+
     if (found.size) {
+      const lines = [...found].map(([path, hits]) => `${path}: ${hits.join(', ')}`);
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message:
-          `Câu chữ nhắc tới số tiền không khớp dữ liệu giá:\n    ${[...found].join('\n    ')}\n  ` +
-          `Các số hợp lệ: ${[...legit].map((n) => n.toLocaleString('vi-VN')).join(', ')}. ` +
-          `Sửa câu chữ hoặc sửa giá — đừng để hai nơi nói hai con số.`,
+          `Không viết số tiền trực tiếp trong nội dung:\n    ${lines.join('\n    ')}\n  ` +
+          `Dùng token ${MONEY_TOKENS.join(', ')} — component sẽ thay bằng số đã định dạng, ` +
+          `nên giá chỉ tồn tại ở đúng một nơi và không thể lệch.`,
       });
     }
   }),

@@ -32,7 +32,7 @@
   "variants": [
     {
       "label": "Combo đầy đủ – Kem + Serum",
-      "note": "Kèm 2 quà tặng, tiết kiệm 90.000đ",
+      "note": "Kèm 2 quà tặng, tiết kiệm {{save}}",
       "price": 1050000,
       "recommended": true
     },
@@ -57,7 +57,7 @@
   ],
   "seo": {
     "title": "Combo Nám Mocha – Kem & Serum chăm sóc da nám | Mocha Việt Nam",
-    "description": "Kem Smart Brightening Cream X3 + Serum Smart First Care: Tranexamic Acid 3%, Bakuchiol 2%, NIO-NAG 2%. Không corticoid. 1.050.000đ kèm 2 quà tặng, freeship.",
+    "description": "Kem Smart Brightening Cream X3 + Serum Smart First Care: Tranexamic Acid 3%, Bakuchiol 2%, NIO-NAG 2%. Không corticoid. {{price}} kèm 2 quà tặng, freeship.",
     "ogImage": "/images/packshot-combo.jpg"
   },
   "compliance": {
@@ -112,7 +112,7 @@
       "type": "offer",
       "eyebrow": "Ưu đãi",
       "heading": "Mua đủ hai bước, rẻ hơn mua lẻ và được tặng thêm hai sản phẩm",
-      "body": "Mua lẻ kem 590.000đ và serum 550.000đ là 1.140.000đ. Mua theo combo còn <strong>1.050.000đ</strong>, và được tặng thêm kem chống nắng SPF50 cùng sữa rửa mặt — hai bước bắt buộc để giữ kết quả.",
+      "body": "Mua lẻ từng món tổng cộng {{compareAtPrice}}. Mua theo combo còn <strong>{{price}}</strong>, và được tặng thêm kem chống nắng SPF50 cùng sữa rửa mặt — hai bước bắt buộc để giữ kết quả.",
       "validUntil": "2026-09-30",
       "notes": [
         "Miễn phí vận chuyển",
@@ -350,7 +350,7 @@
       "items": [
         {
           "q": "Combo Nám Mocha giá bao nhiêu?",
-          "a": "Combo gồm Smart Brightening Cream X3 và Smart First Care Serum, giá <strong>1.050.000đ</strong>, kèm kem chống nắng UV-Block SPF50 và sữa rửa mặt Bio-Active Cleanser, miễn phí vận chuyển. Mua lẻ từng món: kem 590.000đ, serum 550.000đ — tức là mua combo rẻ hơn 90.000đ và được thêm hai sản phẩm tặng kèm."
+          "a": "Combo gồm Smart Brightening Cream X3 và Smart First Care Serum, giá <strong>{{price}}</strong>, kèm kem chống nắng UV-Block SPF50 và sữa rửa mặt Bio-Active Cleanser, miễn phí vận chuyển. Mua lẻ từng món tổng cộng {{compareAtPrice}} — tức là mua combo rẻ hơn {{save}} và được thêm hai sản phẩm tặng kèm."
         },
         {
           "q": "Bao lâu thì thấy khác biệt?",

@@ -23,8 +23,10 @@ jobs:
       - name: Build
         run: npm run build
 
+      # npx astro check tự cài thiếu dependency bằng prompt tương tác; trong CI
+      # không có TTY nên nó thoát 0 mà không kiểm gì. Dùng script đã khai deps.
       - name: Kiểm tra kiểu
-        run: npx astro check --minimumFailingSeverity error
+        run: npm run check
 
       - name: Ngân sách trọng lượng trang
         run: node scripts/check-budget.mjs

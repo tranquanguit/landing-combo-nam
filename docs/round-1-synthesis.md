@@ -286,3 +286,104 @@ Vùng chạm dưới 24px: không còn. Chuỗi tiếng Việt trên trang EN: k
 - `font-display: optional` vẫn tải 115KB font rồi có thể không dùng ở lần tải đầu chậm.
 - Nhánh `fetch` khi có endpoint **chưa bao giờ chạy** trong bất kỳ vòng kiểm định nào.
 - Mọi số LCP đều là phòng thí nghiệm trên localhost, chưa có RTT và TLS thật.
+
+---
+
+# Vòng 10 — kiểm định lần 4: hàng rào bị phá lần nữa, và lần này đổi cách làm
+
+Kiểm định viên thứ tư chấm **13 ĐẠT / 19 CHƯA ĐẠT** và tấn công trực diện vào các
+hàng rào. Kết luận của họ đáng ghi lại nguyên văn: *"Ba cơ chế, ba lần chỉ là lời
+hứa viết bằng TypeScript."*
+
+## Lỗ hổng bảo mật: nội dung JSON thực thi được JavaScript
+
+Dán `Gia tot </script><script>window.__pwned=1</script>` vào `faq.items[].a` → build
+sạch, trang chạy đoạn mã đó. Thoát ra được **hai đường**: qua `set:html` và qua
+`JSON.stringify(jsonLd)` đổ vào thẻ `<script>`. README bán nền tảng này với lời hứa
+"người không biết code tự sửa nội dung" — tức đây là stored XSS chờ sẵn.
+
+Đã sửa: `src/lib/richtext.ts` chỉ cho phép `<strong> <em> <b> <i> <br> <sup> <sub>`
+**không thuộc tính**, escape mọi thứ khác; `safeJsonLd()` escape `<`, `>`, `&`,
+U+2028/2029 trước khi nhúng. Kiểm chứng trong trình duyệt: `window.__pwned` undefined,
+0 alert, JSON-LD vẫn parse được, `<strong>` hợp lệ vẫn render.
+
+## Đổi hình dạng bài toán thay vì siết regex lần thứ tư
+
+Hàng rào giá bị phá **10/11 chiêu**: `990.000 VNĐ` (Đ≠D), chữ số full-width, chữ số
+Ả Rập, HTML entity, số bị cắt bởi `<strong>`, zero-width space, `$39.90`, số La Mã,
+số viết bằng chữ. Đồng thời **chặn nhầm 3 câu hợp lệ**: "gọi 1900 1000 **đồng** hành
+cùng bạn", "đơn hàng số 1.234.567 **đã** giao", "hơn 5 **triệu** phụ nữ".
+
+Vì vậy bỏ hẳn cách quét-số-trong-văn-xuôi. Giá nay viết bằng **token**
+`{{price}}`, `{{compareAtPrice}}`, `{{save}}`, do layout thay một lần cho toàn bộ dữ
+liệu. Hàng rào chỉ còn một luật đơn giản: *không được viết số tiền trực tiếp*. Trước
+khi dò, chuỗi được chuẩn hoá — giải HTML entity, bóc thẻ, xoá zero-width, NFKC, đổi
+chữ số Ả Rập/Ba Tư/Devanagari sang ASCII.
+
+**Kết quả thử lại: 14/14 đúng** — chặn cả 9 cách né, cho qua cả 3 câu hợp lệ từng bị
+chặn nhầm. Rủi ro còn lại được ghi nhận: số không kèm đơn vị ("777.000") không phân
+biệt được với số đơn hàng, nhưng với token thì không ai có lý do viết giá kiểu đó.
+
+## Các cổng khác đều đã bị né, đều đã vá
+
+| Cổng | Cách né | Vá |
+|---|---|---|
+| Bằng chứng | Chỉ soi `hero.usp[]`; đặt "98% khách hàng hết nám", "chứng minh lâm sàng", "hiệu quả như laser" vào FAQ là lọt | Thêm `src/lib/claims-lexicon.ts`: 9 nhóm từ bị cấm theo TT 06/2011 và NĐ 342/2025, quét **mọi** trường chuỗi, mỗi lỗi kèm câu thay thế |
+| Consent | Đổi `type` từ `testimonials` sang `problem` là đăng được tên–tuổi–nơi ở | `problem.quotes[]` từ chối mọi chuỗi chứa danh tính |
+| Ngôn ngữ | Bảng dịch **một khoá** vẫn qua, vì chỉ kiểm bảng có tồn tại | So khoá với `ui.vi`, thiếu khoá nào liệt kê khoá đó |
+| Ngân sách | Không đếm video, svg, gif, iframe, font CDN, và không có luật tổng trang | Đếm đủ; thêm luật tổng một lượt tải và luật cấm tài nguyên bên ngoài nhúng sẵn |
+| `astro check` trong CI | `@astrojs/check` không có trong deps → prompt tương tác → **thoát 0 mà không kiểm gì** | Khai `devDependencies`, đổi sang `npm run check`. Chạy thật: 33 file, 0 lỗi |
+
+Một phát hiện quan trọng khi vá: **`\b` không hoạt động sau ký tự có dấu**. Mẫu
+`/\b(bác sĩ)\b.../u` không bao giờ khớp vì "sĩ" kết thúc bằng `ĩ` — JavaScript coi
+`\b` theo ASCII. Đây là loại lỗi im lặng khiến một hàng rào trông như đang chạy.
+
+## Ba lỗi P0 khác
+
+**Form vẫn mất đơn khi tắt JS.** Vòng 6 dùng `disabled`, vòng 8 đổi sang
+`aria-disabled` cho trình đọc màn hình — nhưng `aria-disabled` không ngăn submit, và
+nhấn Enter trong ô nhập vẫn submit ngầm. Sửa triệt để: **chưa có endpoint thì không
+render thẻ `<form>` nào cả**, các ô nhập bị vô hiệu. Đo lại: 0 POST.
+
+**Thanh consent che nút đặt hàng trên mobile EN.** Khách EU/UK lần đầu bằng điện
+thoại không bấm được nút đặt hàng. Sửa: đặt thanh phía trên thanh CTA, không đè lên.
+
+**GDPR.** Trước đây chỉ hỏi đồng ý khi `locale !== 'vi'` — nhưng ngôn ngữ trang không
+cho biết người đọc ở đâu; một người ở EU đọc bản tiếng Việt bị đặt cookie không cần
+đồng ý. Nay hỏi ở mọi ngôn ngữ, và thêm link **rút lại đồng ý** (điều 7(3)) có xoá
+cookie mà pixel đã đặt.
+
+## Cũng đã sửa
+
+Hai section rỗng in ghi chú nội bộ ("chưa thu thập được văn bản đồng ý") lên mặt
+khách hàng — nay khối biến mất khỏi bản production, ghi chú chỉ hiện khi chạy dev.
+Tràn ngang 3px ở 320px do con của grid có `min-width: auto`. Lỗi JS mới do chính
+thay đổi form gây ra (`form.elements` trên một `<div>`).
+
+## Số đo — kèm điều kiện đo
+
+Kiểm định viên chỉ ra bảng số đo vòng 8 **không tái lập được** (LCP ghi 596ms, họ đo
+432ms) vì không ghi profile throttle. Từ nay ghi rõ:
+
+> Chromium headless, viewport 390×844, DPR 1, CPU throttle 4×, mạng giả lập
+> 1.6 Mbps / 150 ms (4G) và 400 kbps / 400 ms + CPU 6× (3G), phục vụ bằng
+> `python3 -m http.server` trên localhost — **không gzip, không HTTP/2, không TLS,
+> RTT ≈ 0**. Số thật trên hạ tầng có CDN sẽ khác.
+
+| | vi 4G | vi 3G | en 4G | en 3G |
+|---|---|---|---|---|
+| CLS | 0 | 0 | 0 | 0 |
+| LCP | 584 ms | 2040 ms | 548 ms | 1916 ms |
+
+Tải đầu 9 request / 44 KB (chưa nén). Tràn ngang ở 320/390/1440px: 0. Vùng chạm
+dưới 24px: không còn. Chuỗi tiếng Việt trên trang EN: không còn. `npm run check`:
+0 lỗi trên 33 file.
+
+## Vẫn còn nợ
+
+- Nhánh `fetch` khi có endpoint thật **vẫn chưa bao giờ chạy** — nợ từ vòng 8.
+- Chưa đo trên thiết bị và mạng thật tại Việt Nam.
+- Chưa có cụm nội dung chuyên đề, chưa có trang danh mục, 0 liên kết nội bộ nội dung.
+- Hero vẫn không có giá.
+- CI chưa từng chạy trên GitHub — mới chỉ chạy tay từng lệnh.
+- Biến thể sản phẩm chưa được mô hình hoá thành nhiều `Offer` trong JSON-LD.

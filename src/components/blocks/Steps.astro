@@ -1,5 +1,6 @@
 ---
 import Section from '../Section.astro';
+import { richText } from '../../lib/richtext';
 interface Props { data: any; id?: string; }
 const { data, id = 'huong-dan' } = Astro.props;
 ---
@@ -12,7 +13,7 @@ const { data, id = 'huong-dan' } = Astro.props;
       </li>
     ))}
   </ol>
-  {data.footnote && <p class="foot lead" set:html={data.footnote} />}
+  {data.footnote && <p class="foot lead" set:html={richText(data.footnote)} />}
 </Section>
 
 <style>

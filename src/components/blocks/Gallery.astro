@@ -8,9 +8,20 @@ const { data, id, locale } = Astro.props;
 // Không có văn bản đồng ý thì không đăng ảnh người thật. Ràng buộc này được thi
 // hành ở đây thay vì trông vào kỷ luật của người biên tập.
 const publishable = data.consent?.obtained === true;
+
+/**
+ * Chưa có văn bản đồng ý thì khối biến mất khỏi trang production.
+ *
+ * Bản trước để lại tiêu đề và một ô vàng ghi "chưa thu thập được văn bản đồng ý"
+ * — tức là in ghi chú nội bộ lên mặt khách hàng, và để lại một section cao vài
+ * trăm pixel không có nội dung gì. Khi chạy dev thì vẫn hiện để người biên tập
+ * biết mình đang thiếu gì.
+ */
+const showPlaceholder = !publishable && import.meta.env.DEV;
 ---
+{(publishable || showPlaceholder) && (
 <Section id={id} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} center>
-  {!publishable && (
+  {showPlaceholder && (
     <p class="todo" data-todo>
       ⚠️ {t(locale, 'todo')}: {data.consent?.statement}
       {data.consent?.conditions && <> {data.consent.conditions}</>}
@@ -32,6 +43,7 @@ const publishable = data.consent?.obtained === true;
   {publishable && data.disclaimer && <p class="disclaimer">{data.disclaimer}</p>}
   {publishable && data.consent?.conditions && <p class="disclaimer">{data.consent.conditions}</p>}
 </Section>
+)}
 
 <style>
   .gallery { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-4); grid-template-columns: repeat(2, 1fr); }

@@ -64,6 +64,7 @@ export const ui = {
     'consent.body': 'Chúng tôi muốn dùng cookie đo lường để biết quảng cáo nào đưa bạn tới đây. Bạn có thể từ chối mà không ảnh hưởng gì tới việc đặt hàng.',
     'consent.accept': 'Đồng ý',
     'consent.decline': 'Từ chối',
+    'consent.withdraw': 'Rút lại đồng ý đo lường',
     'todo': 'Cần bổ sung dữ liệu thật',
   },
   en: {
@@ -122,6 +123,7 @@ export const ui = {
     'consent.body': 'We would like to use analytics cookies to see which advert brought you here. Declining changes nothing about ordering.',
     'consent.accept': 'Accept',
     'consent.decline': 'Decline',
+    'consent.withdraw': 'Withdraw analytics consent',
     'todo': 'Real data still required',
   },
 } as const;
@@ -129,13 +131,30 @@ export const ui = {
 /** Những ngôn ngữ đã có bảng chuỗi giao diện đầy đủ. */
 export const translatedLocales = Object.keys(ui) as Locale[];
 
+/**
+ * Kiểm bảng dịch ĐỦ KHOÁ, không chỉ kiểm bảng có tồn tại.
+ *
+ * Bản trước chỉ hỏi `Object.keys(ui)` nên một bảng `th` chứa đúng một khoá cũng
+ * qua được, và trang xuất ra mang lang="th-TH" với 100% nhãn giao diện tiếng Việt —
+ * vì `t()` âm thầm rơi về `ui.vi`. Hàng rào và cơ chế fallback triệt tiêu nhau.
+ */
 export function assertTranslated(locale: Locale): void {
-  if (!translatedLocales.includes(locale)) {
+  const table = (ui as Record<string, Record<string, string>>)[locale];
+  if (!table) {
     throw new Error(
       `Ngôn ngữ "${locale}" chưa có bảng chuỗi trong src/i18n/ui.ts.\n` +
       `Nếu xuất bản, trang sẽ mang lang="${htmlLang[locale]}" nhưng toàn bộ nhãn giao diện ` +
       `(nút, biểu mẫu, cảnh báo pháp lý) vẫn là tiếng Việt. Hãy thêm bảng chuỗi trước, ` +
       `hoặc đặt status: "draft" cho nội dung ngôn ngữ này.`
+    );
+  }
+  const missing = Object.keys(ui.vi).filter((k) => !(k in table));
+  if (missing.length) {
+    throw new Error(
+      `Bảng chuỗi "${locale}" thiếu ${missing.length}/${Object.keys(ui.vi).length} khoá, ` +
+      `nên những phần này sẽ hiện bằng tiếng Việt trên trang lang="${htmlLang[locale]}":\n` +
+      `  ${missing.join(', ')}\n` +
+      `Dịch nốt, hoặc đặt status: "draft" cho nội dung ngôn ngữ này.`
     );
   }
 }

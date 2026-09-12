@@ -1,6 +1,7 @@
 ---
 import { money, shortDate } from '../../lib/format';
 import { t, type Locale } from '../../i18n/ui';
+import { richText } from '../../lib/richtext';
 interface Props { data: any; product: any; locale: Locale; }
 const { data, product: p, locale } = Astro.props;
 const save = p.compareAtPrice ? p.compareAtPrice - p.price : 0;
@@ -22,7 +23,7 @@ if (offerExpired) {
     <div>
       {data.eyebrow && <p class="eyebrow">{data.eyebrow}</p>}
       <h2 id="uu-dai-title">{data.heading}</h2>
-      <p class="lead" set:html={data.body} />
+      <p class="lead" set:html={richText(data.body)} />
       {data.notes.length > 0 && (
         <ul class="notes">{data.notes.map((n: string) => <li>{n}</li>)}</ul>
       )}

@@ -112,7 +112,7 @@
       "type": "offer",
       "eyebrow": "The duo",
       "heading": "Both steps together, cheaper than buying them apart",
-      "body": "Bought separately the cream is 590,000₫ and the serum 550,000₫ — 1,140,000₫ in total. The duo is <strong>1,050,000₫</strong> and adds the SPF50 sunscreen and the cleanser on top.",
+      "body": "Bought separately the two products come to {{compareAtPrice}}. The duo is <strong>{{price}}</strong> and adds the SPF50 sunscreen and the cleanser on top.",
       "validUntil": "2026-09-30",
       "notes": [
         "Sunscreen included",
@@ -268,7 +268,7 @@
       "items": [
         {
           "q": "What does the duo cost?",
-          "a": "The Smart Brightening Cream X3 and Smart First Care Serum together are <strong>1,050,000₫</strong>, including the SPF50 sunscreen and cleanser. Individually they are 590,000₫ and 550,000₫, so the duo saves 90,000₫ and adds two products. We quote shipping to your country before you pay."
+          "a": "The Smart Brightening Cream X3 and Smart First Care Serum together are <strong>{{price}}</strong>, including the SPF50 sunscreen and cleanser. Bought separately they total {{compareAtPrice}}, so the duo saves {{save}} and adds two products. We quote shipping to your country before you pay."
         },
         {
           "q": "How long before I see a difference?",

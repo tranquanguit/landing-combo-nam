@@ -209,6 +209,11 @@ section { padding-block: clamp(56px, 8vw, 104px); }
 }
 .surface-navy .todo:not(.on-light *) { background: rgba(255, 214, 102, .14); border-color: #8a6d1f; color: #ffd98a; }
 
+/* Con của grid mặc định có min-width:auto, nên một phần tử không xuống dòng
+   được (giá trong thẻ gói, nhãn dài) có thể kéo giãn cả cột và làm tràn trang
+   ở màn hình hẹp. Đo được 3px tràn ở 320px trước khi thêm luật này. */
+.hero-grid > *, .order-grid > *, .offer-grid > *, .split > *, .grid > * { min-width: 0; }
+
 /* Thanh CTA cố định che 63px cuối màn hình trên mobile — chừa chỗ cho nó */
 @media (max-width: 899px) {
   body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }

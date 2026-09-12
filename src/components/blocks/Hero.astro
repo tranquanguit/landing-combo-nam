@@ -1,5 +1,6 @@
 ---
 import { t, type Locale } from '../../i18n/ui';
+import { richText } from '../../lib/richtext';
 import Picture from '../Picture.astro';
 interface Props { data: any; locale: Locale; }
 const { data, locale } = Astro.props;
@@ -17,7 +18,7 @@ const evidenceLabel: Record<string, string> = {
     <div>
       {data.eyebrow && <p class="eyebrow">{data.eyebrow}</p>}
       <h1 id="hero-title">{data.heading}</h1>
-      <p class="lead" set:html={data.lead} />
+      <p class="lead" set:html={richText(data.lead)} />
 
       <ul class="usp">
         {data.usp.map((u: any) => (
@@ -28,7 +29,7 @@ const evidenceLabel: Record<string, string> = {
                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             <span>
-              <span set:html={u.text} />
+              <span set:html={richText(u.text)} />
               <span class="basis">
                 {u.source?.startsWith('#')
                   ? <a href={u.source}>{evidenceLabel[u.evidence]}</a>

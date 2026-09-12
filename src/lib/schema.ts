@@ -1,5 +1,6 @@
 import type { CollectionEntry } from 'astro:content';
 import { htmlLang, type Locale } from '../i18n/ui';
+import { plainText } from './richtext';
 
 const languageName: Record<Locale, string> = {
   vi: 'Vietnamese', en: 'English', th: 'Thai', id: 'Indonesian',
@@ -70,7 +71,7 @@ export function productGraph(opts: {
       '@id': `${url}#product`,
       name: p.name,
       sku: p.sku,
-      description: p.seo.description,
+      description: plainText(p.seo.description),
       ...(imageUrls.length ? { image: imageUrls } : {}),
       brand: { '@type': 'Brand', name: b.tradingName },
       manufacturer: { '@id': orgId },
@@ -148,8 +149,9 @@ export function productGraph(opts: {
       inLanguage: htmlLang[locale],
       mainEntity: faq.map((f) => ({
         '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
+        name: plainText(f.q),
+        // Bóc thẻ: schema là dữ liệu cho máy, không phải nơi đặt đánh dấu trình bày.
+        acceptedAnswer: { '@type': 'Answer', text: plainText(f.a) },
       })),
     });
   }

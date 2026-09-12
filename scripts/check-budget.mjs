@@ -22,7 +22,16 @@ const BUDGET = {
   inlineJs: 6 * 1024,
   fontsTotal: 120 * 1024,  // tổng font tải lần đầu
   imageMax: 120 * 1024,    // một tệp ảnh đã build
+  mediaMax: 1.5 * 1024 * 1024, // một tệp video/audio
+  /** Tổng mọi tài nguyên trong dist, trừ ảnh biến thể không dùng tới. */
+  pageTotal: 700 * 1024,
 };
+
+/* Những thứ ngân sách cũ không đếm và vì thế không ràng buộc được gì:
+   video, svg, gif, font ngoài woff2, iframe bên thứ ba, và tổng trọng lượng. */
+const HEAVY_MEDIA = /\.(mp4|webm|mov|m4v|mp3|wav|ogg)$/i;
+const IMAGE = /\.(avif|webp|jpg|jpeg|png|gif|svg)$/i;
+const FONT = /\.(woff2|woff|ttf|otf|eot)$/i;
 
 const dist = 'dist';
 const fail = [];
@@ -45,14 +54,46 @@ for (const f of files.filter((f) => f.endsWith('.html'))) {
   (js <= BUDGET.inlineJs ? ok : fail).push(`${f}: JS nội tuyến ${js}B / ${BUDGET.inlineJs}B`);
 }
 
-const fonts = files.filter((f) => extname(f) === '.woff2')
+const fonts = files.filter((f) => FONT.test(f))
   .reduce((n, f) => n + statSync(f).size, 0);
 (fonts <= BUDGET.fontsTotal ? ok : fail).push(`font: ${fonts}B / ${BUDGET.fontsTotal}B`);
 
-for (const f of files.filter((f) => /\.(avif|webp|jpg|jpeg|png)$/.test(f))) {
+for (const f of files.filter((f) => IMAGE.test(f))) {
   const s = statSync(f).size;
   if (s > BUDGET.imageMax) fail.push(`${f}: ảnh ${s}B / ${BUDGET.imageMax}B`);
 }
+
+for (const f of files.filter((f) => HEAVY_MEDIA.test(f))) {
+  const s = statSync(f).size;
+  if (s > BUDGET.mediaMax) fail.push(`${f}: media ${s}B / ${BUDGET.mediaMax}B`);
+}
+
+/* Tài nguyên bên thứ ba nhúng sẵn trong HTML: iframe, script, stylesheet, font CDN.
+   Chúng không nằm trong dist nên mọi luật cân file đều không thấy. */
+for (const f of files.filter((f) => f.endsWith('.html'))) {
+  const html = readFileSync(f).toString();
+  const iframes = [...html.matchAll(/<iframe[^>]*\bsrc=["']([^"']+)/gi)].map((m) => m[1]);
+  if (iframes.length) fail.push(`${f}: có ${iframes.length} iframe nhúng sẵn (${iframes[0]})`);
+  /* Chỉ tính thứ thật sự tải về lúc dựng trang: script và stylesheet/font.
+     canonical và hreflang cũng là thẻ link nhưng không tải gì. */
+  const external = [
+    ...[...html.matchAll(/<script[^>]*\bsrc=["'](https?:\/\/[^"']+)/gi)].map((m) => m[1]),
+    ...[...html.matchAll(/<link[^>]*\brel=["'](?:stylesheet|preload|preconnect)["'][^>]*\bhref=["'](https?:\/\/[^"']+)/gi)].map((m) => m[1]),
+  ];
+  if (external.length) fail.push(`${f}: nạp tài nguyên bên ngoài lúc tải (${external.join(', ')})`);
+}
+
+/* Tổng trọng lượng một lượt tải: HTML + font + biến thể ảnh lớn nhất mỗi ảnh gốc. */
+const heaviest = new Map();
+for (const f of files.filter((f) => IMAGE.test(f))) {
+  const base = f.replace(/_[A-Za-z0-9-]+\.(avif|webp|jpg|jpeg|png)$/, '');
+  heaviest.set(base, Math.max(heaviest.get(base) ?? 0, statSync(f).size));
+}
+const pageWeight = [...heaviest.values()].reduce((a, b) => a + b, 0)
+  + fonts
+  + Math.max(...files.filter((f) => f.endsWith('.html')).map((f) => statSync(f).size));
+(pageWeight <= BUDGET.pageTotal ? ok : fail).push(
+  `tổng một lượt tải (ước tính): ${pageWeight}B / ${BUDGET.pageTotal}B`);
 
 /* Trang tạm dùng để thử hàng rào không được lọt lên production. */
 const scratch = files

@@ -15,6 +15,7 @@ import Order from '../components/blocks/Order.astro';
 import Faq from '../components/blocks/Faq.astro';
 import Analytics from '../components/Analytics.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import { expandProductTokens } from '../lib/money-text';
 import { productGraph } from '../lib/schema';
 import { resolveAssetUrl } from '../lib/images';
 import { FLAGSHIP, productPath } from '../lib/routes';
@@ -28,7 +29,13 @@ interface Props {
   alternates?: { locale: Locale; url: string }[];
 }
 
-const { product: p, brand: b, locale, canonical, alternates = [] } = Astro.props;
+const { product: raw, brand: b, locale, canonical, alternates = [] } = Astro.props;
+
+// Thay token tiền một lần cho toàn bộ dữ liệu, trước khi bất kỳ component nào
+// nhìn thấy nó. Nhờ vậy giá chỉ tồn tại ở trường `price` và không thể lệch.
+const p = expandProductTokens(raw, {
+  price: raw.price, compareAtPrice: raw.compareAtPrice, currency: raw.currency,
+}, locale);
 const site = Astro.site?.origin ?? 'https://mochatrinam.com';
 
 // Không xuất bản một ngôn ngữ chưa dịch xong phần giao diện.

@@ -1,6 +1,7 @@
 ---
 import type { AnalyticsConfig } from '../lib/analytics';
 import { t, type Locale } from '../i18n/ui';
+import { safeJsonLd } from '../lib/richtext';
 
 interface Props { locale: Locale; value: number; currency: string; itemId: string; itemName: string; }
 const { locale, value, currency, itemId, itemName } = Astro.props;
@@ -9,14 +10,22 @@ const config: AnalyticsConfig = {
   ga4: import.meta.env.PUBLIC_GA4_ID || undefined,
   metaPixel: import.meta.env.PUBLIC_META_PIXEL_ID || undefined,
   tiktokPixel: import.meta.env.PUBLIC_TIKTOK_PIXEL_ID || undefined,
-  // Việt Nam chưa yêu cầu đồng ý trước cho cookie đo lường; EU/UK thì có.
-  requireConsent: locale !== 'vi',
+  /**
+   * Hỏi đồng ý ở MỌI ngôn ngữ.
+   *
+   * Trước đây chỉ hỏi khi locale khác 'vi', với lý do "Việt Nam chưa yêu cầu
+   * đồng ý trước". Sai ở hai điểm: Nghị định 13/2023/NĐ-CP có yêu cầu về sự
+   * đồng ý khi xử lý dữ liệu cá nhân, và quan trọng hơn — ngôn ngữ trang không
+   * cho biết người đọc đang ở đâu. Một người ở EU hoàn toàn có thể đọc bản
+   * tiếng Việt, và khi đó họ bị đặt cookie đo lường mà chưa đồng ý.
+   */
+  requireConsent: true,
   currency, value, itemId, itemName,
 };
 
 const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
 ---
-<script is:inline set:html={`window.__mochaAnalytics=${JSON.stringify(config)}`} />
+<script is:inline set:html={`window.__mochaAnalytics=${safeJsonLd(config)}`} />
 
 {anyConfigured && config.requireConsent && (
   <div class="consent" id="consent-bar" role="region" aria-label={t(locale, 'consent.title')} hidden>
@@ -32,14 +41,21 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
   /* display:grid đè lên thuộc tính [hidden], nên phải nói rõ. */
   .consent[hidden] { display: none; }
   .consent {
-    position: fixed; inset-inline: 0; bottom: 0; z-index: 80;
+    position: fixed; inset-inline: 0; z-index: 80;
+    /* Đặt phía trên thanh CTA cố định, không đè lên nó: khách lần đầu trên
+       điện thoại phải bấm được nút đặt hàng ngay cả khi chưa trả lời consent. */
+    bottom: calc(64px + env(safe-area-inset-bottom));
     background: var(--paper); border-top: 1px solid var(--line);
-    padding: var(--s-4) var(--s-5) calc(var(--s-4) + env(safe-area-inset-bottom));
+    padding: var(--s-4) var(--s-5);
     display: grid; gap: var(--s-3); font-size: var(--t-sm);
     box-shadow: 0 -8px 28px rgba(14, 18, 80, .12);
   }
-  @media (min-width: 760px) {
-    .consent { grid-template-columns: 1fr auto; align-items: center; }
+  @media (min-width: 900px) {
+    /* Trên desktop không có thanh CTA cố định nên bám sát đáy màn hình. */
+    .consent {
+      grid-template-columns: 1fr auto; align-items: center;
+      bottom: 0; padding-bottom: calc(var(--s-4) + env(safe-area-inset-bottom));
+    }
   }
   .consent p { margin: 0; max-width: 70ch; }
   .consent-actions { display: flex; gap: var(--s-2); }
@@ -53,6 +69,20 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
   };
   const cfg = (window as unknown as { __mochaAnalytics: Cfg }).__mochaAnalytics;
   const CONSENT_KEY = 'mocha_analytics_consent';
+
+  /* GDPR điều 7(3): rút lại sự đồng ý phải dễ như khi cho. Hàm này được gắn
+     vào link trong footer, và xoá luôn cookie mà pixel đã đặt. */
+  (window as any).mochaWithdrawConsent = () => {
+    try { localStorage.setItem(CONSENT_KEY, 'no'); } catch { /* chế độ riêng tư */ }
+    for (const c of document.cookie.split(';')) {
+      const name = c.split('=')[0].trim();
+      if (/^(_ga|_gid|_fbp|_fbc|_ttp|_tt_)/.test(name)) {
+        document.cookie = `${name}=; Max-Age=0; path=/`;
+        document.cookie = `${name}=; Max-Age=0; path=/; domain=.${location.hostname}`;
+      }
+    }
+    location.reload();
+  };
 
   /* Hàng đợi luôn hoạt động, kể cả khi không nạp pixel nào. Nhờ đó trang vẫn
      phát sự kiện cho mã khác lắng nghe, và không có nhánh code chết. */

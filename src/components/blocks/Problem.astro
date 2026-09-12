@@ -1,5 +1,6 @@
 ---
 import Section from '../Section.astro';
+import { richText } from '../../lib/richtext';
 interface Props { data: any; id?: string; }
 const { data, id = 'van-de' } = Astro.props;
 ---
@@ -10,7 +11,7 @@ const { data, id = 'van-de' } = Astro.props;
     </ul>
     <div class="measure">
       <h3>{data.explainer.heading}</h3>
-      {data.explainer.body.map((para: string) => <p set:html={para} />)}
+      {data.explainer.body.map((para: string) => <p set:html={richText(para)} />)}
     </div>
   </div>
 </Section>

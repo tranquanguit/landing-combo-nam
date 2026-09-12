@@ -1,5 +1,6 @@
 ---
 import Section from '../Section.astro';
+import { richText } from '../../lib/richtext';
 interface Props { data: any; id?: string; }
 const { data, id = 'faq' } = Astro.props;
 ---
@@ -8,7 +9,7 @@ const { data, id = 'faq' } = Astro.props;
     {data.items.map((item: any, i: number) => (
       <details open={i === 0}>
         <summary>{item.q}</summary>
-        <div class="answer"><p set:html={item.a} /></div>
+        <div class="answer"><p set:html={richText(item.a)} /></div>
       </details>
     ))}
   </div>
