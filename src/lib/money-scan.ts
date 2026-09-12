@@ -125,6 +125,16 @@ export function findHandwrittenMoney(raw: string): string[] {
     'giu');
   for (const m of s.matchAll(scaledBare)) hits.push(m[0].trim());
 
+  /* Giá viết bằng CHỮ: "chín trăm chín mươi nghìn", "một triệu không trăm năm
+     mươi nghìn đồng". Kiểm định lần 9: hàng rào chỉ nhìn chữ số. */
+  const NUM_WORD = '(?:không|một|mốt|hai|ba|bốn|tư|năm|lăm|sáu|bảy|tám|chín|mười|mươi|trăm|linh|lẻ)';
+  // Cùng nguyên tắc với luật số: theo sau là danh từ đếm được thì không phải giá.
+  const wordy = new RegExp(
+    `(?:${NUM_WORD}\\s+){1,12}(?:nghìn|ngàn|triệu|tỷ)` +
+    `(?:\\s+(?:${NUM_WORD}\\s*)+)?(?:\\s*(?:đồng|đ|₫|VND))?(?!\\s*${COUNTABLE}(?![\\p{L}]))`,
+    'giu');
+  for (const m of s.matchAll(wordy)) hits.push(m[0].trim().replace(/\s+/g, ' '));
+
   // $ đứng trước số
   for (const m of s.matchAll(/[$€]\s*\d[\d.,]*/g)) hits.push(m[0].trim());
 

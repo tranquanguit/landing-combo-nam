@@ -4,6 +4,17 @@ import { MONEY_TOKENS } from './lib/money-text';
 import { findHandwrittenMoney } from './lib/money-scan';
 import { findForbiddenClaims, findPersonalData } from './lib/claims-lexicon';
 import { DEFAULT_ANCHOR } from './lib/block-anchors';
+import { readFileSync } from 'node:fs';
+
+/* Số liên hệ của chính doanh nghiệp không phải dữ liệu cá nhân của khách. */
+const BRAND_NUMBERS: string[] = (() => {
+  try {
+    const b = JSON.parse(readFileSync('src/data/mocha.json', 'utf8'));
+    return [b.phone, b.phoneDisplay].filter(Boolean);
+  } catch {
+    return [];
+  }
+})();
 
 /* ------------------------------------------------------------------
    Khối nội dung dùng chung cho mọi landing.
@@ -312,7 +323,9 @@ const products = defineCollection({
       note: z.string().optional(),
       price: money.nullable(),
       recommended: z.boolean().default(false),
-    })).default([]),
+    })).default([])
+      .refine((vs) => vs.filter((v) => v.recommended).length <= 1,
+        'Chỉ một gói được đặt recommended: true — hai gói sẽ sinh hai radio cùng checked.'),
 
     seo: z.object({
       title: z.string().max(70),
@@ -327,6 +340,19 @@ const products = defineCollection({
       declaringAddress: z.string(),
       functions: z.string(),
       warnings: z.array(z.string()).min(1),
+      /**
+       * Ngoại lệ đã được người thật xem xét.
+       *
+       * Có những câu chứa đúng cụm bị cấm nhưng nói điều ngược lại — ví dụ
+       * "Nếu bạn cần điều trị nám, hãy đến gặp bác sĩ da liễu", là câu một trang
+       * mỹ phẩm NÊN viết. Nới từ điển để cho qua sẽ mở lỗ thật; thay vào đó mỗi
+       * ngoại lệ phải được khai ở đây kèm lý do, in ra lúc build để không ai
+       * quên, và chỉ miễn cho ĐÚNG đoạn văn bản đã khai.
+       */
+      reviewedClaims: z.array(z.object({
+        text: z.string().min(12),
+        reason: z.string().min(8),
+      })).default([]),
     }),
 
     blocks: z.array(blocks).min(1),
@@ -357,10 +383,14 @@ const products = defineCollection({
 
     /* Từ ngữ bị cấm, quét trên MỌI trường chuỗi — cổng evidence chỉ soi
        hero.usp[] nên mọi tuyên bố kết quả đặt chỗ khác đều lọt. */
+    const reviewed = p.compliance?.reviewedClaims ?? [];
     const claims = new Map<string, { match: string; why: string; instead: string }[]>();
     const scanClaims = (node: unknown, path: string): void => {
       if (typeof node === 'string') {
-        const hits = findForbiddenClaims(node);
+        const covering = reviewed.filter((r) => node.includes(r.text));
+        const hits = findForbiddenClaims(node)
+          // Chỉ miễn khi cụm bị bắt nằm TRONG đoạn đã được xem xét.
+          .filter((h) => !covering.some((r) => r.text.includes(h.match)));
         if (hits.length) claims.set(path, hits);
       } else if (Array.isArray(node)) {
         node.forEach((v, i) => scanClaims(v, `${path}[${i}]`));
@@ -391,6 +421,11 @@ const products = defineCollection({
        đâu cả — và build vẫn xanh. */
     const anchors = new Set<string>(['main']);
     p.blocks.forEach((blk) => {
+      /* Khối có cổng consent chưa được đồng ý thì KHÔNG render, nên neo của nó
+         không tồn tại trên trang. Kiểm định lần 9: "#hieu-qua" được cổng chấp
+         nhận trong khi gallery đã bị ẩn — và chính thông điệp lỗi còn liệt kê
+         nó là "neo có thật". */
+      if ('consent' in blk && (blk as { consent?: { obtained?: boolean } }).consent?.obtained !== true) return;
       const explicit = 'id' in blk ? (blk.id as string | undefined) : undefined;
       const anchor = explicit ?? DEFAULT_ANCHOR[blk.type];
       if (anchor) anchors.add(anchor);
@@ -435,6 +470,18 @@ const products = defineCollection({
       }
     });
 
+    /* availability chỉ có trong JSON-LD: đặt OutOfStock thì máy đọc thấy hết
+       hàng còn trang vẫn mời đặt mua — đúng loại "ba nguồn nói ba điều".
+       Chưa dựng giao diện hết hàng, nên chặn ở cổng thay vì phát hành mâu thuẫn. */
+    if (p.availability && p.availability !== 'InStock' && p.status === 'published') {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `availability="${p.availability}" nhưng giao diện chưa có trạng thái hết hàng: ` +
+          `trang vẫn hiện nút đặt mua và biểu mẫu. Hoặc đặt status="draft", hoặc dựng giao diện ` +
+          `hết hàng trước khi khai trạng thái này.`,
+      });
+    }
+
     const wanted: [string, string][] = [];
     /* Mọi chuỗi bắt đầu bằng "#" ở BẤT KỲ trường nào đều là neo trong trang.
        Bản trước chỉ soi hero.secondaryCta và hero.usp[].source, nên
@@ -466,7 +513,7 @@ const products = defineCollection({
     const personal = new Map<string, { match: string; kind: string }[]>();
     const scanPersonal = (node: unknown, path: string): void => {
       if (typeof node === 'string') {
-        const hits = findPersonalData(node);
+        const hits = findPersonalData(node, BRAND_NUMBERS);
         if (hits.length) personal.set(path, hits);
       } else if (Array.isArray(node)) {
         node.forEach((v, i) => scanPersonal(v, `${path}[${i}]`));

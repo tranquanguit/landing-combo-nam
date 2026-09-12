@@ -772,3 +772,105 @@ Không đổi: số tiếp nhận phiếu công bố, mã số thuế, trang ch�
 đồng ý cho ảnh và lời chứng, link gian hàng sàn. Thêm: `.github/workflows/ci.yml`
 vẫn không deploy — ai dựng hạ tầng phát hành cần nối bước đó, nếu không chuông
 báo hạn ưu đãi kêu mà không ai sửa được trang. Nên bật CSP ở phía hosting.
+
+---
+
+## Vòng 17 — đóng kiểm định độc lập lần 9
+
+Vòng này kiểm định viên tự chọn góc, không được định hướng. Họ xác nhận ba bản
+vá P1 của vòng 16 đều **đúng** — mẫu hình "bản vá đẻ lỗi mới" lần đầu tiên không
+lặp lại. Nhưng họ tìm ra ba lỗ P1 mới, và điểm chung đáng sợ: **cả ba đều mở
+bằng thao tác bình thường của người biên tập, không phải thao tác phá hoại.**
+
+### P1-1 — Hàng rào claims mù với tiếng Việt không dấu
+
+Đây là cổng chống Nghị định 342/2025 — lý do tồn tại của cả dự án. Câu
+`"Kem tri nam tan goc, xoa nam vinh vien. Duoc bac si da lieu khuyen dung."`
+vượt cùng lúc ba luật với build xanh. Copy quảng cáo Việt Nam viết không dấu là
+chuẩn mực, không phải trò lách.
+
+Nay mọi luật chạy trên **hai bản** của cùng một chuỗi: bản gốc và bản bỏ dấu
+(mẫu trong từ điển cũng được bỏ dấu tự động để hai bộ không bao giờ lệch nhau).
+Mẫu phủ định cũng phải có bản không dấu — thiếu bước đó thì
+`"khong co tac dung thay the thuoc"` bị coi là tuyên bố thay vì cảnh báo.
+
+Cùng nhóm: chữ giãn cách từng ký tự (`Đ I Ề U  T R Ị  N Á M`). Dồn lại thì mất
+ranh giới từ, nên chuỗi đã dồn được quét bằng bộ mẫu có dấu cách nới thành
+`\s*`, và biến thể này **chỉ sinh khi văn bản thật sự có chữ giãn cách** — không
+nới lỏng hàng rào cho nội dung bình thường.
+
+Kiểm định viên gọi đây là **bẫy `\b` lần thứ ba**; lần này nó nằm trong
+`/\b(trị|điều trị|…)/` khi ký tự đứng trước là chữ có dấu.
+
+### P1-2 — Hàng rào dữ liệu cá nhân thủng ở hai chỗ đời thường nhất
+
+Luật họ tên thiếu cờ `i` nên chỉ bắt `chị` viết thường — mà tên người gần như
+luôn đứng đầu câu và viết hoa. Luật điện thoại đòi 10 chữ số liền nhau, trong
+khi người ta viết `0912 345 678`. `"Chị Nguyễn Thu Hà, Quận 3, gọi 0912 345 678"`
+đăng được qua `cards.items[].body` với build xanh.
+
+Sửa: gộp dấu phân cách giữa các chữ số trước khi khớp; liệt kê hoa/thường tường
+minh thay vì bật cờ `i` — **bật `i` làm `[A-ZĐÀ-Ỹ]` khớp cả chữ thường**, và
+câu cảnh báo bắt buộc "hỏi ý kiến bác sĩ trước khi dùng" lập tức bị coi là họ tên.
+
+Và một điều đáng ghi: sau khi vá, hotline doanh nghiệp bị chặn nhầm — hoá ra
+trước đây nó qua được **chỉ vì viết cách nhau**, tức qua nhờ chính lỗ hổng. Nay
+số của doanh nghiệp được miễn trừ tường minh từ `src/data/mocha.json`.
+
+### P1-3 — `source` dạng chữ biến thành link chết, đúng ngày Mocha gửi dữ liệu
+
+Schema cố ý cho phép `usp[].source` là chữ ("số phiếu công bố, tên đơn vị kiểm
+nghiệm"), nhưng `Hero.astro` bọc mọi giá trị thành `href`. Đặt
+`"Số tiếp nhận 123456/25/CBMP-HCM"` → trang có một link chết mang nhãn "có chứng
+từ". Lỗi này sẽ nổ đúng ngày điền số công bố thật — tức là đúng món đang chờ.
+
+### P2 đã đóng
+
+- **Cổng neo đếm cả khối bị consent ẩn**: `#hieu-qua` được chấp nhận trong khi
+  gallery đã bị ẩn khỏi trang, và chính thông điệp lỗi còn liệt kê nó là "neo có
+  thật". Nay khối chưa có đồng ý không được tính là neo.
+- **Báo nhầm câu nên viết**: "Nếu bạn cần điều trị nám, hãy đến gặp bác sĩ da
+  liễu" bị chặn. Nới từ điển để cho qua là mở lỗ thật, nên thay vào đó có
+  `compliance.reviewedClaims` — ngoại lệ phải khai kèm **lý do**, và chỉ miễn
+  cho đúng đoạn văn bản đã khai. Câu trên nay nằm trên trang, có tên, có lý do.
+- **JSON-LD đổi trả thiếu trường bắt buộc**: `ReturnShippingFees` mà không có
+  số tiền → dùng `ReturnFeesCustomerResponsibility`; và nhánh hàng lỗi không còn
+  khai "phí 0đ" khi dữ liệu nói khách chịu phí.
+- **`availability` chỉ tồn tại trong JSON-LD**: đặt `OutOfStock` thì máy đọc
+  thấy hết hàng còn trang vẫn mời đặt mua. Giao diện hết hàng chưa có, nên cổng
+  chặn thay vì để phát hành một mâu thuẫn.
+- **Giá viết bằng chữ** ("chín trăm chín mươi nghìn") lọt hàng rào tiền.
+- **Ngày hạn lệch theo múi giờ máy build**: `isOfferExpired` cẩn thận với UTC+7
+  từ vòng trước, `shortDate` thì không — máy build ở múi giờ âm in ra "29 thg 9".
+  Nay ghim `Asia/Ho_Chi_Minh`; kiểm bằng cách build với `TZ=America/Los_Angeles`.
+- **`og:image` bịa chiều cao** cho ảnh trong `public/` — thà không khai còn hơn
+  khai sai với Facebook/Zalo.
+- **Hai radio cùng `checked`** nếu khai hai `variants.recommended`.
+
+### `public/_headers` — bảy vòng ghi "nên bật CSP ở phía hosting"
+
+Kiểm định viên chỉ ra điều đáng ngượng: trên Cloudflare Pages và Netlify, đây là
+**file trong repo**, không phải việc phải nhờ người vận hành. Nay có CSP,
+`X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, HSTS và
+cache-control cho tài nguyên có hash.
+
+Kèm theo một cổng mới: `check-budget.mjs` đối chiếu `connect-src` với
+`PUBLIC_ORDER_ENDPOINT` và fail nếu CSP sẽ chặn đơn hàng. (Bản đầu tôi viết
+nhầm thành `form-action` — biểu mẫu gửi bằng `fetch()`, nên ràng buộc đúng là
+`connect-src`; `form-action` chỉ áp cho POST điều hướng.)
+
+### Đo lại
+
+Bộ thử nay **160 ca**: money 55/55, claims 62/62, richtext 23/23, dữ liệu cá
+nhân 20/20 (bộ mới), đặt hàng 7/7. `astro check` 0 lỗi. Ngân sách trong mức.
+Chuông hạn ưu đãi xanh. Năm cổng mới đều được kiểm bằng cách cố tình phá:
+source dạng chữ → render thành chữ, không thành link; neo tới khối bị ẩn →
+chặn; hai gói recommended → chặn; endpoint khác miền so với CSP → chặn.
+
+### Vẫn còn nợ
+
+Dữ liệu doanh nghiệp (không đổi). Thêm: `ci.yml` vẫn không deploy; chưa có giao
+diện trạng thái hết hàng; chưa đo trên thiết bị và mạng thật tại Việt Nam; và
+ghi chú tích hợp cho người dựng endpoint — payload dùng `Content-Type:
+application/json` nên trình duyệt sẽ gửi preflight `OPTIONS`, endpoint phải trả
+2xx cho nó, nếu không mọi đơn đều rơi vào nhánh "gửi đơn không thành công".

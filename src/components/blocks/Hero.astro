@@ -6,6 +6,9 @@ import Picture from '../Picture.astro';
 interface Props { data: any; locale: Locale; product: any; }
 const { data, locale, product: p } = Astro.props;
 
+/** Chỉ những giá trị thật sự điều hướng được mới thành liên kết. */
+const isLink = (v?: string): v is string => !!v && /^(#|\/|https?:\/\/)/.test(v);
+
 /** Nhãn cho biết mỗi tuyên bố dựa trên cái gì. */
 const evidenceLabel: Record<string, string> = {
   verified: t(locale, 'evidence.verified'),
@@ -47,11 +50,15 @@ const evidenceLabel: Record<string, string> = {
             <span>
               <span set:html={richText(u.text)} />
               <span class="basis">
-                {u.source?.startsWith('#')
-                  ? <a href={u.source}>{evidenceLabel[u.evidence]}</a>
-                  : u.source
-                    ? <a href={u.source} rel="noopener nofollow">{evidenceLabel[u.evidence]}</a>
-                    : <span>{evidenceLabel[u.evidence]}</span>}
+                {/* source được phép là CHỮ (số phiếu công bố, tên đơn vị kiểm
+                    nghiệm) — schema cố ý cho phép. Bản trước bọc mọi giá trị
+                    thành href, nên đúng ngày điền số công bố thật là trang có
+                    một link chết mang nhãn "có chứng từ". */}
+                {isLink(u.source)
+                  ? <a href={u.source} {...(u.source.startsWith('#') ? {} : { rel: 'noopener nofollow' })}>
+                      {evidenceLabel[u.evidence]}
+                    </a>
+                  : <span>{evidenceLabel[u.evidence]}{u.source ? <> · {u.source}</> : null}</span>}
                 {u.qualifier && <> · {u.qualifier}</>}
               </span>
             </span>

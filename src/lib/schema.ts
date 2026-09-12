@@ -39,8 +39,11 @@ function returnPolicyNode(rp: {
   country: string | string[]; days: number;
   scope?: 'defect' | 'any'; fees?: 'free' | 'customer'; refund?: string;
 }) {
-  const fees = rp.fees === 'customer'
-    ? 'https://schema.org/ReturnShippingFees'
+  /* Google đòi returnShippingFeesAmount khi phí do khách chịu. Không biết con
+     số thật cho từng nước, nên khai đúng bản chất: khách tự chịu phí gửi về. */
+  const customerPays = rp.fees === 'customer';
+  const fees = customerPays
+    ? 'https://schema.org/ReturnFeesCustomerResponsibility'
     : 'https://schema.org/FreeReturn';
   const base = {
     '@type': 'MerchantReturnPolicy',
@@ -54,14 +57,19 @@ function returnPolicyNode(rp: {
       returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
       merchantReturnDays: rp.days,
       returnFees: fees,
+      returnMethod: 'https://schema.org/ReturnByMail',
     };
   }
   return {
     ...base,
     returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
     itemDefectReturnLabelSource: 'https://schema.org/ReturnLabelInBox',
-    itemDefectReturnShippingFeesAmount: { '@type': 'MonetaryAmount', value: 0, currency: 'VND' },
     itemDefectReturnFees: fees,
+    // Chỉ khai số tiền 0 khi người bán THẬT SỰ trả phí; bản trước luôn khai 0
+    // kể cả khi fees là 'customer', tức tự mâu thuẫn ngay trong một node.
+    ...(customerPays ? {} : {
+      itemDefectReturnShippingFeesAmount: { '@type': 'MonetaryAmount', value: 0, currency: 'VND' },
+    }),
     itemDefectReturnDays: rp.days,
   };
 }

@@ -48,6 +48,14 @@ const CHAN = [
   'Ai cũng không tin nổi kem trị nám này.',
   'không thể tưởng tượng hết nám hoàn toàn sau 4 tuần',
   'Cam  kết  hoàn  tiền nếu không hết nám.',
+  // Kiểm định lần 9: tiếng Việt KHÔNG DẤU — cách viết quảng cáo bình thường.
+  'Kem tri nam tan goc, xoa nam vinh vien chi sau 2 tuan.',
+  'Duoc bac si da lieu khuyen dung.',
+  'Cam ket hoan tien neu khong het nam.',
+  'Da duoc Bo Y Te cap phep luu hanh.',
+  'hieu qua nhu laser ma khong dau',
+  // chữ giãn cách từng ký tự
+  'Đ I Ề U  T R Ị  N Á M',
   // hai lượt mã hoá
   'Cam k&amp;#7871;t hoàn ti&amp;#7873;n n&amp;#7871;u không h&amp;#7871;t nám.',
 ];
@@ -64,6 +72,9 @@ const CHO_QUA = [
   'Bước số 1, rửa mặt. Bước số 2, dùng serum.',
   'Sản phẩm không phải là thuốc.',
   'Sản phẩm không chứa corticoid.',
+  'My pham nay khong co tac dung thay the thuoc chua benh.',
+  'San pham khong chua corticoid.',
+  'Phu nu mang thai nen hoi y kien bac si truoc khi dung.',
   'Bước số 1: rửa mặt với nước mát.',
   // Entity hợp lệ trong câu bình thường không được báo nhầm.
   'Kem &amp; serum dùng cùng nhau.',

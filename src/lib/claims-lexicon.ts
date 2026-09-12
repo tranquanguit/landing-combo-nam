@@ -28,6 +28,45 @@ function forScan(text: string): string {
   return normaliseForScan(text).replace(/[<>]/g, ' ');
 }
 
+/**
+ * Bản không dấu của cùng một chuỗi.
+ *
+ * Kiểm định lần 9: toàn bộ hàng rào claims khớp trên chuỗi CÓ DẤU, trong khi
+ * copy quảng cáo Việt Nam viết không dấu là chuyện bình thường chứ không phải
+ * trò lách. "Kem tri nam tan goc, xoa nam vinh vien. Duoc bac si da lieu khuyen
+ * dung." vượt cùng lúc ba luật với build xanh.
+ *
+ * Cũng xử luôn chữ giãn cách ("Đ I Ề U  T R Ị  N Á M"): ký tự đơn lẻ cách nhau
+ * bằng dấu cách được dồn lại trước khi quét.
+ */
+export function stripDiacritics(text: string): string {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'D');
+}
+
+/**
+ * Chữ bị giãn cách từng ký tự: "Đ I Ề U  T R Ị  N Á M".
+ *
+ * Dồn lại thì mất luôn ranh giới từ ("ĐIỀUTRỊNÁM"), nên chuỗi dồn được quét
+ * bằng một bộ mẫu có dấu cách nới thành `\s*`. Chỉ sinh biến thể này khi văn bản
+ * THẬT SỰ có chữ giãn cách, để không nới lỏng hàng rào cho nội dung bình thường.
+ */
+const SPREAD = /(?:(?<![\p{L}])\p{L}\s+){3,}\p{L}(?![\p{L}])/gu;
+function despaceSpread(text: string): string | null {
+  if (!SPREAD.test(text)) { SPREAD.lastIndex = 0; return null; }
+  SPREAD.lastIndex = 0;
+  return text.replace(SPREAD, (m) => m.replace(/\s+/g, ''));
+}
+/** Nới mọi dấu cách trong mẫu thành `\s*` để khớp được chuỗi đã dồn. */
+function loosenSpaces(source: string): string {
+  // Cả dấu cách viết thẳng lẫn `\s+` trong mẫu đều phải thành `\s*`, vì chuỗi
+  // đã dồn không còn khoảng trắng nào giữa các từ.
+  return source.replace(/\\s\+/g, '\\s*').replace(/ /g, '\\s*');
+}
+
 export interface ForbiddenPattern {
   pattern: RegExp;
   why: string;
@@ -155,8 +194,21 @@ export const FORBIDDEN: ForbiddenPattern[] = [
  */
 const NEGATED = /(?:không|chẳng|chưa|đừng)\s+(?:phải\s+|có\s+)?(?:là\s+)?(?:thuốc\s+|tác dụng\s+|chứa\s+|dùng\s+để\s+|nhằm\s+|thay thế\s+)?$|(?:không|chẳng|chưa)\s+$|(?:not|never|no)\s+(?:a\s+|an\s+|the\s+)?(?:intended\s+to\s+|meant\s+to\s+|substitute\s+for\s+)?$/iu;
 
+const NEGATED_BARE = new RegExp(stripDiacritics(NEGATED.source), NEGATED.flags);
+
 export function findForbiddenClaims(text: string): { match: string; why: string; instead: string }[] {
-  const plain = forScan(text);
+  const base = forScan(text);
+  /* Quét CẢ bản có dấu lẫn bản không dấu. Mẫu trong từ điển viết có dấu, nên
+     bản không dấu cần một bộ mẫu đã bỏ dấu tương ứng — sinh tự động để hai bộ
+     không bao giờ lệch nhau. */
+  const spread = despaceSpread(base);
+  const variants: { text: string; loose: boolean }[] = [
+    { text: base, loose: false },
+    { text: stripDiacritics(base), loose: false },
+  ];
+  if (spread) {
+    variants.push({ text: spread, loose: true }, { text: stripDiacritics(spread), loose: true });
+  }
   const out: { match: string; why: string; instead: string }[] = [];
   for (const rule of FORBIDDEN) {
     /* Duyệt MỌI lần xuất hiện, không chỉ lần đầu.
@@ -165,12 +217,23 @@ export function findForbiddenClaims(text: string): { match: string; why: string;
        không bao giờ được xét. "Chúng tôi không trị nám bằng lời hứa suông.
        Combo trị nám theo cơ chế kép." lên trang với build xanh. */
     const flags = rule.pattern.flags.includes('g') ? rule.pattern.flags : rule.pattern.flags + 'g';
-    for (const m of plain.matchAll(new RegExp(rule.pattern.source, flags))) {
-      // Bỏ qua đúng lần khớp nằm sau một phủ định trong cùng mệnh đề.
-      if (NEGATED.test(plain.slice(0, m.index ?? 0))) continue;
-      out.push({ match: m[0], why: rule.why, instead: rule.instead });
-      break;
+    let hit: string | null = null;
+    for (const [i, v] of variants.entries()) {
+      const plain = v.text;
+      let source = i % 2 === 0 ? rule.pattern.source : stripDiacritics(rule.pattern.source);
+      if (v.loose) source = loosenSpaces(source);
+      for (const m of plain.matchAll(new RegExp(source, flags))) {
+        // Bỏ qua đúng lần khớp nằm sau một phủ định trong cùng mệnh đề.
+        const before = plain.slice(0, m.index ?? 0);
+        // Mẫu phủ định cũng phải có bản không dấu, nếu không "khong co tac dung
+        // thay the thuoc" sẽ bị coi là tuyên bố chứ không phải cảnh báo.
+        if (NEGATED.test(before) || NEGATED_BARE.test(stripDiacritics(before))) continue;
+        hit = m[0];
+        break;
+      }
+      if (hit) break;
     }
+    if (hit) out.push({ match: hit, why: rule.why, instead: rule.instead });
   }
   return out;
 }
@@ -188,21 +251,44 @@ export function findForbiddenClaims(text: string): { match: string; why: string;
 export interface PersonalDataHit { match: string; kind: string }
 
 const PERSONAL: { pattern: RegExp; kind: string }[] = [
+  // Khớp trên chuỗi ĐÃ gộp chữ số: người ta viết "0912 345 678", "0912.345.678".
   { pattern: /(?:^|[\s(])(?:0|\+84)\d{9}(?![\d])/u, kind: 'số điện thoại' },
   { pattern: /[\w.+-]+@[\w-]+\.[\w.]{2,}/u, kind: 'địa chỉ email' },
   { pattern: /\b\d{2}\s*tuổi\b|\b\d{2}\s*tuoi\b|\baged?\s+\d{2}\b/iu, kind: 'tuổi' },
   {
-    pattern: /(?:^|[\s("“])(?:chị|anh|cô|bác|chú|em|Mrs?\.?|Ms\.?)\s+[A-ZĐÀ-Ỹ][\p{Ll}\p{M}]+\s+[A-ZĐÀ-Ỹ]/u,
+    /* Thiếu cờ `i` nên chỉ bắt "chị" viết thường — mà tên người gần như luôn
+       đứng đầu câu và viết hoa. Kiểm định lần 9 đăng được "Chị Nguyễn Thu Hà,
+       Quận 3, gọi 0912 345 678" qua cards.items[].body với build xanh. */
+    /* KHÔNG bật cờ `i`: nó làm [A-ZĐÀ-Ỹ] khớp cả chữ thường, và "hỏi ý kiến
+       bác sĩ trước khi dùng" — câu cảnh báo bắt buộc — bị coi là họ tên. Viết
+       hoa/thường liệt kê tường minh ở đúng chỗ cần. */
+    pattern: /(?:^|[\s("“])(?:[Cc]hị|[Aa]nh|[Cc]ô|[Bb]ác|[Cc]hú|[Ee]m|Mrs?\.?|Ms\.?)\s+[A-ZĐÀ-Ỹ][\p{Ll}\p{M}]+\s+[A-ZĐÀ-Ỹ]/u,
     kind: 'họ tên đầy đủ kèm xưng hô',
   },
 ];
 
-export function findPersonalData(text: string): PersonalDataHit[] {
+/**
+ * @param allowedNumbers Số điện thoại CỦA DOANH NGHIỆP, dạng chữ số liền nhau.
+ *   Hotline in trên trang không phải dữ liệu cá nhân của khách. Bản trước cho
+ *   hotline qua chỉ vì nó viết cách nhau — tức là qua nhờ một lỗ hổng, nên khi
+ *   vá lỗ hổng thì hotline bị chặn nhầm.
+ */
+export function findPersonalData(text: string, allowedNumbers: string[] = []): PersonalDataHit[] {
   const plain = forScan(text);
+  /* Số điện thoại viết cách hoặc chấm là cách viết phổ biến nhất, không phải
+     cách né. Gộp dấu phân cách giữa các chữ số trước khi khớp — cùng phép chuẩn
+     hoá mà biểu mẫu đặt hàng đã dùng. */
+  const digitsJoined = plain.replace(/(\d)[\s.\-]+(?=\d)/g, '$1');
   const out: PersonalDataHit[] = [];
   for (const rule of PERSONAL) {
-    const m = plain.match(rule.pattern);
-    if (m) out.push({ match: m[0].trim(), kind: rule.kind });
+    const m = plain.match(rule.pattern) ?? digitsJoined.match(rule.pattern);
+    if (!m) continue;
+    const value = m[0].trim();
+    if (rule.kind === 'số điện thoại') {
+      const digits = value.replace(/\D/g, '').replace(/^84/, '0');
+      if (allowedNumbers.some((n) => n.replace(/\D/g, '').replace(/^84/, '0') === digits)) continue;
+    }
+    out.push({ match: value, kind: rule.kind });
   }
   return out;
 }

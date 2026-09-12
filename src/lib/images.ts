@@ -55,7 +55,9 @@ export async function resolveAssetImage(
   const url = await resolveAssetUrl(src, site, width);
   if (!url) return undefined;
   const mod = assets[`/src/assets${src}`];
-  if (!mod) return { url, width, height: Math.round(width * 0.525) };
+  /* Ảnh trong public/ không có metadata kích thước. Bịa một tỉ lệ là khai sai
+     với Facebook/Zalo, nên thà không khai width/height còn hơn khai sai. */
+  if (!mod) return { url, width: 0, height: 0 };
   const w = Math.min(width, mod.default.width);
   return { url, width: w, height: Math.round((mod.default.height / mod.default.width) * w) };
 }

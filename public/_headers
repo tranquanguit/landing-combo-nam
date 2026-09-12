@@ -1,0 +1,20 @@
+# Header bảo mật. Trên Cloudflare Pages, Netlify và một số host tĩnh khác đây là
+# FILE TRONG REPO — không phải việc phải nhờ người vận hành. Bảy vòng kiểm định
+# liền ghi "nên bật CSP ở phía hosting" mà không ai bật được, vì nó nằm ở đây.
+/*
+  # Nội dung trang do build sinh ra; không có script bên thứ ba nào lúc tải.
+  # 'unsafe-inline' là bắt buộc vì Astro nội tuyến script và style của chính trang.
+  # Các miền đo lường chỉ được nạp SAU khi khách bấm đồng ý (Analytics.astro).
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://analytics.tiktok.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://www.facebook.com https://analytics.tiktok.com; font-src 'self'; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://connect.facebook.net https://analytics.tiktok.com; form-action 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  # Không tính năng nào trong số này được dùng; tắt hẳn để script lạ không xin được.
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Tài nguyên có hash trong tên thì không bao giờ đổi nội dung.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

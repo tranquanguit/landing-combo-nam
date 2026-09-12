@@ -161,6 +161,27 @@ if (leaked.length) {
   ok.push(`${gatedNames.size} ảnh chờ văn bản đồng ý, không có ảnh nào trong bản build`);
 }
 
+/* CSP trong public/_headers phải cho phép đúng nơi biểu mẫu gửi đơn tới.
+   Biểu mẫu gửi bằng fetch() nên ràng buộc là connect-src, KHÔNG phải
+   form-action (form-action chỉ áp cho POST điều hướng). Sai chỗ này thì mọi
+   khách đều nhận "gửi đơn không thành công" mà không ai hiểu vì sao. */
+const endpoint = process.env.PUBLIC_ORDER_ENDPOINT;
+if (endpoint) {
+  const headers = readFileSync('public/_headers', 'utf8');
+  const csp = headers.split('\n').find((l) => l.includes('Content-Security-Policy')) ?? '';
+  let origin = '';
+  try { origin = new URL(endpoint).origin; } catch { /* đường dẫn tương đối: cùng miền */ }
+  const connect = /connect-src ([^;]*)/.exec(csp)?.[1] ?? '';
+  const allowed = !origin || connect.includes(origin) ||
+    (connect.includes("'self'") && origin === 'https://mochatrinam.com');
+  if (!allowed) {
+    fail.push(`public/_headers: connect-src (${connect.trim()}) không cho phép ` +
+      `PUBLIC_ORDER_ENDPOINT (${origin}) — fetch() gửi đơn sẽ bị trình duyệt chặn`);
+  } else {
+    ok.push(`CSP connect-src cho phép endpoint đặt hàng (${origin || 'cùng miền'})`);
+  }
+}
+
 /* Trang tạm dùng để thử hàng rào không được lọt lên production. */
 const scratch = files
   .filter((f) => f.endsWith('index.html'))
