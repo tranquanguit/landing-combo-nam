@@ -100,10 +100,18 @@ export function findHandwrittenMoney(raw: string): string[] {
   // 990k — chỉ khi 'k' đứng riêng
   for (const m of s.matchAll(/\d+(?:[.,]\d+)?\s*k(?![\p{L}])/giu)) hits.push(m[0].trim());
 
-  // 630 nghìn đồng | 1,2 triệu. — đơn vị lớn phải kết câu hoặc kèm "đồng",
-  // để "5 triệu phụ nữ" không bị coi là giá.
-  const scaled = /\d+(?:[.,]\d+)?\s*(nghìn|ngàn|triệu|tỷ)(?:\s*(?:đồng|đ|₫|VND))?(?=$|[\s]*[.,;!?)"”]|\s*$)/giu;
-  for (const m of s.matchAll(scaled)) hits.push(m[0].trim());
+  /* 630 nghìn đồng | 1,2 triệu.
+     Có đơn vị tiền đi kèm thì luôn là giá, bất kể sau đó còn chữ gì.
+     Kiểm định lần 7: bản trước đòi kết câu cho MỌI trường hợp, nên
+     "990 nghìn đồng thôi" lọt còn "990 nghìn đồng thôi." thì chặn — một dấu
+     chấm là toàn bộ khác biệt giữa chặn và cho qua. */
+  const scaledWithUnit = /\d+(?:[.,]\d+)?\s*(?:nghìn|ngàn|triệu|tỷ)\s*(?:đồng|đ|₫|VND)(?![\p{L}])/giu;
+  for (const m of s.matchAll(scaledWithUnit)) hits.push(m[0].trim());
+
+  /* Không có đơn vị tiền thì mới cần kết câu, để "5 triệu phụ nữ" không bị
+     coi là giá. */
+  const scaledBare = /\d+(?:[.,]\d+)?\s*(?:nghìn|ngàn|triệu|tỷ)(?=\s*(?:$|[.,;!?)"”]))/giu;
+  for (const m of s.matchAll(scaledBare)) hits.push(m[0].trim());
 
   // $ đứng trước số
   for (const m of s.matchAll(/[$€]\s*\d[\d.,]*/g)) hits.push(m[0].trim());

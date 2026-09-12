@@ -58,9 +58,9 @@ export default defineConfig({
     inlineStylesheets: 'always',
   },
 
-  // Chưa bật astro:assets: ảnh hiện được tham chiếu bằng đường dẫn chuỗi trong JSON
-  // nên pipeline ảnh của Astro không chạm tới. Ảnh đang được nén thủ công.
-  // Việc còn lại: chuyển sang import.meta.glob để có srcset tự động.
+  // Ảnh: file nội dung khai đường dẫn chuỗi, Picture.astro và lib/images.ts ánh xạ
+  // sang ImageMetadata bằng import.meta.glob rồi đi qua astro:assets/getImage —
+  // build sinh biến thể AVIF/WebP và srcset. Đường dẫn sai sẽ dừng build.
 
   vite: {
     build: { cssMinify: 'lightningcss' },

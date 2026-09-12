@@ -75,7 +75,7 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Liposome · Fermentation · Aminovector delivery",
+      "eyebrow": "A cream and a serum, used together, for melasma-prone skin",
       "heading": "A two-step routine for dark spots, with every percentage published",
       "lead": "<strong>Smart Brightening Cream X3</strong> and <strong>Smart First Care Serum</strong>, used together: Tranexamic Acid 3%, Bakuchiol 2%, NIO-NAG 2%, Niacinamide 1%. Formulated for skin dealing with stubborn discolouration and uneven tone.",
       "usp": [
@@ -121,7 +121,7 @@
         "Sunscreen included",
         "Cleanser included",
         "Ships worldwide from Vietnam",
-        "Prices are shown in Vietnamese đồng (VND) and we currently ship within Vietnam only. For delivery to another country, email us for a quote before ordering — international shipping, duties and taxes are not included in the price above."
+        "Prices are shown in Vietnamese đồng (VND). International shipping is quoted per country before you pay — duties and import taxes are not included in the price above."
       ]
     },
     {
@@ -289,6 +289,10 @@
         {
           "q": "How long before I see a difference?",
           "a": "How long it takes depends on which pattern of pigmentation you have. Surface patches tend to shift in 4–8 weeks; deeper and mixed pigmentation takes 8–16 weeks. This varies between individuals and depends heavily on daily sun protection."
+        },
+        {
+          "q": "What if I use it for eight weeks and see no difference?",
+          "a": "Plainly: we do <strong>not refund for change of mind or lack of results</strong>. The 7-day return covers faulty, incorrect or unopened items only — opened cosmetics cannot be resold, and nobody can predict how your skin will respond. If eight weeks pass with no change, email or call us: we will review how you are applying it and your daily sun protection, the two most common causes. If it still does not improve, your pigmentation may need medical treatment rather than a cosmetic product."
         },
         {
           "q": "Is it suitable for sensitive skin?",

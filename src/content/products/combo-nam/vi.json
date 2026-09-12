@@ -74,7 +74,7 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Công nghệ Liposome – Fermentation – Aminovector",
+      "eyebrow": "Kem + serum dùng cùng nhau, cho da nám",
       "heading": "Hai bước chăm sóc da nám, công thức công khai từng tỉ lệ",
       "lead": "Kem <strong>Smart Brightening Cream X3</strong> và serum <strong>Smart First Care Serum</strong> dùng cùng nhau: Tranexamic Acid 3%, Bakuchiol 2%, NIO-NAG 2%, Niacinamide 1%. Dành cho da đang gặp nám mảng, nám chân sâu và nám hỗn hợp.",
       "usp": [
@@ -353,11 +353,15 @@
       "items": [
         {
           "q": "Combo Nám Mocha giá bao nhiêu?",
-          "a": "Combo gồm Smart Brightening Cream X3 và Smart First Care Serum, giá <strong>{{price}}</strong>, kèm kem chống nắng UV-Block SPF50 và sữa rửa mặt Bio-Active Cleanser, miễn phí vận chuyển. Mua lẻ từng món tổng cộng {{compareAtPrice}} — tức là mua combo rẻ hơn {{save}} và được thêm hai sản phẩm tặng kèm."
+          "a": "<strong>{{price}}</strong> cho cả combo, đã gồm kem chống nắng và sữa rửa mặt tặng kèm. Mua lẻ từng món tổng {{compareAtPrice}}. Miễn phí vận chuyển, thanh toán khi nhận hàng."
         },
         {
           "q": "Bao lâu thì thấy khác biệt?",
           "a": "Thời gian cải thiện khác nhau theo loại nám. Nám mảng thường cải thiện trong 4–8 tuần; nám chân sâu và nám hỗn hợp cần 8–16 tuần. Kết quả khác nhau tùy cơ địa và mức độ chống nắng hằng ngày."
+        },
+        {
+          "q": "Dùng đủ 8 tuần mà không thấy khác biệt thì sao?",
+          "a": "Nói thẳng: chúng tôi <strong>không hoàn tiền vì lý do không hợp</strong>. Đổi trả trong 7 ngày chỉ áp dụng khi hàng lỗi, sai hàng hoặc chưa mở seal. Lý do là mỹ phẩm đã mở nắp không thể bán lại, và không ai đoán trước được da bạn phản ứng thế nào. Nếu sau 8 tuần chưa thấy khác biệt, gọi hotline — chúng tôi sẽ xem lại cách dùng và mức chống nắng hằng ngày của bạn, vì đó là hai nguyên nhân hay gặp nhất; nếu vẫn không cải thiện thì nám của bạn có thể cần can thiệp y khoa chứ không phải mỹ phẩm."
         },
         {
           "q": "Da nhạy cảm dùng được không?",

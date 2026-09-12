@@ -16,8 +16,14 @@ import '../styles/tokens.css';
 const brand = await getEntry('brand', 'mocha');
 if (!brand) throw new Error('Thiếu src/data/mocha.json');
 const b = brand.data;
-const products = await getCollection('products', ({ data }) =>
-  data.status === 'published' && data.locale === 'vi');
+// Sản phẩm chủ lực nằm ở gốc tên miền nên productPath() trả về "/" — liệt kê
+// nó sẽ thành link thứ hai trùng y hệt "Trang chủ".
+const all = await getCollection('products', ({ data }) => data.status === 'published');
+const pick = (loc: Locale, home: string) => all
+  .filter((p) => p.data.locale === loc)
+  .filter((p) => productPath(p.data.slug, p.data.locale as Locale) !== home);
+const vi = pick('vi', '/');
+const en = pick('en', '/en/');
 ---
 <!DOCTYPE html>
 <html lang="vi">
@@ -38,10 +44,24 @@ const products = await getCollection('products', ({ data }) =>
 
       <ul class="links">
         <li><a href="/">Trang chủ</a></li>
-        {products.map((p) => (
+        {vi.map((p) => (
           <li><a href={productPath(p.data.slug, p.data.locale as Locale)}>{p.data.name}</a></li>
         ))}
-        <li><a href="/en/">English version</a></li>
+      </ul>
+
+      {/* Song ngữ trên CÙNG một file: hầu hết nhà cung cấp hosting tĩnh chỉ phục
+          vụ 404.html ở gốc, nên một trang /en/404/ riêng sẽ gần như không bao giờ
+          được dùng tới. */}
+      <hr />
+      <h2 lang="en">Page not found</h2>
+      <p class="lead" lang="en">
+        The link you opened no longer exists or was mistyped. These pages are live:
+      </p>
+      <ul class="links" lang="en">
+        <li><a href="/en/">Home (English)</a></li>
+        {en.map((p) => (
+          <li><a href={productPath(p.data.slug, p.data.locale as Locale)}>{p.data.name}</a></li>
+        ))}
       </ul>
 
       <p class="lead">
@@ -56,6 +76,8 @@ const products = await getCollection('products', ({ data }) =>
       .notfound h1 { margin-block: var(--s-2) var(--s-4); }
       .links { list-style: none; padding: 0; margin: var(--s-5) 0; display: grid; gap: var(--s-3); }
       .links a, .notfound p a { min-height: 24px; display: inline-block; line-height: 24px; }
+      hr { border: 0; border-top: 1px solid var(--line); margin-block: var(--s-6); }
+      .notfound h2 { font-size: var(--t-lg); margin-block: 0 var(--s-3); }
       .muted { color: var(--ink-muted); font-size: var(--t-sm); margin-top: var(--s-6); }
     </style>
   </body>

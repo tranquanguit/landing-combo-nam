@@ -15,17 +15,25 @@ const assets = import.meta.glob<{ default: ImageMetadata }>(
 export async function resolveAssetUrl(
   src: string | undefined,
   site: string,
-  width = 1200
+  width = 1200,
+  /**
+   * Định dạng đầu ra. Mặc định giữ nguyên định dạng nguồn thay vì ép WebP.
+   *
+   * Kiểm định lần 7: og:image bị ép sang .webp dù nội dung cố ý khai .jpg, mà
+   * Zalo — kênh chia sẻ lớn nhất ở Việt Nam — không render preview WebP.
+   */
+  format?: 'webp' | 'jpeg' | 'png'
 ): Promise<string | undefined> {
   if (!src) return undefined;
   const mod = assets[`/src/assets${src}`];
   // Picture.astro đã dừng build khi ảnh không tồn tại; ở đây ảnh trong public/ là
   // trường hợp còn lại hợp lệ duy nhất.
   if (!mod) return new URL(src, site).href;
+  const srcFormat = /\.(jpe?g)$/i.test(src) ? 'jpeg' : /\.png$/i.test(src) ? 'png' : 'webp';
   const img = await getImage({
     src: mod.default,
     width: Math.min(width, mod.default.width),
-    format: 'webp',
+    format: format ?? srcFormat,
   });
   return new URL(img.src, site).href;
 }

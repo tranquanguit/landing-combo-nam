@@ -595,3 +595,91 @@ phẩm thứ ba, và tự tìm cách vượt hàng rào thay vì đọc tài li�
 - Không có CSP. Site tĩnh nên header do hosting quyết định; nếu bật `script-src` không cho `unsafe-inline` thì cả nhóm lỗi F-3 sẽ bị vô hiệu thêm một lớp nữa. Cần cấu hình ở phía host.
 - CI vẫn **chưa từng chạy thật trên GitHub** — nay `npm ci` đã chạy được cục bộ nên lần push này là lần đầu nó có cơ hội chạy.
 - Số liệu hiệu năng vẫn là đo cục bộ, chưa có đo trên thiết bị và mạng thật tại Việt Nam.
+
+---
+
+## Vòng 15 — đóng kiểm định độc lập lần 7
+
+Kiểm định viên thứ 7 kiểm chứng lại các bản vá của vòng 14 và soi hai vùng chưa
+ai chạm: **hồi quy do chính bản vá gây ra**, và **trải nghiệm chuyển đổi thật**
+(đọc từng chữ dưới góc nhìn người mua vào từ quảng cáo Facebook trên 4G yếu).
+Kết quả: 2 P0, 5 P1, 9 P2 — và một kết luận thẳng thắn "chưa nên phát hành".
+
+### Hai lỗ P0, cả hai đều nằm trong chính hàng rào tuân thủ
+
+**Hàng rào claims bỏ qua cả luật khi lần khớp ĐẦU TIÊN bị phủ định.**
+`plain.match(rule.pattern)` không có cờ `g` nên chỉ trả về match đầu; nếu match
+đó nằm sau một phủ định thì `continue` bỏ luôn cả luật và mọi lần xuất hiện sau
+không bao giờ được xét. Câu *"Chúng tôi không trị nám bằng lời hứa suông. Combo
+trị nám theo cơ chế kép."* lên `dist/index.html`, JSON-LD `FAQPage` và `llms.txt`
+với build xanh. Nay duyệt `matchAll` và chỉ bỏ qua đúng lần khớp bị phủ định.
+
+**Số tiền lọt khi sau đơn vị còn chữ.** `"990 nghìn đồng thôi"` qua, nhưng
+`"990 nghìn đồng thôi."` bị chặn — một dấu chấm là toàn bộ khác biệt. Tách thành
+hai luật: có đơn vị tiền đi kèm thì luôn là giá; không có đơn vị thì mới đòi kết
+câu (để *"5 triệu phụ nữ"* không bị coi là giá). Cả hai ca vào bộ thử.
+
+### P1
+
+- **Cổng neo chỉ đóng một nửa.** Vòng 14 canh `hero.secondaryCta`, nhưng
+  `#dat-hang` bị hardcode ở 5 chỗ khác nhau kể cả `Offer.url` trong JSON-LD.
+  Sản phẩm không có khối `order` build xanh với **4 nút mua chết**. Nay schema
+  bắt buộc đúng một khối `order`.
+- **Bản EN tự mâu thuẫn về giao hàng.** Hai câu cạnh nhau trong cùng danh sách:
+  "Ships worldwide from Vietnam" và "we currently ship within Vietnam only" —
+  câu thứ hai là do **chính tôi thêm vào ở vòng 14**. Đã viết lại theo sự thật:
+  có giao quốc tế, báo giá theo từng nước trước khi thanh toán.
+- **Ưu đãi hết hạn trên trang tĩnh.** `isOfferExpired` chạy lúc build, mà CI chỉ
+  có `push`/`pull_request`. Sau 30/9 nếu không ai deploy thì trang vẫn in hạn cũ.
+  Thêm `schedule: '0 1 * * *'`.
+- **`lastmod` vỡ trong CI.** `actions/checkout` mặc định shallow depth 1, nên
+  `git log -1 -- <file>` trả ngày commit HEAD cho MỌI file — đúng thứ nó sinh ra
+  để tránh. Thêm `fetch-depth: 0`.
+- **Không có bằng chứng xã hội nào** (chờ dữ liệu doanh nghiệp): cả gallery lẫn
+  testimonials đều bị cổng consent ẩn. Đúng về pháp lý, nhưng phải nói rõ: ở
+  trạng thái này tỉ lệ chuyển đổi sẽ thấp bất kể kỹ thuật tốt đến đâu.
+
+### P2
+
+`llms.txt` nay dịch nhãn theo ngôn ngữ của trang (trước đây nội dung tiếng Anh
+nằm trong khung tiếng Việt, trong khi robots.txt quảng cáo là "song ngữ") và
+dùng `plainText()` cho mọi trường thay vì regex bóc thẻ mà `richtext.ts` đã loại
+bỏ. `og:image` giữ đúng định dạng nguồn (trước bị ép WebP — Zalo không render
+preview WebP). Trang 404 nay song ngữ trong một file, vì hầu hết host tĩnh chỉ
+phục vụ `404.html` ở gốc. PII không còn phát ra `window` qua `CustomEvent`
+(pixel bên thứ ba chạy cùng trang nghe được). Weight 600 của Be Vietnam Pro đổi
+sang `font-display: swap` — đo được nó về lúc ~1,2s, quá xa cửa sổ ~100ms của
+`optional`, nên chữ đậm (giá, nhãn gói) hiển thị bằng font dự phòng ở lượt truy
+cập lạnh; `swap` không tốn byte nào trên đường găng và CLS vẫn 0 nhờ metric đã
+khớp. Sửa báo nhầm "Số 1 trong danh sách bước chăm sóc". Sửa comment sai sự thật
+trong `astro.config.mjs`.
+
+### Biên tập — phần người mua thật sự đọc
+
+- Eyebrow "Công nghệ Liposome – Fermentation – Aminovector" là ba từ tiếng Anh
+  không giải thích, đặt ở dòng đầu tiên người đọc nhìn thấy. Đổi thành
+  "Kem + serum dùng cùng nhau, cho da nám".
+- **Nỗi lo lớn nhất chưa ai trả lời**: "dùng đủ 8 tuần mà không ăn thua thì sao?"
+  Trang né hẳn. Thêm FAQ trả lời thẳng: *không hoàn tiền vì không hợp*, nói rõ lý
+  do (mỹ phẩm đã mở nắp không bán lại được), và nói tiếp nên làm gì.
+- FAQ giá chép lại gần nguyên khối ưu đãi — rút còn dữ kiện.
+- "Tôi cần tư vấn trước" vẫn bắt nhập địa chỉ giao hàng ≥8 ký tự dù chưa mua gì:
+  ma sát vô cớ đúng ở bước cuối phễu. Nay ô địa chỉ tự bỏ bắt buộc theo gói đang
+  chọn, có nhãn "không bắt buộc khi chỉ cần tư vấn", và đây là **kịch bản thứ 7**
+  trong bộ thử đặt hàng.
+
+### Đo lại
+
+Bộ thử: money **41/41**, claims **46/46**, richtext 23/23, đặt hàng **7/7**.
+`astro check` 0 lỗi. Ngân sách trong mức. Trình duyệt thật ở 390×844, cả hai
+ngôn ngữ: 0 vi phạm tương phản focus, 0 vùng chạm dưới 24px, 0 neo chết, 0 tràn
+ngang. CI vòng 14 đã chạy **xanh toàn bộ 10 bước** trên GitHub — lần đầu kể từ
+vòng 10; ba vòng 11–13 đều chết ở `npm ci` mà tài liệu vẫn ghi là xanh.
+
+### Vẫn còn nợ
+
+Không đổi so với vòng 14: số tiếp nhận phiếu công bố, mã số thuế, trang chính
+sách, văn bản đồng ý cho ảnh và lời chứng, link gian hàng sàn — đều là dữ liệu
+doanh nghiệp. Thêm: nên bật CSP ở phía hosting; chưa đo được trên thiết bị và
+mạng thật tại Việt Nam; `shippingDetails` của bản EN cố ý để trống vì phí quốc
+tế là báo giá theo nước, khai một con số cố định sẽ là nói dối với máy đọc.

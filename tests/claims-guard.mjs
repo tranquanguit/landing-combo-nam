@@ -15,6 +15,7 @@ const CHAN = [
   '98% khách hàng hết nám hoàn toàn.',
   'Sản phẩm đã được Bộ Y Tế cấp phép lưu hành.',
   'Đây là kem nám tốt nhất thị trường Việt Nam.',
+  'Kem nám số 1 thị trường Việt Nam.',
   'Xoá nám tận gốc.',
   'Đánh bay nám sau 4 tuần.',
   'Triệt tiêu nám vĩnh viễn.',
@@ -39,6 +40,9 @@ const CHAN = [
   'Hi\u1ec7u qu\u1ea3 nh&#432; laser.',
   'Cam k&#7871;t hoàn ti&#7873;n n&#7871;u không h&#7871;t nám.',
   'FDA &#97;pproved formula.',
+  // Kiểm định lần 7: lần khớp đầu bị phủ định che mất mọi lần khớp sau.
+  'Chúng tôi không trị nám bằng lời hứa suông. Combo trị nám theo cơ chế kép.',
+  'Không phải kem trị nám nào cũng giống nhau; đây là kem trị nám thế hệ mới.',
   // hai lượt mã hoá
   'Cam k&amp;#7871;t hoàn ti&amp;#7873;n n&amp;#7871;u không h&amp;#7871;t nám.',
 ];
@@ -51,6 +55,8 @@ const CHO_QUA = [
   'This is a cosmetic product and is not intended to treat any disease.',
   'Nám mảng thường cải thiện trong 4–8 tuần.',
   'Công thức không chứa corticoid, hydroquinone hay cồn khô.',
+  'Số 1 trong danh sách bước chăm sóc là làm sạch.',
+  'Bước số 1: rửa mặt với nước mát.',
   // Entity hợp lệ trong câu bình thường không được báo nhầm.
   'Kem &amp; serum dùng cùng nhau.',
   'Ghi chú: giá &lt; mức niêm yết cũ.',

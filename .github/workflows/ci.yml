@@ -6,12 +6,22 @@ on:
   push:
     branches: ['**']
   pull_request:
+  # Hạn ưu đãi và năm ở footer được tính LÚC BUILD. Trang tĩnh không tự biết hôm
+  # nay là ngày nào, nên nếu không ai deploy thì sau 30/9 trang vẫn in "ưu đãi
+  # đến hết 30/9" và JSON-LD vẫn phát priceValidUntil đã quá hạn.
+  schedule:
+    - cron: '0 1 * * *'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # lastmod trong sitemap lấy từ ngày commit cuối của từng file nội dung.
+          # checkout mặc định là shallow (depth 1) nên `git log -1 -- <file>` trả
+          # về ngày commit HEAD cho MỌI file — đúng thứ nó sinh ra để tránh.
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22

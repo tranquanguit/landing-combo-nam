@@ -106,7 +106,10 @@ export const FORBIDDEN: ForbiddenPattern[] = [
     instead: 'nêu chính sách đổi trả cụ thể và điều kiện áp dụng',
   },
   {
-    pattern: /(số\s*1|so\s*1|tốt nhất|hiệu quả nhất|duy nhất trên thị trường|number one)/iu,
+    /* "số 1" chỉ là so sánh tuyệt đối khi KHÔNG dùng theo nghĩa thứ tự.
+       Kiểm định lần 7: "Số 1 trong danh sách bước chăm sóc là làm sạch" bị chặn
+       nhầm — một hàng rào báo nhầm là hàng rào bị người biên tập mất niềm tin. */
+    pattern: /((?:số|so)\s*1(?!\s*(?:trong|là|\.|:|\)))|tốt nhất|hiệu quả nhất|duy nhất trên thị trường|number one)/iu,
     why: 'so sánh tuyệt đối, bị cấm theo Luật Quảng cáo',
     instead: 'nêu điểm khác biệt cụ thể, kiểm chứng được',
   },
@@ -148,11 +151,18 @@ export function findForbiddenClaims(text: string): { match: string; why: string;
   const plain = forScan(text);
   const out: { match: string; why: string; instead: string }[] = [];
   for (const rule of FORBIDDEN) {
-    const m = plain.match(rule.pattern);
-    if (!m) continue;
-    // Bỏ qua khi cụm nằm sau một phủ định trong cùng mệnh đề.
-    if (NEGATED.test(plain.slice(0, m.index ?? 0))) continue;
-    out.push({ match: m[0], why: rule.why, instead: rule.instead });
+    /* Duyệt MỌI lần xuất hiện, không chỉ lần đầu.
+       Kiểm định lần 7: `plain.match()` không có cờ g nên chỉ trả match đầu tiên;
+       nếu match đó bị phủ định thì cả luật bị bỏ qua và mọi lần xuất hiện sau
+       không bao giờ được xét. "Chúng tôi không trị nám bằng lời hứa suông.
+       Combo trị nám theo cơ chế kép." lên trang với build xanh. */
+    const flags = rule.pattern.flags.includes('g') ? rule.pattern.flags : rule.pattern.flags + 'g';
+    for (const m of plain.matchAll(new RegExp(rule.pattern.source, flags))) {
+      // Bỏ qua đúng lần khớp nằm sau một phủ định trong cùng mệnh đề.
+      if (NEGATED.test(plain.slice(0, m.index ?? 0))) continue;
+      out.push({ match: m[0], why: rule.why, instead: rule.instead });
+      break;
+    }
   }
   return out;
 }

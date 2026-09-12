@@ -170,6 +170,42 @@ async function fillAndSubmit(page) {
   await page.close();
 }
 
+// --- 7. Gói "chỉ cần tư vấn" không bắt nhập địa chỉ giao hàng ----------
+{
+  mode = 'ok';
+  received.length = 0;
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await page.goto(`http://localhost:${PAGE_PORT}/`, { waitUntil: 'networkidle' });
+
+  // Gói có giá thì vẫn phải nhập địa chỉ.
+  const paidRequires = await page.evaluate(() => {
+    const paid = document.querySelector('input[name="pack"][data-price]:not([data-price=""])');
+    paid.click();
+    return document.getElementById('address').required;
+  });
+
+  // Gói không có giá (chỉ tư vấn) thì không.
+  const adviceRequires = await page.evaluate(() => {
+    const advice = document.querySelector('input[name="pack"][data-price=""]');
+    advice.click();
+    return document.getElementById('address').required;
+  });
+
+  await page.fill('#name', 'Nguyễn Thu Hà');
+  await page.fill('#phone', '0912345678');
+  await page.check('#data-consent');
+  await page.click('#order-form button[type=submit]');
+  await page.waitForTimeout(900);
+  const sent = received.length === 1 && !received[0].address;
+
+  results.push([
+    'tư vấn không địa chỉ',
+    paidRequires && !adviceRequires && sent,
+    `gói có giá bắt buộc: ${paidRequires}, gói tư vấn bắt buộc: ${adviceRequires}, gửi được: ${sent}`,
+  ]);
+  await page.close();
+}
+
 await browser.close();
 api.close();
 pageServer.kill();

@@ -87,7 +87,11 @@ const Wrapper = endpoint ? 'form' : 'div';
         </div>
 
         <div class="field" data-field="address">
-          <label for="address">{t(locale, 'form.address')} <span aria-hidden="true">*</span></label>
+          <label for="address">
+            {t(locale, 'form.address')}
+            <span aria-hidden="true" data-req>*</span>
+            <span class="muted" data-optional hidden>({t(locale, 'form.optional')})</span>
+          </label>
           <input type="text" id="address" name="address" disabled={!endpoint} autocomplete="street-address" required
             aria-describedby="address-err" placeholder={t(locale, 'form.phAddress')} />
           <p class="err" id="address-err">{t(locale, 'form.errAddress')}</p>
@@ -264,8 +268,28 @@ const Wrapper = endpoint ? 'form' : 'div';
           ? /^0\d{9}$/.test(normalisePhone(v))
           // Thị trường quốc tế: không đoán định dạng từng nước, chỉ đòi đủ chữ số.
           : /^\+?[\d\s.\-()]{7,20}$/.test(v.trim()) && (v.match(/\d/g)?.length ?? 0) >= 7,
-      address: (v) => v.trim().length >= 8,
+      /* Gói "cần tư vấn trước" chưa mua gì thì không có lý do bắt nhập địa chỉ
+         giao hàng. Kiểm định lần 7 gọi đây là ma sát vô cớ đúng ở bước cuối phễu. */
+      address: (v) => !addressRequired() || v.trim().length >= 8,
       country: (v) => v.trim().length >= 2,
+    };
+
+    const addressField = form.elements.namedItem('address') as HTMLInputElement | null;
+    const addressRequired = () => {
+      const picked = form.querySelector<HTMLInputElement>('input[name="pack"]:checked');
+      return (picked?.dataset.price ?? '') !== '';
+    };
+    const syncAddress = () => {
+      if (!addressField) return;
+      const need = addressRequired();
+      addressField.required = need;
+      const wrap = addressField.closest('.field');
+      wrap?.querySelector('[data-req]')?.toggleAttribute('hidden', !need);
+      wrap?.querySelector('[data-optional]')?.toggleAttribute('hidden', need);
+      if (!need) {
+        wrap?.removeAttribute('data-invalid');
+        addressField.setAttribute('aria-invalid', 'false');
+      }
     };
 
     /* Đồng ý xử lý dữ liệu cá nhân là điều kiện bắt buộc theo Nghị định
@@ -295,8 +319,9 @@ const Wrapper = endpoint ? 'form' : 'div';
       if (text) totalValue.textContent = text;
     };
     form.querySelectorAll<HTMLInputElement>('input[name="pack"]')
-      .forEach((r) => r.addEventListener('change', syncTotal));
+      .forEach((r) => r.addEventListener('change', () => { syncTotal(); syncAddress(); }));
     syncTotal();
+    syncAddress();
 
     const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     if (submitBtn?.getAttribute('aria-disabled') === 'true') {
@@ -362,7 +387,10 @@ const Wrapper = endpoint ? 'form' : 'div';
             ok.focus();
             ok.scrollIntoView({ block: 'center', behavior: scrollBehaviour() });
           }
-          window.dispatchEvent(new CustomEvent('mocha:lead', { detail: payload }));
+          // Chỉ phát thông tin phi định danh: pixel quảng cáo (GA4, Meta, TikTok) chạy
+      // cùng trang và bất kỳ script nào cũng nghe được sự kiện này. Bản trước gửi
+      // cả tên, số điện thoại và địa chỉ ra window.
+      window.dispatchEvent(new CustomEvent('mocha:lead', { detail: { pack: payload.pack } }));
         })
         .catch(() => {
           /* Gửi hỏng thì nói thật và đưa lối liên hệ khác, không nuốt lỗi. */

@@ -385,6 +385,25 @@ const products = defineCollection({
       const anchor = explicit ?? DEFAULT_ANCHOR[blk.type];
       if (anchor) anchors.add(anchor);
     });
+    /* Neo do CHÍNH COMPONENT sinh ra, không nằm trong dữ liệu nên không ai canh.
+       Kiểm định lần 7: `#dat-hang` bị hardcode ở SiteHeader, Hero, Offer,
+       StickyCta và trong Offer.url của JSON-LD. Sản phẩm không có khối `order`
+       build xanh với 4 nút mua chết và Offer.url trỏ vào hư không. */
+    if (!p.blocks.some((blk) => blk.type === 'order')) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Sản phẩm phải có đúng một khối type="order". Header, hero, khối ưu đãi, ' +
+          'thanh CTA dính đáy và Offer.url trong JSON-LD đều trỏ tới #dat-hang; ' +
+          'thiếu khối này thì mọi nút mua trên trang đều là link chết.',
+      });
+    }
+    if (p.blocks.filter((blk) => blk.type === 'order').length > 1) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Chỉ được có một khối type="order": hai khối sẽ sinh hai id="dat-hang" trùng nhau.',
+      });
+    }
+
     const wanted: [string, string][] = [];
     p.blocks.forEach((blk, i) => {
       if (blk.type === 'hero') {

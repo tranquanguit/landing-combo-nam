@@ -3,6 +3,7 @@ import { getCollection, getEntry } from 'astro:content';
 import { money } from '../lib/format';
 import { expandProductTokens } from '../lib/money-text';
 import { productPath } from '../lib/routes';
+import { plainText } from '../lib/richtext';
 import type { Locale } from '../i18n/ui';
 
 /**
@@ -17,6 +18,32 @@ import type { Locale } from '../i18n/ui';
  * là phụ lục rẻ tiền, không phải chiến lược. Thứ thực sự có tác dụng là dữ kiện
  * nằm trong HTML render sẵn.
  */
+
+/**
+ * Nhãn theo ngôn ngữ của trang được mô tả.
+ *
+ * Kiểm định lần 7: robots.txt quảng cáo file này là "song ngữ" trong khi mọi
+ * nhãn đều hardcode tiếng Việt — trợ lý AI hỏi bằng tiếng Anh nhận nội dung Anh
+ * gói trong khung Việt.
+ */
+const L = {
+  vi: {
+    lang: 'Ngôn ngữ trang', page: 'Trang', price: 'Giá', bundlePrice: 'mua lẻ từng món tổng',
+    includes: 'Gồm', gifts: 'Tặng kèm', functions: 'Tính năng, công dụng đã công bố',
+    declaredBy: 'Tổ chức công bố', notification: 'Số tiếp nhận phiếu công bố',
+    ingredients: 'Thành phần chính', source: 'nguồn', expectations: 'Kỳ vọng theo từng tình trạng',
+    howTo: 'Cách dùng', faq: 'Câu hỏi thường gặp', warnings: 'Cảnh báo',
+  },
+  en: {
+    lang: 'Page language', page: 'Page', price: 'Price', bundlePrice: 'bought separately, total',
+    includes: 'Includes', gifts: 'Free gifts', functions: 'Declared functions',
+    declaredBy: 'Declared by', notification: 'Cosmetic product notification number',
+    ingredients: 'Key ingredients', source: 'source', expectations: 'What to expect, by condition',
+    howTo: 'How to use', faq: 'Frequently asked questions', warnings: 'Warnings',
+  },
+} as const;
+const lab = (loc: Locale) => (loc === 'vi' ? L.vi : L.en);
+
 export const GET: APIRoute = async ({ site }) => {
   const brand = await getEntry('brand', 'mocha');
   /* Mọi ngôn ngữ, không chỉ tiếng Việt. Kiểm định lần 6: bản EN bị lọc ra, nên
@@ -49,55 +76,58 @@ export const GET: APIRoute = async ({ site }) => {
     }, entry.data.locale as Locale);
     const locale = p.locale as Locale;
     lines.push(`## ${p.name}${locale === 'vi' ? '' : ` (${locale.toUpperCase()})`}`, '');
-    lines.push(`- Ngôn ngữ trang: ${locale === 'vi' ? 'tiếng Việt' : 'English'}`);
-    lines.push(`- Trang: ${origin}${productPath(p.slug, locale)}`);
-    lines.push(`- Giá: ${money(p.price, p.currency, locale)}` +
-      (p.compareAtPrice ? ` (mua lẻ từng món tổng ${money(p.compareAtPrice, p.currency, locale)})` : ''));
-    if (p.includes.length) lines.push(`- Gồm: ${p.includes.map((i) => i.name).join('; ')}`);
-    if (p.gifts.length) lines.push(`- Tặng kèm: ${p.gifts.map((g) => g.name).join('; ')}`);
-    lines.push(`- Tính năng, công dụng đã công bố: ${p.compliance.functions}`);
-    lines.push(`- Tổ chức công bố: ${p.compliance.declaringOrganization}, ${p.compliance.declaringAddress}`);
+    const x = lab(locale);
+    lines.push(`- ${x.lang}: ${locale === 'vi' ? 'tiếng Việt' : 'English'}`);
+    lines.push(`- ${x.page}: ${origin}${productPath(p.slug, locale)}`);
+    lines.push(`- ${x.price}: ${money(p.price, p.currency, locale)}` +
+      (p.compareAtPrice ? ` (${x.bundlePrice} ${money(p.compareAtPrice, p.currency, locale)})` : ''));
+    if (p.includes.length) lines.push(`- ${x.includes}: ${p.includes.map((i) => plainText(i.name)).join('; ')}`);
+    if (p.gifts.length) lines.push(`- ${x.gifts}: ${p.gifts.map((g) => plainText(g.name)).join('; ')}`);
+    lines.push(`- ${x.functions}: ${plainText(p.compliance.functions)}`);
+    lines.push(`- ${x.declaredBy}: ${p.compliance.declaringOrganization}, ${p.compliance.declaringAddress}`);
     if (p.compliance.productNotificationNumber) {
-      lines.push(`- Số tiếp nhận phiếu công bố: ${p.compliance.productNotificationNumber}`);
+      lines.push(`- ${x.notification}: ${p.compliance.productNotificationNumber}`);
     }
     lines.push('');
 
     const ing = p.blocks.find((x) => x.type === 'ingredients');
     if (ing && ing.type === 'ingredients') {
-      lines.push('### Thành phần chính', '');
+      lines.push(`### ${x.ingredients}`, '');
       for (const r of ing.rows) {
-        lines.push(`- ${r.name} — ${r.role}${r.reference ? ` (nguồn: ${r.reference})` : ''}`);
+        lines.push(`- ${plainText(r.name)} — ${plainText(r.role)}${r.reference ? ` (${x.source}: ${r.reference})` : ''}`);
       }
       lines.push('');
     }
 
     const cards = p.blocks.find((x) => x.type === 'cards');
     if (cards && cards.type === 'cards') {
-      lines.push('### Kỳ vọng theo từng tình trạng', '');
+      lines.push(`### ${x.expectations}`, '');
       for (const it of cards.items) {
-        lines.push(`- ${it.heading}: ${it.body}${it.meta ? ` ${it.meta}.` : ''}`);
+        lines.push(`- ${plainText(it.heading)}: ${plainText(it.body)}${it.meta ? ` ${plainText(it.meta)}.` : ''}`);
       }
       lines.push('');
     }
 
     const steps = p.blocks.find((x) => x.type === 'steps');
     if (steps && steps.type === 'steps') {
-      lines.push('### Cách dùng', '');
-      steps.items.forEach((s, i) => lines.push(`${i + 1}. ${s.heading}: ${s.body}`));
+      lines.push(`### ${x.howTo}`, '');
+      steps.items.forEach((s, i) => lines.push(`${i + 1}. ${plainText(s.heading)}: ${plainText(s.body)}`));
       lines.push('');
     }
 
     const faq = p.blocks.find((x) => x.type === 'faq');
     if (faq && faq.type === 'faq') {
-      lines.push('### Câu hỏi thường gặp', '');
+      lines.push(`### ${x.faq}`, '');
       for (const f of faq.items) {
-        lines.push(`**${f.q}** ${f.a.replace(/<[^>]+>/g, '')}`);
+        // plainText: bản trước dùng replace(/<[^>]+>/g,'') — đúng regex mà richtext.ts
+        // đã loại bỏ vì nuốt văn bản giữa dấu < và >, và không giải mã entity.
+        lines.push(`**${plainText(f.q)}** ${plainText(f.a)}`);
       }
       lines.push('');
     }
 
-    lines.push('### Cảnh báo', '');
-    for (const w of p.compliance.warnings) lines.push(`- ${w}`);
+    lines.push(`### ${x.warnings}`, '');
+    for (const w of p.compliance.warnings) lines.push(`- ${plainText(w)}`);
     lines.push('');
   }
 
