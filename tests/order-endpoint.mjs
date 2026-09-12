@@ -43,6 +43,16 @@ const pageServer = spawn('python3', ['-m', 'http.server', String(PAGE_PORT)], {
   cwd: 'dist', stdio: 'ignore',
 });
 
+api.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(
+      `\nCổng ${API_PORT} đang bị chiếm — có thể một lần chạy trước chết giữa đường.\n` +
+      `Dọn bằng: lsof -ti:${API_PORT} | xargs -r kill\n`
+    );
+    process.exit(1);
+  }
+  throw err;
+});
 await new Promise((r) => api.listen(API_PORT, r));
 await new Promise((r) => setTimeout(r, 1200));
 
@@ -241,6 +251,12 @@ async function fillAndSubmit(page) {
   const headers = readFileSync('public/_headers', 'utf8');
   const cspRaw = (headers.split('\n').find((l) => l.includes('Content-Security-Policy')) ?? '')
     .replace(/^\s*Content-Security-Policy:\s*/, '').trim();
+  /* Không có CSP thì kịch bản này vô nghĩa mà vẫn "ĐẠT" — kiểm định lần 12 xoá
+     dòng Content-Security-Policy khỏi public/_headers và cả 8 kịch bản vẫn xanh. */
+  if (!cspRaw) {
+    results.push(['gửi đơn dưới CSP', false,
+      'public/_headers KHÔNG có Content-Security-Policy — không còn gì để kiểm']);
+  }
   /* Origin THẬT trong bản build phải nằm trong connect-src gốc — đây là chính
      lớp lỗi vòng 10 tìm ra, và bản trước tự viết lại directive đó nên mù đúng
      chỗ cần soi. */
@@ -279,7 +295,17 @@ async function fillAndSubmit(page) {
   const violations = [];
   page.on('console', (m) => { if (/Content Security Policy/i.test(m.text())) violations.push(m.text()); });
   await page.goto(`http://localhost:${CSP_PORT}/`, { waitUntil: 'networkidle' });
-  await fillAndSubmit(page);
+
+  /* Báo rõ thay vì chết bằng timeout 60 giây.
+     Kiểm định lần 12: bỏ 'unsafe-inline' khỏi script-src thì biểu mẫu không bao
+     giờ hiện, và log chỉ có "element is not visible" — CI đỏ nhưng vô nghĩa. */
+  let formUsable = true;
+  try {
+    await page.waitForSelector('#order-form button[type=submit]:not([disabled])', { timeout: 8000 });
+    await fillAndSubmit(page);
+  } catch {
+    formUsable = false;
+  }
 
   const success = await page.evaluate(() => {
     const el = document.getElementById('form-success');
@@ -287,8 +313,8 @@ async function fillAndSubmit(page) {
   });
   results.push([
     'gửi đơn dưới CSP',
-    received.length === 1 && success && violations.length === 0 && originAllowed,
-    `đơn nhận được: ${received.length}, báo thành công: ${success}, ` +
+    formUsable && received.length === 1 && success && violations.length === 0 && originAllowed,
+    `biểu mẫu dùng được: ${formUsable}, đơn nhận được: ${received.length}, báo thành công: ${success}, ` +
     `vi phạm CSP: ${violations.length}, origin (${builtOrigin || 'cùng miền'})` +
     `${loopback ? ' [loopback, miễn]' : ` trong connect-src: ${originAllowed}`}`,
   ]);

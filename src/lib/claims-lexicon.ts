@@ -100,7 +100,8 @@ export const FORBIDDEN: ForbiddenPattern[] = [
     instead: 'dẫn nghiên cứu cụ thể kèm nồng độ đã thử nghiệm',
   },
   {
-    pattern: /\bFDA[\s-]?(approved|certified|cleared)\b|\b(approved|certified) by the FDA\b/i,
+    /* "F.D.A." viết tắt có dấu chấm cũng phải bắt — kiểm định lần 12. */
+    pattern: /\bF\.?D\.?A\.?[\s-]?(approved|certified|cleared)\b|\b(approved|certified) by the F\.?D\.?A\.?\b/i,
     why: 'FDA không phê duyệt hay chứng nhận mỹ phẩm',
     instead: 'nêu số tiếp nhận phiếu công bố sản phẩm mỹ phẩm',
   },
@@ -110,7 +111,7 @@ export const FORBIDDEN: ForbiddenPattern[] = [
     instead: 'nêu chính sách đổi trả cụ thể kèm điều kiện',
   },
   {
-    pattern: /\b(the best|number one|no\.?\s*1|world'?s leading|most effective)\b/i,
+    pattern: /\b(the best|best\s+\w+\s+cream|number\s*(one|1)|no\.?\s*1|world'?s leading|worldwide\s+no|most effective)\b/i,
     why: 'so sánh tuyệt đối',
     instead: 'nêu điểm khác biệt kiểm chứng được',
   },
@@ -130,7 +131,8 @@ export const FORBIDDEN: ForbiddenPattern[] = [
     instead: 'chăm sóc da nám, hỗ trợ làm mờ',
   },
   {
-    pattern: /(hết|xoá|xóa|đánh bay|triệt tiêu|loại bỏ|chấm dứt|biến mất|tạm biệt)\s*(hoàn toàn\s*)?(nám|thâm|sạm|đốm nâu)|(sạch|khỏi|dứt điểm)\s+(nám|thâm)|không\s+tái\s+phát|vĩnh viễn/iu,
+    /* Thêm dạng ĐẢO thứ tự ("nám biến mất hoàn toàn") — kiểm định lần 12. */
+    pattern: /(hết|xoá|xóa|đánh bay|triệt tiêu|loại bỏ|chấm dứt|biến mất|tạm biệt)\s*(hoàn toàn\s*)?(nám|thâm|sạm|đốm nâu)|(nám|thâm|sạm|đốm nâu)\s+(biến mất|hết hẳn|sạch)\s*(hoàn toàn)?|(sạch|khỏi|dứt điểm)\s+(nám|thâm)|không\s+tái\s+phát|vĩnh viễn/iu,
     why: 'tuyên bố kết quả tuyệt đối, không chứng minh được',
     instead: 'hỗ trợ làm mờ, hạn chế sạm màu quay lại',
   },
@@ -217,26 +219,48 @@ const HAS_DIACRITICS = /[̀-ͯ]|[àáảãạăằắẳẵặâầấẩẫậ�
 const NEGATED_BARE = /(?:khong|chua)\s+(?:phai\s+|co\s+)?(?:la\s+)?(?:thuoc\s+|tac dung\s+|chua\s+|dung de\s+|nham\s+|thay the\s+)?$|(?:khong|chua)\s+$|(?:not|never|no)\s+(?:a\s+|an\s+|the\s+)?(?:intended to\s+|meant to\s+|substitute for\s+)?$/i;
 
 /**
- * Một lần khớp trên bản bỏ dấu có đáng tin không?
+ * Những cách viết CÓ DẤU hợp lệ mà khi bỏ dấu trùng với từ bị cấm.
  *
- * Kiểm định lần 11 chỉ ra bản vá vòng 18 sai mức: nó tắt chế độ không dấu cho
- * MỌI câu có một chữ có dấu, nên "Kem tri nam tận gốc" — cách gõ phổ biến nhất
- * của biên tập Việt, lẫn dấu và không dấu trong cùng câu — lọt lên trang thật.
- * 8/9 câu mà vòng 17 chặn được đã lọt.
+ * Kiểm định lần 12 chỉ ra bản vá vòng 19 vẫn sai hướng: nó đòi đoạn khớp phải
+ * có ít nhất một từ gõ không dấu, nên chỉ cần sai/thiếu dấu trên chính từ khoá
+ * là lọt — "điều trị nạm", "hết nạm", "đặc trị nàm", "chữa nãm", "như lasé",
+ * "cấp phếp" đều qua sạch. Đồng thời nó báo nhầm "sách nam giới".
  *
- * Tiêu chí đúng là mức TỪ: chỉ tin lần khớp nếu trong đúng đoạn khớp đó có ít
- * nhất một từ vốn được gõ KHÔNG dấu. "hết năm 2026" (cả hai từ đều có dấu) thì
- * không; "tri nam tận gốc" thì có.
+ * Đảo mặc định: một lần khớp trên bản bỏ dấu được TIN, trừ khi từ khoá trong đó
+ * là một từ tiếng Việt hợp lệ đã biết. Hàng rào nên mặc định chặn cái nó không
+ * nhận ra, không mặc định tha.
+ */
+const LEGITIMATE_HOMOGRAPHS: Record<string, string[]> = {
+  nam: ['năm', 'nắm', 'nằm', 'nấm'],
+  tham: ['thăm', 'thắm', 'thầm', 'thấm'],
+  sam: ['sâm', 'sắm', 'sám'],
+  mun: ['mùn'],
+  tri: ['trí', 'trì', 'trĩ'],
+  chua: ['chứa', 'chùa', 'chưa'],
+  phep: ['phép'],
+  // "sách" (book) khác "sạch" (clean) — "sạch nám" là vi phạm, "sách nam giới" không.
+  sach: ['sách'],
+};
+
+/**
+ * Lần khớp trên bản bỏ dấu có đáng tin không?
  *
- * Phép bỏ dấu giữ nguyên độ dài từng ký tự, nên chỉ số trên bản bỏ dấu trỏ đúng
- * vào bản gốc.
+ * Không đáng tin khi MỌI từ khoá trong đoạn khớp đều là cách viết hợp lệ đã
+ * biết — "hết năm 2026", "sách nam giới". Đáng tin trong mọi trường hợp còn
+ * lại, kể cả khi từ khoá viết sai dấu ("nạm", "nàm") hoặc không dấu ("nam").
+ *
+ * Phép bỏ dấu giữ nguyên độ dài từng ký tự nên chỉ số trỏ đúng vào bản gốc.
  */
 function foldedHitIsReal(original: string, from: number, to: number): boolean {
-  const span = original.slice(from, to);
-  for (const word of span.split(/[^\p{L}\p{M}]+/u)) {
-    if (word.length >= 2 && !HAS_DIACRITICS.test(word)) return true;
+  const words = original.slice(from, to).split(/[^\p{L}\p{M}]+/u).filter((w) => w.length >= 2);
+  for (const word of words) {
+    // Chỉ cách viết CÓ DẤU mới được tha. Từ không dấu chính là trường hợp cần
+    // hàng rào này, nên nó không bao giờ là bằng chứng ngoại phạm.
+    if (!HAS_DIACRITICS.test(word)) continue;
+    const legit = LEGITIMATE_HOMOGRAPHS[stripDiacritics(word).toLowerCase()];
+    if (legit?.includes(word.toLowerCase())) return false;
   }
-  return false;
+  return true;
 }
 
 export interface ClaimHit { match: string; why: string; instead: string; index: number }
@@ -254,6 +278,14 @@ export function findForbiddenClaims(text: string): ClaimHit[] {
     { text: base, folded: false, loose: false, origin: base },
     { text: folded, folded: true, loose: false, origin: base },
   ];
+  /* Ký tự zero-width bị xoá trong chuẩn hoá, nên "Điều<ZWSP>trị nám" thành
+     "Điềutrị nám" và mẫu có dấu cách không khớp — kiểm định lần 12. Thêm một
+     cách đọc coi zero-width là khoảng trắng. */
+  if (/[\u200b-\u200d\u2060\ufeff]/.test(text)) {
+    const spaced = forScan(text.replace(/[\u200b-\u200d\u2060\ufeff]/g, ' '));
+    readings.push({ text: spaced, folded: false, loose: false, origin: spaced });
+    readings.push({ text: stripDiacritics(spaced), folded: true, loose: false, origin: spaced });
+  }
   if (spread) {
     readings.push({ text: spread, folded: false, loose: true, origin: spread });
     readings.push({ text: stripDiacritics(spread), folded: true, loose: true, origin: spread });

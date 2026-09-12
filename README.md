@@ -21,14 +21,15 @@ scripts/check-budget.mjs     cổng ngân sách trọng lượng, chạy trong C
 
 ## Thêm một sản phẩm mới
 
-1. **Chép thư mục mẫu**: `cp -r src/content/_template src/content/products/<slug>/`
-   — mẫu đã có sẵn các trường bắt buộc kèm chú thích ngay trong file.
+1. **Chép file mẫu**: `mkdir -p src/content/products/<slug> && cp src/content/_template/vi.json src/content/products/<slug>/`
 2. Sửa `slug`, `translationKey`, `name`, `sku`, `price`, `seo`, `compliance`.
 3. Sửa `blocks` — thứ tự trong mảng chính là thứ tự hiển thị trên trang.
 4. Đặt `status: "published"` khi muốn lên trang.
 
-**Bảng trường đầy đủ: [`docs/truong-du-lieu.md`](docs/truong-du-lieu.md)** — sinh
-tự động từ schema bằng `npm run docs:fields`, và CI fail nếu nó lệch khỏi schema.
+Hướng dẫn đầy đủ cho người biên tập: **[`docs/them-san-pham.md`](docs/them-san-pham.md)**
+— gồm bảng neo mặc định và bảng giải nghĩa thông báo lỗi thường gặp.
+Bảng trường: **[`docs/truong-du-lieu.md`](docs/truong-du-lieu.md)** — sinh tự động
+từ schema bằng `npm run docs:fields`, và CI fail nếu nó lệch khỏi schema.
 
 Không cần khai kích thước ảnh: đặt file vào `src/assets/images/` là đủ, máy tự
 đọc số pixel từ chính file.
@@ -49,7 +50,10 @@ npm run dev      # máy chủ phát triển
 npm run build    # xuất ra dist/
 npm run preview  # xem thử bản đã build
 
-npm run test:guards   # 170+ ca: hàng rào giá, từ cấm, dữ liệu cá nhân, richtext, lint mẫu
+npm run test:guards   # toàn bộ hàng rào: giá, từ cấm (kèm khẳng định ĐÚNG luật nào
+                      # bắt), dữ liệu cá nhân, richtext, lint bộ mẫu, và bộ thử
+                      # đi qua schema (tầng nối dây)
+npm run test:schema   # chỉ bộ thử đi qua schema
 npm run test:order    # 8 kịch bản gửi đơn thật trên Chromium, có cả kịch bản áp CSP
 npm run docs:fields   # sinh lại docs/truong-du-lieu.md từ schema
 node scripts/check-budget.mjs        # ngân sách trọng lượng + đối chiếu CSP với endpoint

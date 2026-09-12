@@ -78,6 +78,14 @@ const CHAN = [
   'tri&nbsp;nám tận gốc',
   // Kiểm định lần 11: cụm không liền kề.
   'Sản phẩm chữa bệnh nám da.', 'San pham nay chua benh nam da.',
+  // Kiểm định lần 12: đảo thứ tự, viết tắt có dấu chấm, dạng so sánh khác.
+  'Sản phẩm giúp nám biến mất hoàn toàn.', 'Nám hết hẳn sau 8 tuần.',
+  'F.D.A. approved formula.', 'Best melasma cream, number 1 worldwide.',
+  // sai một dấu trên chính từ khoá
+  'Kem điều trị nạm tận gốc.', 'Đặc trị nàm chân sâu.', 'Chữa nãm da hiệu quả.',
+  'Sản phẩm được Bộ Y Tế cấp phếp lưu hành.',
+  // ký tự zero-width dán hai từ liền
+  'Điều\u200Btrị nám tận gốc.',
   // hai lượt mã hoá
   'Cam k&amp;#7871;t hoàn ti&amp;#7873;n n&amp;#7871;u không h&amp;#7871;t nám.',
 ];
@@ -105,20 +113,70 @@ const CHO_QUA = [
   'Đọc kỹ sách năm 2025.',
   // Kiểm định lần 11: khuyến nghị y tế hợp lệ, không phải so sánh với thủ thuật.
   'Hỏi ý kiến bác sĩ nếu da bạn đang điều trị bằng thuốc bôi.',
+  // Kiểm định lần 12: cách viết có dấu hợp lệ trùng từ khoá sau khi bỏ dấu.
+  'Danh mục sách nam giới bán chạy.',
+  'Nấm da khác với nám da.',
+  'Sản phẩm nằm trong nhóm dưỡng sáng.',
+  'Bộ sách chăm sóc da năm nay.',
+  'Best practices for sun care.',
   'Bước số 1: rửa mặt với nước mát.',
   // Entity hợp lệ trong câu bình thường không được báo nhầm.
   'Kem &amp; serum dùng cùng nhau.',
   'Ghi chú: giá &lt; mức niêm yết cũ.',
 ];
 
+/*
+ * Ca chặn KÈM lý do mong đợi.
+ *
+ * Kiểm định lần 12: một ca "xanh" chỉ khẳng định `length > 0`, nên nó không
+ * chứng minh gì về luật nó nhắm tới — nhiều ca đang được một luật KHÁC bắt hộ.
+ * Tắt luật "chứng minh lâm sàng" đi thì bộ thử vẫn xanh, vì hai ca của nó được
+ * "hết nám" và "erase melasma" bắt thay. Những ca dưới đây khẳng định đúng cụm
+ * bị bắt, nên mỗi luật có ít nhất một ca thật sự canh nó.
+ */
+const CHAN_CO_LY_DO = [
+  ['Đã được chứng minh lâm sàng cho mọi loại da.', 'chứng minh lâm sàng'],
+  ['Sản phẩm đã được kiểm nghiệm lâm sàng tại Pháp.', 'kiểm nghiệm lâm sàng'],
+  ['Kem điều trị nám tận gốc.', 'điều trị nám'],
+  ['Bác sĩ da liễu khuyên dùng sản phẩm này.', 'bác sĩ da liễu khuyên dùng'],
+  ['Sản phẩm đã được Bộ Y Tế cấp phép lưu hành.', 'Bộ Y Tế cấp phép'],
+  ['Đây là kem nám tốt nhất thị trường.', 'tốt nhất'],
+  ['Cam kết hoàn tiền nếu không hết nám.', 'cam kết hoàn tiền'],
+  ['Hiệu quả tương đương laser.', 'tương đương laser'],
+  ['Triệt tiêu nám vĩnh viễn.', 'vĩnh viễn'],
+  ['92% khách hàng thấy da sáng hơn.', '92% khách hàng'],
+  ['Clinically proven to fade dark spots.', 'clinically proven'],
+  ['FDA approved formula.', 'FDA approved'],
+  ['Money back guarantee if it does not work.', 'money back guarantee'],
+  ['Removes melasma permanently.', 'permanently'],
+  ['Dermatologist recommended.', 'Dermatologist recommended'],
+  ['The best melasma cream on the market.', 'the best'],
+  ['As effective as laser treatment.', 'as effective as laser'],
+  ['92% of customers saw results.', '92% of customers'],
+  ['Cures dark spots in four weeks.', 'Cures dark spots'],
+];
+
 let bad = 0;
 for (const s of CHAN) {
   if (!findForbiddenClaims(s).length) { console.error(`  LỌT   phải chặn: ${JSON.stringify(s)}`); bad++; }
+}
+for (const [s, expected] of CHAN_CO_LY_DO) {
+  const hits = findForbiddenClaims(s);
+  if (!hits.length) {
+    console.error(`  LỌT   phải chặn: ${JSON.stringify(s)}`);
+    bad++;
+  } else if (!hits.some((h) => h.match.toLowerCase().includes(expected.toLowerCase()))) {
+    console.error(`  LÝ DO SAI  ${JSON.stringify(s)} — mong bắt "${expected}", ` +
+      `thực tế bắt ${JSON.stringify(hits.map((h) => h.match))}`);
+    bad++;
+  }
 }
 for (const s of CHO_QUA) {
   const h = findForbiddenClaims(s);
   if (h.length) { console.error(`  NHẦM  phải cho qua: ${JSON.stringify(s)} → "${h[0].match}"`); bad++; }
 }
-console.log(`  ${CHAN.length + CHO_QUA.length - bad}/${CHAN.length + CHO_QUA.length} ca đúng ` +
-            `(${CHAN.length} phải chặn, ${CHO_QUA.length} phải cho qua)`);
+const total = CHAN.length + CHAN_CO_LY_DO.length + CHO_QUA.length;
+console.log(`  ${total - bad}/${total} ca đúng ` +
+            `(${CHAN.length} phải chặn, ${CHAN_CO_LY_DO.length} phải chặn ĐÚNG LÝ DO, ` +
+            `${CHO_QUA.length} phải cho qua)`);
 process.exit(bad ? 1 : 0);

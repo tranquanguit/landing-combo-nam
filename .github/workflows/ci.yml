@@ -79,8 +79,15 @@ jobs:
       - name: Cổng CSP phải chặn endpoint khác miền
         run: |
           PUBLIC_ORDER_ENDPOINT=https://api.khong-co-trong-csp.example/orders npm run build
-          if node scripts/check-budget.mjs; then
+          # Phải fail ĐÚNG VÌ CSP. Bản trước coi mọi mã thoát khác 0 là "đã chặn",
+          # nên vượt ngân sách ảnh hay lỗi cú pháp script cũng làm bước này xanh.
+          out=$(node scripts/check-budget.mjs 2>&1) && {
             echo "LỖI: cổng CSP không chặn endpoint ngoài connect-src" >&2
             exit 1
-          fi
-          echo "ok: cổng CSP chặn đúng endpoint ngoài connect-src"
+          }
+          echo "$out"
+          echo "$out" | grep -q 'connect-src không cho phép endpoint' || {
+            echo "LỖI: cổng fail nhưng KHÔNG phải vì CSP — lý do khác đang che mất phép thử" >&2
+            exit 1
+          }
+          echo "ok: cổng CSP chặn đúng endpoint ngoài connect-src, đúng lý do"

@@ -1124,3 +1124,125 @@ Kiểm định viên chỉ ra một điều quan trọng hơn mọi lỗi trong 
 định ngược** (CI đỏ nếu cổng CSP không fail được) và một **lint quét chính bộ
 mẫu** (`pattern-lint`) thay vì quét nội dung. Cả hai kiểm tra *hàng rào có còn
 là hàng rào*, không kiểm tra *nội dung có sạch*.
+
+---
+
+## Vòng 20 — đóng kiểm định độc lập lần 12
+
+Vòng 12 tìm ra điều quan trọng nhất trong cả mười hai vòng, và nó không phải một
+lỗi mà là một **lỗ kiến trúc của chính bộ thử**:
+
+> "Cả năm file test đều gọi thẳng hàm trong `src/lib/*`; không test nào đi qua
+> schema. Vì vậy cửa hậu `reviewedClaims`, việc `compliance.warnings` được miễn,
+> việc trường nào được quét — không có một ca nào. P0-1 vô hình với 203 ca theo
+> đúng nghĩa kiến trúc."
+
+Đó là lý do cùng một cửa hậu sống sót ba vòng vá trong khi mọi cổng vẫn xanh.
+
+### Bỏ hẳn cơ chế ngoại lệ
+
+`reviewedClaims` bị phá ở cả bốn vòng 9, 10, 11, 12 — miễn theo chuỗi, rồi theo
+vị trí, rồi bắt khai câu đầy đủ ≥40 ký tự. Vòng 12 chỉ cần khai **chính câu
+quảng cáo** làm ngoại lệ: `"Combo này xoá nám vĩnh viễn và được bác sĩ da liễu
+khuyên dùng mỗi tối"` — ba luật bị vô hiệu bằng một dòng JSON, build xanh, câu
+lên `dist`.
+
+Mỗi lần vá lại còn một đường khác, vì bản chất nó là **một nút tắt cho chính
+hàng rào đắt nhất của dự án**. Nay nó bị xoá hoàn toàn. Câu duy nhất từng cần nó
+viết lại được mà không mất nghĩa: *"Nếu nám của bạn cần can thiệp y khoa, hãy
+đến gặp bác sĩ da liễu."* — **nội dung phải vừa với hàng rào, không phải ngược lại.**
+
+### Bộ thử đi qua schema: `tests/schema-gate.mjs`
+
+21 ca, mỗi ca là một tài liệu sản phẩm hoàn chỉnh chạy qua đúng schema mà
+`npm run build` dùng: cửa hậu, tuyên bố bị cấm (có dấu / không dấu / sai dấu),
+số tiền viết tay, dữ liệu cá nhân, thiếu khối order, id trùng, neo chết, neo trỏ
+vào khối bị consent ẩn, `javascript:` URL, gõ sai khoá lồng nhau, `evidence`
+không nguồn, hai gói `recommended`, `availability` khác `InStock`, slug sai.
+
+Kiểm chứng nó bắt được hồi quy thật: tắt luật "phải có đúng một khối order" →
+20/21, chỉ đích danh đúng ca đó.
+
+### `foldedHitIsReal` — đảo mặc định
+
+Bản vá vòng 19 đòi đoạn khớp phải có ≥1 từ gõ không dấu, nên **sai một dấu trên
+chính từ khoá là lọt**: `"điều trị nạm"`, `"hết nạm"`, `"đặc trị nàm"`,
+`"chữa nãm"`, `"cấp phếp"` — 7 câu. Đồng thời báo nhầm `"sách nam giới"`.
+
+Nay đảo mặc định: lần khớp trên bản bỏ dấu được **tin**, trừ khi từ khoá trong
+đoạn là một cách viết **có dấu hợp lệ đã biết** (`năm`, `nắm`, `nằm`, `nấm`,
+`thăm`, `thắm`, `chưa`, `chứa`, `sách`, `phép`…). Hàng rào mặc định chặn cái nó
+không nhận ra. Và cách viết **không dấu không bao giờ là bằng chứng ngoại phạm** —
+đó chính là trường hợp cần hàng rào.
+
+Kèm: ký tự zero-width dán hai từ liền (`Điều<ZWSP>trị nám`) nay có một cách đọc
+riêng coi zero-width là khoảng trắng.
+
+### `.strict()` — 15 nhóm trường còn lại
+
+Trước vòng này `.strict()` chỉ có ở khối cấp 1 và `image`, nên gõ sai
+`ingredients.rows[].referenceNotee` (chính trường chống dẫn nguồn gây hiểu nhầm)
+hay `cards.items[].metaa` là **mất nội dung trong im lặng** — trong khi cả ba
+tài liệu khẳng định điều ngược lại. Nay phủ cả `rows[]`, `items[]` (cards, steps,
+testimonials, faq), `consent`, `explainer`, `secondaryCta`, `video`, `includes[]`,
+`gifts[]`, `marketplaces[]`. Kiểm chứng: ba khoá gõ sai đều bị chỉ đích danh.
+
+### Ca thử kèm LÝ DO
+
+Vòng 12 chứng minh bộ thử đang chứng nhận sai: tắt luật "chứng minh lâm sàng" đi
+thì **bộ thử vẫn xanh**, vì hai ca của nó được `hết nám` và `erase melasma` bắt
+hộ. Một ca chỉ khẳng định `length > 0` không chứng minh gì về luật nó nhắm tới.
+
+Nay có 19 ca `CHAN_CO_LY_DO` khẳng định đúng cụm bị bắt, phủ mọi luật trong từ
+điển. Kiểm chứng: tắt luật đó → hai ca đỏ ngay.
+
+### Cổng chứng nhận đúng lý do
+
+Bước CI khẳng định ngược trước đây coi **mọi** mã thoát ≠0 là "cổng CSP đã chặn"
+— vượt ngân sách ảnh hay lỗi cú pháp script cũng làm nó xanh. Nay nó grep đúng
+dòng lý do. Kịch bản đặt hàng thứ 8 nay **fail khi `public/_headers` không có
+CSP** (trước đó xoá hẳn CSP thì cả 8 kịch bản vẫn xanh), và khi `script-src` vỡ
+thì báo `biểu mẫu dùng được: false` thay vì chết bằng timeout 60 giây.
+
+### Tài liệu cho người biên tập
+
+Vòng 12 đóng vai biên tập viên và **vẫn mất ba vòng build-lỗi** — đúng con số mà
+README tuyên bố đã khắc phục. Nguyên nhân: bảng trường chỉ bung nhóm lồng nhau ở
+cấp sản phẩm, phần "Các loại khối" vẫn là danh sách tên khoá cấp 1; không tài
+liệu nào nói `rows[]` cần `name`/`role`/`suitedFor`, FAQ dùng `q`/`a`, hay neo
+mặc định là gì.
+
+Nay `docs/them-san-pham.md` có **bảng neo mặc định** và **bảng giải nghĩa thông
+báo lỗi thường gặp**. Và lệnh trong README đổi thành chép **file**, không chép cả
+thư mục — `cp -r` mang theo cả file hướng dẫn vào thư mục sản phẩm.
+
+Kiểm chứng: dựng một sản phẩm 4 khối (hero + ingredients + faq + order) chỉ từ
+tài liệu → build xanh **ngay lần đầu**.
+
+### Ba lỗ từ vựng có thật
+
+`"nám biến mất hoàn toàn"` (đảo thứ tự), `"number 1 worldwide"` / `"Best melasma
+cream"`, `"F.D.A. approved"` — đều đã bắt, đều có ca thử.
+
+### Đo lại
+
+Bộ thử nay **257 ca**: money 55/55, claims **117/117** (70 chặn + 19 chặn đúng lý
+do + 28 cho qua), richtext 23/23, dữ liệu cá nhân 24/24, lint mẫu 17/17,
+**schema 21/21**, đặt hàng 8/8. `astro check` 0 lỗi. Ngân sách, chuông hạn ưu
+đãi, tài liệu-khớp-schema đều xanh.
+
+### Ba lớp phòng thủ khác loại nhau, sau 12 vòng
+
+1. **Ca thử nội dung** — lỗi cũ không tái diễn (có từ vòng 12).
+2. **Lint bộ mẫu** (`pattern-lint`) — hàng rào có còn là hàng rào (vòng 18).
+3. **Bộ thử qua schema** (`schema-gate`) — tầng nối dây có thật sự nối (vòng 20).
+
+Ba thứ này trả lời ba câu hỏi khác nhau. Mười hai vòng kiểm định cho thấy chỉ có
+lớp thứ nhất thì một cửa hậu sống được ba vòng mà mọi cổng vẫn xanh.
+
+### Vẫn còn nợ
+
+Dữ liệu doanh nghiệp (không đổi). `ci.yml` không deploy. Chưa có giao diện hết
+hàng. Chưa đo trên thiết bị và mạng thật tại Việt Nam. Và điều vòng 12 nêu đúng:
+23 câu hợp lệ viết tay chưa phải một hàng rào chống báo nhầm — cần một corpus
+văn bản mỹ phẩm hợp lệ vài trăm câu để tỉ lệ báo nhầm trở thành cổng đo được.

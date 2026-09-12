@@ -2,7 +2,7 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { MONEY_TOKENS } from './lib/money-text.ts';
 import { findHandwrittenMoney } from './lib/money-scan.ts';
-import { findForbiddenClaims, findPersonalData, scanText } from './lib/claims-lexicon.ts';
+import { findForbiddenClaims, findPersonalData } from './lib/claims-lexicon.ts';
 import { DEFAULT_ANCHOR } from './lib/block-anchors.ts';
 import { readFileSync } from 'node:fs';
 
@@ -124,7 +124,7 @@ const blocks = z.discriminatedUnion('type', [
     secondaryCta: z.object({
       label: z.string(),
       href: z.string().regex(/^#[a-z0-9-]+$/, 'neo dạng #ten-khoi'),
-    }).optional(),
+    }).strict().optional(),
     trustBadges: z.array(z.string()).max(5).default([]),
   }).strict(),
   z.object({
@@ -160,7 +160,7 @@ const blocks = z.discriminatedUnion('type', [
         });
       }
     })),
-    explainer: z.object({ heading: z.string(), body: z.array(z.string()) }),
+    explainer: z.object({ heading: z.string(), body: z.array(z.string()) }).strict(),
   }).strict(),
   z.object({
     type: z.literal('cards'),
@@ -175,7 +175,7 @@ const blocks = z.discriminatedUnion('type', [
       meta: z.string().optional(),
       icon: z.string().optional(),
       image: image.optional(),
-    })),
+    }).strict()),
   }).strict(),
   z.object({
     type: z.literal('ingredients'),
@@ -195,7 +195,7 @@ const blocks = z.discriminatedUnion('type', [
        * cứu dùng 5% để chống lưng cho công thức 1% là dẫn nguồn gây hiểu nhầm.
        */
       referenceNote: z.string().optional(),
-    })),
+    }).strict()),
   }).strict(),
   z.object({
     type: z.literal('steps'),
@@ -204,7 +204,7 @@ const blocks = z.discriminatedUnion('type', [
     heading: z.string(),
     intro: z.string().optional(),
     totalTime: z.string().optional(),
-    items: z.array(z.object({ heading: z.string(), body: z.string() })),
+    items: z.array(z.object({ heading: z.string(), body: z.string() }).strict()),
     footnote: z.string().optional(),
   }).strict(),
   z.object({
@@ -224,7 +224,7 @@ const blocks = z.discriminatedUnion('type', [
       statement: z.string(),
       /** Điều kiện chụp: cùng đèn, cùng góc, có trang điểm hay không. */
       conditions: z.string().optional(),
-    }),
+    }).strict(),
     images: z.array(image),
   }).strict(),
   z.object({
@@ -240,7 +240,7 @@ const blocks = z.discriminatedUnion('type', [
     consent: z.object({
       obtained: z.boolean(),
       statement: z.string(),
-    }),
+    }).strict(),
     items: z.array(z.object({
       quote: z.string(),
       name: z.string(),
@@ -248,8 +248,8 @@ const blocks = z.discriminatedUnion('type', [
       avatar: image.optional(),
       /** Bắt buộc với nội dung có tài trợ (FTC, và để minh bạch tại VN). */
       sponsored: z.boolean().default(false),
-      video: z.object({ src: z.string(), poster: z.string() }).optional(),
-    })),
+      video: z.object({ src: z.string(), poster: z.string() }).strict().optional(),
+    }).strict()),
   }).strict(),
   z.object({
     type: z.literal('order'),
@@ -263,7 +263,7 @@ const blocks = z.discriminatedUnion('type', [
     id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
-    items: z.array(z.object({ q: z.string(), a: z.string() })),
+    items: z.array(z.object({ q: z.string(), a: z.string() }).strict()),
   }).strict(),
 ]);
 
@@ -289,8 +289,8 @@ const products = defineCollection({
     shortName: z.string().optional(),
     sku: z.string(),
     /** Tên từng sản phẩm con trong combo, dùng cho schema và phần quà tặng. */
-    includes: z.array(z.object({ name: z.string(), note: z.string().optional() })).default([]),
-    gifts: z.array(z.object({ name: z.string(), note: z.string().optional() })).default([]),
+    includes: z.array(z.object({ name: z.string(), note: z.string().optional() }).strict()).default([]),
+    gifts: z.array(z.object({ name: z.string(), note: z.string().optional() }).strict()).default([]),
 
     price: money,
     compareAtPrice: money.optional(),
@@ -342,24 +342,7 @@ const products = defineCollection({
       declaringAddress: z.string(),
       functions: z.string(),
       warnings: z.array(z.string()).min(1),
-      /**
-       * Ngoại lệ đã được người thật xem xét.
-       *
-       * Có những câu chứa đúng cụm bị cấm nhưng nói điều ngược lại — ví dụ
-       * "Nếu bạn cần điều trị nám, hãy đến gặp bác sĩ da liễu", là câu một trang
-       * mỹ phẩm NÊN viết. Nới từ điển để cho qua sẽ mở lỗ thật; thay vào đó mỗi
-       * ngoại lệ phải được khai ở đây kèm lý do, in ra lúc build để không ai
-       * quên, và chỉ miễn cho ĐÚNG đoạn văn bản đã khai.
-       */
-      reviewedClaims: z.array(z.object({
-        /* Phải là một câu đầy đủ, không phải chính cụm bị cấm.
-           Kiểm định lần 11: `min(12)` cho phép khai đúng "điều trị nám" —
-           tức khai chính cụm bị cấm làm ngoại lệ, một nút tắt hoàn toàn. */
-        text: z.string().min(40, 'Ngoại lệ phải là một câu đầy đủ (≥40 ký tự), ' +
-          'không phải chính cụm bị cấm. Ngữ cảnh mới là thứ làm câu đó hợp lệ.'),
-        reason: z.string().min(8),
-      })).max(5, 'Quá nhiều ngoại lệ là dấu hiệu nội dung cần viết lại, không phải cần thêm ngoại lệ.')
-        .default([]),
+
     }).strict(),
 
     blocks: z.array(blocks).min(1),
@@ -390,29 +373,17 @@ const products = defineCollection({
 
     /* Từ ngữ bị cấm, quét trên MỌI trường chuỗi — cổng evidence chỉ soi
        hero.usp[] nên mọi tuyên bố kết quả đặt chỗ khác đều lọt. */
-    const reviewed = p.compliance?.reviewedClaims ?? [];
+    /* KHÔNG có cơ chế ngoại lệ.
+       Ba vòng kiểm định liền (9, 10, 11) và cả vòng 12 đều phá được cổng
+       `reviewedClaims`: miễn theo chuỗi, rồi miễn theo vị trí, rồi bắt khai câu
+       đầy đủ ≥40 ký tự — mỗi lần vá lại còn một đường khác, vì bản chất nó là
+       một nút tắt cho chính hàng rào đắt nhất của dự án. Câu duy nhất từng cần
+       nó ("Nếu bạn cần điều trị nám, hãy đến gặp bác sĩ da liễu") viết lại được
+       mà không mất nghĩa. Nội dung phải vừa với hàng rào, không phải ngược lại. */
     const claims = new Map<string, { match: string; why: string; instead: string }[]>();
     const scanClaims = (node: unknown, path: string): void => {
       if (typeof node === 'string') {
-        /* Miễn trừ theo VỊ TRÍ, không theo chuỗi.
-           Kiểm định lần 10: bản trước miễn theo chuỗi khớp được, nên chỉ cần
-           dán câu ngoại lệ hợp lệ vào cuối đoạn là mọi lần xuất hiện khác của
-           cùng cụm trong đoạn đó cũng được tha — "Kem điều trị nám tận gốc chỉ
-           sau 2 tuần. Nếu bạn cần điều trị nám, hãy đến gặp bác sĩ da liễu."
-           lên trang với build xanh. Nay chỉ tha đúng ký tự nằm trong đoạn đã
-           khai; cụm bị bắt ở chế độ quét không dấu hoặc dồn khoảng trắng
-           (index = -1) KHÔNG bao giờ được tha. */
-        /* Cả hai vế phải ở cùng hệ toạ độ của bộ quét: `node` có thể chứa thẻ
-           HTML và entity, bị bóc/giải mã trước khi khớp. */
-        const scanned = scanText(node);
-        const spans = reviewed.flatMap((r) => {
-          const needle = scanText(r.text);
-          const at = scanned.indexOf(needle);
-          return at === -1 ? [] : [[at, at + needle.length] as [number, number]];
-        });
-        const hits = findForbiddenClaims(node).filter(
-          (h) => !(h.index >= 0 && spans.some(([a, b]) => h.index >= a && h.index + h.match.length <= b))
-        );
+        const hits = findForbiddenClaims(node);
         if (hits.length) claims.set(path, hits);
       } else if (Array.isArray(node)) {
         node.forEach((v, i) => scanClaims(v, `${path}[${i}]`));
@@ -594,7 +565,7 @@ const brand = defineCollection({
     email: z.string().email(),
     hours: z.string(),
     logo: z.string(),
-    marketplaces: z.array(z.object({ name: z.string(), url: safeUrl.optional() })).default([]),
+    marketplaces: z.array(z.object({ name: z.string(), url: safeUrl.optional() }).strict()).default([]),
   }),
 });
 

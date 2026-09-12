@@ -47,9 +47,6 @@ Dấu `*` = bắt buộc.
 | &nbsp;&nbsp;&nbsp;&nbsp;`compliance.declaringAddress` | chữ | **có** |
 | &nbsp;&nbsp;&nbsp;&nbsp;`compliance.functions` | chữ | **có** |
 | &nbsp;&nbsp;&nbsp;&nbsp;`compliance.warnings` | danh sách chữ | **có** |
-| &nbsp;&nbsp;&nbsp;&nbsp;`compliance.reviewedClaims` | danh sách nhóm trường | không (có sẵn mặc định) |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`compliance.reviewedClaims[].text` | chữ | **có** |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`compliance.reviewedClaims[].reason` | chữ | **có** |
 | `blocks` | danh sách khối — xem mục "Các loại khối" bên dưới | **có** |
 
 ## Các loại khối dùng trong `blocks`
