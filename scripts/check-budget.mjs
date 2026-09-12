@@ -54,6 +54,14 @@ for (const f of files.filter((f) => /\.(avif|webp|jpg|jpeg|png)$/.test(f))) {
   if (s > BUDGET.imageMax) fail.push(`${f}: ảnh ${s}B / ${BUDGET.imageMax}B`);
 }
 
+/* Trang tạm dùng để thử hàng rào không được lọt lên production. */
+const scratch = files
+  .filter((f) => f.endsWith('index.html'))
+  .filter((f) => /\/(zz-|test-|probe-)/.test(f));
+if (scratch.length) {
+  fail.push(`trang tạm lọt vào bản build: ${scratch.join(', ')}`);
+}
+
 for (const line of ok) console.log('  ok  ' + line);
 if (fail.length) {
   console.error('\nVượt ngân sách:\n' + fail.map((l) => '  ✗  ' + l).join('\n'));
