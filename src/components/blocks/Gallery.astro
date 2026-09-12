@@ -1,10 +1,24 @@
 ---
 import Section from '../Section.astro';
 import Picture from '../Picture.astro';
-interface Props { data: any; id?: string; }
-const { data, id } = Astro.props;
+import { t, type Locale } from '../../i18n/ui';
+interface Props { data: any; id?: string; locale: Locale; }
+const { data, id, locale } = Astro.props;
+
+// Không có văn bản đồng ý thì không đăng ảnh người thật. Ràng buộc này được thi
+// hành ở đây thay vì trông vào kỷ luật của người biên tập.
+const publishable = data.consent?.obtained === true;
 ---
 <Section id={id} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} center>
+  {!publishable && (
+    <p class="todo" data-todo>
+      ⚠️ {t(locale, 'todo')}: {data.consent?.statement}
+      {data.consent?.conditions && <> {data.consent.conditions}</>}
+      <br />Ảnh khách hàng đã được ẩn khỏi trang cho tới khi có văn bản đồng ý.
+    </p>
+  )}
+
+  {publishable && (
   <ul class="gallery">
     {data.images.map((img: any) => (
       <li>
@@ -14,7 +28,9 @@ const { data, id } = Astro.props;
       </li>
     ))}
   </ul>
-  {data.disclaimer && <p class="disclaimer">{data.disclaimer}</p>}
+  )}
+  {publishable && data.disclaimer && <p class="disclaimer">{data.disclaimer}</p>}
+  {publishable && data.consent?.conditions && <p class="disclaimer">{data.consent.conditions}</p>}
 </Section>
 
 <style>

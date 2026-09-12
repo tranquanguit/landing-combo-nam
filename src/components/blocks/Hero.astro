@@ -1,8 +1,16 @@
 ---
-import type { Locale } from '../../i18n/ui';
+import { t, type Locale } from '../../i18n/ui';
 import Picture from '../Picture.astro';
 interface Props { data: any; locale: Locale; }
-const { data } = Astro.props;
+const { data, locale } = Astro.props;
+
+/** Nhãn cho biết mỗi tuyên bố dựa trên cái gì. */
+const evidenceLabel: Record<string, string> = {
+  verified: t(locale, 'evidence.verified'),
+  study: t(locale, 'evidence.study'),
+  survey: t(locale, 'evidence.survey'),
+  ingredient: t(locale, 'evidence.ingredient'),
+};
 ---
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap hero-grid">
@@ -21,7 +29,14 @@ const { data } = Astro.props;
             </svg>
             <span>
               <span set:html={u.text} />
-              {u.qualifier && <em class="qualifier"> — {u.qualifier}</em>}
+              <span class="basis">
+                {u.source?.startsWith('#')
+                  ? <a href={u.source}>{evidenceLabel[u.evidence]}</a>
+                  : u.source
+                    ? <a href={u.source} rel="noopener nofollow">{evidenceLabel[u.evidence]}</a>
+                    : <span>{evidenceLabel[u.evidence]}</span>}
+                {u.qualifier && <> · {u.qualifier}</>}
+              </span>
             </span>
           </li>
         ))}
@@ -74,7 +89,12 @@ const { data } = Astro.props;
   .usp { list-style: none; padding: 0; margin: var(--s-5) 0; display: grid; gap: var(--s-3); }
   .usp li { display: flex; gap: var(--s-3); align-items: flex-start; }
   .usp svg { flex: 0 0 20px; margin-top: 5px; color: var(--green-clinic); }
-  .qualifier { color: var(--ink-muted); font-style: normal; font-size: var(--t-sm); }
+  .basis {
+    display: block; margin-top: 2px;
+    font-size: var(--t-xs); color: var(--ink-muted);
+  }
+  .basis a { color: var(--ink-muted); text-decoration: underline; text-decoration-style: dotted; }
+  .basis a:hover { color: var(--indigo); }
 
   .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
 

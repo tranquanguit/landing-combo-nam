@@ -26,7 +26,13 @@ const { brand: b, locale, alternates = [] } = Astro.props;
     backdrop-filter: saturate(180%) blur(10px);
     border-bottom: 1px solid var(--line);
   }
-  .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s-4); min-height: var(--header-h); }
+  .bar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--s-4);
+    /* Chiều cao cố định, không phải min-height: header không được co giãn
+       khi font tải xong, nếu không cả trang bị đẩy xuống. */
+    height: var(--header-h);
+  }
   .brand :global(img) { height: 30px; width: auto; object-fit: contain; }
   .actions { display: flex; align-items: center; gap: var(--s-4); }
   .tel { display: none; font-weight: 600; font-size: var(--t-sm); color: var(--ink-navy); text-decoration: none; }

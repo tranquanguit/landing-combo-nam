@@ -77,7 +77,7 @@ p.blocks.forEach((block: any, i: number) => {
         case 'cards':        return <Cards data={block} id={block.id} surface={surfaceFor.get(i)} />;
         case 'ingredients':  return <Ingredients data={block} id={block.id} locale={locale} />;
         case 'steps':        return <Steps data={block} id={block.id} />;
-        case 'gallery':      return <Gallery data={block} id={block.id ?? 'hieu-qua'} />;
+        case 'gallery':      return <Gallery data={block} id={block.id ?? 'hieu-qua'} locale={locale} />;
         case 'testimonials': return <Testimonials data={block} id={block.id} locale={locale} />;
         case 'order':        return <Order data={block} product={p} brand={b} locale={locale} />;
         case 'faq':          return <Faq data={block} id={block.id} />;

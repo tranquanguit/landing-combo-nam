@@ -84,12 +84,14 @@
         },
         {
           "text": "<strong>Công khai tỉ lệ từng hoạt chất</strong>, không giấu trong cụm “thành phần độc quyền”",
-          "evidence": "verified"
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "xem bảng thành phần ngay trên trang này"
         },
         {
-          "text": "<strong>Cảm nhận da đều màu hơn sau 4–6 tuần</strong>",
-          "evidence": "survey",
-          "qualifier": "kết quả khác nhau tùy cơ địa"
+          "text": "<strong>Nói rõ mốc thời gian theo từng loại nám</strong>, không hứa một con số chung cho tất cả",
+          "evidence": "ingredient",
+          "qualifier": "bảng mốc thời gian ở phần dưới"
         }
       ],
       "image": {
@@ -293,7 +295,12 @@
           "caption": "Sau 12 tuần"
         }
       ],
-      "disclaimer": "Ảnh do khách hàng chia sẻ, chưa qua chỉnh sửa màu da. Điều kiện ánh sáng giữa các lần chụp có thể khác nhau. Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
+      "disclaimer": "Ảnh do khách hàng chia sẻ, chưa qua chỉnh sửa màu da. Điều kiện ánh sáng giữa các lần chụp có thể khác nhau. Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày.",
+      "consent": {
+        "obtained": false,
+        "statement": "Chưa thu thập được văn bản đồng ý cho những ảnh này. Cho tới khi có, ảnh chỉ được dùng để tham khảo nội bộ và không nên đăng công khai.",
+        "conditions": "Các cặp ảnh được chụp ở điều kiện ánh sáng, góc máy và mức trang điểm khác nhau, nên không so sánh trực tiếp được."
+      }
     },
     {
       "type": "testimonials",

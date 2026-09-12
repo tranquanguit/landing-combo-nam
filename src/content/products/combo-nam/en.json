@@ -85,12 +85,14 @@
         },
         {
           "text": "<strong>Full percentages on the label</strong> — nothing hidden inside a “proprietary complex”",
-          "evidence": "verified"
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "the full table is on this page"
         },
         {
-          "text": "<strong>Most people notice a more even tone at four to six weeks</strong>",
-          "evidence": "survey",
-          "qualifier": "results vary between individuals"
+          "text": "<strong>Honest timelines by pigmentation type</strong>, not one number promised to everybody",
+          "evidence": "ingredient",
+          "qualifier": "see the timeline table below"
         }
       ],
       "image": {

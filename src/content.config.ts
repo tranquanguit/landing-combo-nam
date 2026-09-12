@@ -9,15 +9,41 @@ import { glob } from 'astro/loaders';
 
 const money = z.number().int().positive();
 
-/** Tuyên bố về sản phẩm, luôn đi kèm mức độ bằng chứng để kiểm soát rủi ro pháp lý. */
+/**
+ * Tuyên bố về sản phẩm. Mỗi tuyên bố phải khai mình dựa trên cái gì.
+ *
+ * Đây không phải siêu dữ liệu trang trí: schema từ chối build nếu một tuyên bố
+ * khai có chứng từ mà không dẫn được nguồn, hoặc khai theo khảo sát mà không nêu
+ * cỡ mẫu. Tuyên bố không có gì chống lưng thì không được lên màn hình đầu.
+ */
 const claim = z.object({
   text: z.string(),
-  /** verified: có chứng từ | survey: khảo sát nội bộ | ingredient: suy ra từ hoạt chất | none: chưa có bằng chứng */
-  evidence: z.enum(['verified', 'survey', 'ingredient', 'none']).default('none'),
+  /**
+   * verified   — có chứng từ kiểm chứng được (phiếu kiểm nghiệm, số công bố)
+   * study      — dựa trên nghiên cứu công bố, phải dẫn link
+   * survey     — khảo sát nội bộ, phải nêu cỡ mẫu và cách thu thập
+   * ingredient — suy ra từ bảng thành phần, không hứa kết quả
+   */
+  evidence: z.enum(['verified', 'study', 'survey', 'ingredient']),
   /** Nguồn kiểm chứng: số phiếu công bố, link nghiên cứu, tên đơn vị kiểm nghiệm. */
   source: z.string().optional(),
-  /** Điều kiện đi kèm, ví dụ cỡ mẫu hoặc thời gian sử dụng. */
+  /** Điều kiện đi kèm: cỡ mẫu, thời gian dùng, cách thu thập. */
   qualifier: z.string().optional(),
+}).superRefine((c, ctx) => {
+  if ((c.evidence === 'verified' || c.evidence === 'study') && !c.source) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: `Tuyên bố "${c.text.slice(0, 48)}…" khai evidence="${c.evidence}" nhưng không có source. ` +
+        `Dẫn được nguồn thì mới được khai, không thì hạ xuống "ingredient".`,
+    });
+  }
+  if (c.evidence === 'survey' && !c.qualifier) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: `Tuyên bố "${c.text.slice(0, 48)}…" khai evidence="survey" nhưng không nêu cỡ mẫu. ` +
+        `Một con số khảo sát không có mẫu số là một con số vô nghĩa.`,
+    });
+  }
 });
 
 const image = z.object({
@@ -113,6 +139,17 @@ const blocks = z.discriminatedUnion('type', [
     heading: z.string(),
     intro: z.string().optional(),
     disclaimer: z.string().optional(),
+    /**
+     * Bắt buộc với ảnh khách hàng: xác nhận đã có văn bản đồng ý.
+     * Không có consent thì không được đăng ảnh người thật — đây là ràng buộc
+     * pháp lý, nên nó nằm trong schema chứ không nằm trong hướng dẫn biên tập.
+     */
+    consent: z.object({
+      obtained: z.boolean(),
+      statement: z.string(),
+      /** Điều kiện chụp: cùng đèn, cùng góc, có trang điểm hay không. */
+      conditions: z.string().optional(),
+    }),
     images: z.array(image),
   }),
   z.object({
