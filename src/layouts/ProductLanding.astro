@@ -13,6 +13,7 @@ import Gallery from '../components/blocks/Gallery.astro';
 import Testimonials from '../components/blocks/Testimonials.astro';
 import Order from '../components/blocks/Order.astro';
 import Faq from '../components/blocks/Faq.astro';
+import Analytics from '../components/Analytics.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { productGraph } from '../lib/schema';
 import { resolveAssetUrl } from '../lib/images';
@@ -91,4 +92,11 @@ p.blocks.forEach((block: any, i: number) => {
 
   <SiteFooter brand={b} product={p} locale={locale} />
   <StickyCta brand={b} locale={locale} />
+  <Analytics
+    locale={locale}
+    value={p.price}
+    currency={p.currency}
+    itemId={p.sku}
+    itemName={p.shortName ?? p.name}
+  />
 </BaseLayout>

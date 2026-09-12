@@ -60,6 +60,10 @@ export const ui = {
     'footer.hours': 'Giờ làm việc',
     'footer.official': 'Kênh bán chính hãng',
     'legal.storeLinks': 'đường dẫn tới từng gian hàng chính hãng — trang đang khẳng định có gian hàng nhưng chưa dẫn được về đâu',
+    'consent.title': 'Đo lường truy cập',
+    'consent.body': 'Chúng tôi muốn dùng cookie đo lường để biết quảng cáo nào đưa bạn tới đây. Bạn có thể từ chối mà không ảnh hưởng gì tới việc đặt hàng.',
+    'consent.accept': 'Đồng ý',
+    'consent.decline': 'Từ chối',
     'todo': 'Cần bổ sung dữ liệu thật',
   },
   en: {
@@ -114,6 +118,10 @@ export const ui = {
     'footer.hours': 'Opening hours',
     'footer.official': 'Official channels',
     'legal.storeLinks': 'links to each official storefront — the page claims they exist but points nowhere',
+    'consent.title': 'Analytics',
+    'consent.body': 'We would like to use analytics cookies to see which advert brought you here. Declining changes nothing about ordering.',
+    'consent.accept': 'Accept',
+    'consent.decline': 'Decline',
     'todo': 'Real data still required',
   },
 } as const;

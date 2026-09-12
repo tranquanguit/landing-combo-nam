@@ -80,3 +80,30 @@ Chưa đặt thì nút gửi mang `aria-disabled`, biểu mẫu **không** gửi
 nói thẳng điều đó với khách kèm số hotline. Không có chuyện hiện màn hình cảm ơn giả.
 
 Xem `docs/round-1-synthesis.md` để biết vì sao từng ràng buộc tồn tại.
+
+## Đo lường chuyển đổi
+
+Không hardcode ID nào. Đặt biến môi trường lúc build để bật:
+
+```bash
+PUBLIC_GA4_ID=G-XXXXXXX \
+PUBLIC_META_PIXEL_ID=000000000 \
+PUBLIC_TIKTOK_PIXEL_ID=XXXXXXXX \
+PUBLIC_ORDER_ENDPOINT=https://api.vi-du.com/orders \
+npm run build
+```
+
+Không đặt gì thì trang vẫn phát sự kiện trên `window` (`mocha:event`) để mã khác
+lắng nghe, và **không tải script bên thứ ba nào**.
+
+**Cách nạp.** Không dùng GTM — container của nó chạy custom HTML đồng bộ trong
+click handler và là thủ phạm INP số một trên landing bán hàng. Pixel được nạp sau
+sự kiện `load`, cộng thêm 1,2 giây, rồi mới chờ trình duyệt rảnh; tương tác thật
+của người dùng thì nạp ngay. Đã đo: không host bên ngoài nào được gọi trước tương tác.
+
+**Đồng ý trước ở thị trường ngoài Việt Nam.** Trang bán sang EU và UK, nơi đặt
+cookie đo lường trước khi có đồng ý là vi phạm. Với mọi locale khác `vi`, không
+nạp gì cho tới khi người dùng bấm Đồng ý. Bấm Từ chối thì không bao giờ nạp.
+
+**Sự kiện**: `view_item`, `begin_checkout` (mọi CTA, kèm `cta_id`), `contact`
+(gọi điện / Zalo), `form_start`, `generate_lead`, `scroll_depth`.
