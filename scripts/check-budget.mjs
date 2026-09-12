@@ -195,7 +195,12 @@ if (!cspLine) {
   for (const ep of endpoints) {
     let origin = '';
     try { origin = new URL(ep).origin; } catch { /* đường dẫn tương đối = cùng miền */ }
-    const allowed = !origin || connect.includes(origin) || connect.includes("'self'") && origin === SITE_ORIGIN;
+    /* So khớp CHÍNH XÁC từng nguồn. `includes` là so chuỗi con, nên endpoint
+       gõ thiếu một chữ (https://www.facebook.co) được báo "ok" vì nó là chuỗi
+       con của một nguồn có thật trong policy — kiểm định lần 11. */
+    const sources = connect.trim().split(/\s+/);
+    const allowed = !origin || sources.includes(origin) ||
+      (sources.includes("'self'") && origin === SITE_ORIGIN);
     if (!allowed) {
       fail.push(`public/_headers: connect-src không cho phép endpoint đặt hàng ${origin} — ` +
         `trình duyệt sẽ chặn fetch() và MỌI đơn hàng đều thất bại. ` +

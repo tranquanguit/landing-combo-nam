@@ -43,12 +43,22 @@ const label = (d) => {
   return { string: 'chữ', number: 'số', boolean: 'đúng/sai' }[d.kind] ?? d.kind;
 };
 
+/* Bung cả nhóm trường lồng nhau.
+   Kiểm định lần 11: `compliance` — nhóm bắt buộc theo Nghị định 342/2025 — chỉ
+   hiện một dòng "nhóm trường", nên người biên tập chỉ tạo được sản phẩm nhờ
+   thư mục mẫu chứa sẵn, không nhờ tài liệu. */
 const rows = [];
 const top = describe(product);
-for (const [name, field] of Object.entries(top.fields)) {
-  const d = describe(field);
-  rows.push({ name, type: label(d), required: !d.optional, hasDefault: !!d.hasDefault });
-}
+const walk = (fields, prefix = '', depth = 0) => {
+  for (const [name, field] of Object.entries(fields)) {
+    const d = describe(field);
+    const path = prefix ? `${prefix}.${name}` : name;
+    rows.push({ name: path, type: label(d), required: !d.optional, hasDefault: !!d.hasDefault, depth });
+    if (d.kind === 'object' && depth < 2) walk(d.fields, path, depth + 1);
+    if (d.kind === 'array' && d.of.kind === 'object' && depth < 2) walk(d.of.fields, `${path}[]`, depth + 1);
+  }
+};
+walk(top.fields);
 
 const blockTypes = [];
 const blocksField = describe(top.fields.blocks);
@@ -77,7 +87,7 @@ Dấu \`*\` = bắt buộc.
 
 | Trường | Kiểu | Bắt buộc |
 |---|---|---|
-${rows.map((r) => `| \`${r.name}\` | ${r.type} | ${r.required ? '**có**' : r.hasDefault ? 'không (có sẵn mặc định)' : 'không'} |`).join('\n')}
+${rows.map((r) => `| ${'&nbsp;'.repeat(r.depth * 4)}\`${r.name}\` | ${r.type} | ${r.required ? '**có**' : r.hasDefault ? 'không (có sẵn mặc định)' : 'không'} |`).join('\n')}
 
 ## Các loại khối dùng trong \`blocks\`
 

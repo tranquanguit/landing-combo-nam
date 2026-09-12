@@ -1,5 +1,4 @@
 {
-  "_doc": "MẪU để copy khi thêm sản phẩm. Chép cả thư mục này thành src/content/products/<ten-san-pham>/ rồi sửa. Thư mục _template nằm NGOÀI src/content/products nên không bao giờ lên trang. Bảng trường đầy đủ: docs/truong-du-lieu.md. Kích thước ảnh KHÔNG cần khai — máy đọc từ file.",
   "slug": "ten-san-pham",
   "locale": "vi",
   "translationKey": "ten-san-pham",

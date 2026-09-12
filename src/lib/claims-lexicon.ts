@@ -125,7 +125,7 @@ export const FORBIDDEN: ForbiddenPattern[] = [
     instead: 'mô tả tác dụng của hoạt chất',
   },
   {
-    pattern: /(?<![\p{L}])(trị|điều trị|chữa|đặc trị)\s+(nám|thâm|mụn|sạm)/iu,
+    pattern: /(?<![\p{L}])(trị|điều trị|chữa|đặc trị)\s+(bệnh\s+)?(nám|thâm|mụn|sạm)/iu,
     why: 'biến mỹ phẩm thành thuốc chữa bệnh',
     instead: 'chăm sóc da nám, hỗ trợ làm mờ',
   },
@@ -140,7 +140,10 @@ export const FORBIDDEN: ForbiddenPattern[] = [
     instead: 'dẫn nghiên cứu cụ thể trong bảng thành phần',
   },
   {
-    pattern: /(như|bằng|tương đương|thay thế cho|thay thế)\s*(liệu trình\s*)?(laser|peel|lăn kim|tiêm|thuốc)/iu,
+    /* "bằng thuốc" trong câu khuyến nghị y tế ("da bạn đang điều trị bằng thuốc
+       bôi") không phải so sánh mỹ phẩm với thủ thuật — kiểm định lần 11. Chỉ
+       tính khi nói về CHÍNH sản phẩm này. */
+    pattern: /(như|tương đương|thay thế cho|thay thế)\s*(liệu trình\s*)?(laser|peel|lăn kim|tiêm|thuốc)|(?<![\p{L}])bằng\s+(laser|peel|lăn kim)/iu,
     why: 'so sánh mỹ phẩm với thủ thuật y khoa',
     instead: 'mô tả tác dụng của hoạt chất',
   },
@@ -200,78 +203,87 @@ export const FORBIDDEN: ForbiddenPattern[] = [
 const NEGATED = /(?:không|chẳng|chưa|đừng)\s+(?:phải\s+|có\s+)?(?:là\s+)?(?:thuốc\s+|tác dụng\s+|chứa\s+|dùng\s+để\s+|nhằm\s+|thay thế\s+)?$|(?:không|chẳng|chưa)\s+$|(?:not|never|no)\s+(?:a\s+|an\s+|the\s+)?(?:intended\s+to\s+|meant\s+to\s+|substitute\s+for\s+)?$/iu;
 
 /** Văn bản có chứa dấu tiếng Việt hay không. */
-const HAS_DIACRITICS = /[\u0300-\u036f]|[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]/i;
+const HAS_DIACRITICS = /[̀-ͯ]|[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]/i;
 
 /**
  * Phủ định trong văn bản KHÔNG DẤU.
  *
  * Cố ý KHÔNG sinh bằng stripDiacritics(NEGATED): bỏ dấu thì `đừng` và `dùng`
  * đều thành `dung`, nên từ thông dụng nhất trên một trang mỹ phẩm trở thành từ
- * khoá miễn trừ — "Kem dùng thay thế thuốc bôi" qua sạch mọi luật. Tương tự
- * `chưa`/`chứa` → `chua`, `chẳng`/`chàng` → `chang`.
- * Danh sách này viết tay, chỉ gồm những từ mà bản không dấu KHÔNG trùng nghĩa
- * với từ nào khác.
+ * khoá miễn trừ — "Kem dùng thay thế thuốc bôi" qua sạch mọi luật (kiểm định
+ * lần 10). Tương tự `chưa`/`chứa`, `chẳng`/`chàng`. Danh sách này viết tay, chỉ
+ * gồm những từ mà bản không dấu KHÔNG trùng nghĩa với từ nào khác.
  */
 const NEGATED_BARE = /(?:khong|chua)\s+(?:phai\s+|co\s+)?(?:la\s+)?(?:thuoc\s+|tac dung\s+|chua\s+|dung de\s+|nham\s+|thay the\s+)?$|(?:khong|chua)\s+$|(?:not|never|no)\s+(?:a\s+|an\s+|the\s+)?(?:intended to\s+|meant to\s+|substitute for\s+)?$/i;
 
-/** Tách câu thô, đủ để quyết định quét câu nào ở chế độ không dấu. */
-function sentences(text: string): { text: string; offset: number }[] {
-  const out: { text: string; offset: number }[] = [];
-  const re = /[^.!?;\n]+[.!?;\n]*/g;
-  for (const m of text.matchAll(re)) {
-    if (m[0].trim()) out.push({ text: m[0], offset: m.index ?? 0 });
+/**
+ * Một lần khớp trên bản bỏ dấu có đáng tin không?
+ *
+ * Kiểm định lần 11 chỉ ra bản vá vòng 18 sai mức: nó tắt chế độ không dấu cho
+ * MỌI câu có một chữ có dấu, nên "Kem tri nam tận gốc" — cách gõ phổ biến nhất
+ * của biên tập Việt, lẫn dấu và không dấu trong cùng câu — lọt lên trang thật.
+ * 8/9 câu mà vòng 17 chặn được đã lọt.
+ *
+ * Tiêu chí đúng là mức TỪ: chỉ tin lần khớp nếu trong đúng đoạn khớp đó có ít
+ * nhất một từ vốn được gõ KHÔNG dấu. "hết năm 2026" (cả hai từ đều có dấu) thì
+ * không; "tri nam tận gốc" thì có.
+ *
+ * Phép bỏ dấu giữ nguyên độ dài từng ký tự, nên chỉ số trên bản bỏ dấu trỏ đúng
+ * vào bản gốc.
+ */
+function foldedHitIsReal(original: string, from: number, to: number): boolean {
+  const span = original.slice(from, to);
+  for (const word of span.split(/[^\p{L}\p{M}]+/u)) {
+    if (word.length >= 2 && !HAS_DIACRITICS.test(word)) return true;
   }
-  return out.length ? out : [{ text, offset: 0 }];
+  return false;
 }
 
 export interface ClaimHit { match: string; why: string; instead: string; index: number }
 
 export function findForbiddenClaims(text: string): ClaimHit[] {
   const base = forScan(text);
-
-  /*
-   * Bản bỏ dấu CHỈ áp cho những câu vốn đã viết không dấu.
-   *
-   * Kiểm định lần 10: bỏ dấu cả văn bản có dấu khiến `nám|thâm|sạm` trùng với
-   * `năm|nắm|Nam|sách`, và "Ưu đãi áp dụng đến hết năm 2026" — cách viết hạn
-   * khuyến mãi phổ biến nhất — bị chặn với thông điệp 'het nam', một chuỗi
-   * không hề tồn tại trong file của người biên tập.
-   *
-   * Một câu đã có dấu thì người viết đang gõ tiếng Việt có dấu; không có lý do
-   * đọc nó theo nghĩa không dấu. Câu KHÔNG có dấu nào mới cần đọc cả hai cách.
-   */
-  const pieces: { text: string; loose: boolean; bare: boolean }[] = [{ text: base, loose: false, bare: false }];
-  for (const s of sentences(base)) {
-    if (!HAS_DIACRITICS.test(s.text)) pieces.push({ text: s.text, loose: false, bare: true });
-  }
+  const folded = stripDiacritics(base);
   const spread = despaceSpread(base);
+
+  /* Ba cách đọc cùng một chuỗi:
+     - nguyên văn;
+     - bỏ dấu, chỉ nhận lần khớp có từ vốn không dấu (xem foldedHitIsReal);
+     - dồn chữ giãn cách ("Đ I Ề U  T R Ị"), khớp bằng mẫu nới `\s*`. */
+  const readings: { text: string; folded: boolean; loose: boolean; origin: string }[] = [
+    { text: base, folded: false, loose: false, origin: base },
+    { text: folded, folded: true, loose: false, origin: base },
+  ];
   if (spread) {
-    pieces.push({ text: spread, loose: true, bare: false });
-    if (!HAS_DIACRITICS.test(spread)) pieces.push({ text: spread, loose: true, bare: true });
+    readings.push({ text: spread, folded: false, loose: true, origin: spread });
+    readings.push({ text: stripDiacritics(spread), folded: true, loose: true, origin: spread });
   }
 
   const out: ClaimHit[] = [];
   for (const rule of FORBIDDEN) {
     const flags = rule.pattern.flags.includes('g') ? rule.pattern.flags : rule.pattern.flags + 'g';
-    let hit: { text: string; index: number } | null = null;
-    for (const piece of pieces) {
-      let source = piece.bare ? stripDiacritics(rule.pattern.source) : rule.pattern.source;
-      if (piece.loose) source = loosenSpaces(source);
-      const plain = piece.bare ? stripDiacritics(piece.text) : piece.text;
-      /* Duyệt MỌI lần xuất hiện, không chỉ lần đầu: nếu lần khớp đầu bị phủ
-         định mà bỏ cả luật thì mọi lần sau không bao giờ được xét (vòng 7). */
-      for (const m of plain.matchAll(new RegExp(source, flags))) {
-        const before = plain.slice(0, m.index ?? 0);
-        const negated = piece.bare ? NEGATED_BARE.test(before) : NEGATED.test(before);
-        if (negated) continue;
-        /* Vị trí quy về chuỗi gốc: bản bỏ dấu và bản dồn khoảng trắng có độ dài
-           khác, nên tìm lại đoạn tương ứng bằng độ lệch tương đối. */
-        hit = { text: m[0], index: piece.bare || piece.loose ? -1 : (m.index ?? 0) };
-        break;
+    const seen = new Set<string>();
+    for (const r of readings) {
+      let source = r.folded ? stripDiacritics(rule.pattern.source) : rule.pattern.source;
+      if (r.loose) source = loosenSpaces(source);
+      /* Duyệt MỌI lần khớp và trả MỌI lần khớp.
+         Kiểm định lần 7: dừng ở lần khớp đầu thì một phủ định che được mọi lần
+         sau. Kiểm định lần 11: trả đúng một hit mỗi luật thì cổng ngoại lệ
+         `reviewedClaims` che được mọi lần sau — chỉ cần đặt câu ngoại lệ lên
+         trước câu vi phạm. */
+      for (const m of r.text.matchAll(new RegExp(source, flags))) {
+        const at = m.index ?? 0;
+        const before = r.text.slice(0, at);
+        if (r.folded ? NEGATED_BARE.test(before) : NEGATED.test(before)) continue;
+        if (r.folded && !foldedHitIsReal(r.origin, at, at + m[0].length)) continue;
+        // Vị trí chỉ dùng được khi cách đọc giữ nguyên toạ độ gốc.
+        const index = r.loose ? -1 : at;
+        const key = `${m[0]}@${index}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        out.push({ match: m[0], why: rule.why, instead: rule.instead, index });
       }
-      if (hit) break;
     }
-    if (hit) out.push({ match: hit.text, why: rule.why, instead: rule.instead, index: hit.index });
   }
   return out;
 }
@@ -300,7 +312,9 @@ const PERSONAL: { pattern: RegExp; kind: string }[] = [
     /* KHÔNG bật cờ `i`: nó làm [A-ZĐÀ-Ỹ] khớp cả chữ thường, và "hỏi ý kiến
        bác sĩ trước khi dùng" — câu cảnh báo bắt buộc — bị coi là họ tên. Viết
        hoa/thường liệt kê tường minh ở đúng chỗ cần. */
-    pattern: /(?:^|[\s("“])(?:[Cc]hị|[Aa]nh|[Cc]ô|[Bb]ác|[Cc]hú|[Ee]m|Mrs?\.?|Ms\.?)\s+[A-ZĐÀ-Ỹ][\p{Ll}\p{M}]+\s+[A-ZĐÀ-Ỹ]/u,
+    /* Loại các cách gọi số nhiều/chung: "Anh Chị Em thân mến", "Cô Gái Mùa Thu"
+       (tên chiến dịch) — kiểm định lần 11. */
+    pattern: /(?:^|[\s("“])(?:[Cc]hị|[Aa]nh|[Cc]ô|[Bb]ác|[Cc]hú|[Ee]m|Mrs?\.?|Ms\.?)\s+(?!(?:Chị|Anh|Cô|Bác|Chú|Em|Gái|Nàng|Bạn)(?![\p{Ll}]))[A-ZĐÀ-Ỹ][\p{Ll}\p{M}]+\s+[A-ZĐÀ-Ỹ]/u,
     kind: 'họ tên đầy đủ kèm xưng hô',
   },
 ];

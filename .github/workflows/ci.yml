@@ -71,3 +71,16 @@ jobs:
       # nên cổng CSP không bao giờ có gì để đối chiếu.
       - name: Ngân sách và CSP trên bản có endpoint
         run: PUBLIC_ORDER_ENDPOINT=https://mochatrinam.com/api/orders npm run build && node scripts/check-budget.mjs
+
+      # Khẳng định cổng CSP FAIL ĐƯỢC. Kiểm định lần 11: bước trên truyền đúng
+      # origin của site nên nhánh 'self' luôn đúng bất kể connect-src viết gì —
+      # cổng dựng để chặn lỗi vòng 10 chưa từng nhận một đầu vào có thể làm nó
+      # fail. Một cổng không bao giờ fail được thì không phải là cổng.
+      - name: Cổng CSP phải chặn endpoint khác miền
+        run: |
+          PUBLIC_ORDER_ENDPOINT=https://api.khong-co-trong-csp.example/orders npm run build
+          if node scripts/check-budget.mjs; then
+            echo "LỖI: cổng CSP không chặn endpoint ngoài connect-src" >&2
+            exit 1
+          fi
+          echo "ok: cổng CSP chặn đúng endpoint ngoài connect-src"

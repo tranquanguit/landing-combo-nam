@@ -63,6 +63,21 @@ const CHAN = [
   'Chúng tôi dùng cam kết hoàn tiền nếu không hết nám.',
   'Dùng 98% khách hàng hài lòng.',
   'Bạn dùng bác sĩ da liễu khuyên dùng làm chuẩn.',
+  /* Kiểm định lần 11 — TRỘN dấu và không dấu trong cùng câu.
+     Đây là cách gõ phổ biến nhất của biên tập Việt. Vòng 17 chặn 9/9, bản vá
+     vòng 18 chỉ chặn 1/9 vì nó tắt chế độ không dấu cho cả câu khi thấy một
+     chữ có dấu. Ca thử này bắt buộc phải ở đây. */
+  'Kem tri nam tận gốc.',
+  'Xoa nam vinh vien, da sáng mịn.',
+  'Cam ket hoan tien neu khong het nam nhé.',
+  'Duoc bac si da lieu khuyen dung ạ.',
+  '98% khach hang het nam hoàn toàn.',
+  'Da duoc Bo Y Te cap phep lưu hành.',
+  'Hieu qua nhu laser mà không đau.',
+  'San pham dac tri nam – hàng chính hãng.',
+  'tri&nbsp;nám tận gốc',
+  // Kiểm định lần 11: cụm không liền kề.
+  'Sản phẩm chữa bệnh nám da.', 'San pham nay chua benh nam da.',
   // hai lượt mã hoá
   'Cam k&amp;#7871;t hoàn ti&amp;#7873;n n&amp;#7871;u không h&amp;#7871;t nám.',
 ];
@@ -88,6 +103,8 @@ const CHO_QUA = [
   'Da chưa thâm thì nên phòng ngừa sớm.',
   'Bạn chưa nắm rõ cách dùng? Xem hướng dẫn.',
   'Đọc kỹ sách năm 2025.',
+  // Kiểm định lần 11: khuyến nghị y tế hợp lệ, không phải so sánh với thủ thuật.
+  'Hỏi ý kiến bác sĩ nếu da bạn đang điều trị bằng thuốc bôi.',
   'Bước số 1: rửa mặt với nước mát.',
   // Entity hợp lệ trong câu bình thường không được báo nhầm.
   'Kem &amp; serum dùng cùng nhau.',

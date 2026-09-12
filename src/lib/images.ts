@@ -1,4 +1,6 @@
 import { getImage } from 'astro:assets';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 const assets = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/**/*.{jpg,jpeg,png,webp,avif}',
@@ -26,9 +28,19 @@ export async function resolveAssetUrl(
 ): Promise<string | undefined> {
   if (!src) return undefined;
   const mod = assets[`/src/assets${src}`];
-  // Picture.astro đã dừng build khi ảnh không tồn tại; ở đây ảnh trong public/ là
-  // trường hợp còn lại hợp lệ duy nhất.
-  if (!mod) return new URL(src, site).href;
+  /* Ảnh không tồn tại thì DỪNG BUILD, giống Picture.astro.
+     Kiểm định lần 11: seo.ogImage gõ sai đường dẫn đi qua đây và build vẫn
+     xanh, để lại og:image và Product.image trỏ 404 — đúng lớp lỗi vòng 6, còn
+     sót một đường vào. */
+  if (!mod) {
+    if (!existsSync(join('public', src))) {
+      throw new Error(
+        `Không tìm thấy ảnh "${src}" (dùng cho og:image / JSON-LD).\n` +
+        `  Đặt file tại src/assets${src} hoặc public${src}.`
+      );
+    }
+    return new URL(src, site).href;
+  }
   const srcFormat = /\.(jpe?g)$/i.test(src) ? 'jpeg' : /\.png$/i.test(src) ? 'png' : 'webp';
   const img = await getImage({
     src: mod.default,

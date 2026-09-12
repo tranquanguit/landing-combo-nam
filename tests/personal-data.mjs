@@ -30,6 +30,9 @@ const CHO_QUA = [
   'Combo dùng trong 8 tuần.',
   'Giao hàng 2–5 ngày tùy khu vực.',
   'Anh chị quan tâm có thể để lại lời nhắn.',
+  // Kiểm định lần 11: xưng hô số nhiều và tên chiến dịch, không phải danh tính.
+  'Anh Chị Em thân mến.',
+  'Cô Gái Mùa Thu là tên chiến dịch.',
 ];
 
 let bad = 0;

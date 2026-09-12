@@ -17,16 +17,39 @@ Dấu `*` = bắt buộc.
 | `shortName` | chữ | không |
 | `sku` | chữ | **có** |
 | `includes` | danh sách nhóm trường | không (có sẵn mặc định) |
+| &nbsp;&nbsp;&nbsp;&nbsp;`includes[].name` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`includes[].note` | chữ | không |
 | `gifts` | danh sách nhóm trường | không (có sẵn mặc định) |
+| &nbsp;&nbsp;&nbsp;&nbsp;`gifts[].name` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`gifts[].note` | chữ | không |
 | `price` | số | **có** |
 | `compareAtPrice` | số | không |
 | `currency` | chữ | không (có sẵn mặc định) |
 | `availability` | một trong: `InStock`, `OutOfStock`, `PreOrder`, `BackOrder` | không (có sẵn mặc định) |
 | `shipping` | nhóm trường | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;`shipping.country` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`shipping.rate` | số | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`shipping.transitDaysMin` | số | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`shipping.transitDaysMax` | số | **có** |
 | `returnPolicy` | nhóm trường hoặc danh sách nhóm trường | không |
 | `variants` | danh sách nhóm trường | không (có sẵn mặc định) |
+| &nbsp;&nbsp;&nbsp;&nbsp;`variants[].label` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`variants[].note` | chữ | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;`variants[].price` | số | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;`variants[].recommended` | đúng/sai | không (có sẵn mặc định) |
 | `seo` | nhóm trường | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`seo.title` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`seo.description` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`seo.ogImage` | chữ | không |
 | `compliance` | nhóm trường | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`compliance.productNotificationNumber` | chữ | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;`compliance.declaringOrganization` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`compliance.declaringAddress` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`compliance.functions` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`compliance.warnings` | danh sách chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`compliance.reviewedClaims` | danh sách nhóm trường | không (có sẵn mặc định) |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`compliance.reviewedClaims[].text` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`compliance.reviewedClaims[].reason` | chữ | **có** |
 | `blocks` | danh sách khối — xem mục "Các loại khối" bên dưới | **có** |
 
 ## Các loại khối dùng trong `blocks`

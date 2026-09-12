@@ -49,6 +49,26 @@ await new Promise((r) => setTimeout(r, 1200));
 const results = [];
 const browser = await chromium.launch();
 
+/* Dọn cổng khi bộ thử chết giữa đường.
+   Kiểm định lần 11: một lần chạy bị ngắt để lại server chiếm cổng, lần sau chết
+   với EADDRINUSE thay vì báo lỗi hàng rào — người đọc log sẽ đi sai hướng. */
+let cleaned = false;
+const cleanup = () => {
+  if (cleaned) return;
+  cleaned = true;
+  try { api.close(); } catch { /* đã đóng */ }
+  try { pageServer.kill(); } catch { /* đã chết */ }
+  try { browser.close(); } catch { /* đã đóng */ }
+};
+process.on('exit', cleanup);
+for (const sig of ['SIGINT', 'SIGTERM', 'uncaughtException', 'unhandledRejection']) {
+  process.on(sig, (err) => {
+    if (err instanceof Error) console.error(err.message);
+    cleanup();
+    process.exit(1);
+  });
+}
+
 async function fillForm(page) {
   await page.fill('#name', 'Nguyễn Thu Hà');
   await page.fill('#phone', '0912345678');
@@ -221,9 +241,27 @@ async function fillAndSubmit(page) {
   const headers = readFileSync('public/_headers', 'utf8');
   const cspRaw = (headers.split('\n').find((l) => l.includes('Content-Security-Policy')) ?? '')
     .replace(/^\s*Content-Security-Policy:\s*/, '').trim();
-  // Endpoint của bộ thử là localhost, không phải miền thật — cho phép nó đúng
-  // như người triển khai sẽ phải thêm origin endpoint của họ vào connect-src.
-  const csp = cspRaw.replace('connect-src', `connect-src http://localhost:${API_PORT}`);
+  /* Origin THẬT trong bản build phải nằm trong connect-src gốc — đây là chính
+     lớp lỗi vòng 10 tìm ra, và bản trước tự viết lại directive đó nên mù đúng
+     chỗ cần soi. */
+  const distHtml = readFileSync('dist/index.html', 'utf8');
+  const builtEndpoint = /data-action="([^"]+)"/.exec(distHtml)?.[1] ?? '';
+  let builtOrigin = '';
+  try { builtOrigin = new URL(builtEndpoint).origin; } catch { /* cùng miền */ }
+  const connectSrc = /connect-src ([^;]*)/.exec(cspRaw)?.[1]?.trim().split(/\s+/) ?? [];
+  /* Bản build của bộ thử bắt buộc dùng localhost, nên loopback được miễn khỏi
+     khẳng định này — với endpoint thật thì `scripts/check-budget.mjs` là cổng,
+     và CI có một bước riêng khẳng định cổng đó fail được. */
+  const loopback = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(builtOrigin);
+  const originAllowed = !builtOrigin || loopback || connectSrc.includes(builtOrigin) ||
+    (connectSrc.includes("'self'") && builtOrigin === 'https://mochatrinam.com');
+
+  /* Chỉ nới cho localhost của bộ thử, và CHỈ khi nó chưa có mặt — không bao giờ
+     che việc origin thật thiếu trong policy. */
+  const testOrigin = `http://localhost:${API_PORT}`;
+  const csp = connectSrc.includes(testOrigin)
+    ? cspRaw
+    : cspRaw.replace('connect-src', `connect-src ${testOrigin}`);
 
   const { createServer } = await import('node:http');
   const { existsSync, statSync } = await import('node:fs');
@@ -249,8 +287,10 @@ async function fillAndSubmit(page) {
   });
   results.push([
     'gửi đơn dưới CSP',
-    received.length === 1 && success && violations.length === 0,
-    `đơn nhận được: ${received.length}, báo thành công: ${success}, vi phạm CSP: ${violations.length}`,
+    received.length === 1 && success && violations.length === 0 && originAllowed,
+    `đơn nhận được: ${received.length}, báo thành công: ${success}, ` +
+    `vi phạm CSP: ${violations.length}, origin (${builtOrigin || 'cùng miền'})` +
+    `${loopback ? ' [loopback, miễn]' : ` trong connect-src: ${originAllowed}`}`,
   ]);
   await page.close();
   cspServer.close();

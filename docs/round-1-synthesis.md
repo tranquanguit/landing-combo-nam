@@ -1009,3 +1009,118 @@ trạng thái hết hàng (cổng chặn `availability` khác `InStock` để kh
 mâu thuẫn). Chưa đo trên thiết bị và mạng thật tại Việt Nam. Ghi chú cho người
 dựng endpoint: `Content-Type: application/json` sinh preflight `OPTIONS`, endpoint
 phải trả 2xx cho nó.
+
+---
+
+## Vòng 19 — đóng kiểm định độc lập lần 11
+
+Vòng 11 được giao đúng một việc mà vòng 10 đặt ra: xác nhận bốn bản vá của vòng
+18 có đẻ lỗi mới không. Câu trả lời của họ: **có** — và họ đúng.
+
+### P0-A — Bản vá P0-2 của vòng 18 là hồi quy, nặng hơn lỗ nó vá
+
+Vòng 18 chữa báo nhầm `nám`↔`năm` bằng cách tắt chế độ quét không dấu cho **mọi
+câu có một chữ có dấu**. Sai mức: tiêu chí phải theo **từ**, không theo câu. Đo
+giữa hai commit liền nhau, 9 câu quảng cáo vi phạm:
+
+| | vòng 17 (`4a59aba`) | vòng 18 (`849d187`) |
+|---|---|---|
+| `Kem tri nam tận gốc.` | CHẶN | **LỌT** |
+| `Cam ket hoan tien neu khong het nam nhé.` | CHẶN | **LỌT** |
+| `Duoc bac si da lieu khuyen dung ạ.` | CHẶN | **LỌT** |
+| … (9 câu) | 9/9 chặn | **1/9 chặn** |
+
+Trộn dấu và không dấu trong cùng câu là cách gõ phổ biến nhất của biên tập Việt,
+nên đây là lỗ rộng chứ không hẹp. Kiểm định viên đưa được một câu vi phạm ba
+luật lên `dist/index.html` với build xanh.
+
+Sửa ở mức từ: quét bản bỏ dấu trên toàn văn, nhưng **chỉ tin lần khớp nếu trong
+đúng đoạn khớp có ít nhất một từ vốn được gõ không dấu**. `"hết năm 2026"` (cả
+hai từ đều có dấu) bị loại; `"tri nam tận gốc"` được nhận. Phép bỏ dấu giữ nguyên
+độ dài từng ký tự nên chỉ số trỏ đúng vào bản gốc. Cả 9 ca vào bộ thử.
+
+### P0-B — `reviewedClaims` vẫn là cửa hậu, chỉ cần đổi thứ tự câu
+
+Vòng 18 đổi miễn trừ sang **theo vị trí** nhưng `findForbiddenClaims` vẫn trả
+**đúng một hit mỗi luật** (`break`). Nếu hit duy nhất đó rơi vào khoảng đã khai
+thì mọi vi phạm khác của cùng luật không bao giờ được báo — cửa hậu chỉ đổi điều
+kiện từ "dán câu ngoại lệ vào cuối" sang "dán vào đầu".
+
+Kiểm định viên đưa `"Combo này điều trị nám chỉ sau 2 tuần."` lên `dist` bằng
+chính file production và chính khai báo `reviewedClaims` đang có trong repo.
+
+Hai đường nữa: khai `text: "điều trị nám"` (đúng 12 ký tự, vừa đủ `min(12)` —
+tức khai chính cụm bị cấm làm ngoại lệ), và dùng thẻ HTML để lệch toạ độ.
+
+Sửa: trả **mọi** lần khớp, lọc theo vị trí sau; `text` phải ≥40 ký tự (một câu
+đầy đủ, vì ngữ cảnh mới là thứ làm câu đó hợp lệ); tối đa 5 ngoại lệ — nhiều hơn
+là dấu hiệu nội dung cần viết lại. Kiểm chứng cả bốn đường: đều bị chặn.
+
+### P1-C — Cổng CSP không bao giờ có thể fail trong CI
+
+Cổng chạy thật và chặn thật, nhưng bước CI truyền `https://mochatrinam.com/api/orders`
+— đúng `SITE_ORIGIN`, nên nhánh `'self'` luôn đúng **bất kể `connect-src` viết
+gì**. Cổng dựng để chặn lỗi vòng 10 chưa từng nhận một đầu vào có thể làm nó fail.
+Nay CI có một bước khẳng định ngược: endpoint khác miền **phải** làm cổng fail,
+không fail thì CI đỏ. *Một cổng không bao giờ fail được thì không phải là cổng.*
+
+Kèm: `connect.includes(origin)` là so chuỗi con, nên `https://www.facebook.co`
+(gõ thiếu `m`) được báo "ok" vì là chuỗi con của một nguồn có thật. Nay so khớp
+chính xác từng nguồn.
+
+### P1-D — Kịch bản 8 tự vô hiệu hoá đúng directive nó được viết ra để kiểm
+
+`cspRaw.replace('connect-src', ...)` chèn localhost vô điều kiện, nên nó **không
+thể** phát hiện `connect-src` thiếu origin endpoint. Nay chỉ nới khi origin chưa
+có mặt, và thêm khẳng định rằng origin thật trong `data-action` của bản build
+phải nằm trong `connect-src` gốc (loopback được miễn, vì bản build của bộ thử
+buộc phải dùng localhost). Kiểm chứng: phá `style-src` hoặc `font-src` → bộ thử
+báo hỏng.
+
+### P1-E — `seo.ogImage` sai đường dẫn vẫn build xanh
+
+`Picture.astro` dừng build khi ảnh không tồn tại, nhưng `resolveAssetUrl` thì
+không — `og:image` và `Product.image` trỏ 404. Đúng lớp lỗi vòng 6, còn sót một
+đường vào. Nay dừng build ở cả hai đường.
+
+### P2 đã đóng
+
+`.strict()` nay phủ **object sản phẩm cấp cao, `seo`, `compliance`, `claim`,
+`shipping`, `variants`, `returnPolicy`** — trước chỉ có ở `blocks` và `image`,
+nên gõ sai `compliance.productNotificationNumbe` (trường mang nghĩa pháp lý) hay
+`seo.ogimage` bị bỏ âm thầm, trong khi tài liệu hứa "máy chỉ đích danh".
+
+Và chế độ strict mới lập tức làm **chính thư mục mẫu của tôi vỡ** vì khoá chú
+thích `_doc` — đúng điểm bất nhất vòng 11 nêu. Đã bỏ khoá đó, đưa hướng dẫn ra
+`src/content/_template/README.md`; kiểm chứng lại: chép mẫu, sửa 6 trường, build
+xanh ngay lần đầu.
+
+`docs/truong-du-lieu.md` nay bung cả nhóm trường lồng nhau: **42 trường** thay vì
+19 — trước đây `compliance` chỉ hiện một dòng "nhóm trường", nên người biên tập
+chỉ tạo được sản phẩm nhờ thư mục mẫu, không nhờ tài liệu.
+
+Ba lỗi từ điển có sẵn từ trước: `"chữa bệnh nám da"` (cụm không liền kề) lọt;
+`"da bạn đang điều trị bằng thuốc bôi"` — khuyến nghị y tế hợp lệ — bị chặn;
+`"Anh Chị Em thân mến"` bị coi là danh tính. Đều đã sửa và có ca thử.
+
+`tests/order-endpoint.mjs` nay dọn cổng khi chết giữa đường, để lần chạy sau
+không báo `EADDRINUSE` thay vì báo lỗi hàng rào thật.
+
+### Đo lại
+
+Bộ thử nay **203 ca**: money 55/55, claims 84/84, richtext 23/23, dữ liệu cá
+nhân 24/24, lint mẫu 17/17, đặt hàng 8/8. `astro check` 0 lỗi. Ngân sách, chuông
+hạn ưu đãi, tài liệu-khớp-schema đều xanh.
+
+### Điều đáng ghi lại nhất từ vòng này
+
+Kiểm định viên chỉ ra một điều quan trọng hơn mọi lỗi trong danh sách:
+
+> "Cả 189 ca thử đều xanh trong khi ba lỗ P0 đang mở. Bộ thử chỉ chứa những câu
+> của các vòng trước, nên nó chứng nhận rằng lỗi cũ không tái diễn — không chứng
+> nhận rằng bản vá không mở lỗi mới."
+
+Đó là lý do vòng này, ngoài ca thử, còn thêm hai thứ khác loại: một cổng **khẳng
+định ngược** (CI đỏ nếu cổng CSP không fail được) và một **lint quét chính bộ
+mẫu** (`pattern-lint`) thay vì quét nội dung. Cả hai kiểm tra *hàng rào có còn
+là hàng rào*, không kiểm tra *nội dung có sạch*.

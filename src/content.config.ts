@@ -66,7 +66,7 @@ const returnPolicyEntry = z.object({
   /** Ai trả phí gửi về. */
   fees: z.enum(['free', 'customer']).default('free'),
   refund: z.enum(['exchange', 'full', 'store-credit']).default('exchange'),
-});
+}).strict();
 
 const claim = z.object({
   text: z.string(),
@@ -81,7 +81,7 @@ const claim = z.object({
   source: textOrSafeUrl.optional(),
   /** Điều kiện đi kèm: cỡ mẫu, thời gian dùng, cách thu thập. */
   qualifier: z.string().optional(),
-}).superRefine((c, ctx) => {
+}).strict().superRefine((c, ctx) => {
   if ((c.evidence === 'verified' || c.evidence === 'study') && !c.source) {
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
@@ -302,7 +302,7 @@ const products = defineCollection({
       rate: z.number().int().nonnegative(),
       transitDaysMin: z.number().int().positive(),
       transitDaysMax: z.number().int().positive(),
-    }).optional(),
+    }).strict().optional(),
     /**
      * Chính sách đổi trả, phải khớp ĐÚNG lời hứa trên trang.
      *
@@ -325,7 +325,7 @@ const products = defineCollection({
       note: z.string().optional(),
       price: money.nullable(),
       recommended: z.boolean().default(false),
-    })).default([])
+    }).strict()).default([])
       .refine((vs) => vs.filter((v) => v.recommended).length <= 1,
         'Chỉ một gói được đặt recommended: true — hai gói sẽ sinh hai radio cùng checked.'),
 
@@ -333,7 +333,7 @@ const products = defineCollection({
       title: z.string().max(70),
       description: z.string().max(170),
       ogImage: z.string().optional(),
-    }),
+    }).strict(),
 
     /** Thông tin bắt buộc theo Nghị định 342/2025/NĐ-CP. Thiếu thì build cảnh báo. */
     compliance: z.object({
@@ -352,13 +352,18 @@ const products = defineCollection({
        * quên, và chỉ miễn cho ĐÚNG đoạn văn bản đã khai.
        */
       reviewedClaims: z.array(z.object({
-        text: z.string().min(12),
+        /* Phải là một câu đầy đủ, không phải chính cụm bị cấm.
+           Kiểm định lần 11: `min(12)` cho phép khai đúng "điều trị nám" —
+           tức khai chính cụm bị cấm làm ngoại lệ, một nút tắt hoàn toàn. */
+        text: z.string().min(40, 'Ngoại lệ phải là một câu đầy đủ (≥40 ký tự), ' +
+          'không phải chính cụm bị cấm. Ngữ cảnh mới là thứ làm câu đó hợp lệ.'),
         reason: z.string().min(8),
-      })).default([]),
-    }),
+      })).max(5, 'Quá nhiều ngoại lệ là dấu hiệu nội dung cần viết lại, không phải cần thêm ngoại lệ.')
+        .default([]),
+    }).strict(),
 
     blocks: z.array(blocks).min(1),
-  }).superRefine((p, ctx) => {
+  }).strict().superRefine((p, ctx) => {
     /**
      * Giá chỉ được nhắc bằng token ({{price}}, {{compareAtPrice}}, {{save}}).
      * Bất kỳ số tiền nào viết tay trong nội dung đều bị chặn — không cần đoán
