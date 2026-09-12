@@ -1246,3 +1246,122 @@ Dữ liệu doanh nghiệp (không đổi). `ci.yml` không deploy. Chưa có gi
 hàng. Chưa đo trên thiết bị và mạng thật tại Việt Nam. Và điều vòng 12 nêu đúng:
 23 câu hợp lệ viết tay chưa phải một hàng rào chống báo nhầm — cần một corpus
 văn bản mỹ phẩm hợp lệ vài trăm câu để tỉ lệ báo nhầm trở thành cổng đo được.
+
+---
+
+## Vòng 21 — đóng kiểm định độc lập lần 13
+
+Vòng 13 làm điều chưa vòng nào làm: **mutation testing toàn diện** — tắt từng
+cổng một rồi chạy lại bộ thử. Đó là phép đo khách quan duy nhất về việc bộ thử
+thật sự bảo vệ cái gì, và nó lật ra điều mà mười ba vòng đều bỏ qua:
+
+> "Cả 12 vòng đều nhìn hàng rào qua đúng một cửa: collection `products`. Hai
+> nguồn nội dung khác chạy song song **không có hàng rào nào**."
+
+### P0-1 — Collection `brand` không có một hàng rào nào
+
+`src/data/mocha.json` render ở footer **mọi trang**, trong `llms.txt` và JSON-LD.
+Nó không có `.strict()`, không `superRefine`, không quét claims/PII/tiền. Kiểm
+định viên đặt sáu vi phạm cùng lúc vào đó — "Kem trị nám tốt nhất, cam kết hoàn
+tiền", "chứng minh lâm sàng, bác sĩ da liễu khuyên dùng", tên + tuổi + số điện
+thoại khách, giá viết tay, một trường lạ — và **build xanh, 257 ca thử xanh**.
+
+Nay `brand` qua đúng ba phép quét mà `products` phải qua, cộng `.strict()`.
+Số hotline và email của chính doanh nghiệp được miễn tường minh. Kiểm chứng:
+sáu vi phạm nay bị bắt cả sáu.
+
+### P0-2 — `src/i18n/ui.ts` không có hàng rào nào
+
+Bảng chuỗi giao diện song ngữ cũng render trực tiếp lên trang. Đặt
+`'evidence.ingredient': 'Kem trị nám tốt nhất, cam kết hoàn tiền, bác sĩ da liễu
+khuyên dùng'` → build xanh, 257 ca xanh.
+
+Nay `tests/ui-strings.mjs` duyệt **mọi** chuỗi trong `ui` qua cả ba hàng rào:
+124 chuỗi, 2 ngôn ngữ. Kiểm chứng: đưa vi phạm vào → bốn dòng lỗi.
+
+### P1-1 — Regex song song: lỗi vòng 9 tái xuất lần thứ ba
+
+`problem.quotes` tự khai một regex chống danh tính **riêng**, thiếu cờ hoa — nên
+`"Chị Hà bảo da tôi sạm hẳn sau sinh"` qua sạch. Đó chính là lỗi vòng 9 đã sửa
+trong `findPersonalData`, bị chép thành bản thứ hai rồi sửa một bản mà quên bản
+kia.
+
+Nay xoá regex song song, gọi thẳng `findPersonalData` — **một hàng rào, một
+chỗ**. Và `findPersonalData` nay nhận xưng hô + **một** tên riêng ("Chị Hà"),
+không đòi hai từ viết hoa như trước.
+
+### P1-2 / P1-3 — `LEGITIMATE_HOMOGRAPHS` và phép tha đúng phạm vi
+
+Danh sách thiếu `thẩm`, `sẫm`, `khối` nên chặn nhầm 8 câu copy rất hợp lý —
+"Tạm biệt thẩm mỹ viện đắt đỏ" (một trong những câu mở đầu phổ biến nhất của
+ngành), "Tạm biệt sẫm màu vùng gò má" (chính vốn từ mà thông báo lỗi khuyên dùng),
+"Khối thâm hụt". Đồng thời phép tha "một từ hợp lệ tha cả đoạn" vẫn tha vi phạm.
+
+Làm lại trên một nguyên tắc phát biểu được:
+
+- Danh sách nay gồm **cả chính các từ bị cấm** (`nám`, `thâm`, `trị`, `chữa`…).
+  Lý do: cách đọc nguyên văn đã bắt mọi vi phạm viết đúng chính tả; cách đọc bỏ
+  dấu chỉ tồn tại để bắt chữ **không dấu** hoặc **sai dấu**.
+- Tin lần khớp khi có dấu hiệu văn bản không được gõ đúng chính tả: một từ dễ lẫn
+  viết có dấu nhưng **sai** ("nạm", "phếp"), hoặc một từ ở **vị trí động từ**
+  viết không dấu ("tri nám", "het nam"). Từ **tình trạng** viết không dấu thì
+  trung tính — "nam" là một trong những từ phổ biến nhất tiếng Việt, nên "sách
+  nam giới" không phải vi phạm.
+- Đánh đổi cố ý, đã ghi trong mã: hai từ viết **đúng** chính tả nhưng ghép lại
+  chỉ thành vi phạm sau khi bỏ dấu ("Chứa nám", "Trì nam") không bị chặn — chặn
+  chúng sẽ kéo theo "chưa thâm", "chưa nắm rõ", "khối thâm hụt".
+
+Thêm `nấm` vào từ điển: "điều trị nấm da" là claim thuốc thật, trước đây không
+luật nào bắt.
+
+### P2-1 — Một ca schema "đạt vì lý do sai"
+
+Ca `.strict()` dùng `{ question, a }` — **thiếu `q` bắt buộc**, nên nó fail bằng
+`invalid_type` dù có `.strict()` hay không. Mutation sống sót: tắt `.strict()`
+thì ca vẫn xanh. Nay bộ thử schema khẳng định **mã lỗi** mong đợi
+(`unrecognized_keys`), và có thêm 10 ca: khoá lạ ở 4 nhóm lồng nhau khác nhau,
+`evidence: survey` thiếu qualifier, hai khối order, danh tính trong `problem`,
+`seo.description` quá dài, `warnings` rỗng, neo sai định dạng.
+
+Kiểm chứng bằng mutation: tắt `.strict()` của `faq.items` → đỏ đúng ca đó; bỏ
+`warnings.min(1)` → đỏ đúng ca đó.
+
+### P2-2 — `check-budget.mjs`: 0/12 cổng có ca canh
+
+Làm yếu bất kỳ cổng nào — kể cả **cổng ảnh chờ văn bản đồng ý** và **cổng CSP** —
+không làm một bộ thử nào đỏ. Script chỉ được "thử" bởi việc repo hiện tại tình
+cờ đạt.
+
+Nay `tests/budget-gate.mjs` dựng thư mục `dist` giả rồi chạy script thật: 8 ca
+phủ ảnh chờ đồng ý (cả hai chiều), endpoint ngoài `connect-src`, endpoint cùng
+miền, thiếu CSP, script bên thứ ba, trang tạm lọt vào build. Kiểm chứng bằng
+mutation: đổi `fail.push` → `ok.push` ở hai cổng nặng nhất → đỏ đúng hai ca.
+
+### Đo lại
+
+Bộ thử nay **310 ca**: money 55/55, claims **135/135** (81 chặn + 19 chặn đúng lý
+do + 35 cho qua), richtext 23/23, dữ liệu cá nhân 30/30, lint mẫu 17/17,
+**schema 30/30**, **chuỗi giao diện 124/124**, **cổng ngân sách 8/8**, đặt hàng
+8/8. `astro check` 0 lỗi.
+
+### Bốn lớp phòng thủ, sau 13 vòng
+
+| Lớp | Câu hỏi nó trả lời | Có từ |
+|---|---|---|
+| Ca thử nội dung | lỗi cũ có tái diễn không | vòng 12 |
+| `pattern-lint` | hàng rào có còn là hàng rào không | vòng 18 |
+| `schema-gate` | tầng nối dây có thật sự nối không | vòng 20 |
+| `budget-gate` + `ui-strings` | **những nguồn nội dung khác có được canh không** | vòng 21 |
+
+Và một bài học phương pháp: **mutation testing tìm ra nhiều lỗ hơn bất kỳ vòng
+đọc mã nào.** Mười hai vòng đọc mã và tấn công nội dung không phát hiện ra rằng
+`brand` và `ui.ts` hoàn toàn không có hàng rào; một vòng tắt-từng-cổng thì thấy
+ngay. Bộ thử đo được chính nó là lớp phòng thủ rẻ nhất và bị bỏ qua lâu nhất.
+
+### Vẫn còn nợ
+
+Dữ liệu doanh nghiệp (không đổi). `ci.yml` không deploy. Chưa có giao diện hết
+hàng. Chưa đo trên thiết bị và mạng thật tại Việt Nam. 14 nhánh `|` trong từ điển
+và 12 validator trường vẫn chưa có ca canh riêng (đều còn hoạt động — đây là nợ
+bộ thử, không phải lỗ đang mở). Và điều vòng 12 nêu vẫn đúng: 35 câu hợp lệ viết
+tay chưa phải một hàng rào chống báo nhầm — cần một corpus vài trăm câu.

@@ -142,10 +142,86 @@ const CASES = [
     expect: 'fail',
   },
   {
-    name: 'gõ sai tên trường trong nhóm lồng nhau',
+    /* Ca này phải fail vì `.strict()`, KHÔNG vì thiếu trường bắt buộc.
+       Kiểm định lần 13: bản trước dùng { question, a } — thiếu `q` nên nó fail
+       bằng invalid_type dù có .strict() hay không, tức mutation sống sót. */
+    name: 'khoá lạ trong faq.items (.strict)',
     doc: withDoc((d) => {
-      d.blocks.push({ type: 'faq', heading: 'Hỏi đáp', items: [{ question: 'Câu hỏi?', a: 'Trả lời.' }] });
+      d.blocks.push({
+        type: 'faq', heading: 'Hỏi đáp',
+        items: [{ q: 'Câu hỏi?', a: 'Trả lời.', cauTraLoi: 'khoá lạ' }],
+      });
     }),
+    expect: 'fail',
+    expectCode: 'unrecognized_keys',
+  },
+  {
+    name: 'khoá lạ trong ingredients.rows (.strict)',
+    doc: withDoc((d) => {
+      d.blocks.push({
+        type: 'ingredients', heading: 'Thành phần',
+        rows: [{ name: 'Niacinamide 1%', role: 'Hỗ trợ làm sáng', suitedFor: 'Mọi loại da',
+          referenceNotee: 'khoá gõ sai' }],
+      });
+    }),
+    expect: 'fail',
+    expectCode: 'unrecognized_keys',
+  },
+  {
+    name: 'khoá lạ trong cards.items (.strict)',
+    doc: withDoc((d) => {
+      d.blocks.push({
+        type: 'cards', heading: 'Phân loại',
+        items: [{ heading: 'Nám mảng', body: 'Mô tả.', metaa: 'khoá gõ sai' }],
+      });
+    }),
+    expect: 'fail',
+    expectCode: 'unrecognized_keys',
+  },
+  {
+    name: 'khoá lạ ở cấp sản phẩm (.strict)',
+    doc: withDoc((d) => { d.ghiChu = 'khoá lạ'; }),
+    expect: 'fail',
+    expectCode: 'unrecognized_keys',
+  },
+  {
+    name: 'evidence survey thiếu qualifier',
+    doc: withDoc((d) => { d.blocks[0].usp[0] = { text: '9/10 người thấy da sáng hơn', evidence: 'survey' }; }),
+    expect: 'fail',
+  },
+  {
+    name: 'hai khối order',
+    doc: withDoc((d) => { d.blocks.push({ ...d.blocks[1] }); }),
+    expect: 'fail',
+  },
+  {
+    /* Hai cổng cùng phủ ca này: superRefine của `problem.quotes` (thông báo lỗi
+       rõ hơn) và phép quét dữ liệu cá nhân ở cấp sản phẩm. Mutation testing cho
+       thấy tắt cổng thứ nhất thì cổng thứ hai vẫn bắt — dư thừa có chủ đích,
+       không phải ca đạt vì lý do sai. */
+    name: 'danh tính trong khối problem bị chặn (hai cổng)',
+    doc: withDoc((d) => {
+      d.blocks.push({
+        type: 'problem', heading: 'Vấn đề',
+        quotes: ['Chị Hà bảo da tôi sạm hẳn sau sinh'],
+        explainer: { heading: 'Vì sao', body: ['Nội tiết và nắng.'] },
+      });
+    }),
+    expect: 'fail',
+  },
+  {
+    name: 'seo.description quá 170 ký tự',
+    doc: withDoc((d) => { d.seo.description = 'x'.repeat(171); }),
+    expect: 'fail',
+  },
+  {
+    name: 'compliance.warnings rỗng',
+    doc: withDoc((d) => { d.compliance.warnings = []; }),
+    expect: 'fail',
+  },
+  {
+    name: 'neo secondaryCta sai định dạng',
+    doc: withDoc((d) => { d.blocks[0].secondaryCta = { label: 'Xem', href: 'thanh-phan' }; }),
     expect: 'fail',
   },
   {
@@ -184,6 +260,15 @@ let bad = 0;
 for (const c of CASES) {
   const r = schema.safeParse(c.doc);
   const got = r.success ? 'pass' : 'fail';
+  /* Fail ĐÚNG LÝ DO: một ca fail vì thiếu trường bắt buộc không chứng minh gì
+     về cổng nó nhắm tới — kiểm định lần 13 tìm thấy đúng một ca như vậy. */
+  if (got === 'fail' && c.expectCode &&
+      !r.error.issues.some((i) => i.code === c.expectCode)) {
+    bad++;
+    console.error(`  LÝ DO SAI  ${c.name} — mong "${c.expectCode}", ` +
+      `nhận ${JSON.stringify(r.error.issues.map((i) => i.code))}`);
+    continue;
+  }
   if (got !== c.expect) {
     bad++;
     const why = r.success ? '(qua schema, đáng ra phải chặn)' :

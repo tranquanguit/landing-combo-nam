@@ -149,12 +149,19 @@ const blocks = z.discriminatedUnion('type', [
      * Schema chặn luôn từ đầu: câu trích ở khối này không được chứa danh tính.
      */
     quotes: z.array(z.string().superRefine((q, ctx) => {
-      const identity = /\b(chị|anh|cô|bác|chú|em)\s+[A-ZĐÀ-Ỹ][\p{L}]+|\b\d{2}\s*tuổi|\b(Mrs?|Ms)\.\s+[A-Z]/u;
-      if (identity.test(q)) {
+      /* Dùng ĐÚNG hàng rào dữ liệu cá nhân, không viết lại một regex song song.
+         Kiểm định lần 13: bản trước tự khai
+         /\b(chị|anh|cô|bác|chú|em)\s+[A-ZĐÀ-Ỹ].../u — thiếu cờ hoa, nên "Chị Hà
+         bảo da tôi sạm hẳn sau sinh" qua sạch. Đó chính là lỗi mà vòng 9 đã sửa
+         trong `findPersonalData`, bị chép lại thành bản thứ hai rồi sửa một bản
+         mà quên bản kia. Một hàng rào, một chỗ. */
+      const hits = findPersonalData(q, BRAND_NUMBERS);
+      if (hits.length) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message:
-            `Câu trích trong khối "problem" nêu danh tính người thật: "${q.slice(0, 60)}…". ` +
+            `Câu trích trong khối "problem" nêu danh tính người thật: ` +
+            `"${hits[0].match}" (${hits[0].kind}). ` +
             `Lời chứng của khách phải nằm ở khối "testimonials", nơi có cổng consent. ` +
             `Khối này chỉ dành cho nỗi lo chung, viết ẩn danh.`,
         });
@@ -566,6 +573,50 @@ const brand = defineCollection({
     hours: z.string(),
     logo: z.string(),
     marketplaces: z.array(z.object({ name: z.string(), url: safeUrl.optional() }).strict()).default([]),
+  }).strict().superRefine((b, ctx) => {
+    /*
+     * Dữ liệu thương hiệu phải qua ĐÚNG những hàng rào mà sản phẩm phải qua.
+     *
+     * Kiểm định lần 13 (bằng mutation testing): collection này không có
+     * `.strict()`, không `superRefine`, không quét claims, PII hay tiền — trong
+     * khi nội dung của nó render ở footer MỌI trang, trong llms.txt và JSON-LD.
+     * Sáu vi phạm cùng lúc ("Kem trị nám tốt nhất, cam kết hoàn tiền", "bác sĩ
+     * da liễu khuyên dùng", tên + tuổi + số điện thoại khách, giá viết tay, một
+     * trường lạ) qua sạch với build xanh và 257 ca thử vẫn xanh.
+     *
+     * Mười ba vòng kiểm định đều soi hàng rào qua đúng một cửa: collection
+     * `products`. Đây là cửa còn lại.
+     */
+    const ownNumbers = [b.phone, b.phoneDisplay].filter(Boolean) as string[];
+    for (const [key, value] of Object.entries(b)) {
+      if (typeof value !== 'string') continue;
+      // `logo` là đường dẫn file, `email`/`phone` là dữ liệu liên hệ của chính
+      // doanh nghiệp — không phải văn bản marketing.
+      if (key === 'logo' || key === 'email' || key === 'phone' || key === 'phoneDisplay') continue;
+
+      for (const hit of findForbiddenClaims(value)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: [key],
+          message: `"${hit.match}" — ${hit.why}. Thay bằng: ${hit.instead}`,
+        });
+      }
+      for (const hit of findPersonalData(value, ownNumbers)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: [key],
+          message: `"${hit.match}" là ${hit.kind}. Dữ liệu cá nhân của khách không được đặt ` +
+            `trong thông tin doanh nghiệp.`,
+        });
+      }
+      for (const hit of findHandwrittenMoney(value)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: [key],
+          message: `"${hit}" là số tiền viết tay. Giá chỉ được nhắc bằng token trong file sản phẩm.`,
+        });
+      }
+    }
   }),
 });
 

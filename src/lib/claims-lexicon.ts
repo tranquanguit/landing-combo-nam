@@ -126,7 +126,7 @@ export const FORBIDDEN: ForbiddenPattern[] = [
     instead: 'mô tả tác dụng của hoạt chất',
   },
   {
-    pattern: /(?<![\p{L}])(trị|điều trị|chữa|đặc trị)\s+(bệnh\s+)?(nám|thâm|mụn|sạm)/iu,
+    pattern: /(?<![\p{L}])(trị|điều trị|chữa|đặc trị)\s+(bệnh\s+)?(nám|thâm|mụn|sạm|nấm)/iu,
     why: 'biến mỹ phẩm thành thuốc chữa bệnh',
     instead: 'chăm sóc da nám, hỗ trợ làm mờ',
   },
@@ -230,37 +230,76 @@ const NEGATED_BARE = /(?:khong|chua)\s+(?:phai\s+|co\s+)?(?:la\s+)?(?:thuoc\s+|t
  * là một từ tiếng Việt hợp lệ đã biết. Hàng rào nên mặc định chặn cái nó không
  * nhận ra, không mặc định tha.
  */
+/**
+ * Những cách viết CÓ DẤU đúng chính tả mà khi bỏ dấu trùng nhau.
+ *
+ * Danh sách này CỐ Ý gồm cả chính các từ bị cấm (`nám`, `thâm`, `trị`, `chữa`…).
+ * Lý do: cách đọc nguyên văn đã bắt mọi vi phạm viết đúng chính tả rồi. Cách đọc
+ * bỏ dấu chỉ tồn tại để bắt chữ viết KHÔNG dấu hoặc SAI dấu. Nên với cách đọc
+ * đó, một từ viết đúng chính tả — dù là từ bị cấm hay từ vô can — đều đã được
+ * xử lý ở nơi khác và không cần đọc lại theo nghĩa bỏ dấu.
+ *
+ * Kiểm định lần 13: danh sách thiếu `thẩm`, `sẫm`, `khối` nên "Tạm biệt thẩm mỹ
+ * viện đắt đỏ" và "Tạm biệt sẫm màu vùng gò má" bị chặn — một trong những câu
+ * mở đầu phổ biến nhất của ngành, và `sẫm màu` là chính vốn từ mà thông báo lỗi
+ * của hàng rào khuyên dùng.
+ */
 const LEGITIMATE_HOMOGRAPHS: Record<string, string[]> = {
-  nam: ['năm', 'nắm', 'nằm', 'nấm'],
-  tham: ['thăm', 'thắm', 'thầm', 'thấm'],
-  sam: ['sâm', 'sắm', 'sám'],
-  mun: ['mùn'],
-  tri: ['trí', 'trì', 'trĩ'],
-  chua: ['chứa', 'chùa', 'chưa'],
+  nam: ['năm', 'nắm', 'nằm', 'nấm', 'nám', 'nắng', 'nấng'],
+  tham: ['thăm', 'thắm', 'thầm', 'thấm', 'thẩm', 'thẫm', 'thâm'],
+  sam: ['sâm', 'sắm', 'sám', 'sẫm', 'sẩm', 'sạm'],
+  mun: ['mùn', 'mụn'],
+  tri: ['trí', 'trì', 'trĩ', 'trị'],
+  chua: ['chứa', 'chùa', 'chưa', 'chữa'],
   phep: ['phép'],
-  // "sách" (book) khác "sạch" (clean) — "sạch nám" là vi phạm, "sách nam giới" không.
-  sach: ['sách'],
+  sach: ['sách', 'sạch'],
+  khoi: ['khối', 'khởi', 'khói', 'khôi', 'khỏi'],
+  het: ['hét', 'hẹt', 'hết'],
 };
+
+/**
+ * Những từ khoá ở vị trí ĐỘNG TỪ của một tuyên bố ("trị", "chữa", "hết", "xoá").
+ *
+ * Viết không dấu ở vị trí này là dấu hiệu rõ của copy quảng cáo gõ không dấu:
+ * "tri nám", "het nam", "xoa nam". Trong khi một từ TÌNH TRẠNG viết không dấu
+ * thì không nói lên gì — "nam" (giới tính, phương nam) là một trong những từ
+ * phổ biến nhất tiếng Việt, nên "sách nam giới" không phải vi phạm.
+ */
+const ACTION_KEYS = new Set(['tri', 'chua', 'het', 'xoa', 'sach', 'khoi']);
 
 /**
  * Lần khớp trên bản bỏ dấu có đáng tin không?
  *
- * Không đáng tin khi MỌI từ khoá trong đoạn khớp đều là cách viết hợp lệ đã
- * biết — "hết năm 2026", "sách nam giới". Đáng tin trong mọi trường hợp còn
- * lại, kể cả khi từ khoá viết sai dấu ("nạm", "nàm") hoặc không dấu ("nam").
+ * Tin khi có dấu hiệu văn bản KHÔNG được gõ đúng chính tả tiếng Việt:
+ *   - một từ dễ lẫn viết có dấu nhưng SAI chính tả ("nạm", "nàm", "phếp"), hoặc
+ *   - một từ ở vị trí động từ viết KHÔNG dấu ("tri nám", "het nam").
+ *
+ * Không tin khi mọi từ dễ lẫn đều viết đúng chính tả — nghĩa là cách đọc nguyên
+ * văn đã xét đoạn đó và nếu là vi phạm thì đã bắt ở đó: "hết năm 2026",
+ * "sách nam giới", "khối thâm hụt", "da chưa thâm".
+ *
+ * Đánh đổi cố ý: hai từ viết ĐÚNG chính tả nhưng ghép lại chỉ thành vi phạm sau
+ * khi bỏ dấu ("Chứa nám", "Trì nam") không bị chặn — chặn chúng sẽ kéo theo
+ * "chưa thâm", "khối thâm hụt", "chưa nắm rõ". Văn bản dạng đó đọc như lỗi gõ
+ * chứ không như lời rao.
  *
  * Phép bỏ dấu giữ nguyên độ dài từng ký tự nên chỉ số trỏ đúng vào bản gốc.
  */
 function foldedHitIsReal(original: string, from: number, to: number): boolean {
   const words = original.slice(from, to).split(/[^\p{L}\p{M}]+/u).filter((w) => w.length >= 2);
+  let sawCorrectlySpelled = false;
   for (const word of words) {
-    // Chỉ cách viết CÓ DẤU mới được tha. Từ không dấu chính là trường hợp cần
-    // hàng rào này, nên nó không bao giờ là bằng chứng ngoại phạm.
-    if (!HAS_DIACRITICS.test(word)) continue;
-    const legit = LEGITIMATE_HOMOGRAPHS[stripDiacritics(word).toLowerCase()];
-    if (legit?.includes(word.toLowerCase())) return false;
+    const folded = stripDiacritics(word).toLowerCase();
+    const legit = LEGITIMATE_HOMOGRAPHS[folded];
+    if (!legit) continue;                                  // không phải từ dễ lẫn
+    if (!HAS_DIACRITICS.test(word)) {
+      if (ACTION_KEYS.has(folded)) return true;            // động từ gõ không dấu
+      continue;                                            // từ tình trạng: trung tính
+    }
+    if (!legit.includes(word.toLowerCase())) return true;   // có dấu nhưng sai chính tả
+    sawCorrectlySpelled = true;
   }
-  return true;
+  return !sawCorrectlySpelled;
 }
 
 export interface ClaimHit { match: string; why: string; instead: string; index: number }
@@ -346,7 +385,11 @@ const PERSONAL: { pattern: RegExp; kind: string }[] = [
        hoa/thường liệt kê tường minh ở đúng chỗ cần. */
     /* Loại các cách gọi số nhiều/chung: "Anh Chị Em thân mến", "Cô Gái Mùa Thu"
        (tên chiến dịch) — kiểm định lần 11. */
-    pattern: /(?:^|[\s("“])(?:[Cc]hị|[Aa]nh|[Cc]ô|[Bb]ác|[Cc]hú|[Ee]m|Mrs?\.?|Ms\.?)\s+(?!(?:Chị|Anh|Cô|Bác|Chú|Em|Gái|Nàng|Bạn)(?![\p{Ll}]))[A-ZĐÀ-Ỹ][\p{Ll}\p{M}]+\s+[A-ZĐÀ-Ỹ]/u,
+    /* Xưng hô + MỘT tên riêng đã đủ nhận dạng ("Chị Hà", "Cô Lan").
+       Kiểm định lần 13: bản trước đòi hai từ viết hoa nên "Chị Hà bảo da tôi
+       sạm hẳn sau sinh" qua cả hai cổng. Danh sách loại trừ giữ cho các cách
+       gọi chung không bị coi là danh tính. */
+    pattern: /(?:^|[\s("“])(?:[Cc]hị|[Aa]nh|[Cc]ô|[Bb]ác|[Cc]hú|[Ee]m|Mrs?\.?|Ms\.?)\s+(?!(?:Chị|Anh|Cô|Bác|Chú|Em|Gái|Nàng|Bạn|Sĩ|Ạ|Ơi)(?![\p{Ll}]))[A-ZĐÀ-Ỹ][\p{Ll}\p{M}]{1,}(?![\p{L}])/u,
     kind: 'họ tên đầy đủ kèm xưng hô',
   },
 ];

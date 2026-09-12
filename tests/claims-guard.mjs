@@ -86,6 +86,12 @@ const CHAN = [
   'Sản phẩm được Bộ Y Tế cấp phếp lưu hành.',
   // ký tự zero-width dán hai từ liền
   'Điều\u200Btrị nám tận gốc.',
+  // Kiểm định lần 13: nấm da là claim thuốc; các nhánh chưa ca nào canh.
+  'Điều trị nấm da mặt.', 'Sạch nám sau 4 tuần.', 'Khỏi nám sau 8 tuần.',
+  'Nám không tái phát sau liệu trình.', 'Hoàn tiền 100% nếu không hiệu quả.',
+  'Điều trị bằng laser tại nhà.', 'Guaranteed results in 4 weeks.',
+  'Guaranteed to work on every skin type.', 'Fades dark spots forever.',
+  'Doctor-recommended formula.', 'Approved by the F.D.A.',
   // hai lượt mã hoá
   'Cam k&amp;#7871;t hoàn ti&amp;#7873;n n&amp;#7871;u không h&amp;#7871;t nám.',
 ];
@@ -119,6 +125,10 @@ const CHO_QUA = [
   'Sản phẩm nằm trong nhóm dưỡng sáng.',
   'Bộ sách chăm sóc da năm nay.',
   'Best practices for sun care.',
+  // Kiểm định lần 13: từ có dấu đúng chính tả trùng từ khoá sau khi bỏ dấu.
+  'Tạm biệt thẩm mỹ viện đắt đỏ.', 'Hết thẩm quyền của chúng tôi.',
+  'Loại bỏ thẩm định rườm rà.', 'Chấm dứt thẩm tra.',
+  'Tạm biệt sẫm màu vùng gò má.', 'Xoá sẫm màu do nắng.', 'Khối thâm hụt.',
   'Bước số 1: rửa mặt với nước mát.',
   // Entity hợp lệ trong câu bình thường không được báo nhầm.
   'Kem &amp; serum dùng cùng nhau.',

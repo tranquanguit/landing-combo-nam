@@ -20,6 +20,9 @@ const CHAN = [
   // Kiểm định lần 10: hotline doanh nghiệp đứng trước giấu luôn số của khách.
   'Hotline 0367 848 918. Chị Hà đặt hàng qua số 0912 345 678.',
   'Hotline 0367 848 918 hoặc nhắn cho khách Lan 0912345678.',
+  // Kiểm định lần 13: xưng hô + MỘT tên riêng đã đủ nhận dạng.
+  'Chị Hà bảo da tôi sạm hẳn sau sinh', 'Cô Lan kể nám lan rộng hai bên gò má',
+  'Anh Nam đặt hàng lúc 9h', 'Tôi 38 tuoi, da sạm sau sinh',
 ];
 
 const CHO_QUA = [
@@ -33,6 +36,8 @@ const CHO_QUA = [
   // Kiểm định lần 11: xưng hô số nhiều và tên chiến dịch, không phải danh tính.
   'Anh Chị Em thân mến.',
   'Cô Gái Mùa Thu là tên chiến dịch.',
+  'Bác Sĩ Tư Vấn miễn phí.',
+  'Em có thể nhắn tin cho chúng tôi.',
 ];
 
 let bad = 0;

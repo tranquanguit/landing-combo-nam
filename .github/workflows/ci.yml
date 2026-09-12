@@ -50,6 +50,11 @@ jobs:
       - name: Bảng trường khớp schema
         run: npm run docs:fields && git diff --exit-code docs/truong-du-lieu.md
 
+      # Bộ thử cho chính scripts/check-budget.mjs: dựng dist giả rồi chạy script
+      # thật. Trước vòng 21, 0/12 cổng trong script đó có ca thử nào canh.
+      - name: Bộ thử cổng ngân sách
+        run: npm run test:budget
+
       - name: Ngân sách trọng lượng trang
         run: node scripts/check-budget.mjs
 
