@@ -19,13 +19,58 @@ export interface ForbiddenPattern {
 }
 
 export const FORBIDDEN: ForbiddenPattern[] = [
+  /* ---------- Tiếng Anh ----------
+     Từ điển ban đầu chỉ viết bằng tiếng Việt nên bản EN gần như không có hàng
+     rào nào: "Removes melasma permanently", "cures dark spots", "FDA approved",
+     "Money back guarantee" đều lên trang được. Đây là thị trường EU/UK, nơi
+     claim mỹ phẩm bị xử phạt nặng nhất. */
+  {
+    pattern: /\b(cure|cures|cured|heal|heals|treat|treats|treatment of)\s+(melasma|dark spots?|pigmentation|acne)/i,
+    why: 'biến mỹ phẩm thành thuốc chữa bệnh (US FDA, EU 1223/2009)',
+    instead: 'helps visibly reduce the look of dark spots',
+  },
+  {
+    pattern: /\b(remove|removes|erase|erases|eliminate|eliminates|clear(?:s)?)\s+(melasma|dark spots?|pigmentation)\b|\bpermanently\b|\bforever\b/i,
+    why: 'tuyên bố kết quả tuyệt đối hoặc vĩnh viễn, không chứng minh được',
+    instead: 'helps improve the appearance of uneven tone',
+  },
+  {
+    pattern: /\bclinically proven\b|\bdermatologist(?:ally)?[\s-]?(recommended|tested|approved)\b|\bdoctor[\s-]?recommended\b/i,
+    why: 'cần hồ sơ thử nghiệm lâm sàng thật; và Nghị định 342/2025 cấm dùng danh nghĩa nhân viên y tế',
+    instead: 'dẫn nghiên cứu cụ thể kèm nồng độ đã thử nghiệm',
+  },
+  {
+    pattern: /\bFDA[\s-]?(approved|certified|cleared)\b|\b(approved|certified) by the FDA\b/i,
+    why: 'FDA không phê duyệt hay chứng nhận mỹ phẩm',
+    instead: 'nêu số tiếp nhận phiếu công bố sản phẩm mỹ phẩm',
+  },
+  {
+    pattern: /\bmoney[\s-]?back guarantee\b|\bguaranteed? results?\b|\bguaranteed to work\b/i,
+    why: 'cam kết kết quả điều trị',
+    instead: 'nêu chính sách đổi trả cụ thể kèm điều kiện',
+  },
+  {
+    pattern: /\b(the best|number one|no\.?\s*1|world'?s leading|most effective)\b/i,
+    why: 'so sánh tuyệt đối',
+    instead: 'nêu điểm khác biệt kiểm chứng được',
+  },
+  {
+    pattern: /\b\d{1,3}\s*%\s*(of\s+)?(customers?|users?|people|women)\b|\b100\s*%\s*effective\b/i,
+    why: 'số liệu khảo sát phải nêu cỡ mẫu và cách thu thập',
+    instead: 'đưa vào hero.usp với evidence: "survey" và qualifier nêu cỡ mẫu',
+  },
+  {
+    pattern: /\b(like|same as|replaces?|as effective as)\s+(laser|peel|microneedling|injections?)\b/i,
+    why: 'so sánh mỹ phẩm với thủ thuật y khoa',
+    instead: 'mô tả tác dụng của hoạt chất',
+  },
   {
     pattern: /\b(trị|điều trị|chữa|đặc trị)\s+(nám|thâm|mụn|sạm)/iu,
     why: 'biến mỹ phẩm thành thuốc chữa bệnh',
     instead: 'chăm sóc da nám, hỗ trợ làm mờ',
   },
   {
-    pattern: /\bhết\s+(nám|thâm|sạm)\b|\b(sạch|khỏi|dứt điểm)\s+(nám|thâm)\b|\bkhông\s+tái\s+phát\b/iu,
+    pattern: /(hết|xoá|xóa|đánh bay|triệt tiêu|loại bỏ|chấm dứt|biến mất|tạm biệt)\s*(hoàn toàn\s*)?(nám|thâm|sạm|đốm nâu)|(sạch|khỏi|dứt điểm)\s+(nám|thâm)|không\s+tái\s+phát|vĩnh viễn/iu,
     why: 'tuyên bố kết quả tuyệt đối, không chứng minh được',
     instead: 'hỗ trợ làm mờ, hạn chế sạm màu quay lại',
   },
@@ -35,7 +80,7 @@ export const FORBIDDEN: ForbiddenPattern[] = [
     instead: 'dẫn nghiên cứu cụ thể trong bảng thành phần',
   },
   {
-    pattern: /\b(như|bằng|thay thế)\s+(laser|peel|lăn kim|tiêm|thuốc)\b/iu,
+    pattern: /(như|bằng|tương đương|thay thế cho|thay thế)\s*(liệu trình\s*)?(laser|peel|lăn kim|tiêm|thuốc)/iu,
     why: 'so sánh mỹ phẩm với thủ thuật y khoa',
     instead: 'mô tả tác dụng của hoạt chất',
   },
@@ -45,7 +90,7 @@ export const FORBIDDEN: ForbiddenPattern[] = [
     instead: 'nêu chính sách đổi trả cụ thể và điều kiện áp dụng',
   },
   {
-    pattern: /\b(số\s*1|tốt nhất|hiệu quả nhất|duy nhất trên thị trường|number one)\b/iu,
+    pattern: /(số\s*1|so\s*1|tốt nhất|hiệu quả nhất|duy nhất trên thị trường|number one)/iu,
     why: 'so sánh tuyệt đối, bị cấm theo Luật Quảng cáo',
     instead: 'nêu điểm khác biệt cụ thể, kiểm chứng được',
   },
@@ -74,7 +119,14 @@ export const FORBIDDEN: ForbiddenPattern[] = [
  * "không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh" —
  * chứa đúng cụm bị cấm nhưng nói điều ngược lại.
  */
-const NEGATED = /\b(không|chẳng|chưa|đừng)\b[^.;!?]{0,40}$/iu;
+/*
+ * Chỉ bỏ qua khi phủ định đứng NGAY TRƯỚC cụm bị cấm, trong cùng mệnh đề.
+ *
+ * Bản trước nhìn 40 ký tự bất kỳ phía trước nên "Không ngờ, trị nám chỉ sau 2
+ * tuần" và "Chúng tôi không nói quá: 98% khách hàng hết nám" đều lách được.
+ * Nay dấu phẩy, hai chấm hay dấu chấm đều cắt phạm vi phủ định.
+ */
+const NEGATED = /(không|chẳng|chưa|đừng|no|not|never)\s+(?:có\s+|là\s+|the\s+)?[\p{L}\s]{0,18}$/iu;
 
 export function findForbiddenClaims(text: string): { match: string; why: string; instead: string }[] {
   const plain = text.replace(/<[^>]*>/g, ' ');

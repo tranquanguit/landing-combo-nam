@@ -214,9 +214,12 @@ section { padding-block: clamp(56px, 8vw, 104px); }
    ở màn hình hẹp. Đo được 3px tràn ở 320px trước khi thêm luật này. */
 .hero-grid > *, .order-grid > *, .offer-grid > *, .split > *, .grid > * { min-width: 0; }
 
-/* Thanh CTA cố định che 63px cuối màn hình trên mobile — chừa chỗ cho nó */
+/* Thanh CTA cố định và thanh đồng ý đo lường đều nằm đè lên trang.
+   Chừa chỗ cho cả hai để không khối nội dung nào bị che. */
+:root { --consent-h: 0px; }
+body { padding-bottom: var(--consent-h); }
 @media (max-width: 899px) {
-  body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+  body { padding-bottom: calc(64px + var(--consent-h) + env(safe-area-inset-bottom)); }
 }
 
 /* Trước đây dùng content-visibility:auto cho các section dưới màn hình đầu.

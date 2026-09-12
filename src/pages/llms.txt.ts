@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getCollection, getEntry } from 'astro:content';
 import { money } from '../lib/format';
+import { expandProductTokens } from '../lib/money-text';
 import { productPath } from '../lib/routes';
 import type { Locale } from '../i18n/ui';
 
@@ -34,7 +35,14 @@ export const GET: APIRoute = async ({ site }) => {
     '',
   ];
 
-  for (const { data: p } of products) {
+  for (const entry of products) {
+    /* Thay token giá: llms.txt không đi qua layout nên trước đây in nguyên văn
+       {{price}} cho máy đọc — đúng thứ file này sinh ra để tránh. */
+    const p = expandProductTokens(entry.data, {
+      price: entry.data.price,
+      compareAtPrice: entry.data.compareAtPrice,
+      currency: entry.data.currency,
+    }, entry.data.locale as Locale);
     const locale = p.locale as Locale;
     lines.push(`## ${p.name}`, '');
     lines.push(`- Trang: ${origin}${productPath(p.slug, locale)}`);

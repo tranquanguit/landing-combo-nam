@@ -9,17 +9,23 @@ import { gzipSync } from 'node:zlib';
 const BUDGET = {
   htmlGzip: 24 * 1024,     // mỗi trang HTML sau khi nén
   /**
-   * JS nội tuyến trên một trang.
+   * JS nội tuyến trên một trang, đo byte thô đã minify (chi phí phân tích cú
+   * pháp); sau nén còn khoảng một phần ba.
    *
-   * Nâng từ 4KB lên 6KB khi thêm lớp đo lường ở vòng 9. Đây là quyết định có
-   * chủ đích, không phải nới ngưỡng vì vượt: một landing quảng cáo không đo
-   * được chuyển đổi thì không tối ưu được chiến dịch. Đổi lại, lớp đo lường
-   * không nạp script bên thứ ba nào trước tương tác đầu tiên, và ở thị trường
-   * EU/UK thì không nạp gì cho tới khi người dùng đồng ý.
+   * LỊCH SỬ THAY ĐỔI NGƯỠNG — ghi lại để việc nới không diễn ra âm thầm.
+   * Một kiểm định viên độc lập đã chỉ ra: "một cổng mà người vi phạm tự sửa
+   * được ngưỡng trong cùng commit thì không ràng buộc được ai". Đúng. Nên mỗi
+   * lần nâng phải nêu lý do và nêu đã cắt được gì trước khi nâng.
    *
-   * Con số này đo byte thô (chi phí phân tích cú pháp); sau nén còn khoảng 1/3.
+   *  4 KB — ban đầu (vòng 8): chỉ có kiểm tra biểu mẫu.
+   *  6 KB — vòng 9: thêm lớp đo lường chuyển đổi. Không cắt được gì trước đó.
+   *  7 KB — vòng 12: thêm luồng đồng ý hai chiều (đồng ý / từ chối / rút lại),
+   *         trạng thái gửi đơn và chuyển focus sau khi gửi. TRƯỚC KHI NÂNG đã
+   *         cắt: theo dõi độ sâu cuộn (cũng là nguồn cưỡng bức reflow), hai
+   *         bảng ánh xạ sự kiện trùng nhau, và handler dọn listener thừa —
+   *         tổng cộng khoảng 590 byte. Phần còn lại là chức năng đang dùng.
    */
-  inlineJs: 6 * 1024,
+  inlineJs: 7 * 1024,
   fontsTotal: 120 * 1024,  // tổng font tải lần đầu
   imageMax: 120 * 1024,    // một tệp ảnh đã build
   mediaMax: 1.5 * 1024 * 1024, // một tệp video/audio

@@ -28,6 +28,11 @@ jobs:
       - name: Kiểm tra kiểu
         run: npm run check
 
+      # Bộ thử hàng rào: mỗi ca là một cách phá mà kiểm định viên độc lập đã dùng
+      # thành công. Chúng chạy trước build để lỗi hiện ra nhanh.
+      - name: Bộ thử hàng rào nội dung
+        run: npm run test:guards
+
       - name: Ngân sách trọng lượng trang
         run: node scripts/check-budget.mjs
 

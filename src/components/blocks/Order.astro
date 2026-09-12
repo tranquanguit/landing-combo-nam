@@ -35,13 +35,16 @@ const Wrapper = endpoint ? 'form' : 'div';
     </div>
 
     <div class="form-card on-light">
+      {/* Cố ý KHÔNG đặt action: POST native gửi form-urlencoded còn nhánh JS gửi
+          JSON — hai định dạng vào cùng một endpoint. Và không có action thì form
+          POST về chính trang, ném khách sang màn hình lỗi. Khi tắt JS, biểu mẫu
+          bị ẩn hẳn và chỉ còn lối gọi hotline (xem <noscript> bên dưới).
+          `novalidate` do JS gắn vào, để bản không-JS vẫn có kiểm tra của trình duyệt. */}
       <Wrapper
         id="order-form"
         method={endpoint ? 'post' : undefined}
-        action={endpoint ?? undefined}
         data-endpoint={endpoint ? 'configured' : 'missing'}
         data-action={endpoint ?? undefined}
-        novalidate={endpoint ? true : undefined}
       >
         {p.variants.length > 0 && (
           <fieldset>
@@ -104,6 +107,11 @@ const Wrapper = endpoint ? 'form' : 'div';
           <textarea id="note" name="note" rows="2" disabled={!endpoint}></textarea>
         </div>
 
+        <label class="agree">
+          <input type="checkbox" id="data-consent" name="dataConsent" required disabled={!endpoint} />
+          <span set:html={richText(t(locale, 'form.dataConsent'))} />
+        </label>
+
         <p class="total" id="order-total" data-currency={p.currency} data-locale={locale}>
           {t(locale, 'form.total')} <strong class="tabular" data-total>{money(p.price, p.currency, locale)}</strong>
           <span class="muted"> {t(locale, 'form.totalNote')}</span>
@@ -116,6 +124,7 @@ const Wrapper = endpoint ? 'form' : 'div';
           type={endpoint ? 'submit' : 'button'}
           class="btn btn-primary btn-lg btn-block"
           data-cta="form-submit"
+          data-sending-label={t(locale, 'form.sending')}
           disabled={!endpoint}
           aria-describedby={endpoint ? undefined : 'form-no-endpoint'}
         >
@@ -123,6 +132,12 @@ const Wrapper = endpoint ? 'form' : 'div';
         </button>
 
       </Wrapper>
+
+      <noscript>
+        <p class="todo">
+          {t(locale, 'form.needsJs')} <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a>
+        </p>
+      </noscript>
 
       <p class="ok" id="form-success" role="status" hidden>{t(locale, 'form.success')}</p>
 
@@ -191,7 +206,15 @@ const Wrapper = endpoint ? 'form' : 'div';
   .hint { font-size: var(--t-xs); color: var(--ink-muted); margin: 5px 0 0; }
   .err { font-size: var(--t-xs); color: #b3261e; margin: 5px 0 0; display: none; }
   .field[data-invalid] input { border-color: #b3261e; }
+  .agree[data-invalid] { color: #b3261e; }
   .field[data-invalid] .err { display: block; }
+
+  .agree {
+    display: flex; gap: var(--s-3); align-items: flex-start;
+    font-size: var(--t-xs); color: var(--ink-muted); margin: var(--s-4) 0;
+  }
+  .agree input { width: 24px; height: 24px; accent-color: var(--indigo); flex: 0 0 auto; margin: 0; }
+  .agree:focus-within { outline: 3px solid var(--indigo-lift); outline-offset: 3px; border-radius: var(--r-input); }
 
   .total { font-size: var(--t-sm); margin: var(--s-4) 0; }
   .total strong { color: var(--ink-navy); }
@@ -205,6 +228,9 @@ const Wrapper = endpoint ? 'form' : 'div';
   button[aria-disabled='true'] { background: #6b7280; cursor: not-allowed; }
   button[disabled] { background: #6b7280; cursor: not-allowed; }
   input[disabled], textarea[disabled] { opacity: .6; cursor: not-allowed; }
+  /* Không có JavaScript thì biểu mẫu không gửi đi đâu được, nên ẩn hẳn
+     thay vì để nó POST về chính trang và làm mất dữ liệu khách đã gõ. */
+  html:not(.js) #order-form { display: none; }
   .ok {
     background: #e6f4ee; border: 1.5px solid var(--green-clinic); color: #0a4b38;
     border-radius: var(--r-card); padding: var(--s-4); font-weight: 600; margin: 0;
@@ -218,6 +244,8 @@ const Wrapper = endpoint ? 'form' : 'div';
   const form = node instanceof HTMLFormElement ? node : null;
 
   if (form) {
+    /* Gắn novalidate bằng JS: bản không-JS giữ được kiểm tra của trình duyệt. */
+    form.setAttribute('novalidate', '');
     /* Chấp nhận cả 0912345678, +84912345678 và 84912345678 — khách hay dán
        số ở định dạng quốc tế từ Zalo. Chuẩn hóa về dạng 0xxxxxxxxx rồi mới kiểm. */
     /* CSS scroll-behavior đã tôn trọng prefers-reduced-motion, nhưng lệnh JS thì không. */
@@ -239,6 +267,10 @@ const Wrapper = endpoint ? 'form' : 'div';
       address: (v) => v.trim().length >= 8,
       country: (v) => v.trim().length >= 2,
     };
+
+    /* Đồng ý xử lý dữ liệu cá nhân là điều kiện bắt buộc theo Nghị định
+       13/2023/NĐ-CP, không phải một ô đánh dấu cho đẹp. */
+    const agree = form.elements.namedItem('dataConsent') as HTMLInputElement | null;
 
     const check = (el: HTMLInputElement) => {
       const ok = rules[el.name] ? rules[el.name](el.value) : true;
@@ -277,6 +309,10 @@ const Wrapper = endpoint ? 'form' : 'div';
         const el = form.elements.namedItem(n) as HTMLInputElement | null;
         if (el && !check(el) && !firstBad) firstBad = el;
       }
+      if (!firstBad && agree && !agree.checked) {
+        agree.closest('.agree')?.setAttribute('data-invalid', '');
+        firstBad = agree;
+      }
       if (firstBad) {
         e.preventDefault();
         firstBad.focus();
@@ -298,7 +334,16 @@ const Wrapper = endpoint ? 'form' : 'div';
       if (vietnameseOnly) payload.phone = normalisePhone(String(payload.phone ?? ''));
 
       const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-      if (submit) { submit.disabled = true; submit.dataset.busy = 'true'; }
+      const failBox = document.getElementById('form-error');
+      /* Dọn thông báo lỗi của lần gửi trước: nếu không, gửi lại thành công sẽ
+         hiện đồng thời "đơn đã được ghi nhận" và "gửi đơn không thành công". */
+      if (failBox) failBox.hidden = true;
+      if (submit) {
+        submit.disabled = true;
+        submit.dataset.busy = 'true';
+        submit.dataset.idleLabel = submit.textContent ?? '';
+        submit.textContent = submit.dataset.sendingLabel || submit.textContent;
+      }
 
       fetch(form.dataset.action!, {
         method: 'POST',
@@ -309,14 +354,29 @@ const Wrapper = endpoint ? 'form' : 'div';
           if (!res.ok) throw new Error(String(res.status));
           form.hidden = true;
           const ok = document.getElementById('form-success');
-          if (ok) { ok.hidden = false; ok.scrollIntoView({ block: 'center', behavior: scrollBehaviour() }); }
+          if (ok) {
+            ok.hidden = false;
+            /* Form biến mất nên focus rơi về body; đưa focus sang thông báo để
+               người dùng bàn phím và trình đọc màn hình biết chuyện gì xảy ra. */
+            ok.setAttribute('tabindex', '-1');
+            ok.focus();
+            ok.scrollIntoView({ block: 'center', behavior: scrollBehaviour() });
+          }
           window.dispatchEvent(new CustomEvent('mocha:lead', { detail: payload }));
         })
         .catch(() => {
           /* Gửi hỏng thì nói thật và đưa lối liên hệ khác, không nuốt lỗi. */
-          const fail = document.getElementById('form-error');
-          if (fail) { fail.hidden = false; fail.scrollIntoView({ block: 'center', behavior: scrollBehaviour() }); }
-          if (submit) { submit.disabled = false; delete submit.dataset.busy; }
+          if (failBox) {
+            failBox.hidden = false;
+            failBox.setAttribute('tabindex', '-1');
+            failBox.focus();
+            failBox.scrollIntoView({ block: 'center', behavior: scrollBehaviour() });
+          }
+          if (submit) {
+            submit.disabled = false;
+            delete submit.dataset.busy;
+            if (submit.dataset.idleLabel) submit.textContent = submit.dataset.idleLabel;
+          }
         });
     });
   }

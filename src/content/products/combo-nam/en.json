@@ -262,6 +262,18 @@
       "footnote": "Recommended run: <strong>8–12 weeks without gaps</strong>. Unprotected sun exposure brings pigment back regardless of which product you use."
     },
     {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City — tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support through the full routine</strong> by email."
+      ]
+    },
+    {
       "type": "faq",
       "eyebrow": "Questions",
       "heading": "What people ask before ordering",
@@ -291,23 +303,11 @@
           "a": "Yes, from Ho Chi Minh City. Tell us your country in the order form and we will confirm shipping cost and delivery time before anything is charged."
         }
       ]
-    },
-    {
-      "type": "order",
-      "eyebrow": "Order",
-      "heading": "Tell us where you are and we'll confirm shipping before you pay",
-      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
-      "points": [
-        "<strong>Ships worldwide</strong> from Ho Chi Minh City — tell us your country and we quote the cost first.",
-        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
-        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
-        "<strong>Support through the full routine</strong> by email."
-      ]
     }
   ],
   "availability": "InStock",
   "returnPolicy": {
     "country": "VN",
-    "days": 14
+    "days": 7
   }
 }

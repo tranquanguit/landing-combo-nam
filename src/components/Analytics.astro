@@ -46,9 +46,16 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
        điện thoại phải bấm được nút đặt hàng ngay cả khi chưa trả lời consent. */
     bottom: calc(64px + env(safe-area-inset-bottom));
     background: var(--paper); border-top: 1px solid var(--line);
-    padding: var(--s-4) var(--s-5);
+    padding: var(--s-3) var(--s-4);
+    font-size: var(--t-xs);
+    /* Ở màn hình thấp, thanh từng chiếm tới 48% chiều cao và đè lên CTA của
+       hero. Giới hạn chiều cao và cho phần chữ cuộn trong chính nó. */
+    max-height: 40vh; overflow-y: auto;
     display: grid; gap: var(--s-3); font-size: var(--t-sm);
     box-shadow: 0 -8px 28px rgba(14, 18, 80, .12);
+  }
+  @media (min-width: 640px) {
+    .consent { grid-template-columns: 1fr auto; align-items: center; }
   }
   @media (min-width: 900px) {
     /* Trên desktop không có thanh CTA cố định nên bám sát đáy màn hình. */
@@ -63,15 +70,20 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
 </style>
 
 <script>
-  type Cfg = {
+  const cfg = (window as any).__mochaAnalytics as {
     ga4?: string; metaPixel?: string; tiktokPixel?: string;
     requireConsent: boolean; currency: string; value: number; itemId: string; itemName: string;
   };
-  const cfg = (window as unknown as { __mochaAnalytics: Cfg }).__mochaAnalytics;
   const CONSENT_KEY = 'mocha_analytics_consent';
 
   /* GDPR điều 7(3): rút lại sự đồng ý phải dễ như khi cho. Hàm này được gắn
      vào link trong footer, và xoá luôn cookie mà pixel đã đặt. */
+  /* Xoá hẳn quyết định để banner hỏi lại — dành cho người đã từ chối và muốn đổi ý. */
+  (window as any).mochaResetConsent = () => {
+    try { localStorage.removeItem(CONSENT_KEY); } catch { /* chế độ riêng tư */ }
+    location.reload();
+  };
+
   (window as any).mochaWithdrawConsent = () => {
     try { localStorage.setItem(CONSENT_KEY, 'no'); } catch { /* chế độ riêng tư */ }
     for (const c of document.cookie.split(';')) {
@@ -90,8 +102,7 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
   let loaded = false;
 
   const params = (extra: Record<string, unknown> = {}) => ({
-    currency: cfg.currency,
-    value: cfg.value,
+    currency: cfg.currency, value: cfg.value,
     items: [{ item_id: cfg.itemId, item_name: cfg.itemName, price: cfg.value, quantity: 1 }],
     ...extra,
   });
@@ -101,34 +112,25 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
     w.dataLayer = w.dataLayer || [];
     w.dataLayer.push({ event: name, ...p });
     if (typeof w.gtag === 'function') w.gtag('event', name, p);
-    if (typeof w.fbq === 'function') {
-      const map: Record<string, string> = {
-        view_item: 'ViewContent', begin_checkout: 'InitiateCheckout',
-        generate_lead: 'Lead', contact: 'Contact',
-      };
-      if (map[name]) w.fbq('track', map[name], p);
-    }
-    if (w.ttq?.track) {
-      const map: Record<string, string> = {
-        view_item: 'ViewContent', begin_checkout: 'InitiateCheckout',
-        generate_lead: 'SubmitForm', contact: 'Contact',
-      };
-      if (map[name]) w.ttq.track(map[name], p);
-    }
+    const std: Record<string, string> = {
+      view_item: 'ViewContent', begin_checkout: 'InitiateCheckout', contact: 'Contact',
+    };
+    const fbName = std[name] ?? (name === 'generate_lead' ? 'Lead' : '');
+    const ttName = std[name] ?? (name === 'generate_lead' ? 'SubmitForm' : '');
+    if (typeof w.fbq === 'function' && fbName) w.fbq('track', fbName, p);
+    if (w.ttq?.track && ttName) w.ttq.track(ttName, p);
   }
 
   function track(name: string, extra: Record<string, unknown> = {}) {
     const p = params(extra);
     window.dispatchEvent(new CustomEvent('mocha:event', { detail: { name, params: p } }));
-    if (loaded) forward(name, p);
-    else queue.push({ name, params: p });
+    if (loaded) forward(name, p); else queue.push({ name, params: p });
   }
   (window as any).mochaTrack = track;
 
-  function inject(src: string, after?: () => void) {
+  function inject(src: string) {
     const s = document.createElement('script');
     s.async = true; s.src = src;
-    if (after) s.onload = after;
     document.head.appendChild(s);
   }
 
@@ -141,13 +143,12 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
       w.dataLayer = w.dataLayer || [];
       w.gtag = function () { w.dataLayer.push(arguments); };
       w.gtag('js', new Date());
-      w.gtag('config', cfg.ga4, { send_page_view: true });
+      w.gtag('config', cfg.ga4);
       inject(`https://www.googletagmanager.com/gtag/js?id=${cfg.ga4}`);
     }
     if (cfg.metaPixel) {
-      /* Đoạn khởi tạo tối thiểu của Meta, viết tay để không kéo theo phần
-         auto-config nặng và hay gây tác vụ dài. */
-      const fbq: any = function (...a: unknown[]) { fbq.queue.push(a); };
+      /* Khởi tạo tối thiểu, viết tay để không kéo theo phần auto-config nặng. */
+      const fbq: any = (...a: unknown[]) => { fbq.queue.push(a); };
       fbq.queue = []; fbq.loaded = true; fbq.version = '2.0';
       w.fbq = fbq;
       fbq('init', cfg.metaPixel);
@@ -161,37 +162,46 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
     for (const e of queue.splice(0)) forward(e.name, e.params);
   }
 
-  function consentGiven() {
-    try { return localStorage.getItem(CONSENT_KEY) === 'yes'; } catch { return false; }
+  function consentDecision(): 'yes' | 'no' | null {
+    try {
+      const v = localStorage.getItem(CONSENT_KEY);
+      return v === 'yes' || v === 'no' ? v : null;
+    } catch { return null; }
   }
 
   function arm() {
     if (!cfg.ga4 && !cfg.metaPixel && !cfg.tiktokPixel) return;
-    if (cfg.requireConsent && !consentGiven()) {
+    const decided = consentDecision();
+    if (decided === 'yes') { loadVendors(); return; }
+    /* Đã từ chối thì im lặng, không hỏi lại mỗi lần tải trang. Người dùng đổi ý
+       được qua link trong footer. */
+    if (decided === 'no') return;
+    if (cfg.requireConsent) {
       const bar = document.getElementById('consent-bar');
       if (bar) {
         bar.hidden = false;
+        /* Chừa chỗ cho thanh dưới đáy tài liệu, trả lại khi nó biến mất. */
+        const space = (v: string) => document.documentElement.style.setProperty('--consent-h', v);
+        space(`${bar.offsetHeight}px`);
+        const release = () => space('0px');
         document.getElementById('consent-yes')?.addEventListener('click', () => {
           try { localStorage.setItem(CONSENT_KEY, 'yes'); } catch { /* chế độ riêng tư */ }
           bar.hidden = true;
+          release();
           loadVendors();
         });
         document.getElementById('consent-no')?.addEventListener('click', () => {
           try { localStorage.setItem(CONSENT_KEY, 'no'); } catch { /* chế độ riêng tư */ }
           bar.hidden = true;
+          release();
         });
       }
       return;
     }
     /* Không chặn luồng chính. Idle callback có thể bắn ngay khi trang còn đang
        dựng nốt, nên chỉ tính từ sau sự kiện load, và vẫn ưu tiên tương tác thật. */
-    const go = () => { cleanup(); loadVendors(); };
-    const cleanup = () => {
-      for (const ev of ['pointerdown', 'keydown', 'touchstart']) {
-        window.removeEventListener(ev, go);
-      }
-    };
-    for (const ev of ['pointerdown', 'keydown', 'touchstart']) {
+    const go = () => loadVendors();
+    for (const ev of ['pointerdown', 'keydown']) {
       window.addEventListener(ev, go, { once: true, passive: true });
     }
     const afterLoad = () => {
@@ -227,13 +237,4 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
     track('generate_lead', { pack: (e as CustomEvent).detail?.pack });
   });
 
-  const marks = [25, 50, 75, 90];
-  const fired = new Set<number>();
-  window.addEventListener('scroll', () => {
-    const d = document.documentElement;
-    const pct = Math.round(((window.scrollY + window.innerHeight) / d.scrollHeight) * 100);
-    for (const m of marks) {
-      if (pct >= m && !fired.has(m)) { fired.add(m); track('scroll_depth', { percent_scrolled: m }); }
-    }
-  }, { passive: true });
 </script>

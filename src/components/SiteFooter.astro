@@ -58,14 +58,25 @@ const c = p.compliance;
     <button type="button" id="withdraw-consent" class="linky" hidden>
       {t(locale, 'consent.withdraw')}
     </button>
+    <button type="button" id="reset-consent" class="linky" hidden>
+      {t(locale, 'consent.reconsider')}
+    </button>
   </div>
 
   <script>
-    const btn = document.getElementById('withdraw-consent');
+    const withdraw = document.getElementById('withdraw-consent');
+    const reset = document.getElementById('reset-consent');
     try {
-      if (btn && localStorage.getItem('mocha_analytics_consent') === 'yes') {
-        btn.hidden = false;
-        btn.addEventListener('click', () => (window as any).mochaWithdrawConsent?.());
+      const decision = localStorage.getItem('mocha_analytics_consent');
+      if (decision === 'yes' && withdraw) {
+        withdraw.hidden = false;
+        withdraw.addEventListener('click', () => (window as any).mochaWithdrawConsent?.());
+      }
+      /* Đã từ chối: cho đường quay lại, nếu không thì từ chối là quyết định
+         không thể đảo ngược — cũng là một dạng không tôn trọng lựa chọn. */
+      if (decision === 'no' && reset) {
+        reset.hidden = false;
+        reset.addEventListener('click', () => (window as any).mochaResetConsent?.());
       }
     } catch { /* chế độ riêng tư: không có gì để rút */ }
   </script>

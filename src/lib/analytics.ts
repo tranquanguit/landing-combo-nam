@@ -20,8 +20,7 @@ export type EventName =
   | 'begin_checkout'
   | 'form_start'
   | 'generate_lead'
-  | 'contact'
-  | 'scroll_depth';
+  | 'contact';
 
 export interface AnalyticsConfig {
   ga4?: string;

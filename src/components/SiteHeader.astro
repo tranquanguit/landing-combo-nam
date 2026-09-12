@@ -35,7 +35,11 @@ const { brand: b, locale, alternates = [] } = Astro.props;
   }
   .brand :global(img) { height: 30px; width: auto; object-fit: contain; }
   .actions { display: flex; align-items: center; gap: var(--s-4); }
-  .tel { display: none; font-weight: 600; font-size: var(--t-sm); color: var(--ink-navy); text-decoration: none; }
-  @media (min-width: 620px) { .tel { display: inline; } }
+  .tel {
+    display: none; font-weight: 600; font-size: var(--t-sm);
+    color: var(--ink-navy); text-decoration: none;
+    min-height: 24px; align-items: center;
+  }
+  @media (min-width: 620px) { .tel { display: inline-flex; } }
   .compact { padding: 9px 18px; font-size: var(--t-sm); }
 </style>

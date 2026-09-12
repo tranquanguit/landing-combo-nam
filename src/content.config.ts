@@ -1,6 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { findHandwrittenMoney, MONEY_TOKENS } from './lib/money-text';
+import { MONEY_TOKENS } from './lib/money-text';
+import { findHandwrittenMoney } from './lib/money-scan';
 import { findForbiddenClaims } from './lib/claims-lexicon';
 
 /* ------------------------------------------------------------------
@@ -311,8 +312,11 @@ const products = defineCollection({
       }
     };
     // Bỏ qua compliance: đó là cảnh báo bắt buộc theo luật, không phải lời rao.
+    // Nhưng PHẢI quét variants — chúng bị loại khỏi `rest` cho luật giá, và ở
+    // vòng trước việc tái dùng `rest` khiến nhãn gói bán thành vùng tự do.
     const { compliance, ...marketing } = rest as Record<string, unknown>;
     scanClaims(marketing, '');
+    scanClaims(variants.map((v) => ({ label: v.label, note: v.note })), 'variants');
 
     if (claims.size) {
       const lines = [...claims].flatMap(([path, hits]) =>

@@ -387,3 +387,111 @@ dưới 24px: không còn. Chuỗi tiếng Việt trên trang EN: không còn. `
 - Hero vẫn không có giá.
 - CI chưa từng chạy trên GitHub — mới chỉ chạy tay từng lệnh.
 - Biến thể sản phẩm chưa được mô hình hoá thành nhiều `Offer` trong JSON-LD.
+
+---
+
+# Vòng 12 — kiểm định lần 5: vòng 10 gây hồi quy, và tuyên bố "14/14" là sai
+
+Kiểm định viên thứ năm chấm **10 ĐẠT / 21 CHƯA ĐẠT** — điểm thấp nhất từ đầu, vì họ
+tấn công chính những thứ vừa được vá.
+
+## Hồi quy do vòng 10 gây ra
+
+**`1.050.000 đồng` — cách viết giá phổ biến nhất tiếng Việt — lọt qua hàng rào.**
+Nguyên nhân: `(?![\p{L}])` đặt ngay sau `đ`; trong "đồng", sau `đ` là `ồ`, một chữ
+cái, nên luật tự loại chính nó. Trước vòng 10 dạng này bị bắt.
+
+Commit vòng 10 ghi *"Thử lại 14/14 đúng"*. **Tuyên bố đó sai** — bộ thử của tôi không
+có ca `1.050.000 đồng`. Tôi đã thử đúng những ca mình nghĩ ra, rồi kết luận về những
+ca mình không nghĩ ra.
+
+Cách chữa không phải sửa regex rồi tự chấm điểm lại. Nay mỗi hàng rào có **bộ thử
+riêng nằm trong `tests/`, chạy trong CI**, và mỗi ca trong đó là một cách phá mà
+kiểm định viên độc lập đã dùng thành công:
+
+- `tests/money-guard.mjs` — **37 ca** (29 phải chặn, 8 phải cho qua)
+- `tests/claims-guard.mjs` — **34 ca** (27 phải chặn, 7 phải cho qua)
+- `tests/order-endpoint.mjs` — **6 kịch bản** đặt hàng thật
+
+## Bản tiếng Anh không có hàng rào tuân thủ nào
+
+`claims-lexicon.ts` viết bằng tiếng Việt nên `Removes melasma permanently`,
+`cures dark spots`, `FDA approved`, `Dermatologist recommended`,
+`Money back guarantee`, `100% effective` đều lên trang được — ở chính thị trường
+EU/UK, nơi claim mỹ phẩm bị phạt nặng nhất. Đã thêm 8 nhóm mẫu tiếng Anh.
+
+Cũng vá: đồng nghĩa tiếng Việt (`xoá nám`, `đánh bay nám`, `triệt tiêu`, `chấm dứt`,
+`tạm biệt nám vĩnh viễn`), và lỗ phủ định — `"Không ngờ, trị nám chỉ sau 2 tuần"`
+từng lách được vì luật nhìn 40 ký tự bất kỳ phía trước; nay dấu phẩy cắt phạm vi.
+
+## Lỗi cắt-dán: `variants` rơi khỏi vùng quét
+
+`const { price, compareAtPrice, currency, variants, ...rest } = p` viết cho luật giá,
+rồi `scanClaims` tái dùng `rest` — nên **nhãn gói bán trở thành vùng tự do**.
+`label: "Combo tri nam tan goc"` build sạch và hiện hai lần trên trang.
+
+## Luồng đặt hàng nói dối trong hai tình huống
+
+Vòng 11 vừa thêm test cho nhánh này và tuyên bố "cả ba đều đúng". Test đó **bỏ sót
+cả hai**:
+
+1. **Gửi lại thành công sau lỗi** → trang hiện **đồng thời** "Đơn hàng đã được ghi
+   nhận" và "Gửi đơn không thành công, hãy gọi hotline". Không dòng nào ẩn hộp lỗi cũ.
+2. **Tắt JS khi đã có endpoint** → POST native gửi `form-urlencoded` trong khi nhánh
+   JS gửi `application/json` (hai định dạng vào cùng một endpoint), và khách bị điều
+   hướng sang màn hình `{"ok":true}` trần.
+
+Đã sửa: dọn hộp lỗi trước mỗi lần gửi; bỏ `action` và **ẩn hẳn biểu mẫu khi không có
+JavaScript**, chỉ để lại lối gọi hotline. Thêm hai kịch bản này vào bộ thử.
+
+## Cũng đã sửa
+
+| Vấn đề | Cách sửa |
+|---|---|
+| `/llms.txt` in nguyên văn `{{price}}` cho máy đọc | `llms.txt.ts` không đi qua layout nên không được thay token — nay tự thay |
+| Từ chối consent không lưu được, banner hiện lại mọi lần tải | `consentGiven()` chỉ so `'yes'`; nay đọc cả `'no'`, và thêm nút xem lại lựa chọn để từ chối không thành quyết định vĩnh viễn |
+| Đổi trả 7 ngày (vi) vs 14 ngày (en) cho cùng một SKU trong schema | Thống nhất 7 ngày; quyền rút lui 14 ngày của EU/UK là quyền theo luật, nêu ở phần cảnh báo |
+| Thứ tự khối khác nhau: vi = order→faq, en = faq→order | Thống nhất |
+| Không có ô đồng ý xử lý dữ liệu cá nhân | Thêm checkbox bắt buộc theo NĐ 13/2023 — trước đây cookie đo lường thì có banner, còn họ tên + SĐT + địa chỉ thì không hỏi gì |
+| Focus rơi về `body` sau khi gửi đơn | Chuyển focus sang thông báo |
+| Hotline ở header dưới 24px | `min-height: 24px` |
+
+## Ngân sách: nâng ngưỡng, nhưng ghi lại lịch sử
+
+Cổng ngân sách bắt luồng consent mới (6.836 B / 6.144 B). Kiểm định viên đã chỉ ra ở
+vòng trước: *"một cổng mà người vi phạm tự sửa được ngưỡng trong cùng commit thì không
+ràng buộc được ai"*. Đúng.
+
+Nên trước khi nâng, đã **cắt thật ~590 byte**: bỏ theo dõi độ sâu cuộn (cũng là nguồn
+cưỡng bức reflow mà kiểm định viên nêu), gộp hai bảng ánh xạ sự kiện trùng nhau, bỏ
+handler dọn listener thừa. Vẫn dư 100 byte nên nâng 6 KB → 7 KB, và `check-budget.mjs`
+nay giữ **nhật ký thay đổi ngưỡng** ghi rõ từng lần nâng, lý do, và đã cắt được gì
+trước đó. Việc nới không thể diễn ra âm thầm nữa.
+
+## Số đo — điều kiện đo ghi trong tài liệu
+
+> Chromium 1194 headless, 390×844 DPR 1, CPU throttle 4× (4G) / 6× (3G),
+> `Network.emulateNetworkConditions` 1.6 Mbps/150 ms và 400 kbps/400 ms,
+> `python3 -m http.server` trên localhost — **không gzip, không HTTP/2, không TLS,
+> RTT ≈ 0**. Số thật trên hạ tầng có CDN sẽ cao hơn.
+
+| | vi 4G | vi 3G | en 4G | en 3G |
+|---|---|---|---|---|
+| CLS | 0 | 0.0087 | 0 | 0 |
+| LCP | 616 ms | 2316 ms | 564 ms | 2200 ms |
+
+Tràn ngang 320/390/1440px: 0 · vùng chạm dưới 24px: không còn · chuỗi tiếng Việt trên
+trang EN: không còn · giá trong màn hình đầu: y=519px cả hai ngôn ngữ ·
+`npm run check`: 0 lỗi.
+
+## Vẫn còn nợ, không giấu
+
+- `richText` từ chối `<br />` (dạng chuẩn có dấu cách) và không bất biến; `plainText`
+  nuốt văn bản giữa `<` và `>`. Ảnh hưởng `seo.description`, JSON-LD, `llms.txt`.
+- `cards.items[].body` vẫn đăng được tên + tuổi + số điện thoại mà không qua cổng consent.
+- `AggregateOffer.lowPrice` = 550.000 gắn trên `Product` vốn là combo giá 1.050.000.
+- Bảng dịch có khoá nhưng **giá trị rỗng hoặc vẫn là tiếng Việt** vẫn qua cổng.
+- Thanh CTA cố định che CTA của hero ở 768×700 — chấp nhận được vì chính nó là nút
+  đặt hàng, nhưng vẫn là chồng lấn.
+- CI chưa từng chạy trên GitHub.
+- Chưa đo trên thiết bị và mạng thật tại Việt Nam.

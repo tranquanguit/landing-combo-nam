@@ -75,6 +75,9 @@ export function productGraph(opts: {
             applicableCountry: p.returnPolicy.country,
             returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
             merchantReturnDays: p.returnPolicy.days,
+            // Cùng một SKU phải khai cùng số ngày ở mọi ngôn ngữ. Quyền rút lui
+            // 14 ngày của EU/UK là quyền theo luật của người mua, nêu trong phần
+            // cảnh báo của bản EN, không phải chính sách của người bán.
             returnMethod: 'https://schema.org/ReturnByMail',
             returnFees: 'https://schema.org/FreeReturn',
             refundType: 'https://schema.org/ExchangeRefund',
