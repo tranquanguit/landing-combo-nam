@@ -36,6 +36,9 @@ export function normaliseForScan(input: string): string {
   // Thẻ HTML cắt giữa con số: <strong>1.950</strong><strong>.000</strong>đ
   s = s.replace(/<[^>]*>/g, '');
 
+  // Khoảng trắng lặp: "Cam  kết  hoàn  tiền" vượt được mọi luật có dấu cách cứng.
+  s = s.replace(/[ \t]{2,}/g, ' ');
+
   // Zero-width và các khoảng trắng lạ
   s = s.replace(/[​-‍﻿⁠]/g, '');
   s = s.replace(/[   ]/g, ' ');
@@ -108,9 +111,18 @@ export function findHandwrittenMoney(raw: string): string[] {
   const scaledWithUnit = /\d+(?:[.,]\d+)?\s*(?:nghìn|ngàn|triệu|tỷ)\s*(?:đồng|đ|₫|VND)(?![\p{L}])/giu;
   for (const m of s.matchAll(scaledWithUnit)) hits.push(m[0].trim());
 
-  /* Không có đơn vị tiền thì mới cần kết câu, để "5 triệu phụ nữ" không bị
-     coi là giá. */
-  const scaledBare = /\d+(?:[.,]\d+)?\s*(?:nghìn|ngàn|triệu|tỷ)(?=\s*(?:$|[.,;!?)"”]))/giu;
+  /* Không có đơn vị tiền: chặn TRỪ KHI theo sau là một danh từ đếm được.
+     Kiểm định lần 8: bản trước đòi phải kết câu, nên "giảm còn 890 nghìn nha",
+     "1.5 triệu nhé", "giá 1 triệu 50" đều lọt lên dist, JSON-LD và llms.txt —
+     đúng hình dạng lỗi mà vòng 15 tuyên bố đã đóng, chỉ ở nhánh còn lại. */
+  const COUNTABLE = '(?:người|phụ nữ|khách|khách hàng|lượt|đơn|sản phẩm|chai|hộp|tuýp|' +
+    'năm|ngày|tháng|tuần|giờ|phút|lần|ml|mg|g|kg|km|m2|view|like|follow)';
+  const scaledBare = new RegExp(
+    // KHÔNG dùng \b sau danh từ tiếng Việt: \b chỉ nhận ký tự ASCII nên sau
+    // "nữ" không có biên từ và lookahead tự vô hiệu. Đây là lần thứ hai cái bẫy
+    // này xuất hiện trong dự án (lần đầu ở mẫu "bác sĩ khuyên dùng", vòng 10).
+    '\\d+(?:[.,]\\d+)?\\s*(?:nghìn|ngàn|triệu|tỷ)(?:\\s*(?:rưỡi|\\d{1,3}))?(?!\\s*' + COUNTABLE + '(?![\\p{L}]))',
+    'giu');
   for (const m of s.matchAll(scaledBare)) hits.push(m[0].trim());
 
   // $ đứng trước số

@@ -46,6 +46,17 @@ const textOrSafeUrl = z.string().refine((v) => !/^[a-z][a-z0-9+.-]*:/i.test(v) |
   message: 'Nguồn viết dạng scheme: thì chỉ được http(s). Muốn ghi chữ thường thì đừng dùng dấu hai chấm sau một từ.',
 });
 
+const returnPolicyEntry = z.object({
+  /** Một hoặc nhiều mã quốc gia ISO-3166 alpha-2. */
+  country: z.union([z.string().length(2), z.array(z.string().length(2)).min(1)]),
+  days: z.number().int().positive(),
+  /** 'defect' = chỉ đổi khi hàng lỗi/sai/chưa mở seal. 'any' = đổi ý cũng được. */
+  scope: z.enum(['defect', 'any']).default('defect'),
+  /** Ai trả phí gửi về. */
+  fees: z.enum(['free', 'customer']).default('free'),
+  refund: z.enum(['exchange', 'full', 'store-credit']).default('exchange'),
+});
+
 const claim = z.object({
   text: z.string(),
   /**
@@ -286,16 +297,15 @@ const products = defineCollection({
      * cho mọi lý do, trong khi trang chỉ hứa "7 ngày NẾU sản phẩm lỗi". Markup
      * rộng hơn lời hứa thật là đúng loại rủi ro Google kiểm chéo cho merchant.
      */
-    returnPolicy: z.object({
-      /** Một hoặc nhiều mã quốc gia ISO-3166 alpha-2. */
-      country: z.union([z.string().length(2), z.array(z.string().length(2)).min(1)]),
-      days: z.number().int().positive(),
-      /** 'defect' = chỉ đổi khi hàng lỗi/sai/chưa mở seal. 'any' = đổi ý cũng được. */
-      scope: z.enum(['defect', 'any']).default('defect'),
-      /** Ai trả phí gửi về. */
-      fees: z.enum(['free', 'customer']).default('free'),
-      refund: z.enum(['exchange', 'full', 'store-credit']).default('exchange'),
-    }).optional(),
+    /**
+     * Chính sách đổi trả, phải khớp ĐÚNG lời hứa trên trang.
+     *
+     * Nhận một hoặc NHIỀU chính sách: kiểm định lần 8 chỉ ra bản EN hứa quyền
+     * rút lui 14 ngày cho EU/UK (tức hoàn tiền vì đổi ý) trong phần cảnh báo,
+     * trong khi FAQ nói "không hoàn tiền vì đổi ý" và JSON-LD nói điều thứ ba.
+     * Ba nguồn, ba lời hứa, trên cùng một trang.
+     */
+    returnPolicy: z.union([returnPolicyEntry, z.array(returnPolicyEntry).min(1)]).optional(),
     /** Các lựa chọn mua hiển thị trong form đặt hàng. */
     variants: z.array(z.object({
       label: z.string(),
@@ -389,7 +399,8 @@ const products = defineCollection({
        Kiểm định lần 7: `#dat-hang` bị hardcode ở SiteHeader, Hero, Offer,
        StickyCta và trong Offer.url của JSON-LD. Sản phẩm không có khối `order`
        build xanh với 4 nút mua chết và Offer.url trỏ vào hư không. */
-    if (!p.blocks.some((blk) => blk.type === 'order')) {
+    // Bản nháp đang soạn dở chưa cần đủ khối; chỉ chặn khi đã xuất bản.
+    if (p.status === 'published' && !p.blocks.some((blk) => blk.type === 'order')) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: 'Sản phẩm phải có đúng một khối type="order". Header, hero, khối ưu đãi, ' +
@@ -404,15 +415,41 @@ const products = defineCollection({
       });
     }
 
-    const wanted: [string, string][] = [];
+    /* Hai khối cùng id sẽ sinh hai phần tử cùng anchor; neo trỏ tới cái đầu.
+       Kiểm định lần 8: đặt {"type":"faq","id":"dat-hang"} là build xanh và mọi
+       nút mua nhảy vào FAQ thay vì biểu mẫu đặt hàng. */
+    const seenAnchor = new Map<string, number>();
     p.blocks.forEach((blk, i) => {
-      if (blk.type === 'hero') {
-        if (blk.secondaryCta) wanted.push([`blocks[${i}].secondaryCta.href`, blk.secondaryCta.href]);
-        blk.usp.forEach((u: { source?: string }, j: number) => {
-          if (u.source?.startsWith('#')) wanted.push([`blocks[${i}].usp[${j}].source`, u.source]);
+      const explicit = 'id' in blk ? (blk.id as string | undefined) : undefined;
+      const anchor = explicit ?? DEFAULT_ANCHOR[blk.type];
+      if (!anchor) return;
+      const first = seenAnchor.get(anchor);
+      if (first !== undefined) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `blocks[${i}] dùng id "${anchor}" đã có ở blocks[${first}]. ` +
+            `Hai khối cùng id thì mọi liên kết #${anchor} chỉ tới được khối đầu tiên.`,
         });
+      } else {
+        seenAnchor.set(anchor, i);
       }
     });
+
+    const wanted: [string, string][] = [];
+    /* Mọi chuỗi bắt đầu bằng "#" ở BẤT KỲ trường nào đều là neo trong trang.
+       Bản trước chỉ soi hero.secondaryCta và hero.usp[].source, nên
+       ingredients.rows[].reference = "#khong-ton-tai" lên trang thành link chết
+       với build xanh. */
+    const collectAnchors = (node: unknown, path: string): void => {
+      if (typeof node === 'string') {
+        if (/^#[a-z0-9-]+$/i.test(node)) wanted.push([path, node]);
+      } else if (Array.isArray(node)) {
+        node.forEach((v, i) => collectAnchors(v, `${path}[${i}]`));
+      } else if (node && typeof node === 'object') {
+        for (const [k, v] of Object.entries(node)) collectAnchors(v, path ? `${path}.${k}` : k);
+      }
+    };
+    collectAnchors(p.blocks, 'blocks');
     for (const [path, href] of wanted) {
       if (!anchors.has(href.slice(1))) {
         ctx.addIssue({

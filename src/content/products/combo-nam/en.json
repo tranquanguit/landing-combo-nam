@@ -292,7 +292,7 @@
         },
         {
           "q": "What if I use it for eight weeks and see no difference?",
-          "a": "Plainly: we do <strong>not refund for change of mind or lack of results</strong>. The 7-day return covers faulty, incorrect or unopened items only — opened cosmetics cannot be resold, and nobody can predict how your skin will respond. If eight weeks pass with no change, email or call us: we will review how you are applying it and your daily sun protection, the two most common causes. If it still does not improve, your pigmentation may need medical treatment rather than a cosmetic product."
+          "a": "Outside the EU and UK we do <strong>not refund for change of mind or lack of results</strong>; the 7-day return covers faulty, incorrect or unopened items only, because opened cosmetics cannot be resold. <strong>EU and UK customers keep the statutory 14-day right to withdraw</strong> and receive a full refund, with return postage at your cost. Either way, if eight weeks pass with no change, contact us first: we will review how you are applying it and your daily sun protection, the two most common causes. If it still does not improve, your pigmentation may need medical treatment rather than a cosmetic product."
         },
         {
           "q": "Is it suitable for sensitive skin?",
@@ -314,11 +314,49 @@
     }
   ],
   "availability": "InStock",
-  "returnPolicy": {
-    "country": "VN",
-    "days": 7,
-    "scope": "defect",
-    "fees": "free",
-    "refund": "exchange"
-  }
+  "returnPolicy": [
+    {
+      "country": "VN",
+      "days": 7,
+      "scope": "defect",
+      "fees": "free",
+      "refund": "exchange"
+    },
+    {
+      "country": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE",
+        "GB"
+      ],
+      "days": 14,
+      "scope": "any",
+      "fees": "customer",
+      "refund": "full"
+    }
+  ]
 }

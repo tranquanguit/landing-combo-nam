@@ -43,6 +43,11 @@ const CHAN = [
   // Kiểm định lần 7: lần khớp đầu bị phủ định che mất mọi lần khớp sau.
   'Chúng tôi không trị nám bằng lời hứa suông. Combo trị nám theo cơ chế kép.',
   'Không phải kem trị nám nào cũng giống nhau; đây là kem trị nám thế hệ mới.',
+  // Kiểm định lần 8: phủ định gắn vào động từ khác, không gắn vào cụm bị cấm.
+  'Bạn sẽ không ngờ combo trị nám nhanh đến thế.',
+  'Ai cũng không tin nổi kem trị nám này.',
+  'không thể tưởng tượng hết nám hoàn toàn sau 4 tuần',
+  'Cam  kết  hoàn  tiền nếu không hết nám.',
   // hai lượt mã hoá
   'Cam k&amp;#7871;t hoàn ti&amp;#7873;n n&amp;#7871;u không h&amp;#7871;t nám.',
 ];
@@ -56,6 +61,9 @@ const CHO_QUA = [
   'Nám mảng thường cải thiện trong 4–8 tuần.',
   'Công thức không chứa corticoid, hydroquinone hay cồn khô.',
   'Số 1 trong danh sách bước chăm sóc là làm sạch.',
+  'Bước số 1, rửa mặt. Bước số 2, dùng serum.',
+  'Sản phẩm không phải là thuốc.',
+  'Sản phẩm không chứa corticoid.',
   'Bước số 1: rửa mặt với nước mát.',
   // Entity hợp lệ trong câu bình thường không được báo nhầm.
   'Kem &amp; serum dùng cùng nhau.',

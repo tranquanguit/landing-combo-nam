@@ -6,9 +6,11 @@ on:
   push:
     branches: ['**']
   pull_request:
-  # Hạn ưu đãi và năm ở footer được tính LÚC BUILD. Trang tĩnh không tự biết hôm
-  # nay là ngày nào, nên nếu không ai deploy thì sau 30/9 trang vẫn in "ưu đãi
-  # đến hết 30/9" và JSON-LD vẫn phát priceValidUntil đã quá hạn.
+  # Chạy hằng đêm để PHÁT HIỆN hạn ưu đãi đã qua. Lưu ý cho người sau: workflow
+  # này KHÔNG deploy, và GitHub chỉ chạy schedule trên nhánh mặc định — nên nó
+  # chỉ là chuông báo, không tự sửa trang production. Việc sửa thật sự là
+  # Offer.astro tự ẩn dòng hạn và schema.ts không phát priceValidUntil quá hạn,
+  # cả hai chỉ có hiệu lực sau một lần deploy mới.
   schedule:
     - cron: '0 1 * * *'
 
@@ -45,6 +47,11 @@ jobs:
 
       - name: Ngân sách trọng lượng trang
         run: node scripts/check-budget.mjs
+
+      # Chuông báo hạn ưu đãi: fail để có người nhìn thấy, vì trang tĩnh đã
+      # deploy sẽ tiếp tục hiển thị ưu đãi cũ cho tới lần deploy kế tiếp.
+      - name: Hạn ưu đãi còn hiệu lực
+        run: node scripts/check-offer-window.mjs
 
       # Nhánh gửi đơn khi ĐÃ cấu hình endpoint từng là nhánh chết suốt bốn vòng
       # kiểm định — không ai chạy nó. Nay nó là một phép thử bắt buộc.

@@ -18,7 +18,7 @@ import Analytics from '../components/Analytics.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { expandProductTokens } from '../lib/money-text';
 import { productGraph } from '../lib/schema';
-import { resolveAssetUrl } from '../lib/images';
+import { resolveAssetUrl, resolveAssetImage } from '../lib/images';
 import { FLAGSHIP, productPath } from '../lib/routes';
 import { assertTranslated, localePath, type Locale } from '../i18n/ui';
 
@@ -63,7 +63,15 @@ const breadcrumb = p.slug === FLAGSHIP ? undefined : [
 
 // og:image và ảnh trong schema phải là URL sau khi build, không phải đường dẫn nguồn
 const heroBlock = p.blocks.find((x: any) => x.type === 'hero');
-const ogImage = await resolveAssetUrl(p.seo.ogImage ?? heroBlock?.image?.src, site, 1200);
+const ogSrc = p.seo.ogImage ?? heroBlock?.image?.src;
+const ogResolved = await resolveAssetImage(ogSrc, site, 1200);
+const ogImage = ogResolved?.url;
+const ogImageDims = {
+  width: ogResolved?.width ?? 1200,
+  height: ogResolved?.height ?? 630,
+  // alt của ảnh hero chỉ dùng được khi og:image CHÍNH LÀ ảnh hero.
+  alt: ogSrc === heroBlock?.image?.src ? (heroBlock?.image?.alt ?? p.name) : p.name,
+};
 const logoUrl = await resolveAssetUrl(b.logo, site, 512);
 
 const jsonLd = productGraph({
@@ -85,6 +93,9 @@ p.blocks.forEach((block: any, i: number) => {
   description={p.seo.description}
   canonical={canonical}
   ogImage={ogImage}
+  ogImageWidth={ogImageDims.width}
+  ogImageHeight={ogImageDims.height}
+  ogImageAlt={ogImageDims.alt}
   alternates={alternates}
   jsonLd={jsonLd}
 >

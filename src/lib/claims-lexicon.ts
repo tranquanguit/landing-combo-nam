@@ -109,7 +109,7 @@ export const FORBIDDEN: ForbiddenPattern[] = [
     /* "số 1" chỉ là so sánh tuyệt đối khi KHÔNG dùng theo nghĩa thứ tự.
        Kiểm định lần 7: "Số 1 trong danh sách bước chăm sóc là làm sạch" bị chặn
        nhầm — một hàng rào báo nhầm là hàng rào bị người biên tập mất niềm tin. */
-    pattern: /((?:số|so)\s*1(?!\s*(?:trong|là|\.|:|\)))|tốt nhất|hiệu quả nhất|duy nhất trên thị trường|number one)/iu,
+    pattern: /((?:số|so)\s*1(?!\s*(?:trong|là|[.,:;)\u2013\u2014-]))|tốt nhất|hiệu quả nhất|duy nhất trên thị trường|number one)/iu,
     why: 'so sánh tuyệt đối, bị cấm theo Luật Quảng cáo',
     instead: 'nêu điểm khác biệt cụ thể, kiểm chứng được',
   },
@@ -145,7 +145,15 @@ export const FORBIDDEN: ForbiddenPattern[] = [
  * tuần" và "Chúng tôi không nói quá: 98% khách hàng hết nám" đều lách được.
  * Nay dấu phẩy, hai chấm hay dấu chấm đều cắt phạm vi phủ định.
  */
-const NEGATED = /(không|chẳng|chưa|đừng|no|not|never)\s+(?:có\s+|là\s+|the\s+)?[\p{L}\s]{0,18}$/iu;
+/*
+ * Chỉ những cách phủ định THẬT SỰ đảo nghĩa mới được miễn.
+ *
+ * Kiểm định lần 8: `[\p{L}\s]{0,18}` cho phép bất kỳ chữ nào chen giữa, nên
+ * "Bạn sẽ không ngờ combo trị nám nhanh đến thế" và "Ai cũng không tin nổi kem
+ * trị nám này" đều lách được — phủ định gắn vào động từ khác, không gắn vào cụm
+ * bị cấm. Nay chỉ nhận đúng các tổ hợp phủ định trực tiếp.
+ */
+const NEGATED = /(?:không|chẳng|chưa|đừng)\s+(?:phải\s+|có\s+)?(?:là\s+)?(?:thuốc\s+|tác dụng\s+|chứa\s+|dùng\s+để\s+|nhằm\s+|thay thế\s+)?$|(?:không|chẳng|chưa)\s+$|(?:not|never|no)\s+(?:a\s+|an\s+|the\s+)?(?:intended\s+to\s+|meant\s+to\s+|substitute\s+for\s+)?$/iu;
 
 export function findForbiddenClaims(text: string): { match: string; why: string; instead: string }[] {
   const plain = forScan(text);

@@ -56,7 +56,7 @@ const Wrapper = endpoint ? 'form' : 'div';
                     type="radio" name="pack" value={v.label}
                     data-price={v.price ?? ''}
                     data-price-text={v.price === null ? '' : money(v.price, p.currency, locale)}
-                    checked={v.recommended || i === 0}
+                    checked={p.variants.some((x: any) => x.recommended) ? v.recommended : i === 0}
                   />
                   <span class="pack-text">
                     <strong>{v.label}</strong>
@@ -277,7 +277,12 @@ const Wrapper = endpoint ? 'form' : 'div';
     const addressField = form.elements.namedItem('address') as HTMLInputElement | null;
     const addressRequired = () => {
       const picked = form.querySelector<HTMLInputElement>('input[name="pack"]:checked');
-      return (picked?.dataset.price ?? '') !== '';
+      // Không có gói nào để chọn (sản phẩm không khai variants) thì đây là đơn
+      // mua bình thường và địa chỉ là bắt buộc. Kiểm định lần 8: bản trước trả
+      // false trong trường hợp này, nên cả một lớp sản phẩm nhận đơn KHÔNG có
+      // địa chỉ giao hàng mà người mua không hề bị nhắc.
+      if (!picked) return true;
+      return (picked.dataset.price ?? '') !== '';
     };
     const syncAddress = () => {
       if (!addressField) return;

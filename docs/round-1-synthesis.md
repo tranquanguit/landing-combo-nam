@@ -683,3 +683,92 @@ sách, văn bản đồng ý cho ảnh và lời chứng, link gian hàng sàn �
 doanh nghiệp. Thêm: nên bật CSP ở phía hosting; chưa đo được trên thiết bị và
 mạng thật tại Việt Nam; `shippingDetails` của bản EN cố ý để trống vì phí quốc
 tế là báo giá theo nước, khai một con số cố định sẽ là nói dối với máy đọc.
+
+---
+
+## Vòng 16 — đóng kiểm định độc lập lần 8
+
+Kiểm định viên thứ 8 được giao đúng một việc: săn mẫu hình đã lặp ba vòng liền —
+**bản vá của vòng trước tạo lỗi mới ở chính vùng vừa sửa**. Họ tìm thấy nó ở
+**cả bốn** bản vá chính của vòng 15. Không còn P0; còn 4 P1 đang nói sai với
+người mua hoặc với máy đọc.
+
+### Bốn P1
+
+**Ô địa chỉ có điều kiện làm hỏng cả một lớp sản phẩm.** `addressRequired()` đọc
+radio `input[name="pack"]:checked`; sản phẩm không khai `variants` thì không có
+radio nào, `picked` là `null`, và hàm trả `false` — **địa chỉ giao hàng thành
+không bắt buộc cho mọi người**, đơn gửi về endpoint không có địa chỉ, người mua
+không hề bị nhắc. Sửa: không có radio nghĩa là đơn mua bình thường → bắt buộc.
+
+**Luật tiền chỉ vá một nửa.** Vòng 15 bỏ điều kiện kết câu cho nhánh *có* đơn vị
+tiền nhưng giữ nguyên cho nhánh *không* có. `"giảm còn 890 nghìn nha"`,
+`"1.5 triệu nhé"`, `"1 triệu rưỡi"`, `"giá 1 triệu 50"` đều lên `dist`, JSON-LD
+và llms.txt với build xanh. Nay nhánh bare chặn trừ khi theo sau là danh từ đếm
+được (`5 triệu phụ nữ`, `2 nghìn đơn`).
+
+Và ở đây **cái bẫy `\b` xuất hiện lần thứ hai trong dự án**: bản vá đầu của tôi
+viết `(?!\s*COUNTABLE\b)`, nhưng `\b` chỉ nhận ký tự ASCII nên sau "nữ" không có
+biên từ — lookahead tự vô hiệu và `"5 triệu phụ nữ"` bị chặn nhầm. Lần đầu là
+mẫu "bác sĩ khuyên dùng" ở vòng 10.
+
+**FAQ "không hoàn tiền" chọi với chính trang, ở bản EN.** Câu tôi viết cho bản
+tiếng Việt được bê sang bản EN, nơi `compliance.warnings` đã hứa quyền rút lui
+14 ngày cho EU/UK — mà quyền rút lui *chính là* hoàn tiền vì đổi ý. Ba nguồn
+(FAQ, cảnh báo, JSON-LD) nói ba điều khác nhau trên cùng một trang. Nguyên nhân
+cấu trúc: `compliance.warnings` là trường **duy nhất được miễn mọi cổng quét**.
+Sửa: `returnPolicy` nay nhận nhiều chính sách; bản EN khai hai — VN 7 ngày chỉ
+hàng lỗi, và EU/UK 14 ngày đổi ý hoàn tiền đầy đủ, phí gửi về do khách chịu.
+FAQ viết lại cho khớp cả hai.
+
+**`llms.txt` bỏ mất `referenceNote`.** Vòng 14 bắt buộc trường này chính vì "dẫn
+nghiên cứu dùng 5% để chống lưng cho công thức 1% là dẫn nguồn gây hiểu nhầm" —
+rồi file dành riêng cho máy trích dẫn lại in link trần. Trang người đọc nói
+thật, file máy đọc nói nửa sự thật. Nay in đủ `referenceNote` và `suitedFor`.
+
+### P2
+
+- **`matchAll` sinh báo nhầm mới**: "Sản phẩm không điều trị nám. Nếu bạn cần
+  điều trị nám, hãy đến gặp bác sĩ da liễu" bị chặn — đúng thứ trang mỹ phẩm
+  *nên* viết. Và **lỗ phủ định vòng 14 vẫn còn nửa**: bỏ dấu phẩy là lọt lại
+  ("Bạn sẽ không ngờ combo trị nám nhanh đến thế"). Nguyên nhân chung là
+  `NEGATED` cho phép `[\p{L}\s]{0,18}` chen giữa, nên phủ định gắn vào động từ
+  khác vẫn tính. Nay chỉ nhận đúng các tổ hợp phủ định trực tiếp. Thêm: khoảng
+  trắng đôi vượt mọi luật có dấu cách cứng → `normaliseForScan` gộp `\s+`.
+- **Cổng "đúng một khối order" đóng nửa**: đặt `{"type":"faq","id":"dat-hang"}`
+  là build xanh với hai `id="dat-hang"` và mọi nút mua nhảy vào FAQ. Và neo
+  trong `ingredients.rows[].reference` không được kiểm. Nay: id trùng bị chặn,
+  và **mọi chuỗi bắt đầu bằng `#` ở bất kỳ trường nào** đều phải trỏ tới khối có
+  thật.
+- **Luật order làm vỡ sản phẩm nháp** — nay chỉ áp cho `status: "published"`.
+- **`schedule` cron không làm được việc nó được thêm vào để làm**: workflow
+  không có bước deploy nào, và GitHub chỉ chạy schedule trên nhánh mặc định.
+  Thay vì giả vờ, nay comment nói thẳng nó chỉ là chuông báo, và thêm
+  `scripts/check-offer-window.mjs` fail CI khi hạn ưu đãi đã qua (cảnh báo
+  trước 7 ngày).
+- **`llms.txt` mới dịch nửa file** — khung tài liệu vẫn tiếng Việt cứng, kể cả
+  tuyên bố tuân thủ quan trọng nhất. Nay song ngữ.
+- **`og:image` thiếu kích thước** → thêm `width`/`height`/`type`/`alt`. Bản vá
+  đầu của tôi lấy tỉ lệ ảnh hero trong khi og:image là ảnh packshot — đã sửa
+  bằng `resolveAssetImage()` trả kích thước thật của chính ảnh được dùng.
+- **`checked` đặt trên hai radio** nếu gói khuyến nghị không phải gói đầu.
+- Bỏ câu comment tự mâu thuẫn trong `fonts.css`.
+
+### Đo lại
+
+Bộ thử: money **48/48**, claims **53/53**, richtext 23/23, đặt hàng 7/7.
+`astro check` 0 lỗi. Ngân sách trong mức. Chuông hạn ưu đãi xanh.
+
+Khẳng định "CLS vẫn 0 với `swap`" của vòng 15 nay **có bằng chứng**: đo 390×844,
+1,6 Mbps, RTT 300ms, CPU ×4, cache lạnh — CLS 0 (vi) và 0,0037 (en), LCP 828ms,
+và cả ba face (BVP 400, BVP 600, Fraunces 600) đều đã nạp và áp dụng.
+
+Ba cổng mới đều được kiểm bằng cách cố tình phá: id trùng → chặn; neo sai trong
+`reference` → chặn kèm danh sách neo có thật; bản nháp thiếu khối order → cho qua.
+
+### Vẫn còn nợ
+
+Không đổi: số tiếp nhận phiếu công bố, mã số thuế, trang chính sách, văn bản
+đồng ý cho ảnh và lời chứng, link gian hàng sàn. Thêm: `.github/workflows/ci.yml`
+vẫn không deploy — ai dựng hạ tầng phát hành cần nối bước đó, nếu không chuông
+báo hạn ưu đãi kêu mà không ai sửa được trang. Nên bật CSP ở phía hosting.

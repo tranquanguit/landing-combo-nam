@@ -15,9 +15,15 @@ interface Props {
   jsonLd?: unknown;
   /** Tên thương mại dùng cho og:site_name; trước đây hardcode "Mocha Việt Nam". */
   siteName: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  ogImageAlt?: string;
 }
 
-const { locale, title, description, canonical, ogImage, alternates = [], jsonLd, siteName } = Astro.props;
+const {
+  locale, title, description, canonical, ogImage, alternates = [], jsonLd, siteName,
+  ogImageWidth = 1200, ogImageHeight = 630, ogImageAlt,
+} = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang={htmlLang[locale]}>
@@ -44,7 +50,17 @@ const { locale, title, description, canonical, ogImage, alternates = [], jsonLd,
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    {/* Kích thước và alt là bắt buộc trên thực tế: Facebook và Zalo hay bỏ qua
+        preview lớn ở lần scrape đầu khi thiếu og:image:width/height. */}
+    {ogImage && (
+      <>
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content={String(ogImageWidth)} />
+        <meta property="og:image:height" content={String(ogImageHeight)} />
+        <meta property="og:image:type" content={ogImage.endsWith('.jpeg') || ogImage.endsWith('.jpg') ? 'image/jpeg' : 'image/webp'} />
+        <meta property="og:image:alt" content={ogImageAlt ?? title} />
+      </>
+    )}
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

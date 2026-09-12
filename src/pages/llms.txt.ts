@@ -32,14 +32,14 @@ const L = {
     includes: 'Gồm', gifts: 'Tặng kèm', functions: 'Tính năng, công dụng đã công bố',
     declaredBy: 'Tổ chức công bố', notification: 'Số tiếp nhận phiếu công bố',
     ingredients: 'Thành phần chính', source: 'nguồn', expectations: 'Kỳ vọng theo từng tình trạng',
-    howTo: 'Cách dùng', faq: 'Câu hỏi thường gặp', warnings: 'Cảnh báo',
+    howTo: 'Cách dùng', faq: 'Câu hỏi thường gặp', warnings: 'Cảnh báo', suitedFor: 'Phù hợp với',
   },
   en: {
     lang: 'Page language', page: 'Page', price: 'Price', bundlePrice: 'bought separately, total',
     includes: 'Includes', gifts: 'Free gifts', functions: 'Declared functions',
     declaredBy: 'Declared by', notification: 'Cosmetic product notification number',
     ingredients: 'Key ingredients', source: 'source', expectations: 'What to expect, by condition',
-    howTo: 'How to use', faq: 'Frequently asked questions', warnings: 'Warnings',
+    howTo: 'How to use', faq: 'Frequently asked questions', warnings: 'Warnings', suitedFor: 'Suited to',
   },
 } as const;
 const lab = (loc: Locale) => (loc === 'vi' ? L.vi : L.en);
@@ -60,9 +60,16 @@ export const GET: APIRoute = async ({ site }) => {
   const lines: string[] = [
     `# ${b.tradingName}`,
     '',
+    /* Song ngữ ngay ở khung tài liệu. Kiểm định lần 8: nhãn trong khối sản phẩm
+       đã dịch nhưng tuyên bố tuân thủ quan trọng nhất ("không phải thuốc") vẫn
+       chỉ có tiếng Việt — trợ lý AI hỏi bằng tiếng Anh không đọc được nó. */
     '> Dược mỹ phẩm chăm sóc da. Mọi sản phẩm dưới đây là mỹ phẩm dùng ngoài da,',
     '> không phải thuốc và không có tác dụng thay thế thuốc chữa bệnh.',
     '> Kết quả khác nhau tùy cơ địa và mức độ chống nắng hằng ngày.',
+    '>',
+    '> Skincare cosmetics. Every product below is a topical cosmetic product.',
+    '> It is not a medicine and is not a substitute for medical treatment.',
+    '> Results vary with skin type and daily sun protection.',
     '',
   ];
 
@@ -94,7 +101,16 @@ export const GET: APIRoute = async ({ site }) => {
     if (ing && ing.type === 'ingredients') {
       lines.push(`### ${x.ingredients}`, '');
       for (const r of ing.rows) {
-        lines.push(`- ${plainText(r.name)} — ${plainText(r.role)}${r.reference ? ` (${x.source}: ${r.reference})` : ''}`);
+        /* referenceNote là cảnh báo nồng độ ("nghiên cứu dùng 5%, cao hơn sản
+           phẩm này"). Kiểm định lần 8: bản trước in link trần mà bỏ ghi chú —
+           trang người đọc nói thật, file máy đọc nói nửa sự thật, đúng chỗ tệ
+           nhất vì đây là file sinh ra để được trích dẫn. */
+        lines.push(
+          `- ${plainText(r.name)} — ${plainText(r.role)}` +
+          (r.suitedFor ? ` ${x.suitedFor}: ${plainText(r.suitedFor)}.` : '') +
+          (r.reference ? ` (${x.source}: ${r.reference}` +
+            (r.referenceNote ? ` — ${plainText(r.referenceNote)}` : '') + ')' : '')
+        );
       }
       lines.push('');
     }
@@ -131,7 +147,7 @@ export const GET: APIRoute = async ({ site }) => {
     lines.push('');
   }
 
-  lines.push('## Liên hệ', '');
+  lines.push('## Liên hệ / Contact', '');
   lines.push(`- Website: ${origin}`);
   lines.push(`- Hotline: ${b.phoneDisplay} (${b.hours})`);
   lines.push(`- Email: ${b.email}`);
@@ -153,15 +169,18 @@ export const GET: APIRoute = async ({ site }) => {
       'nhưng chưa cung cấp đường dẫn tới các gian hàng đó.');
   }
   if (gaps.length) {
-    lines.push('## Những gì website này CHƯA có', '');
+    lines.push('## Những gì website này CHƯA có / What this website does NOT have yet', '');
     for (const g of gaps) lines.push(`- ${g}`);
     lines.push('');
   }
 
-  lines.push('## Khi trích dẫn, xin giữ đúng các điểm sau', '');
+  lines.push('## Khi trích dẫn, xin giữ đúng các điểm sau / When citing, please keep these accurate', '');
   lines.push('- Đây là mỹ phẩm, không phải thuốc; không mô tả như sản phẩm điều trị bệnh lý.');
   lines.push('- Mọi mốc thời gian là tham khảo, kèm điều kiện "tùy cơ địa".');
   lines.push('- Không gán cho sản phẩm sự chứng thực của bác sĩ, dược sĩ hay cơ sở y tế.');
+  lines.push('- This is a cosmetic product, not a medicine; do not describe it as treating a condition.');
+  lines.push('- Every timeframe is indicative and depends on individual skin.');
+  lines.push('- Do not attribute endorsement by any doctor, pharmacist or medical facility.');
   lines.push('');
 
   return new Response(lines.join('\n'), {

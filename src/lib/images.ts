@@ -37,3 +37,25 @@ export async function resolveAssetUrl(
   });
   return new URL(img.src, site).href;
 }
+
+
+/**
+ * Như resolveAssetUrl nhưng trả kèm kích thước THẬT của ảnh sau khi thu nhỏ.
+ *
+ * Kiểm định lần 8: og:image thiếu width/height nên Facebook và Zalo hay bỏ qua
+ * preview lớn ở lần scrape đầu. Kích thước phải lấy từ chính ảnh được dùng —
+ * bản vá đầu của tôi lấy tỉ lệ ảnh hero trong khi og:image là ảnh packshot.
+ */
+export async function resolveAssetImage(
+  src: string | undefined,
+  site: string,
+  width = 1200
+): Promise<{ url: string; width: number; height: number } | undefined> {
+  if (!src) return undefined;
+  const url = await resolveAssetUrl(src, site, width);
+  if (!url) return undefined;
+  const mod = assets[`/src/assets${src}`];
+  if (!mod) return { url, width, height: Math.round(width * 0.525) };
+  const w = Math.min(width, mod.default.width);
+  return { url, width: w, height: Math.round((mod.default.height / mod.default.width) * w) };
+}

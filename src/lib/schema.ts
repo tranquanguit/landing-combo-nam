@@ -120,7 +120,13 @@ export function productGraph(opts: {
           },
         }
       : {}),
-    ...(p.returnPolicy ? { hasMerchantReturnPolicy: returnPolicyNode(p.returnPolicy) } : {}),
+    ...(p.returnPolicy
+      ? {
+          hasMerchantReturnPolicy: Array.isArray(p.returnPolicy)
+            ? p.returnPolicy.map(returnPolicyNode)
+            : returnPolicyNode(p.returnPolicy),
+        }
+      : {}),
   };
 
   /**
