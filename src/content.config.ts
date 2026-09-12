@@ -3,6 +3,7 @@ import { glob } from 'astro/loaders';
 import { MONEY_TOKENS } from './lib/money-text';
 import { findHandwrittenMoney } from './lib/money-scan';
 import { findForbiddenClaims, findPersonalData } from './lib/claims-lexicon';
+import { DEFAULT_ANCHOR } from './lib/block-anchors';
 
 /* ------------------------------------------------------------------
    Khối nội dung dùng chung cho mọi landing.
@@ -19,6 +20,32 @@ const money = z.number().int().positive();
  * khai có chứng từ mà không dẫn được nguồn, hoặc khai theo khảo sát mà không nêu
  * cỡ mẫu. Tuyên bố không có gì chống lưng thì không được lên màn hình đầu.
  */
+/**
+ * Chỉ cho phép link an toàn.
+ *
+ * Kiểm định lần 6 đặt "javascript:window.__pwned=1" vào `usp[].source`,
+ * `ingredients.reference` và `brand.zalo` rồi bấm được trên trang thật. Zod
+ * `.url()` dùng `new URL()` nên chấp nhận mọi scheme, kể cả javascript: và data:.
+ */
+const SAFE_SCHEME = /^https?:$/;
+export function isSafeHref(v: string): boolean {
+  if (v.startsWith('#') || v.startsWith('/')) return true;
+  try {
+    return SAFE_SCHEME.test(new URL(v).protocol);
+  } catch {
+    return false;
+  }
+}
+/** Link bắt buộc phải là http(s), neo trong trang, hoặc đường dẫn nội bộ. */
+const safeUrl = z.string().refine(isSafeHref, {
+  message: 'Link phải là http(s), neo #trong-trang hoặc đường dẫn /noi-bo. ' +
+    'Scheme khác (javascript:, data:, vbscript:) bị chặn vì chạy được mã trên trang.',
+});
+/** Chuỗi có thể là link hoặc chỉ là chữ (số phiếu, tên đơn vị kiểm nghiệm). */
+const textOrSafeUrl = z.string().refine((v) => !/^[a-z][a-z0-9+.-]*:/i.test(v) || isSafeHref(v), {
+  message: 'Nguồn viết dạng scheme: thì chỉ được http(s). Muốn ghi chữ thường thì đừng dùng dấu hai chấm sau một từ.',
+});
+
 const claim = z.object({
   text: z.string(),
   /**
@@ -29,7 +56,7 @@ const claim = z.object({
    */
   evidence: z.enum(['verified', 'study', 'survey', 'ingredient']),
   /** Nguồn kiểm chứng: số phiếu công bố, link nghiên cứu, tên đơn vị kiểm nghiệm. */
-  source: z.string().optional(),
+  source: textOrSafeUrl.optional(),
   /** Điều kiện đi kèm: cỡ mẫu, thời gian dùng, cách thu thập. */
   qualifier: z.string().optional(),
 }).superRefine((c, ctx) => {
@@ -69,7 +96,11 @@ const blocks = z.discriminatedUnion('type', [
     usp: z.array(claim).max(4),
     image,
     primaryCta: z.string(),
-    secondaryCta: z.string().optional(),
+    /** CTA phụ: nhãn + neo. Neo được kiểm chéo với id các khối có thật. */
+    secondaryCta: z.object({
+      label: z.string(),
+      href: z.string().regex(/^#[a-z0-9-]+$/, 'neo dạng #ten-khoi'),
+    }).optional(),
     trustBadges: z.array(z.string()).max(5).default([]),
   }),
   z.object({
@@ -133,7 +164,7 @@ const blocks = z.discriminatedUnion('type', [
       name: z.string(),
       role: z.string(),
       suitedFor: z.string(),
-      reference: z.string().url().optional(),
+      reference: safeUrl.optional(),
       /**
        * Nồng độ và bối cảnh mà nghiên cứu được dẫn thật sự đã thử nghiệm.
        * Bắt buộc phải ghi khi nó khác với nồng độ trong sản phẩm — dẫn một nghiên
@@ -221,7 +252,10 @@ const products = defineCollection({
     generateId: ({ entry }) => entry.replace(/\.json$/, ''),
   }),
   schema: z.object({
-    slug: z.string(),
+    /* Slug đi thẳng vào URL và sitemap: chỉ chữ thường, số và gạch nối.
+       Kiểm định lần 6: slug tự do gây vỡ build bằng NoMatchingStaticPathFound
+       khó hiểu, hoặc sinh URL hỏng khi có khoảng trắng/dấu. */
+    slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'slug chỉ gồm chữ thường, số và gạch nối'),
     locale: z.enum(['vi', 'en', 'th', 'id']),
     /** Nhóm các bản dịch của cùng một sản phẩm lại, dùng để sinh hreflang. */
     translationKey: z.string(),
@@ -245,9 +279,22 @@ const products = defineCollection({
       transitDaysMin: z.number().int().positive(),
       transitDaysMax: z.number().int().positive(),
     }).optional(),
+    /**
+     * Chính sách đổi trả, phải khớp ĐÚNG lời hứa trên trang.
+     *
+     * Kiểm định lần 6: markup khai cửa sổ đổi trả 7 ngày vô điều kiện, miễn phí,
+     * cho mọi lý do, trong khi trang chỉ hứa "7 ngày NẾU sản phẩm lỗi". Markup
+     * rộng hơn lời hứa thật là đúng loại rủi ro Google kiểm chéo cho merchant.
+     */
     returnPolicy: z.object({
-      country: z.string().length(2),
+      /** Một hoặc nhiều mã quốc gia ISO-3166 alpha-2. */
+      country: z.union([z.string().length(2), z.array(z.string().length(2)).min(1)]),
       days: z.number().int().positive(),
+      /** 'defect' = chỉ đổi khi hàng lỗi/sai/chưa mở seal. 'any' = đổi ý cũng được. */
+      scope: z.enum(['defect', 'any']).default('defect'),
+      /** Ai trả phí gửi về. */
+      fees: z.enum(['free', 'customer']).default('free'),
+      refund: z.enum(['exchange', 'full', 'store-credit']).default('exchange'),
     }).optional(),
     /** Các lựa chọn mua hiển thị trong form đặt hàng. */
     variants: z.array(z.object({
@@ -311,12 +358,51 @@ const products = defineCollection({
         for (const [k, v] of Object.entries(node)) scanClaims(v, path ? `${path}.${k}` : k);
       }
     };
-    // Bỏ qua compliance: đó là cảnh báo bắt buộc theo luật, không phải lời rao.
+    // Chỉ `compliance.warnings` được miễn: đó là cảnh báo bắt buộc theo luật,
+    // câu nào cũng có thể chứa từ như "bác sĩ" hay "chữa bệnh" theo nghĩa phủ định.
+    // Kiểm định lần 6: miễn trừ cả khối compliance khiến `functions` — chữ hiển
+    // thị ở footer và llms.txt dưới nhãn "công dụng ĐÃ CÔNG BỐ", tức trường
+    // mang uy tín cơ quan quản lý — thành vùng tự do duy nhất trong file.
     // Nhưng PHẢI quét variants — chúng bị loại khỏi `rest` cho luật giá, và ở
     // vòng trước việc tái dùng `rest` khiến nhãn gói bán thành vùng tự do.
     const { compliance, ...marketing } = rest as Record<string, unknown>;
     scanClaims(marketing, '');
+    const comp = compliance as Record<string, unknown> | undefined;
+    if (comp) {
+      const { warnings, ...declared } = comp;
+      scanClaims(declared, 'compliance');
+    }
     scanClaims(variants.map((v) => ({ label: v.label, note: v.note })), 'variants');
+
+
+    /* Mọi neo #trong-trang phải trỏ tới một khối có thật.
+       Kiểm định lần 6: CTA phụ của hero hardcode href="#thanh-phan", nên sản phẩm
+       thứ ba (không có khối ingredients) có một nút "Xem bảng thành phần" không đi
+       đâu cả — và build vẫn xanh. */
+    const anchors = new Set<string>(['main']);
+    p.blocks.forEach((blk) => {
+      const explicit = 'id' in blk ? (blk.id as string | undefined) : undefined;
+      const anchor = explicit ?? DEFAULT_ANCHOR[blk.type];
+      if (anchor) anchors.add(anchor);
+    });
+    const wanted: [string, string][] = [];
+    p.blocks.forEach((blk, i) => {
+      if (blk.type === 'hero') {
+        if (blk.secondaryCta) wanted.push([`blocks[${i}].secondaryCta.href`, blk.secondaryCta.href]);
+        blk.usp.forEach((u: { source?: string }, j: number) => {
+          if (u.source?.startsWith('#')) wanted.push([`blocks[${i}].usp[${j}].source`, u.source]);
+        });
+      }
+    });
+    for (const [path, href] of wanted) {
+      if (!anchors.has(href.slice(1))) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `${path} trỏ tới "${href}" nhưng không khối nào có id đó. ` +
+            `Các neo có thật: ${[...anchors].map((a) => '#' + a).join(', ')}.`,
+        });
+      }
+    }
 
     /* Dữ liệu cá nhân chỉ được đặt trong khối có cổng consent. Các khối có
        consent tự chịu trách nhiệm, nên bỏ chúng ra khỏi phạm vi quét này. */
@@ -379,11 +465,11 @@ const brand = defineCollection({
     address: z.string(),
     phone: z.string(),
     phoneDisplay: z.string(),
-    zalo: z.string().optional(),
+    zalo: safeUrl.optional(),
     email: z.string().email(),
     hours: z.string(),
     logo: z.string(),
-    marketplaces: z.array(z.object({ name: z.string(), url: z.string().url().optional() })).default([]),
+    marketplaces: z.array(z.object({ name: z.string(), url: safeUrl.optional() })).default([]),
   }),
 });
 

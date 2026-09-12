@@ -19,6 +19,53 @@ type Brand = CollectionEntry<'brand'>['data'];
  * Cũng không khai FAQPage/HowTo như một chiến lược: Google đã bỏ hai rich result
  * này (FAQ từ 05/2026). Giữ FAQPage vì vẫn giúp máy đọc hiểu, không vì SERP.
  */
+import { isOfferExpired } from './offer.ts';
+
+const REFUND: Record<string, string> = {
+  exchange: 'https://schema.org/ExchangeRefund',
+  full: 'https://schema.org/FullRefund',
+  'store-credit': 'https://schema.org/StoreCreditRefund',
+};
+
+/**
+ * Dựng MerchantReturnPolicy đúng phạm vi đã hứa trên trang.
+ *
+ * scope 'defect': không có cửa sổ đổi ý, chỉ có cửa sổ hàng lỗi. Khai bằng
+ * `MerchantReturnNotPermitted` + `itemDefectReturnDays` là cách schema.org mô tả
+ * đúng điều đó; khai `MerchantReturnFiniteReturnWindow` + `merchantReturnDays`
+ * như bản trước là hứa với máy nhiều hơn hứa với người.
+ */
+function returnPolicyNode(rp: {
+  country: string | string[]; days: number;
+  scope?: 'defect' | 'any'; fees?: 'free' | 'customer'; refund?: string;
+}) {
+  const fees = rp.fees === 'customer'
+    ? 'https://schema.org/ReturnShippingFees'
+    : 'https://schema.org/FreeReturn';
+  const base = {
+    '@type': 'MerchantReturnPolicy',
+    applicableCountry: rp.country,
+    returnMethod: 'https://schema.org/ReturnByMail',
+    refundType: REFUND[rp.refund ?? 'exchange'],
+  };
+  if ((rp.scope ?? 'defect') === 'any') {
+    return {
+      ...base,
+      returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+      merchantReturnDays: rp.days,
+      returnFees: fees,
+    };
+  }
+  return {
+    ...base,
+    returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+    itemDefectReturnLabelSource: 'https://schema.org/ReturnLabelInBox',
+    itemDefectReturnShippingFeesAmount: { '@type': 'MonetaryAmount', value: 0, currency: 'VND' },
+    itemDefectReturnFees: fees,
+    itemDefectReturnDays: rp.days,
+  };
+}
+
 export function productGraph(opts: {
   product: Product;
   brand: Brand;
@@ -35,7 +82,9 @@ export function productGraph(opts: {
   const { product: p, brand: b, site, url, locale, faq, breadcrumb, imageUrls = [], logoUrl } = opts;
   const orgId = `${site}/#organization`;
   const offerBlock = p.blocks.find((x) => x.type === 'offer');
-  const offerValidUntil = offerBlock && offerBlock.type === 'offer' ? offerBlock.validUntil : undefined;
+  const declaredValidUntil = offerBlock && offerBlock.type === 'offer' ? offerBlock.validUntil : undefined;
+  // Hạn đã qua thì KHÔNG phát cho máy đọc — giống hệt cách giao diện ẩn dòng hạn.
+  const offerValidUntil = isOfferExpired(declaredValidUntil) ? undefined : declaredValidUntil;
 
   /**
    * Mỗi gói bán là một Offer riêng.
@@ -49,7 +98,10 @@ export function productGraph(opts: {
     itemCondition: 'https://schema.org/NewCondition',
     seller: { '@id': orgId },
     ...(offerValidUntil ? { priceValidUntil: offerValidUntil } : {}),
-    ...(locale === 'vi' && p.shipping
+    // Phí vận chuyển là dữ kiện của người bán, không phụ thuộc ngôn ngữ trang.
+    // Kiểm định lần 6: Offer bản EN không có shippingDetails nên người đọc bản
+    // tiếng Anh không biết mình sẽ trả bao nhiêu.
+    ...(p.shipping
       ? {
           shippingDetails: {
             '@type': 'OfferShippingDetails',
@@ -68,22 +120,7 @@ export function productGraph(opts: {
           },
         }
       : {}),
-    ...(p.returnPolicy
-      ? {
-          hasMerchantReturnPolicy: {
-            '@type': 'MerchantReturnPolicy',
-            applicableCountry: p.returnPolicy.country,
-            returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-            merchantReturnDays: p.returnPolicy.days,
-            // Cùng một SKU phải khai cùng số ngày ở mọi ngôn ngữ. Quyền rút lui
-            // 14 ngày của EU/UK là quyền theo luật của người mua, nêu trong phần
-            // cảnh báo của bản EN, không phải chính sách của người bán.
-            returnMethod: 'https://schema.org/ReturnByMail',
-            returnFees: 'https://schema.org/FreeReturn',
-            refundType: 'https://schema.org/ExchangeRefund',
-          },
-        }
-      : {}),
+    ...(p.returnPolicy ? { hasMerchantReturnPolicy: returnPolicyNode(p.returnPolicy) } : {}),
   };
 
   /**

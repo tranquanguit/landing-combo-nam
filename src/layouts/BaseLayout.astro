@@ -13,9 +13,11 @@ interface Props {
   /** Các bản dịch cùng sản phẩm, dùng sinh hreflang. Chỉ liệt kê bản đã xuất bản. */
   alternates?: { locale: Locale; url: string }[];
   jsonLd?: unknown;
+  /** Tên thương mại dùng cho og:site_name; trước đây hardcode "Mocha Việt Nam". */
+  siteName: string;
 }
 
-const { locale, title, description, canonical, ogImage, alternates = [], jsonLd } = Astro.props;
+const { locale, title, description, canonical, ogImage, alternates = [], jsonLd, siteName } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang={htmlLang[locale]}>
@@ -37,7 +39,7 @@ const { locale, title, description, canonical, ogImage, alternates = [], jsonLd 
     )}
 
     <meta property="og:type" content="product" />
-    <meta property="og:site_name" content="Mocha Việt Nam" />
+    <meta property="og:site_name" content={siteName} />
     <meta property="og:locale" content={htmlLang[locale].replace('-', '_')} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

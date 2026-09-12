@@ -101,7 +101,10 @@
         "height": 762
       },
       "primaryCta": "Đặt combo",
-      "secondaryCta": "Xem bảng thành phần",
+      "secondaryCta": {
+        "label": "Xem bảng thành phần",
+        "href": "#thanh-phan"
+      },
       "trustBadges": [
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
@@ -388,6 +391,9 @@
   },
   "returnPolicy": {
     "country": "VN",
-    "days": 7
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
   }
 }

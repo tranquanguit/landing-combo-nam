@@ -61,7 +61,7 @@
     "ogImage": "/images/packshot-combo.jpg"
   },
   "compliance": {
-    "declaringOrganization": "Mocha Vietnam Cosmeceuticals",
+    "declaringOrganization": "Công ty Dược Mỹ Phẩm Mocha Việt Nam",
     "declaringAddress": "290/2 Nam Ky Khoi Nghia, Vo Thi Sau Ward, District 3, Ho Chi Minh City, Vietnam",
     "functions": "helps visibly reduce the look of dark spots and supports a more even-looking skin tone",
     "warnings": [
@@ -102,7 +102,10 @@
         "height": 762
       },
       "primaryCta": "Order the duo",
-      "secondaryCta": "See the formula",
+      "secondaryCta": {
+        "label": "See the formula",
+        "href": "#thanh-phan"
+      },
       "trustBadges": [
         "Ships from Ho Chi Minh City",
         "7-day return if the product arrives faulty"
@@ -117,7 +120,8 @@
       "notes": [
         "Sunscreen included",
         "Cleanser included",
-        "Ships worldwide from Vietnam"
+        "Ships worldwide from Vietnam",
+        "Prices are shown in Vietnamese đồng (VND) and we currently ship within Vietnam only. For delivery to another country, email us for a quote before ordering — international shipping, duties and taxes are not included in the price above."
       ]
     },
     {
@@ -308,6 +312,9 @@
   "availability": "InStock",
   "returnPolicy": {
     "country": "VN",
-    "days": 7
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
   }
 }

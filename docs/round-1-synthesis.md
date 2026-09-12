@@ -548,3 +548,50 @@ trên trang EN: không còn · `npm run check`: 0 lỗi · ngân sách: trong m�
 - **Bảy ô ⚠️ trên trang** vẫn chờ dữ liệu thật: số công bố mỹ phẩm, mã số thuế, chính
   sách đổi trả và bảo mật, link gian hàng, endpoint nhận đơn, văn bản đồng ý cho ảnh
   và cho lời chứng.
+
+---
+
+## Vòng 14 — đóng kiểm định độc lập lần 6
+
+Kiểm định viên thứ 6 soi bản đã siết sau vòng 13, tự soạn 28 câu hỏi, tự dựng sản
+phẩm thứ ba, và tự tìm cách vượt hàng rào thay vì đọc tài liệu. Kết quả: 4 lỗi P0,
+6 lỗi P1, 12 lỗi P2. Vòng này đóng toàn bộ nhóm P0 và P1, phần lớn P2.
+
+### P0
+
+| Lỗi | Bản chất | Cách sửa | Bằng chứng |
+|---|---|---|---|
+| F-0 `npm ci` vỡ | `playwright` có trong package.json nhưng không có trong lockfile → **mọi job CI thoát ở bước đầu tiên**. README nói "chạy trong CI trên mọi lần push" — sai | đồng bộ lại lockfile | `npm ci` trong thư mục sạch: EXIT=0, `npm ls playwright` → 1.63.0 |
+| F-1 entity xuyên hàng rào | `richText` cố ý giữ entity hợp lệ; `findForbiddenClaims`/`findPersonalData` không giải mã → `Cam k&#7871;t hoàn ti&#7873;n` lên trang, JSON-LD và llms.txt | cả ba hàng rào dùng chung `normaliseForScan()`, giải mã lặp tới 4 lượt (bắt cả `&amp;#7871;`) | bộ thử claims 41/41, thêm 5 ca entity + 2 ca entity hợp lệ không bị báo nhầm |
+| F-2 `compliance.functions` là vùng tự do | trường mang uy tín "đã công bố", in ở footer và llms.txt, là trường DUY NHẤT không bị quét | chỉ miễn trừ `compliance.warnings` | đặt "điều trị nám tận gốc, hiệu quả như laser" → build chặn |
+| F-3 `javascript:` URL chạy được | `z.string().url()` dùng `new URL()` nên nhận mọi scheme; 3 trường sinh href | `isSafeHref` + `safeUrl`/`textOrSafeUrl` cho `source`, `reference`, `zalo`, `marketplaces.url` | chèn `javascript:` vào usp.source và brand.zalo → build chặn cả hai |
+| F-4 ảnh chưa có đồng ý vẫn phát hành | khối bị ẩn nhưng `import.meta.glob` vẫn emit; 4 ảnh khuôn mặt khách HTTP 200 | chuyển sang `src/media-gated/` (ngoài glob) + cổng hậu-build trong `check-budget.mjs` | thả một ảnh vào dist → cổng fail đúng |
+
+### P1
+
+- **F-5** markup đổi trả rộng hơn lời hứa thật (7 ngày vô điều kiện vs "7 ngày nếu hàng lỗi") → mô hình hoá `scope`/`fees`/`refund`; scope `defect` phát `MerchantReturnNotPermitted` + `itemDefectReturnDays`.
+- **F-6** `priceValidUntil` hết hạn vẫn phát cho máy đọc trong khi UI đã ẩn → `isOfferExpired()` một nguồn cho cả UI và JSON-LD, tính **hết ngày theo giờ VN** (trước đây so sánh UTC nên ưu đãi biến mất sớm một ngày). Thử với `2024-01-01`: dist không còn `priceValidUntil`.
+- **F-7** focus ring 2.78:1 trên nền tối → `#b9c0ff` cho `.surface-navy` **và `footer`** (lần sửa đầu bỏ sót footer vì nó dùng `--ink`, đo lại mới thấy).
+- **F-8** thiếu số tiếp nhận phiếu công bố / MST / trang chính sách — **chưa đóng được, chờ dữ liệu thật từ phía Mocha**.
+- **F-9** vùng chạm 102×19 trong hộp cảnh báo → `.todo a` min-height 24px. Đo lại còn phát hiện thêm link breadcrumb 105×16 trên trang sản phẩm phụ, đã sửa.
+- **F-10** bốn điểm vỡ khi thêm sản phẩm: (a) CTA phụ hardcode `#thanh-phan` → `secondaryCta {label, href}` + kiểm chéo neo với id khối có thật; (b) logo là `#main` chứ không về trang chủ → `localePath`; (c) ảnh sai đường dẫn build im lặng → **dừng build**; (d) ngân sách cộng ảnh của mọi sản phẩm → tính **theo từng trang**.
+
+  Cổng neo mới lập tức phát hiện một lỗi đang tồn tại: trên trang EN, `#thanh-phan` chưa từng là id có thật — cả CTA phụ lẫn link "nguồn" đều là link chết. Nguyên nhân: id mặc định nằm rải trong từng component nên schema không biết. Nay `DEFAULT_ANCHOR` là một nguồn duy nhất.
+
+### P2 đã đóng
+
+`plainText` giải mã entity (F-12); trang 404 dựng từ dữ liệu, liệt kê mọi trang đang sống + hotline (F-13); llms.txt gồm cả bản EN, có nhãn ngôn ngữ (F-14); bỏ `Disallow: /*?utm_` để canonical làm việc của nó (F-15); `lastmod` lấy từ ngày commit cuối của chính file nội dung, không phải ngày build (F-16); `og:site_name` lấy từ `brand` (F-18); viền hộp cảnh báo 2.97:1 → 4.72:1 (F-19); tên pháp nhân công bố phải trùng `brand.legalName`, build dừng nếu lệch (F-20); bản EN nêu rõ giá tính bằng VND và chỉ giao trong nước, phí quốc tế báo trước khi thanh toán (F-21); `slug` có regex (F-11).
+
+### Đo lại sau khi sửa
+
+- Bộ thử: money 37/37, claims **41/41**, richtext 23/23, đặt hàng 6/6. `astro check` 0 lỗi.
+- Trình duyệt thật, 1280×900, cả `/` và `/en/`: **0 vi phạm tương phản focus, 0 vùng chạm dưới 24px, 0 neo chết**. 404 trả đúng mã 404 kèm trang có hotline.
+- Ngân sách theo trang: vi 275KB, en 272KB, sản phẩm thử thứ ba 214KB — trên tổng ngân sách 700KB/trang. Con số cũ (615KB) là lỗi phép cộng, không phải trang nặng.
+- Dựng sản phẩm thứ ba từ một file JSON: route, breadcrumb, schema, sitemap, llms.txt, ngân sách đều tự sinh; các hàng rào mới không chặn nhầm một sản phẩm hợp lệ tối giản.
+
+### Vẫn còn nợ
+
+- **F-8**: số tiếp nhận phiếu công bố mỹ phẩm, mã số thuế, trang chính sách dữ liệu cá nhân và chính sách đổi trả. Đây là dữ liệu doanh nghiệp, không phải việc code. Trang đang hiển thị ⚠️ thay vì bịa.
+- Không có CSP. Site tĩnh nên header do hosting quyết định; nếu bật `script-src` không cho `unsafe-inline` thì cả nhóm lỗi F-3 sẽ bị vô hiệu thêm một lớp nữa. Cần cấu hình ở phía host.
+- CI vẫn **chưa từng chạy thật trên GitHub** — nay `npm ci` đã chạy được cục bộ nên lần push này là lần đầu nó có cơ hội chạy.
+- Số liệu hiệu năng vẫn là đo cục bộ, chưa có đo trên thiết bị và mạng thật tại Việt Nam.

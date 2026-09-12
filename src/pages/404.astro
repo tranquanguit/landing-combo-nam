@@ -1,0 +1,62 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import { productPath } from '../lib/routes';
+import type { Locale } from '../i18n/ui';
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+
+/**
+ * Trang 404 dựng từ dữ liệu.
+ *
+ * Kiểm định lần 6: bản build chỉ có index.html và en/index.html, nên mọi URL sai —
+ * kể cả link cũ đã chia sẻ trong quảng cáo — rơi vào trang lỗi mặc định của nhà
+ * cung cấp hosting: không header, không hotline, không đường về. Với một trang
+ * chạy quảng cáo trả tiền thì đó là tiền đổ ra ngoài.
+ */
+const brand = await getEntry('brand', 'mocha');
+if (!brand) throw new Error('Thiếu src/data/mocha.json');
+const b = brand.data;
+const products = await getCollection('products', ({ data }) =>
+  data.status === 'published' && data.locale === 'vi');
+---
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0e1250" />
+    <title>Không tìm thấy trang — {b.tradingName}</title>
+    <meta name="robots" content="noindex, follow" />
+  </head>
+  <body>
+    <main id="main" class="wrap notfound">
+      <p class="eyebrow">Lỗi 404</p>
+      <h1>Không tìm thấy trang này</h1>
+      <p class="lead">
+        Đường dẫn bạn mở không còn tồn tại hoặc đã bị gõ sai. Dưới đây là các trang đang hoạt động.
+      </p>
+
+      <ul class="links">
+        <li><a href="/">Trang chủ</a></li>
+        {products.map((p) => (
+          <li><a href={productPath(p.data.slug, p.data.locale as Locale)}>{p.data.name}</a></li>
+        ))}
+        <li><a href="/en/">English version</a></li>
+      </ul>
+
+      <p class="lead">
+        Cần hỗ trợ ngay: gọi <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a> ({b.hours})
+        hoặc gửi email <a href={`mailto:${b.email}`}>{b.email}</a>.
+      </p>
+      <p class="muted">{b.legalName} — {b.address}</p>
+    </main>
+
+    <style>
+      .notfound { padding-block: clamp(48px, 8vw, 96px); max-width: 640px; }
+      .notfound h1 { margin-block: var(--s-2) var(--s-4); }
+      .links { list-style: none; padding: 0; margin: var(--s-5) 0; display: grid; gap: var(--s-3); }
+      .links a, .notfound p a { min-height: 24px; display: inline-block; line-height: 24px; }
+      .muted { color: var(--ink-muted); font-size: var(--t-sm); margin-top: var(--s-6); }
+    </style>
+  </body>
+</html>

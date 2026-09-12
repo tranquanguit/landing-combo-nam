@@ -1,5 +1,7 @@
 ---
 import { getImage } from 'astro:assets';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 /**
  * Ảnh responsive cho ảnh được tham chiếu bằng đường dẫn chuỗi trong file nội dung JSON.
@@ -39,8 +41,26 @@ const {
 const key = `/src/assets${src}`;
 const mod = assets[key];
 
-// Ảnh chưa được chuyển vào src/assets thì vẫn render bình thường từ public/,
-// không làm vỡ trang — nhưng cũng không có srcset.
+/**
+ * Đường dẫn ảnh sai thì DỪNG BUILD.
+ *
+ * Bản trước lặng lẽ fallback sang `src` thô, nên kiểm định lần 6 gõ sai một đường
+ * dẫn và nhận được build xanh cùng một ảnh LCP 404 — kèm og:image và Product.image
+ * trỏ vào URL chết. Với mô hình "thêm sản phẩm = thêm một file JSON", gõ sai đường
+ * dẫn ảnh là kịch bản thường gặp nhất, và nó là kịch bản duy nhất không có hàng rào.
+ * Ảnh trong public/ vẫn dùng được, chỉ cần tồn tại thật.
+ */
+if (!mod && !existsSync(join('public', src))) {
+  const gated = existsSync(join('src/media-gated', src));
+  throw new Error(
+    `Không tìm thấy ảnh "${src}".\n` +
+    (gated
+      ? `  Ảnh này đang nằm trong src/media-gated/ (chờ văn bản đồng ý). ` +
+        `Có đồng ý rồi thì chuyển vào src/assets${src} và đặt consent.obtained = true.`
+      : `  Đặt file tại src/assets${src} (được tối ưu, có srcset) hoặc public${src}.`)
+  );
+}
+
 const meta = mod?.default;
 const candidates = meta ? widths.filter((w) => w <= meta.width) : [];
 const list = candidates.length ? candidates : meta ? [meta.width] : [];

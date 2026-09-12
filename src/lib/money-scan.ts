@@ -11,12 +11,27 @@
  * Gom mọi cách né đã quan sát được về một dạng: chữ số full-width và Ả Rập,
  * HTML entity dạng số, ký tự zero-width, và thẻ HTML cắt giữa con số.
  */
-export function normaliseForScan(input: string): string {
-  let s = input;
+const NAMED_ENTITY: Record<string, string> = {
+  amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ',
+  ndash: '-', mdash: '-', hellip: '...', dong: '\u20ab', percnt: '%',
+  num: '#', dollar: '$', euro: '\u20ac', pound: '\u00a3', yen: '\u00a5',
+};
 
-  // &#57; &#x39; -> ký tự thật
-  s = s.replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)));
-  s = s.replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)));
+/** Giải mã entity, lặp tới khi hết, vì `&amp;#273;` cần hai lượt. */
+function decodeEntities(input: string): string {
+  let s = input;
+  for (let i = 0; i < 4; i++) {
+    const before = s;
+    s = s.replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)));
+    s = s.replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)));
+    s = s.replace(/&([a-z]+);/gi, (m, n) => NAMED_ENTITY[String(n).toLowerCase()] ?? m);
+    if (s === before) break;
+  }
+  return s;
+}
+
+export function normaliseForScan(input: string): string {
+  let s = decodeEntities(input);
 
   // Thẻ HTML cắt giữa con số: <strong>1.950</strong><strong>.000</strong>đ
   s = s.replace(/<[^>]*>/g, '');

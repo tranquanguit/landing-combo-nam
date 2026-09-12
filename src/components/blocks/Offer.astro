@@ -2,6 +2,7 @@
 import { money, shortDate } from '../../lib/format';
 import { t, type Locale } from '../../i18n/ui';
 import { richText } from '../../lib/richtext';
+import { isOfferExpired } from '../../lib/offer';
 interface Props { data: any; product: any; locale: Locale; }
 const { data, product: p, locale } = Astro.props;
 const save = p.compareAtPrice ? p.compareAtPrice - p.price : 0;
@@ -10,7 +11,7 @@ const save = p.compareAtPrice ? p.compareAtPrice - p.price : 0;
 // điểm build thì ẩn dòng hạn và cảnh báo to, thay vì lặng lẽ phục vụ ưu đãi đã
 // hết hạn. Cố ý KHÔNG dừng build: một dự án không deploy được bản vá khẩn chỉ vì
 // một ngày khuyến mãi trôi qua là tệ hơn.
-const offerExpired = !!data.validUntil && new Date(data.validUntil) < new Date();
+const offerExpired = isOfferExpired(data.validUntil);
 if (offerExpired) {
   console.warn(
     `\n⚠️  Hạn ưu đãi ${data.validUntil} của "${p.slug}/${locale}" ĐÃ QUA.\n` +

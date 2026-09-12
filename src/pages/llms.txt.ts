@@ -19,9 +19,13 @@ import type { Locale } from '../i18n/ui';
  */
 export const GET: APIRoute = async ({ site }) => {
   const brand = await getEntry('brand', 'mocha');
-  const products = await getCollection('products', ({ data }) =>
-    data.status === 'published' && data.locale === 'vi'
-  );
+  /* Mọi ngôn ngữ, không chỉ tiếng Việt. Kiểm định lần 6: bản EN bị lọc ra, nên
+     một trợ lý AI hỏi bằng tiếng Anh không thấy trang tiếng Anh tồn tại. */
+  const all = await getCollection('products', ({ data }) => data.status === 'published');
+  const products = all.sort((a, b2) =>
+    a.data.slug === b2.data.slug
+      ? (a.data.locale === 'vi' ? -1 : 1)
+      : a.data.slug.localeCompare(b2.data.slug));
   if (!brand) throw new Error('Thiếu src/data/mocha.json');
   const b = brand.data;
   const origin = site?.origin ?? 'https://mochatrinam.com';
@@ -44,7 +48,8 @@ export const GET: APIRoute = async ({ site }) => {
       currency: entry.data.currency,
     }, entry.data.locale as Locale);
     const locale = p.locale as Locale;
-    lines.push(`## ${p.name}`, '');
+    lines.push(`## ${p.name}${locale === 'vi' ? '' : ` (${locale.toUpperCase()})`}`, '');
+    lines.push(`- Ngôn ngữ trang: ${locale === 'vi' ? 'tiếng Việt' : 'English'}`);
     lines.push(`- Trang: ${origin}${productPath(p.slug, locale)}`);
     lines.push(`- Giá: ${money(p.price, p.currency, locale)}` +
       (p.compareAtPrice ? ` (mua lẻ từng món tổng ${money(p.compareAtPrice, p.currency, locale)})` : ''));

@@ -19,6 +19,8 @@ export async function resolveAssetUrl(
 ): Promise<string | undefined> {
   if (!src) return undefined;
   const mod = assets[`/src/assets${src}`];
+  // Picture.astro đã dừng build khi ảnh không tồn tại; ở đây ảnh trong public/ là
+  // trường hợp còn lại hợp lệ duy nhất.
   if (!mod) return new URL(src, site).href;
   const img = await getImage({
     src: mod.default,

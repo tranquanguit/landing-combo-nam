@@ -85,7 +85,16 @@ export function plainText(input: string): string {
     // <br> ngắt dòng nên thay bằng khoảng trắng, các thẻ khác thì bỏ hẳn.
     .replace(/<br\s*\/?>/gi, ' ')
     .replace(new RegExp(`</?(?:${tags})\\s*/?>`, 'gi'), '')
+    // Giải mã entity: richText khuyến khích biên tập viên gõ &amp; &lt;, nên nếu
+    // không giải mã thì JSON-LD và llms.txt in ra literal "Kem &amp; serum" và
+    // trợ lý AI sẽ trích dẫn đúng chuỗi rác đó.
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
     .replace(/&nbsp;/g, ' ')
+    .replace(/&(amp|lt|gt|quot|apos);/g, (m, n: string) => {
+      const map: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" };
+      return map[n] ?? m;
+    })
     .replace(/\s+/g, ' ')
     .trim();
 }

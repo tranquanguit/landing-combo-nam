@@ -34,6 +34,13 @@ const CHAN = [
   'Clinically proven to erase melasma.',
   '92% of customers saw results.',
   'As effective as laser treatment.',
+  // Kiểm định lần 6: entity đi xuyên hàng rào vì richText giữ nguyên entity hợp lệ.
+  'Sản phẩm &#273;i&#7873;u tr&#7883; nám tận gốc.',
+  'Hi\u1ec7u qu\u1ea3 nh&#432; laser.',
+  'Cam k&#7871;t hoàn ti&#7873;n n&#7871;u không h&#7871;t nám.',
+  'FDA &#97;pproved formula.',
+  // hai lượt mã hoá
+  'Cam k&amp;#7871;t hoàn ti&amp;#7873;n n&amp;#7871;u không h&amp;#7871;t nám.',
 ];
 
 const CHO_QUA = [
@@ -44,6 +51,9 @@ const CHO_QUA = [
   'This is a cosmetic product and is not intended to treat any disease.',
   'Nám mảng thường cải thiện trong 4–8 tuần.',
   'Công thức không chứa corticoid, hydroquinone hay cồn khô.',
+  // Entity hợp lệ trong câu bình thường không được báo nhầm.
+  'Kem &amp; serum dùng cùng nhau.',
+  'Ghi chú: giá &lt; mức niêm yết cũ.',
 ];
 
 let bad = 0;

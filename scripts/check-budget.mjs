@@ -49,6 +49,7 @@ const walk = (dir) => readdirSync(dir).flatMap((f) => {
 });
 
 const files = walk(dist);
+const htmls = files.filter((f) => f.endsWith('.html'));
 
 for (const f of files.filter((f) => f.endsWith('.html'))) {
   const raw = readFileSync(f);
@@ -89,17 +90,76 @@ for (const f of files.filter((f) => f.endsWith('.html'))) {
   if (external.length) fail.push(`${f}: nạp tài nguyên bên ngoài lúc tải (${external.join(', ')})`);
 }
 
-/* Tổng trọng lượng một lượt tải: HTML + font + biến thể ảnh lớn nhất mỗi ảnh gốc. */
-const heaviest = new Map();
-for (const f of files.filter((f) => IMAGE.test(f))) {
-  const base = f.replace(/_[A-Za-z0-9-]+\.(avif|webp|jpg|jpeg|png)$/, '');
-  heaviest.set(base, Math.max(heaviest.get(base) ?? 0, statSync(f).size));
+/* Tổng trọng lượng MỘT TRANG, tính theo asset mà chính trang đó tham chiếu.
+   Kiểm định lần 6: bản trước cộng mọi ảnh trong dist — kể cả ảnh của sản phẩm
+   khác — rồi gọi đó là "một lượt tải". Với 3 sản phẩm con số đã 615KB/700KB dù
+   không trang nào tải quá 127KB thật, nên tới sản phẩm thứ 5-6 cổng sẽ fail vì
+   lý do sai và người ta sẽ nới ngưỡng. Nay mỗi trang tự chịu ngân sách của mình. */
+/** "tuong-phan-1.Tm9CJaZD.webp" -> "tuong-phan-1". Astro chèn hash giữa tên và
+    phần mở rộng bằng DẤU CHẤM, không phải gạch dưới — bản trước dò gạch dưới nên
+    không nhận ra biến thể nào là của cùng một ảnh gốc. */
+const stemOf = (name) => name.replace(/\.[A-Za-z0-9_-]{6,}\.[a-z0-9]+$/i, '').replace(/\.[a-z0-9]+$/i, '');
+
+const sizeOf = (f) => statSync(f).size;
+const byName = new Map();
+for (const f of files) byName.set(f.split('/').pop(), f);
+for (const f of htmls) {
+  const html = readFileSync(f, 'utf8');
+  // Mọi tên file asset xuất hiện trong HTML (src, srcset, href, url()).
+  const referenced = new Set(
+    [...html.matchAll(/[\w./-]*\/_astro\/([\w.-]+\.(?:avif|webp|jpg|jpeg|png|gif|svg|woff2|woff|css))/g)]
+      .map((m) => m[1])
+  );
+  let assetBytes = 0;
+  const seenBase = new Map();
+  for (const name of referenced) {
+    const path = byName.get(name);
+    if (!path) continue;
+    if (IMAGE.test(name)) {
+      // srcset liệt kê nhiều biến thể của cùng một ảnh: chỉ tính biến thể nặng nhất.
+      const base = stemOf(name);
+      seenBase.set(base, Math.max(seenBase.get(base) ?? 0, sizeOf(path)));
+    } else {
+      assetBytes += sizeOf(path);
+    }
+  }
+  assetBytes += [...seenBase.values()].reduce((a, b) => a + b, 0);
+  const pageWeight = assetBytes + fonts + sizeOf(f);
+  (pageWeight <= BUDGET.pageTotal ? ok : fail).push(
+    `${f}: một lượt tải ${pageWeight}B / ${BUDGET.pageTotal}B`);
 }
-const pageWeight = [...heaviest.values()].reduce((a, b) => a + b, 0)
-  + fonts
-  + Math.max(...files.filter((f) => f.endsWith('.html')).map((f) => statSync(f).size));
-(pageWeight <= BUDGET.pageTotal ? ok : fail).push(
-  `tổng một lượt tải (ước tính): ${pageWeight}B / ${BUDGET.pageTotal}B`);
+
+/* Ảnh của khối chưa có văn bản đồng ý không được có mặt trong bản build.
+   Kiểm định lần 6 tải được 4 ảnh khuôn mặt khách hàng bằng HTTP 200 dù khối đã
+   bị ẩn khỏi trang: ẩn thẻ <img> không phải là chưa công bố. */
+const contentRoot = 'src/content/products';
+const gatedNames = new Set();
+const jsons = (function collect(dir) {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+    e.isDirectory() ? collect(join(dir, e.name)) : e.name.endsWith('.json') ? [join(dir, e.name)] : []);
+})(contentRoot);
+for (const j of jsons) {
+  let doc;
+  try { doc = JSON.parse(readFileSync(j, 'utf8')); } catch { continue; }
+  for (const blk of doc.blocks ?? []) {
+    if (blk.consent && blk.consent.obtained !== true) {
+      for (const item of [...(blk.images ?? []), ...(blk.items ?? []), ...(blk.pairs ?? [])]) {
+        const src = item.src ?? item.image?.src;
+        if (src) gatedNames.add(src.split('/').pop().replace(/\.[a-z0-9]+$/i, ''));
+      }
+    }
+  }
+}
+const leaked = files.filter((f) => {
+  const stem = stemOf(f.split('/').pop());
+  return gatedNames.has(stem);
+});
+if (leaked.length) {
+  fail.push(`ảnh của khối CHƯA có văn bản đồng ý lọt vào bản build: ${leaked.join(', ')} ` +
+    `— chuyển sang src/media-gated/ tới khi có đồng ý`);
+} else if (gatedNames.size) {
+  ok.push(`${gatedNames.size} ảnh chờ văn bản đồng ý, không có ảnh nào trong bản build`);
+}
 
 /* Trang tạm dùng để thử hàng rào không được lọt lên production. */
 const scratch = files

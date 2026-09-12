@@ -62,7 +62,9 @@ const evidenceLabel: Record<string, string> = {
       <div class="hero-actions">
         <a class="btn btn-primary btn-lg" href="#dat-hang" data-cta="hero-primary">{data.primaryCta}</a>
         {data.secondaryCta && (
-          <a class="btn btn-ghost" href="#thanh-phan" data-cta="hero-secondary">{data.secondaryCta}</a>
+          <a class="btn btn-ghost" href={data.secondaryCta.href} data-cta="hero-secondary">
+            {data.secondaryCta.label}
+          </a>
         )}
       </div>
 

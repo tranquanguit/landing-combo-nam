@@ -12,6 +12,22 @@
  * Cơ sở: Thông tư 06/2011/TT-BYT và Nghị định 342/2025/NĐ-CP.
  */
 
+import { normaliseForScan } from './money-scan.ts';
+
+/**
+ * Bóc thẻ và giải mã entity trước khi quét.
+ *
+ * Kiểm định lần 6: `richText()` cố ý giữ nguyên entity hợp lệ, nên
+ * "&#273;i&#7873;u tr&#7883; nám" lên trang nguyên vẹn và trình duyệt giải mã
+ * thành "điều trị nám" — trong khi hàng rào chỉ thấy dấu &. Hàng rào giá đã
+ * giải mã từ vòng trước; hai hàng rào cùng họ nay dùng chung một chuẩn hoá.
+ */
+function forScan(text: string): string {
+  // Thẻ thật bị bóc trong normaliseForScan. Dấu < > còn lại (sinh ra do giải mã
+  // &lt; &gt;) chỉ đổi thành khoảng trắng, không bóc, để không che mất chữ.
+  return normaliseForScan(text).replace(/[<>]/g, ' ');
+}
+
 export interface ForbiddenPattern {
   pattern: RegExp;
   why: string;
@@ -129,7 +145,7 @@ export const FORBIDDEN: ForbiddenPattern[] = [
 const NEGATED = /(không|chẳng|chưa|đừng|no|not|never)\s+(?:có\s+|là\s+|the\s+)?[\p{L}\s]{0,18}$/iu;
 
 export function findForbiddenClaims(text: string): { match: string; why: string; instead: string }[] {
-  const plain = text.replace(/<[^>]*>/g, ' ');
+  const plain = forScan(text);
   const out: { match: string; why: string; instead: string }[] = [];
   for (const rule of FORBIDDEN) {
     const m = plain.match(rule.pattern);
@@ -164,7 +180,7 @@ const PERSONAL: { pattern: RegExp; kind: string }[] = [
 ];
 
 export function findPersonalData(text: string): PersonalDataHit[] {
-  const plain = text.replace(/<[^>]*>/g, ' ');
+  const plain = forScan(text);
   const out: PersonalDataHit[] = [];
   for (const rule of PERSONAL) {
     const m = plain.match(rule.pattern);

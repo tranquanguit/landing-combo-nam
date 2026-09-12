@@ -20,6 +20,8 @@ const { items } = Astro.props;
   .crumbs { background: var(--bone); border-bottom: 1px solid var(--line); font-size: var(--t-xs); }
   ol { list-style: none; display: flex; flex-wrap: wrap; gap: var(--s-2); margin: 0; padding: var(--s-2) 0; }
   li + li::before { content: "/"; margin-right: var(--s-2); color: var(--ink-muted); }
-  a { color: var(--ink-muted); }
+  /* WCAG 2.2 AA 2.5.8: link breadcrumb cao 16px là vùng chạm dưới 24px.
+     Chỉ xuất hiện trên trang sản phẩm phụ nên bốn vòng kiểm định trước không thấy. */
+  a { color: var(--ink-muted); display: inline-block; min-height: 24px; line-height: 24px; }
   [aria-current] { color: var(--ink-navy); font-weight: 600; }
 </style>

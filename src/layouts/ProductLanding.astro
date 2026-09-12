@@ -1,4 +1,5 @@
 ---
+import { DEFAULT_ANCHOR } from '../lib/block-anchors';
 import BaseLayout from './BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -30,6 +31,17 @@ interface Props {
 }
 
 const { product: raw, brand: b, locale, canonical, alternates = [] } = Astro.props;
+
+/* Tên tổ chức công bố (in ở footer) phải trùng pháp nhân trong JSON-LD Organization.
+   Kiểm định lần 6: bản EN khai "Mocha Vietnam Cosmeceuticals" trong khi structured
+   data khai "Công ty Dược Mỹ Phẩm Mocha Việt Nam" — hai pháp nhân khác tên trên
+   cùng một trang. Tên pháp nhân là dữ kiện pháp lý, không dịch theo ngôn ngữ. */
+if (raw.compliance.declaringOrganization !== b.legalName) {
+  throw new Error(
+    `compliance.declaringOrganization ("${raw.compliance.declaringOrganization}") khác ` +
+    `brand.legalName ("${b.legalName}"). Tên pháp nhân phải giống nhau ở mọi ngôn ngữ.`
+  );
+}
 
 // Thay token tiền một lần cho toàn bộ dữ liệu, trước khi bất kỳ component nào
 // nhìn thấy nó. Nhờ vậy giá chỉ tồn tại ở trường `price` và không thể lệch.
@@ -67,7 +79,7 @@ p.blocks.forEach((block: any, i: number) => {
   if (block.type === 'cards') surfaceFor.set(i, surfaceFor.size % 2 === 0 ? 'bone' : 'paper');
 });
 ---
-<BaseLayout
+<BaseLayout siteName={b.tradingName}
   locale={locale}
   title={p.seo.title}
   description={p.seo.description}
@@ -84,14 +96,14 @@ p.blocks.forEach((block: any, i: number) => {
       switch (block.type) {
         case 'hero':         return <Hero data={block} locale={locale} product={p} />;
         case 'offer':        return <Offer data={block} product={p} locale={locale} />;
-        case 'problem':      return <Problem data={block} id={block.id} />;
-        case 'cards':        return <Cards data={block} id={block.id} surface={surfaceFor.get(i)} />;
-        case 'ingredients':  return <Ingredients data={block} id={block.id} locale={locale} />;
-        case 'steps':        return <Steps data={block} id={block.id} />;
-        case 'gallery':      return <Gallery data={block} id={block.id ?? 'hieu-qua'} locale={locale} />;
-        case 'testimonials': return <Testimonials data={block} id={block.id} locale={locale} />;
+        case 'problem':      return <Problem data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
+        case 'cards':        return <Cards data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} surface={surfaceFor.get(i)} />;
+        case 'ingredients':  return <Ingredients data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} />;
+        case 'steps':        return <Steps data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
+        case 'gallery':      return <Gallery data={block} id={block.id ?? DEFAULT_ANCHOR.gallery} locale={locale} />;
+        case 'testimonials': return <Testimonials data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} />;
         case 'order':        return <Order data={block} product={p} brand={b} locale={locale} />;
-        case 'faq':          return <Faq data={block} id={block.id} />;
+        case 'faq':          return <Faq data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
         default:             return null;
       }
     })}

@@ -2,8 +2,8 @@
 # Cho phép công cụ tìm kiếm truyền thống
 User-agent: *
 Allow: /
-Disallow: /*?utm_
-Disallow: /*?fbclid
+# Không chặn URL có tham số theo dõi: chặn crawl thì Google không đọc được
+# rel=canonical trên chính những URL đó. Việc gộp bản sao để canonical lo.
 
 # ==== AI / LLM crawlers: cho phép thu thập để hiển thị trong câu trả lời AI ====
 User-agent: GPTBot
@@ -52,3 +52,6 @@ User-agent: meta-externalagent
 Allow: /
 
 Sitemap: https://mochatrinam.com/sitemap-index.xml
+
+# Bản tóm tắt dành cho máy đọc (song ngữ)
+# https://mochatrinam.com/llms.txt
