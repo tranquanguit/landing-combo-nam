@@ -1,9 +1,9 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { MONEY_TOKENS } from './lib/money-text';
-import { findHandwrittenMoney } from './lib/money-scan';
-import { findForbiddenClaims, findPersonalData } from './lib/claims-lexicon';
-import { DEFAULT_ANCHOR } from './lib/block-anchors';
+import { MONEY_TOKENS } from './lib/money-text.ts';
+import { findHandwrittenMoney } from './lib/money-scan.ts';
+import { findForbiddenClaims, findPersonalData, scanText } from './lib/claims-lexicon.ts';
+import { DEFAULT_ANCHOR } from './lib/block-anchors.ts';
 import { readFileSync } from 'node:fs';
 
 /* Số liên hệ của chính doanh nghiệp không phải dữ liệu cá nhân của khách. */
@@ -101,10 +101,12 @@ const claim = z.object({
 const image = z.object({
   src: z.string(),
   alt: z.string(),
-  width: z.number().int().positive(),
-  height: z.number().int().positive(),
+  /* Không bắt buộc: kích thước đọc thẳng từ file ảnh trong src/assets. Chỉ cần
+     khai khi ảnh nằm trong public/ (không đi qua pipeline ảnh). */
+  width: z.number().int().positive().optional(),
+  height: z.number().int().positive().optional(),
   caption: z.string().optional(),
-});
+}).strict();
 
 /** Id neo dùng cho liên kết trong trang. Để trống thì component dùng id mặc định. */
 const anchorId = z.string().regex(/^[a-z0-9-]+$/).optional();
@@ -124,7 +126,7 @@ const blocks = z.discriminatedUnion('type', [
       href: z.string().regex(/^#[a-z0-9-]+$/, 'neo dạng #ten-khoi'),
     }).optional(),
     trustBadges: z.array(z.string()).max(5).default([]),
-  }),
+  }).strict(),
   z.object({
     type: z.literal('offer'),
     eyebrow: z.string().optional(),
@@ -133,7 +135,7 @@ const blocks = z.discriminatedUnion('type', [
     /** Hạn khuyến mãi là ngày thật, không phải đồng hồ đếm ngược reset mỗi lần tải trang. */
     validUntil: z.string().date().optional(),
     notes: z.array(z.string()).default([]),
-  }),
+  }).strict(),
   z.object({
     type: z.literal('problem'),
     id: anchorId,
@@ -159,7 +161,7 @@ const blocks = z.discriminatedUnion('type', [
       }
     })),
     explainer: z.object({ heading: z.string(), body: z.array(z.string()) }),
-  }),
+  }).strict(),
   z.object({
     type: z.literal('cards'),
     id: anchorId,
@@ -174,7 +176,7 @@ const blocks = z.discriminatedUnion('type', [
       icon: z.string().optional(),
       image: image.optional(),
     })),
-  }),
+  }).strict(),
   z.object({
     type: z.literal('ingredients'),
     id: anchorId,
@@ -194,7 +196,7 @@ const blocks = z.discriminatedUnion('type', [
        */
       referenceNote: z.string().optional(),
     })),
-  }),
+  }).strict(),
   z.object({
     type: z.literal('steps'),
     id: anchorId,
@@ -204,7 +206,7 @@ const blocks = z.discriminatedUnion('type', [
     totalTime: z.string().optional(),
     items: z.array(z.object({ heading: z.string(), body: z.string() })),
     footnote: z.string().optional(),
-  }),
+  }).strict(),
   z.object({
     type: z.literal('gallery'),
     id: anchorId,
@@ -224,7 +226,7 @@ const blocks = z.discriminatedUnion('type', [
       conditions: z.string().optional(),
     }),
     images: z.array(image),
-  }),
+  }).strict(),
   z.object({
     type: z.literal('testimonials'),
     id: anchorId,
@@ -248,21 +250,21 @@ const blocks = z.discriminatedUnion('type', [
       sponsored: z.boolean().default(false),
       video: z.object({ src: z.string(), poster: z.string() }).optional(),
     })),
-  }),
+  }).strict(),
   z.object({
     type: z.literal('order'),
     eyebrow: z.string().optional(),
     heading: z.string(),
     body: z.string(),
     points: z.array(z.string()),
-  }),
+  }).strict(),
   z.object({
     type: z.literal('faq'),
     id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
     items: z.array(z.object({ q: z.string(), a: z.string() })),
-  }),
+  }).strict(),
 ]);
 
 const products = defineCollection({
@@ -387,10 +389,25 @@ const products = defineCollection({
     const claims = new Map<string, { match: string; why: string; instead: string }[]>();
     const scanClaims = (node: unknown, path: string): void => {
       if (typeof node === 'string') {
-        const covering = reviewed.filter((r) => node.includes(r.text));
-        const hits = findForbiddenClaims(node)
-          // Chỉ miễn khi cụm bị bắt nằm TRONG đoạn đã được xem xét.
-          .filter((h) => !covering.some((r) => r.text.includes(h.match)));
+        /* Miễn trừ theo VỊ TRÍ, không theo chuỗi.
+           Kiểm định lần 10: bản trước miễn theo chuỗi khớp được, nên chỉ cần
+           dán câu ngoại lệ hợp lệ vào cuối đoạn là mọi lần xuất hiện khác của
+           cùng cụm trong đoạn đó cũng được tha — "Kem điều trị nám tận gốc chỉ
+           sau 2 tuần. Nếu bạn cần điều trị nám, hãy đến gặp bác sĩ da liễu."
+           lên trang với build xanh. Nay chỉ tha đúng ký tự nằm trong đoạn đã
+           khai; cụm bị bắt ở chế độ quét không dấu hoặc dồn khoảng trắng
+           (index = -1) KHÔNG bao giờ được tha. */
+        /* Cả hai vế phải ở cùng hệ toạ độ của bộ quét: `node` có thể chứa thẻ
+           HTML và entity, bị bóc/giải mã trước khi khớp. */
+        const scanned = scanText(node);
+        const spans = reviewed.flatMap((r) => {
+          const needle = scanText(r.text);
+          const at = scanned.indexOf(needle);
+          return at === -1 ? [] : [[at, at + needle.length] as [number, number]];
+        });
+        const hits = findForbiddenClaims(node).filter(
+          (h) => !(h.index >= 0 && spans.some(([a, b]) => h.index >= a && h.index + h.match.length <= b))
+        );
         if (hits.length) claims.set(path, hits);
       } else if (Array.isArray(node)) {
         node.forEach((v, i) => scanClaims(v, `${path}[${i}]`));

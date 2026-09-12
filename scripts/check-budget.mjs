@@ -40,6 +40,7 @@ const IMAGE = /\.(avif|webp|jpg|jpeg|png|gif|svg)$/i;
 const FONT = /\.(woff2|woff|ttf|otf|eot)$/i;
 
 const dist = 'dist';
+const SITE_ORIGIN = 'https://mochatrinam.com';
 const fail = [];
 const ok = [];
 
@@ -163,22 +164,45 @@ if (leaked.length) {
 
 /* CSP trong public/_headers phải cho phép đúng nơi biểu mẫu gửi đơn tới.
    Biểu mẫu gửi bằng fetch() nên ràng buộc là connect-src, KHÔNG phải
-   form-action (form-action chỉ áp cho POST điều hướng). Sai chỗ này thì mọi
-   khách đều nhận "gửi đơn không thành công" mà không ai hiểu vì sao. */
-const endpoint = process.env.PUBLIC_ORDER_ENDPOINT;
-if (endpoint) {
-  const headers = readFileSync('public/_headers', 'utf8');
-  const csp = headers.split('\n').find((l) => l.includes('Content-Security-Policy')) ?? '';
-  let origin = '';
-  try { origin = new URL(endpoint).origin; } catch { /* đường dẫn tương đối: cùng miền */ }
-  const connect = /connect-src ([^;]*)/.exec(csp)?.[1] ?? '';
-  const allowed = !origin || connect.includes(origin) ||
-    (connect.includes("'self'") && origin === 'https://mochatrinam.com');
-  if (!allowed) {
-    fail.push(`public/_headers: connect-src (${connect.trim()}) không cho phép ` +
-      `PUBLIC_ORDER_ENDPOINT (${origin}) — fetch() gửi đơn sẽ bị trình duyệt chặn`);
-  } else {
-    ok.push(`CSP connect-src cho phép endpoint đặt hàng (${origin || 'cùng miền'})`);
+   form-action (form-action chỉ áp cho POST điều hướng).
+
+   Endpoint đọc từ CHÍNH BẢN BUILD (`data-action` trong HTML), không từ
+   process.env: kiểm định lần 10 chỉ ra bản trước đọc biến môi trường, mà CI
+   gọi script này không có biến nào — nên cổng được viết ra đúng để chặn lỗi
+   này lại không bao giờ chạy, và CSP mặc định chặn 100% đơn hàng. */
+const cspLine = (() => {
+  try {
+    const headers = readFileSync('public/_headers', 'utf8');
+    return headers.split('\n').find((l) => l.includes('Content-Security-Policy')) ?? '';
+  } catch {
+    return '';
+  }
+})();
+
+const endpoints = new Set();
+for (const f of htmls) {
+  const html = readFileSync(f, 'utf8');
+  for (const m of html.matchAll(/data-action="([^"]+)"/g)) endpoints.add(m[1]);
+}
+if (process.env.PUBLIC_ORDER_ENDPOINT) endpoints.add(process.env.PUBLIC_ORDER_ENDPOINT);
+
+if (!cspLine) {
+  fail.push('public/_headers: không có Content-Security-Policy');
+} else if (endpoints.size === 0) {
+  ok.push('chưa cấu hình endpoint đặt hàng, không có gì để đối chiếu với CSP');
+} else {
+  const connect = /connect-src ([^;]*)/.exec(cspLine)?.[1] ?? '';
+  for (const ep of endpoints) {
+    let origin = '';
+    try { origin = new URL(ep).origin; } catch { /* đường dẫn tương đối = cùng miền */ }
+    const allowed = !origin || connect.includes(origin) || connect.includes("'self'") && origin === SITE_ORIGIN;
+    if (!allowed) {
+      fail.push(`public/_headers: connect-src không cho phép endpoint đặt hàng ${origin} — ` +
+        `trình duyệt sẽ chặn fetch() và MỌI đơn hàng đều thất bại. ` +
+        `Thêm ${origin} vào connect-src.`);
+    } else {
+      ok.push(`CSP connect-src cho phép endpoint đặt hàng (${origin || 'cùng miền'})`);
+    }
   }
 }
 

@@ -874,3 +874,138 @@ diện trạng thái hết hàng; chưa đo trên thiết bị và mạng thật
 ghi chú tích hợp cho người dựng endpoint — payload dùng `Content-Type:
 application/json` nên trình duyệt sẽ gửi preflight `OPTIONS`, endpoint phải trả
 2xx cho nó, nếu không mọi đơn đều rơi vào nhánh "gửi đơn không thành công".
+
+---
+
+## Vòng 18 — đóng kiểm định độc lập lần 10
+
+Kiểm định viên thứ 10 có hai việc: phá lại từng bản vá của vòng 17, và đóng vai
+kỹ sư trưởng nhận bàn giao. Họ **từ chối ký nhận**, và cả hai lỗi P0 đều do
+chính vòng 17 sinh ra.
+
+### P0-1 — CSP chặn 100% đơn hàng, cổng canh nó chết trong CI
+
+`public/_headers` — thứ tôi giới thiệu là thành tựu lớn nhất của vòng 17 — có
+`connect-src` không liệt kê endpoint nhận đơn. Đo bằng Playwright trên cùng một
+`dist/`, chỉ khác việc máy chủ có gắn header đó hay không:
+
+```
+NO CSP:   endpoint hits=2, CSP violations=0 → "Đơn hàng đã được ghi nhận"
+WITH CSP: endpoint hits=0, CSP violations=2 → "không thành công. Vui lòng gọi…"
+```
+
+Và cổng tôi viết ra đúng để chặn việc này đọc `process.env.PUBLIC_ORDER_ENDPOINT`,
+trong khi CI gọi `node scripts/check-budget.mjs` **không có biến môi trường nào** —
+nên nó không bao giờ có gì để đối chiếu. Nay cổng đọc endpoint từ **chính bản
+build** (`data-action` trong HTML), CI đo thêm một bản build giống production, và
+`tests/order-endpoint.mjs` có **kịch bản thứ 8: gửi đơn dưới CSP thật lấy từ
+`public/_headers`** — theo kiểm định viên, đó là phép thử duy nhất bắt được lớp
+lỗi này. Kiểm chứng ngược: đổi `script-src` bỏ `'unsafe-inline'` → bộ thử fail.
+
+### P0-2 — Một chữ "dùng" đứng trước là qua hết mọi luật
+
+Vòng 17 sinh mẫu phủ định không dấu bằng `stripDiacritics(NEGATED.source)`.
+Nhưng **`đừng` và `dùng` bỏ dấu đều thành `dung`** — nên từ thông dụng nhất trên
+một trang mỹ phẩm trở thành từ khoá miễn trừ:
+
+```
+PASSED  "Sản phẩm dùng thay thế laser."
+PASSED  "Kem dùng thay thế thuốc bôi mỗi tối."
+PASSED  "Chúng tôi dùng cam kết hoàn tiền nếu không hết nám."
+BLOCKED "Kem trị nám tận gốc mỗi tối."     ← cùng câu, không có "dùng"
+```
+
+Cùng cơ chế: `chưa`/`chứa` → `chua`, `chẳng`/`chàng` → `chang`. Nay
+`NEGATED_BARE` **viết tay**, chỉ gồm những từ mà bản không dấu không trùng nghĩa
+với từ nào khác — `dung` bị loại khỏi danh sách.
+
+### P1-3 — Bỏ dấu cả văn bản có dấu sinh 5 báo nhầm, bằng chuỗi không tồn tại
+
+`nám|thâm|sạm` bỏ dấu thành `nam|tham|sam`, trùng `năm|nắm|Nam|sách`:
+
+```
+BLOCKED "Ưu đãi áp dụng đến hết năm 2026."   → thông điệp lỗi: "het nam"
+BLOCKED "Bạn chưa nắm rõ cách dùng?"         → "chua nam"
+```
+
+Người biên tập sẽ Ctrl+F `het nam` trong file của mình và **không tìm thấy gì** —
+chuỗi đó chỉ tồn tại trong bộ nhớ của bộ quét. "Hết năm 2026" là cách viết hạn
+khuyến mãi phổ biến nhất tiếng Việt.
+
+Sửa từ gốc: **bản bỏ dấu chỉ áp cho những câu vốn đã viết không dấu.** Một câu
+đã có dấu thì người viết đang gõ tiếng Việt có dấu, không có lý do đọc nó theo
+nghĩa không dấu. Tách câu, xét từng câu.
+
+### Bẫy `\b` lần thứ TƯ — và cổng chặn nó tái diễn
+
+Trong lúc sửa, phát hiện `/\b(trị|điều trị|chữa|đặc trị)\s+(nám|…)/` **vẫn** còn
+`\b`: nhánh `điều trị` chưa bao giờ khớp, chỉ khớp nhờ nhánh ngắn `trị` ăn may,
+và vỡ hẳn với chữ giãn cách. Đây là lần thứ tư cùng một cái bẫy trong dự án
+(vòng 10: "bác sĩ khuyên dùng"; vòng 16: `(?!\s*phụ nữ\b)`; vòng 18: hai lần).
+
+Nên nay có `tests/pattern-lint.mjs`: quét chính bộ mẫu, fail nếu `\b` đứng cạnh
+ký tự ngoài ASCII — kể cả khi nó canh một nhóm `(a|b|c)` mà chỉ nhánh sau có dấu.
+Kiểm chứng hai chiều: đưa lỗi cũ trở lại → exit 1.
+
+### P1-1 — `reviewedClaims` là cửa hậu, và nó đã mở sẵn
+
+Miễn trừ khớp theo **chuỗi khớp được**, không theo **vị trí**. Câu ngoại lệ hợp
+lệ đã có trong `vi.json` chứa cụm `điều trị nám`, nên chỉ cần dán nó vào cuối
+một đoạn là mọi lần xuất hiện khác của cùng cụm trong đoạn đó được tha:
+
+```
+PASSED "Kem điều trị nám tận gốc chỉ sau 2 tuần. Nếu bạn cần điều trị nám, hãy
+        đến gặp bác sĩ da liễu."
+```
+
+Nay miễn theo **khoảng vị trí** của đúng đoạn đã khai, tính trong cùng hệ toạ độ
+mà bộ quét dùng; và cụm bị bắt ở chế độ không dấu hoặc dồn khoảng trắng **không
+bao giờ** được tha. Kiểm chứng: đúng payload của kiểm định viên nay bị chặn cả
+ba lỗi (`điều trị nám`, `thay thế laser`, `0912345678`).
+
+### P1-2 — Miễn trừ hotline giấu luôn số của khách
+
+`findPersonalData` lấy đúng một match mỗi luật. Hotline doanh nghiệp đứng trước
+→ `continue` → mọi số sau không bao giờ được xét:
+
+```
+PASSED "Hotline 0367 848 918. Chị Hà đặt hàng qua số 0912 345 678."
+```
+
+Nay duyệt mọi lần khớp trên cả hai bản (nguyên văn và bản gộp chữ số).
+
+### Bàn giao — phần B của kiểm định
+
+Kiểm định viên đóng vai người biên tập không biết code, chỉ đọc README, và mất
+**ba vòng build-lỗi**: README nói "điền các trường bắt buộc" mà không chỗ nào
+trong repo liệt kê chúng; và họ phải tự khai `image.width`/`height` mà không
+biết lấy số pixel ở đâu — khai sai thì build vẫn xanh còn CLS vọt lên 0,0996.
+
+Ba việc đã làm:
+
+1. **`docs/truong-du-lieu.md` sinh tự động từ schema** (`npm run docs:fields`),
+   và CI fail nếu nó lệch khỏi schema — tài liệu viết tay sẽ lệch sau vài vòng.
+2. **`src/content/_template/vi.json`** — mẫu có chú thích ngay trong file, nằm
+   ngoài `products/` nên không bao giờ lên trang. Kiểm chứng: chép mẫu, sửa 6
+   trường, build xanh ngay lần đầu, trang render đủ.
+3. **Kích thước ảnh đọc từ chính file** — người biên tập không cần biết pixel.
+   Khai lệch (999×111 cho ảnh 1002×762) nay bị bỏ qua thay vì gây CLS.
+   Kèm `.strict()` cho mọi khối: gõ `headding` được chỉ đích danh.
+
+### Đo lại
+
+Bộ thử nay **189 ca**: money 55/55, claims 72/72, richtext 23/23, dữ liệu cá
+nhân 22/22, lint mẫu 17/17, đặt hàng **8/8** (thêm kịch bản CSP). `astro check`
+0 lỗi. Ngân sách và chuông hạn ưu đãi xanh.
+
+Trình duyệt thật, 390×844, 1,6 Mbps, RTT 300ms, CPU ×4, cache lạnh:
+CLS 0,0014 (vi) / 0,0045 (en), LCP 888/844ms, 0 vi phạm tương phản focus,
+0 vùng chạm dưới 24px, 0 neo chết, 0 id trùng, 0 tràn ngang.
+
+### Vẫn còn nợ
+
+Dữ liệu doanh nghiệp (không đổi). `ci.yml` vẫn không deploy. Chưa có giao diện
+trạng thái hết hàng (cổng chặn `availability` khác `InStock` để không phát hành
+mâu thuẫn). Chưa đo trên thiết bị và mạng thật tại Việt Nam. Ghi chú cho người
+dựng endpoint: `Content-Type: application/json` sinh preflight `OPTIONS`, endpoint
+phải trả 2xx cho nó.

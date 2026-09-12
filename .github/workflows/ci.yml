@@ -45,6 +45,11 @@ jobs:
       - name: Bộ thử hàng rào nội dung
         run: npm run test:guards
 
+      # Bảng trường sinh từ schema. Nếu schema đổi mà không chạy lại thì tài
+      # liệu lệch khỏi mã — đúng thứ đã khiến người biên tập mất ba vòng thử.
+      - name: Bảng trường khớp schema
+        run: npm run docs:fields && git diff --exit-code docs/truong-du-lieu.md
+
       - name: Ngân sách trọng lượng trang
         run: node scripts/check-budget.mjs
 
@@ -60,3 +65,9 @@ jobs:
 
       - name: Kiểm thử gửi đơn hàng
         run: PUBLIC_ORDER_ENDPOINT=http://localhost:8132/orders npm run build && npm run test:order
+
+      # Bản build CÓ endpoint mới là bản giống production nhất. Đo ngân sách và
+      # đối chiếu CSP trên chính nó — bản trước chỉ đo bản build không endpoint,
+      # nên cổng CSP không bao giờ có gì để đối chiếu.
+      - name: Ngân sách và CSP trên bản có endpoint
+        run: PUBLIC_ORDER_ENDPOINT=https://mochatrinam.com/api/orders npm run build && node scripts/check-budget.mjs

@@ -1,6 +1,6 @@
 import type { CollectionEntry } from 'astro:content';
-import { htmlLang, type Locale } from '../i18n/ui';
-import { plainText } from './richtext';
+import { htmlLang, type Locale } from '../i18n/ui.ts';
+import { plainText } from './richtext.ts';
 
 const languageName: Record<Locale, string> = {
   vi: 'Vietnamese', en: 'English', th: 'Thai', id: 'Indonesian',

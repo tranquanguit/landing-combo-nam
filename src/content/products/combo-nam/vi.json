@@ -102,9 +102,7 @@
       ],
       "image": {
         "src": "/images/packshot-combo.webp",
-        "alt": "Hũ kem Mocha Smart Brightening Cream X3 và chai serum Mocha Smart First Care Serum",
-        "width": 1002,
-        "height": 762
+        "alt": "Hũ kem Mocha Smart Brightening Cream X3 và chai serum Mocha Smart First Care Serum"
       },
       "primaryCta": "Đặt combo",
       "secondaryCta": {
@@ -161,9 +159,7 @@
           "meta": "Cải thiện tham khảo: 4–8 tuần",
           "image": {
             "src": "/images/nam_01.webp",
-            "alt": "Nám mảng với các mảng nâu nhạt bờ rõ trên gò má",
-            "width": 800,
-            "height": 449
+            "alt": "Nám mảng với các mảng nâu nhạt bờ rõ trên gò má"
           }
         },
         {
@@ -172,9 +168,7 @@
           "meta": "Cải thiện tham khảo: 8–12 tuần",
           "image": {
             "src": "/images/nam_02.webp",
-            "alt": "Nám chân sâu dạng nốt nâu xám bờ mờ",
-            "width": 500,
-            "height": 316
+            "alt": "Nám chân sâu dạng nốt nâu xám bờ mờ"
           }
         },
         {
@@ -183,9 +177,7 @@
           "meta": "Cải thiện tham khảo: 8–16 tuần",
           "image": {
             "src": "/images/nam_03.webp",
-            "alt": "Nám hỗn hợp gồm vùng sẫm màu và vùng loang lổ",
-            "width": 800,
-            "height": 533
+            "alt": "Nám hỗn hợp gồm vùng sẫm màu và vùng loang lổ"
           }
         }
       ]
@@ -278,29 +270,21 @@
         {
           "src": "/images/tuong-phan-1.webp",
           "alt": "So sánh làn da trước và sau 4 tuần",
-          "width": 463,
-          "height": 463,
           "caption": "Sau 4 tuần"
         },
         {
           "src": "/images/tuong-phan-3.webp",
           "alt": "Vùng gò má sau 6 tuần sử dụng",
-          "width": 462,
-          "height": 462,
           "caption": "Sau 6 tuần"
         },
         {
           "src": "/images/tuong-phan-5.webp",
           "alt": "Da đều màu hơn sau 8 tuần",
-          "width": 500,
-          "height": 500,
           "caption": "Sau 8 tuần"
         },
         {
           "src": "/images/tuong-phan-7.webp",
           "alt": "Kết quả sau 12 tuần dùng đủ chu kỳ",
-          "width": 550,
-          "height": 550,
           "caption": "Sau 12 tuần"
         }
       ],

@@ -206,6 +206,56 @@ async function fillAndSubmit(page) {
   await page.close();
 }
 
+// --- 8. Gửi đơn khi trình duyệt ÁP CSP thật từ public/_headers -------
+/*
+ * Kiểm định lần 10: CSP trong public/_headers chặn 100% đơn hàng vì connect-src
+ * không liệt kê endpoint. Mọi bộ thử trước chạy KHÔNG có CSP nên không thấy gì.
+ * Đây là phép thử duy nhất bắt được lớp lỗi này: phục vụ đúng trang đó, kèm
+ * đúng header đó, rồi bấm nút.
+ */
+{
+  mode = 'ok';
+  received.length = 0;
+
+  const { readFileSync } = await import('node:fs');
+  const headers = readFileSync('public/_headers', 'utf8');
+  const cspRaw = (headers.split('\n').find((l) => l.includes('Content-Security-Policy')) ?? '')
+    .replace(/^\s*Content-Security-Policy:\s*/, '').trim();
+  // Endpoint của bộ thử là localhost, không phải miền thật — cho phép nó đúng
+  // như người triển khai sẽ phải thêm origin endpoint của họ vào connect-src.
+  const csp = cspRaw.replace('connect-src', `connect-src http://localhost:${API_PORT}`);
+
+  const { createServer } = await import('node:http');
+  const { existsSync, statSync } = await import('node:fs');
+  const CSP_PORT = 8133;
+  const cspServer = createServer((req, res) => {
+    let p = 'dist' + decodeURIComponent((req.url ?? '/').split('?')[0]);
+    if (existsSync(p) && statSync(p).isDirectory()) p += '/index.html';
+    if (!existsSync(p)) { res.writeHead(404); return res.end('x'); }
+    res.writeHead(200, { 'Content-Security-Policy': csp });
+    res.end(readFileSync(p));
+  });
+  await new Promise((r) => cspServer.listen(CSP_PORT, r));
+
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  const violations = [];
+  page.on('console', (m) => { if (/Content Security Policy/i.test(m.text())) violations.push(m.text()); });
+  await page.goto(`http://localhost:${CSP_PORT}/`, { waitUntil: 'networkidle' });
+  await fillAndSubmit(page);
+
+  const success = await page.evaluate(() => {
+    const el = document.getElementById('form-success');
+    return !!el && !el.hidden;
+  });
+  results.push([
+    'gửi đơn dưới CSP',
+    received.length === 1 && success && violations.length === 0,
+    `đơn nhận được: ${received.length}, báo thành công: ${success}, vi phạm CSP: ${violations.length}`,
+  ]);
+  await page.close();
+  cspServer.close();
+}
+
 await browser.close();
 api.close();
 pageServer.kill();

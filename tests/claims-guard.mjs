@@ -56,6 +56,13 @@ const CHAN = [
   'hieu qua nhu laser ma khong dau',
   // chữ giãn cách từng ký tự
   'Đ I Ề U  T R Ị  N Á M',
+  // Kiểm định lần 10: bỏ dấu mẫu khiến `đừng` và `dùng` cùng thành `dung`,
+  // biến từ thông dụng nhất trên trang mỹ phẩm thành từ khoá miễn trừ.
+  'Sản phẩm dùng thay thế laser.',
+  'Kem dùng thay thế thuốc bôi mỗi tối.',
+  'Chúng tôi dùng cam kết hoàn tiền nếu không hết nám.',
+  'Dùng 98% khách hàng hài lòng.',
+  'Bạn dùng bác sĩ da liễu khuyên dùng làm chuẩn.',
   // hai lượt mã hoá
   'Cam k&amp;#7871;t hoàn ti&amp;#7873;n n&amp;#7871;u không h&amp;#7871;t nám.',
 ];
@@ -75,6 +82,12 @@ const CHO_QUA = [
   'My pham nay khong co tac dung thay the thuoc chua benh.',
   'San pham khong chua corticoid.',
   'Phu nu mang thai nen hoi y kien bac si truoc khi dung.',
+  // Kiểm định lần 10: bỏ dấu cả văn bản CÓ dấu khiến nám↔năm, thâm↔thăm, sạm↔sách.
+  'Ưu đãi áp dụng đến hết năm 2026.',
+  'Nếu da chưa sạm, hãy dùng kem chống nắng mỗi ngày.',
+  'Da chưa thâm thì nên phòng ngừa sớm.',
+  'Bạn chưa nắm rõ cách dùng? Xem hướng dẫn.',
+  'Đọc kỹ sách năm 2025.',
   'Bước số 1: rửa mặt với nước mát.',
   // Entity hợp lệ trong câu bình thường không được báo nhầm.
   'Kem &amp; serum dùng cùng nhau.',

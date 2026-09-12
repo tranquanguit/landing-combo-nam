@@ -97,9 +97,7 @@
       ],
       "image": {
         "src": "/images/packshot-combo.webp",
-        "alt": "Mocha Smart Brightening Cream X3 jar beside the Smart First Care Serum bottle",
-        "width": 1002,
-        "height": 762
+        "alt": "Mocha Smart Brightening Cream X3 jar beside the Smart First Care Serum bottle"
       },
       "primaryCta": "Order the duo",
       "secondaryCta": {
@@ -156,9 +154,7 @@
           "meta": "Typical improvement: 4–8 weeks",
           "image": {
             "src": "/images/nam_01.webp",
-            "alt": "Light brown patches with defined edges across the cheekbone",
-            "width": 800,
-            "height": 449
+            "alt": "Light brown patches with defined edges across the cheekbone"
           }
         },
         {
@@ -167,9 +163,7 @@
           "meta": "Typical improvement: 8–12 weeks",
           "image": {
             "src": "/images/nam_02.webp",
-            "alt": "Grey-brown pigmentation with soft edges",
-            "width": 500,
-            "height": 316
+            "alt": "Grey-brown pigmentation with soft edges"
           }
         },
         {
@@ -178,9 +172,7 @@
           "meta": "Typical improvement: 8–16 weeks",
           "image": {
             "src": "/images/nam_03.webp",
-            "alt": "Mixed pigmentation with both defined and diffuse areas",
-            "width": 800,
-            "height": 533
+            "alt": "Mixed pigmentation with both defined and diffuse areas"
           }
         }
       ]

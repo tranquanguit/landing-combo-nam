@@ -19,8 +19,9 @@ const assets = import.meta.glob<{ default: ImageMetadata }>(
 interface Props {
   src: string;
   alt: string;
-  width: number;
-  height: number;
+  /** Bỏ trống thì lấy từ chính file ảnh. */
+  width?: number;
+  height?: number;
   sizes: string;
   widths?: number[];
   loading?: 'eager' | 'lazy';
@@ -62,6 +63,23 @@ if (!mod && !existsSync(join('public', src))) {
 }
 
 const meta = mod?.default;
+
+/**
+ * Kích thước lấy từ CHÍNH FILE ẢNH, không phải từ số người biên tập gõ tay.
+ *
+ * Kiểm định lần 10: khai 999×111 cho ảnh 1002×762 thì build vẫn xanh và CLS
+ * vọt lên 0,0996 so với ngân sách 0,03 — mà người biên tập không có cách nào
+ * biết số pixel đúng. Số khai chỉ còn dùng cho ảnh nằm trong public/ (không có
+ * metadata); khai lệch với ảnh trong src/assets sẽ bị bỏ qua chứ không gây hại.
+ */
+const w = meta?.width ?? width;
+const h = meta?.height ?? height;
+if (!w || !h) {
+  throw new Error(
+    `Ảnh "${src}" nằm trong public/ nên không đọc được kích thước: ` +
+    `khai width và height trong file nội dung, hoặc chuyển ảnh vào src/assets${src}.`
+  );
+}
 const candidates = meta ? widths.filter((w) => w <= meta.width) : [];
 const list = candidates.length ? candidates : meta ? [meta.width] : [];
 
@@ -77,13 +95,13 @@ const srcset = (set: { src: string; options: { width?: number } }[]) =>
     <source type="image/avif" srcset={srcset(avif)} sizes={sizes} />
     <source type="image/webp" srcset={srcset(webp)} sizes={sizes} />
     <img
-      src={fallback!.src} alt={alt} width={width} height={height}
+      src={fallback!.src} alt={alt} width={w} height={h}
       loading={loading} fetchpriority={fetchpriority} decoding={decoding} class={className}
     />
   </picture>
 ) : (
   <img
-    src={src} alt={alt} width={width} height={height}
+    src={src} alt={alt} width={w} height={h}
     loading={loading} fetchpriority={fetchpriority} decoding={decoding} class={className}
   />
 )}

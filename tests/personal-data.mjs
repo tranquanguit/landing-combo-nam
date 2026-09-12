@@ -17,6 +17,9 @@ const CHAN = [
   'Gọi 0912 345 678 để nghe chia sẻ', '+84912345678',
   'Chị Hà, 38 tuổi', 'ha.nguyen@gmail.com',
   'Chị Nguyễn Thu Hà, Quận 3, gọi 0912 345 678 để nghe chia sẻ.',
+  // Kiểm định lần 10: hotline doanh nghiệp đứng trước giấu luôn số của khách.
+  'Hotline 0367 848 918. Chị Hà đặt hàng qua số 0912 345 678.',
+  'Hotline 0367 848 918 hoặc nhắn cho khách Lan 0912345678.',
 ];
 
 const CHO_QUA = [

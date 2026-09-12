@@ -1,0 +1,49 @@
+{
+  "_doc": "MẪU để copy khi thêm sản phẩm. Chép cả thư mục này thành src/content/products/<ten-san-pham>/ rồi sửa. Thư mục _template nằm NGOÀI src/content/products nên không bao giờ lên trang. Bảng trường đầy đủ: docs/truong-du-lieu.md. Kích thước ảnh KHÔNG cần khai — máy đọc từ file.",
+  "slug": "ten-san-pham",
+  "locale": "vi",
+  "translationKey": "ten-san-pham",
+  "status": "draft",
+  "name": "Tên đầy đủ của sản phẩm",
+  "sku": "MOCHA-XXX",
+  "price": 0,
+  "seo": {
+    "title": "Tối đa 70 ký tự, có tên sản phẩm",
+    "description": "Tối đa 170 ký tự, nói thật sản phẩm làm gì cho ai"
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty Dược Mỹ Phẩm Mocha Việt Nam",
+    "declaringAddress": "Địa chỉ ghi trên phiếu công bố",
+    "functions": "Công dụng ĐÃ CÔNG BỐ với cơ quan quản lý — không phải lời quảng cáo",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngừng dùng nếu có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt."
+    ]
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "heading": "Câu đầu tiên khách đọc — nói sản phẩm là gì, cho ai",
+      "lead": "Hai đến ba câu. Được dùng <strong>in đậm</strong> và <em>in nghiêng</em>.",
+      "usp": [
+        {
+          "text": "Một điểm mạnh kiểm chứng được",
+          "evidence": "ingredient"
+        }
+      ],
+      "image": {
+        "src": "/images/ten-file.webp",
+        "alt": "Miêu tả ảnh cho người không nhìn thấy ảnh"
+      },
+      "primaryCta": "Đặt mua"
+    },
+    {
+      "type": "order",
+      "heading": "Tiêu đề khối đặt hàng",
+      "body": "Nói rõ sau khi gửi đơn thì điều gì xảy ra.",
+      "points": [
+        "<strong>Miễn phí vận chuyển</strong> toàn quốc."
+      ]
+    }
+  ]
+}

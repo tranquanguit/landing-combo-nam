@@ -1,4 +1,4 @@
-import { type Locale } from '../i18n/ui';
+import { type Locale } from '../i18n/ui.ts';
 
 const intlLocale: Record<Locale, string> = {
   vi: 'vi-VN', en: 'en-GB', th: 'th-TH', id: 'id-ID',

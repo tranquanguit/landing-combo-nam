@@ -1,6 +1,6 @@
-import { money } from './format';
-export { findHandwrittenMoney, normaliseForScan } from './money-scan';
-import type { Locale } from '../i18n/ui';
+import { money } from './format.ts';
+export { findHandwrittenMoney, normaliseForScan } from './money-scan.ts';
+import type { Locale } from '../i18n/ui.ts';
 
 /**
  * Giá trong câu chữ được viết bằng token, không phải bằng số.

@@ -5,7 +5,12 @@
   # Nội dung trang do build sinh ra; không có script bên thứ ba nào lúc tải.
   # 'unsafe-inline' là bắt buộc vì Astro nội tuyến script và style của chính trang.
   # Các miền đo lường chỉ được nạp SAU khi khách bấm đồng ý (Analytics.astro).
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://analytics.tiktok.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://www.facebook.com https://analytics.tiktok.com; font-src 'self'; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://connect.facebook.net https://analytics.tiktok.com; form-action 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests
+  #
+  # ⚠️ KHI NỐI ENDPOINT NHẬN ĐƠN: biểu mẫu gửi bằng fetch(), nên nếu endpoint
+  # nằm ở tên miền khác thì PHẢI thêm origin của nó vào connect-src bên dưới,
+  # nếu không trình duyệt chặn và MỌI đơn hàng đều thất bại. `check-budget.mjs`
+  # đọc endpoint từ chính bản build và fail nếu thiếu.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://analytics.tiktok.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://www.facebook.com https://analytics.tiktok.com; font-src 'self'; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.facebook.com https://analytics.google.com https://connect.facebook.net https://analytics.tiktok.com; form-action 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   # Không tính năng nào trong số này được dùng; tắt hẳn để script lạ không xin được.

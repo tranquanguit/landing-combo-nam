@@ -21,12 +21,25 @@ scripts/check-budget.mjs     cổng ngân sách trọng lượng, chạy trong C
 
 ## Thêm một sản phẩm mới
 
-1. Tạo `src/content/products/<slug>/vi.json`.
-2. Điền các trường bắt buộc; `blocks` liệt kê khối theo đúng thứ tự muốn hiển thị.
-3. Đặt `status: "published"`.
+1. **Chép thư mục mẫu**: `cp -r src/content/_template src/content/products/<slug>/`
+   — mẫu đã có sẵn các trường bắt buộc kèm chú thích ngay trong file.
+2. Sửa `slug`, `translationKey`, `name`, `sku`, `price`, `seo`, `compliance`.
+3. Sửa `blocks` — thứ tự trong mảng chính là thứ tự hiển thị trên trang.
+4. Đặt `status: "published"` khi muốn lên trang.
 
-Build sẽ **từ chối** file thiếu trường bắt buộc hoặc sai kiểu — schema là hàng rào,
+**Bảng trường đầy đủ: [`docs/truong-du-lieu.md`](docs/truong-du-lieu.md)** — sinh
+tự động từ schema bằng `npm run docs:fields`, và CI fail nếu nó lệch khỏi schema.
+
+Không cần khai kích thước ảnh: đặt file vào `src/assets/images/` là đủ, máy tự
+đọc số pixel từ chính file.
+
+Build sẽ **từ chối** file thiếu trường bắt buộc, sai kiểu, **hoặc gõ sai tên
+trường** (`headding` thay vì `heading` được chỉ đích danh) — schema là hàng rào,
 không phải tài liệu. Ví dụ meta description quá 170 ký tự là build fail ngay.
+
+Trước đây mục này chỉ nói "điền các trường bắt buộc" mà không chỗ nào liệt kê
+chúng; một người kiểm định đóng vai biên tập viên đã mất ba vòng build-lỗi mới
+qua được. Đó là lý do có thư mục mẫu và bảng trường.
 
 ## Lệnh
 
@@ -35,7 +48,20 @@ npm install
 npm run dev      # máy chủ phát triển
 npm run build    # xuất ra dist/
 npm run preview  # xem thử bản đã build
+
+npm run test:guards   # 170+ ca: hàng rào giá, từ cấm, dữ liệu cá nhân, richtext, lint mẫu
+npm run test:order    # 8 kịch bản gửi đơn thật trên Chromium, có cả kịch bản áp CSP
+npm run docs:fields   # sinh lại docs/truong-du-lieu.md từ schema
+node scripts/check-budget.mjs        # ngân sách trọng lượng + đối chiếu CSP với endpoint
+node scripts/check-offer-window.mjs  # chuông báo hạn ưu đãi đã qua
 ```
+
+## Khi nối endpoint nhận đơn
+
+Biểu mẫu gửi bằng `fetch()`. Nếu endpoint nằm ở tên miền khác, **phải thêm origin
+của nó vào `connect-src` trong `public/_headers`** — nếu không trình duyệt chặn và
+mọi đơn hàng đều thất bại. `check-budget.mjs` đọc endpoint từ chính bản build và
+fail nếu thiếu, nên đừng bỏ qua bước đó trong quy trình phát hành.
 
 ## Hàng rào tự động
 

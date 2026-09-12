@@ -1,5 +1,5 @@
 import { getCollection } from 'astro:content';
-import { defaultLocale, localePath, type Locale } from '../i18n/ui';
+import { defaultLocale, localePath, type Locale } from '../i18n/ui.ts';
 
 /** Sản phẩm được đặt ở gốc tên miền. Mọi sản phẩm khác nằm dưới /<slug>. */
 export const FLAGSHIP = 'combo-nam';
