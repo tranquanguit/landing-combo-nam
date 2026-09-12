@@ -3,8 +3,19 @@ import Section from '../Section.astro';
 import { t, type Locale } from '../../i18n/ui';
 interface Props { data: any; id?: string; locale: Locale; }
 const { data, id = 'danh-gia', locale } = Astro.props;
+
+// Cùng chuẩn với ảnh khách hàng: chưa có văn bản đồng ý thì không đăng
+// tên, tuổi, nơi ở của người thật.
+const publishable = data.consent?.obtained === true;
 ---
 <Section id={id} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} center>
+  {!publishable && (
+    <p class="todo" data-todo>
+      ⚠️ {t(locale, 'todo')}: {data.consent?.statement}
+    </p>
+  )}
+
+  {publishable && (
   <ul class="quotes">
     {data.items.map((item: any) => (
       <li class="card">
@@ -31,6 +42,7 @@ const { data, id = 'danh-gia', locale } = Astro.props;
       </li>
     ))}
   </ul>
+  )}
 </Section>
 
 <style>

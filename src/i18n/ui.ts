@@ -22,12 +22,12 @@ export const ui = {
     'form.address': 'Địa chỉ nhận hàng',
     'form.note': 'Ghi chú thêm (không bắt buộc)',
     'form.submit': 'Đặt mua – Giao hàng miễn phí',
+    'form.total': 'Tổng tiền trả khi nhận hàng:',
     'form.success': 'Cảm ơn bạn! Đơn hàng đã được ghi nhận. Chuyên viên Mocha sẽ gọi xác nhận trong vòng 2 giờ làm việc.',
     'form.errName': 'Vui lòng nhập họ tên của bạn.',
     'form.errPhone': 'Số điện thoại chưa đúng định dạng (10 số, bắt đầu bằng 0).',
     'form.errAddress': 'Vui lòng nhập địa chỉ nhận hàng.',
     'form.errCountry': 'Vui lòng nhập quốc gia nhận hàng.',
-    'form.total': 'Tổng tiền trả khi nhận hàng:',
     'form.totalNote': '(đã gồm phí giao hàng)',
     'form.noPrice': 'Miễn phí',
     'form.failed': 'Gửi đơn không thành công. Bạn vui lòng gọi',
@@ -75,14 +75,14 @@ export const ui = {
     'form.phone': 'Phone number',
     'form.address': 'Delivery address',
     'form.note': 'Anything else (optional)',
-    'form.submit': 'Place order – Free delivery',
+    'form.submit': 'Request this order',
     'form.success': 'Thank you. We have your order and will call to confirm within 2 business hours.',
     'form.errName': 'Please enter your name.',
     'form.errPhone': 'Please enter a valid phone number.',
     'form.errAddress': 'Please enter a delivery address.',
     'form.errCountry': 'Please tell us which country to ship to.',
-    'form.total': 'Total on delivery:',
-    'form.totalNote': '(shipping included)',
+    'form.total': 'Product total:',
+    'form.totalNote': '(international shipping quoted separately before payment)',
     'form.noPrice': 'No charge',
     'form.failed': 'We could not submit your order. Please call',
     'form.selectPack': 'Choose an option',
@@ -117,6 +117,20 @@ export const ui = {
     'todo': 'Real data still required',
   },
 } as const;
+
+/** Những ngôn ngữ đã có bảng chuỗi giao diện đầy đủ. */
+export const translatedLocales = Object.keys(ui) as Locale[];
+
+export function assertTranslated(locale: Locale): void {
+  if (!translatedLocales.includes(locale)) {
+    throw new Error(
+      `Ngôn ngữ "${locale}" chưa có bảng chuỗi trong src/i18n/ui.ts.\n` +
+      `Nếu xuất bản, trang sẽ mang lang="${htmlLang[locale]}" nhưng toàn bộ nhãn giao diện ` +
+      `(nút, biểu mẫu, cảnh báo pháp lý) vẫn là tiếng Việt. Hãy thêm bảng chuỗi trước, ` +
+      `hoặc đặt status: "draft" cho nội dung ngôn ngữ này.`
+    );
+  }
+}
 
 export function t(locale: Locale, key: keyof typeof ui.vi): string {
   const table = (ui as Record<string, Record<string, string>>)[locale] ?? ui.vi;

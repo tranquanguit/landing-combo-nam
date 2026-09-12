@@ -272,7 +272,7 @@
         },
         {
           "q": "How long before I see a difference?",
-          "a": "Most people report a more even-looking tone at <strong>four to six weeks</strong> of consistent use. Surface patches tend to shift in 4–8 weeks; deeper and mixed pigmentation takes 8–16 weeks. This varies between individuals and depends heavily on daily sun protection."
+          "a": "How long it takes depends on which pattern of pigmentation you have. Surface patches tend to shift in 4–8 weeks; deeper and mixed pigmentation takes 8–16 weeks. This varies between individuals and depends heavily on daily sun protection."
         },
         {
           "q": "Is it suitable for sensitive skin?",
@@ -306,14 +306,8 @@
     }
   ],
   "availability": "InStock",
-  "shipping": {
-    "country": "VN",
-    "rate": 0,
-    "transitDaysMin": 2,
-    "transitDaysMax": 5
-  },
   "returnPolicy": {
     "country": "VN",
-    "days": 7
+    "days": 14
   }
 }

@@ -103,7 +103,7 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
           type="submit"
           class="btn btn-primary btn-lg btn-block"
           data-cta="form-submit"
-          disabled={!endpoint}
+          aria-disabled={endpoint ? undefined : 'true'}
           aria-describedby={endpoint ? undefined : 'form-no-endpoint'}
         >
           {t(locale, 'form.submit')}
@@ -118,9 +118,7 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
 
       {!endpoint && (
         <p class="todo" id="form-no-endpoint" data-todo>
-          ⚠️ Chưa cấu hình <code>PUBLIC_ORDER_ENDPOINT</code>. Cho tới khi cấu hình, biểu mẫu này
-          không gửi đơn đi đâu cả — hãy đặt hàng qua hotline
-          <a href={`tel:${b.phone}`}> {b.phoneDisplay}</a>.
+          ⚠️ {t(locale, 'form.noEndpoint')} <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a>
         </p>
       )}
     </div>
@@ -137,7 +135,10 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
     content: ""; position: absolute; left: 0; top: .62em;
     width: 8px; height: 8px; border-radius: 50%; background: #7de0b4;
   }
-  .hotline a { color: #b9c0ff; font-weight: 600; }
+  .hotline a {
+    color: #b9c0ff; font-weight: 600;
+    display: inline-block; min-height: 24px; line-height: 24px;
+  }
 
   .form-card { background: var(--paper); color: var(--ink); border-radius: var(--r-card); padding: var(--s-5); box-shadow: var(--shadow-2); }
   fieldset { border: 0; padding: 0; margin: 0 0 var(--s-4); }
@@ -149,7 +150,7 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
   }
   .pack:hover { border-color: var(--indigo-lift); }
   .pack:has(input:checked) { border-color: var(--indigo); background: var(--paper); }
-  .pack input { margin-top: 5px; width: 18px; height: 18px; accent-color: var(--indigo); flex: 0 0 auto; }
+  .pack input { margin-top: 2px; width: 24px; height: 24px; accent-color: var(--indigo); flex: 0 0 auto; }
   .pack-text strong { display: block; color: var(--ink-navy); font-size: var(--t-sm); }
   .pack-text .muted { font-size: var(--t-xs); }
   .pack-price { margin-left: auto; font-weight: 600; color: var(--ink-navy); white-space: nowrap; font-size: var(--t-sm); }
@@ -161,7 +162,18 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
     border: 1.5px solid var(--line-control); border-radius: var(--r-input);
     background: var(--bone); color: var(--ink);
   }
-  input:focus, textarea:focus { border-color: var(--indigo); background: var(--paper); outline: none; box-shadow: 0 0 0 3px rgba(42, 47, 160, .14); }
+  /* Không dùng outline:none — nó đè lên :focus-visible trong tokens.css và xoá
+     sạch chỉ báo bàn phím. Viền dày hơn chỉ là trang trí thêm. */
+  input:focus-visible, textarea:focus-visible {
+    border-color: var(--indigo);
+    background: var(--paper);
+    outline: 3px solid var(--indigo-lift);
+    outline-offset: 2px;
+  }
+  input:focus:not(:focus-visible), textarea:focus:not(:focus-visible) {
+    border-color: var(--indigo); background: var(--paper);
+  }
+  .pack:focus-within { outline: 3px solid var(--indigo-lift); outline-offset: 2px; }
   .hint { font-size: var(--t-xs); color: var(--ink-muted); margin: 5px 0 0; }
   .err { font-size: var(--t-xs); color: #b3261e; margin: 5px 0 0; display: none; }
   .field[data-invalid] input { border-color: #b3261e; }
@@ -174,7 +186,9 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
     border-radius: var(--r-card); padding: var(--s-4); font-weight: 600; margin: var(--s-3) 0 0;
   }
   button[data-busy] { opacity: .6; pointer-events: none; }
-  button[disabled] { opacity: .55; cursor: not-allowed; }
+  /* aria-disabled thay cho disabled để nút vẫn nhận được focus và trình đọc
+     màn hình vẫn đọc được lời giải thích kèm theo. Màu giữ đủ tương phản. */
+  button[aria-disabled='true'] { background: #6b7280; cursor: not-allowed; }
   .ok {
     background: #e6f4ee; border: 1.5px solid var(--green-clinic); color: #0a4b38;
     border-radius: var(--r-card); padding: var(--s-4); font-weight: 600; margin: 0;
@@ -187,6 +201,10 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
   if (form) {
     /* Chấp nhận cả 0912345678, +84912345678 và 84912345678 — khách hay dán
        số ở định dạng quốc tế từ Zalo. Chuẩn hóa về dạng 0xxxxxxxxx rồi mới kiểm. */
+    /* CSS scroll-behavior đã tôn trọng prefers-reduced-motion, nhưng lệnh JS thì không. */
+    const scrollBehaviour = (): ScrollBehavior =>
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+
     const normalisePhone = (v: string) =>
       v.replace(/[\s.\-()]/g, '').replace(/^\+?84/, '0');
 
@@ -229,6 +247,11 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
       .forEach((r) => r.addEventListener('change', syncTotal));
     syncTotal();
 
+    const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (submitBtn?.getAttribute('aria-disabled') === 'true') {
+      submitBtn.addEventListener('click', (e) => e.preventDefault());
+    }
+
     form.addEventListener('submit', (e) => {
       let firstBad: HTMLInputElement | null = null;
       for (const n of Object.keys(rules)) {
@@ -248,7 +271,7 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
          giờ rỗng, thiếu action thì nó trả về URL của chính trang. */
       if (form.dataset.endpoint !== 'configured') {
         const warn = document.getElementById('form-no-endpoint');
-        if (warn) warn.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        if (warn) warn.scrollIntoView({ block: 'center', behavior: scrollBehaviour() });
         return;
       }
 
@@ -267,13 +290,13 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
           if (!res.ok) throw new Error(String(res.status));
           form.hidden = true;
           const ok = document.getElementById('form-success');
-          if (ok) { ok.hidden = false; ok.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+          if (ok) { ok.hidden = false; ok.scrollIntoView({ block: 'center', behavior: scrollBehaviour() }); }
           window.dispatchEvent(new CustomEvent('mocha:lead', { detail: payload }));
         })
         .catch(() => {
           /* Gửi hỏng thì nói thật và đưa lối liên hệ khác, không nuốt lỗi. */
           const fail = document.getElementById('form-error');
-          if (fail) { fail.hidden = false; fail.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+          if (fail) { fail.hidden = false; fail.scrollIntoView({ block: 'center', behavior: scrollBehaviour() }); }
           if (submit) { submit.disabled = false; delete submit.dataset.busy; }
         });
     });

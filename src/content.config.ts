@@ -158,6 +158,14 @@ const blocks = z.discriminatedUnion('type', [
     eyebrow: z.string().optional(),
     heading: z.string(),
     intro: z.string().optional(),
+    /**
+     * Lời chứng nêu tên, tuổi, nơi ở là dữ liệu cá nhân y như ảnh chân dung.
+     * Cùng một chuẩn: không có văn bản đồng ý thì không đăng.
+     */
+    consent: z.object({
+      obtained: z.boolean(),
+      statement: z.string(),
+    }),
     items: z.array(z.object({
       quote: z.string(),
       name: z.string(),
@@ -247,38 +255,60 @@ const products = defineCollection({
     blocks: z.array(blocks).min(1),
   }).superRefine((p, ctx) => {
     /**
-     * Giá bị nhắc lại ở nhiều chỗ trong nội dung (khối ưu đãi, FAQ, ghi chú biến thể).
-     * Ở vòng trước, "tiết kiệm 630.000đ" sống sót qua hai lần dọn dẹp vì không ai
-     * đối chiếu con số trong câu chữ với con số trong dữ liệu. Hàng rào này quét
-     * mọi chuỗi tiền trong nội dung và chặn build nếu xuất hiện số không thuộc
-     * tập hợp giá hợp lệ.
+     * Giá bị nhắc lại ở nhiều chỗ trong nội dung. Hàng rào này quét MỌI chuỗi
+     * của sản phẩm — không chỉ `blocks` — và chặn build nếu xuất hiện con số
+     * tiền không thuộc tập giá hợp lệ.
+     *
+     * Bản đầu chỉ quét `blocks` và chỉ bắt dạng "1.050.000đ", nên bị lách dễ
+     * dàng bằng: đặt số vào `variants[].note`, `gifts[].note` hay `seo.description`;
+     * viết "1050000đ" không dấu phân cách; viết "990k"; viết "630 nghìn đồng";
+     * hay viết "1.140.000 đồng". Tất cả những cách đó nay đều bị bắt.
      */
     const legit = new Set<number>([p.price, ...(p.compareAtPrice ? [p.compareAtPrice] : [])]);
     for (const v of p.variants) if (v.price !== null) legit.add(v.price);
     if (p.compareAtPrice) legit.add(p.compareAtPrice - p.price);
 
-    const seen = new Set<string>();
+    // Cố ý không nhận đơn vị 'd' trần: nó bắt nhầm chuỗi như "Hakozaki 2002 dùng…"
+    const unit = String.raw`(?:đ|₫|VND|đồng)`;
+    const patterns: [RegExp, (m: RegExpMatchArray) => number][] = [
+      // 1.050.000đ | 1,050,000 ₫ | 1.140.000 đồng | 1050000đ | 1050000 VND
+      [new RegExp(String.raw`(\d[\d.,\s]{2,})\s*${unit}`, 'gi'),
+        (m) => Number(m[1].replace(/[.,\s]/g, ''))],
+      // 990k | 1.050k | 990 k
+      [/(\d+(?:[.,]\d+)?)\s*k\b/gi,
+        (m) => Math.round(Number(m[1].replace(',', '.')) * 1000)],
+      // 630 nghìn | 1,2 triệu
+      [/(\d+(?:[.,]\d+)?)\s*(nghìn|ngàn|triệu)/gi,
+        (m) => Math.round(Number(m[1].replace(',', '.')) * (m[2] === 'triệu' ? 1_000_000 : 1_000))],
+    ];
+
+    const found = new Set<string>();
     const scan = (node: unknown, path: string): void => {
       if (typeof node === 'string') {
-        // Bắt 1.050.000đ, 1,050,000₫, 1.140.000 VND
-        const re = /(\d{1,3}(?:[.,]\d{3}){1,3})\s*(?:đ|₫|VND)/gi;
-        for (const m of node.matchAll(re)) {
-          const n = Number(m[1].replace(/[.,]/g, ''));
-          if (!legit.has(n)) seen.add(`${n.toLocaleString('vi-VN')} (tại ${path})`);
+        for (const [re, toNumber] of patterns) {
+          for (const m of node.matchAll(re)) {
+            const n = toNumber(m);
+            // Bỏ qua số quá nhỏ để không bắt nhầm "3%" hay "SPF50"
+            if (n < 1000) continue;
+            if (!legit.has(n)) found.add(`"${m[0].trim()}" = ${n.toLocaleString('vi-VN')} (tại ${path})`);
+          }
         }
       } else if (Array.isArray(node)) {
         node.forEach((v, i) => scan(v, `${path}[${i}]`));
       } else if (node && typeof node === 'object') {
-        for (const [k, v] of Object.entries(node)) scan(v, `${path}.${k}`);
+        for (const [k, v] of Object.entries(node)) scan(v, path ? `${path}.${k}` : k);
       }
     };
-    scan(p.blocks, 'blocks');
+    // Quét toàn bộ sản phẩm, trừ chính các trường giá dạng số
+    const { price, compareAtPrice, variants, ...rest } = p;
+    scan(rest, '');
+    scan(variants.map((v) => ({ label: v.label, note: v.note })), 'variants');
 
-    if (seen.size) {
+    if (found.size) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message:
-          `Câu chữ nhắc tới số tiền không khớp dữ liệu giá: ${[...seen].join('; ')}. ` +
+          `Câu chữ nhắc tới số tiền không khớp dữ liệu giá:\n    ${[...found].join('\n    ')}\n  ` +
           `Các số hợp lệ: ${[...legit].map((n) => n.toLocaleString('vi-VN')).join(', ')}. ` +
           `Sửa câu chữ hoặc sửa giá — đừng để hai nơi nói hai con số.`,
       });

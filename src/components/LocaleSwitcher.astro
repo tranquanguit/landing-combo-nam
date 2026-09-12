@@ -34,7 +34,12 @@ const labels: Record<Locale, string> = {
 <style>
   .locales { display: flex; gap: var(--s-2); align-items: center; font-size: var(--t-xs); }
   /* Chiều rộng cố định để nhãn không làm header co giãn lúc font swap */
-  .locales > * { min-width: 2.1em; text-align: center; font-variant-numeric: tabular-nums; }
+  /* Vùng chạm tối thiểu 24x24 theo WCAG 2.5.8 */
+  .locales > * {
+    min-width: 2.6em; min-height: 24px;
+    display: inline-flex; align-items: center; justify-content: center;
+    text-align: center; font-variant-numeric: tabular-nums;
+  }
   .locales a { color: var(--ink-muted); text-decoration: none; }
   .locales a:hover { color: var(--indigo); text-decoration: underline; }
   .locales [aria-current] { color: var(--ink-navy); font-weight: 600; }

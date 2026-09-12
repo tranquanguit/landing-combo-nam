@@ -205,3 +205,84 @@ kể cả bản vá khẩn. Một hàng rào an toàn không được phép bi�
 - Chưa có cụm nội dung chuyên đề, chưa có trang danh mục.
 - Ảnh trước–sau chưa có tuyên bố đồng ý, và mỗi cặp khác nhau về ánh sáng lẫn trang điểm.
 - Chưa đo trên mạng thật tại Việt Nam; mọi số LCP ở trên là localhost, thiếu RTT và TLS.
+
+---
+
+# Vòng 8 — kiểm định lần 3: hàng rào bị phá, và cách dựng lại
+
+Kiểm định viên thứ ba chấm **14 ĐẠT / 17 CHƯA ĐẠT** và làm một việc hai người trước
+chưa làm: **tấn công chính các hàng rào tự động**.
+
+## Kết luận nặng nhất: ba cơ chế, ba lần chỉ là lời hứa viết bằng TypeScript
+
+**Hàng rào giá (vòng 6) bị phá bằng 7/7 chiêu.** Nó chỉ quét `blocks`, và chỉ nhận dạng
+`1.050.000đ`. Lách được bằng cách đặt số vào `variants[].note`, `gifts[].note`,
+`seo.description`; hoặc viết `1234000đ`, `990k`, `630 nghìn đồng`, `1.140.000 đồng`.
+Kiểm định viên dựng một sản phẩm chứa đồng thời sáu con số mâu thuẫn và build vẫn chạy,
+**không một cảnh báo nào**.
+
+**Cổng bằng chứng (vòng 7) bị né bằng cách dời câu chữ.** Luật mới bắt `evidence: survey`
+phải có cỡ mẫu, nên câu "cảm nhận sau 4–6 tuần" bị gỡ khỏi `usp[]` — và ở nguyên trong
+FAQ, nơi hàng rào không nhìn tới. Nó vẫn in ra cả hai trang và cả `llms.txt`.
+
+**Ngân sách hiệu năng "đặt làm cổng CI" — không hề có CI.** `.github/` không tồn tại.
+Tệ hơn: đúng lúc kiểm định bắt đầu, cây làm việc **không build được** vì vòng 7 siết
+schema mà quên cập nhật `en.json`.
+
+## Đã dựng lại
+
+| Hàng rào | Trước | Sau |
+|---|---|---|
+| CI | không tồn tại | `.github/workflows/ci.yml`: build + `astro check` + ngân sách, chạy mọi lần push |
+| Ngân sách trọng lượng | chỉ là câu chữ trong tài liệu | `scripts/check-budget.mjs`, fail CI khi vượt |
+| Hàng rào giá | quét `blocks`, 1 dạng số | quét **toàn bộ** sản phẩm, nhận `990k`, `630 nghìn`, `1.140.000 đồng`, số không dấu phân cách |
+| Cổng bằng chứng | chỉ soi `usp[]` | câu "4–6 tuần" đã bị gỡ khỏi mọi nơi, kể cả FAQ và `llms.txt` |
+| Consent | chỉ áp cho ảnh | áp cả cho lời chứng nêu tên, tuổi, nơi ở |
+| Ngôn ngữ chưa dịch | xuất trang `lang="th-TH"` với giao diện 100% tiếng Việt | **build lỗi** kèm hướng dẫn |
+
+Bộ thử phá hàng rào giá nay chạy 6/6 đúng, không báo nhầm (`SPF 50`, `3%`, và
+`1.050.000 VND` đúng giá đều cho qua).
+
+## Ba lỗi P0 khác
+
+**Cảnh báo quan trọng nhất trên trang EN viết bằng tiếng Việt.** Ô báo "biểu mẫu này
+không gửi đơn đi đâu cả" hardcode tiếng Việt, còn phơi cả tên biến môi trường. Bản dịch
+`form.noEndpoint` **đã tồn tại trong `i18n/ui.ts` mà không nơi nào gọi**. Đây là lỗi vòng
+5 (chữ trắng trên nền trắng ở đúng ô này) tái diễn dưới dạng khác.
+
+**Trang EN nói ba điều mâu thuẫn về phí giao hàng, cách nhau vài chục pixel:** thân bài
+"chúng tôi báo giá trước", dòng tổng "(đã gồm phí giao hàng)", nút gửi "Free delivery".
+Câu chữ trong JSON được sửa ở vòng 7, bảng `i18n/ui.ts` thì không. Nay nhãn nút EN là
+"Request this order" và dòng tổng ghi rõ phí quốc tế báo riêng.
+
+**Chỉ báo focus bị xoá trên mọi ô nhập và mọi radio.** `outline: none` trong `Order.astro`
+có độ đặc hiệu cao hơn luật `:focus-visible` ở `tokens.css`. Người dùng bàn phím không
+thấy mình đang ở đâu. Nay outline 3px trên cả ô nhập lẫn khối chọn gói.
+
+## Cũng đã sửa
+
+Bảng thành phần cuộn ngang được bằng chuột nhưng không bằng bàn phím (`tabindex="0"` +
+`role="region"`); nút gửi dùng `aria-disabled` thay vì `disabled` để trình đọc màn hình
+đọc được lời giải thích; `scrollIntoView` tôn trọng `prefers-reduced-motion`; mọi vùng
+chạm đạt 24×24; `llms.txt` nay **nói thẳng rằng website chưa nhận đơn trực tuyến**;
+README sửa lại hướng dẫn cấu hình endpoint (trước đó hướng dẫn sai hoàn toàn).
+
+## Số đo sau vòng 8
+
+| | vi 4G | vi 3G | en 4G | en 3G |
+|---|---|---|---|---|
+| CLS | 0 | 0.0032 | 0 | 0 |
+| LCP | 596ms | 1896ms | 584ms | 1884ms |
+
+Tải đầu 188KB / 9 request. Không tràn ngang. 8/8 CTA dừng cách form 72px.
+Vùng chạm dưới 24px: không còn. Chuỗi tiếng Việt trên trang EN: không còn.
+
+## Vẫn còn nợ
+
+- **Không có đo lường chuyển đổi nào** — trang sạch JS đến mức không có GA4/Pixel. Cần
+  quyết định: thêm lại có kiểm soát, hay đo bằng server-side.
+- Chưa có cụm nội dung chuyên đề, chưa có trang danh mục, 0 liên kết nội bộ nội dung.
+- Hero không có giá; giá nằm ở section kế tiếp.
+- `font-display: optional` vẫn tải 115KB font rồi có thể không dùng ở lần tải đầu chậm.
+- Nhánh `fetch` khi có endpoint **chưa bao giờ chạy** trong bất kỳ vòng kiểm định nào.
+- Mọi số LCP đều là phòng thí nghiệm trên localhost, chưa có RTT và TLS thật.

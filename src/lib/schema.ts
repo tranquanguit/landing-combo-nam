@@ -1,6 +1,10 @@
 import type { CollectionEntry } from 'astro:content';
 import { htmlLang, type Locale } from '../i18n/ui';
 
+const languageName: Record<Locale, string> = {
+  vi: 'Vietnamese', en: 'English', th: 'Thai', id: 'Indonesian',
+};
+
 type Product = CollectionEntry<'products'>['data'];
 type Brand = CollectionEntry<'brand'>['data'];
 
@@ -47,7 +51,8 @@ export function productGraph(opts: {
         telephone: b.phone,
         contactType: 'customer service',
         areaServed: locale === 'vi' ? 'VN' : 'Worldwide',
-        availableLanguage: locale === 'vi' ? ['Vietnamese'] : ['Vietnamese', 'English'],
+        // Ngôn ngữ hỗ trợ lấy từ chính trang đang render, không đoán.
+        availableLanguage: [languageName[locale]],
       }],
       ...(b.taxId ? { taxID: b.taxId } : {}),
     },
@@ -82,8 +87,9 @@ export function productGraph(opts: {
         availability: `https://schema.org/${p.availability ?? 'InStock'}`,
         itemCondition: 'https://schema.org/NewCondition',
         seller: { '@id': orgId },
-        // Giao hàng miễn phí chỉ đúng trong nước; bản quốc tế báo phí trước khi thanh toán.
-        ...(locale === 'vi' && p.shipping
+        // Giao hàng miễn phí chỉ đúng trong nước. Bản quốc tế không khai
+        // shippingRate vì phí được báo riêng cho từng nước trước khi thanh toán.
+        ...(p.shipping
           ? {
               shippingDetails: {
                 '@type': 'OfferShippingDetails',

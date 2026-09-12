@@ -5,7 +5,9 @@ interface Props { data: any; id?: string; locale: Locale; }
 const { data, id = 'thanh-phan', locale } = Astro.props;
 ---
 <Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} center>
-  <div class="scroll">
+  {/* tabindex + role: vùng cuộn ngang phải tới được bằng bàn phím,
+      nếu không người dùng chỉ có bàn phím không đọc được các cột bên phải. */}
+  <div class="scroll" tabindex="0" role="region" aria-label={data.heading}>
     <table>
       {data.caption && <caption>{data.caption}</caption>}
       <thead>
@@ -36,6 +38,7 @@ const { data, id = 'thanh-phan', locale } = Astro.props;
 
 <style>
   .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-card); }
+  .scroll:focus-visible { outline: 3px solid var(--indigo-lift); outline-offset: 2px; }
   table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: var(--t-sm); }
   caption { text-align: left; padding: var(--s-4) var(--s-4) 0; color: var(--ink-muted); font-size: var(--t-xs); }
   th, td { padding: 13px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
@@ -43,6 +46,6 @@ const { data, id = 'thanh-phan', locale } = Astro.props;
   tbody tr:nth-child(even) { background: var(--bone); }
   tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
   tbody th { color: var(--ink-navy); font-weight: 600; }
-  .ref { font-size: var(--t-xs); font-weight: 400; white-space: nowrap; }
+  .ref { font-size: var(--t-xs); font-weight: 400; white-space: nowrap; display: inline-block; min-height: 24px; line-height: 24px; }
   .ref-note { display: block; margin-top: 4px; font-size: var(--t-xs); font-weight: 400; color: var(--ink-muted); }
 </style>

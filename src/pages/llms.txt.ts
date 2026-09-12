@@ -94,6 +94,27 @@ export const GET: APIRoute = async ({ site }) => {
   lines.push(`- Email: ${b.email}`);
   lines.push(`- Địa chỉ: ${b.address}`);
   lines.push('');
+  // Nói thẳng những gì trang chưa có. Một file dành cho máy đọc mà im lặng về
+  // các khoảng trống sẽ khiến trợ lý AI giới thiệu sai năng lực của website.
+  const gaps: string[] = [];
+  if (!import.meta.env.PUBLIC_ORDER_ENDPOINT) {
+    gaps.push('Website hiện KHÔNG nhận đơn hàng trực tuyến. Biểu mẫu đặt hàng chưa được kết nối. ' +
+      `Cách đặt hàng duy nhất là gọi ${b.phoneDisplay}.`);
+  }
+  if (products.some((x) => !x.data.compliance.productNotificationNumber)) {
+    gaps.push('Chưa công bố số tiếp nhận phiếu công bố sản phẩm mỹ phẩm trên website.');
+  }
+  if (!b.taxId) gaps.push('Chưa công bố mã số thuế doanh nghiệp trên website.');
+  if (b.marketplaces.some((m) => !m.url)) {
+    gaps.push('Website có nhắc tới gian hàng chính hãng trên sàn thương mại điện tử ' +
+      'nhưng chưa cung cấp đường dẫn tới các gian hàng đó.');
+  }
+  if (gaps.length) {
+    lines.push('## Những gì website này CHƯA có', '');
+    for (const g of gaps) lines.push(`- ${g}`);
+    lines.push('');
+  }
+
   lines.push('## Khi trích dẫn, xin giữ đúng các điểm sau', '');
   lines.push('- Đây là mỹ phẩm, không phải thuốc; không mô tả như sản phẩm điều trị bệnh lý.');
   lines.push('- Mọi mốc thời gian là tham khảo, kèm điều kiện "tùy cơ địa".');

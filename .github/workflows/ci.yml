@@ -1,0 +1,30 @@
+name: CI
+
+# Tài liệu dự án nhiều lần khẳng định "đặt làm cổng CI, vượt thì fail build"
+# trong khi repo chưa từng có CI nào. Đây là cổng thật.
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      # Schema content collections là nơi đặt phần lớn ràng buộc về nội dung
+      # và tuân thủ. Build hỏng nghĩa là một ràng buộc đã bị vi phạm.
+      - name: Build
+        run: npm run build
+
+      - name: Kiểm tra kiểu
+        run: npx astro check --minimumFailingSeverity error
+
+      - name: Ngân sách trọng lượng trang
+        run: node scripts/check-budget.mjs

@@ -14,8 +14,9 @@ src/
                              Gallery, Testimonials, Order, Faq
   lib/                       định dạng tiền/ngày, sinh JSON-LD
   styles/tokens.css          design tokens
-public/                      ảnh, video, font self-host, robots.txt
-legacy/index.html            bản HTML viết tay trước đây, giữ để đối chiếu
+src/assets/images/           ảnh nguồn, được astro:assets xử lý thành AVIF/WebP nhiều kích thước
+public/                      font self-host, robots.txt, favicon
+scripts/check-budget.mjs     cổng ngân sách trọng lượng, chạy trong CI
 ```
 
 ## Thêm một sản phẩm mới
@@ -36,6 +37,21 @@ npm run build    # xuất ra dist/
 npm run preview  # xem thử bản đã build
 ```
 
+## Hàng rào tự động
+
+Những ràng buộc dưới đây được **thi hành bằng code**, không phải bằng hướng dẫn:
+
+| Hàng rào | Ở đâu | Chặn gì |
+|---|---|---|
+| Số tiền trong câu chữ phải khớp dữ liệu giá | `src/content.config.ts` | Quét mọi chuỗi của sản phẩm, nhận cả `990k`, `630 nghìn`, `1.140.000 đồng` |
+| Tuyên bố phải khai dựa trên bằng chứng gì | `src/content.config.ts` | `verified`/`study` không có nguồn; `survey` không có cỡ mẫu |
+| Ảnh và lời chứng của khách cần văn bản đồng ý | `src/content.config.ts` | Chưa có consent thì component không render |
+| Ngôn ngữ chưa dịch xong giao diện | `src/i18n/ui.ts` | Build lỗi thay vì xuất trang nửa Việt nửa Anh |
+| Ngân sách trọng lượng trang | `scripts/check-budget.mjs` | HTML gzip, JS nội tuyến, tổng font, cỡ ảnh |
+| Ưu đãi hết hạn | `src/components/blocks/Offer.astro` | Ẩn dòng hạn + cảnh báo (cố ý không dừng build) |
+
+Tất cả chạy trong CI (`.github/workflows/ci.yml`) trên mọi lần push.
+
 ## Ràng buộc đã chốt
 
 **Tuân thủ.** Trường `compliance` là bắt buộc trong schema vì Nghị định 342/2025/NĐ-CP
@@ -53,7 +69,14 @@ thật hiển thị trên trang — khai sai dẫn tới manual action của Goo
 ảnh màn đầu ≤ 180KB, tổng tải đầu ≤ 700KB. Không dùng GTM, không Partytown, không ClientRouter.
 Font self-host tách subset latin/vietnamese qua `unicode-range`.
 
-**Cần cấu hình trước khi chạy thật.** Endpoint nhận đơn đọc từ `data-order-endpoint`
-trên thẻ `<html>`; chưa đặt thì form chỉ log ra console.
+**Cần cấu hình trước khi chạy thật.** Endpoint nhận đơn đọc từ biến môi trường
+`PUBLIC_ORDER_ENDPOINT` lúc build (đặt trong `.env` hoặc biến môi trường của CI):
+
+```bash
+PUBLIC_ORDER_ENDPOINT=https://api.vi-du.com/orders npm run build
+```
+
+Chưa đặt thì nút gửi mang `aria-disabled`, biểu mẫu **không** gửi đi đâu và trang
+nói thẳng điều đó với khách kèm số hotline. Không có chuyện hiện màn hình cảm ơn giả.
 
 Xem `docs/round-1-synthesis.md` để biết vì sao từng ràng buộc tồn tại.

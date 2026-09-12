@@ -325,7 +325,11 @@
           "meta": "Cần Thơ",
           "sponsored": false
         }
-      ]
+      ],
+      "consent": {
+        "obtained": false,
+        "statement": "Chưa có văn bản đồng ý của khách hàng cho việc đăng tên, tuổi và nơi ở kèm lời chứng. Nội dung này đã được ẩn cho tới khi có."
+      }
     },
     {
       "type": "order",
@@ -350,7 +354,7 @@
         },
         {
           "q": "Bao lâu thì thấy khác biệt?",
-          "a": "Phần lớn khách hàng cảm nhận da sáng và đều màu hơn sau <strong>4–6 tuần</strong> dùng đều đặn. Nám mảng thường cải thiện trong 4–8 tuần; nám chân sâu và nám hỗn hợp cần 8–16 tuần. Kết quả khác nhau tùy cơ địa và mức độ chống nắng hằng ngày."
+          "a": "Thời gian cải thiện khác nhau theo loại nám. Nám mảng thường cải thiện trong 4–8 tuần; nám chân sâu và nám hỗn hợp cần 8–16 tuần. Kết quả khác nhau tùy cơ địa và mức độ chống nắng hằng ngày."
         },
         {
           "q": "Da nhạy cảm dùng được không?",

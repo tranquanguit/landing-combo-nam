@@ -17,7 +17,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import { productGraph } from '../lib/schema';
 import { resolveAssetUrl } from '../lib/images';
 import { FLAGSHIP, productPath } from '../lib/routes';
-import { localePath, type Locale } from '../i18n/ui';
+import { assertTranslated, localePath, type Locale } from '../i18n/ui';
 
 interface Props {
   product: any;
@@ -29,6 +29,9 @@ interface Props {
 
 const { product: p, brand: b, locale, canonical, alternates = [] } = Astro.props;
 const site = Astro.site?.origin ?? 'https://mochatrinam.com';
+
+// Không xuất bản một ngôn ngữ chưa dịch xong phần giao diện.
+assertTranslated(locale);
 
 const faqBlock = p.blocks.find((x: any) => x.type === 'faq');
 

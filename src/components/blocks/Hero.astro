@@ -93,7 +93,11 @@ const evidenceLabel: Record<string, string> = {
     display: block; margin-top: 2px;
     font-size: var(--t-xs); color: var(--ink-muted);
   }
-  .basis a { color: var(--ink-muted); text-decoration: underline; text-decoration-style: dotted; }
+  .basis a {
+    color: var(--ink-muted);
+    text-decoration: underline; text-decoration-style: dotted;
+    display: inline-block; min-height: 24px; line-height: 24px;
+  }
   .basis a:hover { color: var(--indigo); }
 
   .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
