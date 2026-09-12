@@ -2,7 +2,7 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { MONEY_TOKENS } from './lib/money-text';
 import { findHandwrittenMoney } from './lib/money-scan';
-import { findForbiddenClaims } from './lib/claims-lexicon';
+import { findForbiddenClaims, findPersonalData } from './lib/claims-lexicon';
 
 /* ------------------------------------------------------------------
    Khối nội dung dùng chung cho mọi landing.
@@ -317,6 +317,36 @@ const products = defineCollection({
     const { compliance, ...marketing } = rest as Record<string, unknown>;
     scanClaims(marketing, '');
     scanClaims(variants.map((v) => ({ label: v.label, note: v.note })), 'variants');
+
+    /* Dữ liệu cá nhân chỉ được đặt trong khối có cổng consent. Các khối có
+       consent tự chịu trách nhiệm, nên bỏ chúng ra khỏi phạm vi quét này. */
+    const gated = new Set(['gallery', 'testimonials']);
+    const personal = new Map<string, { match: string; kind: string }[]>();
+    const scanPersonal = (node: unknown, path: string): void => {
+      if (typeof node === 'string') {
+        const hits = findPersonalData(node);
+        if (hits.length) personal.set(path, hits);
+      } else if (Array.isArray(node)) {
+        node.forEach((v, i) => scanPersonal(v, `${path}[${i}]`));
+      } else if (node && typeof node === 'object') {
+        for (const [k, v] of Object.entries(node)) scanPersonal(v, path ? `${path}.${k}` : k);
+      }
+    };
+    p.blocks.forEach((blk, i) => {
+      if (!gated.has(blk.type)) scanPersonal(blk, `blocks[${i}]`);
+    });
+
+    if (personal.size) {
+      const lines = [...personal].flatMap(([path, hits]) =>
+        hits.map((h) => `${path}: "${h.match}" — ${h.kind}`));
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          `Dữ liệu cá nhân nằm ngoài khối có cổng đồng ý:\n    ${lines.join('\n    ')}\n  ` +
+          `Lời chứng của khách phải đặt trong khối "testimonials" (có trường consent). ` +
+          `Số điện thoại và email của doanh nghiệp thì để trong src/data/mocha.json.`,
+      });
+    }
 
     if (claims.size) {
       const lines = [...claims].flatMap(([path, hits]) =>

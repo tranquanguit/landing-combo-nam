@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "check": "astro check --minimumFailingSeverity error",
     "test:order": "node tests/order-endpoint.mjs",
-    "test:guards": "node --experimental-strip-types tests/money-guard.mjs && node --experimental-strip-types tests/claims-guard.mjs"
+    "test:guards": "node --experimental-strip-types tests/money-guard.mjs && node --experimental-strip-types tests/claims-guard.mjs && node --experimental-strip-types tests/richtext.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

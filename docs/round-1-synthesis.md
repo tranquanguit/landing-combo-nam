@@ -495,3 +495,56 @@ trang EN: không còn · giá trong màn hình đầu: y=519px cả hai ngôn ng
   đặt hàng, nhưng vẫn là chồng lấn.
 - CI chưa từng chạy trên GitHub.
 - Chưa đo trên thiết bị và mạng thật tại Việt Nam.
+
+---
+
+# Vòng 13 — đóng danh sách nợ từ kiểm định lần 5
+
+Không gọi kiểm định viên mới ở vòng này; toàn bộ công việc là đóng đúng những gì
+kiểm định viên thứ năm đã liệt kê ở mục "vẫn còn nợ".
+
+| Nợ | Cách đóng | Bằng chứng |
+|---|---|---|
+| `richText` từ chối `<br />` (cú pháp chuẩn tài liệu bảo dùng) và không bất biến | Viết lại: chuẩn hoá thẻ về một dạng, không escape lại entity đã hợp lệ | `tests/richtext.mjs`, 23/23 ca, gồm 4 ca bất biến |
+| `plainText` nuốt văn bản giữa `<` và `>` | Chỉ bỏ đúng những thẻ mà `richText` cho phép; `<br>` thành khoảng trắng | `plainText('a < b > c')` = `'a < b > c'` |
+| `cards.items[].body` đăng được tên + tuổi + số điện thoại không qua cổng nào | Thêm luật quét dữ liệu cá nhân trên **mọi khối không có cổng consent** | 6/6 ca, gồm ca hotline doanh nghiệp phải cho qua |
+| `AggregateOffer.lowPrice` 550.000 gắn trên Product vốn là combo 1.050.000 | Combo có đúng một Offer; món bán lẻ là `Product` riêng, liên kết bằng `isRelatedTo` | JSON-LD: 1.050.000 / 590.000 / 550.000, mỗi giá trên đúng sản phẩm của nó |
+| Bảng dịch có khoá nhưng **rỗng** hoặc **vẫn là tiếng Việt** vẫn qua cổng | Kiểm cả ba: thiếu khoá, khoá rỗng, khoá chưa dịch | 4/4 kiểu bảng hỏng đều bị chặn |
+
+## Trạng thái bộ thử
+
+| Bộ thử | Số ca | Kết quả |
+|---|---|---|
+| `money-guard` | 37 | 37/37 |
+| `claims-guard` | 34 | 34/34 |
+| `richtext` | 23 | 23/23 |
+| `order-endpoint` | 6 kịch bản | 6/6 |
+
+Tất cả chạy trong CI. Mỗi ca là một cách phá mà một kiểm định viên độc lập đã dùng
+thành công, hoặc một lỗi mà một bản vá trước đây đã gây ra.
+
+## Số đo
+
+Cùng điều kiện đo đã ghi ở vòng 12.
+
+| | vi 4G | vi 3G | en 4G | en 3G |
+|---|---|---|---|---|
+| CLS | 0 | 0.0032 | 0 | 0 |
+| LCP | 568 ms | 2272 ms | 564 ms | 2288 ms |
+
+Tràn ngang 320/390/1440px: 0 · vùng chạm dưới 24px: không còn · chuỗi tiếng Việt
+trên trang EN: không còn · `npm run check`: 0 lỗi · ngân sách: trong mức.
+
+## Còn lại, và vì sao chưa làm
+
+- **CI chưa từng chạy trên GitHub.** Chỉ chạy tay từng lệnh. Sẽ biết khi push lần đầu
+  có workflow.
+- **Chưa đo trên thiết bị và mạng thật tại Việt Nam.** Mọi số LCP là localhost, không
+  TLS, RTT ≈ 0 — là sàn lạc quan, không phải số thật.
+- **Thanh CTA cố định che CTA của hero ở 768×700.** Chấp nhận có chủ đích: thanh đó
+  chính là nút đặt hàng, nên người dùng không mất đường hành động.
+- **Chưa có cụm nội dung chuyên đề và trang danh mục.** Cần nội dung mới, không phải
+  cần code; và cần quyết định của khách hàng về phạm vi.
+- **Bảy ô ⚠️ trên trang** vẫn chờ dữ liệu thật: số công bố mỹ phẩm, mã số thuế, chính
+  sách đổi trả và bảo mật, link gian hàng, endpoint nhận đơn, văn bản đồng ý cho ảnh
+  và cho lời chứng.

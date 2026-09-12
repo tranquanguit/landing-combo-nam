@@ -156,12 +156,28 @@ export function assertTranslated(locale: Locale): void {
       `hoặc đặt status: "draft" cho nội dung ngôn ngữ này.`
     );
   }
-  const missing = Object.keys(ui.vi).filter((k) => !(k in table));
-  if (missing.length) {
+  const keys = Object.keys(ui.vi);
+  const missing = keys.filter((k) => !(k in table));
+  /* Khoá có mặt nhưng rỗng thì nhãn biến mất (nút không chữ); khoá có mặt
+     nhưng vẫn y hệt tiếng Việt thì chưa dịch. Cả hai đều qua được cổng cũ. */
+  const empty = keys.filter((k) => k in table && !String(table[k]).trim());
+  const untranslated = locale === defaultLocale ? [] : keys.filter(
+    (k) => k in table && String(table[k]).trim() && table[k] === ui.vi[k as keyof typeof ui.vi]
+      // Vài chuỗi trùng nhau là bình thường (mã ngôn ngữ, ký hiệu), bỏ qua chuỗi rất ngắn.
+      && String(table[k]).trim().length > 3
+  );
+
+  const problems = [
+    missing.length && `thiếu ${missing.length} khoá: ${missing.join(', ')}`,
+    empty.length && `${empty.length} khoá để rỗng: ${empty.join(', ')}`,
+    untranslated.length && `${untranslated.length} khoá còn nguyên tiếng Việt: ${untranslated.join(', ')}`,
+  ].filter(Boolean);
+
+  if (problems.length) {
     throw new Error(
-      `Bảng chuỗi "${locale}" thiếu ${missing.length}/${Object.keys(ui.vi).length} khoá, ` +
-      `nên những phần này sẽ hiện bằng tiếng Việt trên trang lang="${htmlLang[locale]}":\n` +
-      `  ${missing.join(', ')}\n` +
+      `Bảng chuỗi "${locale}" chưa dùng được (${keys.length} khoá cần có):\n` +
+      problems.map((x) => `  - ${x}`).join('\n') + '\n' +
+      `Trang sẽ mang lang="${htmlLang[locale]}" nhưng những phần này hiện sai. ` +
       `Dịch nốt, hoặc đặt status: "draft" cho nội dung ngôn ngữ này.`
     );
   }

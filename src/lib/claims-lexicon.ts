@@ -140,3 +140,35 @@ export function findForbiddenClaims(text: string): { match: string; why: string;
   }
   return out;
 }
+
+
+/**
+ * Dữ liệu cá nhân trong nội dung.
+ *
+ * Cổng consent chỉ bảo vệ các khối có trường `consent` (ảnh, lời chứng). Kiểm
+ * định viên đã đăng được "Chị Nguyễn Thu Ha, 38 tuoi, Quan 3, dt 0912345678"
+ * qua `cards.items[].body` — một trường văn xuôi bình thường, không cổng nào
+ * chạm tới. Luật này quét mọi trường: danh tính người thật chỉ được đặt trong
+ * khối có consent, không được rải trong văn xuôi.
+ */
+export interface PersonalDataHit { match: string; kind: string }
+
+const PERSONAL: { pattern: RegExp; kind: string }[] = [
+  { pattern: /(?:^|[\s(])(?:0|\+84)\d{9}(?![\d])/u, kind: 'số điện thoại' },
+  { pattern: /[\w.+-]+@[\w-]+\.[\w.]{2,}/u, kind: 'địa chỉ email' },
+  { pattern: /\b\d{2}\s*tuổi\b|\b\d{2}\s*tuoi\b|\baged?\s+\d{2}\b/iu, kind: 'tuổi' },
+  {
+    pattern: /(?:^|[\s("“])(?:chị|anh|cô|bác|chú|em|Mrs?\.?|Ms\.?)\s+[A-ZĐÀ-Ỹ][\p{Ll}\p{M}]+\s+[A-ZĐÀ-Ỹ]/u,
+    kind: 'họ tên đầy đủ kèm xưng hô',
+  },
+];
+
+export function findPersonalData(text: string): PersonalDataHit[] {
+  const plain = text.replace(/<[^>]*>/g, ' ');
+  const out: PersonalDataHit[] = [];
+  for (const rule of PERSONAL) {
+    const m = plain.match(rule.pattern);
+    if (m) out.push({ match: m[0].trim(), kind: rule.kind });
+  }
+  return out;
+}

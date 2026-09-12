@@ -86,26 +86,38 @@ export function productGraph(opts: {
       : {}),
   };
 
+  /**
+   * Sản phẩm này có đúng MỘT giá.
+   *
+   * Bản trước gộp cả bốn lựa chọn vào một `AggregateOffer`, nên `lowPrice` là
+   * 550.000 — giá của serum bán lẻ — gắn trên `Product` vốn là combo giá
+   * 1.050.000. Máy đọc sẽ hiểu sai, và giá hiển thị lệch giá markup là đúng
+   * loại rủi ro rich result.
+   *
+   * Cách đúng: combo có một Offer của chính nó; các món bán lẻ là sản phẩm
+   * khác, khai riêng và liên kết bằng `isRelatedTo`.
+   */
   function buildOffers() {
-    const paid = p.variants.filter((v) => v.price !== null);
-    if (paid.length < 2) {
-      return { '@type': 'Offer', url: `${url}#dat-hang`, price: String(p.price), ...offerBase };
-    }
-    return {
-      '@type': 'AggregateOffer',
-      url: `${url}#dat-hang`,
-      priceCurrency: p.currency,
-      lowPrice: String(Math.min(...paid.map((v) => v.price as number))),
-      highPrice: String(Math.max(...paid.map((v) => v.price as number))),
-      offerCount: paid.length,
-      offers: paid.map((v) => ({
-        '@type': 'Offer',
+    return { '@type': 'Offer', url: `${url}#dat-hang`, price: String(p.price), ...offerBase };
+  }
+
+  /** Các món bán lẻ: sản phẩm riêng, giá riêng, không trộn vào giá combo. */
+  function standaloneProducts() {
+    return p.variants
+      .filter((v) => v.price !== null && v.price !== p.price)
+      .map((v, i) => ({
+        '@type': 'Product',
+        '@id': `${url}#variant-${i}`,
         name: v.label,
-        price: String(v.price),
-        url: `${url}#dat-hang`,
-        ...offerBase,
-      })),
-    };
+        ...(v.note ? { description: plainText(v.note) } : {}),
+        brand: { '@type': 'Brand', name: b.tradingName },
+        offers: {
+          '@type': 'Offer',
+          url: `${url}#dat-hang`,
+          price: String(v.price),
+          ...offerBase,
+        },
+      }));
   }
 
   const graph: Record<string, unknown>[] = [
@@ -147,11 +159,16 @@ export function productGraph(opts: {
       brand: { '@type': 'Brand', name: b.tradingName },
       manufacturer: { '@id': orgId },
       ...(p.includes.length
-        ? { isRelatedTo: p.includes.map((i) => ({ '@type': 'Product', name: i.name, description: i.note })) }
+        ? { hasPart: p.includes.map((i) => ({ '@type': 'Product', name: i.name, description: i.note })) }
+        : {}),
+      ...(standaloneProducts().length
+        ? { isRelatedTo: standaloneProducts().map((v) => ({ '@id': v['@id'] })) }
         : {}),
       offers: buildOffers(),
     },
   ];
+
+  graph.push(...standaloneProducts());
 
   if (breadcrumb?.length) {
     graph.push({
