@@ -185,14 +185,50 @@ const CASES = [
     expectCode: 'unrecognized_keys',
   },
   {
+    name: 'khoá lạ trong consent (.strict)',
+    doc: withDoc((d) => {
+      d.blocks.push({
+        type: 'gallery', heading: 'Trước và sau',
+        consent: { obtained: true, statement: 'Đã có văn bản đồng ý.', obtaind: true },
+        images: [{ src: '/images/packshot-combo.webp', alt: 'Ảnh' }],
+      });
+    }),
+    expect: 'fail', expectCode: 'unrecognized_keys',
+  },
+  {
+    name: 'khoá lạ trong shipping (.strict)',
+    doc: withDoc((d) => {
+      d.shipping = { rate: 0, country: 'VN', transitDaysMin: 2, transitDaysMax: 5, ghiChu: 'x' };
+    }),
+    expect: 'fail', expectCode: 'unrecognized_keys',
+  },
+  {
+    name: 'khoá lạ trong variants (.strict)',
+    doc: withDoc((d) => { d.variants = [{ label: 'Gói A', price: 390000, ghiChu: 'x' }]; }),
+    expect: 'fail', expectCode: 'unrecognized_keys',
+  },
+  {
+    name: 'khoá lạ trong usp/claim (.strict)',
+    doc: withDoc((d) => { d.blocks[0].usp[0] = { text: 'A', evidence: 'ingredient', nguon: 'x' }; }),
+    expect: 'fail', expectCode: 'unrecognized_keys',
+  },
+  {
+    name: 'khoá lạ trong image (.strict)',
+    doc: withDoc((d) => { d.blocks[0].image.chuThich = 'x'; }),
+    expect: 'fail', expectCode: 'unrecognized_keys',
+  },
+  {
     name: 'evidence survey thiếu qualifier',
     doc: withDoc((d) => { d.blocks[0].usp[0] = { text: '9/10 người thấy da sáng hơn', evidence: 'survey' }; }),
     expect: 'fail',
   },
   {
+    /* Phải fail ĐÚNG VÌ luật "chỉ một khối order". Kiểm định lần 14: ca này
+       trước đây đạt nhờ cổng trùng id, nên tắt luật đếm khối thì nó vẫn xanh. */
     name: 'hai khối order',
     doc: withDoc((d) => { d.blocks.push({ ...d.blocks[1] }); }),
     expect: 'fail',
+    expectMessage: /Chỉ được có một khối type="order"/,
   },
   {
     /* Hai cổng cùng phủ ca này: superRefine của `problem.quotes` (thông báo lỗi
@@ -262,6 +298,12 @@ for (const c of CASES) {
   const got = r.success ? 'pass' : 'fail';
   /* Fail ĐÚNG LÝ DO: một ca fail vì thiếu trường bắt buộc không chứng minh gì
      về cổng nó nhắm tới — kiểm định lần 13 tìm thấy đúng một ca như vậy. */
+  if (got === 'fail' && c.expectMessage &&
+      !r.error.issues.some((i) => c.expectMessage.test(i.message))) {
+    bad++;
+    console.error(`  LÝ DO SAI  ${c.name} — không có thông báo khớp ${c.expectMessage}`);
+    continue;
+  }
   if (got === 'fail' && c.expectCode &&
       !r.error.issues.some((i) => i.code === c.expectCode)) {
     bad++;

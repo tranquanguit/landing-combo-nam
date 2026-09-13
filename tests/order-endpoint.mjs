@@ -221,12 +221,28 @@ async function fillAndSubmit(page) {
     return document.getElementById('address').required;
   });
 
+  /* Sự kiện `mocha:lead` chỉ được mang gói hàng, KHÔNG mang tên/điện thoại/địa
+     chỉ: pixel quảng cáo chạy cùng trang và bất kỳ script nào cũng nghe được.
+     Kiểm định lần 14: thêm ba trường đó vào lại thì cả 8 kịch bản vẫn xanh. */
+  await page.evaluate(() => {
+    window.__leadDetail = null;
+    window.addEventListener('mocha:lead', (e) => { window.__leadDetail = e.detail; });
+  });
+
   await page.fill('#name', 'Nguyễn Thu Hà');
   await page.fill('#phone', '0912345678');
   await page.check('#data-consent');
   await page.click('#order-form button[type=submit]');
   await page.waitForTimeout(900);
   const sent = received.length === 1 && !received[0].address;
+
+  const leak = await page.evaluate(() => {
+    const d = window.__leadDetail;
+    if (!d) return 'không có sự kiện';
+    const extra = Object.keys(d).filter((k) => k !== 'pack');
+    return extra.length ? `rò trường: ${extra.join(', ')}` : '';
+  });
+  results.push(['mocha:lead chỉ mang gói hàng', leak === '', leak || 'chỉ có { pack }']);
 
   results.push([
     'tư vấn không địa chỉ',

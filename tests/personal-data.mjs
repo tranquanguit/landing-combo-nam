@@ -20,12 +20,26 @@ const CHAN = [
   // Kiểm định lần 10: hotline doanh nghiệp đứng trước giấu luôn số của khách.
   'Hotline 0367 848 918. Chị Hà đặt hàng qua số 0912 345 678.',
   'Hotline 0367 848 918 hoặc nhắn cho khách Lan 0912345678.',
-  // Kiểm định lần 13: xưng hô + MỘT tên riêng đã đủ nhận dạng.
-  'Chị Hà bảo da tôi sạm hẳn sau sinh', 'Cô Lan kể nám lan rộng hai bên gò má',
-  'Anh Nam đặt hàng lúc 9h', 'Tôi 38 tuoi, da sạm sau sinh',
+  'Tôi 38 tuoi, da sạm sau sinh',
 ];
 
+/* Văn xuôi thường: xưng hô + một từ viết hoa KHÔNG phải danh tính.
+   Kiểm định lần 14 liệt kê 22 câu bị chặn nhầm; đây là mẫu đại diện. */
 const CHO_QUA = [
+  'Anh Quốc và châu Âu đều siết claim mỹ phẩm.',
+  'Chú Thích ở cuối trang.',
+  'Cô Dâu nên dưỡng da trước ngày cưới.',
+  'Em Bé sơ sinh có da rất mỏng.',
+  'Anh Đào Nhật Bản nở vào tháng ba.',
+  'Bác Hồ dạy chúng ta tiết kiệm.',
+  'Chị Hằng trên trời cao.',
+  'Cô Tấm là nhân vật cổ tích.',
+  'Chị Hai ở quê gửi nghệ lên.',
+  'Em Trai tôi cũng dùng kem này.',
+  'Anh Hùng bàn phím thì nhiều.',
+  'Cô Nương ơi.',
+  'Bác Nông Dân trồng nghệ.',
+  'Anh Văn và tiếng Nhật.',
   'Gọi hotline 0367 848 918 để được tư vấn.',
   'Hotline 0367848918 làm việc 8h–20h.',
   'Phụ nữ mang thai nên hỏi ý kiến bác sĩ trước khi dùng.',
@@ -40,7 +54,33 @@ const CHO_QUA = [
   'Em có thể nhắn tin cho chúng tôi.',
 ];
 
+/*
+ * Ngữ cảnh LỜI CHỨNG (khối `problem.quotes`): xưng hô + MỘT tên riêng đã đủ
+ * nhận dạng. Ngoài ngữ cảnh đó thì cùng hình dạng lại là chuyện bình thường
+ * ("Chị Hằng trên trời cao", "Cô Tấm là nhân vật cổ tích") — kiểm định lần 14
+ * đo được 22/26 câu tiếng Việt bình thường bị chặn nhầm khi áp luật một-tên cho
+ * mọi nơi.
+ */
+const CHAN_LOI_CHUNG = [
+  'Chị Hà bảo da tôi sạm hẳn sau sinh',
+  'Cô Lan kể nám lan rộng hai bên gò má',
+  'Anh Nam đặt hàng lúc 9h',
+];
+const CHO_QUA_LOI_CHUNG = [
+  'Sau sinh da tôi sạm hẳn, ai cũng hỏi',
+  'Nám mảng hai bên gò má làm tôi ngại ra đường',
+];
+
 let bad = 0;
+for (const s of CHAN_LOI_CHUNG) {
+  if (!findPersonalData(s, BRAND, { testimonyContext: true }).length) {
+    console.error(`  LỌT   lời chứng phải chặn: ${JSON.stringify(s)}`); bad++;
+  }
+}
+for (const s of CHO_QUA_LOI_CHUNG) {
+  const h = findPersonalData(s, BRAND, { testimonyContext: true });
+  if (h.length) { console.error(`  NHẦM  lời chứng phải cho qua: ${JSON.stringify(s)} → "${h[0].match}"`); bad++; }
+}
 for (const s of CHAN) {
   if (!findPersonalData(s, BRAND).length) { console.error(`  LỌT   phải chặn: ${JSON.stringify(s)}`); bad++; }
 }
@@ -48,6 +88,8 @@ for (const s of CHO_QUA) {
   const h = findPersonalData(s, BRAND);
   if (h.length) { console.error(`  NHẦM  phải cho qua: ${JSON.stringify(s)} → "${h[0].match}"`); bad++; }
 }
-console.log(`  ${CHAN.length + CHO_QUA.length - bad}/${CHAN.length + CHO_QUA.length} ca đúng ` +
-            `(${CHAN.length} phải chặn, ${CHO_QUA.length} phải cho qua)`);
+const total = CHAN.length + CHO_QUA.length + CHAN_LOI_CHUNG.length + CHO_QUA_LOI_CHUNG.length;
+console.log(`  ${total - bad}/${total} ca đúng ` +
+            `(${CHAN.length} chặn, ${CHO_QUA.length} cho qua, ` +
+            `${CHAN_LOI_CHUNG.length} chặn trong lời chứng, ${CHO_QUA_LOI_CHUNG.length} cho qua trong lời chứng)`);
 process.exit(bad ? 1 : 0);

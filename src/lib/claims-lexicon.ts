@@ -251,55 +251,98 @@ const LEGITIMATE_HOMOGRAPHS: Record<string, string[]> = {
   mun: ['mùn', 'mụn'],
   tri: ['trí', 'trì', 'trĩ', 'trị'],
   chua: ['chứa', 'chùa', 'chưa', 'chữa'],
-  phep: ['phép'],
   sach: ['sách', 'sạch'],
   khoi: ['khối', 'khởi', 'khói', 'khôi', 'khỏi'],
   het: ['hét', 'hẹt', 'hết'],
 };
 
 /**
- * Những từ khoá ở vị trí ĐỘNG TỪ của một tuyên bố ("trị", "chữa", "hết", "xoá").
+ * Chính tả ĐÚNG của những từ xuất hiện trong từ điển từ cấm.
  *
- * Viết không dấu ở vị trí này là dấu hiệu rõ của copy quảng cáo gõ không dấu:
- * "tri nám", "het nam", "xoa nam". Trong khi một từ TÌNH TRẠNG viết không dấu
- * thì không nói lên gì — "nam" (giới tính, phương nam) là một trong những từ
- * phổ biến nhất tiếng Việt, nên "sách nam giới" không phải vi phạm.
+ * Phân biệt "trị nam" (vi phạm: động từ bị cấm viết đúng + tình trạng viết không
+ * dấu) với "sách nam giới" (bình thường: "sách" không phải từ bị cấm nào — từ bị
+ * cấm là "sạch"). Kiểm định lần 14 tìm ra lỗ này: `ACTION_KEYS` chỉ xét từ động
+ * từ có viết không dấu hay không, nên "Kem trị nam tận gốc", "Chữa tham hiệu
+ * quả", "Trị mun cấp tốc", "Hết nam sau 8 tuần" lọt sạch.
  */
-const ACTION_KEYS = new Set(['tri', 'chua', 'het', 'xoa', 'sach', 'khoi']);
+/**
+ * Từ khoá mà bản KHÔNG dấu của nó gần như chỉ có một nghĩa trong văn bản mỹ phẩm.
+ *
+ * "tri"/"xoa" không dấu thì hầu như luôn là "trị"/"xoá". Ngược lại "het", "nam",
+ * "sach", "chua", "tham" không dấu là những từ cực kỳ phổ biến với nghĩa khác
+ * ("hết năm", "sách nam giới", "chưa thăm", "đã chứa") — kiểm định lần 14 chỉ ra
+ * bản trước tin mọi đoạn toàn-không-dấu, nên bốn câu hoàn toàn bình thường viết
+ * không dấu bị chặn.
+ *
+ * Với đoạn toàn không dấu mà không có từ nào ở đây, hàng rào dựa vào các luật
+ * KHÁC trong từ điển ("cam ket hoan tien", "bac si ... khuyen dung",
+ * "98% khach hang", "Bo Y Te cap phep") — chúng không dựa vào cặp động từ +
+ * tình trạng nên không bị ảnh hưởng.
+ */
+const UNAMBIGUOUS_UNACCENTED = new Set(['tri', 'xoa']);
+
+/**
+ * Từ trong đoạn khớp khiến cả đoạn hết mơ hồ dù mọi từ đều viết không dấu.
+ *
+ * "chua benh nam da" — "chua" một mình mơ hồ (chưa/chứa/chữa), nhưng đi với
+ * "benh" thì chỉ còn một nghĩa: chữa bệnh.
+ */
+const DISAMBIGUATING = new Set(['benh', 'lieu', 'gioc']);
+
+const FORBIDDEN_SPELLINGS = new Set([
+  'trị', 'chữa', 'hết', 'xoá', 'xóa', 'sạch', 'khỏi',
+  'nám', 'thâm', 'sạm', 'mụn', 'nấm',
+]);
 
 /**
  * Lần khớp trên bản bỏ dấu có đáng tin không?
  *
- * Tin khi có dấu hiệu văn bản KHÔNG được gõ đúng chính tả tiếng Việt:
- *   - một từ dễ lẫn viết có dấu nhưng SAI chính tả ("nạm", "nàm", "phếp"), hoặc
- *   - một từ ở vị trí động từ viết KHÔNG dấu ("tri nám", "het nam").
+ * Tin khi có dấu hiệu văn bản không được gõ đúng chính tả tiếng Việt:
+ *   1. một từ dễ lẫn viết CÓ dấu nhưng SAI chính tả ("nạm", "nàm", "phếp"); hoặc
+ *   2. mọi từ dễ lẫn trong đoạn đều viết KHÔNG dấu ("tri nam", "het nam"); hoặc
+ *   3. có từ viết không dấu VÀ trong đoạn có một từ viết đúng chính tả mà chính
+ *      nó là từ bị cấm ("trị nam", "Hết nam", "Chữa tham").
  *
- * Không tin khi mọi từ dễ lẫn đều viết đúng chính tả — nghĩa là cách đọc nguyên
- * văn đã xét đoạn đó và nếu là vi phạm thì đã bắt ở đó: "hết năm 2026",
+ * Không tin khi mọi từ dễ lẫn đều viết đúng chính tả và không từ nào là từ bị
+ * cấm — nghĩa là cách đọc nguyên văn đã xét đoạn đó: "hết năm 2026",
  * "sách nam giới", "khối thâm hụt", "da chưa thâm".
  *
- * Đánh đổi cố ý: hai từ viết ĐÚNG chính tả nhưng ghép lại chỉ thành vi phạm sau
- * khi bỏ dấu ("Chứa nám", "Trì nam") không bị chặn — chặn chúng sẽ kéo theo
- * "chưa thâm", "khối thâm hụt", "chưa nắm rõ". Văn bản dạng đó đọc như lỗi gõ
- * chứ không như lời rao.
+ * Đánh đổi cố ý, đã ghi: hai từ viết ĐÚNG chính tả nhưng ghép lại chỉ thành vi
+ * phạm sau khi bỏ dấu ("Chứa nám", "Trì nam") không bị chặn — chặn chúng sẽ kéo
+ * theo "chưa thâm", "chưa nắm rõ", "khối thâm hụt".
  *
  * Phép bỏ dấu giữ nguyên độ dài từng ký tự nên chỉ số trỏ đúng vào bản gốc.
  */
 function foldedHitIsReal(original: string, from: number, to: number): boolean {
   const words = original.slice(from, to).split(/[^\p{L}\p{M}]+/u).filter((w) => w.length >= 2);
-  let sawCorrectlySpelled = false;
+  let sawColliding = false;
+  let sawUnaccented = false;
+  let sawUnambiguousUnaccented = false;
+  let sawDisambiguating = false;
+  let sawAccentedOk = false;
+  let sawForbiddenSpelling = false;
+
   for (const word of words) {
     const folded = stripDiacritics(word).toLowerCase();
+    if (DISAMBIGUATING.has(folded)) sawDisambiguating = true;
     const legit = LEGITIMATE_HOMOGRAPHS[folded];
-    if (!legit) continue;                                  // không phải từ dễ lẫn
+    if (!legit) continue;
+    sawColliding = true;
     if (!HAS_DIACRITICS.test(word)) {
-      if (ACTION_KEYS.has(folded)) return true;            // động từ gõ không dấu
-      continue;                                            // từ tình trạng: trung tính
+      sawUnaccented = true;
+      if (UNAMBIGUOUS_UNACCENTED.has(folded)) sawUnambiguousUnaccented = true;
+      continue;
     }
-    if (!legit.includes(word.toLowerCase())) return true;   // có dấu nhưng sai chính tả
-    sawCorrectlySpelled = true;
+    if (!legit.includes(word.toLowerCase())) return true;          // (1) sai chính tả
+    sawAccentedOk = true;
+    if (FORBIDDEN_SPELLINGS.has(word.toLowerCase())) sawForbiddenSpelling = true;
   }
-  return !sawCorrectlySpelled;
+
+  if (!sawColliding) return true;
+  // (2) toàn bộ không dấu VÀ có từ khoá chỉ một nghĩa ("tri", "xoa")
+  if (sawUnaccented && !sawAccentedOk && (sawUnambiguousUnaccented || sawDisambiguating)) return true;
+  if (sawUnaccented && sawForbiddenSpelling) return true;          // (3) từ bị cấm + không dấu
+  return false;
 }
 
 export interface ClaimHit { match: string; why: string; instead: string; index: number }
@@ -369,6 +412,18 @@ export function findForbiddenClaims(text: string): ClaimHit[] {
  * chạm tới. Luật này quét mọi trường: danh tính người thật chỉ được đặt trong
  * khối có consent, không được rải trong văn xuôi.
  */
+/**
+ * Chữ HOA tiếng Việt, liệt kê tường minh.
+ *
+ * Dải `À-Ỹ` (U+00C0–U+1EF9) chứa cả chữ thường có dấu như `ở`, `ạ`, nên
+ * `[A-ZĐÀ-Ỹ]` khớp luôn chữ thường — kiểm định lần 14: "Chú Thích ở cuối trang"
+ * bị coi là họ tên vì `ở` lọt vào lớp "chữ hoa".
+ */
+const UPPER = 'A-ZĐÀÁẢÃẠĂẰẮẲẴẶÂẦẤẨẪẬÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴ';
+
+/** Từ thường đi sau xưng hô nhưng không phải tên riêng của một người cụ thể. */
+const NOT_A_NAME = '(?:Chị|Anh|Cô|Bác|Chú|Em|Gái|Nàng|Bạn|Sĩ|Ạ|Ơi|Đào|Nông|Thích|Hai|Ba|Tư|Nương|Hùng|Văn|Ngữ|Quốc|Tấm|Hằng|Bé|Dâu|Trai|Yêu|Đại|Ái|Giáo|Hồ)'
+
 export interface PersonalDataHit { match: string; kind: string }
 
 const PERSONAL: { pattern: RegExp; kind: string }[] = [
@@ -389,7 +444,7 @@ const PERSONAL: { pattern: RegExp; kind: string }[] = [
        Kiểm định lần 13: bản trước đòi hai từ viết hoa nên "Chị Hà bảo da tôi
        sạm hẳn sau sinh" qua cả hai cổng. Danh sách loại trừ giữ cho các cách
        gọi chung không bị coi là danh tính. */
-    pattern: /(?:^|[\s("“])(?:[Cc]hị|[Aa]nh|[Cc]ô|[Bb]ác|[Cc]hú|[Ee]m|Mrs?\.?|Ms\.?)\s+(?!(?:Chị|Anh|Cô|Bác|Chú|Em|Gái|Nàng|Bạn|Sĩ|Ạ|Ơi)(?![\p{Ll}]))[A-ZĐÀ-Ỹ][\p{Ll}\p{M}]{1,}(?![\p{L}])/u,
+    pattern: new RegExp(`(?:^|[\\s("“])(?:[Cc]hị|[Aa]nh|[Cc]ô|[Bb]ác|[Cc]hú|[Ee]m|Mrs?\\.?|Ms\\.?)\\s+(?!${NOT_A_NAME}(?![\\p{Ll}]))[${UPPER}][\\p{Ll}\\p{M}]{1,}(?![\\p{L}])`, 'u'),
     kind: 'họ tên đầy đủ kèm xưng hô',
   },
 ];
@@ -400,7 +455,19 @@ const PERSONAL: { pattern: RegExp; kind: string }[] = [
  *   hotline qua chỉ vì nó viết cách nhau — tức là qua nhờ một lỗ hổng, nên khi
  *   vá lỗ hổng thì hotline bị chặn nhầm.
  */
-export function findPersonalData(text: string, allowedNumbers: string[] = []): PersonalDataHit[] {
+/**
+ * @param opts.testimonyContext Ngữ cảnh là LỜI CHỨNG (khối `problem.quotes`).
+ *   Ở đó "Chị Hà bảo da tôi sạm hẳn" là danh tính khách hàng và phải chặn. Trong
+ *   văn xuôi thường thì cùng hình dạng đó lại là chuyện bình thường — "Anh Quốc
+ *   và châu Âu đều siết claim", "Cô Tấm là nhân vật cổ tích", "Bác Hồ dạy chúng
+ *   ta tiết kiệm", "Chị Hằng trên trời cao". Kiểm định lần 14 đo được 22/26 câu
+ *   tiếng Việt bình thường bị chặn nhầm khi áp luật một-tên cho mọi nơi.
+ */
+export function findPersonalData(
+  text: string,
+  allowedNumbers: string[] = [],
+  opts: { testimonyContext?: boolean } = {}
+): PersonalDataHit[] {
   const plain = forScan(text);
   /* Số điện thoại viết cách hoặc chấm là cách viết phổ biến nhất, không phải
      cách né. Gộp dấu phân cách giữa các chữ số trước khi khớp — cùng phép chuẩn
@@ -409,6 +476,14 @@ export function findPersonalData(text: string, allowedNumbers: string[] = []): P
   const allow = new Set(allowedNumbers.map((n) => n.replace(/\D/g, '').replace(/^84/, '0')));
   const out: PersonalDataHit[] = [];
   for (const rule of PERSONAL) {
+    if (rule.kind === 'họ tên đầy đủ kèm xưng hô' && !opts.testimonyContext) {
+      /* Ngoài ngữ cảnh lời chứng: đòi HAI từ viết hoa (họ + tên) hoặc một tín
+         hiệu thứ hai (tuổi, số điện thoại) — những thứ đã có luật riêng. */
+      const twoWords = new RegExp(`(?:^|[\\s("“])(?:[Cc]hị|[Aa]nh|[Cc]ô|[Bb]ác|[Cc]hú|[Ee]m|Mrs?\\.?|Ms\\.?)\\s+(?!${NOT_A_NAME}(?![\\p{Ll}]))[${UPPER}][\\p{Ll}\\p{M}]+\\s+[${UPPER}]`, 'u');
+      const m = plain.match(twoWords);
+      if (m) out.push({ match: m[0].trim(), kind: rule.kind });
+      continue;
+    }
     const flags = rule.pattern.flags.includes('g') ? rule.pattern.flags : rule.pattern.flags + 'g';
     const re = new RegExp(rule.pattern.source, flags);
     /* Duyệt MỌI lần khớp trên cả hai bản. Kiểm định lần 10: bản trước lấy đúng

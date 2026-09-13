@@ -155,7 +155,7 @@ const blocks = z.discriminatedUnion('type', [
          bảo da tôi sạm hẳn sau sinh" qua sạch. Đó chính là lỗi mà vòng 9 đã sửa
          trong `findPersonalData`, bị chép lại thành bản thứ hai rồi sửa một bản
          mà quên bản kia. Một hàng rào, một chỗ. */
-      const hits = findPersonalData(q, BRAND_NUMBERS);
+      const hits = findPersonalData(q, BRAND_NUMBERS, { testimonyContext: true });
       if (hits.length) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
@@ -588,35 +588,37 @@ const brand = defineCollection({
      * `products`. Đây là cửa còn lại.
      */
     const ownNumbers = [b.phone, b.phoneDisplay].filter(Boolean) as string[];
-    for (const [key, value] of Object.entries(b)) {
-      if (typeof value !== 'string') continue;
-      // `logo` là đường dẫn file, `email`/`phone` là dữ liệu liên hệ của chính
-      // doanh nghiệp — không phải văn bản marketing.
-      if (key === 'logo' || key === 'email' || key === 'phone' || key === 'phoneDisplay') continue;
+    /* `logo` là đường dẫn file; `email`/`phone`/`phoneDisplay` là dữ liệu liên hệ
+       của chính doanh nghiệp; `taxId` là mã số thuế — 10 chữ số bắt đầu bằng 0,
+       đúng hình dạng số điện thoại Việt Nam, nên kiểm định lần 14 chỉ ra cổng sẽ
+       chặn build ngay ngày doanh nghiệp điền trường mà chính schema mời điền. */
+    const SKIP = new Set(['logo', 'email', 'phone', 'phoneDisplay', 'taxId']);
 
-      for (const hit of findForbiddenClaims(value)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: [key],
-          message: `"${hit.match}" — ${hit.why}. Thay bằng: ${hit.instead}`,
-        });
+    /* Quét ĐỆ QUY. Bản trước chỉ xét chuỗi ở cấp một nên `marketplaces[]` —
+       "Kênh bán chính hãng" hiện ở footer mọi trang — hoàn toàn không được quét. */
+    const scanBrand = (node: unknown, path: string, topKey: string): void => {
+      if (typeof node === 'string') {
+        if (SKIP.has(topKey)) return;
+        for (const hit of findForbiddenClaims(node)) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: [path],
+            message: `"${hit.match}" — ${hit.why}. Thay bằng: ${hit.instead}` });
+        }
+        for (const hit of findPersonalData(node, ownNumbers)) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: [path],
+            message: `"${hit.match}" là ${hit.kind}. Dữ liệu cá nhân của khách không được đặt ` +
+              `trong thông tin doanh nghiệp.` });
+        }
+        for (const hit of findHandwrittenMoney(node)) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: [path],
+            message: `"${hit}" là số tiền viết tay. Giá chỉ được nhắc bằng token trong file sản phẩm.` });
+        }
+      } else if (Array.isArray(node)) {
+        node.forEach((v, i) => scanBrand(v, `${path}[${i}]`, topKey));
+      } else if (node && typeof node === 'object') {
+        for (const [k, v] of Object.entries(node)) scanBrand(v, `${path}.${k}`, topKey);
       }
-      for (const hit of findPersonalData(value, ownNumbers)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: [key],
-          message: `"${hit.match}" là ${hit.kind}. Dữ liệu cá nhân của khách không được đặt ` +
-            `trong thông tin doanh nghiệp.`,
-        });
-      }
-      for (const hit of findHandwrittenMoney(value)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: [key],
-          message: `"${hit}" là số tiền viết tay. Giá chỉ được nhắc bằng token trong file sản phẩm.`,
-        });
-      }
-    }
+    };
+    for (const [key, value] of Object.entries(b)) scanBrand(value, key, key);
   }),
 });
 

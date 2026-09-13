@@ -55,6 +55,10 @@ jobs:
       - name: Bộ thử cổng ngân sách
         run: npm run test:budget
 
+      # Bộ thử cho chuông báo hạn ưu đãi — trước vòng 22 script này có 0 ca canh.
+      - name: Bộ thử chuông hạn ưu đãi
+        run: npm run test:offer
+
       - name: Ngân sách trọng lượng trang
         run: node scripts/check-budget.mjs
 

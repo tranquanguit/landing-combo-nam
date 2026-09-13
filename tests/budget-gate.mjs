@@ -144,6 +144,41 @@ const MINIMAL = '<!doctype html><html><head><title>x</title></head><body>ok</bod
     r.code === 1 && /trang tạm/.test(r.out), `mã thoát ${r.code}`]);
 }
 
+/* 9. Ngân sách trọng lượng: một trang vượt ngưỡng phải fail. */
+{
+  /* Nội dung phải KHÓ NÉN, vì ngưỡng tính trên bản gzip: 200KB chữ "x" lặp lại
+     nén xuống còn vài trăm byte. */
+  const { randomBytes } = await import('node:crypto');
+  const noise = randomBytes(120_000).toString('base64');
+  const big = `<!doctype html><html><head><title>x</title></head><body>${noise}</body></html>`;
+  const r = run({ html: big });
+  results.push(['HTML vượt ngân sách gzip bị chặn', r.code === 1, `mã thoát ${r.code}`]);
+}
+
+/* 10. Một ảnh đơn lẻ quá nặng phải fail. */
+{
+  const r = run({
+    html: MINIMAL.replace('<body>', '<body><img src="/_astro/anh-nang.AbCdEfGh.webp">'),
+    files: { 'anh-nang.AbCdEfGh.webp': Buffer.alloc(300 * 1024) },
+  });
+  results.push(['ảnh đơn lẻ quá nặng bị chặn', r.code === 1, `mã thoát ${r.code}`]);
+}
+
+/* 11. JS nội tuyến vượt ngưỡng phải fail. */
+{
+  const js = `<script>${'var x=1;'.repeat(2000)}</script>`;
+  const r = run({ html: MINIMAL.replace('</head>', `${js}</head>`) });
+  results.push(['JS nội tuyến vượt ngưỡng bị chặn', r.code === 1, `mã thoát ${r.code}`]);
+}
+
+/* 12. iframe nhúng sẵn phải fail. */
+{
+  const r = run({
+    html: MINIMAL.replace('<body>', '<body><iframe src="https://www.youtube.com/embed/x"></iframe>'),
+  });
+  results.push(['iframe nhúng sẵn bị chặn', r.code === 1, `mã thoát ${r.code}`]);
+}
+
 let failed = 0;
 for (const [name, ok, detail] of results) {
   if (!ok) failed++;
