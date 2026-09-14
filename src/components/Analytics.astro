@@ -3,7 +3,13 @@ import type { AnalyticsConfig } from '../lib/analytics';
 import { t, type Locale } from '../i18n/ui';
 import { safeJsonLd } from '../lib/richtext';
 
-interface Props { locale: Locale; value: number; currency: string; itemId: string; itemName: string; }
+/* Bốn trường thương mại chỉ có trên trang sản phẩm. Trang chủ, trang dòng và
+   bài viết vẫn cần thanh đồng ý và hàng đợi sự kiện, nhưng không có sản phẩm
+   nào để gắn giá — gắn bừa giá của một sản phẩm ở đó là số liệu sai. */
+interface Props {
+  locale: Locale;
+  value?: number; currency?: string; itemId?: string; itemName?: string;
+}
 const { locale, value, currency, itemId, itemName } = Astro.props;
 
 const config: AnalyticsConfig = {
@@ -20,7 +26,9 @@ const config: AnalyticsConfig = {
    * tiếng Việt, và khi đó họ bị đặt cookie đo lường mà chưa đồng ý.
    */
   requireConsent: true,
-  currency, value, itemId, itemName,
+  /* Không có sản phẩm thì KHÔNG khai bốn trường này, thay vì khai giá trị rỗng:
+     một sự kiện mang value: 0 sẽ vào báo cáo doanh thu như một đơn giá 0 đồng. */
+  ...(itemId ? { currency, value, itemId, itemName } : {}),
 };
 
 const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
@@ -72,7 +80,8 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
 <script>
   const cfg = (window as any).__mochaAnalytics as {
     ga4?: string; metaPixel?: string; tiktokPixel?: string;
-    requireConsent: boolean; currency: string; value: number; itemId: string; itemName: string;
+    requireConsent: boolean;
+    currency?: string; value?: number; itemId?: string; itemName?: string;
   };
   const CONSENT_KEY = 'mocha_analytics_consent';
 
@@ -102,8 +111,10 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
   let loaded = false;
 
   const params = (extra: Record<string, unknown> = {}) => ({
-    currency: cfg.currency, value: cfg.value,
-    items: [{ item_id: cfg.itemId, item_name: cfg.itemName, price: cfg.value, quantity: 1 }],
+    ...(cfg.itemId ? {
+      currency: cfg.currency, value: cfg.value,
+      items: [{ item_id: cfg.itemId, item_name: cfg.itemName, price: cfg.value, quantity: 1 }],
+    } : {}),
     ...extra,
   });
 

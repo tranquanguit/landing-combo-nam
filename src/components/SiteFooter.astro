@@ -1,13 +1,21 @@
 ---
 import { t, type Locale } from '../i18n/ui';
-interface Props { brand: any; product: any; locale: Locale; }
-const { brand: b, product: p, locale } = Astro.props;
-const c = p.compliance;
+/* `product` chỉ có trên trang sản phẩm. Trang chủ, trang dòng và bài viết vẫn
+   cần chân trang pháp lý của doanh nghiệp, nhưng không có sản phẩm nào để khai
+   số công bố hay công dụng — khai bừa một sản phẩm ở đó là sai thông tin. */
+interface Props {
+  brand: any; product?: any; locale: Locale;
+  /** Cùng danh sách với điều hướng ở đầu trang — trên điện thoại đây là lối đi duy nhất. */
+  nav?: { label: string; href: string }[];
+}
+const { brand: b, product: p, locale, nav = [] } = Astro.props;
+const c = p?.compliance;
 ---
 <footer>
   <div class="wrap grid">
+    {p && c && (
     <div>
-      <h3>{t(locale, 'footer.product')}</h3>
+      <h2>{t(locale, 'footer.product')}</h2>
       <p>
         <strong>{p.name}</strong><br />
         {t(locale, 'footer.functions')}: {c.functions}<br />
@@ -18,16 +26,28 @@ const c = p.compliance;
         : <p class="todo">⚠️ {t(locale, 'todo')}: {t(locale, 'legal.notifNumber')} — {t(locale, 'legal.decree')}.</p>}
       {!b.taxId && <p class="todo">⚠️ {t(locale, 'todo')}: {t(locale, 'legal.taxId')}.</p>}
     </div>
+    )}
 
+    {c && (
     <div>
-      <h3>{t(locale, 'footer.warning')}</h3>
+      <h2>{t(locale, 'footer.warning')}</h2>
       <ul class="warnings">
         {c.warnings.map((w: string) => <li>{w}</li>)}
       </ul>
     </div>
+    )}
+
+    {nav.length > 0 && (
+    <div>
+      <h2>{t(locale, 'nav.lines')}</h2>
+      <ul class="channels">
+        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </div>
+    )}
 
     <div>
-      <h3>{t(locale, 'footer.contact')}</h3>
+      <h2>{t(locale, 'footer.contact')}</h2>
       <p>
         {b.legalName}<br />
         {b.address}<br />
@@ -84,7 +104,7 @@ const c = p.compliance;
 
 <style>
   footer { background: var(--ink); color: rgba(255, 255, 255, .74); padding-block: var(--s-7) var(--s-6); font-size: var(--t-sm); }
-  footer h3 { color: #fff; font-size: var(--t-base); font-family: var(--font-body); font-weight: 600; }
+  footer :is(h2, h3) { color: #fff; font-size: var(--t-base); font-family: var(--font-body); font-weight: 600; }
   footer a { color: #b9c0ff; display: inline-block; min-height: 24px; line-height: 24px; }
   .grid { display: grid; gap: var(--s-6); }
   @media (min-width: 800px) { .grid { grid-template-columns: 1.3fr 1fr 1fr; } }

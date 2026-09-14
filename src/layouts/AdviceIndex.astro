@@ -1,0 +1,106 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Analytics from '../components/Analytics.astro';
+import { collectionGraph } from '../lib/schema';
+import { resolveAssetImage, resolveAssetUrl } from '../lib/images';
+import { adviceIndexPath, articlePath, homePath } from '../lib/routes';
+import { assertTranslated, t, type Locale } from '../i18n/ui';
+
+interface Props {
+  brand: any;
+  locale: Locale;
+  canonical: string;
+  alternates?: { locale: Locale; url: string }[];
+  nav?: { label: string; href: string }[];
+  /** Ảnh dùng khi trang không tự khai ảnh chia sẻ. */
+  fallbackOgImage?: string;
+  articles: any[];
+}
+
+const { brand: b, locale, canonical, alternates = [], nav = [], fallbackOgImage, articles } = Astro.props;
+const site = Astro.site?.origin ?? 'https://mochatrinam.com';
+assertTranslated(locale);
+
+const breadcrumb = [
+  { name: t(locale, 'nav.home'), url: new URL(homePath(locale), site).href },
+  { name: t(locale, 'nav.advice'), url: new URL(adviceIndexPath(locale), site).href },
+];
+const og = await resolveAssetImage(fallbackOgImage, site, 1200);
+const logoUrl = await resolveAssetUrl(b.logo, site, 512);
+
+const jsonLd = collectionGraph({
+  brand: b, site, url: canonical, locale, logoUrl,
+  title: t(locale, 'advice.title'),
+  description: t(locale, 'advice.description'),
+  items: articles.map((a) => ({
+    name: a.title, url: new URL(articlePath(a.slug, locale), site).href,
+  })),
+  breadcrumb,
+});
+---
+<BaseLayout
+  siteName={b.tradingName}
+  locale={locale}
+  title={t(locale, 'advice.title')}
+  description={t(locale, 'advice.description')}
+  canonical={canonical}
+  ogImage={og?.url}
+  ogImageWidth={og?.width}
+  ogImageHeight={og?.height}
+  ogImageAlt={t(locale, 'advice.heading')}
+  ogType="website"
+  alternates={alternates}
+  jsonLd={jsonLd}
+>
+  <SiteHeader brand={b} locale={locale} alternates={alternates} nav={nav} orderHref={homePath(locale)} />
+  <Breadcrumb items={breadcrumb} locale={locale} />
+
+  <main id="main">
+    <div class="head">
+      <div class="wrap">
+        <h1>{t(locale, 'advice.heading')}</h1>
+        <p class="lead">{t(locale, 'advice.lead')}</p>
+      </div>
+    </div>
+
+    <div class="wrap list-wrap">
+      <ul class="reads">
+        {articles.map((a) => (
+          <li>
+            <a href={articlePath(a.slug, locale)}>
+              <span class="read-title">{a.title}</span>
+              <span class="read-lead">{a.lead}</span>
+              <time datetime={a.updatedAt ?? a.publishedAt}>{a.updatedAt ?? a.publishedAt}</time>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </main>
+
+  <SiteFooter brand={b} locale={locale} nav={nav} />
+  <Analytics locale={locale} />
+</BaseLayout>
+
+<style>
+  .head { background: var(--paper); padding-block: var(--s-7) var(--s-5); }
+  .head h1 { margin: 0 0 var(--s-4); }
+  .head .lead { max-width: 62ch; margin: 0; }
+  .list-wrap { padding-block: var(--s-5) var(--s-7); }
+  .reads { list-style: none; padding: 0; margin: 0; }
+  .reads a {
+    display: grid; gap: var(--s-2); padding: var(--s-5) 0;
+    border-top: 1px solid var(--line); text-decoration: none; color: inherit;
+  }
+  .reads li:last-child a { border-bottom: 1px solid var(--line); }
+  .read-title {
+    font-size: var(--t-lg); font-weight: 600; line-height: 1.2;
+    letter-spacing: -0.02em; color: var(--ink-navy);
+  }
+  .reads a:hover .read-title { color: var(--cobalt); }
+  .read-lead { color: var(--slate); max-width: 68ch; line-height: 1.6; }
+  time { font-size: var(--t-2xs); color: var(--slate); letter-spacing: .08em; }
+</style>

@@ -1,0 +1,62 @@
+{
+  "slug": "nam-tham",
+  "locale": "vi",
+  "translationKey": "line-nam-tham",
+  "status": "published",
+  "primaryKeyword": "kem dưỡng da nám nên chọn loại nào",
+  "seo": {
+    "title": "Dòng chăm sóc da nám, thâm Mocha – So sánh và cách chọn",
+    "description": "Ba loại nám khác nhau cần cách chăm sóc khác nhau. Bảng so sánh, nồng độ hoạt chất công khai và hướng dẫn chọn sản phẩm phù hợp với da bạn.",
+    "ogImage": "/images/packshot-combo.jpg"
+  },
+  "eyebrow": "Dòng sản phẩm",
+  "heading": "Da nám và thâm sạm",
+  "lead": "Nám mảng, nám chân sâu và nám hỗn hợp phản ứng khác nhau với cùng một hoạt chất. Trang này giải thích cách phân biệt, rồi mới nói tới sản phẩm.",
+  "products": ["combo-nam"],
+  "sections": [
+    {
+      "id": "ba-loai-nam",
+      "heading": "Ba loại nám, và vì sao chúng không giống nhau",
+      "body": [
+        "Nám mảng nằm nông, thường thành từng vùng rộng ở hai gò má, màu nâu nhạt và ranh giới không rõ. Đây là loại phản ứng nhanh nhất với việc chống nắng nghiêm túc cộng hoạt chất làm sáng.",
+        "Nám chân sâu (thường gọi là nám đốm) nằm sâu hơn trong da, hiện thành những chấm tròn nhỏ, màu sẫm và ranh giới rõ. Loại này thay đổi chậm và gần như không cải thiện nếu chỉ dùng sản phẩm bôi mà bỏ chống nắng.",
+        "Nám hỗn hợp là hai loại trên xuất hiện cùng lúc trên một khuôn mặt, và đó cũng là trường hợp phổ biến nhất ở phụ nữ Việt Nam sau tuổi 30. Nhìn vào gương khó phân biệt; soi dưới ánh sáng chéo thì dễ hơn.",
+        "Điều đáng nói là phần lớn quảng cáo mỹ phẩm nói về “nám” như một thứ duy nhất, rồi đưa ra một mốc thời gian duy nhất. Ba loại da khác nhau mà chung một lời hứa thì ít nhất hai trong ba sẽ thất vọng."
+      ]
+    },
+    {
+      "id": "hoat-chat",
+      "heading": "Những hoạt chất có cơ sở nghiên cứu",
+      "body": [
+        "Tranexamic Acid được nghiên cứu nhiều trong nhóm làm mờ vùng da sẫm màu do tăng sắc tố, thường ở nồng độ 2–5% với dạng bôi ngoài da. Đây là hoạt chất chính trong dòng này.",
+        "Bakuchiol là dẫn xuất từ thực vật, được nghiên cứu như một lựa chọn thay thế retinol cho làn da dễ kích ứng, với ưu điểm là không làm tăng nhạy cảm ánh sáng.",
+        "Niacinamide hỗ trợ hàng rào bảo vệ da và thường đi kèm trong các công thức làm đều màu da. Nồng độ thấp vừa đủ để hạn chế cảm giác châm chích trên da mỏng.",
+        "Ba hoạt chất trên đều có mặt trong sản phẩm của dòng này, và tỉ lệ được in cụ thể trên trang sản phẩm chứ không gộp vào một tên gọi chung."
+      ]
+    },
+    {
+      "id": "chong-nang",
+      "heading": "Phần không ai muốn nghe",
+      "body": [
+        "Không có sản phẩm bôi nào giữ được kết quả nếu da tiếp tục phơi nắng không che chắn. Tia UV kích hoạt lại quá trình sinh sắc tố nhanh hơn tốc độ mà bất kỳ hoạt chất làm sáng nào có thể bù lại.",
+        "Nghĩa là: kem chống nắng phổ rộng dùng hằng ngày, kể cả ngày âm u và kể cả khi ngồi trong nhà gần cửa sổ, là điều kiện cần. Sản phẩm chăm sóc chỉ có ý nghĩa khi điều kiện đó đã được đáp ứng.",
+        "Chúng tôi nói điều này trước khi bạn mua, chứ không để trong phần ghi chú sau khi bạn đã trả tiền."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Bao lâu thì thấy khác biệt?",
+      "a": "Tuỳ loại nám. Nám mảng thường thay đổi sớm hơn nám chân sâu. Trang sản phẩm có bảng mốc thời gian theo từng loại, kèm điều kiện đi cùng là chống nắng hằng ngày. Chúng tôi không đưa một con số chung cho mọi người vì con số đó sẽ sai với phần lớn."
+    },
+    {
+      "q": "Sản phẩm có chứa corticoid hay hydroquinone không?",
+      "a": "Không. Bảng thành phần đầy đủ nằm trên trang sản phẩm, kèm tỉ lệ từng hoạt chất chính."
+    },
+    {
+      "q": "Đang mang thai hoặc cho con bú thì dùng được không?",
+      "a": "Hãy hỏi ý kiến nhân viên y tế trước khi dùng bất kỳ sản phẩm chăm sóc da nào trong giai đoạn này. Chúng tôi không đưa ra lời khuyên thay cho họ."
+    }
+  ],
+  "articles": ["nam-noi-tiet-la-gi"]
+}

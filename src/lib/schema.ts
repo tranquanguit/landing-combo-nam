@@ -74,6 +74,190 @@ function returnPolicyNode(rp: {
   };
 }
 
+/**
+ * Node Organization, dùng chung cho MỌI loại trang.
+ *
+ * Trước đây node này nằm gọn trong `productGraph`. Từ khi site có bốn tầng
+ * trang, chép nó ra bốn chỗ là cách chắc chắn để bốn trang khai bốn pháp nhân
+ * hơi khác nhau sau vài tháng sửa lặt vặt.
+ */
+export function organizationNode(b: Brand, site: string, locale: Locale, logoUrl?: string) {
+  return {
+    '@type': 'Organization',
+    '@id': `${site}/#organization`,
+    name: b.legalName,
+    alternateName: b.tradingName,
+    url: site,
+    ...(logoUrl ? { logo: { '@type': 'ImageObject', url: logoUrl } } : {}),
+    email: b.email,
+    address: { '@type': 'PostalAddress', streetAddress: b.address, addressCountry: 'VN' },
+    contactPoint: [{
+      '@type': 'ContactPoint',
+      telephone: b.phone,
+      contactType: 'customer service',
+      areaServed: locale === 'vi' ? 'VN' : 'Worldwide',
+      availableLanguage: [languageName[locale]],
+    }],
+    ...(b.taxId ? { taxID: b.taxId } : {}),
+  };
+}
+
+export function breadcrumbNode(url: string, items: { name: string; url: string }[]) {
+  return {
+    '@type': 'BreadcrumbList',
+    '@id': `${url}#breadcrumb`,
+    itemListElement: items.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: c.name,
+      // Mục cuối là trang hiện tại nên không cần item, theo hướng dẫn của Google.
+      ...(i < items.length - 1 ? { item: c.url } : {}),
+    })),
+  };
+}
+
+export function faqNode(url: string, locale: Locale, faq: { q: string; a: string }[]) {
+  return {
+    '@type': 'FAQPage',
+    '@id': `${url}#faq`,
+    inLanguage: htmlLang[locale],
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: plainText(f.q),
+      // Bóc thẻ: schema là dữ liệu cho máy, không phải nơi đặt đánh dấu trình bày.
+      acceptedAnswer: { '@type': 'Answer', text: plainText(f.a) },
+    })),
+  };
+}
+
+interface PageBase {
+  brand: Brand;
+  site: string;
+  url: string;
+  locale: Locale;
+  logoUrl?: string;
+  breadcrumb?: { name: string; url: string }[];
+  faq?: { q: string; a: string }[];
+}
+
+/**
+ * JSON-LD cho trang chủ: Organization + WebSite.
+ *
+ * WebSite chỉ khai ở gốc. Khai nó trên mọi trang là cách nhanh nhất để máy đọc
+ * hiểu mỗi trang con là một website riêng.
+ */
+export function homeGraph(opts: PageBase & { title: string; description: string }) {
+  const { brand: b, site, url, locale, logoUrl, title, description } = opts;
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      organizationNode(b, site, locale, logoUrl),
+      {
+        '@type': 'WebSite',
+        '@id': `${site}/#website`,
+        url: site,
+        name: b.tradingName,
+        inLanguage: htmlLang[locale],
+        publisher: { '@id': `${site}/#organization` },
+      },
+      {
+        '@type': 'WebPage',
+        '@id': `${url}#webpage`,
+        url,
+        name: title,
+        description,
+        inLanguage: htmlLang[locale],
+        isPartOf: { '@id': `${site}/#website` },
+        publisher: { '@id': `${site}/#organization` },
+      },
+    ],
+  };
+}
+
+/**
+ * JSON-LD cho trang dòng sản phẩm: CollectionPage + ItemList.
+ *
+ * ItemList cho máy đọc biết trang này liệt kê những sản phẩm nào và theo thứ tự
+ * nào — đây là thứ phân biệt một trang danh mục thật với một trang giới thiệu
+ * có gắn vài liên kết.
+ */
+export function collectionGraph(opts: PageBase & {
+  title: string;
+  description: string;
+  items: { name: string; url: string }[];
+}) {
+  const { brand: b, site, url, locale, logoUrl, title, description, items, breadcrumb, faq } = opts;
+  const graph: Record<string, unknown>[] = [
+    organizationNode(b, site, locale, logoUrl),
+    {
+      '@type': 'CollectionPage',
+      '@id': `${url}#webpage`,
+      url,
+      name: title,
+      description,
+      inLanguage: htmlLang[locale],
+      publisher: { '@id': `${site}/#organization` },
+      mainEntity: { '@id': `${url}#list` },
+    },
+    {
+      '@type': 'ItemList',
+      '@id': `${url}#list`,
+      numberOfItems: items.length,
+      itemListElement: items.map((it, i) => ({
+        '@type': 'ListItem', position: i + 1, name: it.name, url: it.url,
+      })),
+    },
+  ];
+  if (breadcrumb?.length) graph.push(breadcrumbNode(url, breadcrumb));
+  if (faq?.length) graph.push(faqNode(url, locale, faq));
+  return { '@context': 'https://schema.org', '@graph': graph };
+}
+
+/** JSON-LD cho bài tư vấn. */
+export function articleGraph(opts: PageBase & {
+  title: string;
+  description: string;
+  headline: string;
+  publishedAt: string;
+  updatedAt?: string;
+  imageUrls?: string[];
+}) {
+  const {
+    brand: b, site, url, locale, logoUrl, title, description, headline,
+    publishedAt, updatedAt, imageUrls = [], breadcrumb, faq,
+  } = opts;
+  const graph: Record<string, unknown>[] = [
+    organizationNode(b, site, locale, logoUrl),
+    {
+      '@type': 'Article',
+      '@id': `${url}#article`,
+      headline,
+      description,
+      inLanguage: htmlLang[locale],
+      datePublished: publishedAt,
+      dateModified: updatedAt ?? publishedAt,
+      /* Tác giả là pháp nhân, không phải một cái tên bịa ra cho có vẻ chuyên gia.
+         Một tên người không kiểm chứng được thì tệ hơn là không khai tên. */
+      author: { '@id': `${site}/#organization` },
+      publisher: { '@id': `${site}/#organization` },
+      mainEntityOfPage: { '@id': `${url}#webpage` },
+      ...(imageUrls.length ? { image: imageUrls } : {}),
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${url}#webpage`,
+      url,
+      name: title,
+      description,
+      inLanguage: htmlLang[locale],
+      publisher: { '@id': `${site}/#organization` },
+    },
+  ];
+  if (breadcrumb?.length) graph.push(breadcrumbNode(url, breadcrumb));
+  if (faq?.length) graph.push(faqNode(url, locale, faq));
+  return { '@context': 'https://schema.org', '@graph': graph };
+}
+
 export function productGraph(opts: {
   product: Product;
   brand: Brand;
@@ -172,25 +356,7 @@ export function productGraph(opts: {
   }
 
   const graph: Record<string, unknown>[] = [
-    {
-      '@type': 'Organization',
-      '@id': orgId,
-      name: b.legalName,
-      alternateName: b.tradingName,
-      url: site,
-      ...(logoUrl ? { logo: { '@type': 'ImageObject', url: logoUrl } } : {}),
-      email: b.email,
-      address: { '@type': 'PostalAddress', streetAddress: b.address, addressCountry: 'VN' },
-      contactPoint: [{
-        '@type': 'ContactPoint',
-        telephone: b.phone,
-        contactType: 'customer service',
-        areaServed: locale === 'vi' ? 'VN' : 'Worldwide',
-        // Ngôn ngữ hỗ trợ lấy từ chính trang đang render, không đoán.
-        availableLanguage: [languageName[locale]],
-      }],
-      ...(b.taxId ? { taxID: b.taxId } : {}),
-    },
+    organizationNode(b, site, locale, logoUrl),
     {
       '@type': 'WebPage',
       '@id': `${url}#webpage`,
@@ -221,33 +387,8 @@ export function productGraph(opts: {
 
   graph.push(...standaloneProducts());
 
-  if (breadcrumb?.length) {
-    graph.push({
-      '@type': 'BreadcrumbList',
-      '@id': `${url}#breadcrumb`,
-      itemListElement: breadcrumb.map((c, i) => ({
-        '@type': 'ListItem',
-        position: i + 1,
-        name: c.name,
-        // Mục cuối là trang hiện tại nên không cần item, theo hướng dẫn của Google.
-        ...(i < breadcrumb.length - 1 ? { item: c.url } : {}),
-      })),
-    });
-  }
-
-  if (faq?.length) {
-    graph.push({
-      '@type': 'FAQPage',
-      '@id': `${url}#faq`,
-      inLanguage: htmlLang[locale],
-      mainEntity: faq.map((f) => ({
-        '@type': 'Question',
-        name: plainText(f.q),
-        // Bóc thẻ: schema là dữ liệu cho máy, không phải nơi đặt đánh dấu trình bày.
-        acceptedAnswer: { '@type': 'Answer', text: plainText(f.a) },
-      })),
-    });
-  }
+  if (breadcrumb?.length) graph.push(breadcrumbNode(url, breadcrumb));
+  if (faq?.length) graph.push(faqNode(url, locale, faq));
 
   return { '@context': 'https://schema.org', '@graph': graph };
 }

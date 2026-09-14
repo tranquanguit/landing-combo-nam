@@ -10,6 +10,27 @@ export const htmlLang: Record<Locale, string> = {
 export const ui = {
   vi: {
     'nav.order': 'Đặt mua',
+    'nav.home': 'Trang chủ',
+    'nav.lines': 'Dòng sản phẩm',
+    'nav.advice': 'Góc tư vấn',
+    'advice.title': 'Góc tư vấn chăm sóc da | Mocha Việt Nam',
+    'advice.description': 'Giải thích cơ chế của các vấn đề về da trước khi nói tới sản phẩm: nám, thâm, da dầu mụn và cách chăm sóc hằng ngày.',
+    'advice.heading': 'Góc tư vấn',
+    'advice.lead': 'Những bài giải thích cơ chế, viết để đọc trước khi mua chứ không phải để bán hàng.',
+    'line.products': 'Sản phẩm trong dòng này',
+    'line.readMore': 'Xem chi tiết',
+    'line.from': 'Từ',
+    'line.relatedArticles': 'Bài viết liên quan',
+    'article.updated': 'Cập nhật',
+    'article.readingTime': 'phút đọc',
+    'article.toc': 'Nội dung bài viết',
+    'faq.heading': 'Câu hỏi thường gặp',
+    'article.relatedProducts': 'Sản phẩm được nhắc tới',
+    'article.backToLine': 'Xem cả dòng sản phẩm',
+    'home.linesHeading': 'Chọn theo vấn đề của da',
+    'home.adviceHeading': 'Hiểu trước, chọn sau',
+    'home.allProducts': 'Tất cả sản phẩm',
+    'breadcrumb.label': 'Đường dẫn trang',
     'nav.skip': 'Bỏ qua điều hướng, đến nội dung chính',
     'cta.call': 'Gọi tư vấn',
     'cta.order': 'Đặt hàng',
@@ -74,6 +95,27 @@ export const ui = {
   },
   en: {
     'nav.order': 'Buy now',
+    'nav.home': 'Home',
+    'nav.lines': 'Product lines',
+    'nav.advice': 'Skin guide',
+    'advice.title': 'Skin guide | Mocha Vietnam',
+    'advice.description': 'How common skin concerns actually work, explained before any product is mentioned: pigmentation, dark spots, oily and acne-prone skin, and daily care.',
+    'advice.heading': 'Skin guide',
+    'advice.lead': 'Explainers written to be read before buying, not to sell.',
+    'line.products': 'Products in this line',
+    'line.readMore': 'View details',
+    'line.from': 'From',
+    'line.relatedArticles': 'Related reading',
+    'article.updated': 'Updated',
+    'article.readingTime': 'min read',
+    'article.toc': 'In this article',
+    'faq.heading': 'Frequently asked questions',
+    'article.relatedProducts': 'Products mentioned',
+    'article.backToLine': 'See the full product line',
+    'home.linesHeading': 'Start with your skin concern',
+    'home.adviceHeading': 'Understand first, choose second',
+    'home.allProducts': 'All products',
+    'breadcrumb.label': 'Breadcrumb',
     'nav.skip': 'Skip to main content',
     'cta.call': 'Talk to us',
     'cta.order': 'Order',
@@ -189,6 +231,17 @@ export function t(locale: Locale, key: keyof typeof ui.vi): string {
   const table = (ui as Record<string, Record<string, string>>)[locale] ?? ui.vi;
   return table[key] ?? ui.vi[key];
 }
+
+/**
+ * Đoạn đường dẫn của chuyên mục tư vấn, dịch theo ngôn ngữ.
+ *
+ * Không dùng chung một đoạn tiếng Việt cho mọi ngôn ngữ: URL là nội dung, và
+ * một người đọc tiếng Anh gặp /en/goc-tu-van/ thì không đọc được nó nói gì —
+ * cả người lẫn máy tìm kiếm.
+ */
+export const ADVICE_SEGMENT: Record<Locale, string> = {
+  vi: 'goc-tu-van', en: 'advice', th: 'goc-tu-van', id: 'goc-tu-van',
+};
 
 /** Đường dẫn có tiền tố ngôn ngữ; tiếng Việt không prefix. */
 export function localePath(locale: Locale, path = '/'): string {

@@ -8,45 +8,63 @@ tốt cho SEO**, và **dữ liệu khách hàng đi về đâu**. Mọi con số
 
 ## 1. Hình dạng tổng thể
 
-Đây **không phải một trang landing**. Đây là một bộ sinh trang: nội dung nằm
-trong file JSON, mã nguồn chỉ là khuôn. Thêm một sản phẩm = thêm một thư mục
-JSON, không đụng vào một dòng `.astro` nào.
+Đây **không phải một trang landing**. Đây là một bộ sinh trang bốn tầng: nội
+dung nằm trong file JSON, mã nguồn chỉ là khuôn. Thêm một sản phẩm, một dòng
+hay một bài viết = thêm một file JSON, không đụng vào một dòng `.astro` nào.
+
+### Bốn tầng, mỗi tầng một ý định tìm kiếm
+
+| Tầng | URL | Ai tới đây, và họ gõ gì |
+| --- | --- | --- |
+| **Trang chủ** | `/` | "mocha", "kem nám mocha" — đã biết thương hiệu |
+| **Dòng sản phẩm** | `/nam-tham/` | "kem dưỡng da nám nên chọn loại nào" — **chưa biết thương hiệu, khối lượng lớn nhất** |
+| **Landing sản phẩm** | `/combo-nam/` | "combo nám mocha giá bao nhiêu" — sẵn sàng mua |
+| **Góc tư vấn** | `/goc-tu-van/nam-noi-tiet-la-gi/` | "nám nội tiết là gì" — chưa mua, và **là nơi AI trích dẫn** |
+
+Điểm dễ bị bỏ qua: **tầng dòng sản phẩm gánh phần truy vấn lớn nhất.** Người gõ
+"kem trị nám loại nào tốt" chưa biết Mocha là ai; họ sẽ không tìm thấy landing.
+Trang dòng bắt họ, giải thích, rồi mới đẩy xuống landing.
 
 ```
-src/content/products/<slug>/vi.json     ← nội dung, giá, thành phần, FAQ
-                            en.json     ← bản dịch; thiếu ngôn ngữ nào thì build dừng
-src/data/mocha.json                     ← thông tin thương hiệu dùng chung mọi sản phẩm
+src/content/pages/home/<locale>.json        ← trang chủ
+src/content/lines/<slug>/<locale>.json      ← dòng sản phẩm
+src/content/products/<slug>/<locale>.json   ← landing sản phẩm
+src/content/articles/<slug>/<locale>.json   ← bài tư vấn
+src/data/mocha.json                         ← thông tin thương hiệu dùng chung
         │
-        ▼  đọc qua content collections + Zod (src/content.config.ts)
-src/pages/[...path].astro                ← một route bắt tất cả, getStaticPaths sinh URL
-        │
-        ▼
-src/layouts/ProductLanding.astro         ← đọc mảng blocks[] và dựng đúng thứ tự đó
-        │
-        ▼
-src/components/blocks/*.astro            ← 10 khối: Hero, Problem, Ingredients,
-                                           Steps, Cards, Gallery, Testimonials,
-                                           Offer, Faq, Order
+        ▼  content collections + Zod (src/content.config.ts)
+src/lib/routes.ts  ← MỘT nơi biết URL của mọi trang; allRoutes() liệt kê tất cả
         │
         ▼
-dist/index.html, dist/en/index.html, sitemap, robots.txt, llms.txt
+src/pages/[...path].astro   ← một route bắt tất cả, tự phân nhánh theo loại
+        │
+        ├── HomePage.astro     ├── LinePage.astro
+        ├── ProductLanding.astro (10 khối) └── ArticlePage.astro / AdviceIndex.astro
+        ▼
+dist/  (11 trang)  + sitemap + robots.txt + llms.txt
 ```
 
-**Khối là một discriminated union.** Mỗi phần tử trong `blocks[]` có trường
-`type`, và Zod chọn schema tương ứng. Hệ quả thực tế: một sản phẩm có thể bỏ
-hẳn phần "Thành phần" và thêm hai phần "Gallery", chỉ bằng cách sửa mảng — và
-nếu khai sai tên khối hay thiếu trường bắt buộc thì **build thất bại**, không
-phải trang lỗi lúc chạy.
+### Vì sao một route chứ không bốn
 
-Xem `docs/them-san-pham.md` để biết quy trình thêm sản phẩm và
-`docs/truong-du-lieu.md` cho 42 trường dữ liệu (tài liệu này sinh tự động từ
-schema bằng `npm run docs:fields`, nên không thể lệch với mã).
+Dòng sản phẩm và sản phẩm nằm **cùng cấp URL** (`/nam-tham/` và `/combo-nam/`).
+Bốn route riêng thì hai `getStaticPaths` có thể cùng đòi `/nam-tham/` và Astro
+chọn một cái — im lặng. Ở đây mọi đường dẫn đi qua `allRoutes()`, nên cổng build
+nhìn thấy va chạm ngay và dừng lại kèm tên hai trang đang tranh nhau.
 
-### Vì sao tách nội dung khỏi mã
+### Khối là một discriminated union
 
-Người viết nội dung của Mocha sửa JSON. Họ không cần biết Astro. Nhưng JSON tự
-do thì sẽ trôi — nên mọi ràng buộc quan trọng được cài thành **cổng lúc build**
-(mục 4), chứ không phải hướng dẫn trong tài liệu mà người ta sẽ quên.
+Mỗi phần tử trong `blocks[]` của landing có trường `type`, và Zod chọn schema
+tương ứng. Một sản phẩm có thể bỏ hẳn phần "Thành phần" và thêm hai "Gallery",
+chỉ bằng cách sửa mảng — khai sai tên khối hay thiếu trường bắt buộc thì **build
+thất bại**, không phải trang lỗi lúc chạy.
+
+### Liên kết nội bộ sinh từ quan hệ dữ liệu
+
+Sản phẩm khai `line: "nam-tham"`; bài viết khai `relatedLine` và
+`relatedProducts`. Từ đó site tự dựng: điều hướng đầu trang, breadcrumb ba bậc,
+danh sách sản phẩm trong trang dòng, khối "bài viết liên quan", khối "sản phẩm
+được nhắc tới". **Không có liên kết nào đặt tay.** Đây là 70% giá trị SEO của
+một site nhiều trang, và cũng là thứ hỏng đầu tiên khi người ta đặt tay.
 
 ### Ngôn ngữ và URL
 
@@ -56,12 +74,15 @@ do thì sẽ trôi — nên mọi ràng buộc quan trọng được cài thành
 | Quốc tế | `https://mochatrinam.com/en/` | `en` |
 | Thái Lan, Indonesia | `/th/`, `/id/` — cấu hình sẵn, chưa có nội dung | |
 
-`prefixDefaultLocale: false` nên tiếng Việt nằm ở gốc miền, không phải `/vi/` —
-thị trường chính không nên trả thêm một lần chuyển hướng. `trailingSlash:
-'always'` giữ **một dạng URL duy nhất**, để canonical, hreflang và sitemap
-không bao giờ lệch nhau một dấu gạch chéo.
+`prefixDefaultLocale: false` nên tiếng Việt nằm ở gốc miền. `trailingSlash:
+'always'` giữ **một dạng URL duy nhất**, để canonical, hreflang và sitemap không
+bao giờ lệch nhau một dấu gạch chéo. Đoạn đường dẫn của chuyên mục tư vấn được
+**dịch** (`/goc-tu-van/` ↔ `/en/advice/`): URL là nội dung, và người đọc tiếng
+Anh gặp `/en/goc-tu-van/` thì không đọc được nó nói gì.
 
----
+Xem `docs/them-san-pham.md` để biết quy trình thêm nội dung và
+`docs/truong-du-lieu.md` cho bảng trường (sinh tự động từ schema bằng
+`npm run docs:fields`, nên không thể lệch với mã).
 
 ## 2. Tại sao tốt cho SEO — và bằng chứng
 
@@ -75,8 +96,8 @@ HTML đã có đầy đủ chữ ngay ở phản hồi đầu tiên — không p
 Googlebot có chịu chạy JavaScript hay không, và các bot AI (phần lớn **không**
 chạy JavaScript) đọc được toàn bộ nội dung.
 
-Đo: trang chủ **2.075 từ hiển thị**, bản tiếng Anh **2.517 từ**, JS nội tuyến
-**6.799 byte** trên ngân sách 7.168 byte.
+Đo: 11 trang, mọi trang đều trên 300 từ hiển thị (landing sản phẩm ~2.000 từ,
+bài tư vấn ~900 từ), JS nội tuyến **7.172 byte** trên ngân sách 8.192 byte.
 
 ### 2.2 Dữ liệu có cấu trúc sinh từ chính dữ liệu bán hàng
 
@@ -84,8 +105,19 @@ chạy JavaScript) đọc được toàn bộ nội dung.
 trong `Offer` **không thể** lệch với giá hiển thị — và báo cáo SEO còn kiểm lại
 điều đó một lần nữa.
 
-Kiểu khai: `Product`, `Offer` ×3, `Organization`, `Brand`, `FAQPage`,
-`WebPage`, `MerchantReturnPolicy`, `OfferShippingDetails`.
+Kiểu khai theo từng loại trang — không rải `Product` lên mọi trang:
+
+| Trang | JSON-LD |
+| --- | --- |
+| Trang chủ | `Organization`, `WebSite`, `WebPage` |
+| Dòng sản phẩm | `CollectionPage`, **`ItemList`**, `BreadcrumbList`, `FAQPage` |
+| Landing sản phẩm | `Product`, `Offer` ×3, `Brand`, `MerchantReturnPolicy`, `OfferShippingDetails`, `FAQPage`, `BreadcrumbList` |
+| Bài tư vấn | `Article`, `WebPage`, `BreadcrumbList`, `FAQPage` |
+
+`ItemList` trên trang dòng là thứ phân biệt một trang danh mục thật với một
+trang giới thiệu có gắn vài liên kết. `Article` khai `author` là **pháp nhân**,
+không phải một tên người bịa ra cho có vẻ chuyên gia — một tên không kiểm chứng
+được thì tệ hơn là không khai tên.
 
 **Không khai `aggregateRating` và không khai `review`.** Đây là lựa chọn có
 chủ ý: Mocha chưa có hệ thống đánh giá kiểm chứng được, và đánh dấu sao bịa là
@@ -119,7 +151,8 @@ cập nhật" cho những trang không đổi gì, và tín hiệu đó mất gi
 
 | Phép đo | Điều kiện | Kết quả |
 | --- | --- | --- |
-| CLS | Chromium, viewport 390×844, ảnh trễ 400ms | **0,0000** (cả VI và EN) |
+| CLS | Chromium, viewport 390×844, ảnh trễ 400ms | **0,0000** trên cả 4 loại trang, cả VI và EN |
+| Tương phản chữ | 10 trang × 2 bề ngang (390px, 1280px) | **0 lỗi** WCAG AA |
 | HTML gzip | trang chủ | 20.880 B / ngân sách 24.576 B |
 | Tổng một lượt tải | trang chủ | 324.226 B / ngân sách 716.800 B |
 | Font | toàn bộ | 113.148 B / 122.880 B |
@@ -136,12 +169,23 @@ nên với khách chưa đồng ý, chi phí là 0 byte bên thứ ba.
 ### 2.6 Bằng chứng: `npm run test:seo`
 
 ```bash
-npm run build && npm run test:seo     # 60 phép đo, thoát 1 nếu có lỗi
+npm run build && npm run test:seo     # 223 phép đo, thoát 1 nếu có lỗi
 npm run docs:seo                      # ghi docs/bao-cao-seo.md
 ```
 
 Kịch bản này đọc **`dist/` đã build**, không đọc mã nguồn và không tin tài
-liệu. Kết quả hiện tại: `docs/bao-cao-seo.md` — **60/60 đạt**.
+liệu. Kết quả hiện tại: `docs/bao-cao-seo.md` — **223/223 đạt** trên 11 trang.
+
+Ba phép đo quan trọng nhất từ khi site có nhiều tầng, và không phép nào kiểm
+được bằng cách đọc từng file:
+
+- **Trang mồ côi** — trang không ai trỏ tới thì gần như không được thu thập, dù
+  có trong sitemap. Chính phép đo này phát hiện tầng Góc tư vấn được dựng xong
+  mà không có chỗ nào trỏ tới; điều hướng chính ra đời từ đó.
+- **Độ sâu tối đa 3 cú nhấp** từ trang chủ của **từng ngôn ngữ** — bản tiếng Anh
+  không được phép chỉ tới được qua bộ chuyển ngôn ngữ.
+- **Mọi trang dẫn được sang nơi bán hàng** — một bài viết cụt là một bài đọc
+  xong rồi thoát.
 
 Quan trọng hơn con số: báo cáo đã được **kiểm tra ngược bằng đột biến**. Mười
 lỗi thật được cố tình tiêm vào bản build, cả mười đều bị bắt:
@@ -296,6 +340,15 @@ Những gì làm **dừng build**:
 - **`availability` khác `InStock`**, slug sai định dạng, trùng id neo, neo
   `#...` trỏ vào khối không tồn tại, thiếu bản dịch, `.strict()` trên ~32 đối
   tượng nên gõ sai tên trường là dừng ngay.
+- **Hai trang cùng đòi một URL** — dòng sản phẩm và sản phẩm nằm cùng cấp nên
+  slug phải khác nhau trên toàn site, không chỉ trong cùng collection.
+- **Hai trang cùng khai một `primaryKeyword`** — hai trang nhắm một truy vấn thì
+  Google chọn một, và thường chọn trang có tỉ lệ chuyển đổi thấp hơn. Đây là lỗi
+  không thấy được khi đọc từng file, chỉ thấy khi nhìn cả site cùng lúc.
+- **Biến thể quảng cáo (`canonicalOf`) trỏ canonical vào trang không tồn tại** —
+  nó sẽ tự loại mình khỏi chỉ mục mà không chuyển tín hiệu đi đâu cả.
+- **Trang dòng rỗng** (không sản phẩm, không nội dung) và **bài viết dưới 350 từ**
+  — nội dung mỏng kéo theo cả những trang khác.
 - **Hạn ưu đãi đã qua** — trang tĩnh đã deploy sẽ tiếp tục hiện ưu đãi cũ cho
   tới lần deploy kế, nên đây là chuông báo có người phải nghe.
 
@@ -342,8 +395,8 @@ thứ chỉ sai được ở đúng nơi đó.
 npm ci
 npm run build          # dựng dist/
 npm run check          # 0 lỗi kiểu
-npm run test:guards    # 466 ca hàng rào
-npm run test:seo       # 60 phép đo SEO trên bản build
+npm run test:guards    # 486 ca hàng rào
+npm run test:seo       # 223 phép đo SEO trên bản build
 npm run test:order     # 9 kịch bản đặt hàng trong trình duyệt thật
 npm run test:orders-api # 20 kịch bản API đơn hàng trên SQLite thật
 npm run test:admin     # 9 kịch bản trang quản trị trong trình duyệt thật

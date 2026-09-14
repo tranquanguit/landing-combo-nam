@@ -18,11 +18,19 @@ interface Props {
   ogImageWidth?: number;
   ogImageHeight?: number;
   ogImageAlt?: string;
+  /** og:type theo loại trang: product cho landing, article cho bài, website cho phần còn lại. */
+  ogType?: 'product' | 'article' | 'website';
+  /**
+   * Biến thể dành cho quảng cáo: không cho lập chỉ mục, và canonical đã trỏ về
+   * trang gốc. Thiếu cờ này thì năm biến thể của một landing sẽ cạnh tranh với
+   * chính trang gốc trên kết quả tìm kiếm.
+   */
+  noindex?: boolean;
 }
 
 const {
   locale, title, description, canonical, ogImage, alternates = [], jsonLd, siteName,
-  ogImageWidth = 1200, ogImageHeight = 630, ogImageAlt,
+  ogImageWidth = 1200, ogImageHeight = 630, ogImageAlt, ogType = 'website', noindex = false,
 } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -35,7 +43,12 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta
+      name="robots"
+      content={noindex
+        ? 'noindex, follow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+    />
 
     {alternates.length > 1 && alternates.map((a) => (
       <link rel="alternate" hreflang={htmlLang[a.locale]} href={a.url} />
@@ -44,7 +57,7 @@ const {
       <link rel="alternate" hreflang="x-default" href={alternates.find((a) => a.locale === 'vi')?.url ?? canonical} />
     )}
 
-    <meta property="og:type" content="product" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:locale" content={htmlLang[locale].replace('-', '_')} />
     <meta property="og:title" content={title} />

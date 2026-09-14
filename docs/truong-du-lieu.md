@@ -13,6 +13,9 @@ Dấu `*` = bắt buộc.
 | `locale` | một trong: `vi`, `en`, `th`, `id` | **có** |
 | `translationKey` | chữ | **có** |
 | `status` | một trong: `draft`, `published` | không (có sẵn mặc định) |
+| `line` | chữ | không |
+| `primaryKeyword` | chữ | không |
+| `canonicalOf` | chữ | không |
 | `name` | chữ | **có** |
 | `shortName` | chữ | không |
 | `sku` | chữ | **có** |

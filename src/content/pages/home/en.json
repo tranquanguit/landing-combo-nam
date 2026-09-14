@@ -1,0 +1,31 @@
+{
+  "slug": "home",
+  "locale": "en",
+  "translationKey": "home",
+  "status": "published",
+  "seo": {
+    "title": "Mocha Vietnam – Skincare that publishes its concentrations",
+    "description": "Creams and serums for dark spots, uneven tone and oily skin. Every active ingredient listed with its percentage. No corticosteroids, no hydroquinone.",
+    "ogImage": "/images/packshot-combo.jpg"
+  },
+  "hero": {
+    "eyebrow": "Mocha skincare",
+    "heading": "Every percentage, in writing",
+    "lead": "Most skincare lists ingredient names and stops there. Mocha publishes the concentration of each active, so you can compare our products against anyone else's before you buy.",
+    "image": "/images/packshot-combo.jpg",
+    "imageAlt": "Mocha cream and serum side by side on a light background",
+    "primaryCta": { "label": "See the dark spot line", "href": "/en/nam-tham/" }
+  },
+  "lines": ["nam-tham"],
+  "featured": ["combo-nam"],
+  "articles": ["nam-noi-tiet-la-gi"],
+  "about": {
+    "eyebrow": "About Mocha",
+    "heading": "Why we print the percentages",
+    "body": [
+      "A jar labelled “proprietary complex” might hold 0.01% of an active, or it might hold 3%. The buyer has no way to tell, which is exactly why skincare is so hard to compare.",
+      "Mocha does the opposite: each product publishes the concentration of every key active, with a reference for what that ingredient is understood to do. You can take those numbers and check them against any other product, including ours.",
+      "In return, we do not promise things that cannot be measured. Every Mocha product is a topical cosmetic, not a medicine, and results depend on your skin and on daily sun protection."
+    ]
+  }
+}

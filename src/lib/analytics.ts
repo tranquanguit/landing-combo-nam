@@ -28,8 +28,11 @@ export interface AnalyticsConfig {
   tiktokPixel?: string;
   /** true với thị trường cần đồng ý trước khi đặt cookie đo lường. */
   requireConsent: boolean;
-  currency: string;
-  value: number;
-  itemId: string;
-  itemName: string;
+  /* Bốn trường thương mại chỉ có trên trang sản phẩm. Trang chủ, trang dòng và
+     bài viết vẫn phát sự kiện nhưng không có giá để gắn — bắt buộc chúng ở đây
+     sẽ đẩy mọi trang khác vào chỗ phải bịa một con số. */
+  currency?: string;
+  value?: number;
+  itemId?: string;
+  itemName?: string;
 }

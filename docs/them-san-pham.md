@@ -62,3 +62,46 @@ khỏi trang, nên neo của nó **không** được tính là có thật.
 | `Nội dung chứa tuyên bố bị cấm với mỹ phẩm` | thông báo nêu luôn cách viết thay thế |
 | `Số tiền không được viết trực tiếp` | dùng `{{price}}`, `{{compareAtPrice}}`, `{{save}}` |
 | `trỏ tới "#..." nhưng không khối nào có id đó` | thông báo liệt kê các neo có thật |
+
+---
+
+## Thêm một dòng sản phẩm
+
+Dòng sản phẩm là trang gánh phần truy vấn lớn nhất — người gõ "kem dưỡng da nám
+nên chọn loại nào" chưa biết Mocha là ai.
+
+1. `mkdir -p src/content/lines/<slug>` rồi tạo `vi.json` (và `en.json`).
+2. Bắt buộc: `slug`, `locale`, `translationKey`, `primaryKeyword`, `seo`,
+   `heading`, `lead`.
+3. `products`: danh sách slug sản phẩm, **theo thứ tự muốn hiển thị**. Bỏ trống
+   thì trang tự gom mọi sản phẩm có `line: "<slug>"`.
+4. `sections`: các mục nội dung biên tập. Đây là phần giúp trang xếp hạng — một
+   trang chỉ có danh sách sản phẩm là trang mỏng và build sẽ chặn.
+5. `faq`, `articles`: tuỳ chọn.
+
+Dòng sản phẩm và sản phẩm **nằm cùng cấp URL**, nên slug phải khác mọi slug sản
+phẩm. Trùng thì build dừng và nêu tên hai trang đang tranh nhau.
+
+## Thêm một bài tư vấn
+
+1. `mkdir -p src/content/articles/<slug>` rồi tạo `vi.json`.
+2. Bắt buộc: `primaryKeyword`, `seo`, `title`, `lead`, `publishedAt`,
+   `sections` (ít nhất một mục).
+3. `relatedLine` và `relatedProducts` là thứ biến bài viết thành đường dẫn về
+   trang bán hàng. Bỏ trống thì bài trở thành ngõ cụt và phép đo
+   "mọi trang dẫn được sang nơi bán hàng" trong `npm run test:seo` sẽ đỏ.
+4. Bài dưới **350 từ** bị chặn: ngắn hơn thì không trả lời trọn một câu hỏi.
+
+URL sinh ra là `/goc-tu-van/<slug>/` (tiếng Việt) và `/en/advice/<slug>/`.
+
+## Một truy vấn, một trang
+
+Mỗi trang khai `primaryKeyword` — truy vấn mà trang đó **sở hữu**. Hai trang
+cùng khai một truy vấn thì build dừng. Không phải để cho khó: hai trang nhắm một
+truy vấn thì Google chọn một, và thường chọn trang có tỉ lệ chuyển đổi thấp hơn.
+
+## Biến thể landing cho quảng cáo
+
+Muốn 5 biến thể landing cho 5 nhóm quảng cáo: tạo sản phẩm mới với
+`canonicalOf: "<slug-gốc>"`. Biến thể sẽ `noindex` và canonical trỏ về trang
+gốc, nên nó không cạnh tranh với chính trang gốc trên kết quả tìm kiếm.

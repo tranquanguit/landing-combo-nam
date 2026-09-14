@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getCollection, getEntry } from 'astro:content';
 import { money } from '../lib/format';
 import { expandProductTokens } from '../lib/money-text';
-import { productPath } from '../lib/routes';
+import { adviceIndexPath, articlePath, homePath, linePath, productPath } from '../lib/routes';
 import { plainText } from '../lib/richtext';
 import type { Locale } from '../i18n/ui';
 
@@ -33,6 +33,7 @@ const L = {
     declaredBy: 'Tổ chức công bố', notification: 'Số tiếp nhận phiếu công bố',
     ingredients: 'Thành phần chính', source: 'nguồn', expectations: 'Kỳ vọng theo từng tình trạng',
     howTo: 'Cách dùng', faq: 'Câu hỏi thường gặp', warnings: 'Cảnh báo', suitedFor: 'Phù hợp với',
+    lineProducts: 'Sản phẩm trong dòng', published: 'Đăng ngày', updated: 'Cập nhật',
   },
   en: {
     lang: 'Page language', page: 'Page', price: 'Price', bundlePrice: 'bought separately, total',
@@ -40,6 +41,7 @@ const L = {
     declaredBy: 'Declared by', notification: 'Cosmetic product notification number',
     ingredients: 'Key ingredients', source: 'source', expectations: 'What to expect, by condition',
     howTo: 'How to use', faq: 'Frequently asked questions', warnings: 'Warnings', suitedFor: 'Suited to',
+    lineProducts: 'Products in this line', published: 'Published', updated: 'Updated',
   },
 } as const;
 const lab = (loc: Locale) => (loc === 'vi' ? L.vi : L.en);
@@ -49,6 +51,8 @@ export const GET: APIRoute = async ({ site }) => {
   /* Mọi ngôn ngữ, không chỉ tiếng Việt. Kiểm định lần 6: bản EN bị lọc ra, nên
      một trợ lý AI hỏi bằng tiếng Anh không thấy trang tiếng Anh tồn tại. */
   const all = await getCollection('products', ({ data }) => data.status === 'published');
+  const lineEntries = await getCollection('lines', ({ data }) => data.status === 'published');
+  const articleEntries = await getCollection('articles', ({ data }) => data.status === 'published');
   const products = all.sort((a, b2) =>
     a.data.slug === b2.data.slug
       ? (a.data.locale === 'vi' ? -1 : 1)
@@ -145,6 +149,71 @@ export const GET: APIRoute = async ({ site }) => {
     lines.push(`### ${x.warnings}`, '');
     for (const w of p.compliance.warnings) lines.push(`- ${plainText(w)}`);
     lines.push('');
+  }
+
+  /* Trang chủ, trang dòng và bài tư vấn cũng phải có mặt.
+     Một file dành cho máy đọc chỉ liệt kê trang bán hàng sẽ khiến trợ lý AI
+     tưởng website chỉ có bấy nhiêu — trong khi phần trả lời được câu hỏi của
+     người dùng lại nằm ở các bài tư vấn. */
+  const homeLocales = [...new Set(all.map((e) => e.data.locale as Locale))];
+  lines.push('## Trang chủ / Home', '');
+  for (const loc of homeLocales) lines.push(`- ${origin}${homePath(loc)} (${loc})`);
+  lines.push('');
+
+  for (const entry of lineEntries) {
+    const d = entry.data;
+    const locale = d.locale as Locale;
+    const x = lab(locale);
+    lines.push(`## ${d.heading}${locale === 'vi' ? '' : ` (${locale.toUpperCase()})`}`, '');
+    lines.push(`- ${x.lang}: ${locale === 'vi' ? 'tiếng Việt' : 'English'}`);
+    lines.push(`- ${x.page}: ${origin}${linePath(d.slug, locale)}`);
+    lines.push(`- ${plainText(d.lead)}`);
+    const inLine = d.products.length
+      ? d.products
+      : all.filter((p) => p.data.locale === locale && p.data.line === d.slug).map((p) => p.data.slug);
+    if (inLine.length) {
+      lines.push(`- ${x.lineProducts}: ${inLine.map((sl) => `${origin}${productPath(sl, locale)}`).join(', ')}`);
+    }
+    lines.push('');
+    for (const sec of d.sections) {
+      lines.push(`### ${plainText(sec.heading)}`, '');
+      for (const para of sec.body) lines.push(plainText(para));
+      lines.push('');
+    }
+    if (d.faq.length) {
+      lines.push(`### ${x.faq}`, '');
+      for (const f of d.faq) lines.push(`**${plainText(f.q)}** ${plainText(f.a)}`);
+      lines.push('');
+    }
+  }
+
+  const adviceLocales = [...new Set(articleEntries.map((e) => e.data.locale as Locale))];
+  for (const loc of adviceLocales) {
+    lines.push(`## ${loc === 'vi' ? 'Góc tư vấn' : 'Skin guide'} (${loc})`, '');
+    lines.push(`- ${lab(loc).page}: ${origin}${adviceIndexPath(loc)}`);
+    lines.push('');
+  }
+
+  for (const entry of articleEntries) {
+    const d = entry.data;
+    const locale = d.locale as Locale;
+    const x = lab(locale);
+    lines.push(`## ${d.title}${locale === 'vi' ? '' : ` (${locale.toUpperCase()})`}`, '');
+    lines.push(`- ${x.lang}: ${locale === 'vi' ? 'tiếng Việt' : 'English'}`);
+    lines.push(`- ${x.page}: ${origin}${articlePath(d.slug, locale)}`);
+    lines.push(`- ${x.published}: ${d.publishedAt}` + (d.updatedAt ? ` — ${x.updated}: ${d.updatedAt}` : ''));
+    lines.push(`- ${plainText(d.lead)}`);
+    lines.push('');
+    for (const sec of d.sections) {
+      lines.push(`### ${plainText(sec.heading)}`, '');
+      for (const para of sec.body) lines.push(plainText(para));
+      lines.push('');
+    }
+    if (d.faq.length) {
+      lines.push(`### ${x.faq}`, '');
+      for (const f of d.faq) lines.push(`**${plainText(f.q)}** ${plainText(f.a)}`);
+      lines.push('');
+    }
   }
 
   lines.push('## Liên hệ / Contact', '');

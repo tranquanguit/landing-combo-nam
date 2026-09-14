@@ -3,8 +3,18 @@ import { t, type Locale } from '../i18n/ui';
 import Picture from '../components/Picture.astro';
 import LocaleSwitcher from './LocaleSwitcher.astro';
 import { localePath } from '../i18n/ui';
-interface Props { brand: any; locale: Locale; alternates?: { locale: Locale; url: string }[]; }
-const { brand: b, locale, alternates = [] } = Astro.props;
+interface Props {
+  brand: any; locale: Locale; alternates?: { locale: Locale; url: string }[];
+  /**
+   * Nút đặt mua trỏ đi đâu. Trên landing là neo #dat-hang trong chính trang;
+   * trên trang chủ, trang dòng và bài viết thì KHÔNG có neo đó — để mặc định
+   * sẽ thành một nút chết trên ba phần tư số trang của site.
+   */
+  orderHref?: string;
+  /** Điều hướng chính. Sinh từ dữ liệu ở route, không viết cứng ở đây. */
+  nav?: { label: string; href: string }[];
+}
+const { brand: b, locale, alternates = [], orderHref = '#dat-hang', nav = [] } = Astro.props;
 ---
 <header>
   <div class="wrap bar">
@@ -14,10 +24,19 @@ const { brand: b, locale, alternates = [] } = Astro.props;
       <Picture src={b.logo} alt={b.tradingName} width={92} height={34}
         sizes="92px" widths={[92, 184]} loading="eager" />
     </a>
+    {nav.length > 0 && (
+      <nav class="nav" aria-label={b.tradingName}>
+        <ul>
+          {nav.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    )}
     <div class="actions">
       <LocaleSwitcher current={locale} alternates={alternates} />
       <a class="tel" href={`tel:${b.phone}`} data-cta="header-call">{b.phoneDisplay}</a>
-      <a class="btn btn-primary compact" href="#dat-hang" data-cta="header-order">{t(locale, 'nav.order')}</a>
+      <a class="btn btn-primary compact" href={orderHref} data-cta="header-order">{t(locale, 'nav.order')}</a>
     </div>
   </div>
 </header>
@@ -37,6 +56,20 @@ const { brand: b, locale, alternates = [] } = Astro.props;
     height: var(--header-h);
   }
   .brand :global(img) { height: 30px; width: auto; object-fit: contain; }
+
+  /* Điều hướng ẩn dưới 860px: trên điện thoại, thanh trên cùng ưu tiên hotline
+     và nút đặt mua. Các đường dẫn này vẫn có trong chân trang và trong nội dung
+     trang, nên không có trang nào mất đường vào. */
+  .nav { display: none; }
+  @media (min-width: 860px) {
+    .nav { display: block; margin-inline: auto; }
+    .nav ul { list-style: none; display: flex; gap: var(--s-5); margin: 0; padding: 0; }
+    .nav a {
+      color: var(--ink-muted); text-decoration: none; font-size: var(--t-sm);
+      display: inline-block; min-height: 24px; line-height: 24px;
+    }
+    .nav a:hover { color: var(--cobalt); }
+  }
   .actions { display: flex; align-items: center; gap: var(--s-4); }
   .tel {
     display: none; font-weight: 600; font-size: var(--t-sm);

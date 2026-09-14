@@ -292,6 +292,20 @@ const products = defineCollection({
     translationKey: z.string(),
     status: z.enum(['draft', 'published']).default('draft'),
 
+    /** Dòng sản phẩm chứa sản phẩm này. Trang dòng sẽ tự gom, không khai hai chiều. */
+    line: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
+    /**
+     * Truy vấn mà trang này sở hữu. Hai trang cùng khai một truy vấn sẽ ăn thịt
+     * nhau trên kết quả tìm kiếm — cổng bên dưới chặn việc đó ngay lúc build.
+     */
+    primaryKeyword: z.string().min(3).optional(),
+    /**
+     * Biến thể dành riêng cho quảng cáo: noindex + canonical trỏ về trang gốc.
+     * Không khai thì 5 biến thể của cùng một landing sẽ cạnh tranh với chính
+     * trang gốc và Google chọn nhầm trang để hiển thị.
+     */
+    canonicalOf: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
+
     name: z.string(),
     shortName: z.string().optional(),
     sku: z.string(),
@@ -559,6 +573,172 @@ const products = defineCollection({
   }),
 });
 
+/* ------------------------------------------------------------------
+   Ba tầng nội dung còn lại: trang chủ, dòng sản phẩm, bài tư vấn.
+
+   Bài học đắt nhất của dự án (kiểm định lần 13, bằng mutation testing): một
+   collection mới KHÔNG có hàng rào là một vùng tự do, và không ai phát hiện ra
+   bằng cách đọc mã. Nên ba collection dưới đây đi qua đúng ba phép quét mà
+   `products` phải qua — tuyên bố bị cấm, dữ liệu cá nhân, giá viết tay — ngay
+   từ dòng đầu tiên, chứ không phải "bổ sung sau".
+-------------------------------------------------------------------*/
+
+const slugField = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'slug chỉ gồm chữ thường, số và gạch nối');
+
+const seoField = z.object({
+  title: z.string().max(70),
+  description: z.string().max(170),
+  ogImage: z.string().optional(),
+}).strict();
+
+/** Một mục nội dung biên tập: tiêu đề phụ + các đoạn văn. */
+const proseSection = z.object({
+  id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
+  heading: z.string(),
+  body: z.array(z.string().min(1)).min(1),
+}).strict();
+
+const faqField = z.array(z.object({
+  q: z.string(), a: z.string(),
+}).strict()).default([]);
+
+/**
+ * Quét toàn bộ chuỗi của một mục nội dung.
+ * Dùng chung cho pages/lines/articles — một hàm, không phải ba bản sao sẽ
+ * lệch nhau sau vài tháng.
+ */
+/* `z.RefinementCtx` không dùng được làm namespace kiểu ở đây; khai đúng phần
+   giao diện mà hàm này cần là đủ, và rõ hơn cho người đọc. */
+type IssueSink = { addIssue: (issue: { code: any; path?: (string | number)[]; message: string }) => void };
+
+function scanEditorial(node: unknown, ctx: IssueSink, path = ''): void {
+  if (typeof node === 'string') {
+    for (const hit of findForbiddenClaims(node)) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: [path],
+        message: `"${hit.match}" — ${hit.why}. Thay bằng: ${hit.instead}` });
+    }
+    for (const hit of findPersonalData(node, BRAND_NUMBERS)) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: [path],
+        message: `"${hit.match}" là ${hit.kind}. Nội dung biên tập không được chứa ` +
+          `dữ liệu cá nhân của khách.` });
+    }
+    for (const hit of findHandwrittenMoney(node)) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: [path],
+        message: `"${hit}" là số tiền viết tay. Giá chỉ tồn tại trong file sản phẩm; ` +
+          `trang dòng và bài viết lấy giá từ đó, không chép lại.` });
+    }
+  } else if (Array.isArray(node)) {
+    node.forEach((v, i) => scanEditorial(v, ctx, `${path}[${i}]`));
+  } else if (node && typeof node === 'object') {
+    for (const [k, v] of Object.entries(node)) scanEditorial(v, ctx, path ? `${path}.${k}` : k);
+  }
+}
+
+const pages = defineCollection({
+  loader: glob({
+    pattern: '**/*.json',
+    base: './src/content/pages',
+    generateId: ({ entry }) => entry.replace(/\.json$/, ''),
+  }),
+  schema: z.object({
+    slug: slugField,
+    locale: z.enum(['vi', 'en', 'th', 'id']),
+    translationKey: z.string(),
+    status: z.enum(['draft', 'published']).default('draft'),
+    seo: seoField,
+    hero: z.object({
+      eyebrow: z.string().optional(),
+      heading: z.string(),
+      lead: z.string(),
+      image: z.string().optional(),
+      imageAlt: z.string().optional(),
+      primaryCta: z.object({ label: z.string(), href: safeUrl }).strict().optional(),
+    }).strict(),
+    /* Thứ tự hiển thị do file quyết định, không do thứ tự đọc thư mục —
+       thư mục thì đổi theo hệ điều hành, còn trang chủ thì không được đổi. */
+    lines: z.array(slugField).default([]),
+    featured: z.array(slugField).default([]),
+    articles: z.array(slugField).default([]),
+    about: z.object({
+      eyebrow: z.string().optional(),
+      heading: z.string(),
+      body: z.array(z.string()).min(1),
+    }).strict().optional(),
+  }).strict().superRefine((page, ctx) => scanEditorial(page, ctx)),
+});
+
+const lines = defineCollection({
+  loader: glob({
+    pattern: '**/*.json',
+    base: './src/content/lines',
+    generateId: ({ entry }) => entry.replace(/\.json$/, ''),
+  }),
+  schema: z.object({
+    slug: slugField,
+    locale: z.enum(['vi', 'en', 'th', 'id']),
+    translationKey: z.string(),
+    status: z.enum(['draft', 'published']).default('draft'),
+    /** Trang dòng là nơi bắt truy vấn không mang tên thương hiệu, nên bắt buộc khai. */
+    primaryKeyword: z.string().min(3),
+    seo: seoField,
+    eyebrow: z.string().optional(),
+    heading: z.string(),
+    lead: z.string(),
+    /** Sản phẩm hiển thị, theo thứ tự này. Bỏ trống thì tự gom theo product.line. */
+    products: z.array(slugField).default([]),
+    sections: z.array(proseSection).default([]),
+    faq: faqField,
+    articles: z.array(slugField).default([]),
+  }).strict().superRefine((line, ctx) => {
+    scanEditorial(line, ctx);
+    /* Một trang dòng không có sản phẩm nào và cũng không có nội dung biên tập
+       là một trang rỗng — thứ Google gọi là thin content và là rủi ro lớn nhất
+       khi nhân bản cấu trúc này ra nhiều dòng. */
+    if (!line.products.length && !line.sections.length && line.status === 'published') {
+      ctx.addIssue({ code: z.ZodIssueCode.custom,
+        message: 'Dòng sản phẩm đã xuất bản phải có ít nhất một sản phẩm hoặc một mục nội dung. ' +
+          'Trang rỗng bị Google xếp là nội dung mỏng và kéo theo cả những trang khác.' });
+    }
+  }),
+});
+
+const articles = defineCollection({
+  loader: glob({
+    pattern: '**/*.json',
+    base: './src/content/articles',
+    generateId: ({ entry }) => entry.replace(/\.json$/, ''),
+  }),
+  schema: z.object({
+    slug: slugField,
+    locale: z.enum(['vi', 'en', 'th', 'id']),
+    translationKey: z.string(),
+    status: z.enum(['draft', 'published']).default('draft'),
+    primaryKeyword: z.string().min(3),
+    seo: seoField,
+    title: z.string(),
+    lead: z.string(),
+    publishedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    updatedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    sections: z.array(proseSection).min(1),
+    faq: faqField,
+    relatedLine: slugField.optional(),
+    relatedProducts: z.array(slugField).default([]),
+  }).strict().superRefine((a, ctx) => {
+    scanEditorial(a, ctx);
+    /* Bài quá ngắn không trả lời được câu hỏi nào và chỉ làm loãng site. */
+    const words = a.sections.flatMap((sec) => sec.body).join(' ').split(/\s+/).length;
+    if (a.status === 'published' && words < 350) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom,
+        message: `Bài mới có ${words} từ. Bài tư vấn đã xuất bản cần ít nhất 350 từ — ` +
+          `ngắn hơn thì không trả lời trọn một câu hỏi, và đó là nội dung mỏng.` });
+    }
+    if (a.updatedAt && a.updatedAt < a.publishedAt) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['updatedAt'],
+        message: 'updatedAt sớm hơn publishedAt.' });
+    }
+  }),
+});
+
 const brand = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/data' }),
   schema: z.object({
@@ -622,4 +802,4 @@ const brand = defineCollection({
   }),
 });
 
-export const collections = { products, brand };
+export const collections = { pages, products, lines, articles, brand };

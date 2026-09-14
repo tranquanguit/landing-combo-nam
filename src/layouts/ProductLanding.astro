@@ -1,4 +1,5 @@
 ---
+import { getCollection } from 'astro:content';
 import { DEFAULT_ANCHOR } from '../lib/block-anchors';
 import BaseLayout from './BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -19,8 +20,8 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import { expandProductTokens } from '../lib/money-text';
 import { productGraph } from '../lib/schema';
 import { resolveAssetUrl, resolveAssetImage } from '../lib/images';
-import { FLAGSHIP, productPath } from '../lib/routes';
-import { assertTranslated, localePath, type Locale } from '../i18n/ui';
+import { homePath, linePath, productPath } from '../lib/routes';
+import { assertTranslated, localePath, t, type Locale } from '../i18n/ui';
 
 interface Props {
   product: any;
@@ -28,9 +29,10 @@ interface Props {
   locale: Locale;
   canonical: string;
   alternates?: { locale: Locale; url: string }[];
+  nav?: { label: string; href: string }[];
 }
 
-const { product: raw, brand: b, locale, canonical, alternates = [] } = Astro.props;
+const { product: raw, brand: b, locale, canonical, alternates = [], nav = [] } = Astro.props;
 
 /* Tên tổ chức công bố (in ở footer) phải trùng pháp nhân trong JSON-LD Organization.
    Kiểm định lần 6: bản EN khai "Mocha Vietnam Cosmeceuticals" trong khi structured
@@ -55,9 +57,19 @@ assertTranslated(locale);
 
 const faqBlock = p.blocks.find((x: any) => x.type === 'faq');
 
-// Sản phẩm chủ lực nằm ở gốc nên không có đường dẫn phân cấp để hiển thị.
-const breadcrumb = p.slug === FLAGSHIP ? undefined : [
-  { name: b.tradingName, url: new URL(localePath(locale, '/'), site).href },
+/* Đường dẫn phân cấp thật: trang chủ -> dòng sản phẩm -> sản phẩm.
+   Bản trước bỏ hẳn breadcrumb cho sản phẩm ở gốc; nay không sản phẩm nào ở gốc
+   nữa, và bậc giữa (dòng sản phẩm) chính là trang gánh truy vấn không mang tên
+   thương hiệu — bỏ nó khỏi breadcrumb là cắt mất liên kết nội bộ quan trọng nhất. */
+const lineEntry = p.line
+  ? (await getCollection('lines')).find(
+    (l: any) => l.data.slug === p.line && l.data.locale === locale && l.data.status === 'published')
+  : undefined;
+const breadcrumb = [
+  { name: t(locale, 'nav.home'), url: new URL(homePath(locale), site).href },
+  ...(lineEntry
+    ? [{ name: lineEntry.data.heading, url: new URL(linePath(p.line, locale), site).href }]
+    : []),
   { name: p.shortName ?? p.name, url: new URL(productPath(p.slug, locale), site).href },
 ];
 
@@ -99,8 +111,8 @@ p.blocks.forEach((block: any, i: number) => {
   alternates={alternates}
   jsonLd={jsonLd}
 >
-  <SiteHeader brand={b} locale={locale} alternates={alternates} />
-  {breadcrumb && <Breadcrumb items={breadcrumb} />}
+  <SiteHeader brand={b} locale={locale} alternates={alternates} nav={nav} />
+  <Breadcrumb items={breadcrumb} locale={locale} />
 
   <main id="main">
     {p.blocks.map((block: any, i: number) => {

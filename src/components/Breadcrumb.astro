@@ -1,8 +1,9 @@
 ---
-interface Props { items: { name: string; url: string }[]; }
-const { items } = Astro.props;
+import { t, type Locale } from '../i18n/ui';
+interface Props { items: { name: string; url: string }[]; locale: Locale; }
+const { items, locale } = Astro.props;
 ---
-<nav class="crumbs" aria-label="Breadcrumb">
+<nav class="crumbs" aria-label={t(locale, "breadcrumb.label")}>
   <div class="wrap">
     <ol>
       {items.map((c, i) => (

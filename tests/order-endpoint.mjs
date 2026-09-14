@@ -18,6 +18,8 @@ try {
   ({ chromium } = require('/opt/node22/lib/node_modules/playwright'));
 }
 
+/* Landing sản phẩm nằm ở /combo-nam/, không còn ở gốc: từ khi site có tầng
+   trang chủ và tầng dòng sản phẩm, gốc là trang chủ thương hiệu. */
 const PAGE_PORT = 8131;
 const API_PORT = 8132;
 const received = [];
@@ -97,7 +99,7 @@ async function fillAndSubmit(page) {
   mode = 'ok';
   received.length = 0;
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-  await page.goto(`http://localhost:${PAGE_PORT}/`, { waitUntil: 'networkidle' });
+  await page.goto(`http://localhost:${PAGE_PORT}/combo-nam/`, { waitUntil: 'networkidle' });
   await fillAndSubmit(page);
   const payload = received[0] ? JSON.parse(received[0].body) : null;
   results.push([
@@ -118,7 +120,7 @@ async function fillAndSubmit(page) {
   mode = 'fail';
   received.length = 0;
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-  await page.goto(`http://localhost:${PAGE_PORT}/`, { waitUntil: 'networkidle' });
+  await page.goto(`http://localhost:${PAGE_PORT}/combo-nam/`, { waitUntil: 'networkidle' });
   await fillAndSubmit(page);
   const saidSuccess = await page.locator('#form-success').isVisible();
   const saidError = await page.locator('#form-error').isVisible();
@@ -135,7 +137,7 @@ async function fillAndSubmit(page) {
 {
   received.length = 0;
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-  await page.goto(`http://localhost:${PAGE_PORT}/`, { waitUntil: 'networkidle' });
+  await page.goto(`http://localhost:${PAGE_PORT}/combo-nam/`, { waitUntil: 'networkidle' });
   await page.route(`http://localhost:${API_PORT}/**`, (route) => route.abort('failed'));
   await fillAndSubmit(page);
   const saidSuccess = await page.locator('#form-success').isVisible();
@@ -153,7 +155,7 @@ async function fillAndSubmit(page) {
   mode = 'ok';
   received.length = 0;
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-  await page.goto(`http://localhost:${PAGE_PORT}/`, { waitUntil: 'networkidle' });
+  await page.goto(`http://localhost:${PAGE_PORT}/combo-nam/`, { waitUntil: 'networkidle' });
   await page.fill('#name', 'Nguyễn Thu Hà');
   await page.fill('#phone', '0912345678');
   await page.fill('#address', '12 Lê Lợi, Quận 1');
@@ -173,7 +175,7 @@ async function fillAndSubmit(page) {
   mode = 'fail';
   received.length = 0;
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-  await page.goto(`http://localhost:${PAGE_PORT}/`, { waitUntil: 'networkidle' });
+  await page.goto(`http://localhost:${PAGE_PORT}/combo-nam/`, { waitUntil: 'networkidle' });
   await fillAndSubmit(page);
   const errorShown = await page.locator('#form-error').isVisible();
   mode = 'ok';
@@ -193,7 +195,7 @@ async function fillAndSubmit(page) {
 {
   mode = 'ok';
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-  await page.goto(`http://localhost:${PAGE_PORT}/`, { waitUntil: 'networkidle' });
+  await page.goto(`http://localhost:${PAGE_PORT}/combo-nam/`, { waitUntil: 'networkidle' });
   await fillAndSubmit(page);
   const focused = await page.evaluate(() => document.activeElement?.id || document.activeElement?.tagName);
   results.push(['focus chuyển sang thông báo', focused === 'form-success', `activeElement: ${focused}`]);
@@ -205,7 +207,7 @@ async function fillAndSubmit(page) {
   mode = 'ok';
   received.length = 0;
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-  await page.goto(`http://localhost:${PAGE_PORT}/`, { waitUntil: 'networkidle' });
+  await page.goto(`http://localhost:${PAGE_PORT}/combo-nam/`, { waitUntil: 'networkidle' });
 
   // Gói có giá thì vẫn phải nhập địa chỉ.
   const paidRequires = await page.evaluate(() => {
@@ -310,7 +312,7 @@ async function fillAndSubmit(page) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const violations = [];
   page.on('console', (m) => { if (/Content Security Policy/i.test(m.text())) violations.push(m.text()); });
-  await page.goto(`http://localhost:${CSP_PORT}/`, { waitUntil: 'networkidle' });
+  await page.goto(`http://localhost:${CSP_PORT}/combo-nam/`, { waitUntil: 'networkidle' });
 
   /* Báo rõ thay vì chết bằng timeout 60 giây.
      Kiểm định lần 12: bỏ 'unsafe-inline' khỏi script-src thì biểu mẫu không bao

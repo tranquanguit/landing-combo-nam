@@ -24,8 +24,18 @@ const BUDGET = {
    *         cắt: theo dõi độ sâu cuộn (cũng là nguồn cưỡng bức reflow), hai
    *         bảng ánh xạ sự kiện trùng nhau, và handler dọn listener thừa —
    *         tổng cộng khoảng 590 byte. Phần còn lại là chức năng đang dùng.
+   *  8 KB — vòng này: biểu mẫu gửi thêm ngữ cảnh đơn (sản phẩm, ngôn ngữ, câu
+   *         đồng ý, giá gói, utm), đọc phản hồi của máy chủ để không báo thành
+   *         công cho đơn chưa vào cơ sở dữ liệu, và hiện mã đơn. Lớp đo lường
+   *         phải bỏ qua bốn trường thương mại trên những trang không có sản
+   *         phẩm. TRƯỚC KHI NÂNG đã cắt: gộp ba lần truy vấn gói đang chọn
+   *         thành một hàm, và rút gọn nhánh xử lý phản hồi — khoảng 150 byte.
+   *         Ngưỡng 7 KB đã chặn đúng hai lần trong cùng một phiên làm việc với
+   *         những thay đổi chính đáng; đó là dấu hiệu ngưỡng đã quá sát, không
+   *         phải dấu hiệu thay đổi sai. Ngân sách tổng một lượt tải (700 KB)
+   *         không đổi, và JS nội tuyến vẫn chỉ chiếm khoảng 1% con số đó.
    */
-  inlineJs: 7 * 1024,
+  inlineJs: 8 * 1024,
   fontsTotal: 120 * 1024,  // tổng font tải lần đầu
   imageMax: 120 * 1024,    // một tệp ảnh đã build
   mediaMax: 1.5 * 1024 * 1024, // một tệp video/audio

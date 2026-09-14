@@ -151,9 +151,36 @@ for (const file of contentPages) {
   };
   parsed.forEach(collect);
   const types = new Set(flat.map((n) => n['@type']).filter(Boolean));
-  check(S, 'có Product, Organization, FAQPage, WebPage',
-    ['Product', 'Organization', 'FAQPage', 'WebPage'].every((t) => types.has(t)),
-    [...types].sort().join(', '));
+  /* Yêu cầu khác nhau theo LOẠI trang. Bản trước đòi mọi trang phải có Product
+     và Offer — đúng khi site chỉ có landing, sai từ lúc có trang chủ, trang dòng
+     và bài viết; và một phép đo sai thì tệ hơn không đo, vì nó dạy người đọc bỏ
+     qua màu đỏ. */
+  const isProduct = types.has('Product');
+  const isArticle = types.has('Article');
+  const isCollection = types.has('CollectionPage');
+  const kind = isProduct ? 'sản phẩm' : isArticle ? 'bài viết' : isCollection ? 'danh mục' : 'trang chủ';
+
+  check(S, 'có Organization và một node trang',
+    types.has('Organization') && (types.has('WebPage') || types.has('CollectionPage')),
+    `${kind}: ${[...types].sort().join(', ')}`);
+
+  if (isProduct) {
+    check(S, 'trang sản phẩm có node Product', types.has('Product'), 'có');
+  }
+  if (isArticle) {
+    const art = flat.find((n) => n['@type'] === 'Article');
+    const missArt = ['headline', 'datePublished', 'author', 'publisher']
+      .filter((k) => !art?.[k]);
+    check(S, 'Article đủ trường bắt buộc', missArt.length === 0,
+      missArt.length ? `thiếu ${missArt.join(', ')}` : 'headline, datePublished, author, publisher');
+  }
+  if (isCollection) {
+    const list = flat.find((n) => n['@type'] === 'ItemList');
+    check(S, 'trang danh mục có ItemList khớp số mục',
+      !!list && Array.isArray(list.itemListElement)
+      && list.numberOfItems === list.itemListElement.length,
+      list ? `${list.numberOfItems} mục` : 'không có ItemList');
+  }
 
   // Quyết định của dự án: KHÔNG khai aggregateRating khi chưa có đánh giá
   // thật kiểm chứng được. Đây là phép đo giữ cho quyết định đó không trôi.
@@ -167,7 +194,7 @@ for (const file of contentPages) {
     check(S, `Offer #${i + 1} đủ trường bắt buộc`, miss.length === 0,
       miss.length ? `thiếu ${miss.join(', ')}` : `${o.price} ${o.priceCurrency}`);
   }
-  check(S, 'có ít nhất một Offer', offers.length > 0, `${offers.length} Offer`);
+  if (isProduct) check(S, 'trang sản phẩm có ít nhất một Offer', offers.length > 0, `${offers.length} Offer`);
 
   // Giá trong JSON-LD phải bằng giá hiện trên trang, nếu không Google báo
   // "giá không khớp" và bỏ đoạn trích giàu.
@@ -233,6 +260,68 @@ for (const [url, alts] of altMap) {
 }
 check('site', 'hreflang đối xứng hai chiều', asym.length === 0,
   asym.join('; ') || `${altMap.size} trang, mỗi trang ${[...altMap.values()][0].length} bản dịch`);
+
+/* ============ 2b. Liên kết nội bộ: trang mồ côi và độ sâu ============ */
+/* Phép đo quan trọng nhất khi site có nhiều tầng. Một trang không ai trỏ tới
+   thì gần như không được thu thập, dù nó nằm trong sitemap — và không cách nào
+   phát hiện bằng cách đọc từng file. */
+const allUrls = contentPages.map(urlOf);
+const linkGraph = new Map();
+for (const file of contentPages) {
+  const html = fs.readFileSync(file, 'utf8');
+  const from = urlOf(file);
+  const out = new Set();
+  for (const m of html.matchAll(/<a\b[^>]*href="([^"]+)"/gi)) {
+    const href = m[1].split('#')[0].split('?')[0];
+    if (!href.startsWith('/') || href.startsWith('//')) continue;
+    const abs = `${SITE}${href.endsWith('/') || /\.[a-z0-9]+$/i.test(href) ? href : `${href}/`}`;
+    if (abs !== from && allUrls.includes(abs)) out.add(abs);
+  }
+  linkGraph.set(from, out);
+}
+
+/* Lan từ trang chủ của TỪNG ngôn ngữ: bản tiếng Anh không được phép chỉ tới
+   được qua bộ chuyển ngôn ngữ. */
+const homes = allUrls.filter((u) => u === `${SITE}/` || /^https?:\/\/[^/]+\/[a-z]{2}\/$/.test(u));
+const depth = new Map(homes.map((h) => [h, 0]));
+const queue = [...homes];
+while (queue.length) {
+  const cur = queue.shift();
+  for (const next of linkGraph.get(cur) || []) {
+    if (depth.has(next)) continue;
+    depth.set(next, depth.get(cur) + 1);
+    queue.push(next);
+  }
+}
+
+const orphans = allUrls.filter((u) => !depth.has(u));
+check('liên kết', 'không có trang mồ côi', orphans.length === 0,
+  orphans.join(' ') || `${allUrls.length} trang đều tới được từ trang chủ`);
+
+const tooDeep = [...depth].filter(([, d]) => d > 3);
+check('liên kết', 'mọi trang cách trang chủ tối đa 3 cú nhấp', tooDeep.length === 0,
+  tooDeep.map(([u, d]) => `${u} (${d})`).join(' ') || `sâu nhất: ${Math.max(...depth.values())}`);
+
+/* Trang dòng sản phẩm và bài viết chỉ có giá trị khi chúng dẫn được sang nơi
+   bán hàng; một bài viết cụt là một bài đọc xong rồi thoát. Trang danh mục
+   (dòng sản phẩm) cũng tính là đích thương mại — nó liệt kê sản phẩm. */
+const productUrls = new Set(
+  contentPages.map((f) => ({ f, html: fs.readFileSync(f, 'utf8') }))
+    .filter(({ html }) => /"@type":"Product"/.test(html))
+    .map(({ f }) => urlOf(f)));
+const commercialUrls = new Set([
+  ...productUrls,
+  ...contentPages.map((f) => ({ f, html: fs.readFileSync(f, 'utf8') }))
+    .filter(({ html }) => /"@type":"CollectionPage"/.test(html) && /"@type":"ItemList"/.test(html))
+    .map(({ f }) => urlOf(f)),
+]);
+const noPathToProduct = [...linkGraph]
+  .filter(([u]) => !commercialUrls.has(u) && !u.endsWith('/404.html'))
+  .filter(([, out]) => ![...out].some((o) => commercialUrls.has(o)))
+  .map(([u]) => u);
+check('liên kết', 'mọi trang dẫn được sang nơi bán hàng',
+  noPathToProduct.length === 0,
+  noPathToProduct.join(' ') || `${commercialUrls.size} đích thương mại, đều có đường dẫn vào`);
 
 /* ====================== 3. Sitemap, robots, llms ====================== */
 const smPath = path.join(DIST, 'sitemap-0.xml');

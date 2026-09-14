@@ -2,41 +2,219 @@
 import type { GetStaticPaths } from 'astro';
 import { getCollection, getEntry } from 'astro:content';
 import ProductLanding from '../layouts/ProductLanding.astro';
-import { alternatesFor, productPath, FLAGSHIP } from '../lib/routes';
-import { defaultLocale, type Locale } from '../i18n/ui';
+import HomePage from '../layouts/HomePage.astro';
+import LinePage from '../layouts/LinePage.astro';
+import ArticlePage from '../layouts/ArticlePage.astro';
+import AdviceIndex from '../layouts/AdviceIndex.astro';
+import { allRoutes, alternatesFor, siteNav, type Route } from '../lib/routes';
+import { t, type Locale } from '../i18n/ui';
 
 /**
- * Một route duy nhất phục vụ mọi sản phẩm ở mọi ngôn ngữ.
- * Thêm sản phẩm = thêm file JSON, không đụng vào đây.
+ * MỘT route phục vụ cả bốn tầng nội dung, ở mọi ngôn ngữ.
  *
- *   sản phẩm chủ lực, tiếng Việt   -> /
- *   sản phẩm chủ lực, tiếng Anh    -> /en/
- *   sản phẩm khác, tiếng Việt      -> /serum-x3
- *   sản phẩm khác, tiếng Anh       -> /en/serum-x3
+ *   trang chủ          -> /            /en/
+ *   dòng sản phẩm      -> /nam-tham/   /en/nam-tham/
+ *   landing sản phẩm   -> /combo-nam/  /en/combo-nam/
+ *   danh sách tư vấn   -> /goc-tu-van/ /en/advice/
+ *   bài tư vấn         -> /goc-tu-van/<slug>/
+ *
+ * Thêm nội dung = thêm file JSON, không đụng vào đây.
+ *
+ * Vì sao gộp làm một thay vì bốn route: dòng sản phẩm và sản phẩm nằm cùng một
+ * cấp URL. Hai route riêng thì hai `getStaticPaths` có thể cùng đòi `/nam-tham/`
+ * và Astro chọn một cái — im lặng. Ở đây mọi đường dẫn đi qua `allRoutes()`, nên
+ * cổng bên dưới nhìn thấy va chạm ngay lúc build.
  */
 export const getStaticPaths = (async () => {
-  const products = await getCollection('products', ({ data }) => data.status === 'published');
+  const routes = await allRoutes();
 
-  return products.map((entry) => {
-    const { slug, locale } = entry.data;
-    const path = productPath(slug, locale as Locale).replace(/^\/|\/$/g, '');
-    return { params: { path: path || undefined }, props: { entry } };
-  });
+  const seen = new Map<string, Route>();
+  for (const r of routes) {
+    const clash = seen.get(r.path);
+    if (clash) {
+      throw new Error(
+        `Hai trang cùng đòi đường dẫn ${r.path}:\n` +
+        `  - ${clash.kind} "${clash.slug}" (${clash.locale})\n` +
+        `  - ${r.kind} "${r.slug}" (${r.locale})\n` +
+        `Đổi slug của một trong hai. Dòng sản phẩm và sản phẩm nằm cùng cấp URL ` +
+        `nên slug phải khác nhau trên toàn site, không chỉ khác trong cùng collection.`,
+      );
+    }
+    seen.set(r.path, r);
+  }
+
+  /* Hai trang cùng nhắm một truy vấn sẽ ăn thịt nhau: Google chọn một, và
+     thường chọn trang có tỉ lệ chuyển đổi thấp hơn. Đây là lỗi không thấy được
+     khi đọc từng file, chỉ thấy khi nhìn cả site cùng lúc. */
+  const byKeyword = new Map<string, Route>();
+  for (const r of routes) {
+    const kw = (r.entry as any)?.data?.primaryKeyword;
+    if (!kw) continue;
+    const key = `${r.locale}::${kw.trim().toLowerCase()}`;
+    const clash = byKeyword.get(key);
+    if (clash) {
+      throw new Error(
+        `Hai trang cùng khai primaryKeyword "${kw}" (${r.locale}):\n` +
+        `  - ${clash.kind} "${clash.slug}" -> ${clash.path}\n` +
+        `  - ${r.kind} "${r.slug}" -> ${r.path}\n` +
+        `Mỗi truy vấn chỉ một trang sở hữu. Hai trang cùng nhắm một truy vấn thì ` +
+        `Google chọn một trang và thường chọn nhầm.`,
+      );
+    }
+    byKeyword.set(key, r);
+  }
+
+  /* Biến thể quảng cáo phải trỏ canonical về một trang CÓ THẬT, nếu không nó
+     tự loại mình khỏi chỉ mục mà không chuyển được tín hiệu đi đâu cả. */
+  const productPaths = new Set(routes.filter((r) => r.kind === 'product').map((r) => `${r.locale}::${r.slug}`));
+  for (const r of routes) {
+    const target = (r.entry as any)?.data?.canonicalOf;
+    if (!target) continue;
+    if (!productPaths.has(`${r.locale}::${target}`)) {
+      throw new Error(
+        `${r.kind} "${r.slug}" khai canonicalOf="${target}" nhưng không có sản phẩm nào ` +
+        `mang slug đó ở ngôn ngữ ${r.locale}.`,
+      );
+    }
+    if (target === r.slug) {
+      throw new Error(`"${r.slug}" khai canonicalOf trỏ về chính nó.`);
+    }
+  }
+
+  return routes.map((r) => ({
+    params: { path: r.path.replace(/^\/|\/$/g, '') || undefined },
+    props: { route: r },
+  }));
 }) satisfies GetStaticPaths;
 
-const { entry } = Astro.props;
-const locale = entry.data.locale as Locale;
+const { route } = Astro.props as { route: Route };
+const locale = route.locale as Locale;
 
 const brand = await getEntry('brand', 'mocha');
 if (!brand) throw new Error('Thiếu src/data/mocha.json');
 
-const canonical = new URL(productPath(entry.data.slug, locale), Astro.site).href;
-const alternates = await alternatesFor(entry.data.translationKey, Astro.site);
+const canonical = new URL(route.path, Astro.site).href;
+const alternates = await alternatesFor(route.translationKey, Astro.site);
+
+const entry = route.entry as any;
+const data = entry?.data;
+
+/* Gom dữ liệu liên quan tại đây, không để từng layout tự đi hỏi collection:
+   liên kết nội bộ là thứ quyết định phần lớn giá trị SEO của một site nhiều
+   trang, nên nó phải sinh từ quan hệ dữ liệu ở một chỗ duy nhất. */
+const [allProducts, allLines, allArticles] = await Promise.all([
+  getCollection('products', ({ data: d }) => d.status === 'published' && d.locale === locale),
+  getCollection('lines', ({ data: d }) => d.status === 'published' && d.locale === locale),
+  getCollection('articles', ({ data: d }) => d.status === 'published' && d.locale === locale),
+]);
+
+/* Thẻ sản phẩm cần ảnh và một dòng mô tả ngắn. Cả hai đã có sẵn trong khối hero
+   của chính sản phẩm — lấy từ đó thay vì bắt người biên tập khai lại, vì khai
+   hai lần là hai chỗ để lệch nhau. */
+const cardOf = (d: any) => {
+  const hero = d.blocks.find((x: any) => x.type === 'hero');
+  return {
+    ...d,
+    image: d.seo.ogImage ?? hero?.image?.src,
+    imageAlt: hero?.image?.alt ?? d.name,
+    tagline: hero?.eyebrow,
+  };
+};
+
+const productBySlug = new Map(allProducts.map((p) => [p.data.slug, cardOf(p.data)]));
+const lineBySlug = new Map(allLines.map((l) => [l.data.slug, l.data]));
+const articleBySlug = new Map(allArticles.map((a) => [a.data.slug, a.data]));
+
+/** Danh sách theo thứ tự khai trong file; slug không tồn tại thì bỏ qua, không vỡ build. */
+const pick = <T,>(slugs: string[], from: Map<string, T>): T[] =>
+  slugs.map((s) => from.get(s)).filter((x): x is T => x !== undefined);
+
+/* Sản phẩm của một dòng: lấy theo thứ tự khai trong file dòng; file không khai
+   thì tự gom từ product.line, để thêm sản phẩm không phải sửa hai nơi. */
+const productsOfLine = (line: any) =>
+  line.products.length
+    ? pick<any>(line.products, productBySlug)
+    : allProducts.filter((p) => p.data.line === line.slug).map((p) => cardOf(p.data));
+
+/* Ảnh OG dự phòng: trang không tự khai thì mượn ảnh của trang chủ cùng ngôn
+   ngữ. Không có ảnh nào thì thẻ chia sẻ trên Facebook/Zalo hiện một ô xám —
+   với một trang bán hàng thì đó là mất lượt bấm, không phải lỗi thẩm mỹ. */
+const homeEntry = (await getCollection('pages', ({ data: d }) =>
+  d.status === 'published' && d.locale === locale && d.slug === 'home'))[0];
+const fallbackOgImage = homeEntry?.data.seo.ogImage ?? homeEntry?.data.hero.image;
+
+const nav = siteNav(
+  locale,
+  allLines.map((l) => ({ slug: l.data.slug, heading: l.data.heading })),
+  allArticles.length > 0,
+  { home: t(locale, 'nav.home'), advice: t(locale, 'nav.advice') },
+);
+
+const articlesSorted = allArticles
+  .map((a) => a.data)
+  .sort((a, b) => (b.updatedAt ?? b.publishedAt).localeCompare(a.updatedAt ?? a.publishedAt));
 ---
-<ProductLanding
-  product={entry.data}
-  brand={brand.data}
-  locale={locale}
-  canonical={canonical}
-  alternates={alternates}
-/>
+{route.kind === 'home' && (
+  <HomePage
+    nav={nav}
+    page={data}
+    brand={brand.data}
+    locale={locale}
+    canonical={canonical}
+    alternates={alternates}
+    lines={pick<any>(data.lines, lineBySlug)}
+    featured={pick<any>(data.featured, productBySlug)}
+    articles={pick<any>(data.articles, articleBySlug)}
+  />
+)}
+
+{route.kind === 'line' && (
+  <LinePage
+    nav={nav}
+    fallbackOgImage={fallbackOgImage}
+    line={data}
+    brand={brand.data}
+    locale={locale}
+    canonical={canonical}
+    alternates={alternates}
+    products={productsOfLine(data)}
+    articles={pick<any>(data.articles, articleBySlug)}
+  />
+)}
+
+{route.kind === 'product' && (
+  <ProductLanding
+    nav={nav}
+    product={data}
+    brand={brand.data}
+    locale={locale}
+    canonical={canonical}
+    alternates={alternates}
+  />
+)}
+
+{route.kind === 'article' && (
+  <ArticlePage
+    nav={nav}
+    fallbackOgImage={fallbackOgImage}
+    article={data}
+    brand={brand.data}
+    locale={locale}
+    canonical={canonical}
+    alternates={alternates}
+    line={data.relatedLine ? lineBySlug.get(data.relatedLine) : undefined}
+    products={pick<any>(data.relatedProducts, productBySlug)}
+  />
+)}
+
+{route.kind === 'advice-index' && (
+  <AdviceIndex
+    nav={nav}
+    fallbackOgImage={fallbackOgImage}
+    brand={brand.data}
+    locale={locale}
+    canonical={canonical}
+    alternates={alternates}
+    articles={articlesSorted}
+  />
+)}

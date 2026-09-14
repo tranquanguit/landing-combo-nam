@@ -1,0 +1,31 @@
+{
+  "slug": "home",
+  "locale": "vi",
+  "translationKey": "home",
+  "status": "published",
+  "seo": {
+    "title": "Mocha Việt Nam – Dược mỹ phẩm chăm sóc da công khai nồng độ",
+    "description": "Kem và serum chăm sóc da nám, thâm, da dầu mụn. Công khai tỉ lệ từng hoạt chất, không corticoid, không hydroquinone. Tư vấn trước khi mua.",
+    "ogImage": "/images/packshot-combo.jpg"
+  },
+  "hero": {
+    "eyebrow": "Dược mỹ phẩm Mocha",
+    "heading": "Công thức công khai từng tỉ lệ",
+    "lead": "Phần lớn mỹ phẩm chăm sóc da chỉ liệt kê tên hoạt chất. Mocha công bố cả nồng độ, để bạn so sánh được với bất kỳ sản phẩm nào khác trước khi quyết định.",
+    "image": "/images/packshot-combo.jpg",
+    "imageAlt": "Kem và serum Mocha đặt cạnh nhau trên nền sáng",
+    "primaryCta": { "label": "Xem dòng cho da nám", "href": "/nam-tham/" }
+  },
+  "lines": ["nam-tham"],
+  "featured": ["combo-nam"],
+  "articles": ["nam-noi-tiet-la-gi"],
+  "about": {
+    "eyebrow": "Về Mocha",
+    "heading": "Vì sao chúng tôi in nồng độ lên bao bì",
+    "body": [
+      "Một hũ kem ghi “chiết xuất độc quyền” có thể chứa 0,01% hoạt chất, cũng có thể chứa 3%. Người mua không có cách nào biết, và đó là lý do thị trường chăm sóc da rất khó so sánh.",
+      "Mocha chọn cách ngược lại: mỗi sản phẩm công bố tỉ lệ từng hoạt chất chính, kèm nguồn tham khảo cho vai trò của hoạt chất đó. Bạn có thể mang con số ấy đi đối chiếu với bất kỳ sản phẩm nào khác, kể cả sản phẩm của người khác.",
+      "Đổi lại, chúng tôi không hứa những điều không đo được. Mọi sản phẩm của Mocha là mỹ phẩm dùng ngoài da, không phải thuốc, và kết quả phụ thuộc vào cơ địa cùng mức độ chống nắng hằng ngày."
+    ]
+  }
+}
