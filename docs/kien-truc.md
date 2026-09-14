@@ -167,56 +167,107 @@ fail được thì không phải là cổng.
 
 ## 3. Dữ liệu đi về đâu
 
-Câu trả lời ngắn: **nền tảng này không lưu dữ liệu ở đâu cả.** Nó là file tĩnh
-trên CDN. Không có cơ sở dữ liệu, không có phiên đăng nhập, không có máy chủ
-ứng dụng. Có đúng ba luồng dữ liệu rời khỏi trình duyệt khách:
-
-### 3.1 Đơn hàng → endpoint do Mocha cấu hình
+Trang là file tĩnh trên CDN. Nhưng đơn hàng thì phải nằm ở đâu đó — và nó nằm
+trong **Cloudflare D1**, một cơ sở dữ liệu SQLite chạy ngay cạnh trang.
 
 ```
 Biểu mẫu #order-form
-  → fetch() POST JSON tới PUBLIC_ORDER_ENDPOINT
-  → { pack, name, phone, address, note, dataConsent }
+   │  fetch() POST JSON
+   ▼
+POST /api/orders            functions/api/orders.ts
+   │  kiểm tra → chống bấm hai lần → ghi
+   ▼
+D1 (SQLite)  bảng orders    migrations/0001_orders.sql
+   ▲
+   │  Bearer token
+/admin  ←  GET/PATCH /api/admin/orders
 ```
 
-- Endpoint đặt bằng **biến môi trường lúc build**, không nằm trong mã nguồn.
-  Mocha trỏ nó vào Google Apps Script, n8n, CRM — nền tảng không quyết định
-  thay.
-- **Chưa cấu hình thì không có `<form>`**: khối render thành `<div>`, mọi ô
-  nhập `disabled`, nút không phải `submit`. Không có đường nào để một đơn hàng
-  rơi vào hư không.
-- Endpoint khác tên miền thì **phải** có mặt trong `connect-src` của
-  `public/_headers`; `scripts/check-budget.mjs` đọc endpoint từ chính bản
-  build và làm fail CI nếu thiếu. Lỗi này từng chặn 100% đơn hàng trong một
-  vòng kiểm định trước.
-- Chín kịch bản thật được kiểm bằng trình duyệt thật (`npm run test:order`):
-  gửi thành công, máy chủ 500, mạng đứt, gửi lại sau lỗi, chuyển focus, gửi
-  dưới CSP thật.
+### 3.1 Vì sao cùng tên miền, không phải dịch vụ ngoài
 
-### 3.2 Ô đồng ý dữ liệu cá nhân (Nghị định 13/2023/NĐ-CP)
+Biểu mẫu gửi bằng `fetch()`. Endpoint ở tên miền khác thì **phải** có mặt trong
+`connect-src` của CSP, và một vòng kiểm định trước đã mất 100% đơn hàng đúng vì
+chỗ đó. `/api/orders` cùng gốc thì `'self'` đã đủ: không CORS, không preflight,
+không có gì để quên khi đổi tên miền.
 
-Ô `#data-consent` là **bắt buộc và không tick sẵn**. Không tick thì không gửi
-được, và focus nhảy về chính ô đó. Trạng thái đồng ý đi kèm trong payload
-(`dataConsent`) để Mocha có bằng chứng lưu cùng đơn.
+### 3.2 Lưu gì, và cố tình không lưu gì
 
-### 3.3 Đo lường → chỉ sau khi đồng ý
+| Nhóm | Cột | Ghi chú |
+| --- | --- | --- |
+| Đơn | `order_code`, `created_at`, `product_slug`, `locale`, `pack`, `pack_price` | `order_code` dạng `MC-260914-A7K3`, bỏ ký tự dễ nghe nhầm để đọc qua hotline |
+| Khách | `name`, `phone`, `address`, `country`, `note` | `phone` chuẩn hoá về `0xxxxxxxxx` — `+84`, `84`, có dấu chấm đều gộp về một |
+| Đồng ý | `data_consent`, `consent_text` | **Đúng câu khách đã đọc**, không phải một cờ true/false |
+| Nguồn | `utm_*`, `referrer_host` | Về chiến dịch, không về người. Chỉ lưu tên miền, không lưu URL đầy đủ |
+| Vận hành | `status`, `staff_note`, `updated_at` | 6 trạng thái, ràng buộc bằng `CHECK` ở cấp cơ sở dữ liệu |
+
+**Không lưu:** IP thô, User-Agent, cookie quảng cáo, mã khách của bên thứ ba.
+Chống spam dùng IP đã **băm SHA-256 với muối** rồi cắt còn 16 ký tự, trong bảng
+riêng tự hết hạn — đủ để đếm, không đủ để truy ngược ra một người. Không có
+`IP_SALT` thì bỏ qua hẳn việc đếm, chứ không băm bằng muối rỗng (muối rỗng cho
+ra bảng băm tra ngược được, tức là lưu IP mà tưởng đã ẩn danh).
+
+`consent_text` là cột quan trọng nhất về mặt pháp lý. Nghị định 13/2023/NĐ-CP
+đòi chứng minh được khách đã đồng ý **với điều gì**; một cờ `true` không chứng
+minh được điều đó, nhất là sau này khi câu chữ trên trang đã đổi.
+
+### 3.3 Những gì không thể xảy ra
+
+Mỗi dòng dưới đây là một phép thử chạy trong CI, không phải một lời hứa:
+
+- Không tick ô đồng ý → **không có dòng nào vào cơ sở dữ liệu** (và `CHECK
+  (data_consent = 1)` chặn lần thứ hai ngay ở cấp bảng, kể cả khi có ai ghi
+  thẳng vào D1 sau này)
+- Bấm nút hai lần → **một đơn**, trả lại cùng mã đơn
+- Phản hồi lỗi **không mang tên, số điện thoại hay địa chỉ** khách vừa gõ — log
+  của Cloudflare không phải nơi dữ liệu cá nhân đi qua
+- Website khác POST vào `/api/orders` → **403**
+- Chèn SQL trong tên khách → lưu nguyên văn thành một chuỗi, bảng còn nguyên
+- Gửi dồn dập từ một IP → **429**
+- Ô CSV bắt đầu bằng `=` `+` `-` `@` → vô hiệu hoá trước khi xuất, để mở bằng
+  Excel không thành công thức
+
+### 3.4 Ai đọc được
+
+`/admin` — một trang HTML, không framework, không build. Token nhập một lần và
+chỉ nằm trong `sessionStorage` của tab đang mở; đóng tab là mất. Trang **rỗng**
+cho tới khi token được máy chủ chấp nhận, nên mở được URL cũng không thấy gì.
+
+- `ADMIN_TOKEN` chưa đặt (hoặc ngắn dưới 24 ký tự) → API trả **503, khoá hẳn**,
+  không phải mở toang
+- So sánh token trong thời gian không đổi
+- Mọi phản hồi mang `X-Robots-Tag: noindex` và `Cache-Control: no-store`
+- `/admin` và `/api/` cũng bị chặn trong `robots.txt` — lớp thứ hai, vì
+  robots.txt là đề nghị chứ không phải khoá
+- Nội dung khách gõ luôn đi qua `textContent`, không bao giờ qua `innerHTML`
+
+Chín kịch bản trên trang này được đi thử bằng trình duyệt thật trong CI, gồm cả
+"tên khách chứa `<b>` phải hiện nguyên văn" và "token không rơi vào
+localStorage hay cookie".
+
+### 3.5 Đo lường → chỉ sau khi đồng ý
 
 - Trước khi khách trả lời: **không** nạp GA4, Meta Pixel, TikTok Pixel. Không
   một byte bên thứ ba.
 - Quyết định lưu trong `localStorage` khoá `mocha_analytics_consent`, **trên
   máy khách**, không gửi đi đâu.
 - Sự kiện nội bộ `mocha:lead` chỉ mang `{ pack }`. Không tên, không số điện
-  thoại, không địa chỉ. Có một phép thử tự động khẳng định đúng điều này —
-  vì "chắc là không gửi PII đâu" không phải một phép đo.
+  thoại, không địa chỉ. Có phép thử tự động khẳng định đúng điều này — vì "chắc
+  là không gửi PII đâu" không phải một phép đo.
 
-### 3.4 Ảnh khách hàng và lời chứng
+### 3.6 Ảnh khách hàng và lời chứng
 
 Thư mục `src/media-gated/` chứa 4 ảnh **chưa** có văn bản đồng ý bằng văn bản
 của khách. Chúng **không** vào bản build: `scripts/check-budget.mjs` kiểm và
 fail nếu một trong số đó lọt ra `dist/`. Khi Mocha có văn bản đồng ý, chuyển
 file sang `src/assets/` và bật khối.
 
----
+### 3.7 Còn phải quyết
+
+- **Thời hạn lưu.** Hiện chưa có cơ chế xoá tự động. Cần chốt: giữ đơn bao lâu
+  sau khi giao xong (đề xuất 24 tháng cho nghĩa vụ kế toán), rồi thêm một
+  Routine xoá theo lịch.
+- **Quyền xoá của khách.** Câu đồng ý đã hứa "có thể yêu cầu xoá bất cứ lúc
+  nào". Hiện phải xoá tay bằng `wrangler d1 execute`; nên có nút trên `/admin`.
 
 ## 4. Cổng lúc build: điều gì không thể lọt qua
 
@@ -257,20 +308,33 @@ hoàn toàn **không có hàng rào nào** suốt mười hai vòng đọc mã �
 
 ## 5. Triển khai
 
-Đầu ra là thư mục file tĩnh. Chạy được trên Cloudflare Pages, Netlify, Vercel,
-hay bất cứ CDN nào.
+Trang là file tĩnh; `functions/` chạy trên Cloudflare Pages Functions và cần D1.
 
 ```bash
-PUBLIC_ORDER_ENDPOINT=https://.../orders npm run build
-# deploy dist/
+# một lần, lúc dựng
+npx wrangler d1 create mocha-orders           # dán database_id vào wrangler.toml
+npm run db:migrate                            # tạo bảng orders + rate_limit
+npx wrangler pages secret put ADMIN_TOKEN     # chuỗi ngẫu nhiên >= 32 ký tự
+npx wrangler pages secret put IP_SALT         # chuỗi ngẫu nhiên, không đổi về sau
+
+# mỗi lần deploy
+PUBLIC_ORDER_ENDPOINT=/api/orders npm run build
+npx wrangler pages deploy dist
 ```
+
+Chưa đặt `PUBLIC_ORDER_ENDPOINT` thì biểu mẫu **không render thẻ `<form>`** và
+hiện hotline thay thế — một đơn hàng rơi vào hư không tệ hơn nhiều so với một
+nút không hoạt động.
 
 `public/_headers` đi kèm bản build và **là file trong repo** — CSP, HSTS,
 `Permissions-Policy`, `X-Content-Type-Options`, cache bất biến cho tài nguyên
 có hash. Bảy vòng kiểm định trước ghi "nên bật CSP ở phía hosting" mà không ai
 bật được, vì không ai biết nó nằm ở đâu. Nay nó nằm ở đây.
 
----
+**Chưa chạy thử trên Cloudflare thật.** Toàn bộ phần máy chủ được kiểm bằng
+SQLite thật và trình duyệt thật trong Node, nhưng lần deploy đầu tiên lên
+Cloudflare vẫn cần đi lại một lượt đặt thử đơn — cấu hình binding và secret là
+thứ chỉ sai được ở đúng nơi đó.
 
 ## 6. Chạy lại mọi con số trong tài liệu này
 
@@ -281,5 +345,7 @@ npm run check          # 0 lỗi kiểu
 npm run test:guards    # 466 ca hàng rào
 npm run test:seo       # 60 phép đo SEO trên bản build
 npm run test:order     # 9 kịch bản đặt hàng trong trình duyệt thật
+npm run test:orders-api # 20 kịch bản API đơn hàng trên SQLite thật
+npm run test:admin     # 9 kịch bản trang quản trị trong trình duyệt thật
 node scripts/check-budget.mjs
 ```

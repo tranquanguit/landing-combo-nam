@@ -101,6 +101,11 @@ jobs:
           }
           echo "ok: cổng CSP chặn đúng endpoint ngoài connect-src, đúng lý do"
 
+      # Trang quản trị là nơi duy nhất dữ liệu cá nhân của khách hiện lên màn
+      # hình. Đi thử bằng trình duyệt thật, trên SQLite thật, mỗi lần push.
+      - name: Kiểm thử trang quản trị đơn hàng
+        run: npm run test:admin
+
       # SEO đo từ bản build, không đọc mã nguồn. Bước cuối vì nó cần dist/ ở
       # trạng thái sạch — bước trên để lại bản build với endpoint giả.
       - name: Báo cáo SEO

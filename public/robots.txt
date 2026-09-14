@@ -51,6 +51,13 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
+# Trang quản trị và API: không có gì để lập chỉ mục, và /admin hiển thị dữ liệu
+# cá nhân của khách. Cả hai cũng trả X-Robots-Tag: noindex ở phía máy chủ —
+# dòng dưới đây chỉ là lớp thứ hai, vì robots.txt là đề nghị chứ không phải khoá.
+User-agent: *
+Disallow: /admin
+Disallow: /api/
+
 Sitemap: https://mochatrinam.com/sitemap-index.xml
 
 # Bản tóm tắt dành cho máy đọc (song ngữ)

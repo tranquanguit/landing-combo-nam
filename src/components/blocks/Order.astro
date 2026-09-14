@@ -18,6 +18,14 @@ const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
  * khách mất sạch dữ liệu đã gõ. Không có phần tử form thì không có gì để submit.
  */
 const Wrapper = endpoint ? 'form' : 'div';
+
+/**
+ * Chính câu khách đã đọc lúc bấm, dạng văn bản thuần, gửi kèm đơn và lưu vào
+ * cơ sở dữ liệu. Nghị định 13/2023/NĐ-CP đòi chứng minh được khách đã đồng ý
+ * với ĐIỀU GÌ — lưu một cờ true/false thì không chứng minh được điều đó, nhất
+ * là sau này khi câu chữ trên trang đã đổi.
+ */
+const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
 ---
 <section id="dat-hang" class="surface-navy defer" aria-labelledby="dat-hang-title">
   <div class="wrap order-grid">
@@ -111,6 +119,19 @@ const Wrapper = endpoint ? 'form' : 'div';
           <textarea id="note" name="note" rows="2" disabled={!endpoint}></textarea>
         </div>
 
+        {/* Bẫy bot: người thật không thấy và bàn phím không tới được. Không dùng
+            display:none — vài bot biết bỏ qua ô ẩn kiểu đó. */}
+        <div class="trap" aria-hidden="true">
+          <label for="website">Website</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        {/* Ngữ cảnh đơn hàng: máy chủ cần biết đơn này của sản phẩm nào, tiếng
+            gì, và khách đã đồng ý với câu chữ nào. */}
+        <input type="hidden" name="productSlug" value={p.slug} />
+        <input type="hidden" name="locale" value={locale} />
+        <input type="hidden" name="consentText" value={consentText} />
+
         <label class="agree">
           <input type="checkbox" id="data-consent" name="dataConsent" required disabled={!endpoint} />
           <span set:html={richText(t(locale, 'form.dataConsent'))} />
@@ -143,7 +164,10 @@ const Wrapper = endpoint ? 'form' : 'div';
         </p>
       </noscript>
 
-      <p class="ok" id="form-success" role="status" hidden>{t(locale, 'form.success')}</p>
+      <p class="ok" id="form-success" role="status" hidden>
+        {t(locale, 'form.success')}
+        <span class="code" id="order-code" hidden></span>
+      </p>
 
       <p class="fail" id="form-error" role="alert" hidden>
         {t(locale, 'form.failed')} <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a>
@@ -220,6 +244,11 @@ const Wrapper = endpoint ? 'form' : 'div';
   .agree input { width: 24px; height: 24px; accent-color: var(--indigo); flex: 0 0 auto; margin: 0; }
   .agree:focus-within { outline: 3px solid var(--indigo-lift); outline-offset: 3px; border-radius: var(--r-input); }
 
+  .trap {
+    position: absolute; width: 1px; height: 1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+  }
+
   .total { font-size: var(--t-sm); margin: var(--s-4) 0; }
   .total strong { color: var(--ink-navy); }
   .fail {
@@ -235,6 +264,11 @@ const Wrapper = endpoint ? 'form' : 'div';
   /* Không có JavaScript thì biểu mẫu không gửi đi đâu được, nên ẩn hẳn
      thay vì để nó POST về chính trang và làm mất dữ liệu khách đã gõ. */
   html:not(.js) #order-form { display: none; }
+  .code {
+    display: block; margin-top: var(--s-2);
+    font-family: var(--font-figure); font-weight: 600; letter-spacing: .06em;
+    color: var(--ink-navy);
+  }
   .ok {
     background: #e6f4ee; border: 1.5px solid var(--green-clinic); color: #0a4b38;
     border-radius: var(--r-card); padding: var(--s-4); font-weight: 600; margin: 0;
@@ -275,8 +309,12 @@ const Wrapper = endpoint ? 'form' : 'div';
     };
 
     const addressField = form.elements.namedItem('address') as HTMLInputElement | null;
+    /* Gói đang chọn — ba chỗ cần tới nó: bắt buộc địa chỉ hay không, tổng tiền,
+       và giá gửi kèm đơn. Một hàm, không phải ba lần truy vấn giống hệt nhau. */
+    const pickedPack = () => form.querySelector<HTMLInputElement>('input[name="pack"]:checked');
+
     const addressRequired = () => {
-      const picked = form.querySelector<HTMLInputElement>('input[name="pack"]:checked');
+      const picked = pickedPack();
       // Không có gói nào để chọn (sản phẩm không khai variants) thì đây là đơn
       // mua bình thường và địa chỉ là bắt buộc. Kiểm định lần 8: bản trước trả
       // false trong trường hợp này, nên cả một lớp sản phẩm nhận đơn KHÔNG có
@@ -317,7 +355,7 @@ const Wrapper = endpoint ? 'form' : 'div';
     const totalBox = document.getElementById('order-total');
     const totalValue = totalBox?.querySelector('[data-total]');
     const syncTotal = () => {
-      const picked = form.querySelector<HTMLInputElement>('input[name="pack"]:checked');
+      const picked = pickedPack();
       if (!totalBox || !totalValue || !picked) return;
       const text = picked.dataset.priceText ?? '';
       totalBox.hidden = text === '';
@@ -363,6 +401,18 @@ const Wrapper = endpoint ? 'form' : 'div';
       const payload = Object.fromEntries(new FormData(form).entries());
       if (vietnameseOnly) payload.phone = normalisePhone(String(payload.phone ?? ''));
 
+      /* Giá của gói đang chọn: máy chủ không tin con số này để tính tiền, nhưng
+         lưu lại để đối chiếu nếu khách nói "lúc tôi đặt giá khác". */
+      payload.packPrice = pickedPack()?.dataset.price ?? '';
+
+      /* Nguồn quảng cáo: đọc từ URL, không từ cookie. Đây là thông tin về chiến
+         dịch, không phải về người — nên không cần đồng ý theo dõi. */
+      const q = new URLSearchParams(location.search);
+      for (const k of ['Source', 'Medium', 'Campaign']) {
+        const v = q.get(`utm_${k.toLowerCase()}`);
+        if (v) payload[`utm${k}`] = v.slice(0, 120);
+      }
+
       const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
       const failBox = document.getElementById('form-error');
       /* Dọn thông báo lỗi của lần gửi trước: nếu không, gửi lại thành công sẽ
@@ -380,11 +430,22 @@ const Wrapper = endpoint ? 'form' : 'div';
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
-        .then((res) => {
+        .then(async (res) => {
           if (!res.ok) throw new Error(String(res.status));
+          /* Máy chủ có thể trả 200 kèm ok:false; coi đó là thất bại, đừng báo
+             thành công cho một đơn chưa vào cơ sở dữ liệu. */
+          const data = await res.json().catch(() => ({}));
+          if (data.ok === false) throw new Error(data.error);
           form.hidden = true;
           const ok = document.getElementById('form-success');
           if (ok) {
+            /* Mã đơn để khách đọc lại qua hotline. Chèn bằng textContent, không
+               phải innerHTML — chuỗi này đến từ mạng. */
+            const codeBox = document.getElementById('order-code');
+            if (codeBox && typeof data.orderCode === 'string') {
+              codeBox.textContent = data.orderCode;
+              codeBox.hidden = false;
+            }
             ok.hidden = false;
             /* Form biến mất nên focus rơi về body; đưa focus sang thông báo để
                người dùng bàn phím và trình đọc màn hình biết chuyện gì xảy ra. */

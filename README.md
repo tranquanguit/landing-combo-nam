@@ -23,6 +23,10 @@ src/assets/images/           ảnh nguồn, được astro:assets xử lý thàn
 public/                      font self-host, robots.txt, favicon
 scripts/check-budget.mjs     cổng ngân sách trọng lượng, chạy trong CI
 scripts/seo-report.mjs       60 phép đo SEO trên dist/, chạy trong CI
+functions/api/orders.ts      nhận đơn, ghi vào Cloudflare D1
+functions/api/admin/orders.ts  đọc/cập nhật đơn, cần Bearer token
+functions/admin/index.ts     trang xem đơn cho nhân viên (/admin)
+migrations/0001_orders.sql   lược đồ cơ sở dữ liệu đơn hàng
 ```
 
 ## Thêm một sản phẩm mới

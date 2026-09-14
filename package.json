@@ -9,14 +9,18 @@
     "preview": "astro preview",
     "check": "astro check --minimumFailingSeverity error",
     "test:order": "node tests/order-endpoint.mjs",
-    "test:guards": "node --experimental-strip-types tests/money-guard.mjs && node --experimental-strip-types tests/claims-guard.mjs && node --experimental-strip-types tests/richtext.mjs && node --experimental-strip-types tests/personal-data.mjs && node --experimental-strip-types tests/pattern-lint.mjs && npm run test:schema && node --experimental-strip-types tests/ui-strings.mjs && npm run test:budget && npm run test:brand && npm run test:offer",
+    "test:guards": "node --experimental-strip-types tests/money-guard.mjs && node --experimental-strip-types tests/claims-guard.mjs && node --experimental-strip-types tests/richtext.mjs && node --experimental-strip-types tests/personal-data.mjs && node --experimental-strip-types tests/pattern-lint.mjs && npm run test:schema && node --experimental-strip-types tests/ui-strings.mjs && npm run test:budget && npm run test:brand && npm run test:offer && npm run test:orders-api",
     "docs:fields": "node --experimental-strip-types --import ./scripts/shim/register.mjs scripts/gen-field-docs.mjs",
     "test:schema": "node --experimental-strip-types --import ./scripts/shim/register.mjs tests/schema-gate.mjs",
     "test:budget": "node tests/budget-gate.mjs",
     "test:brand": "node --experimental-strip-types --import ./scripts/shim/register.mjs tests/brand-gate.mjs",
     "test:offer": "node tests/offer-window.mjs",
     "test:seo": "node scripts/seo-report.mjs",
-    "docs:seo": "node scripts/seo-report.mjs --md docs/bao-cao-seo.md"
+    "docs:seo": "node scripts/seo-report.mjs --md docs/bao-cao-seo.md",
+    "test:orders-api": "node --experimental-strip-types --experimental-sqlite tests/orders-api.mjs",
+    "test:admin": "node --experimental-strip-types --experimental-sqlite tests/admin-page.mjs",
+    "db:migrate": "wrangler d1 execute mocha-orders --remote --file=migrations/0001_orders.sql",
+    "db:migrate:local": "wrangler d1 execute mocha-orders --local --file=migrations/0001_orders.sql"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

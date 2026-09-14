@@ -1,7 +1,7 @@
 <!-- Sinh tự động bởi scripts/seo-report.mjs — đừng sửa tay. -->
 # Báo cáo SEO (đo từ bản build)
 
-Đo lúc: 2026-09-14T13:26:39.883Z  
+Đo lúc: 2026-09-14T14:41:43.758Z  
 Kết quả: **60/60 phép đo đạt**, 0 lỗi.
 
 | Phạm vi | Phép đo | Kết quả | Giá trị đo được |
@@ -28,7 +28,7 @@ Kết quả: **60/60 phép đo đạt**, 0 lỗi.
 | `/en/` | giá trong JSON-LD xuất hiện trên trang | ✅ | khớp |
 | `/en/` | neo trong trang đều tồn tại | ✅ | 10 neo |
 | `/en/` | liên kết nội bộ đều tồn tại trong dist | ✅ | không gãy |
-| `/en/` | nội dung hiển thị > 300 từ | ✅ | 2075 từ |
+| `/en/` | nội dung hiển thị > 300 từ | ✅ | 2076 từ |
 | `/` | title dài 15–65 ký tự | ✅ | 62 ký tự: "Combo Nám Mocha – Kem & Serum chăm sóc da nám \| Mocha Việt Nam" |
 | `/` | description dài 70–160 ký tự | ✅ | 156 ký tự |
 | `/` | canonical tự trỏ, tuyệt đối | ✅ | https://mochatrinam.com/ |
@@ -51,7 +51,7 @@ Kết quả: **60/60 phép đo đạt**, 0 lỗi.
 | `/` | giá trong JSON-LD xuất hiện trên trang | ✅ | khớp |
 | `/` | neo trong trang đều tồn tại | ✅ | 10 neo |
 | `/` | liên kết nội bộ đều tồn tại trong dist | ✅ | không gãy |
-| `/` | nội dung hiển thị > 300 từ | ✅ | 2517 từ |
+| `/` | nội dung hiển thị > 300 từ | ✅ | 2518 từ |
 | `site` | title không trùng giữa các trang | ✅ | 2 title khác nhau |
 | `site` | description không trùng giữa các trang | ✅ | 2 mô tả khác nhau |
 | `site` | hreflang đối xứng hai chiều | ✅ | 2 trang, mỗi trang 2 bản dịch |
