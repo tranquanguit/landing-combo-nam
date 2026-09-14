@@ -3,6 +3,11 @@
 Astro 7, xuất HTML tĩnh. Mỗi sản phẩm là **một file JSON**; bố cục và thứ tự khối do
 chính file đó quyết định, không phải sửa code.
 
+> **Bắt đầu ở đây:** [`docs/kien-truc.md`](docs/kien-truc.md) — trang được tổ chức
+> thế nào, tại sao nó tốt cho SEO, và dữ liệu khách hàng đi về đâu.
+> Bằng chứng SEO đo từ bản build: [`docs/bao-cao-seo.md`](docs/bao-cao-seo.md)
+> (`npm run test:seo`).
+
 ```
 src/
   content.config.ts          schema Zod cho catalog + các khối nội dung
@@ -17,6 +22,7 @@ src/
 src/assets/images/           ảnh nguồn, được astro:assets xử lý thành AVIF/WebP nhiều kích thước
 public/                      font self-host, robots.txt, favicon
 scripts/check-budget.mjs     cổng ngân sách trọng lượng, chạy trong CI
+scripts/seo-report.mjs       60 phép đo SEO trên dist/, chạy trong CI
 ```
 
 ## Thêm một sản phẩm mới

@@ -14,7 +14,9 @@
     "test:schema": "node --experimental-strip-types --import ./scripts/shim/register.mjs tests/schema-gate.mjs",
     "test:budget": "node tests/budget-gate.mjs",
     "test:brand": "node --experimental-strip-types --import ./scripts/shim/register.mjs tests/brand-gate.mjs",
-    "test:offer": "node tests/offer-window.mjs"
+    "test:offer": "node tests/offer-window.mjs",
+    "test:seo": "node scripts/seo-report.mjs",
+    "docs:seo": "node scripts/seo-report.mjs --md docs/bao-cao-seo.md"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

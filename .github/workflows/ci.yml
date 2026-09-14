@@ -100,3 +100,19 @@ jobs:
             exit 1
           }
           echo "ok: cổng CSP chặn đúng endpoint ngoài connect-src, đúng lý do"
+
+      # SEO đo từ bản build, không đọc mã nguồn. Bước cuối vì nó cần dist/ ở
+      # trạng thái sạch — bước trên để lại bản build với endpoint giả.
+      - name: Báo cáo SEO
+        run: npm run build && node scripts/seo-report.mjs
+
+      # Khẳng định báo cáo SEO FAIL ĐƯỢC. Một báo cáo luôn xanh không chứng
+      # minh điều gì; chỉ có báo cáo phát hiện được hỏng hóc mới là bằng chứng.
+      - name: Báo cáo SEO phải bắt được lỗi
+        run: |
+          sed -i 's|rel="canonical" href="https://mochatrinam.com/"|rel="canonical" href="https://vi-du.example/"|' dist/index.html
+          out=$(node scripts/seo-report.mjs 2>&1) && {
+            echo "LỖI: canonical sai mà báo cáo vẫn xanh" >&2; exit 1; }
+          echo "$out" | grep -q 'LỖI  canonical tự trỏ' || {
+            echo "LỖI: báo cáo fail nhưng không phải vì canonical" >&2; exit 1; }
+          echo "ok: báo cáo SEO chặn đúng canonical sai, đúng lý do"
