@@ -73,6 +73,11 @@ const {
         Chỉ preload hai file cần ngay cho màn hình đầu: body 400 và tiêu đề Fraunces 600. */}
     <link rel="preload" href="/fonts/bvp-400-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/bvp-400-vietnamese.woff2" as="font" type="font/woff2" crossorigin />
+    {/* Tiêu đề nay đặt ở cỡ rất lớn bằng weight 600, nên độ lệch metric giữa
+        font dự phòng và font thật bị phóng đại: đo được CLS 0.0368 trên bản EN
+        ở 390px khi chỉ preload weight 400. Preload thêm 600. */}
+    <link rel="preload" href="/fonts/bvp-600-vietnamese.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/bvp-600-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/fraunces-600-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/fraunces-600-vietnamese.woff2" as="font" type="font/woff2" crossorigin />
 

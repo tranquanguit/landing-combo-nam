@@ -20,9 +20,11 @@ const headingId = id ? `${id}-title` : undefined;
 >
   <div class="wrap">
     {heading && (
-      <div class:list={['section-head', center && 'center']}>
-        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-        <h2 id={headingId}>{heading}</h2>
+      <div class:list={['section-head', center ? 'center' : 'split-head']}>
+        <div class="head-title">
+          {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+          <h2 id={headingId}>{heading}</h2>
+        </div>
         {intro && <p class="lead">{intro}</p>}
       </div>
     )}

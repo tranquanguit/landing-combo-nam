@@ -4,7 +4,7 @@ import Picture from '../Picture.astro';
 interface Props { data: any; id?: string; surface?: any; }
 const { data, id, surface = 'bone' } = Astro.props;
 ---
-<Section id={id} surface={surface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} center>
+<Section id={id} surface={surface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
   <ul class="grid" style={`--cols:${data.columns}`}>
     {data.items.map((item: any) => (
       <li class="card">

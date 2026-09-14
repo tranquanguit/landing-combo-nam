@@ -4,7 +4,7 @@ import { richText } from '../../lib/richtext';
 interface Props { data: any; id?: string; }
 const { data, id = 'huong-dan' } = Astro.props;
 ---
-<Section id={id} surface="mist" eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} center>
+<Section id={id} surface="mist" eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
   <ol class="steps">
     {data.items.map((s: any) => (
       <li class="card">
@@ -20,11 +20,14 @@ const { data, id = 'huong-dan' } = Astro.props;
   .steps { list-style: none; counter-reset: s; padding: 0; margin: 0; display: grid; gap: var(--s-4); }
   @media (min-width: 760px) { .steps { grid-template-columns: repeat(4, 1fr); } }
   .steps li { counter-increment: s; position: relative; padding-top: var(--s-6); }
+  /* Số bước đặt bằng face chữ số, cỡ lớn, màu thép nhạt — nó là ký hiệu thứ tự
+     của tờ đặc tả, không phải huy hiệu tròn. */
   .steps li::before {
-    content: counter(s);
-    position: absolute; top: var(--s-5); left: var(--s-5);
-    font-family: var(--font-display); font-size: var(--t-lg); font-weight: 600;
-    color: var(--indigo-lift); line-height: 1;
+    content: counter(s, decimal-leading-zero);
+    position: absolute; top: 0; left: 0;
+    font-family: var(--font-figure); font-size: var(--t-lg); font-weight: 600;
+    color: var(--line-strong); line-height: 1;
+    font-variant-numeric: lining-nums;
   }
   .steps h3 { font-size: var(--t-base); margin-bottom: var(--s-2); }
   .steps p { font-size: var(--t-sm); color: var(--ink-muted); }

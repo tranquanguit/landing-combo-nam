@@ -30,15 +30,15 @@ if (offerExpired) {
       )}
     </div>
 
-    <div class="price-card on-light">
+    <div class="price-card on-light card-raised">
       <p class="price-row">
-        <span class="now tabular">{money(p.price, p.currency, locale)}</span>
+        <span class="now figure">{money(p.price, p.currency, locale)}</span>
         {p.compareAtPrice && (
-          <span class="was tabular"><span class="sr-only">{t(locale, 'price.from')} </span>{money(p.compareAtPrice, p.currency, locale)}</span>
+          <span class="was figure"><span class="sr-only">{t(locale, 'price.from')} </span>{money(p.compareAtPrice, p.currency, locale)}</span>
         )}
       </p>
       {save > 0 && (
-        <p class="save tabular">{t(locale, 'price.save')} {money(save, p.currency, locale)}</p>
+        <p class="save">{t(locale, 'price.save')} {money(save, p.currency, locale)}</p>
       )}
 
       <ul class="contents">
@@ -70,15 +70,12 @@ if (offerExpired) {
     font-size: var(--t-sm); color: rgba(255, 255, 255, .78);
   }
 
-  .price-card {
-    background: var(--paper); color: var(--ink);
-    border-radius: var(--r-card); padding: var(--s-5);
-    box-shadow: var(--shadow-2);
-  }
+  .price-card { color: var(--ink); }
   .price-row { display: flex; align-items: baseline; gap: var(--s-3); margin: 0; flex-wrap: wrap; }
-  .now { font-family: var(--font-display); font-size: var(--t-2xl); font-weight: 600; color: var(--ink-navy); line-height: 1; }
-  .was { color: var(--ink-muted); text-decoration: line-through; font-size: var(--t-sm); }
-  .save { color: var(--green-clinic); font-weight: 600; font-size: var(--t-sm); margin: var(--s-2) 0 var(--s-4); }
+  .now { font-size: clamp(2.2rem, 4vw, var(--t-2xl)); font-weight: 600; color: var(--ink-navy); line-height: 1; }
+  .was { color: var(--slate); text-decoration: line-through; font-size: var(--t-sm); }
+  /* Mức tiết kiệm là một dòng chữ, không phải nhãn màu. */
+  .save { color: var(--slate); font-size: var(--t-sm); margin: var(--s-3) 0 var(--s-5); }
 
   .contents { list-style: none; padding: 0; margin: 0 0 var(--s-4); display: grid; gap: var(--s-2); font-size: var(--t-sm); }
   .contents strong { color: var(--ink-navy); }

@@ -20,7 +20,7 @@ const publishable = data.consent?.obtained === true;
 const showPlaceholder = !publishable && import.meta.env.DEV;
 ---
 {(publishable || showPlaceholder) && (
-<Section id={id} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} center>
+<Section id={id} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
   {showPlaceholder && (
     <p class="todo" data-todo>
       ⚠️ {t(locale, 'todo')}: {data.consent?.statement}

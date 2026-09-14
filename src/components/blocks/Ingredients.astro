@@ -3,8 +3,17 @@ import Section from '../Section.astro';
 import { t, type Locale } from '../../i18n/ui';
 interface Props { data: any; id?: string; locale: Locale; }
 const { data, id = 'thanh-phan', locale } = Astro.props;
+
+/**
+ * Tách phần trăm ra khỏi tên hoạt chất để đặt bằng face dành cho chữ số.
+ * "Tranexamic Acid 3%" -> "Tranexamic Acid <span class=pct>3%</span>"
+ * Chỉ bọc thẻ quanh chính chuỗi số; phần còn lại escape bình thường.
+ */
+const esc = (v: string) => v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const splitPct = (name: string) =>
+  esc(name).replace(/(\d+(?:[.,]\d+)?\s*%)/g, '<span class="pct">$1</span>');
 ---
-<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} center>
+<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
   {/* tabindex + role: vùng cuộn ngang phải tới được bằng bàn phím,
       nếu không người dùng chỉ có bàn phím không đọc được các cột bên phải. */}
   <div class="scroll" tabindex="0" role="region" aria-label={data.heading}>
@@ -21,7 +30,7 @@ const { data, id = 'thanh-phan', locale } = Astro.props;
         {data.rows.map((r: any) => (
           <tr>
             <th scope="row">
-              {r.name}
+              <span class="name" set:html={splitPct(r.name)} />
               {r.reference && (
                 <> <a href={r.reference} rel="noopener nofollow" target="_blank" class="ref">{t(locale, 'table.source')}</a></>
               )}
@@ -37,15 +46,70 @@ const { data, id = 'thanh-phan', locale } = Astro.props;
 </Section>
 
 <style>
-  .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-card); }
-  .scroll:focus-visible { outline: 3px solid var(--indigo-lift); outline-offset: 2px; }
-  table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: var(--t-sm); }
-  caption { text-align: left; padding: var(--s-4) var(--s-4) 0; color: var(--ink-muted); font-size: var(--t-xs); }
-  th, td { padding: 13px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
-  thead th { background: var(--ink-navy); color: #fff; font-weight: 600; border-bottom: 0; }
-  tbody tr:nth-child(even) { background: var(--bone); }
-  tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
-  tbody th { color: var(--ink-navy); font-weight: 600; }
-  .ref { font-size: var(--t-xs); font-weight: 400; white-space: nowrap; display: inline-block; min-height: 24px; line-height: 24px; }
-  .ref-note { display: block; margin-top: 4px; font-size: var(--t-xs); font-weight: 400; color: var(--ink-muted); }
+  /* Tờ đặc tả, không phải bảng dữ liệu.
+     Bản trước: hộp bo góc, hàng sọc xen kẽ, header navy đặc — ngôn ngữ của
+     trang quản trị. Nay chỉ còn gạch tóc ngang, nhiều khoảng trống, tên hoạt
+     chất lớn, và NỒNG ĐỘ tách ra đặt bằng face dành cho chữ số. */
+  .scroll { overflow-x: auto; }
+  .scroll:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 4px; }
+
+  table { width: 100%; border-collapse: collapse; min-width: 620px; }
+  caption {
+    text-align: left; padding: 0 0 var(--s-5);
+    color: var(--slate); font-size: var(--t-xs); max-width: 62ch;
+  }
+  thead th {
+    font-size: var(--t-2xs); font-weight: 600;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--slate);
+    padding: 0 var(--s-5) var(--s-3) 0;
+    text-align: left; vertical-align: bottom;
+    border-bottom: 1px solid var(--ink-navy);
+    background: transparent;
+  }
+  tbody th, tbody td {
+    padding: var(--s-5) var(--s-5) var(--s-5) 0;
+    text-align: left; vertical-align: top;
+    border-bottom: 1px solid var(--line);
+    font-size: var(--t-sm); line-height: 1.55;
+    color: var(--ink-muted);
+    font-weight: 400;
+  }
+  tbody tr:last-child :is(th, td) { border-bottom: 0; }
+  tbody th { width: 34%; }
+
+  .name {
+    display: block;
+    font-size: var(--t-md);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--ink-navy);
+    font-weight: 600;
+    margin-bottom: var(--s-2);
+  }
+  /* Nồng độ tách khỏi tên và đặt bằng face chữ số — chi tiết chỉ sản phẩm này
+     mới có, vì nó là thứ duy nhất nó thật sự công khai. */
+  .pct {
+    font-family: var(--font-figure);
+    font-variant-numeric: tabular-nums lining-nums;
+    color: var(--cobalt);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .ref {
+    font-size: var(--t-2xs); letter-spacing: .1em; text-transform: uppercase;
+    color: var(--slate); text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    display: inline-block; min-height: 24px; line-height: 24px;
+  }
+  .ref:hover { color: var(--cobalt); border-color: currentColor; }
+  .ref-note {
+    display: block; margin-top: var(--s-2);
+    font-size: var(--t-2xs); color: var(--slate); line-height: 1.5;
+  }
+
+  @media (max-width: 700px) {
+    table { min-width: 520px; }
+    tbody th { width: 42%; }
+  }
 </style>

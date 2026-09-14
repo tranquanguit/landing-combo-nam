@@ -1,55 +1,93 @@
 /* ==========================================================================
-   Mocha — design tokens
-   Bảng màu lấy từ bao bì thật: chai/hũ indigo bóng, chữ bạc.
-   Nền bone ấm thay vì trắng xanh kiểu bệnh viện.
-   Tương phản đã kiểm: ink trên bone 15.7:1, trắng trên green-clinic 6.5:1.
+   Mocha — hệ thị giác: "tờ đặc tả của nhà bào chế"
+
+   Điều duy nhất sản phẩm này thật sự khác biệt là CÔNG KHAI TỈ LỆ từng hoạt
+   chất. Nên trang đối xử với con số nồng độ như một hãng đồng hồ đối xử với
+   thông số bộ máy: đường nét mảnh, khoảng trống rộng, chữ số được đặt trang
+   trọng, và không một nhãn giảm giá nào.
+
+   Ba quyết định định hình toàn bộ:
+   1. Nền giấy phòng thí nghiệm xanh-xám (không phải kem ấm, không phải tím
+      nhạt). Mực indigo lấy từ chai thật; điểm nhấn cobalt cũng từ chai thật.
+   2. Be Vietnam Pro làm chữ HIỂN THỊ ở cỡ lớn — một thương hiệu Việt dùng
+      typeface vẽ riêng cho dấu tiếng Việt. Fraunces KHÔNG dùng cho tiêu đề nữa;
+      nó chỉ dành cho CON SỐ (3%, 2%, giá, mốc tuần), đúng cách một tờ đặc tả
+      tách chữ số ra khỏi văn bản.
+   3. Gạch tóc 1px thay cho viền hộp và đổ bóng. Trước đây mọi khối đều là thẻ
+      bo góc có bóng, nên không gì nổi bật được vì mọi thứ đều nổi.
+
+   Tương phản đã đo bằng công thức WCAG: ink-navy trên paper 15.15:1,
+   slate trên paper 5.40:1 và trên bone 4.99:1, cobalt trên paper 8.89:1.
    ========================================================================== */
 :root {
-  --ink-navy: #0e1250;
-  --indigo: #2a2fa0;
-  --indigo-lift: #4b4fd6;
-  --violet-mist: #edeafb;
-  --bone: #f7f5f2;
-  --paper: #ffffff;
-  --ink: #1b1b22;
-  --ink-muted: #5a5a6e;
-  --line: #d6d1c8;
-  /* Viền của điều khiển nhập liệu phải đạt >= 3:1 theo WCAG 1.4.11 */
-  --line-control: #8d8578;
-  --green-clinic: #0b6b4f;
-  --green-lift: #0a7d5b;
-  --amber-note: #fff4d6;
-  --amber-edge: #8a6508;   /* 4.72:1 trên --amber-note; #b8860b chỉ 2.97:1, trượt SC 1.4.11 */
+  /* --- mực --- */
+  --ink: #15162e;            /* gần đen ngả indigo, không dùng đen thuần */
+  --ink-navy: #1a1d52;       /* indigo sâu của chai */
+  --ink-muted: #5d6076;
+  /* 5.40:1 trên paper, 4.99:1 trên bone. Bản đầu dùng #767a90 (4.10:1) — trượt
+     AA cho chữ nhỏ. Đổi bảng màu là chỗ dễ làm vỡ tương phản nhất; số này đo
+     bằng công thức WCAG chứ không chọn bằng mắt. */
+  --slate: #63677c;
+
+  /* --- nền --- */
+  --paper: #fbfbfd;
+  --bone: #f1f2f6;           /* giấy phòng thí nghiệm, xanh-xám rất nhạt */
+  --vellum: #e8eaf1;         /* dải nền thứ ba, dùng rất tiết chế */
+  --violet-mist: #e8eaf1;    /* giữ tên cũ để không vỡ các surface đã dùng */
+
+  /* --- điểm nhấn --- */
+  --cobalt: #2b34b8;         /* cobalt của bao bì; dùng cho liên kết và nét nhấn */
+  --cobalt-lift: #3f4ad6;
+  --indigo: #2b34b8;         /* tên cũ, trỏ về cobalt */
+  --indigo-lift: #3f4ad6;
+  --steel: #c8ccd8;          /* gạch tóc */
+  --line: #d9dce5;
+  --line-strong: #b6bbc9;
+  --line-control: #8b90a2;   /* viền ô nhập: 3.2:1 trên paper */
+
+  /* Xanh xác minh — chỉ dùng cho chấm ngữ nghĩa, không dùng cho nút hay nhãn */
+  --verify: #1f6b4d;
+  --green-clinic: #1f6b4d;
+  --green-lift: #185a40;
+
+  --amber-note: #fdf6e3;
+  --amber-edge: #8a6508;
   --amber-ink: #6b4e00;
 
-  --font-display: 'Fraunces', 'Fraunces Fallback', Georgia, 'Times New Roman', serif;
+  --font-display: 'Be Vietnam Pro', 'Be Vietnam Pro Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Be Vietnam Pro', 'Be Vietnam Pro Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Chỉ dành cho CHỮ SỐ: nồng độ, giá, mốc tuần. */
+  --font-figure: 'Fraunces', 'Fraunces Fallback', Georgia, 'Times New Roman', serif;
 
-  /* Thang 1.25, 13 → 49 */
+  /* Thang 1.26 với tương phản mạnh ở hai đầu: chữ nhỏ nhỏ hẳn, chữ lớn lớn hẳn.
+     Bản trước đỉnh thang chỉ 3.06rem nên tiêu đề không bao giờ thành khoảnh khắc. */
+  --t-2xs: 0.6875rem;
   --t-xs: 0.8125rem;
-  --t-sm: 0.9375rem;
-  --t-base: 1.03rem;
-  --t-md: 1.25rem;
-  --t-lg: 1.5625rem;
-  --t-xl: 1.9375rem;
-  --t-2xl: 2.4375rem;
-  --t-3xl: 3.0625rem;
+  --t-sm: 0.9063rem;
+  --t-base: 1rem;
+  --t-md: 1.1875rem;
+  --t-lg: 1.5rem;
+  --t-xl: 2rem;
+  --t-2xl: 2.75rem;
+  --t-3xl: 3.75rem;
+  --t-4xl: 5rem;
 
   --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
   --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
-  --s-9: 96px; --s-10: 128px;
+  --s-9: 96px; --s-10: 144px;
 
-  --r-input: 4px;
-  --r-card: 10px;
-  --r-media: 20px;
-  --r-btn: 8px;
+  /* Bo góc gần như phẳng: tờ đặc tả không có góc tròn. */
+  --r-input: 2px;
+  --r-card: 3px;
+  --r-media: 2px;
+  --r-btn: 2px;
 
-  /* Đúng hai cấp bóng đổ, không rải shadow lên mọi khối */
-  --shadow-1: 0 1px 2px rgba(14, 18, 80, .06);
-  --shadow-2: 0 12px 32px rgba(14, 18, 80, .10);
+  /* Một cấp bóng duy nhất, chỉ dùng cho thẻ nổi thật sự (form đặt hàng). */
+  --shadow-1: none;
+  --shadow-2: 0 24px 60px -24px rgba(21, 22, 46, .28);
 
-  --wrap: 1120px;
-  --measure: 64ch;
+  --wrap: 1200px;
+  --measure: 58ch;
   --header-h: 60px;
 }
 
@@ -103,20 +141,40 @@ footer :focus-visible {
   outline-color: #b9c0ff;   /* 9.87:1 trên --ink-navy, 12.4:1 trên --ink */
 }
 
+/* Tiêu đề: cỡ lớn, tracking âm, dòng sát. Đây là nơi tạo "khoảnh khắc" —
+   bản trước đỉnh thang quá nhỏ nên tiêu đề chỉ là chữ to hơn một chút. */
 h1, h2, h3 {
   font-family: var(--font-display);
   font-weight: 600;
-  line-height: 1.14;
-  letter-spacing: -0.02em;
   color: var(--ink-navy);
-  margin: 0 0 var(--s-3);
+  margin: 0 0 var(--s-4);
   text-wrap: balance;
 }
-h1 { font-size: clamp(2.1rem, 5vw, var(--t-3xl)); }
-h2 { font-size: clamp(1.6rem, 3.4vw, var(--t-2xl)); }
-h3 { font-size: var(--t-md); }
+h1 {
+  font-size: clamp(2.5rem, 6.2vw, var(--t-4xl));
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+h2 {
+  font-size: clamp(1.85rem, 4vw, var(--t-2xl));
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+h3 {
+  font-size: var(--t-md);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
 p { margin: 0 0 var(--s-4); }
 p:last-child { margin-bottom: 0; }
+
+/* Chữ số của công thức: nồng độ, giá, mốc tuần. Một face riêng cho số là
+   quy ước của tờ đặc tả, và là chi tiết duy nhất sản phẩm này mới có. */
+.figure {
+  font-family: var(--font-figure);
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -0.01em;
+}
 
 .wrap {
   width: 100%;
@@ -125,7 +183,8 @@ p:last-child { margin-bottom: 0; }
   padding-inline: var(--s-5);
 }
 
-section { padding-block: clamp(56px, 8vw, 104px); }
+/* Khoảng trống là tín hiệu cao cấp rẻ nhất và bị bỏ qua nhiều nhất. */
+section { padding-block: clamp(72px, 10vw, 152px); }
 
 .measure { max-width: var(--measure); }
 .lead { font-size: var(--t-md); color: var(--ink-muted); line-height: 1.6; }
@@ -147,19 +206,54 @@ section { padding-block: clamp(56px, 8vw, 104px); }
   font-weight: 600; text-decoration: none;
 }
 
+/* Nhãn vi mô: nhỏ, giãn chữ rộng, màu xám thép — không phải viên thuốc màu.
+   Kèm một gạch tóc ngắn để nó đọc như số hiệu mục trong tờ đặc tả. */
 .eyebrow {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
   font-family: var(--font-body);
-  font-size: var(--t-xs);
+  font-size: var(--t-2xs);
   font-weight: 600;
-  letter-spacing: .14em;
+  letter-spacing: .2em;
   text-transform: uppercase;
-  color: var(--indigo);
-  margin-bottom: var(--s-3);
+  color: var(--slate);
+  margin-bottom: var(--s-5);
 }
+.eyebrow::before {
+  content: "";
+  width: 28px; height: 1px; flex: 0 0 28px;
+  background: var(--line-strong);
+}
+.section-head.center .eyebrow { justify-content: center; }
 
-.section-head { max-width: 62ch; margin-bottom: clamp(28px, 4vw, 52px); }
-.section-head.center { margin-inline: auto; text-align: center; }
+/* Tiêu đề mục căn TRÁI theo mặc định. Bản trước căn giữa mọi mục, nên trang
+   không có mép trái để mắt bám vào và mọi section trông giống hệt nhau. */
+.section-head {
+  max-width: 22ch;
+  margin-bottom: clamp(36px, 5vw, 72px);
+}
+.section-head h2 { margin-bottom: var(--s-5); }
+.section-head .lead { max-width: 52ch; }
+.section-head.center { margin-inline: auto; text-align: center; max-width: 46ch; }
+.section-head.center .lead { margin-inline: auto; }
+
+/* Bố cục biên tập: tiêu đề chiếm cột hẹp bên trái, nội dung chạy bên phải. */
+@media (min-width: 960px) {
+  .section-head.split-head {
+    display: grid;
+    /* Cột tiêu đề phải đủ rộng cho 2–3 dòng ở cỡ chữ lớn. Bản đầu đặt 26ch nên
+       tiêu đề vỡ thành năm dòng cụt — trông như lỗi bố cục chứ không phải biên tập. */
+    grid-template-columns: minmax(0, 46%) minmax(0, 1fr);
+    gap: clamp(32px, 4vw, 72px);
+    max-width: none;
+    align-items: start;
+  }
+  .section-head.split-head h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); }
+  .section-head.split-head .lead { margin: 0; padding-top: .35em; }
+}
+.section-head .head-title h2 { margin-bottom: 0; }
+.section-head.center .head-title { max-width: 30ch; margin-inline: auto; }
 
 /* Nhịp nền: chỉ đổi giữa bone và paper, riêng 2 khối navy */
 .surface-paper { background: var(--paper); }
@@ -177,31 +271,48 @@ section { padding-block: clamp(56px, 8vw, 104px); }
 .surface-navy .on-light :is(h1, h2, h3) { color: var(--ink-navy); }
 .surface-navy .on-light .muted { color: var(--ink-muted); }
 
-/* Nút: màu đặc, bo 8px. Không gradient, không pill, không hiệu ứng quét sáng. */
+/* Nút: hình chữ nhật gần vuông góc, chữ giãn nhẹ. Nút chính màu mực indigo —
+   KHÔNG phải xanh lá. Bản trước dùng xanh "clinic" cho nút mua, vừa chọi với
+   indigo của thương hiệu vừa mang ngôn ngữ nhãn giảm giá. */
 .btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
-  font: inherit; font-weight: 600; line-height: 1.2;
-  padding: 14px 26px; border: 2px solid transparent; border-radius: var(--r-btn);
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-3);
+  font: inherit; font-weight: 600; font-size: var(--t-sm);
+  letter-spacing: .04em; line-height: 1.2;
+  padding: 17px 34px; border: 1px solid transparent; border-radius: var(--r-btn);
   cursor: pointer; text-decoration: none; text-align: center;
-  transition: background-color .16s ease, border-color .16s ease, color .16s ease;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease;
 }
-.btn-primary { background: var(--green-clinic); color: #fff; }
-.btn-primary:hover { background: var(--green-lift); color: #fff; }
-.btn-secondary { background: var(--ink-navy); color: #fff; }
-.btn-secondary:hover { background: var(--indigo); color: #fff; }
-.btn-ghost { background: transparent; color: var(--ink-navy); border-color: var(--ink-navy); }
-.btn-ghost:hover { background: var(--ink-navy); color: #fff; }
+.btn-primary { background: var(--ink-navy); color: #fff; }
+.btn-primary:hover { background: var(--cobalt); color: #fff; }
+.btn-secondary { background: var(--cobalt); color: #fff; }
+.btn-secondary:hover { background: var(--ink-navy); color: #fff; }
+.btn-ghost { background: transparent; color: var(--ink-navy); border-color: var(--line-strong); }
+.btn-ghost:hover { background: var(--ink-navy); color: #fff; border-color: var(--ink-navy); }
 .surface-navy .btn-ghost { color: #fff; border-color: rgba(255, 255, 255, .55); }
 .surface-navy .btn-ghost:hover { background: #fff; color: var(--ink-navy); border-color: #fff; }
 .btn-lg { padding: 17px 32px; font-size: var(--t-base); }
 .btn-block { width: 100%; }
 
+/* "Thẻ" mặc định KHÔNG còn là hộp. Một gạch tóc phía trên và khoảng trống là
+   đủ để tách nhóm; viền + bóng trên mọi khối làm phẳng toàn bộ thứ bậc. */
 .card {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  padding: var(--s-5) 0 0;
+}
+/* Dùng .card-raised cho đúng MỘT khối cần nổi thật: biểu mẫu đặt hàng. */
+.card-raised {
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--r-card);
-  padding: var(--s-5);
+  padding: var(--s-6);
+  box-shadow: var(--shadow-2);
 }
+
+/* Gạch tóc dùng lại nhiều nơi */
+.rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
 
 /* Ô đánh dấu chỗ còn thiếu dữ liệu thật — hiển thị rõ để không lọt lên production */
 /* Link trong hộp cảnh báo là lối liên hệ duy nhất khi form chưa nối endpoint;
