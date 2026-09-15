@@ -43,6 +43,32 @@
       "points": [
         "<strong>Miễn phí vận chuyển</strong> toàn quốc."
       ]
+    },
+    {
+      "type": "feature",
+      "image": {
+        "src": "/images/texture-kem.webp",
+        "alt": "Chất kem cận cảnh trên nền sáng"
+      },
+      "caption": "Dải ảnh tràn lề, không đặt chữ đè lên. Bỏ khối này nếu chưa có ảnh."
+    },
+    {
+      "type": "documents",
+      "eyebrow": "Giấy tờ",
+      "heading": "Chứng từ của sản phẩm",
+      "intro": "Mở ảnh để đọc được số hiệu in trên chính chứng từ.",
+      "items": [
+        {
+          "image": {
+            "src": "/documents/phieu-cong-bo.webp",
+            "alt": "Phiếu công bố sản phẩm mỹ phẩm"
+          },
+          "label": "Phiếu công bố sản phẩm mỹ phẩm",
+          "reference": "____/__/CBMP-__",
+          "issuedBy": "Sở Y tế ____"
+        }
+      ],
+      "footnote": "Xoá khối này nếu chưa có chứng từ để đăng."
     }
   ]
 }

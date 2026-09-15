@@ -38,7 +38,7 @@ const notes = data.usp.map((u: any, i: number) => ({
 ---
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap hero-grid">
-    <div class="hero-text">
+    <div class="hero-text enter">
       {data.eyebrow && <p class="eyebrow">{data.eyebrow}</p>}
       <h1 id="hero-title">{data.heading}</h1>
       <p class="lead measure" set:html={richText(data.lead)} />

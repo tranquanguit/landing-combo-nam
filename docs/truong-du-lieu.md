@@ -146,6 +146,21 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 - `heading *`
 - `items *`
 
+### `feature`
+
+- `id`
+- `image *`
+- `caption`
+
+### `documents`
+
+- `id`
+- `eyebrow`
+- `heading *`
+- `intro`
+- `items *`
+- `footnote`
+
 ## Những điều máy sẽ chặn bạn (và vì sao)
 
 - **Viết số tiền trực tiếp** trong bất kỳ câu chữ nào. Dùng `{{price}}`,

@@ -106,6 +106,13 @@ jobs:
       - name: Kiểm thử trang quản trị đơn hàng
         run: npm run test:admin
 
+      # Ảnh không đi qua schema Zod nên đây là cổng duy nhất canh chúng.
+      # Hiện chạy ở chế độ báo cáo: mọi ảnh trong repo đều dưới chuẩn và chặn
+      # build vì điều đó thì không ai deploy được. ĐỔI SANG --strict ngay khi
+      # Mocha gửi bộ ảnh đúng đặc tả, nếu không nó sẽ trôi lại.
+      - name: Ảnh khớp đặc tả
+        run: npm run check:assets
+
       # SEO đo từ bản build, không đọc mã nguồn. Bước cuối vì nó cần dist/ ở
       # trạng thái sạch — bước trên để lại bản build với endpoint giả.
       - name: Báo cáo SEO

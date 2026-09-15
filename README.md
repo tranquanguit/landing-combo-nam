@@ -3,6 +3,11 @@
 Astro 7, xuất HTML tĩnh. Mỗi sản phẩm là **một file JSON**; bố cục và thứ tự khối do
 chính file đó quyết định, không phải sửa code.
 
+> **Sắp deploy?** [`docs/deploy.md`](docs/deploy.md) — danh sách làm theo từ trên
+> xuống, gồm cả bảng "còn thiếu gì, ai cung cấp".
+> **Cần gửi ảnh?** [`docs/anh-can-co.md`](docs/anh-can-co.md) — từng vị trí, tỉ lệ,
+> kích thước tối thiểu (`npm run check:assets` để tự kiểm).
+>
 > **Bắt đầu ở đây:** [`docs/kien-truc.md`](docs/kien-truc.md) — trang được tổ chức
 > thế nào, tại sao nó tốt cho SEO, và dữ liệu khách hàng đi về đâu.
 > Bằng chứng SEO đo từ bản build: [`docs/bao-cao-seo.md`](docs/bao-cao-seo.md)
@@ -22,7 +27,9 @@ src/
 src/assets/images/           ảnh nguồn, được astro:assets xử lý thành AVIF/WebP nhiều kích thước
 public/                      font self-host, robots.txt, favicon
 scripts/check-budget.mjs     cổng ngân sách trọng lượng, chạy trong CI
-scripts/seo-report.mjs       60 phép đo SEO trên dist/, chạy trong CI
+scripts/seo-report.mjs       223 phép đo SEO trên dist/, chạy trong CI
+scripts/check-assets.mjs     kiểm ảnh khớp đặc tả + sinh docs/anh-can-co.md
+src/data/_anh-can-co.json    đặc tả từng vị trí ảnh
 functions/api/orders.ts      nhận đơn, ghi vào Cloudflare D1
 functions/api/admin/orders.ts  đọc/cập nhật đơn, cần Bearer token
 functions/admin/index.ts     trang xem đơn cho nhân viên (/admin)

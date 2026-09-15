@@ -28,8 +28,28 @@ const { data, id = 'faq' } = Astro.props;
     content: ""; position: absolute; right: 20px; top: 50%;
     width: 9px; height: 9px; margin-top: -6px;
     border-right: 2px solid var(--indigo); border-bottom: 2px solid var(--indigo);
-    transform: rotate(45deg); transition: transform .18s ease;
+    transform: rotate(45deg);
   }
   details[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
   .answer { padding: 0 var(--s-4) var(--s-4); color: var(--ink-muted); font-size: var(--t-sm); }
+
+  /* Mở ra trượt xuống thay vì nhảy phựt.
+     interpolate-size + calc-size là cách duy nhất hiện nay để chuyển động tới
+     height:auto mà không cần JS đo chiều cao. Trình duyệt chưa hỗ trợ thì
+     @supports bỏ qua và <details> hoạt động y như cũ — không có nhánh hỏng. */
+  @supports (interpolate-size: allow-keywords) {
+    @media (prefers-reduced-motion: no-preference) {
+      details::details-content {
+        block-size: 0;
+        overflow: hidden;
+        transition:
+          block-size var(--dur-2) var(--ease-out),
+          content-visibility var(--dur-2) allow-discrete;
+      }
+      details[open]::details-content { block-size: auto; }
+    }
+  }
+  summary::after { transition: transform var(--dur-2) var(--ease); }
+  summary { transition: color var(--dur-1) var(--ease); }
+  summary:hover { color: var(--cobalt); }
 </style>

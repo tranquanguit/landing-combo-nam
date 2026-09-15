@@ -1,0 +1,53 @@
+---
+import Section from '../Section.astro';
+import Picture from '../Picture.astro';
+interface Props { data: any; id?: string; }
+const { data, id = 'chung-tu' } = Astro.props;
+---
+<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
+  <ul class="docs" data-reveal-group>
+    {data.items.map((doc: any) => (
+      <li data-reveal>
+        <figure>
+          <Picture src={doc.image.src} alt={doc.image.alt}
+            width={620} height={877} sizes="(min-width: 760px) 260px, 45vw"
+            widths={[260, 520, 620]} loading="lazy" />
+          <figcaption>
+            <span class="label">{doc.label}</span>
+            {doc.reference && <span class="ref">{doc.reference}</span>}
+            {doc.issuedBy && <span class="by">{doc.issuedBy}</span>}
+          </figcaption>
+        </figure>
+      </li>
+    ))}
+  </ul>
+  {data.footnote && <p class="foot">{data.footnote}</p>}
+</Section>
+
+<style>
+  .docs {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: var(--s-5);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+  }
+  figure { margin: 0; display: grid; gap: var(--s-3); }
+  /* Giấy tờ: viền mảnh và nền trắng để trông ra một tờ giấy, không phải một
+     tấm ảnh. Không bo góc — giấy không bo góc. */
+  figure :global(img) {
+    display: block; width: 100%; height: auto;
+    aspect-ratio: 1 / 1.414; object-fit: cover; object-position: top;
+    border: 1px solid var(--line-strong); background: #fff;
+    transition: transform var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease);
+  }
+  @media (hover: hover) {
+    figure:hover :global(img) { transform: translateY(-2px); border-color: var(--cobalt); }
+  }
+  figcaption { display: grid; gap: 2px; font-size: var(--t-xs); line-height: 1.5; }
+  .label { font-weight: 600; color: var(--ink-navy); }
+  .ref {
+    font-family: var(--font-figure); font-variant-numeric: tabular-nums;
+    color: var(--cobalt); font-weight: 600;
+  }
+  .by { color: var(--slate); }
+  .foot { margin: var(--s-5) 0 0; font-size: var(--t-xs); color: var(--slate); max-width: 68ch; }
+</style>

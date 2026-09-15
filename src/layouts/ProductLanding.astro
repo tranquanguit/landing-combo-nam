@@ -15,6 +15,8 @@ import Gallery from '../components/blocks/Gallery.astro';
 import Testimonials from '../components/blocks/Testimonials.astro';
 import Order from '../components/blocks/Order.astro';
 import Faq from '../components/blocks/Faq.astro';
+import Feature from '../components/blocks/Feature.astro';
+import Documents from '../components/blocks/Documents.astro';
 import Analytics from '../components/Analytics.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { expandProductTokens } from '../lib/money-text';
@@ -126,6 +128,8 @@ p.blocks.forEach((block: any, i: number) => {
         case 'gallery':      return <Gallery data={block} id={block.id ?? DEFAULT_ANCHOR.gallery} locale={locale} />;
         case 'testimonials': return <Testimonials data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} />;
         case 'order':        return <Order data={block} product={p} brand={b} locale={locale} />;
+        case 'feature':      return <Feature data={block} id={block.id} />;
+        case 'documents':    return <Documents data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
         case 'faq':          return <Faq data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
         default:             return null;
       }

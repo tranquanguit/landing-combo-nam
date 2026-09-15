@@ -290,6 +290,87 @@ const CASES = [
     doc: withDoc((d) => { d.slug = 'San Pham Thu'; }),
     expect: 'fail',
   },
+  /* ---- hai khối mới: feature (dải ảnh) và documents (chứng từ) ---- */
+  {
+    name: 'feature thiếu alt bị chặn',
+    doc: withDoc((d) => {
+      d.blocks.push({ type: 'feature', image: { src: '/images/packshot-combo.webp', alt: '' } });
+    }),
+    expect: 'fail',
+    expectMessage: /alt/,
+  },
+  {
+    name: 'feature hợp lệ được nhận',
+    doc: withDoc((d) => {
+      d.blocks.push({
+        type: 'feature',
+        image: { src: '/images/packshot-combo.webp', alt: 'Chất kem cận cảnh' },
+        caption: 'Chụp ở ánh sáng tự nhiên.',
+      });
+    }),
+    expect: 'pass',
+  },
+  {
+    name: 'khoá lạ trong feature (.strict)',
+    doc: withDoc((d) => {
+      d.blocks.push({
+        type: 'feature',
+        image: { src: '/images/packshot-combo.webp', alt: 'Ảnh' },
+        overlayText: 'chữ đè lên ảnh',
+      });
+    }),
+    expect: 'fail',
+    expectCode: 'unrecognized_keys',
+  },
+  {
+    name: 'documents rỗng bị chặn',
+    doc: withDoc((d) => {
+      d.blocks.push({ type: 'documents', heading: 'Chứng từ', items: [] });
+    }),
+    expect: 'fail',
+  },
+  {
+    name: 'documents hợp lệ được nhận',
+    doc: withDoc((d) => {
+      d.blocks.push({
+        type: 'documents',
+        heading: 'Chứng từ của sản phẩm',
+        items: [{
+          image: { src: '/images/packshot-combo.webp', alt: 'Phiếu công bố sản phẩm mỹ phẩm' },
+          label: 'Phiếu công bố sản phẩm mỹ phẩm',
+          reference: '1459/24/CBMP-LA',
+          issuedBy: 'Sở Y tế Long An',
+        }],
+      });
+    }),
+    expect: 'pass',
+  },
+  {
+    name: 'documents vẫn bị quét tuyên bố bị cấm',
+    doc: withDoc((d) => {
+      d.blocks.push({
+        type: 'documents',
+        heading: 'Giấy tờ chứng minh kem trị nám tận gốc',
+        items: [{
+          image: { src: '/images/packshot-combo.webp', alt: 'Phiếu công bố' },
+          label: 'Phiếu công bố',
+        }],
+      });
+    }),
+    expect: 'fail',
+  },
+  {
+    name: 'neo #chung-tu trỏ tới khối documents là hợp lệ',
+    doc: withDoc((d) => {
+      d.blocks.push({
+        type: 'documents',
+        heading: 'Chứng từ',
+        items: [{ image: { src: '/images/packshot-combo.webp', alt: 'Phiếu' }, label: 'Phiếu' }],
+      });
+      d.blocks[0].secondaryCta = { label: 'Xem chứng từ', href: '#chung-tu' };
+    }),
+    expect: 'pass',
+  },
 ];
 
 let bad = 0;

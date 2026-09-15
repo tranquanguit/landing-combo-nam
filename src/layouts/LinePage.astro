@@ -72,7 +72,7 @@ const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath
 
   <main id="main">
     <div class="head">
-      <div class="wrap">
+      <div class="wrap enter">
         {line.eyebrow && <p class="eyebrow">{line.eyebrow}</p>}
         <h1>{line.heading}</h1>
         <p class="lead" set:html={richText(line.lead)} />

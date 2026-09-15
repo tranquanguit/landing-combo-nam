@@ -1,0 +1,120 @@
+{
+  "_doc": "Đặc tả từng vị trí ảnh trên site. Một nguồn duy nhất: scripts/check-assets.mjs vừa kiểm ảnh thật vừa sinh docs/anh-can-co.md từ file này, nên tài liệu không thể lệch với phép kiểm.",
+  "slots": [
+    {
+      "file": "logo.webp",
+      "ten": "Logo thương hiệu",
+      "batBuoc": true,
+      "hienO": ["Đầu trang mọi trang", "Chân trang", "JSON-LD Organization"],
+      "tiLe": "tự do",
+      "rongToiThieu": 368,
+      "caoToiThieu": 136,
+      "nenTrongSuot": true,
+      "nangToiDaKb": 30,
+      "chuDe": "Chữ MOCHA trên nền trong suốt. Không viền, không bóng đổ, không khung."
+    },
+    {
+      "file": "packshot-combo.webp",
+      "ten": "Ảnh bộ sản phẩm",
+      "batBuoc": true,
+      "hienO": ["Hero landing", "Thẻ sản phẩm", "Ảnh chia sẻ og:image mọi trang"],
+      "tiLe": "4:3",
+      "rongToiThieu": 1600,
+      "caoToiThieu": 1200,
+      "nangToiDaKb": 120,
+      "chuDe": "Hũ kem và chai serum đứng cạnh nhau, nền sáng phẳng, đổ bóng mềm. Nhãn đọc được rõ. Chừa khoảng trống hai bên: ảnh bị cắt khác nhau ở hero (cắt dọc) và ở thẻ sản phẩm (cắt 4:3)."
+    },
+    {
+      "file": "packshot-combo.jpg",
+      "ten": "Ảnh bộ sản phẩm (bản JPEG cho og:image)",
+      "batBuoc": true,
+      "hienO": ["og:image — Facebook và Zalo không đọc được WebP ở mọi phiên bản"],
+      "tiLe": "4:3",
+      "rongToiThieu": 1200,
+      "caoToiThieu": 900,
+      "nangToiDaKb": 200,
+      "chuDe": "Cùng ảnh với bản .webp, xuất ra JPEG."
+    },
+    {
+      "file": "nam_01.webp",
+      "ten": "Nám mảng",
+      "batBuoc": true,
+      "hienO": ["Khối “Ba loại nám” trên landing"],
+      "tiLe": "4:3",
+      "rongToiThieu": 800,
+      "caoToiThieu": 600,
+      "nangToiDaKb": 60,
+      "chuDe": "Cận cảnh vùng má có nám mảng — mảng nâu nhạt, bờ không rõ. KHÔNG có mặt người nhận diện được, KHÔNG có bác sĩ hay cơ sở y tế trong khung (Nghị định 342/2025/NĐ-CP)."
+    },
+    {
+      "file": "nam_02.webp",
+      "ten": "Nám chân sâu",
+      "batBuoc": true,
+      "hienO": ["Khối “Ba loại nám” trên landing"],
+      "tiLe": "4:3",
+      "rongToiThieu": 800,
+      "caoToiThieu": 600,
+      "nangToiDaKb": 60,
+      "chuDe": "Cận cảnh các nốt nâu sẫm bờ rõ. Cùng góc chụp, cùng ánh sáng với nam_01 và nam_03 — ba ảnh nằm cạnh nhau nên lệch tông là thấy ngay."
+    },
+    {
+      "file": "nam_03.webp",
+      "ten": "Nám hỗn hợp",
+      "batBuoc": true,
+      "hienO": ["Khối “Ba loại nám” trên landing"],
+      "tiLe": "4:3",
+      "rongToiThieu": 800,
+      "caoToiThieu": 600,
+      "nangToiDaKb": 60,
+      "chuDe": "Cận cảnh vùng da có cả hai dạng trên."
+    },
+    {
+      "file": "texture-kem.webp",
+      "ten": "Chất kem cận cảnh",
+      "batBuoc": false,
+      "hienO": ["Dải ảnh tràn lề giữa landing", "Trang dòng sản phẩm"],
+      "tiLe": "16:9",
+      "rongToiThieu": 1800,
+      "caoToiThieu": 1012,
+      "nangToiDaKb": 110,
+      "chuDe": "Macro chất kem/serum — vệt kem, giọt serum trên nền sáng. Đây là ảnh làm trang bớt đơn điệu nhất: nó cho thấy sản phẩm là gì mà không cần một lời quảng cáo nào."
+    },
+    {
+      "file": "ung-dung.webp",
+      "ten": "Thao tác dùng sản phẩm",
+      "batBuoc": false,
+      "hienO": ["Khối “Cách dùng” trên landing"],
+      "tiLe": "3:2",
+      "rongToiThieu": 1200,
+      "caoToiThieu": 800,
+      "nangToiDaKb": 90,
+      "chuDe": "Bàn tay lấy kem hoặc thoa lên má. Chỉ bàn tay và một phần da, không cần mặt. Ánh sáng tự nhiên."
+    },
+    {
+      "file": "thuong-hieu.webp",
+      "ten": "Ảnh thương hiệu cho trang chủ",
+      "batBuoc": false,
+      "hienO": ["Hero trang chủ"],
+      "tiLe": "4:3",
+      "rongToiThieu": 1600,
+      "caoToiThieu": 1200,
+      "nangToiDaKb": 130,
+      "chuDe": "Toàn dải sản phẩm Mocha xếp cùng khung, hoặc một cảnh đặt sản phẩm có chiều sâu. Hiện trang chủ đang mượn tạm ảnh packshot — thay được bằng ảnh riêng thì trang chủ và landing mới không giống hệt nhau."
+    }
+  ],
+  "chungTu": {
+    "thuMuc": "src/assets/documents",
+    "ghiChu": "Phiếu công bố sản phẩm mỹ phẩm, chứng nhận CGMP-ASEAN, phiếu kiểm nghiệm. Đặt tại đây rồi khai trong khối \"documents\" của file sản phẩm.",
+    "tiLe": "tự do, ưu tiên A4 dọc",
+    "rongToiThieu": 1000,
+    "nangToiDaKb": 180,
+    "canhBao": "Che hoặc xoá mọi dữ liệu cá nhân trước khi đưa lên: chữ ký, số điện thoại cá nhân, số căn cước. Đây là trang công khai."
+  },
+  "anhCanVanBanDongY": {
+    "thuMuc": "src/media-gated/images",
+    "ghiChu": "Ảnh trước/sau của khách. KHÔNG được vào bản build khi chưa có văn bản đồng ý của chính người trong ảnh; scripts/check-budget.mjs chặn và làm fail CI nếu lọt ra dist/.",
+    "tiLe": "1:1",
+    "rongToiThieu": 900,
+    "nangToiDaKb": 90
+  }
+}

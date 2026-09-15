@@ -1,7 +1,7 @@
 <!-- Sinh tự động bởi scripts/seo-report.mjs — đừng sửa tay. -->
 # Báo cáo SEO (đo từ bản build)
 
-Đo lúc: 2026-09-14T15:06:22.449Z  
+Đo lúc: 2026-09-15T10:20:07.020Z  
 Kết quả: **223/223 phép đo đạt**, 0 lỗi.
 
 | Phạm vi | Phép đo | Kết quả | Giá trị đo được |
@@ -29,7 +29,7 @@ Kết quả: **223/223 phép đo đạt**, 0 lỗi.
 | `/combo-nam/` | giá trong JSON-LD xuất hiện trên trang | ✅ | khớp |
 | `/combo-nam/` | neo trong trang đều tồn tại | ✅ | 10 neo |
 | `/combo-nam/` | liên kết nội bộ đều tồn tại trong dist | ✅ | không gãy |
-| `/combo-nam/` | nội dung hiển thị > 300 từ | ✅ | 2628 từ |
+| `/combo-nam/` | nội dung hiển thị > 300 từ | ✅ | 2693 từ |
 | `/en/advice/` | title dài 15–65 ký tự | ✅ | 26 ký tự: "Skin guide \| Mocha Vietnam" |
 | `/en/advice/` | description dài 70–160 ký tự | ✅ | 150 ký tự |
 | `/en/advice/` | canonical tự trỏ, tuyệt đối | ✅ | https://mochatrinam.com/en/advice/ |
@@ -49,7 +49,7 @@ Kết quả: **223/223 phép đo đạt**, 0 lỗi.
 | `/en/advice/` | giá trong JSON-LD xuất hiện trên trang | ✅ | khớp |
 | `/en/advice/` | neo trong trang đều tồn tại | ✅ | 1 neo |
 | `/en/advice/` | liên kết nội bộ đều tồn tại trong dist | ✅ | không gãy |
-| `/en/advice/` | nội dung hiển thị > 300 từ | ✅ | 582 từ |
+| `/en/advice/` | nội dung hiển thị > 300 từ | ✅ | 647 từ |
 | `/en/advice/nam-noi-tiet-la-gi/` | title dài 15–65 ký tự | ✅ | 57 ký tự: "What is hormonal pigmentation, and why does it come back?" |
 | `/en/advice/nam-noi-tiet-la-gi/` | description dài 70–160 ký tự | ✅ | 149 ký tự |
 | `/en/advice/nam-noi-tiet-la-gi/` | canonical tự trỏ, tuyệt đối | ✅ | https://mochatrinam.com/en/advice/nam-noi-tiet-la-gi/ |
@@ -69,7 +69,7 @@ Kết quả: **223/223 phép đo đạt**, 0 lỗi.
 | `/en/advice/nam-noi-tiet-la-gi/` | giá trong JSON-LD xuất hiện trên trang | ✅ | khớp |
 | `/en/advice/nam-noi-tiet-la-gi/` | neo trong trang đều tồn tại | ✅ | 5 neo |
 | `/en/advice/nam-noi-tiet-la-gi/` | liên kết nội bộ đều tồn tại trong dist | ✅ | không gãy |
-| `/en/advice/nam-noi-tiet-la-gi/` | nội dung hiển thị > 300 từ | ✅ | 1268 từ |
+| `/en/advice/nam-noi-tiet-la-gi/` | nội dung hiển thị > 300 từ | ✅ | 1333 từ |
 | `/en/combo-nam/` | title dài 15–65 ký tự | ✅ | 55 ký tự: "Mocha Dark Spot Duo – Tranexamic Acid 3% + Bakuchiol 2%" |
 | `/en/combo-nam/` | description dài 70–160 ký tự | ✅ | 138 ký tự |
 | `/en/combo-nam/` | canonical tự trỏ, tuyệt đối | ✅ | https://mochatrinam.com/en/combo-nam/ |
@@ -93,7 +93,7 @@ Kết quả: **223/223 phép đo đạt**, 0 lỗi.
 | `/en/combo-nam/` | giá trong JSON-LD xuất hiện trên trang | ✅ | khớp |
 | `/en/combo-nam/` | neo trong trang đều tồn tại | ✅ | 10 neo |
 | `/en/combo-nam/` | liên kết nội bộ đều tồn tại trong dist | ✅ | không gãy |
-| `/en/combo-nam/` | nội dung hiển thị > 300 từ | ✅ | 2184 từ |
+| `/en/combo-nam/` | nội dung hiển thị > 300 từ | ✅ | 2249 từ |
 | `/en/` | title dài 15–65 ký tự | ✅ | 58 ký tự: "Mocha Vietnam – Skincare that publishes its concentrations" |
 | `/en/` | description dài 70–160 ký tự | ✅ | 149 ký tự |
 | `/en/` | canonical tự trỏ, tuyệt đối | ✅ | https://mochatrinam.com/en/ |
@@ -112,7 +112,7 @@ Kết quả: **223/223 phép đo đạt**, 0 lỗi.
 | `/en/` | giá trong JSON-LD xuất hiện trên trang | ✅ | khớp |
 | `/en/` | neo trong trang đều tồn tại | ✅ | 1 neo |
 | `/en/` | liên kết nội bộ đều tồn tại trong dist | ✅ | không gãy |
-| `/en/` | nội dung hiển thị > 300 từ | ✅ | 937 từ |
+| `/en/` | nội dung hiển thị > 300 từ | ✅ | 1002 từ |
 | `/en/nam-tham/` | title dài 15–65 ký tự | ✅ | 56 ký tự: "Mocha dark spot line – How to choose, and what is inside" |
 | `/en/nam-tham/` | description dài 70–160 ký tự | ✅ | 158 ký tự |
 | `/en/nam-tham/` | canonical tự trỏ, tuyệt đối | ✅ | https://mochatrinam.com/en/nam-tham/ |
@@ -132,7 +132,7 @@ Kết quả: **223/223 phép đo đạt**, 0 lỗi.
 | `/en/nam-tham/` | giá trong JSON-LD xuất hiện trên trang | ✅ | khớp |
 | `/en/nam-tham/` | neo trong trang đều tồn tại | ✅ | 1 neo |
 | `/en/nam-tham/` | liên kết nội bộ đều tồn tại trong dist | ✅ | không gãy |
-| `/en/nam-tham/` | nội dung hiển thị > 300 từ | ✅ | 1241 từ |
+| `/en/nam-tham/` | nội dung hiển thị > 300 từ | ✅ | 1306 từ |
 | `/goc-tu-van/` | title dài 15–65 ký tự | ✅ | 39 ký tự: "Góc tư vấn chăm sóc da \| Mocha Việt Nam" |
 | `/goc-tu-van/` | description dài 70–160 ký tự | ✅ | 116 ký tự |
 | `/goc-tu-van/` | canonical tự trỏ, tuyệt đối | ✅ | https://mochatrinam.com/goc-tu-van/ |
@@ -152,7 +152,7 @@ Kết quả: **223/223 phép đo đạt**, 0 lỗi.
 | `/goc-tu-van/` | giá trong JSON-LD xuất hiện trên trang | ✅ | khớp |
 | `/goc-tu-van/` | neo trong trang đều tồn tại | ✅ | 1 neo |
 | `/goc-tu-van/` | liên kết nội bộ đều tồn tại trong dist | ✅ | không gãy |
-| `/goc-tu-van/` | nội dung hiển thị > 300 từ | ✅ | 652 từ |
+| `/goc-tu-van/` | nội dung hiển thị > 300 từ | ✅ | 717 từ |
 | `/goc-tu-van/nam-noi-tiet-la-gi/` | title dài 15–65 ký tự | ✅ | 56 ký tự: "Nám nội tiết là gì, và vì sao nó quay lại sau khi mờ đi?" |
 | `/goc-tu-van/nam-noi-tiet-la-gi/` | description dài 70–160 ký tự | ✅ | 152 ký tự |
 | `/goc-tu-van/nam-noi-tiet-la-gi/` | canonical tự trỏ, tuyệt đối | ✅ | https://mochatrinam.com/goc-tu-van/nam-noi-tiet-la-gi/ |
@@ -172,7 +172,7 @@ Kết quả: **223/223 phép đo đạt**, 0 lỗi.
 | `/goc-tu-van/nam-noi-tiet-la-gi/` | giá trong JSON-LD xuất hiện trên trang | ✅ | khớp |
 | `/goc-tu-van/nam-noi-tiet-la-gi/` | neo trong trang đều tồn tại | ✅ | 5 neo |
 | `/goc-tu-van/nam-noi-tiet-la-gi/` | liên kết nội bộ đều tồn tại trong dist | ✅ | không gãy |
-| `/goc-tu-van/nam-noi-tiet-la-gi/` | nội dung hiển thị > 300 từ | ✅ | 1472 từ |
+| `/goc-tu-van/nam-noi-tiet-la-gi/` | nội dung hiển thị > 300 từ | ✅ | 1537 từ |
 | `/` | title dài 15–65 ký tự | ✅ | 59 ký tự: "Mocha Việt Nam – Dược mỹ phẩm chăm sóc da công khai nồng độ" |
 | `/` | description dài 70–160 ký tự | ✅ | 138 ký tự |
 | `/` | canonical tự trỏ, tuyệt đối | ✅ | https://mochatrinam.com/ |
@@ -191,7 +191,7 @@ Kết quả: **223/223 phép đo đạt**, 0 lỗi.
 | `/` | giá trong JSON-LD xuất hiện trên trang | ✅ | khớp |
 | `/` | neo trong trang đều tồn tại | ✅ | 1 neo |
 | `/` | liên kết nội bộ đều tồn tại trong dist | ✅ | không gãy |
-| `/` | nội dung hiển thị > 300 từ | ✅ | 1060 từ |
+| `/` | nội dung hiển thị > 300 từ | ✅ | 1125 từ |
 | `/nam-tham/` | title dài 15–65 ký tự | ✅ | 55 ký tự: "Dòng chăm sóc da nám, thâm Mocha – So sánh và cách chọn" |
 | `/nam-tham/` | description dài 70–160 ký tự | ✅ | 139 ký tự |
 | `/nam-tham/` | canonical tự trỏ, tuyệt đối | ✅ | https://mochatrinam.com/nam-tham/ |
@@ -211,7 +211,7 @@ Kết quả: **223/223 phép đo đạt**, 0 lỗi.
 | `/nam-tham/` | giá trong JSON-LD xuất hiện trên trang | ✅ | khớp |
 | `/nam-tham/` | neo trong trang đều tồn tại | ✅ | 1 neo |
 | `/nam-tham/` | liên kết nội bộ đều tồn tại trong dist | ✅ | không gãy |
-| `/nam-tham/` | nội dung hiển thị > 300 từ | ✅ | 1446 từ |
+| `/nam-tham/` | nội dung hiển thị > 300 từ | ✅ | 1511 từ |
 | `site` | title không trùng giữa các trang | ✅ | 10 title khác nhau |
 | `site` | description không trùng giữa các trang | ✅ | 10 mô tả khác nhau |
 | `site` | hreflang đối xứng hai chiều | ✅ | 10 trang, mỗi trang 2 bản dịch |
@@ -220,7 +220,7 @@ Kết quả: **223/223 phép đo đạt**, 0 lỗi.
 | `liên kết` | mọi trang dẫn được sang nơi bán hàng | ✅ | 6 đích thương mại, đều có đường dẫn vào |
 | `sitemap` | mọi trang nội dung có trong sitemap | ✅ | 10/10: https://mochatrinam.com/ https://mochatrinam.com/combo-nam/ https://mochatrinam.com/en/ https://mochatrinam.com/en/advice/ https://mochatrinam.com/en/advice/nam-noi-tiet-la-gi/ https://mochatrinam.com/en/combo-nam/ https://mochatrinam.com/en/nam-tham/ https://mochatrinam.com/goc-tu-van/ https://mochatrinam.com/goc-tu-van/nam-noi-tiet-la-gi/ https://mochatrinam.com/nam-tham/ |
 | `sitemap` | sitemap không chứa URL không tồn tại | ✅ | sạch |
-| `sitemap` | lastmod hợp lệ và không ở tương lai | ✅ | 2026-09-12T15:20:24.000Z, 2026-09-12T15:20:24.000Z, 2026-09-12T14:27:10.000Z, 2026-09-12T14:27:10.000Z |
+| `sitemap` | lastmod hợp lệ và không ở tương lai | ✅ | 2026-09-14T15:06:22.000Z, 2026-09-14T15:06:22.000Z, 2026-09-14T15:06:22.000Z, 2026-09-14T15:06:22.000Z |
 | `sitemap` | sitemap khai hreflang xhtml:link | ✅ | có |
 | `robots` | robots.txt khai sitemap đúng URL | ✅ | có |
 | `robots` | không Disallow nhầm toàn site | ✅ | không có Disallow: / |

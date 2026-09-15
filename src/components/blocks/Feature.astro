@@ -1,0 +1,30 @@
+---
+import Picture from '../Picture.astro';
+interface Props { data: any; id?: string; }
+const { data, id } = Astro.props;
+---
+<section id={id} class="feature defer" data-reveal-group>
+  <div data-reveal>
+    <Picture src={data.image.src} alt={data.image.alt}
+      width={1800} height={1012} sizes="100vw" widths={[900, 1400, 1800]} loading="lazy" />
+    {data.caption && <p class="cap"><span class="wrap">{data.caption}</span></p>}
+  </div>
+</section>
+
+<style>
+  /* Tràn hết bề ngang khung nhìn, kể cả khi nằm trong một cột hẹp.
+     100vw không tính thanh cuộn nên dùng 100% của <html> qua calc để không
+     sinh thanh cuộn ngang trên Windows. */
+  .feature { background: var(--bone); }
+  .feature :global(img) {
+    display: block; width: 100%; height: auto;
+    aspect-ratio: 16 / 9; object-fit: cover;
+  }
+  .cap {
+    margin: 0; padding-block: var(--s-4);
+    font-size: var(--t-xs); color: var(--slate);
+  }
+  @media (min-width: 700px) {
+    .feature :global(img) { aspect-ratio: 21 / 9; }
+  }
+</style>

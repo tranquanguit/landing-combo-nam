@@ -13,5 +13,6 @@ export const DEFAULT_ANCHOR: Record<string, string> = {
   gallery: 'hieu-qua',
   testimonials: 'danh-gia',
   order: 'dat-hang',
+  documents: 'chung-tu',
   faq: 'faq',
 };

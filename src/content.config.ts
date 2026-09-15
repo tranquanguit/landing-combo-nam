@@ -272,6 +272,47 @@ const blocks = z.discriminatedUnion('type', [
     heading: z.string(),
     items: z.array(z.object({ q: z.string(), a: z.string() }).strict()),
   }).strict(),
+
+  /**
+   * Dải ảnh tràn lề, không có chữ đè lên.
+   *
+   * Việc của nó là cho mắt nghỉ giữa hai vùng chữ dày, và cho thấy sản phẩm là
+   * gì mà không cần một lời quảng cáo nào. Không đặt chữ lên ảnh: chữ trên ảnh
+   * không kiểm soát được độ tương phản khi ảnh đổi, và máy tìm kiếm không đọc
+   * được nó.
+   */
+  z.object({
+    type: z.literal('feature'),
+    id: anchorId,
+    image: z.object({
+      src: z.string(),
+      alt: z.string().min(1, 'Ảnh tràn lề vẫn cần alt: người dùng trình đọc màn hình cũng đang đọc trang này.'),
+    }).strict(),
+    caption: z.string().optional(),
+  }).strict(),
+
+  /**
+   * Chứng từ: phiếu công bố, chứng nhận cơ sở sản xuất, phiếu kiểm nghiệm.
+   *
+   * Đây là bằng chứng mạnh nhất một trang mỹ phẩm có thể đưa ra, và là thứ
+   * người mua Việt Nam thật sự tìm. Ảnh mở được ở kích thước đầy đủ để đọc
+   * được số hiệu — một ảnh thu nhỏ không đọc được thì không chứng minh gì.
+   */
+  z.object({
+    type: z.literal('documents'),
+    id: anchorId,
+    eyebrow: z.string().optional(),
+    heading: z.string(),
+    intro: z.string().optional(),
+    items: z.array(z.object({
+      image: z.object({ src: z.string(), alt: z.string().min(1) }).strict(),
+      label: z.string(),
+      /** Số hiệu in trên chính chứng từ, để người đọc đối chiếu được. */
+      reference: z.string().optional(),
+      issuedBy: z.string().optional(),
+    }).strict()).min(1),
+    footnote: z.string().optional(),
+  }).strict(),
 ]);
 
 const products = defineCollection({
@@ -740,7 +781,10 @@ const articles = defineCollection({
 });
 
 const brand = defineCollection({
-  loader: glob({ pattern: '**/*.json', base: './src/data' }),
+  /* Bỏ qua file bắt đầu bằng "_": src/data còn chứa đặc tả ảnh, vốn không phải
+     một thương hiệu. Không loại ra thì loader coi nó là một entry brand thiếu
+     mọi trường bắt buộc và build dừng với thông báo khó hiểu. */
+  loader: glob({ pattern: ['**/*.json', '!_*.json'], base: './src/data' }),
   schema: z.object({
     legalName: z.string(),
     tradingName: z.string(),

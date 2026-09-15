@@ -17,10 +17,11 @@ const headingId = id ? `${id}-title` : undefined;
   id={id}
   class:list={[surfaceClass, !aboveFold && 'defer']}
   aria-labelledby={headingId}
+  data-reveal-group
 >
   <div class="wrap">
     {heading && (
-      <div class:list={['section-head', center ? 'center' : 'split-head']}>
+      <div class:list={['section-head', center ? 'center' : 'split-head']} data-reveal>
         <div class="head-title">
           {eyebrow && <p class="eyebrow">{eyebrow}</p>}
           <h2 id={headingId}>{heading}</h2>
@@ -28,6 +29,6 @@ const headingId = id ? `${id}-title` : undefined;
         {intro && <p class="lead">{intro}</p>}
       </div>
     )}
-    <slot />
+    <div data-reveal><slot /></div>
   </div>
 </section>

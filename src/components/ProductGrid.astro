@@ -7,9 +7,9 @@ import { t, type Locale } from '../i18n/ui';
 interface Props { products: any[]; locale: Locale; }
 const { products, locale } = Astro.props;
 ---
-<ul class="grid">
+<ul class="grid" data-reveal-group>
   {products.map((p) => (
-    <li>
+    <li data-reveal>
       <a href={productPath(p.slug, locale)}>
         {p.image && (
           <span class="shot">
@@ -44,8 +44,17 @@ const { products, locale } = Astro.props;
     border-top: 1px solid var(--line-strong); padding-top: var(--s-4);
   }
   a:hover .name { color: var(--cobalt); }
-  .shot { display: block; background: var(--bone); }
-  .shot :global(img) { width: 100%; height: auto; display: block; }
+  /* Ảnh phóng rất nhẹ khi di chuột, cắt trong khung. Chỉ dùng transform nên
+     không gây reflow, và chỉ bật ở thiết bị có con trỏ thật — trên cảm ứng
+     hiệu ứng hover chỉ gây kẹt ở trạng thái "đang hover" sau khi chạm. */
+  .shot { display: block; background: var(--bone); overflow: hidden; }
+  .shot :global(img) {
+    width: 100%; height: auto; display: block;
+    transition: transform 620ms var(--ease-out);
+  }
+  @media (hover: hover) {
+    a:hover .shot :global(img) { transform: scale(1.035); }
+  }
   .name {
     font-size: var(--t-md); font-weight: 600; line-height: 1.25;
     letter-spacing: -0.015em; color: var(--ink-navy);

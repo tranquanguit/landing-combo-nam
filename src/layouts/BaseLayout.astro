@@ -100,6 +100,40 @@ const {
   <body>
     {/* Đánh dấu có JavaScript để CSS phân biệt được hai trạng thái. */}
     <script is:inline>document.documentElement.classList.add('js');</script>
+
+    {/*
+      Xuất hiện khi cuộn tới, và trạng thái đã-cuộn của thanh trên cùng.
+
+      Ghi chú đặt trong khối chú thích của Astro chứ không phải bên trong thẻ
+      script: script nội tuyến được xuất NGUYÊN VĂN, không qua minify, nên mọi
+      dòng chú thích và mọi khoảng trắng đều được tải về máy khách. Bản đầu
+      tiên của đoạn này tốn 1.308 byte, phần lớn là chú thích — và cổng ngân
+      sách đã chặn lại.
+
+      Ba quyết định trong 12 dòng dưới đây:
+
+      1. Lớp ẩn `reveal-ready` do CHÍNH JS thêm vào <html>. JS hỏng, bị chặn,
+         hay chưa tải xong thì trang vẫn hiện đầy đủ. Thư viện scroll-reveal
+         thường làm ngược lại và biến một lỗi script thành một trang trắng.
+      2. Chạy inline trong <head> để lớp ẩn có mặt trước lần vẽ đầu tiên; đặt
+         ở cuối <body> sẽ thấy nội dung nhấp nháy một nhịp rồi mới biến mất.
+      3. Thứ tự lệch nhịp đếm trong PHẠM VI khối cha, không phải toàn trang:
+         đếm toàn trang thì phần tử thứ 40 trễ gần ba giây.
+    */}
+    <script is:inline>
+      (function(){var d=document,h=d.documentElement;
+      if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+      h.classList.add('reveal-ready');
+      var init=function(){
+      var io=new IntersectionObserver(function(es){for(var e of es)if(e.isIntersecting){
+      e.target.classList.add('is-in');io.unobserve(e.target)}},{rootMargin:'0px 0px -12% 0px'});
+      for(var el of d.querySelectorAll('[data-reveal]')){
+      var g=el.closest('[data-reveal-group]')||d.body;g.__n=(g.__n||0)+1;
+      el.style.setProperty('--reveal-i',Math.min(g.__n-1,3));io.observe(el)}
+      var t=function(){h.classList.toggle('scrolled',scrollY>8)};
+      addEventListener('scroll',t,{passive:true});t()};
+      d.readyState=='loading'?d.addEventListener('DOMContentLoaded',init):init()})();
+    </script>
     <a class="sr-only skip-link" href="#main">{t(locale, 'nav.skip')}</a>
     <slot />
   </body>

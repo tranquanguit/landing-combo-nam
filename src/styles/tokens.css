@@ -94,6 +94,9 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
+  /* Cho phép chuyển động tới các từ khoá kích thước (auto, min-content...).
+     Cần cho <details> mở ra mượt mà; trình duyệt chưa hỗ trợ thì bỏ qua. */
+  interpolate-size: allow-keywords;
   -webkit-text-size-adjust: 100%;
   scroll-padding-top: calc(var(--header-h) + 12px);
 }
@@ -110,6 +113,67 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
+}
+
+/* ===================== CHUYỂN ĐỘNG =====================
+   Một đường cong, một thang thời lượng. Chuyển động ở đây có đúng một việc:
+   dẫn mắt theo thứ tự đọc. Không nảy, không xoay, không phóng to — những thứ
+   đó làm trang trông rẻ tiền chứ không làm nó sang.
+
+   Ba quy tắc tự đặt ra:
+   1. Chỉ animate `opacity` và `transform`. Hai thuộc tính này chạy trên GPU và
+      không gây reflow; animate `height` hay `top` là cách chắc chắn để trang
+      giật trên điện thoại tầm trung — đúng nhóm máy phần lớn khách đang dùng.
+   2. Không phần tử nào bị ẩn bởi CSS tĩnh. Lớp ẩn do JS tự thêm vào <html>,
+      nên khi JS hỏng hoặc chưa chạy, trang vẫn hiện đầy đủ. Đây là lỗi kinh
+      điển của các thư viện scroll-reveal: JS lỗi là trang trắng.
+   3. Khoảng dịch nhỏ (10px) và không bao giờ theo chiều ngang — dịch ngang
+      sinh thanh cuộn ngang trên màn hình hẹp. */
+:root {
+  --ease: cubic-bezier(.22, .61, .36, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --dur-1: 140ms;   /* phản hồi chạm/di chuột */
+  --dur-2: 260ms;   /* đổi trạng thái */
+  --dur-3: 560ms;   /* xuất hiện khi cuộn tới */
+  --reveal-shift: 10px;
+}
+
+/* Chỉ ẩn khi JS đã sẵn sàng VÀ người dùng không yêu cầu giảm chuyển động. */
+@media (prefers-reduced-motion: no-preference) {
+  html.reveal-ready [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-shift), 0);
+  }
+  html.reveal-ready [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity var(--dur-3) var(--ease-out),
+      transform var(--dur-3) var(--ease-out);
+    /* Các phần tử trong cùng một khối vào lệch nhau một nhịp ngắn, theo thứ tự
+       đọc. Trễ tối đa 3 nhịp: lâu hơn nữa thì người cuộn nhanh sẽ thấy trang
+       chưa dựng xong thay vì thấy một chuyển động. */
+    transition-delay: calc(var(--reveal-i, 0) * 70ms);
+  }
+}
+
+/* Hero không chờ cuộn: nó đã ở trong khung nhìn. Vào bằng animation riêng để
+   không phụ thuộc JS — phần trên màn hình đầu tiên phải hiện kể cả khi script
+   chưa tải xong. */
+@media (prefers-reduced-motion: no-preference) {
+  .enter > * {
+    animation: enter var(--dur-3) var(--ease-out) both;
+    animation-delay: calc(var(--reveal-i, 0) * 80ms);
+  }
+  /* Thứ tự lệch nhịp đặt bằng CSS thuần, không cần JS chạm tới phần trên màn
+     hình đầu tiên — đây là vùng quyết định LCP. */
+  .enter > :nth-child(2) { --reveal-i: 1; }
+  .enter > :nth-child(3) { --reveal-i: 2; }
+  .enter > :nth-child(n + 4) { --reveal-i: 3; }
+}
+@keyframes enter {
+  from { opacity: 0; transform: translate3d(0, var(--reveal-shift), 0); }
+  to   { opacity: 1; transform: none; }
 }
 
 body {
@@ -280,10 +344,23 @@ section { padding-block: clamp(72px, 10vw, 152px); }
   letter-spacing: .04em; line-height: 1.2;
   padding: 17px 34px; border: 1px solid transparent; border-radius: var(--r-btn);
   cursor: pointer; text-decoration: none; text-align: center;
-  transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+  transition:
+    background-color var(--dur-2) var(--ease),
+    border-color var(--dur-2) var(--ease),
+    color var(--dur-2) var(--ease),
+    transform var(--dur-1) var(--ease),
+    box-shadow var(--dur-2) var(--ease);
 }
 .btn-primary { background: var(--ink-navy); color: #fff; }
 .btn-primary:hover { background: var(--cobalt); color: #fff; }
+
+/* Nhấc lên 1px khi di chuột, nhấn xuống khi bấm. Biên độ cố tình rất nhỏ: đủ
+   để ngón tay và con trỏ biết nút đã nhận lệnh, không đủ để thành hiệu ứng. */
+@media (hover: hover) {
+  .btn:hover { transform: translateY(-1px); }
+}
+.btn:active { transform: translateY(0); transition-duration: 60ms; }
+.btn[disabled], .btn[aria-disabled='true'] { transform: none; }
 .btn-secondary { background: var(--cobalt); color: #fff; }
 .btn-secondary:hover { background: var(--ink-navy); color: #fff; }
 .btn-ghost { background: transparent; color: var(--ink-navy); border-color: var(--line-strong); }
@@ -347,3 +424,10 @@ body { padding-bottom: var(--consent-h); }
    Đã gỡ: nó khai chiều cao giả nên mọi liên kết neo (#dat-hang) cuộn trượt đích
    hơn 2000px. Tiết kiệm vài chục ms render không đáng đổi lấy việc không ai
    bấm được nút Đặt hàng. */
+
+
+/* Thanh trên cùng dính đáy khung nhìn: lúc ở đầu trang thì hoà vào nền, cuộn
+   xuống mới tách ra bằng một gạch tóc. Trạng thái do JS đặt trên <html> chứ
+   không phải trên chính header — một lớp, mọi trang dùng chung. */
+html.scrolled header { border-bottom-color: var(--line-strong); }
+header { transition: border-color var(--dur-2) var(--ease); }

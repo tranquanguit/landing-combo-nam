@@ -20,7 +20,9 @@
     "test:orders-api": "node --experimental-strip-types --experimental-sqlite tests/orders-api.mjs",
     "test:admin": "node --experimental-strip-types --experimental-sqlite tests/admin-page.mjs",
     "db:migrate": "wrangler d1 execute mocha-orders --remote --file=migrations/0001_orders.sql",
-    "db:migrate:local": "wrangler d1 execute mocha-orders --local --file=migrations/0001_orders.sql"
+    "db:migrate:local": "wrangler d1 execute mocha-orders --local --file=migrations/0001_orders.sql",
+    "check:assets": "node scripts/check-assets.mjs",
+    "docs:assets": "node scripts/check-assets.mjs --md docs/anh-can-co.md"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

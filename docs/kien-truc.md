@@ -316,7 +316,7 @@ file sang `src/assets/` và bật khối.
 ## 4. Cổng lúc build: điều gì không thể lọt qua
 
 Kiến trúc này đặt cược vào một ý: **quy tắc nào quan trọng thì phải là cổng,
-không phải tài liệu.** 466 ca kiểm thử chia bốn tầng:
+không phải tài liệu.** 535 ca kiểm thử chia bốn tầng:
 
 | Tầng | Hỏi gì | Tệp |
 | --- | --- | --- |
@@ -395,7 +395,7 @@ thứ chỉ sai được ở đúng nơi đó.
 npm ci
 npm run build          # dựng dist/
 npm run check          # 0 lỗi kiểu
-npm run test:guards    # 486 ca hàng rào
+npm run test:guards    # 535 ca hàng rào
 npm run test:seo       # 223 phép đo SEO trên bản build
 npm run test:order     # 9 kịch bản đặt hàng trong trình duyệt thật
 npm run test:orders-api # 20 kịch bản API đơn hàng trên SQLite thật
