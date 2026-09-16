@@ -193,6 +193,14 @@ const blocks = z.discriminatedUnion('type', [
     caption: z.string().optional(),
     rows: z.array(z.object({
       name: z.string(),
+      /**
+       * Hoạt chất này nằm trong sản phẩm nào của bộ.
+       *
+       * Với một combo, gộp thành phần của hai sản phẩm vào một bảng mà không
+       * nói rõ cái nào ở đâu là làm người đọc tưởng cả hai đều có đủ. Đây
+       * cũng là chỗ bản trước sai: nồng độ in trên bao bì serum bị gán cho kem.
+       */
+      inProduct: z.string().optional(),
       role: z.string(),
       suitedFor: z.string(),
       reference: safeUrl.optional(),

@@ -56,8 +56,8 @@
     }
   ],
   "seo": {
-    "title": "Mocha Dark Spot Duo – Tranexamic Acid 3% + Bakuchiol 2%",
-    "description": "Two-step routine for dark spots and uneven tone: Tranexamic Acid 3%, Bakuchiol 2%, NIO-NAG 2%, Niacinamide 1%. Every percentage published.",
+    "title": "Mocha Dark Spot Duo – 4-butylresorcinol 1000ppm + Niacinamide 4%",
+    "description": "Serum with 4-butylresorcinol 1000ppm and Niacinamide 4%, plus a cream with Tranexamic Acid and Bakuchiol. Only the percentages printed on the pack. {{price}}.",
     "ogImage": "/images/packshot-combo.jpg"
   },
   "compliance": {
@@ -78,7 +78,7 @@
       "type": "hero",
       "eyebrow": "A cream and a serum, used together, for melasma-prone skin",
       "heading": "A two-step routine for dark spots, with every percentage published",
-      "lead": "<strong>Smart Brightening Cream X3</strong> and <strong>Smart First Care Serum</strong>, used together: Tranexamic Acid 3%, Bakuchiol 2%, NIO-NAG 2%, Niacinamide 1%. Formulated for skin dealing with stubborn discolouration and uneven tone.",
+      "lead": "<strong>Smart First Care Serum</strong> publishes 4-butylresorcinol 1000ppm, Niacinamide 4% and Bio-Placenta 1%; <strong>Smart Brightening Cream X3</strong> carries Tranexamic Acid, NIO-NAG and Bakuchiol. Formulated for skin dealing with stubborn discolouration and uneven tone.",
       "usp": [
         {
           "text": "<strong>No corticosteroids, no hydroquinone, no drying alcohol</strong>",
@@ -183,52 +183,79 @@
       "eyebrow": "The formula",
       "heading": "Every active, its percentage, and what it is doing there",
       "intro": "No corticosteroids, no hydroquinone, no synthetic fragrance.",
-      "caption": "Table 1 — Key actives, their concentration, and the referenced study. Where the study used a different concentration to this product, that is stated.",
+      "caption": "This table lists only the actives and concentrations PRINTED ON THE PACKAGING. An ingredient without a number is one the packaging does not state a percentage for — we do not fill one in. The full INCI list is printed on the box.",
       "rows": [
         {
-          "name": "Tranexamic Acid 3%",
-          "role": "Widely used in brightening formulations; supports the appearance of a more even tone.",
-          "suitedFor": "Hormonal and post-pregnancy discolouration",
-          "reference": "https://pubmed.ncbi.nlm.nih.gov/36606378/",
-          "referenceNote": "2023 review of tranexamic acid in melasma; studies used various routes and concentrations."
+          "name": "4-butylresorcinol 1000ppm",
+          "inProduct": "Serum",
+          "role": "Studied for its ability to inhibit tyrosinase, the enzyme that starts melanin production.",
+          "suitedFor": "Surface patches, mixed pigmentation"
         },
         {
-          "name": "Bakuchiol 2%",
-          "role": "Studied as a gentler alternative to retinol; supports cell turnover without peeling.",
-          "suitedFor": "Sensitive skin, retinol-intolerant skin",
-          "reference": "https://pubmed.ncbi.nlm.nih.gov/29947134/",
-          "referenceNote": "Double-blind 12-week trial used bakuchiol at 0.5%, lower than the concentration in this product."
+          "name": "Niacinamide 4%",
+          "inProduct": "Serum",
+          "role": "Supports the skin barrier and evens tone; kept moderate to limit stinging.",
+          "suitedFor": "All skin types, including easily irritated skin"
         },
         {
-          "name": "Niacinamide 1% + NIO-NAG (Glucosamine) 2%",
-          "role": "Supports barrier function, texture, and the appearance of brightness.",
-          "suitedFor": "All skin types, including oily and blemish-prone",
-          "reference": "https://pubmed.ncbi.nlm.nih.gov/12100180/",
-          "referenceNote": "Hakozaki 2002 used niacinamide at 5%, higher than the concentration in this product."
+          "name": "Bio-Placenta 1%",
+          "inProduct": "Serum",
+          "role": "A biological ingredient supporting recovery, encapsulated in liposomes for delivery.",
+          "suitedFor": "Thin skin, skin recovering from treatment"
         },
         {
-          "name": "Vietnam Bio-White Complex 3%",
-          "role": "Fermented botanical blend; soothing, supports a brighter-looking complexion.",
-          "suitedFor": "Reactive or dull-looking skin",
-          "referenceNote": "No public study cited for this ingredient yet."
+          "name": "Vietnam Bio-white Complex 3%",
+          "inProduct": "Serum",
+          "role": "A fermented complex of native Vietnamese extracts aimed at evening out tone.",
+          "suitedFor": "Uneven, dull skin"
         },
         {
-          "name": "SEPICALM™ VG WP",
-          "role": "Aminovector-class active with a calming, brightening profile.",
-          "suitedFor": "Skin that flushes easily",
-          "referenceNote": "No public study cited for this ingredient yet."
+          "name": "Bioyoga 2%",
+          "inProduct": "Serum",
+          "role": "A fermented ingredient that helps calm the skin.",
+          "suitedFor": "Stressed, easily reddened skin"
         },
         {
-          "name": "Ceramide 1% + Bioyoga",
-          "role": "Reinforces the skin barrier and reduces water loss, helping results hold.",
-          "suitedFor": "Dry skin, skin recovering from active treatment",
-          "referenceNote": "No public study cited for this ingredient yet."
+          "name": "Black Truffle Extract 2%",
+          "inProduct": "Serum",
+          "role": "Black truffle extract, supporting brightness.",
+          "suitedFor": "Dull skin"
         },
         {
-          "name": "Black Truffle & Bio-Placenta",
-          "role": "Polyphenol-rich antioxidants that support skin renewal.",
-          "suitedFor": "Skin showing early signs of ageing",
-          "referenceNote": "No public study cited for this ingredient yet."
+          "name": "Tranexamic Acid",
+          "inProduct": "Cream",
+          "role": "Among the more widely studied topical options for softening areas darkened by excess pigment.",
+          "suitedFor": "Surface patches, mixed pigmentation"
+        },
+        {
+          "name": "NIO-NAG",
+          "inProduct": "Cream",
+          "role": "A glucosamine derivative that helps regulate pigment formation.",
+          "suitedFor": "Post-inflammatory pigmentation"
+        },
+        {
+          "name": "Ceramide",
+          "inProduct": "Cream",
+          "role": "A structural part of the skin barrier that helps hold moisture.",
+          "suitedFor": "Dry, dehydrated skin"
+        },
+        {
+          "name": "Bakuchiol",
+          "inProduct": "Cream",
+          "role": "A plant-derived alternative to retinol studied for easily irritated skin; it does not increase light sensitivity.",
+          "suitedFor": "Sensitive skin, skin that does not tolerate retinol"
+        },
+        {
+          "name": "Vietnam Bio-white Complex",
+          "inProduct": "Cream",
+          "role": "The same native complex as the serum, in a cream that stays on skin longer.",
+          "suitedFor": "Uneven, dull skin"
+        },
+        {
+          "name": "Black Truffle Extract",
+          "inProduct": "Cream",
+          "role": "Black truffle extract, supporting brightness.",
+          "suitedFor": "Dull skin"
         }
       ]
     },

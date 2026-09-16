@@ -57,7 +57,7 @@
   ],
   "seo": {
     "title": "Combo Nám Mocha – Kem & Serum chăm sóc da nám | Mocha Việt Nam",
-    "description": "Kem Smart Brightening Cream X3 + Serum Smart First Care: Tranexamic Acid 3%, Bakuchiol 2%, NIO-NAG 2%. Không corticoid. {{price}} kèm 2 quà tặng, freeship.",
+    "description": "Serum 4-butylresorcinol 1000ppm, Niacinamide 4% + kem Tranexamic Acid, Bakuchiol. Nồng độ in trên bao bì. Không corticoid. {{price}}, freeship.",
     "ogImage": "/images/packshot-combo.jpg"
   },
   "compliance": {
@@ -77,14 +77,14 @@
       "type": "hero",
       "eyebrow": "Kem + serum dùng cùng nhau, cho da nám",
       "heading": "Hai bước chăm sóc da nám, công thức công khai từng tỉ lệ",
-      "lead": "Kem <strong>Smart Brightening Cream X3</strong> và serum <strong>Smart First Care Serum</strong> dùng cùng nhau: Tranexamic Acid 3%, Bakuchiol 2%, NIO-NAG 2%, Niacinamide 1%. Dành cho da đang gặp nám mảng, nám chân sâu và nám hỗn hợp.",
+      "lead": "Serum <strong>Smart First Care</strong> công bố 4-butylresorcinol 1000ppm, Niacinamide 4%, Bio-Placenta 1%; kem <strong>Smart Brightening X3</strong> mang Tranexamic Acid, NIO-NAG, Bakuchiol. Dành cho da đang gặp nám mảng, nám chân sâu và nám hỗn hợp.",
       "usp": [
         {
           "text": "<strong>Không corticoid, không hydroquinone, không cồn khô</strong>",
           "evidence": "ingredient"
         },
         {
-          "text": "<strong>Công khai tỉ lệ từng hoạt chất</strong>, không giấu trong cụm “thành phần độc quyền”",
+          "text": "<strong>Công khai đúng những tỉ lệ in trên bao bì</strong>, không giấu trong cụm “thành phần độc quyền”",
           "evidence": "verified",
           "source": "#thanh-phan",
           "qualifier": "xem bảng thành phần ngay trên trang này"
@@ -182,52 +182,79 @@
       "eyebrow": "Bảng thành phần",
       "heading": "Từng hoạt chất, từng tỉ lệ, và vai trò của nó",
       "intro": "Không corticoid, không hydroquinone, không hương liệu tổng hợp gây kích ứng.",
-      "caption": "Bảng 1 — Hoạt chất chính, nồng độ, và nghiên cứu tham chiếu. Khi nồng độ trong nghiên cứu khác nồng độ trong sản phẩm, điều đó được ghi rõ.",
+      "caption": "Bảng này chỉ liệt kê những hoạt chất và nồng độ được IN TRÊN BAO BÌ sản phẩm. Hoạt chất không có số là hoạt chất bao bì không công bố tỉ lệ — chúng tôi không tự điền con số. Thành phần đầy đủ theo INCI in trên vỏ hộp.",
       "rows": [
         {
-          "name": "Tranexamic Acid 3%",
-          "role": "Hoạt chất được dùng phổ biến trong sản phẩm dưỡng sáng, hỗ trợ cải thiện vùng da sạm màu.",
-          "suitedFor": "Nám mảng, nám nội tiết, nám sau sinh",
-          "reference": "https://pubmed.ncbi.nlm.nih.gov/36606378/",
-          "referenceNote": "Tổng quan 2023 về tranexamic acid trong nám; các nghiên cứu dùng nhiều đường dùng và nồng độ khác nhau."
+          "name": "4-butylresorcinol 1000ppm",
+          "inProduct": "Serum",
+          "role": "Được nghiên cứu về khả năng ức chế enzyme tyrosinase — enzyme khởi đầu quá trình sinh melanin.",
+          "suitedFor": "Da nám mảng, nám hỗn hợp"
         },
         {
-          "name": "Bakuchiol 2%",
-          "role": "Được nghiên cứu như lựa chọn thay thế retinol, hỗ trợ tái tạo tế bào mà không gây bong tróc.",
-          "suitedFor": "Da nhạy cảm, da không dùng được retinol",
-          "reference": "https://pubmed.ncbi.nlm.nih.gov/29947134/",
-          "referenceNote": "Thử nghiệm mù đôi 12 tuần dùng bakuchiol nồng độ 0,5%, thấp hơn nồng độ trong sản phẩm này."
+          "name": "Niacinamide 4%",
+          "inProduct": "Serum",
+          "role": "Hỗ trợ hàng rào bảo vệ da và làm đều màu da; nồng độ vừa phải để hạn chế châm chích.",
+          "suitedFor": "Mọi loại da, kể cả da dễ kích ứng"
         },
         {
-          "name": "Niacinamide 1% + NIO-NAG (Glucosamine) 2%",
-          "role": "Hỗ trợ làm sáng, phục hồi chức năng bảo vệ da và cải thiện kết cấu da.",
-          "suitedFor": "Mọi loại da, kể cả da dầu mụn",
-          "reference": "https://pubmed.ncbi.nlm.nih.gov/12100180/",
-          "referenceNote": "Nghiên cứu Hakozaki 2002 dùng niacinamide nồng độ 5%, cao hơn nồng độ trong sản phẩm này."
+          "name": "Bio-Placenta 1%",
+          "inProduct": "Serum",
+          "role": "Thành phần sinh học hỗ trợ phục hồi, bọc trong liposome để tăng dẫn truyền.",
+          "suitedFor": "Da mỏng yếu, vừa qua treatment"
         },
         {
-          "name": "Vietnam Bio-White Complex 3%",
-          "role": "Hỗn hợp chiết xuất lên men, làm dịu và hỗ trợ làm sáng da.",
-          "suitedFor": "Da đang kích ứng, da xỉn màu",
-          "referenceNote": "Chưa có nghiên cứu công khai để dẫn cho riêng hoạt chất này."
+          "name": "Vietnam Bio-white Complex 3%",
+          "inProduct": "Serum",
+          "role": "Phức hợp chiết xuất bản địa lên men, hướng tới làm sáng đều màu.",
+          "suitedFor": "Da sạm màu không đều"
         },
         {
-          "name": "SEPICALM™ VG WP",
-          "role": "Hoạt chất nhóm Aminovector, làm dịu và hỗ trợ làm sáng da.",
-          "suitedFor": "Da dễ đỏ, dễ kích ứng",
-          "referenceNote": "Chưa có nghiên cứu công khai để dẫn cho riêng hoạt chất này."
+          "name": "Bioyoga 2%",
+          "inProduct": "Serum",
+          "role": "Thành phần lên men, hỗ trợ làm dịu nền da.",
+          "suitedFor": "Da căng thẳng, dễ đỏ"
         },
         {
-          "name": "Ceramide 1% + Bioyoga",
-          "role": "Củng cố hàng rào bảo vệ da, giảm mất nước, hạn chế sạm màu quay lại.",
-          "suitedFor": "Da khô, da sau giai đoạn đặc trị",
-          "referenceNote": "Chưa có nghiên cứu công khai để dẫn cho riêng hoạt chất này."
+          "name": "Black Truffle Extract 2%",
+          "inProduct": "Serum",
+          "role": "Chiết xuất nấm truffle đen, hỗ trợ dưỡng sáng.",
+          "suitedFor": "Da xỉn màu"
         },
         {
-          "name": "Black Truffle & Bio-Placenta",
-          "role": "Giàu polyphenol chống oxy hóa, hỗ trợ tái tạo tế bào.",
-          "suitedFor": "Da bắt đầu lão hóa",
-          "referenceNote": "Chưa có nghiên cứu công khai để dẫn cho riêng hoạt chất này."
+          "name": "Tranexamic Acid",
+          "inProduct": "Kem",
+          "role": "Được nghiên cứu nhiều trong nhóm làm mờ vùng da sẫm màu do tăng sắc tố.",
+          "suitedFor": "Nám mảng, nám hỗn hợp"
+        },
+        {
+          "name": "NIO-NAG",
+          "inProduct": "Kem",
+          "role": "Dẫn xuất glucosamine, hỗ trợ điều tiết quá trình sinh sắc tố.",
+          "suitedFor": "Da tăng sắc tố sau viêm"
+        },
+        {
+          "name": "Ceramide",
+          "inProduct": "Kem",
+          "role": "Thành phần cấu trúc của hàng rào bảo vệ da, hỗ trợ giữ ẩm.",
+          "suitedFor": "Da khô, da mất nước"
+        },
+        {
+          "name": "Bakuchiol",
+          "inProduct": "Kem",
+          "role": "Dẫn xuất thực vật được nghiên cứu như lựa chọn thay thế retinol cho da dễ kích ứng; không làm tăng nhạy cảm ánh sáng.",
+          "suitedFor": "Da nhạy cảm, không hợp retinol"
+        },
+        {
+          "name": "Vietnam Bio-white Complex",
+          "inProduct": "Kem",
+          "role": "Cùng phức hợp bản địa với serum, ở dạng kem giữ trên da lâu hơn.",
+          "suitedFor": "Da sạm màu không đều"
+        },
+        {
+          "name": "Black Truffle Extract",
+          "inProduct": "Kem",
+          "role": "Chiết xuất nấm truffle đen, hỗ trợ dưỡng sáng.",
+          "suitedFor": "Da xỉn màu"
         }
       ]
     },

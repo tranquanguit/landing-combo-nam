@@ -4,6 +4,10 @@ import { t, type Locale } from '../../i18n/ui';
 interface Props { data: any; id?: string; locale: Locale; }
 const { data, id = 'thanh-phan', locale } = Astro.props;
 
+/* Cột "có trong" chỉ xuất hiện khi dữ liệu thật sự khai — sản phẩm đơn lẻ
+   không cần nó, và một cột rỗng chỉ làm bảng rộng thêm vô ích. */
+const showProduct = data.rows.some((r: any) => r.inProduct);
+
 /**
  * Tách phần trăm ra khỏi tên hoạt chất để đặt bằng face dành cho chữ số.
  * "Tranexamic Acid 3%" -> "Tranexamic Acid <span class=pct>3%</span>"
@@ -22,6 +26,7 @@ const splitPct = (name: string) =>
       <thead>
         <tr>
           <th scope="col">{t(locale, 'table.ingredient')}</th>
+          {showProduct && <th scope="col">{t(locale, 'table.inProduct')}</th>}
           <th scope="col">{t(locale, 'table.role')}</th>
           <th scope="col">{t(locale, 'table.suitedFor')}</th>
         </tr>
@@ -36,6 +41,7 @@ const splitPct = (name: string) =>
               )}
               {r.referenceNote && <span class="ref-note">{r.referenceNote}</span>}
             </th>
+            {showProduct && <td class="in">{r.inProduct}</td>}
             <td>{r.role}</td>
             <td>{r.suitedFor}</td>
           </tr>
@@ -53,7 +59,7 @@ const splitPct = (name: string) =>
   .scroll { overflow-x: auto; }
   .scroll:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 4px; }
 
-  table { width: 100%; border-collapse: collapse; min-width: 620px; }
+  table { width: 100%; border-collapse: collapse; min-width: 720px; }
   caption {
     text-align: left; padding: 0 0 var(--s-5);
     color: var(--slate); font-size: var(--t-xs); max-width: 62ch;
@@ -76,7 +82,10 @@ const splitPct = (name: string) =>
     font-weight: 400;
   }
   tbody tr:last-child :is(th, td) { border-bottom: 0; }
-  tbody th { width: 34%; }
+  tbody th { width: 30%; }
+  /* Cột "có trong" hẹp và nhạt hơn: nó là nhãn phân loại, không phải nội dung
+     người đọc dừng lại để đọc kỹ. */
+  .in { width: 13%; color: var(--slate); font-size: var(--t-xs); }
 
   .name {
     display: block;
