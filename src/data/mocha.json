@@ -1,7 +1,7 @@
 {
-  "legalName": "Công ty Dược Mỹ Phẩm Mocha Việt Nam",
+  "legalName": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
   "tradingName": "Mocha Việt Nam",
-  "address": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, TP. Hồ Chí Minh",
+  "address": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
   "phone": "+84367848918",
   "phoneDisplay": "0367 848 918",
   "zalo": "https://zalo.me/0367848918",
@@ -21,5 +21,6 @@
     {
       "name": "Facebook"
     }
-  ]
+  ],
+  "taxId": "0317963313"
 }

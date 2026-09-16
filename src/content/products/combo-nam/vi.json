@@ -61,15 +61,16 @@
     "ogImage": "/images/packshot-combo.jpg"
   },
   "compliance": {
-    "declaringOrganization": "Công ty Dược Mỹ Phẩm Mocha Việt Nam",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, TP. Hồ Chí Minh",
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
     "functions": "hỗ trợ làm mờ vùng da sạm nám, dưỡng sáng và cải thiện độ đều màu da",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ]
+    ],
+    "productNotificationNumber": "1517/25/CBMP-LA"
   },
   "blocks": [
     {

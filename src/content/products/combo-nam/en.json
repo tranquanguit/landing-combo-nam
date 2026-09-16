@@ -61,8 +61,8 @@
     "ogImage": "/images/packshot-combo.jpg"
   },
   "compliance": {
-    "declaringOrganization": "Công ty Dược Mỹ Phẩm Mocha Việt Nam",
-    "declaringAddress": "290/2 Nam Ky Khoi Nghia, Vo Thi Sau Ward, District 3, Ho Chi Minh City, Vietnam",
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
     "functions": "helps visibly reduce the look of dark spots and supports a more even-looking skin tone",
     "warnings": [
       "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
@@ -70,7 +70,8 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ]
+    ],
+    "productNotificationNumber": "1517/25/CBMP-LA"
   },
   "blocks": [
     {
