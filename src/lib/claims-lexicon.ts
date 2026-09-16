@@ -430,7 +430,18 @@ const PERSONAL: { pattern: RegExp; kind: string }[] = [
   // Khớp trên chuỗi ĐÃ gộp chữ số: người ta viết "0912 345 678", "0912.345.678".
   { pattern: /(?:^|[\s(])(?:0|\+84)\d{9}(?![\d])/u, kind: 'số điện thoại' },
   { pattern: /[\w.+-]+@[\w-]+\.[\w.]{2,}/u, kind: 'địa chỉ email' },
-  { pattern: /\b\d{2}\s*tuổi(?![\p{L}])|\b\d{2}\s*tuoi\b|\baged?\s+\d{2}\b/iu, kind: 'tuổi' },
+  /* Tuổi của KHÁCH là dữ liệu cá nhân ("chị Hà, 38 tuổi"). Nhưng một NGƯỠNG
+     tuổi trong văn bản pháp lý thì không — "không dành cho người dưới 16 tuổi"
+     là điều khoản, không phải thông tin về ai cả.
+
+     Phân biệt bằng từ đứng ngay trước con số: dưới/trên/từ/đủ/under/over/aged
+     báo hiệu một ngưỡng. Không dùng cơ chế miễn trừ theo chuỗi hay theo vị trí
+     — dự án đã xoá `reviewedClaims` vì đúng lý do đó; ở đây sửa chính luật, nên
+     nó vẫn chặn được "chị Hà, 38 tuổi" nằm bất cứ đâu. */
+  {
+    pattern: /(?<!\b(?:dưới|trên|từ|đủ|tròn|duoi|tren|tu|du|under|over|above|below|aged?|min|max)\s{0,3})(?:\b\d{2}\s*tuổi(?![\p{L}])|\b\d{2}\s*tuoi\b|\baged?\s+\d{2}\b)/iu,
+    kind: 'tuổi',
+  },
   {
     /* Thiếu cờ `i` nên chỉ bắt "chị" viết thường — mà tên người gần như luôn
        đứng đầu câu và viết hoa. Kiểm định lần 9 đăng được "Chị Nguyễn Thu Hà,

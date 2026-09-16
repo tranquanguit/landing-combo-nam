@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getCollection, getEntry } from 'astro:content';
 import { money } from '../lib/format';
 import { expandProductTokens } from '../lib/money-text';
-import { adviceIndexPath, articlePath, homePath, linePath, productPath } from '../lib/routes';
+import { adviceIndexPath, articlePath, homePath, linePath, policyPath, productPath } from '../lib/routes';
 import { plainText } from '../lib/richtext';
 import type { Locale } from '../i18n/ui';
 
@@ -53,6 +53,7 @@ export const GET: APIRoute = async ({ site }) => {
   const all = await getCollection('products', ({ data }) => data.status === 'published');
   const lineEntries = await getCollection('lines', ({ data }) => data.status === 'published');
   const articleEntries = await getCollection('articles', ({ data }) => data.status === 'published');
+  const policyEntries = await getCollection('policies', ({ data }) => data.status === 'published');
   const products = all.sort((a, b2) =>
     a.data.slug === b2.data.slug
       ? (a.data.locale === 'vi' ? -1 : 1)
@@ -212,6 +213,25 @@ export const GET: APIRoute = async ({ site }) => {
     if (d.faq.length) {
       lines.push(`### ${x.faq}`, '');
       for (const f of d.faq) lines.push(`**${plainText(f.q)}** ${plainText(f.a)}`);
+      lines.push('');
+    }
+  }
+
+  /* Chính sách phải có mặt: trợ lý AI thường được hỏi đúng những câu này —
+     "đổi trả thế nào", "họ lưu dữ liệu của tôi bao lâu". Trả lời sai vì không
+     đọc được chính sách còn tệ hơn là không trả lời. */
+  for (const entry of policyEntries) {
+    const d = entry.data;
+    const locale = d.locale as Locale;
+    const x = lab(locale);
+    lines.push(`## ${d.title}${locale === 'vi' ? '' : ` (${locale.toUpperCase()})`}`, '');
+    lines.push(`- ${x.page}: ${origin}${policyPath(d.slug, locale)}`);
+    lines.push(`- ${x.updated}: ${d.updatedAt}`);
+    lines.push(`- ${plainText(d.lead)}`);
+    lines.push('');
+    for (const sec of d.sections) {
+      lines.push(`### ${plainText(sec.heading)}`, '');
+      for (const para of sec.body) lines.push(plainText(para));
       lines.push('');
     }
   }

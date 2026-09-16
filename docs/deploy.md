@@ -16,12 +16,22 @@ Mỗi dòng dưới đây hiện đang hiện một ô cảnh báo vàng trên c
 | --- | --- | --- | --- |
 | A1 | **Số tiếp nhận phiếu công bố mỹ phẩm** | `src/content/products/combo-nam/*.json` → `compliance.productNotificationNumber` | Nghị định 342/2025/NĐ-CP bắt buộc với quảng cáo mỹ phẩm. Thiếu là rủi ro xử phạt. |
 | A2 | **Mã số thuế doanh nghiệp** | `src/data/mocha.json` → `taxId` | Bắt buộc với website thương mại điện tử bán hàng. |
-| A3 | **Trang chính sách** (đổi trả, bảo mật dữ liệu cá nhân) | chưa có — cần viết | Nghị định 13/2023/NĐ-CP: đã thu thập dữ liệu cá nhân thì phải công bố chính sách. Câu đồng ý trên biểu mẫu đang hứa "có thể yêu cầu xoá bất cứ lúc nào". |
+| ~~A3~~ | ~~**Trang chính sách**~~ — ✅ **đã có bản thảo**, xem ghi chú dưới bảng | `src/content/policies/` | Nghị định 13/2023/NĐ-CP. Hai trang đã lên site và có link ở chân trang. |
 | A4 | **Đường dẫn gian hàng chính hãng** (Shopee, Lazada, TikTok Shop, Facebook) | `src/data/mocha.json` → `marketplaces[].url` | Đang nhắc tên sàn mà không dẫn được tới đâu. |
 | A5 | **Bộ ảnh đúng đặc tả** | `src/assets/images/` | Xem `docs/anh-can-co.md`. Hiện **cả 6 ảnh bắt buộc đều dưới chuẩn**: logo 220×81 không nền trong suốt, packshot 1002×762 (cần 1600×1200), ba ảnh nám ba tỉ lệ khác nhau. |
 | A6 | **Chứng từ** (phiếu công bố, CGMP, kiểm nghiệm) | `src/assets/documents/` rồi khai khối `documents` | Khối đã dựng xong và đã kiểm thử, chỉ chờ file. Đây là bằng chứng mạnh nhất một trang mỹ phẩm có thể đưa ra. |
 | A7 | **Văn bản đồng ý cho 4 ảnh trước/sau** | có văn bản rồi thì chuyển file từ `src/media-gated/images/` sang `src/assets/images/` | Ảnh khách là dữ liệu cá nhân. Cổng build đang chặn chúng khỏi `dist/`. |
 
+> **A3 — đã viết, nhưng cần người của Mocha rà lại.** Hai trang
+> `/chinh-sach/chinh-sach-du-lieu/` và `/chinh-sach/chinh-sach-doi-tra/` mô tả
+> đúng những gì hệ thống thật sự làm (lưu gì, không lưu gì, ai đọc được). Phần
+> chỉ Mocha mới quyết được thì **không bịa**: chúng nằm trong trường `pending`
+> và hiện thành một ô cảnh báo vàng ngay trên chính trang đó — thời hạn lưu dữ
+> liệu, số ngày cửa sổ đổi trả, địa chỉ nhận hàng đổi trả, danh sách đơn vị vận
+> chuyển. Điền xong thì xoá dòng tương ứng trong `pending`, ô cảnh báo tự biến
+> mất. Đây là bản thảo của người dựng site, không phải tư vấn pháp lý — nên có
+> người phụ trách pháp chế của Mocha đọc trước khi chạy quảng cáo.
+>
 > **A1 — một đầu mối để đối chiếu.** Tìm kiếm công khai cho ra số
 > **1459/24/CBMP-LA** gắn với sản phẩm Mocha, nhưng cùng một số lại xuất hiện cho
 > cả kem và serum ở các nguồn bán lẻ khác nhau, nên **không dùng được**. Đây là
@@ -71,8 +81,8 @@ rơi vào hư không tệ hơn một nút không hoạt động.
 
 ```bash
 npm run check          # 0 lỗi kiểu
-npm run test:guards    # 535 ca hàng rào
-npm run test:seo       # 223 phép đo SEO trên chính bản build
+npm run test:guards    # 549 ca hàng rào
+npm run test:seo       # 299 phép đo SEO trên chính bản build
 npm run test:orders-api # 20 kịch bản API đơn hàng
 npm run test:admin     # 9 kịch bản trang quản trị
 npm run check:assets   # ảnh khớp đặc tả

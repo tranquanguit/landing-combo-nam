@@ -1,5 +1,5 @@
 import { getCollection } from 'astro:content';
-import { ADVICE_SEGMENT, defaultLocale, localePath, type Locale } from '../i18n/ui.ts';
+import { ADVICE_SEGMENT, POLICY_SEGMENT, defaultLocale, localePath, type Locale } from '../i18n/ui.ts';
 
 /**
  * MỘT nơi duy nhất biết URL của mọi trang trên site.
@@ -41,7 +41,12 @@ export function adviceIndexPath(locale: Locale): string {
   return withSlash(localePath(locale, `/${ADVICE_SEGMENT[locale]}/`));
 }
 
-export type RouteKind = 'home' | 'product' | 'line' | 'article' | 'advice-index';
+/** Trang chính sách, dưới đoạn chuyên mục đã dịch. */
+export function policyPath(slug: string, locale: Locale): string {
+  return withSlash(localePath(locale, `/${POLICY_SEGMENT[locale]}/${slug}/`));
+}
+
+export type RouteKind = 'home' | 'product' | 'line' | 'article' | 'advice-index' | 'policy';
 
 export interface Route {
   kind: RouteKind;
@@ -64,11 +69,12 @@ const published = <T extends { data: { status?: string } }>(entries: T[]) =>
  * từ một tập khác.
  */
 export async function allRoutes(): Promise<Route[]> {
-  const [pages, products, lines, articles] = await Promise.all([
+  const [pages, products, lines, articles, policies] = await Promise.all([
     getCollection('pages'),
     getCollection('products'),
     getCollection('lines'),
     getCollection('articles'),
+    getCollection('policies'),
   ]);
 
   const routes: Route[] = [];
@@ -100,6 +106,13 @@ export async function allRoutes(): Promise<Route[]> {
     articleLocales.add(e.data.locale);
     routes.push({
       kind: 'article', path: articlePath(e.data.slug, e.data.locale), locale: e.data.locale,
+      translationKey: e.data.translationKey, slug: e.data.slug, entry: e,
+    });
+  }
+
+  for (const e of published(policies as any[])) {
+    routes.push({
+      kind: 'policy', path: policyPath(e.data.slug, e.data.locale), locale: e.data.locale,
       translationKey: e.data.translationKey, slug: e.data.slug, entry: e,
     });
   }

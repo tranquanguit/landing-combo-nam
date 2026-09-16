@@ -780,6 +780,37 @@ const articles = defineCollection({
   }),
 });
 
+/**
+ * Trang chính sách: đổi trả, bảo vệ dữ liệu cá nhân.
+ *
+ * Tách khỏi `pages` vì hình dạng khác hẳn — không hero, không danh sách sản
+ * phẩm, chỉ là văn bản có mục. Và vì chúng có một trường mà không trang nào
+ * khác cần: `updatedAt`. Người đọc chính sách luôn hỏi "bản này từ bao giờ", và
+ * Nghị định 13/2023/NĐ-CP cũng đòi thông báo khi chính sách thay đổi.
+ */
+const policies = defineCollection({
+  loader: glob({
+    pattern: '**/*.json',
+    base: './src/content/policies',
+    generateId: ({ entry }) => entry.replace(/\.json$/, ''),
+  }),
+  schema: z.object({
+    slug: slugField,
+    locale: z.enum(['vi', 'en', 'th', 'id']),
+    translationKey: z.string(),
+    status: z.enum(['draft', 'published']).default('draft'),
+    seo: seoField,
+    title: z.string(),
+    lead: z.string(),
+    updatedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    sections: z.array(proseSection).min(1),
+    /* Những chỗ doanh nghiệp còn phải tự điền (thời hạn lưu, điều kiện đổi
+       trả). Khai ra để trang tự hiện cảnh báo thay vì im lặng phát hành một
+       chính sách còn lỗ hổng. */
+    pending: z.array(z.string()).default([]),
+  }).strict().superRefine((d, ctx) => scanEditorial(d, ctx)),
+});
+
 const brand = defineCollection({
   /* Bỏ qua file bắt đầu bằng "_": src/data còn chứa đặc tả ảnh, vốn không phải
      một thương hiệu. Không loại ra thì loader coi nó là một entry brand thiếu
@@ -846,4 +877,4 @@ const brand = defineCollection({
   }),
 });
 
-export const collections = { pages, products, lines, articles, brand };
+export const collections = { pages, products, lines, articles, policies, brand };

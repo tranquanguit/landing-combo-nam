@@ -6,7 +6,8 @@ import HomePage from '../layouts/HomePage.astro';
 import LinePage from '../layouts/LinePage.astro';
 import ArticlePage from '../layouts/ArticlePage.astro';
 import AdviceIndex from '../layouts/AdviceIndex.astro';
-import { allRoutes, alternatesFor, siteNav, type Route } from '../lib/routes';
+import PolicyPage from '../layouts/PolicyPage.astro';
+import { allRoutes, alternatesFor, policyPath, siteNav, type Route } from '../lib/routes';
 import { t, type Locale } from '../i18n/ui';
 
 /**
@@ -17,6 +18,7 @@ import { t, type Locale } from '../i18n/ui';
  *   landing sản phẩm   -> /combo-nam/  /en/combo-nam/
  *   danh sách tư vấn   -> /goc-tu-van/ /en/advice/
  *   bài tư vấn         -> /goc-tu-van/<slug>/
+ *   trang chính sách   -> /chinh-sach/<slug>/  /en/policies/<slug>/
  *
  * Thêm nội dung = thêm file JSON, không đụng vào đây.
  *
@@ -102,10 +104,11 @@ const data = entry?.data;
 /* Gom dữ liệu liên quan tại đây, không để từng layout tự đi hỏi collection:
    liên kết nội bộ là thứ quyết định phần lớn giá trị SEO của một site nhiều
    trang, nên nó phải sinh từ quan hệ dữ liệu ở một chỗ duy nhất. */
-const [allProducts, allLines, allArticles] = await Promise.all([
+const [allProducts, allLines, allArticles, allPolicies] = await Promise.all([
   getCollection('products', ({ data: d }) => d.status === 'published' && d.locale === locale),
   getCollection('lines', ({ data: d }) => d.status === 'published' && d.locale === locale),
   getCollection('articles', ({ data: d }) => d.status === 'published' && d.locale === locale),
+  getCollection('policies', ({ data: d }) => d.status === 'published' && d.locale === locale),
 ]);
 
 /* Thẻ sản phẩm cần ảnh và một dòng mô tả ngắn. Cả hai đã có sẵn trong khối hero
@@ -150,6 +153,13 @@ const nav = siteNav(
   { home: t(locale, 'nav.home'), advice: t(locale, 'nav.advice') },
 );
 
+/* Chính sách chỉ trỏ từ chân trang — không đưa lên điều hướng chính vì nó
+   không phải thứ khách cần khi đang chọn mua. Nhưng phải có đường vào, nếu
+   không phép đo "trang mồ côi" sẽ đỏ, và đúng như vậy. */
+const policies = allPolicies.map((x) => ({
+  label: x.data.title, href: policyPath(x.data.slug, locale),
+}));
+
 const articlesSorted = allArticles
   .map((a) => a.data)
   .sort((a, b) => (b.updatedAt ?? b.publishedAt).localeCompare(a.updatedAt ?? a.publishedAt));
@@ -157,6 +167,7 @@ const articlesSorted = allArticles
 {route.kind === 'home' && (
   <HomePage
     nav={nav}
+    policies={policies}
     page={data}
     brand={brand.data}
     locale={locale}
@@ -171,6 +182,7 @@ const articlesSorted = allArticles
 {route.kind === 'line' && (
   <LinePage
     nav={nav}
+    policies={policies}
     fallbackOgImage={fallbackOgImage}
     line={data}
     brand={brand.data}
@@ -185,6 +197,7 @@ const articlesSorted = allArticles
 {route.kind === 'product' && (
   <ProductLanding
     nav={nav}
+    policies={policies}
     product={data}
     brand={brand.data}
     locale={locale}
@@ -196,6 +209,7 @@ const articlesSorted = allArticles
 {route.kind === 'article' && (
   <ArticlePage
     nav={nav}
+    policies={policies}
     fallbackOgImage={fallbackOgImage}
     article={data}
     brand={brand.data}
@@ -210,11 +224,25 @@ const articlesSorted = allArticles
 {route.kind === 'advice-index' && (
   <AdviceIndex
     nav={nav}
+    policies={policies}
     fallbackOgImage={fallbackOgImage}
     brand={brand.data}
     locale={locale}
     canonical={canonical}
     alternates={alternates}
     articles={articlesSorted}
+  />
+)}
+
+{route.kind === 'policy' && (
+  <PolicyPage
+    nav={nav}
+    policies={policies}
+    fallbackOgImage={fallbackOgImage}
+    policy={data}
+    brand={brand.data}
+    locale={locale}
+    canonical={canonical}
+    alternates={alternates}
   />
 )}

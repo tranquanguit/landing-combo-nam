@@ -19,12 +19,13 @@ interface Props {
   canonical: string;
   alternates?: { locale: Locale; url: string }[];
   nav?: { label: string; href: string }[];
+  policies?: { label: string; href: string }[];
   lines: any[];
   featured: any[];
   articles: any[];
 }
 
-const { page, brand: b, locale, canonical, alternates = [], nav = [], lines, featured, articles } = Astro.props;
+const { page, brand: b, locale, canonical, alternates = [], nav = [], policies = [], lines, featured, articles } = Astro.props;
 const site = Astro.site?.origin ?? 'https://mochatrinam.com';
 assertTranslated(locale);
 
@@ -125,7 +126,7 @@ const orderHref = page.hero.primaryCta?.href
     )}
   </main>
 
-  <SiteFooter brand={b} locale={locale} nav={nav} product={featured[0]} />
+  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} product={featured[0]} />
   <Analytics locale={locale} />
 </BaseLayout>
 

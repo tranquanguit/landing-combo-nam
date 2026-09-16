@@ -15,12 +15,13 @@ interface Props {
   canonical: string;
   alternates?: { locale: Locale; url: string }[];
   nav?: { label: string; href: string }[];
+  policies?: { label: string; href: string }[];
   /** Ảnh dùng khi trang không tự khai ảnh chia sẻ. */
   fallbackOgImage?: string;
   articles: any[];
 }
 
-const { brand: b, locale, canonical, alternates = [], nav = [], fallbackOgImage, articles } = Astro.props;
+const { brand: b, locale, canonical, alternates = [], nav = [], policies = [], fallbackOgImage, articles } = Astro.props;
 const site = Astro.site?.origin ?? 'https://mochatrinam.com';
 assertTranslated(locale);
 
@@ -81,7 +82,7 @@ const jsonLd = collectionGraph({
     </div>
   </main>
 
-  <SiteFooter brand={b} locale={locale} nav={nav} />
+  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} />
   <Analytics locale={locale} />
 </BaseLayout>
 

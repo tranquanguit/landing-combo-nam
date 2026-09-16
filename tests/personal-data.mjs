@@ -16,6 +16,9 @@ const CHAN = [
   '0912 345 678', '0912.345.678', '0912-345-678', '0912345678',
   'Gọi 0912 345 678 để nghe chia sẻ', '+84912345678',
   'Chị Hà, 38 tuổi', 'ha.nguyen@gmail.com',
+  /* Tuổi của một người cụ thể vẫn phải chặn ở mọi vị trí — luật ngưỡng tuổi
+     bên dưới không được mở đường cho những câu này. */
+  'Khách 45 tuổi dùng sau hai tháng', 'Nguyễn Thu Hà 29 tuổi',
   'Chị Nguyễn Thu Hà, Quận 3, gọi 0912 345 678 để nghe chia sẻ.',
   // Kiểm định lần 10: hotline doanh nghiệp đứng trước giấu luôn số của khách.
   'Hotline 0367 848 918. Chị Hà đặt hàng qua số 0912 345 678.',
@@ -52,6 +55,13 @@ const CHO_QUA = [
   'Cô Gái Mùa Thu là tên chiến dịch.',
   'Bác Sĩ Tư Vấn miễn phí.',
   'Em có thể nhắn tin cho chúng tôi.',
+  /* NGƯỠNG tuổi trong văn bản pháp lý không phải dữ liệu cá nhân: nó là điều
+     khoản, không nói về ai cả. Trang chính sách bảo vệ dữ liệu cần viết được
+     câu này, và bản trước của luật chặn đúng chính sách đó. */
+  'Không dành cho người dưới 16 tuổi.',
+  'The products are not intended for anyone under 16.',
+  'Áp dụng từ 18 tuổi trở lên.',
+  'Chỉ bán cho khách trên 18 tuổi.',
 ];
 
 /*

@@ -1,0 +1,79 @@
+{
+  "slug": "chinh-sach-du-lieu",
+  "locale": "vi",
+  "translationKey": "policy-du-lieu",
+  "status": "published",
+  "seo": {
+    "title": "Chính sách bảo vệ dữ liệu cá nhân | Mocha Việt Nam",
+    "description": "Mocha thu thập những gì, dùng để làm gì, lưu ở đâu, trong bao lâu, và bạn có những quyền nào. Viết theo Nghị định 13/2023/NĐ-CP."
+  },
+  "title": "Chính sách bảo vệ dữ liệu cá nhân",
+  "lead": "Trang này nói đúng những gì hệ thống thật sự làm với thông tin của bạn. Nếu có chỗ nào khác với thực tế, đó là lỗi của chúng tôi và xin báo lại theo thông tin liên hệ ở cuối trang.",
+  "updatedAt": "2026-09-16",
+  "sections": [
+    {
+      "id": "thu-thap-gi",
+      "heading": "Chúng tôi thu thập những gì",
+      "body": [
+        "Khi bạn gửi biểu mẫu đặt hàng, chúng tôi nhận và lưu: <strong>họ tên, số điện thoại, địa chỉ nhận hàng</strong>, ghi chú bạn tự nhập, gói sản phẩm bạn chọn và giá của gói đó tại thời điểm đặt.",
+        "Cùng với đơn, hệ thống lưu <strong>đúng câu đồng ý bạn đã đọc</strong> lúc bấm gửi. Việc này để khi câu chữ trên trang thay đổi về sau, vẫn xác định được bạn đã đồng ý với nội dung nào.",
+        "Chúng tôi cũng ghi nguồn truy cập ở mức chiến dịch quảng cáo (các tham số utm) và tên miền bạn đến từ đó. Đây là thông tin về chiến dịch, không phải về cá nhân bạn — chúng tôi không lưu URL đầy đủ.",
+        "Chúng tôi <strong>không</strong> lưu địa chỉ IP thô, không lưu thông tin trình duyệt, không lưu cookie quảng cáo trong cơ sở dữ liệu đơn hàng. Để hạn chế gửi tự động hàng loạt, hệ thống có đếm số lần gửi theo một chuỗi băm một chiều của địa chỉ IP; chuỗi đó được cắt ngắn và không truy ngược lại được thành địa chỉ ban đầu."
+      ]
+    },
+    {
+      "id": "dung-de-lam-gi",
+      "heading": "Dùng để làm gì",
+      "body": [
+        "Thông tin đơn hàng chỉ dùng để <strong>liên hệ xác nhận và giao đơn hàng đó</strong>. Chúng tôi không dùng nó để gửi tin nhắn tiếp thị nếu bạn chưa đồng ý riêng cho việc đó.",
+        "Chúng tôi <strong>không bán, không trao đổi, không cho thuê</strong> thông tin của bạn cho bên thứ ba.",
+        "Đơn vị vận chuyển sẽ nhận họ tên, số điện thoại và địa chỉ của bạn — đây là điều bắt buộc để giao được hàng, và chỉ gồm đúng các trường cần cho việc giao."
+      ]
+    },
+    {
+      "id": "do-luong",
+      "heading": "Đo lường và quảng cáo",
+      "body": [
+        "Website có thể dùng công cụ đo lường của Google, Meta và TikTok để biết quảng cáo nào đưa khách tới. Các công cụ này <strong>chỉ được nạp sau khi bạn bấm đồng ý</strong> trên thanh thông báo. Nếu bạn từ chối hoặc chưa trả lời, không một mã đo lường nào của bên thứ ba được tải về máy bạn.",
+        "Lựa chọn của bạn lưu trên chính trình duyệt của bạn, không gửi về máy chủ của chúng tôi. Bạn rút lại đồng ý bất cứ lúc nào bằng nút ở cuối mỗi trang.",
+        "Sự kiện đo lường nội bộ chỉ mang tên gói sản phẩm, không kèm họ tên, số điện thoại hay địa chỉ."
+      ]
+    },
+    {
+      "id": "luu-o-dau",
+      "heading": "Lưu ở đâu và trong bao lâu",
+      "body": [
+        "Đơn hàng lưu trong cơ sở dữ liệu của Cloudflare, cùng hạ tầng phục vụ website này. Chỉ nhân sự xử lý đơn của Mocha mới truy cập được, thông qua một trang quản trị có mã truy cập riêng.",
+        "Chúng tôi giữ thông tin đơn hàng trong thời gian cần thiết để hoàn tất giao dịch và đáp ứng nghĩa vụ chứng từ kế toán theo quy định."
+      ]
+    },
+    {
+      "id": "quyen-cua-ban",
+      "heading": "Quyền của bạn",
+      "body": [
+        "Theo Nghị định 13/2023/NĐ-CP, bạn có quyền: biết dữ liệu nào đang được xử lý, yêu cầu <strong>xem</strong>, yêu cầu <strong>sửa</strong> cho đúng, yêu cầu <strong>xoá</strong>, yêu cầu <strong>ngừng xử lý</strong>, và rút lại sự đồng ý đã cho.",
+        "Để thực hiện, gọi hotline hoặc gửi email theo thông tin ở cuối trang, kèm số điện thoại bạn đã dùng khi đặt hàng để chúng tôi tìm đúng đơn. Chúng tôi xử lý trong vòng 72 giờ làm việc.",
+        "Rút lại đồng ý không làm mất hiệu lực những việc đã xử lý hợp pháp trước đó, và có thể khiến chúng tôi không hoàn tất được đơn hàng đang giao."
+      ]
+    },
+    {
+      "id": "tre-em",
+      "heading": "Trẻ em",
+      "body": [
+        "Website và sản phẩm không dành cho người dưới 16 tuổi. Chúng tôi không cố ý thu thập dữ liệu của trẻ em. Nếu phát hiện đã nhận dữ liệu như vậy, chúng tôi xoá ngay khi biết."
+      ]
+    },
+    {
+      "id": "thay-doi",
+      "heading": "Khi chính sách thay đổi",
+      "body": [
+        "Ngày cập nhật ghi ngay đầu trang này. Nếu có thay đổi ảnh hưởng tới quyền của bạn, chúng tôi sẽ thông báo trước khi áp dụng."
+      ]
+    }
+  ],
+  "pending": [
+    "Thời hạn lưu cụ thể (số tháng) sau khi đơn hàng hoàn tất — cần chốt theo nghĩa vụ chứng từ kế toán.",
+    "Tên và thông tin liên hệ của bộ phận phụ trách bảo vệ dữ liệu cá nhân, nếu doanh nghiệp có chỉ định.",
+    "Danh sách đơn vị vận chuyển đang hợp tác."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "slug": "chinh-sach-doi-tra",
+  "locale": "vi",
+  "translationKey": "policy-doi-tra",
+  "status": "published",
+  "seo": {
+    "title": "Chính sách đổi trả và bảo hành | Mocha Việt Nam",
+    "description": "Khi nào đổi được, khi nào không, ai chịu phí vận chuyển và cần giữ lại những gì. Viết thẳng để bạn biết trước khi đặt hàng."
+  },
+  "title": "Chính sách đổi trả",
+  "lead": "Chúng tôi viết phần này thẳng thắn, kể cả những trường hợp không đổi được. Biết trước khi mua tốt hơn là biết lúc muốn trả.",
+  "updatedAt": "2026-09-16",
+  "sections": [
+    {
+      "id": "kiem-tra-khi-nhan",
+      "heading": "Kiểm tra ngay khi nhận hàng",
+      "body": [
+        "Bạn được <strong>mở hộp kiểm tra trước khi thanh toán</strong>. Hãy đối chiếu tên sản phẩm, dung tích, hạn sử dụng và tình trạng tem niêm phong ngay trước mặt nhân viên giao hàng.",
+        "Nếu hàng giao sai, thiếu, vỡ hoặc hết hạn, <strong>từ chối nhận và không thanh toán</strong>. Đây là cách xử lý nhanh nhất cho cả hai bên; gọi hotline ngay sau đó để chúng tôi gửi lại."
+      ]
+    },
+    {
+      "id": "doi-duoc",
+      "heading": "Những trường hợp được đổi",
+      "body": [
+        "Giao sai sản phẩm, sai dung tích, hoặc thiếu món so với gói bạn đã đặt.",
+        "Sản phẩm hư hỏng do vận chuyển: vỡ, nứt, rò rỉ, bao bì rách.",
+        "Sản phẩm còn nguyên tem niêm phong nhưng có dấu hiệu bất thường: đổi màu, tách lớp, mùi lạ.",
+        "Sản phẩm đã quá hạn hoặc quá gần hạn sử dụng tại thời điểm giao.",
+        "Trong các trường hợp trên, <strong>Mocha chịu toàn bộ chi phí vận chuyển hai chiều</strong>."
+      ]
+    },
+    {
+      "id": "khong-doi-duoc",
+      "heading": "Những trường hợp không đổi được",
+      "body": [
+        "<strong>Đã bóc tem niêm phong và đã sử dụng, nhưng không có lỗi sản phẩm.</strong> Mỹ phẩm là hàng tiếp xúc trực tiếp với da; sản phẩm đã mở không thể bán lại cho người khác, nên chúng tôi không nhận đổi vì lý do đổi ý.",
+        "<strong>Da không hợp hoặc kết quả chưa như mong đợi.</strong> Đây là lý do chúng tôi nói rõ ngay trên trang sản phẩm rằng kết quả khác nhau tuỳ cơ địa và tuỳ mức độ chống nắng hằng ngày, thay vì hứa một con số chung. Nếu bạn gặp kích ứng, hãy ngừng dùng và gọi hotline — chúng tôi xử lý riêng từng trường hợp.",
+        "Hư hỏng do bảo quản sai: để nơi nắng nóng, trong xe ô tô đóng kín, hoặc gần nguồn nhiệt.",
+        "Sản phẩm mua từ nguồn không phải Mocha hoặc gian hàng chính hãng của Mocha."
+      ]
+    },
+    {
+      "id": "cach-doi",
+      "heading": "Cách yêu cầu đổi",
+      "body": [
+        "Gọi hotline hoặc nhắn Zalo theo thông tin ở cuối trang, kèm <strong>mã đơn hàng</strong> và ảnh chụp sản phẩm cùng bao bì.",
+        "Giữ lại hộp, tem niêm phong và phiếu giao hàng cho tới khi việc đổi trả xong.",
+        "Chúng tôi phản hồi trong vòng 24 giờ làm việc và thống nhất cách gửi lại trước khi bạn gửi đi."
+      ]
+    },
+    {
+      "id": "da-nhan-tien",
+      "heading": "Nếu bạn ở ngoài Việt Nam",
+      "body": [
+        "Người tiêu dùng ở một số quốc gia có quyền rút lui khỏi giao dịch từ xa trong một khoảng thời gian luật định, kể cả khi sản phẩm không có lỗi. Chúng tôi tôn trọng quyền đó theo luật nơi bạn cư trú.",
+        "Với mỹ phẩm đã mở niêm phong, nhiều nước có ngoại lệ vì lý do vệ sinh. Hãy liên hệ trước khi gửi trả để chúng tôi xác nhận trường hợp cụ thể."
+      ]
+    }
+  ],
+  "pending": [
+    "Số ngày cụ thể của cửa sổ đổi trả kể từ ngày nhận hàng — hiện chưa khai, cần chốt và điền vào cả trang này lẫn trường returnPolicy trong file sản phẩm.",
+    "Địa chỉ nhận hàng đổi trả, nếu khác địa chỉ trụ sở.",
+    "Chính sách cụ thể cho từng thị trường ngoài Việt Nam, nếu thật sự bán ra nước ngoài."
+  ]
+}

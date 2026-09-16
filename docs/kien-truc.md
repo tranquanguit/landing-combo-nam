@@ -169,12 +169,12 @@ nên với khách chưa đồng ý, chi phí là 0 byte bên thứ ba.
 ### 2.6 Bằng chứng: `npm run test:seo`
 
 ```bash
-npm run build && npm run test:seo     # 223 phép đo, thoát 1 nếu có lỗi
+npm run build && npm run test:seo     # 299 phép đo, thoát 1 nếu có lỗi
 npm run docs:seo                      # ghi docs/bao-cao-seo.md
 ```
 
 Kịch bản này đọc **`dist/` đã build**, không đọc mã nguồn và không tin tài
-liệu. Kết quả hiện tại: `docs/bao-cao-seo.md` — **223/223 đạt** trên 11 trang.
+liệu. Kết quả hiện tại: `docs/bao-cao-seo.md` — **299/299 đạt** trên 15 trang.
 
 Ba phép đo quan trọng nhất từ khi site có nhiều tầng, và không phép nào kiểm
 được bằng cách đọc từng file:
@@ -316,7 +316,7 @@ file sang `src/assets/` và bật khối.
 ## 4. Cổng lúc build: điều gì không thể lọt qua
 
 Kiến trúc này đặt cược vào một ý: **quy tắc nào quan trọng thì phải là cổng,
-không phải tài liệu.** 535 ca kiểm thử chia bốn tầng:
+không phải tài liệu.** 549 ca kiểm thử chia bốn tầng:
 
 | Tầng | Hỏi gì | Tệp |
 | --- | --- | --- |
@@ -395,8 +395,8 @@ thứ chỉ sai được ở đúng nơi đó.
 npm ci
 npm run build          # dựng dist/
 npm run check          # 0 lỗi kiểu
-npm run test:guards    # 535 ca hàng rào
-npm run test:seo       # 223 phép đo SEO trên bản build
+npm run test:guards    # 549 ca hàng rào
+npm run test:seo       # 299 phép đo SEO trên bản build
 npm run test:order     # 9 kịch bản đặt hàng trong trình duyệt thật
 npm run test:orders-api # 20 kịch bản API đơn hàng trên SQLite thật
 npm run test:admin     # 9 kịch bản trang quản trị trong trình duyệt thật

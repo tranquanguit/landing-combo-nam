@@ -31,6 +31,10 @@ export const ui = {
     'home.adviceHeading': 'Hiểu trước, chọn sau',
     'home.allProducts': 'Tất cả sản phẩm',
     'breadcrumb.label': 'Đường dẫn trang',
+    'policy.heading': 'Chính sách',
+    'policy.updated': 'Cập nhật ngày',
+    'policy.pending': 'Phần còn phải bổ sung',
+    'footer.policies': 'Chính sách',
     'nav.skip': 'Bỏ qua điều hướng, đến nội dung chính',
     'cta.call': 'Gọi tư vấn',
     'cta.order': 'Đặt hàng',
@@ -116,6 +120,10 @@ export const ui = {
     'home.adviceHeading': 'Understand first, choose second',
     'home.allProducts': 'All products',
     'breadcrumb.label': 'Breadcrumb',
+    'policy.heading': 'Policies',
+    'policy.updated': 'Last updated',
+    'policy.pending': 'Still to be completed',
+    'footer.policies': 'Policies',
     'nav.skip': 'Skip to main content',
     'cta.call': 'Talk to us',
     'cta.order': 'Order',
@@ -241,6 +249,11 @@ export function t(locale: Locale, key: keyof typeof ui.vi): string {
  */
 export const ADVICE_SEGMENT: Record<Locale, string> = {
   vi: 'goc-tu-van', en: 'advice', th: 'goc-tu-van', id: 'goc-tu-van',
+};
+
+/** Đoạn đường dẫn của trang chính sách, cũng dịch theo ngôn ngữ. */
+export const POLICY_SEGMENT: Record<Locale, string> = {
+  vi: 'chinh-sach', en: 'policies', th: 'chinh-sach', id: 'chinh-sach',
 };
 
 /** Đường dẫn có tiền tố ngôn ngữ; tiếng Việt không prefix. */
