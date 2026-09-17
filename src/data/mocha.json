@@ -8,19 +8,6 @@
   "email": "kemnammocha@gmail.com",
   "hours": "8:00 – 21:00",
   "logo": "/images/logo.webp",
-  "marketplaces": [
-    {
-      "name": "Shopee"
-    },
-    {
-      "name": "Lazada"
-    },
-    {
-      "name": "TikTok Shop"
-    },
-    {
-      "name": "Facebook"
-    }
-  ],
+  "marketplaces": [],
   "taxId": "0317963313"
 }

@@ -27,7 +27,7 @@
     }
   ],
   "price": 1050000,
-  "compareAtPrice": 1140000,
+  "compareAtPrice": 1800000,
   "currency": "VND",
   "variants": [
     {
@@ -113,8 +113,8 @@
     {
       "type": "offer",
       "eyebrow": "Ưu đãi",
-      "heading": "Mua đủ hai bước, rẻ hơn mua lẻ và được tặng thêm hai sản phẩm",
-      "body": "Mua lẻ từng món tổng cộng {{compareAtPrice}}. Mua theo combo còn <strong>{{price}}</strong>, và được tặng thêm kem chống nắng SPF50 cùng sữa rửa mặt — hai bước bắt buộc để giữ kết quả.",
+      "heading": "Giá bán hiện tại thấp hơn giá niêm yết, và được tặng thêm hai sản phẩm",
+      "body": "Giá niêm yết của combo là {{compareAtPrice}}. Giá bán hiện tại là <strong>{{price}}</strong>, và được tặng thêm kem chống nắng SPF50 cùng sữa rửa mặt — hai bước bắt buộc để giữ kết quả.",
       "validUntil": "2026-09-30",
       "notes": [
         "Miễn phí vận chuyển",
@@ -182,7 +182,7 @@
       "eyebrow": "Bảng thành phần",
       "heading": "Từng hoạt chất, từng tỉ lệ, và vai trò của nó",
       "intro": "Không corticoid, không hydroquinone, không hương liệu tổng hợp gây kích ứng.",
-      "caption": "Bảng này chỉ liệt kê những hoạt chất và nồng độ được IN TRÊN BAO BÌ sản phẩm. Hoạt chất không có số là hoạt chất bao bì không công bố tỉ lệ — chúng tôi không tự điền con số. Thành phần đầy đủ theo INCI in trên vỏ hộp.",
+      "caption": "Bảng này liệt kê đúng những hoạt chất và nồng độ được IN TRÊN BAO BÌ của serum và kem. Chúng tôi không tự điền con số nào không có trên vỏ hộp. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
       "rows": [
         {
           "name": "4-butylresorcinol 1000ppm",
@@ -221,37 +221,37 @@
           "suitedFor": "Da xỉn màu"
         },
         {
-          "name": "Tranexamic Acid",
+          "name": "Tranexamic Acid 3%",
           "inProduct": "Kem",
           "role": "Được nghiên cứu nhiều trong nhóm làm mờ vùng da sẫm màu do tăng sắc tố.",
           "suitedFor": "Nám mảng, nám hỗn hợp"
         },
         {
-          "name": "NIO-NAG",
+          "name": "NIO-NAG 2%",
           "inProduct": "Kem",
           "role": "Dẫn xuất glucosamine, hỗ trợ điều tiết quá trình sinh sắc tố.",
           "suitedFor": "Da tăng sắc tố sau viêm"
         },
         {
-          "name": "Ceramide",
+          "name": "Ceramide 1%",
           "inProduct": "Kem",
           "role": "Thành phần cấu trúc của hàng rào bảo vệ da, hỗ trợ giữ ẩm.",
           "suitedFor": "Da khô, da mất nước"
         },
         {
-          "name": "Bakuchiol",
+          "name": "Bakuchiol 2%",
           "inProduct": "Kem",
           "role": "Dẫn xuất thực vật được nghiên cứu như lựa chọn thay thế retinol cho da dễ kích ứng; không làm tăng nhạy cảm ánh sáng.",
           "suitedFor": "Da nhạy cảm, không hợp retinol"
         },
         {
-          "name": "Vietnam Bio-white Complex",
+          "name": "Vietnam Bio-white Complex 3%",
           "inProduct": "Kem",
           "role": "Cùng phức hợp bản địa với serum, ở dạng kem giữ trên da lâu hơn.",
           "suitedFor": "Da sạm màu không đều"
         },
         {
-          "name": "Black Truffle Extract",
+          "name": "Black Truffle Extract 2%",
           "inProduct": "Kem",
           "role": "Chiết xuất nấm truffle đen, hỗ trợ dưỡng sáng.",
           "suitedFor": "Da xỉn màu"
@@ -365,7 +365,7 @@
       "items": [
         {
           "q": "Combo Nám Mocha giá bao nhiêu?",
-          "a": "<strong>{{price}}</strong> cho cả combo, đã gồm kem chống nắng và sữa rửa mặt tặng kèm. Mua lẻ từng món tổng {{compareAtPrice}}. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+          "a": "<strong>{{price}}</strong> cho cả combo, đã gồm kem chống nắng và sữa rửa mặt tặng kèm. Giá niêm yết là {{compareAtPrice}}. Miễn phí vận chuyển, thanh toán khi nhận hàng."
         },
         {
           "q": "Bao lâu thì thấy khác biệt?",

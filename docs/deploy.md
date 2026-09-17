@@ -14,10 +14,10 @@ Mỗi dòng dưới đây hiện đang hiện một ô cảnh báo vàng trên c
 
 | # | Thiếu gì | Sửa ở đâu | Vì sao chặn |
 | --- | --- | --- | --- |
-| A1 | **Số tiếp nhận phiếu công bố mỹ phẩm** | `src/content/products/combo-nam/*.json` → `compliance.productNotificationNumber` | Nghị định 342/2025/NĐ-CP bắt buộc với quảng cáo mỹ phẩm. Thiếu là rủi ro xử phạt. |
-| A2 | **Mã số thuế doanh nghiệp** | `src/data/mocha.json` → `taxId` | Bắt buộc với website thương mại điện tử bán hàng. |
+| ~~A1~~ | ~~**Số tiếp nhận phiếu công bố mỹ phẩm**~~ — ✅ kem: **1517/25/CBMP-LA**, lấy từ phiếu công bố bản gốc. **Còn thiếu số của serum** — combo gồm hai sản phẩm nên phải ghi đủ hai dòng. | `src/content/products/combo-nam/*.json` → `compliance.productNotificationNumber` | Nghị định 342/2025/NĐ-CP bắt buộc với quảng cáo mỹ phẩm. Thiếu là rủi ro xử phạt. |
+| ~~A2~~ | ~~**Mã số thuế doanh nghiệp**~~ — ✅ **0317963313** | `src/data/mocha.json` → `taxId` | Bắt buộc với website thương mại điện tử bán hàng. |
 | ~~A3~~ | ~~**Trang chính sách**~~ — ✅ **đã có bản thảo**, xem ghi chú dưới bảng | `src/content/policies/` | Nghị định 13/2023/NĐ-CP. Hai trang đã lên site và có link ở chân trang. |
-| A4 | **Đường dẫn gian hàng chính hãng** (Shopee, Lazada, TikTok Shop, Facebook) | `src/data/mocha.json` → `marketplaces[].url` | Đang nhắc tên sàn mà không dẫn được tới đâu. |
+| ~~A4~~ | ~~**Đường dẫn gian hàng chính hãng**~~ — ✅ **đã bỏ khỏi site**. Hiện bán theo hình thức khách điền biểu mẫu, sale gọi lại xác nhận; chưa có gian hàng sàn. Khi có link Shopee/TikTok Shop/Lazada thì thêm vào `src/data/mocha.json` → `marketplaces[]` (`{ "name": "...", "url": "https://..." }`), khối "Kênh bán chính hãng" ở chân trang sẽ tự hiện lại. | `src/data/mocha.json` | Nhắc tên sàn mà không dẫn được tới đâu là tệ hơn không nhắc. |
 | A5 | **Bộ ảnh đúng đặc tả** | `src/assets/images/` | Xem `docs/anh-can-co.md`. Hiện **cả 6 ảnh bắt buộc đều dưới chuẩn**: logo 220×81 không nền trong suốt, packshot 1002×762 (cần 1600×1200), ba ảnh nám ba tỉ lệ khác nhau. |
 | A6 | **Chứng từ** (phiếu công bố, CGMP, kiểm nghiệm) | `src/assets/documents/` rồi khai khối `documents` | Khối đã dựng xong và đã kiểm thử, chỉ chờ file. Đây là bằng chứng mạnh nhất một trang mỹ phẩm có thể đưa ra. |
 | A7 | **Văn bản đồng ý cho 4 ảnh trước/sau** | có văn bản rồi thì chuyển file từ `src/media-gated/images/` sang `src/assets/images/` | Ảnh khách là dữ liệu cá nhân. Cổng build đang chặn chúng khỏi `dist/`. |
@@ -32,10 +32,12 @@ Mỗi dòng dưới đây hiện đang hiện một ô cảnh báo vàng trên c
 > mất. Đây là bản thảo của người dựng site, không phải tư vấn pháp lý — nên có
 > người phụ trách pháp chế của Mocha đọc trước khi chạy quảng cáo.
 >
-> **A1 — một đầu mối để đối chiếu.** Tìm kiếm công khai cho ra số
-> **1459/24/CBMP-LA** gắn với sản phẩm Mocha, nhưng cùng một số lại xuất hiện cho
-> cả kem và serum ở các nguồn bán lẻ khác nhau, nên **không dùng được**. Đây là
-> trường pháp lý: lấy đúng số in trên phiếu công bố bản gốc của từng sản phẩm.
+> **A1 — vì sao chỉ mới có một số.** Số đang hiện trên site (**1517/25/CBMP-LA**)
+> đọc từ phiếu công bố bản gốc của **kem**. Số **1458/24/CBMP-LA** và
+> **1459/24/CBMP-LA** thấy trên ảnh chứng từ và trên các nguồn bán lẻ là số **năm
+> 2024 đã bị thay bằng số 2025** — không dùng. Khi có phiếu công bố bản gốc của
+> serum thì thêm số của nó thành dòng thứ hai: combo gồm hai sản phẩm, mỗi sản
+> phẩm một số tiếp nhận riêng.
 
 ---
 

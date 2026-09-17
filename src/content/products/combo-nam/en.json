@@ -27,7 +27,7 @@
     }
   ],
   "price": 1050000,
-  "compareAtPrice": 1140000,
+  "compareAtPrice": 1800000,
   "currency": "VND",
   "variants": [
     {
@@ -114,7 +114,7 @@
       "type": "offer",
       "eyebrow": "The duo",
       "heading": "Both steps together, cheaper than buying them apart",
-      "body": "Bought separately the two products come to {{compareAtPrice}}. The duo is <strong>{{price}}</strong> and adds the SPF50 sunscreen and the cleanser on top.",
+      "body": "The duo's list price is {{compareAtPrice}}. It currently sells at <strong>{{price}}</strong> and adds the SPF50 sunscreen and the cleanser on top.",
       "validUntil": "2026-09-30",
       "notes": [
         "Sunscreen included",
@@ -183,7 +183,7 @@
       "eyebrow": "The formula",
       "heading": "Every active, its percentage, and what it is doing there",
       "intro": "No corticosteroids, no hydroquinone, no synthetic fragrance.",
-      "caption": "This table lists only the actives and concentrations PRINTED ON THE PACKAGING. An ingredient without a number is one the packaging does not state a percentage for — we do not fill one in. The full INCI list is printed on the box.",
+      "caption": "This table lists exactly the actives and concentrations PRINTED ON THE PACKAGING of the serum and the cream. We do not fill in any number the packaging does not state. The full INCI list is printed on the pack.",
       "rows": [
         {
           "name": "4-butylresorcinol 1000ppm",
@@ -222,37 +222,37 @@
           "suitedFor": "Dull skin"
         },
         {
-          "name": "Tranexamic Acid",
+          "name": "Tranexamic Acid 3%",
           "inProduct": "Cream",
           "role": "Among the more widely studied topical options for softening areas darkened by excess pigment.",
           "suitedFor": "Surface patches, mixed pigmentation"
         },
         {
-          "name": "NIO-NAG",
+          "name": "NIO-NAG 2%",
           "inProduct": "Cream",
           "role": "A glucosamine derivative that helps regulate pigment formation.",
           "suitedFor": "Post-inflammatory pigmentation"
         },
         {
-          "name": "Ceramide",
+          "name": "Ceramide 1%",
           "inProduct": "Cream",
           "role": "A structural part of the skin barrier that helps hold moisture.",
           "suitedFor": "Dry, dehydrated skin"
         },
         {
-          "name": "Bakuchiol",
+          "name": "Bakuchiol 2%",
           "inProduct": "Cream",
           "role": "A plant-derived alternative to retinol studied for easily irritated skin; it does not increase light sensitivity.",
           "suitedFor": "Sensitive skin, skin that does not tolerate retinol"
         },
         {
-          "name": "Vietnam Bio-white Complex",
+          "name": "Vietnam Bio-white Complex 3%",
           "inProduct": "Cream",
           "role": "The same native complex as the serum, in a cream that stays on skin longer.",
           "suitedFor": "Uneven, dull skin"
         },
         {
-          "name": "Black Truffle Extract",
+          "name": "Black Truffle Extract 2%",
           "inProduct": "Cream",
           "role": "Black truffle extract, supporting brightness.",
           "suitedFor": "Dull skin"
@@ -304,7 +304,7 @@
       "items": [
         {
           "q": "What does the duo cost?",
-          "a": "The Smart Brightening Cream X3 and Smart First Care Serum together are <strong>{{price}}</strong>, including the SPF50 sunscreen and cleanser. Bought separately they total {{compareAtPrice}}, so the duo saves {{save}} and adds two products. We quote shipping to your country before you pay."
+          "a": "The Smart Brightening Cream X3 and Smart First Care Serum together are <strong>{{price}}</strong>, including the SPF50 sunscreen and cleanser. The list price is {{compareAtPrice}}, so you save {{save}}. We quote shipping to your country before you pay."
         },
         {
           "q": "How long before I see a difference?",

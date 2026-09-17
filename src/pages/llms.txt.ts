@@ -28,7 +28,7 @@ import type { Locale } from '../i18n/ui';
  */
 const L = {
   vi: {
-    lang: 'Ngôn ngữ trang', page: 'Trang', price: 'Giá', bundlePrice: 'mua lẻ từng món tổng',
+    lang: 'Ngôn ngữ trang', page: 'Trang', price: 'Giá', bundlePrice: 'giá niêm yết',
     includes: 'Gồm', gifts: 'Tặng kèm', functions: 'Tính năng, công dụng đã công bố',
     declaredBy: 'Tổ chức công bố', notification: 'Số tiếp nhận phiếu công bố',
     ingredients: 'Thành phần chính', source: 'nguồn', expectations: 'Kỳ vọng theo từng tình trạng',
@@ -36,7 +36,7 @@ const L = {
     lineProducts: 'Sản phẩm trong dòng', published: 'Đăng ngày', updated: 'Cập nhật',
   },
   en: {
-    lang: 'Page language', page: 'Page', price: 'Price', bundlePrice: 'bought separately, total',
+    lang: 'Page language', page: 'Page', price: 'Price', bundlePrice: 'list price',
     includes: 'Includes', gifts: 'Free gifts', functions: 'Declared functions',
     declaredBy: 'Declared by', notification: 'Cosmetic product notification number',
     ingredients: 'Key ingredients', source: 'source', expectations: 'What to expect, by condition',
