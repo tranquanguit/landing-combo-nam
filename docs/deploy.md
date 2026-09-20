@@ -123,7 +123,7 @@ hiệu năng.
 
 ### C4. Hạn ưu đãi
 
-`validUntil` của khối `offer` hiện là **2026-09-30**. Trang tĩnh đã deploy sẽ
+`validUntil` của khối `offer` hiện là **2026-12-31**. Trang tĩnh đã deploy sẽ
 tiếp tục hiện ưu đãi cũ cho tới lần deploy kế tiếp, nên
 `scripts/check-offer-window.mjs` làm CI đỏ khi hạn đã qua. Đặt lịch nhắc trước
 ngày đó.
