@@ -65,6 +65,11 @@ jobs:
       - name: Tương phản màu
         run: npm run test:contrast
 
+      # INP trên trình duyệt thật. Không đoán được bằng cách đọc code, và điểm
+      # chất lượng quảng cáo Google có tính chỉ số này.
+      - name: Độ phản hồi tương tác
+        run: npm run test:inp
+
       - name: Ngân sách trọng lượng trang
         run: node scripts/check-budget.mjs
 

@@ -23,7 +23,8 @@
     "db:migrate:local": "wrangler d1 execute mocha-orders --local --file=migrations/0001_orders.sql",
     "check:assets": "node scripts/check-assets.mjs",
     "docs:assets": "node scripts/check-assets.mjs --md docs/anh-can-co.md",
-    "test:contrast": "node scripts/check-contrast.mjs"
+    "test:contrast": "node scripts/check-contrast.mjs",
+    "test:inp": "node tests/inp.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
