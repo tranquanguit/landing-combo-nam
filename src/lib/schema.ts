@@ -102,6 +102,10 @@ export function organizationNode(b: Brand, site: string, locale: Locale, logoUrl
       areaServed: locale === 'vi' ? 'VN' : 'Worldwide',
       availableLanguage: [languageName[locale]],
     }],
+    /* sameAs nối website với hồ sơ chính thức trên nền tảng khác. Thiếu nó thì
+       mỗi nơi là một thực thể rời, và không nơi nào mượn được uy tín của nơi
+       nào — kể cả khi cùng một doanh nghiệp vận hành tất cả. */
+    ...(b.profiles?.length ? { sameAs: b.profiles.map((p) => p.url) } : {}),
     ...(b.taxId ? { taxID: b.taxId } : {}),
   };
 }

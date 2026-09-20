@@ -8,6 +8,24 @@
   "email": "kemnammocha@gmail.com",
   "hours": "8:00 – 21:00",
   "logo": "/images/logo.webp",
+  "profiles": [
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/ctymochavietnam"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/mochavietnam/"
+    },
+    {
+      "name": "TikTok",
+      "url": "https://www.tiktok.com/@kemnammochavietnam"
+    },
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com/@mochasmartvietnam"
+    }
+  ],
   "marketplaces": [],
   "taxId": "0317963313"
 }

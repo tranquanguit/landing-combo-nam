@@ -863,6 +863,20 @@ const brand = defineCollection({
     email: z.string().email(),
     hours: z.string(),
     logo: z.string(),
+    /**
+     * Hồ sơ chính thức của thương hiệu trên nền tảng khác, phát ra `sameAs`.
+     *
+     * Đây là cách duy nhất nói với Google và trợ lý AI rằng website này và
+     * fanpage/kênh kia là CÙNG một thực thể. Không có nó, mỗi nơi là một thực
+     * thể rời rạc và không nơi nào mượn được uy tín của nơi nào.
+     *
+     * Chỉ khai hồ sơ thật sự do thương hiệu vận hành. Gắn một URL không kiểm
+     * soát được vào `sameAs` là tự nhận về mọi thứ đăng ở đó.
+     */
+    profiles: z.array(z.object({
+      name: z.string(),
+      url: safeUrl,
+    }).strict()).default([]),
     marketplaces: z.array(z.object({ name: z.string(), url: safeUrl.optional() }).strict()).default([]),
   }).strict().superRefine((b, ctx) => {
     /*

@@ -72,6 +72,17 @@ const c = p?.compliance;
         <p class="todo">⚠️ {t(locale, 'todo')}: {t(locale, 'legal.policies')}.</p>
       )}
 
+      {b.profiles?.length > 0 && (
+        <>
+          <h3 style="margin-top:1.4em">{t(locale, 'footer.profiles')}</h3>
+          <ul class="channels">
+            {b.profiles.map((p: any) => (
+              <li><a href={p.url} rel="noopener me" target="_blank">{p.name}</a></li>
+            ))}
+          </ul>
+        </>
+      )}
+
       {b.marketplaces.length > 0 && (
         <>
           <h3 style="margin-top:1.4em">{t(locale, 'footer.official')}</h3>
