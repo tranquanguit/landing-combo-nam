@@ -1,0 +1,199 @@
+{
+  "slug": "smart-brightening-cream",
+  "locale": "vi",
+  "translationKey": "smart-brightening-cream",
+  "status": "published",
+  "name": "Mocha Smart Brightening Cream X3 – kem giảm sạm nám chuyên sâu",
+  "shortName": "Kem nám Smart Brightening X3",
+  "sku": "8938552914259",
+  "price": 590000,
+  "compareAtPrice": 960000,
+  "currency": "VND",
+  "variants": [
+    {
+      "label": "Kem Smart Brightening X3 – 30gr",
+      "note": "Tiết kiệm {{save}} so với giá niêm yết",
+      "price": 590000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, xem tình trạng da qua hình ảnh",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "seo": {
+    "title": "Kem nám Mocha Smart Brightening Cream X3 30gr | Mocha Việt Nam",
+    "description": "Kem giảm sạm nám Tranexamic Acid, NIO-NAG, Bakuchiol, Ceramide — nồng độ in trên bao bì. Không corticoid. {{price}}, freeship, trả tiền khi nhận."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "hỗ trợ làm mờ vùng da sạm nám, dưỡng sáng và cải thiện độ đều màu da",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
+      "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
+      "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
+    ],
+    "productNotificationNumber": "1517/25/CBMP-LA"
+  },
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "nam-tham",
+  "primaryKeyword": "kem nám mocha smart brightening cream",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước kem, dùng buổi tối",
+      "heading": "Kem nám Mocha Smart Brightening X3, công khai từng hoạt chất trên vỏ hộp",
+      "lead": "Hũ 30gr mang <strong>Tranexamic Acid, NIO-NAG, Ceramide, Bakuchiol, Vietnam Bio-white Complex và Black Truffle Extract</strong> — đúng danh sách in trên bao bì. Dành cho da sạm nám, không đều màu, và da đã qua nhiều biện pháp mà sắc tố vẫn quay lại.",
+      "usp": [
+        {
+          "text": "<strong>Không corticoid, không hydroquinone</strong>",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "danh sách thành phần đầy đủ in trên bao bì"
+        },
+        {
+          "text": "<strong>Bakuchiol thay cho retinol</strong>, không gây bong tróc",
+          "evidence": "ingredient",
+          "qualifier": "xem vai trò từng hoạt chất ở bảng thành phần"
+        },
+        {
+          "text": "<strong>Số tiếp nhận phiếu công bố ghi ngay trên trang</strong>, không phải tra ở đâu khác",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "1517/25/CBMP-LA"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-brightening-cream.webp",
+        "alt": "Hộp và hũ kem Mocha Smart Brightening Cream X3 cùng tuýp sữa rửa mặt Bio-Active Cleanser"
+      },
+      "primaryCta": "Đặt kem nám",
+      "secondaryCta": {
+        "label": "Xem bảng thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Bảng thành phần",
+      "heading": "Sáu hoạt chất in trên vỏ hộp, và vai trò của từng cái",
+      "intro": "Không corticoid, không hydroquinone, không hương liệu tổng hợp gây kích ứng.",
+      "caption": "Bảng này liệt kê đúng những hoạt chất được IN TRÊN BAO BÌ của hũ kem 30gr. Chúng tôi không tự điền con số nào không có trên vỏ hộp. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
+      "rows": [
+        {
+          "name": "Tranexamic Acid 3%",
+          "role": "Được nghiên cứu nhiều trong nhóm làm mờ vùng da sẫm màu do tăng sắc tố.",
+          "suitedFor": "Nám mảng, nám hỗn hợp"
+        },
+        {
+          "name": "NIO-NAG 2%",
+          "role": "Dẫn xuất glucosamine, hỗ trợ điều tiết quá trình sinh sắc tố.",
+          "suitedFor": "Da tăng sắc tố sau viêm"
+        },
+        {
+          "name": "Ceramide 1%",
+          "role": "Thành phần cấu trúc của hàng rào bảo vệ da, hỗ trợ giữ ẩm.",
+          "suitedFor": "Da khô, da mất nước"
+        },
+        {
+          "name": "Bakuchiol 2%",
+          "role": "Dẫn xuất thực vật được nghiên cứu như lựa chọn thay thế retinol cho da dễ kích ứng; không làm tăng nhạy cảm ánh sáng.",
+          "suitedFor": "Da nhạy cảm, không hợp retinol"
+        },
+        {
+          "name": "Vietnam Bio-white Complex 3%",
+          "role": "Cùng phức hợp bản địa với serum, ở dạng kem giữ trên da lâu hơn.",
+          "suitedFor": "Da sạm màu không đều"
+        },
+        {
+          "name": "Black Truffle Extract 2%",
+          "role": "Chiết xuất nấm truffle đen, ở dạng kem lưu trên da qua đêm.",
+          "suitedFor": "Da xỉn màu"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Ba bước, dùng 1–2 lần mỗi ngày",
+      "intro": "Thứ tự lấy từ hướng dẫn sử dụng in kèm sản phẩm.",
+      "totalTime": "PT3M",
+      "items": [
+        {
+          "heading": "Làm sạch da mặt",
+          "body": "Rửa mặt và lau khô trước khi dùng. Da còn ẩm hoặc còn cặn trang điểm đều làm giảm mức thẩm thấu."
+        },
+        {
+          "heading": "Lấy lượng vừa đủ",
+          "body": "Khoảng một đốt ngón tay trỏ, chấm đều 5 điểm: trán, hai má, mũi và cằm."
+        },
+        {
+          "heading": "Thoa và massage",
+          "body": "Thoa nhẹ từ trong ra ngoài, nâng cơ từ dưới lên, lên mặt và cổ, tránh vùng mắt. Massage vùng sạm màu khoảng 1–2 phút."
+        }
+      ],
+      "footnote": "Thử một lượng nhỏ ở vùng cổ và quan sát trong <strong>30–45 phút</strong> trước khi dùng toàn mặt. Buổi sáng cần kem chống nắng — bỏ bước này thì sắc tố sẽ quay lại bất kể dùng sản phẩm nào."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng phù hợp với tình trạng da của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt chu kỳ sử dụng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Kem nám Mocha giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho hũ 30gr. Giá niêm yết là {{compareAtPrice}}. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Dùng kem một mình có đủ không?",
+          "a": "Kem là bước khoá ẩm và giữ hoạt chất ở lại trên da. Nếu bạn muốn cả bước thẩm thấu sâu thì cần thêm serum — đó là lý do có bản combo. Nói thẳng: dùng riêng kem vẫn là một liệu trình hợp lệ, nhưng chậm hơn so với dùng đủ hai bước."
+        },
+        {
+          "q": "Da nhạy cảm dùng được không?",
+          "a": "Công thức dùng Bakuchiol thay cho retinol, không chứa corticoid hay hydroquinone. Bạn vẫn nên thử một lượng nhỏ ở vùng cổ và quan sát trong 30–45 phút trước khi dùng toàn mặt."
+        },
+        {
+          "q": "Đang mang thai hoặc cho con bú thì sao?",
+          "a": "Sản phẩm không chứa retinoid. Tuy nhiên nếu đang mang thai hoặc cho con bú, bạn nên hỏi ý kiến bác sĩ trước khi dùng bất kỳ sản phẩm chăm sóc da nào."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Tránh nhiệt độ cao và ánh nắng trực tiếp, đóng nắp sau khi dùng, để xa tầm tay trẻ em. Tránh tiếp xúc với mắt; nếu dính vào mắt thì rửa ngay bằng nước sạch."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "slug": "smart-brightening-cream",
+  "locale": "en",
+  "translationKey": "smart-brightening-cream",
+  "status": "published",
+  "name": "Mocha Smart Brightening Cream X3 – intensive dark-spot cream",
+  "shortName": "Smart Brightening Cream X3",
+  "sku": "8938552914259",
+  "price": 590000,
+  "compareAtPrice": 960000,
+  "currency": "VND",
+  "variants": [
+    {
+      "label": "Smart Brightening Cream X3 – 30g",
+      "note": "You save {{save}} off the list price",
+      "price": 590000,
+      "recommended": true
+    },
+    {
+      "label": "I would like advice first",
+      "note": "An adviser calls you back and reviews your skin from photos",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "seo": {
+    "title": "Mocha Smart Brightening Cream X3, 30g | Mocha Vietnam",
+    "description": "Dark-spot cream with Tranexamic Acid, NIO-NAG, Bakuchiol and Ceramide — the exact actives printed on the jar. No corticosteroids. {{price}}, free shipping."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "helps soften areas of uneven pigmentation and supports a more even skin tone",
+    "warnings": [
+      "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
+      "Discontinue use if irritation occurs. Avoid direct contact with the eyes.",
+      "If you are pregnant or breastfeeding, speak to your doctor before use.",
+      "Results vary between individuals and depend on consistent daily sun protection.",
+      "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
+    ],
+    "productNotificationNumber": "1517/25/CBMP-LA"
+  },
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "nam-tham",
+  "primaryKeyword": "mocha smart brightening cream",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "The cream step, used at night",
+      "heading": "Every active printed on the jar, listed here in full",
+      "lead": "The 30g jar carries <strong>Tranexamic Acid, NIO-NAG, Ceramide, Bakuchiol, Vietnam Bio-white Complex and Black Truffle Extract</strong> — exactly the list printed on the packaging. For skin with uneven tone and dark patches that keep coming back.",
+      "usp": [
+        {
+          "text": "<strong>No corticosteroids, no hydroquinone</strong>",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "full ingredient list printed on the packaging"
+        },
+        {
+          "text": "<strong>Bakuchiol instead of retinol</strong>, no peeling",
+          "evidence": "ingredient",
+          "qualifier": "see what each active does in the table below"
+        },
+        {
+          "text": "<strong>Cosmetic notification number shown on this page</strong>, not hidden elsewhere",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "1517/25/CBMP-LA"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-brightening-cream.webp",
+        "alt": "Box and jar of Mocha Smart Brightening Cream X3 next to a tube of Bio-Active Cleanser"
+      },
+      "primaryCta": "Order the cream",
+      "secondaryCta": {
+        "label": "See the ingredient table",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Free delivery nationwide",
+        "Inspect before you pay",
+        "7-day return if the product is faulty"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Ingredients",
+      "heading": "Six actives printed on the jar, and what each one does",
+      "intro": "No corticosteroids, no hydroquinone, no synthetic fragrance.",
+      "caption": "This table lists exactly the actives and concentrations PRINTED ON THE PACKAGING of the serum and the cream. We do not fill in any number the packaging does not state. The full INCI list is printed on the pack.",
+      "rows": [
+        {
+          "name": "Tranexamic Acid 3%",
+          "role": "Among the more widely studied topical options for softening areas darkened by excess pigment.",
+          "suitedFor": "Surface patches, mixed pigmentation"
+        },
+        {
+          "name": "NIO-NAG 2%",
+          "role": "A glucosamine derivative that helps regulate pigment formation.",
+          "suitedFor": "Post-inflammatory pigmentation"
+        },
+        {
+          "name": "Ceramide 1%",
+          "role": "A structural part of the skin barrier that helps hold moisture.",
+          "suitedFor": "Dry, dehydrated skin"
+        },
+        {
+          "name": "Bakuchiol 2%",
+          "role": "A plant-derived alternative to retinol studied for easily irritated skin; it does not increase light sensitivity.",
+          "suitedFor": "Sensitive skin, skin that does not tolerate retinol"
+        },
+        {
+          "name": "Vietnam Bio-white Complex 3%",
+          "role": "The same native complex as the serum, in a cream that stays on skin longer.",
+          "suitedFor": "Uneven, dull skin"
+        },
+        {
+          "name": "Black Truffle Extract 2%",
+          "role": "Black truffle extract, in a cream that stays on the skin overnight.",
+          "suitedFor": "Dull skin"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use",
+      "heading": "Three steps, once or twice a day",
+      "intro": "The order below is taken from the instructions supplied with the product.",
+      "totalTime": "PT3M",
+      "items": [
+        {
+          "heading": "Cleanse",
+          "body": "Wash and dry your face first. Damp skin or leftover make-up both reduce how much is absorbed."
+        },
+        {
+          "heading": "Take the right amount",
+          "body": "About the size of one fingertip joint, dotted evenly on five points: forehead, both cheeks, nose and chin."
+        },
+        {
+          "heading": "Apply and massage",
+          "body": "Spread outwards and upwards over face and neck, avoiding the eye area. Massage darker patches for one to two minutes."
+        }
+      ],
+      "footnote": "Patch-test on the neck and watch for <strong>30–45 minutes</strong> before using it on the whole face. Sunscreen in the morning is not optional — without it pigmentation returns whatever product you use."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City — tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support through the full routine</strong> by email."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "FAQ",
+      "heading": "Questions people actually ask",
+      "items": [
+        {
+          "q": "How much is the cream?",
+          "a": "<strong>{{price}}</strong> for the 30g jar. The list price is {{compareAtPrice}}. Free delivery, pay on delivery."
+        },
+        {
+          "q": "Is the cream enough on its own?",
+          "a": "The cream is the step that seals moisture in and keeps the actives on the skin. If you also want a deeper-penetrating step you need the serum — that is what the combo is for. Plainly: the cream on its own is a valid routine, just a slower one than using both steps."
+        },
+        {
+          "q": "Can sensitive skin use it?",
+          "a": "The formula uses Bakuchiol instead of retinol and contains no corticosteroids or hydroquinone. Still patch-test on the neck and watch for 30–45 minutes before using it on the whole face."
+        },
+        {
+          "q": "What about pregnancy or breastfeeding?",
+          "a": "The product contains no retinoids. Even so, if you are pregnant or breastfeeding, ask a doctor before using any skincare product."
+        },
+        {
+          "q": "How should it be stored?",
+          "a": "Keep away from heat and direct sunlight, close the lid after use, keep out of reach of children. Avoid contact with the eyes; if it gets in, rinse immediately with clean water."
+        }
+      ]
+    }
+  ]
+}
