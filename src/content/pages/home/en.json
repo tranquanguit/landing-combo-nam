@@ -41,5 +41,68 @@
       "Mocha does the opposite: each product publishes the concentration of every key active, with a reference for what that ingredient is understood to do. You can take those numbers and check them against any other product, including ours.",
       "In return, we do not promise things that cannot be measured. Every Mocha product is a topical cosmetic, not a medicine, and results depend on your skin and on daily sun protection."
     ]
-  }
+  },
+  "sections": [
+    {
+      "id": "bat-dau-tu-dau",
+      "heading": "Not sure where to start? Settle this first",
+      "body": [
+        "Which layer your darker patches sit in. That is the question that decides how long to expect — not which label to buy.",
+        "Pigment in the outer layer and pigment sitting deeper respond very differently to the same ingredient. Applying one group's expectations to the other is the most common reason people stop halfway, and then conclude that nothing works.",
+        "The Pigmentation and dark spots page separates the three groups and gives a reference timescale for each. Read that before you look at price."
+      ],
+      "links": [
+        {
+          "label": "How the three groups differ",
+          "href": "/en/nam-tham/"
+        }
+      ]
+    },
+    {
+      "id": "mua-o-day-the-nao",
+      "heading": "What happens when you order here",
+      "body": [
+        "There is no cart on this site and no online payment. You leave a name, phone number and address; an adviser calls back within <strong>2 working hours</strong> to confirm the order and ask about your skin before anything is dispatched.",
+        "Delivery takes 2–5 days depending on the area, free nationwide. You open and inspect the parcel before paying. If an item is faulty, wrong, or still sealed, you can return it within 7 days.",
+        "The number you leave is used to confirm the order and advise you, and is not shared with third parties. Details in the personal data policy."
+      ],
+      "links": [
+        {
+          "label": "Personal data policy",
+          "href": "/en/policies/chinh-sach-du-lieu/"
+        },
+        {
+          "label": "Return policy",
+          "href": "/en/policies/chinh-sach-doi-tra/"
+        }
+      ]
+    },
+    {
+      "id": "nhung-dieu-khong-noi",
+      "heading": "What we do not claim",
+      "body": [
+        "There is no “clears in N days” figure. How long improvement takes varies by group, by individual, and by whether you use sunscreen every morning. Anyone quoting one number for everybody is guessing.",
+        "There are no refunds for simply not liking it. Opened cosmetics cannot be resold, and nobody can predict how your skin will respond. The 7-day return window covers faulty, wrong or still-sealed items only — said upfront so it is not a surprise later.",
+        "And there are no medical claims. Everything here is a topical cosmetic. If your skin needs medical care, see a dermatologist."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Is this the official Mocha site?",
+      "a": "The site is operated under Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha — the legal name, tax number and registered address appear in the footer of every page. The same company is the one that filed the cosmetic product notifications, and each product page prints its notification number."
+    },
+    {
+      "q": "Why is the price lower than the list price?",
+      "a": "The list price is the one printed on the manufacturer's own material for each product. The price on this site is the current selling price. Both are shown side by side so you can compare them yourself; neither is hidden."
+    },
+    {
+      "q": "Can I buy without leaving a phone number?",
+      "a": "Orders here go through a callback, so a number is needed to confirm. If you would rather not leave details yet, read the ingredient table and instructions on the product pages — they are published in full and need no sign-in."
+    },
+    {
+      "q": "Are the products registered with the regulator?",
+      "a": "Yes. The cosmetic product notification number is printed at the foot of each product page so you can check it. Where a number is not yet available for the current filing, the page shows a warning rather than staying silent."
+    }
+  ]
 }

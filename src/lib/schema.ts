@@ -187,11 +187,12 @@ interface PageBase {
  * hiểu mỗi trang con là một website riêng.
  */
 export function homeGraph(opts: PageBase & { title: string; description: string }) {
-  const { brand: b, site, url, locale, logoUrl, title, description } = opts;
+  const { brand: b, site, url, locale, logoUrl, title, description, faq } = opts;
   return {
     '@context': 'https://schema.org',
     '@graph': [
       organizationNode(b, site, locale, logoUrl),
+      ...(faq?.length ? [faqNode(url, locale, faq)] : []),
       {
         '@type': 'WebSite',
         '@id': `${site}/#website`,

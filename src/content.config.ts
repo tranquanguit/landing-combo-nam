@@ -645,6 +645,20 @@ const proseSection = z.object({
   id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
   heading: z.string(),
   body: z.array(z.string().min(1)).min(1),
+  /**
+   * Liên kết đi kèm mục, khai riêng chứ KHÔNG viết `<a>` vào `body`.
+   *
+   * `richText` chỉ cho qua strong/em/b/i/br/sup/sub và escape mọi thẻ khác —
+   * đó là hàng rào XSS dựng từ kiểm định lần 6, không phải thiếu sót. Viết thẻ
+   * `a` vào body thì nó hiện nguyên văn ra màn hình dưới dạng chữ.
+   *
+   * Khai ở đây thì `href` đi qua `safeUrl`, nên javascript:/data: bị chặn mà
+   * vẫn nối được trang với nhau — thứ SEO cần và người đọc cũng cần.
+   */
+  links: z.array(z.object({
+    label: z.string().min(1),
+    href: safeUrl,
+  }).strict()).default([]),
 }).strict();
 
 const faqField = z.array(z.object({
@@ -717,6 +731,12 @@ const pages = defineCollection({
       heading: z.string(),
       body: z.array(z.string()).min(1),
     }).strict().optional(),
+    /* Mục nội dung của chính trang chủ. Trang chủ chỉ có hero + about là 678 từ
+       — quá mỏng để đấu Google cho từ khoá thương hiệu, và là trang đích của
+       phần lớn quảng cáo. Dùng lại `proseSection` nên đi qua đúng các hàng rào
+       nội dung đã có. */
+    sections: z.array(proseSection).default([]),
+    faq: faqField,
   }).strict().superRefine((page, ctx) => scanEditorial(page, ctx)),
 });
 

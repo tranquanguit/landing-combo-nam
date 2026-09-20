@@ -5,6 +5,8 @@ import SiteFooter from '../components/SiteFooter.astro';
 import Section from '../components/Section.astro';
 import Picture from '../components/Picture.astro';
 import ProductGrid from '../components/ProductGrid.astro';
+import Prose from '../components/blocks/Prose.astro';
+import Faq from '../components/blocks/Faq.astro';
 import Analytics from '../components/Analytics.astro';
 import { homeGraph } from '../lib/schema';
 import { money } from '../lib/format';
@@ -36,6 +38,7 @@ const logoUrl = await resolveAssetUrl(b.logo, site, 512);
 const jsonLd = homeGraph({
   brand: b, site, url: canonical, locale, logoUrl,
   title: page.seo.title, description: page.seo.description,
+  faq: page.faq ?? [],
 });
 
 /* Nút "Đặt mua" ở header không có neo #dat-hang trên trang này; trỏ nó tới
@@ -199,6 +202,14 @@ const soloArticle = articles.length === 1 ? articles[0] : undefined;
           ))}
         </ul>
       </Section>
+    )}
+
+    {page.sections?.map((section: any, i: number) => (
+      <Prose section={section} surface={i % 2 === 0 ? 'bone' : 'paper'} />
+    ))}
+
+    {page.faq?.length > 0 && (
+      <Faq data={{ heading: t(locale, 'faq.heading'), items: page.faq }} id="cau-hoi" />
     )}
   </main>
 
