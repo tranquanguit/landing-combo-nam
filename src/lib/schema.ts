@@ -16,10 +16,14 @@ type Brand = CollectionEntry<'brand'>['data'];
  * mà trang không hiển thị đúng dữ liệu đó, vi phạm dẫn tới manual action.
  * Khi có hệ thống review thật thì thêm vào đây, không sớm hơn.
  *
- * Cũng không khai FAQPage/HowTo như một chiến lược: Google đã bỏ hai rich result
- * này (FAQ từ 05/2026). Giữ FAQPage vì vẫn giúp máy đọc hiểu, không vì SERP.
+ * FAQPage và HowTo KHÔNG khai để lấy rich result: Google đã bỏ cả hai (FAQ từ
+ * 05/2026). Vẫn khai vì lý do khác — chúng là cách duy nhất nói với máy rằng
+ * "đây là một câu hỏi và đây là câu trả lời của nó", "đây là bước 2 trong quy
+ * trình bốn bước". Trợ lý AI trích dẫn được đoạn nào là nhờ ranh giới đó, chứ
+ * không nhờ SERP. Mất rich result không làm dữ liệu sai đi.
  */
 import { isOfferExpired } from './offer.ts';
+import { DEFAULT_ANCHOR } from './block-anchors.ts';
 
 const REFUND: Record<string, string> = {
   exchange: 'https://schema.org/ExchangeRefund',
@@ -126,6 +130,38 @@ export function faqNode(url: string, locale: Locale, faq: { q: string; a: string
       name: plainText(f.q),
       // Bóc thẻ: schema là dữ liệu cho máy, không phải nơi đặt đánh dấu trình bày.
       acceptedAnswer: { '@type': 'Answer', text: plainText(f.a) },
+    })),
+  };
+}
+
+/**
+ * HowTo từ khối `steps`.
+ *
+ * Neo `url` của từng bước trỏ về đúng khối hướng dẫn trên trang, để máy nối
+ * được bước trong dữ liệu với bước người đọc nhìn thấy. Không bịa `supply` hay
+ * `tool`: khối `steps` không khai hai thứ đó, và đoán ra chúng là thêm dữ kiện
+ * không có trên trang.
+ */
+export function howToNode(url: string, locale: Locale, steps: {
+  heading: string;
+  intro?: string;
+  totalTime?: string;
+  anchor: string;
+  items: { heading: string; body: string }[];
+}) {
+  return {
+    '@type': 'HowTo',
+    '@id': `${url}#howto`,
+    name: plainText(steps.heading),
+    ...(steps.intro ? { description: plainText(steps.intro) } : {}),
+    ...(steps.totalTime ? { totalTime: steps.totalTime } : {}),
+    inLanguage: htmlLang[locale],
+    step: steps.items.map((s, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: plainText(s.heading),
+      text: plainText(s.body),
+      url: `${url}#${steps.anchor}`,
     })),
   };
 }
@@ -386,6 +422,17 @@ export function productGraph(opts: {
   ];
 
   graph.push(...standaloneProducts());
+
+  const stepsBlock = p.blocks.find((x) => x.type === 'steps');
+  if (stepsBlock && stepsBlock.type === 'steps' && stepsBlock.items.length) {
+    graph.push(howToNode(url, locale, {
+      heading: stepsBlock.heading,
+      intro: stepsBlock.intro,
+      totalTime: stepsBlock.totalTime,
+      anchor: stepsBlock.id ?? DEFAULT_ANCHOR.steps,
+      items: stepsBlock.items,
+    }));
+  }
 
   if (breadcrumb?.length) graph.push(breadcrumbNode(url, breadcrumb));
   if (faq?.length) graph.push(faqNode(url, locale, faq));

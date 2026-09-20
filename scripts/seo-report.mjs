@@ -198,7 +198,16 @@ for (const file of contentPages) {
 
   // Giá trong JSON-LD phải bằng giá hiện trên trang, nếu không Google báo
   // "giá không khớp" và bỏ đoạn trích giàu.
-  const text = decode(html.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<[^>]+>/g, ' '));
+  /* Bóc CẢ <style>, không chỉ <script>.
+     Bản trước chỉ bóc <script>, nên khi CSS còn nhúng thẳng vào HTML thì mỗi
+     selector, mỗi tên thuộc tính đều được đếm là một "từ hiển thị". Phép đo
+     "nội dung hiển thị > 300 từ" vì thế luôn xanh trên mọi trang, kể cả trang
+     rỗng — nó không đo gì suốt từ đầu. Chuyển CSS ra file rời làm lộ ra điều
+     đó: hai trang chính sách tụt ngay xuống 165 và 223 từ. */
+  const text = decode(html
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<[^>]+>/g, ' '));
   // Bỏ dấu phân nhóm trước khi so: trang tiếng Việt viết 1.050.000, trang
   // tiếng Anh viết 1,050,000 — cùng một con số.
   const digitsOnly = text.replace(/(?<=\d)[.,\u00a0\u202f ](?=\d{3}\b)/g, '');

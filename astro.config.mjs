@@ -55,7 +55,7 @@ export default defineConfig({
 
   build: {
     // CSS nhỏ thì nhúng thẳng, tiết kiệm một vòng request trên mạng 4G Việt Nam
-    inlineStylesheets: 'always',
+    inlineStylesheets: 'auto',
   },
 
   // Ảnh: file nội dung khai đường dẫn chuỗi, Picture.astro và lib/images.ts ánh xạ
