@@ -52,6 +52,10 @@ const c = p?.compliance;
       <h2>{t(locale, 'footer.contact')}</h2>
       <p>
         {b.legalName}<br />
+        {/* Mã số thuế hiện ngay dưới tên pháp nhân: trước đây nó chỉ nằm trong
+            JSON-LD, tức chỉ máy đọc được. Người mua Việt Nam — và cả bên duyệt
+            quảng cáo — tra mã số thuế bằng mắt, ngay ở chân trang. */}
+        {b.taxId && <>{t(locale, 'legal.taxId')}: {b.taxId}<br /></>}
         {b.address}<br />
         <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a><br />
         <a href={`mailto:${b.email}`}>{b.email}</a><br />

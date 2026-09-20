@@ -82,7 +82,9 @@
       "usp": [
         {
           "text": "<strong>No corticosteroids, no hydroquinone, no drying alcohol</strong>",
-          "evidence": "ingredient"
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "the full ingredient list is printed on the pack"
         },
         {
           "text": "<strong>Full percentages on the label</strong> — nothing hidden inside a “proprietary complex”",
@@ -254,7 +256,7 @@
         {
           "name": "Black Truffle Extract 2%",
           "inProduct": "Cream",
-          "role": "Black truffle extract, supporting brightness.",
+          "role": "Black truffle extract, in a cream that stays on the skin overnight.",
           "suitedFor": "Dull skin"
         }
       ]

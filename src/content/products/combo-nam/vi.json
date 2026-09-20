@@ -81,7 +81,9 @@
       "usp": [
         {
           "text": "<strong>Không corticoid, không hydroquinone, không cồn khô</strong>",
-          "evidence": "ingredient"
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "danh sách thành phần đầy đủ in trên bao bì"
         },
         {
           "text": "<strong>Công khai đúng những tỉ lệ in trên bao bì</strong>, không giấu trong cụm “thành phần độc quyền”",
@@ -253,7 +255,7 @@
         {
           "name": "Black Truffle Extract 2%",
           "inProduct": "Kem",
-          "role": "Chiết xuất nấm truffle đen, hỗ trợ dưỡng sáng.",
+          "role": "Chiết xuất nấm truffle đen, ở dạng kem lưu trên da qua đêm.",
           "suitedFor": "Da xỉn màu"
         }
       ]
@@ -393,7 +395,7 @@
         },
         {
           "q": "Làm sao biết là hàng chính hãng?",
-          "a": "Sản phẩm chính hãng có tem chống giả kèm mã QR tra cứu, và chỉ phân phối qua website chính thức, hotline 0367 848 918 cùng các gian hàng Mocha trên Shopee, Lazada, TikTok Shop."
+          "a": "Sản phẩm chính hãng có tem chống giả kèm mã QR tra cứu. Hiện Mocha chỉ bán qua website chính thức này và hotline 0367 848 918 — chưa có gian hàng trên sàn thương mại điện tử, nên hàng rao bán ở nơi khác không phải do Mocha phân phối."
         }
       ]
     }

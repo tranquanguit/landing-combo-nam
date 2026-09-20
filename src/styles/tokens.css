@@ -248,7 +248,10 @@ p:last-child { margin-bottom: 0; }
 }
 
 /* Khoảng trống là tín hiệu cao cấp rẻ nhất và bị bỏ qua nhiều nhất. */
-section { padding-block: clamp(72px, 10vw, 152px); }
+/* Nhịp dọc: bản trước dùng tới 152px trên desktop, nên mọi khối ngắn đều kết
+   thúc bằng một dải trống 150–180px — nhìn ra ngay khi chụp màn hình từng
+   trang một. Hạ trần xuống 112px giữ được khoảng thở mà không còn lỗ hổng. */
+section { padding-block: clamp(64px, 7vw, 112px); }
 
 .measure { max-width: var(--measure); }
 .lead { font-size: var(--t-md); color: var(--ink-muted); line-height: 1.6; }
@@ -299,6 +302,12 @@ section { padding-block: clamp(72px, 10vw, 152px); }
 }
 .section-head h2 { margin-bottom: var(--s-5); }
 .section-head .lead { max-width: 52ch; }
+/* Trên khổ hẹp câu dẫn nằm ngay dưới tiêu đề và gần bằng cỡ tiêu đề phụ, nên
+   hai thứ dính vào nhau thành một khối khó đọc — thấy rõ ở ảnh chụp 390px. */
+@media (max-width: 860px) {
+  .section-head h2 { margin-bottom: var(--s-3); }
+  .section-head .lead { font-size: var(--t-base); line-height: 1.6; }
+}
 .section-head.center { margin-inline: auto; text-align: center; max-width: 46ch; }
 .section-head.center .lead { margin-inline: auto; }
 

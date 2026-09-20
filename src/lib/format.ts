@@ -29,7 +29,12 @@ export function money(amount: number, currency = 'VND', locale: Locale = 'vi'): 
  * UTC+7 từ vòng trước; hàm này thì chưa.
  */
 export function shortDate(iso: string, locale: Locale = 'vi'): string {
+  /* Bản tiếng Việt dùng SỐ, không dùng "thg". Intl vi-VN với month:'short' in
+     ra "30 thg 9, 2026" — đúng ngữ pháp máy, sai thói quen người: người Việt
+     đọc hạn ưu đãi là 30/09/2026. Chi tiết nhỏ nhưng nằm ngay cạnh giá. */
+  const numeric = locale === 'vi';
   return new Date(iso).toLocaleDateString(intlLocale[locale] ?? 'en-GB', {
-    day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Ho_Chi_Minh',
+    day: '2-digit', month: numeric ? '2-digit' : 'short', year: 'numeric',
+    timeZone: 'Asia/Ho_Chi_Minh',
   });
 }

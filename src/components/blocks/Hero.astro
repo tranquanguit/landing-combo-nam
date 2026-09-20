@@ -178,7 +178,10 @@ const notes = data.usp.map((u: any, i: number) => ({
     font-size: var(--t-sm); color: var(--slate);
   }
   .hero-price .was > .figure { text-decoration: line-through; }
-  .hero-price .save { letter-spacing: .02em; }
+  /* Số tiền tiết kiệm là tài sản thương mại mạnh nhất của khối giá, nhưng bản
+     trước đặt nó cùng một màu xám với mọi chữ khác nên mắt trượt qua. Dùng đúng
+     màu vẫn dùng cho các tín hiệu kiểm chứng được — không phải đỏ giảm giá. */
+  .hero-price .save { letter-spacing: .02em; color: var(--verify); font-weight: 600; }
 
   /* Gạch đầu dòng: một dòng chữ, một số cước chú. Không còn dòng xám phụ. */
   /* Gạch đầu dòng gọn lại: chữ và số cước chú nằm CÙNG một dòng chảy, số bám
