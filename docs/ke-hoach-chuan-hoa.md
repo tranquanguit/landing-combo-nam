@@ -118,8 +118,13 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
   không viết tay. Schema chặn lỗi trượt cột. Ghi chú cuối bảng nói rõ không cột
   nào "mạnh hơn" cột nào — thiếu câu đó thì bảng so sánh tự đẩy người đọc về
   cột đắt nhất.
-- `[ ] C5` Rà bảng màu và tương phản: tối thiểu AA cho mọi cặp chữ/nền, kể cả
-  chữ đặt trên ảnh. Đo bằng số, không bằng mắt.
+- `[x] C5` **Xong — dựng thành cổng thường trực, không phải một lần rà.**
+  `scripts/check-contrast.mjs` đọc hex thật từ tokens.css rồi tính lại 19 cặp
+  đang dùng; đã nối vào `test:guards` và CI. Bắt được ngay hai lỗi do chính đêm
+  nay tạo ra: nền dải mốc thời gian thứ ba 3,92:1 (trượt AA) và vạch trục
+  1,86:1 (mờ tới mức vô dụng). Cả hai đã sửa.
+  *Chưa canh được:* chữ đặt trên ảnh — việc đó cần render rồi lấy pixel. Hiện
+  trang chưa có chỗ nào đặt chữ đè lên ảnh; ngày nào có thì phải bổ sung.
 
 ## D. SEO và AI search
 
