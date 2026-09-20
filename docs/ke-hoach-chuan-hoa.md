@@ -57,6 +57,10 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
 - `[!] A6` **Chứng từ có chữ ký giám đốc.** Phải che chữ ký và dấu cá nhân trước
   khi đăng lên trang công khai.
 - `[!] A7` **Văn bản đồng ý cho 4 ảnh trước/sau.** Cổng build đang chặn đúng.
+- `[!] A10` **Chỉ số PA của kem chống nắng UV-Block Plus.** Hai nguồn của chính
+  hãng mâu thuẫn: trang sản phẩm ghi `SPF 50 PA+`, bốn tài liệu marketing ghi
+  `SPF 50 PA++++`. Trang hiện để trống chỉ số PA và chỉ ghi SPF 50 (cả hai
+  nguồn khớp). Cần đọc từ vỏ hộp thật rồi khai đúng một con số.
 - `[!] A8` **Đăng ký Bộ Công Thương.** Bản cào có hồ sơ
   `online.gov.vn/Home/WebDetails/139375`, nhưng đó là đăng ký cho **tên miền
   mochavietnam.com**. Site này chạy tên miền khác, nên KHÔNG được gắn logo hay
@@ -185,18 +189,19 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
   `auto` = 152KB HTML + 9KB CSS = 161KB, nặng nhất 15.421B/24.576B (đạt).
   Tổng byte cả site giảm một nửa, và ngay cả lượt xem một trang cũng không tệ
   hơn. Lý do cũ đúng khi site có một trang landing, không còn đúng với 19 trang.
-- `[ ] F2` Sản phẩm mới cần dòng sản phẩm mới (Bảo vệ da, Làm sạch, Phục hồi da,
-  Chăm sóc da mụn, Treatment). Mỗi dòng cần nội dung biên tập thật, không phải
-  chỉ danh sách — build sẽ chặn trang mỏng.
+- `[~] F2` **Dòng "Bảo vệ da" đã xong** (4 mục nội dung + FAQ + 1 sản phẩm).
+  Còn bốn dòng: Làm sạch, Phục hồi da, Chăm sóc da mụn, Treatment. Mỗi dòng cần
+  nội dung biên tập thật, không phải chỉ danh sách — build chặn trang mỏng.
 
-## G. Mười sản phẩm còn lại
+## G. Sản phẩm còn lại (9)
+
+> `uv-block-sunscreen` đã xong — xem dòng Bảo vệ da.
 
 Giá và mã vạch đã lấy từ cửa hàng chính hãng, chờ dựng trang:
 
 | Giá bán | Sản phẩm |
 |---|---|
 | 550.000đ | Peel vi gai tảo biển |
-| 335.000đ | Kem chống nắng UV-Block Sunscreen 7 màng lọc |
 | 335.000đ | Kem dưỡng sáng Biovector |
 | 285.000đ | Sữa rửa mặt Bio-Active Cleanser |
 | 250.000đ | Collagen Peptide Cream |
