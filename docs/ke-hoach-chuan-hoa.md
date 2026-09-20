@@ -128,10 +128,17 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
   đây thì chuyện gì xảy ra; và những điều chúng tôi không nói. Kèm FAQ 4 câu,
   phát FAQPage. Thêm trường `links` cho `proseSection` (href qua `safeUrl`) vì
   `richText` cố ý không cho thẻ `a` — dùng chung cho pages/lines/articles/guides.
-- `[ ] D3` `speakable` cho đoạn trả lời chính của mỗi trang.
-- `[ ] D4` Cập nhật `llms.txt` theo các sản phẩm mới.
-- `[ ] D5` Kiểm lại nội bộ: mọi trang sản phẩm phải tới được từ trang chủ trong
-  ≤ 3 cú nhấp, và dòng sản phẩm phải dẫn sang bài tư vấn liên quan.
+- `[x] D3` **Quyết định KHÔNG làm.** Google chỉ hỗ trợ `speakable` trong phạm
+  vi tin tức và vẫn ở dạng beta từ 2018. Khai trên trang mỹ phẩm là thêm byte
+  vào JSON-LD mà không bên nào đọc. Việc đánh dấu ranh giới nội dung đã do
+  FAQPage và HowTo đảm nhiệm.
+- `[x] D4` **Không phải làm.** `llms.txt` tự sinh từ dữ liệu (`pages/llms.txt.ts`)
+  nên đã có sẵn hai sản phẩm mới.
+- `[x] D5` **Xong.** Thêm `relatedArticles` cho sản phẩm và khối "Đọc thêm
+  trước khi quyết định". Trước đó liên kết chỉ một chiều — bài dẫn về sản phẩm,
+  sản phẩm không dẫn ngược lại, nên trang đích quảng cáo là ngõ cụt. Đã nối hai
+  chiều cho cả ba sản phẩm. Phần còn lại (trang mồ côi, độ sâu ≤3 cú nhấp) vốn
+  đã được `test:seo` canh và đang xanh.
 
 ## E. Chuyển đổi
 
