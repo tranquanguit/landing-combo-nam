@@ -112,8 +112,12 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
 - `[ ] C3` Dải ảnh chính hãng đúng chỗ trong mạch kể (infographic thành phần,
   routine sáng/tối, ảnh chất kem). Quy tắc: ảnh có chữ in đè **không** nằm cạnh
   chữ của trang — để nó đứng riêng thành một chặng.
-- `[ ] C4` Bảng so sánh chọn sản phẩm theo loại da / loại nám / ngân sách.
-  Đây là dạng nội dung trợ lý AI trích nhiều nhất.
+- `[x] C4` **Xong.** Bảng `compare` trên trang dòng, năm tiêu chí: gồm những
+  gì, hợp với ai, chiếm mấy bước trong lộ trình, đã có bước chống nắng chưa,
+  hoạt chất chính. Cột lấy từ `products`, giá render từ dữ liệu sản phẩm chứ
+  không viết tay. Schema chặn lỗi trượt cột. Ghi chú cuối bảng nói rõ không cột
+  nào "mạnh hơn" cột nào — thiếu câu đó thì bảng so sánh tự đẩy người đọc về
+  cột đắt nhất.
 - `[ ] C5` Rà bảng màu và tương phản: tối thiểu AA cho mọi cặp chữ/nền, kể cả
   chữ đặt trên ảnh. Đo bằng số, không bằng mắt.
 
