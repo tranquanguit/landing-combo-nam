@@ -101,11 +101,14 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
   ai không nên dùng → giá và cam kết → biểu mẫu.
   Thứ tự này đặt phần trung thực nhất ("ai không nên dùng") ngay trước lúc
   xin thông tin — đó là chỗ nó tăng tỉ lệ chốt chứ không làm giảm.
-- `[~] C2` **Xong mốc thời gian.** Khối `timeline` dựng bằng CSS/HTML thuần
-  (không SVG — dải chỉ là hình chữ nhật bo tròn định vị theo %, nhẹ hơn và tự
-  dùng token màu). Số liệu ở dạng chữ trong `<dl>` là chính, biểu đồ mang
-  `aria-hidden` — máy đọc được số mà không cần hiểu hình.
-  Còn lại: lộ trình sáng/tối, và sơ đồ "kem hay serum trước" cho trang sản phẩm.
+- `[x] C2` **Xong.** Hai khối trực quan, cả hai dựng bằng CSS/HTML thuần chứ
+  không SVG — nhẹ hơn, tự co theo khung, tự dùng token màu:
+  * `timeline` — ba nhóm nám, ba khoảng thời gian đặt cạnh nhau. Số liệu ở
+    dạng chữ trong `<dl>` là chính, biểu đồ mang `aria-hidden`.
+  * `routine` — lộ trình sáng và tối, cho thấy bước chống nắng chỉ có ở cột
+    sáng. Dấu sáng/tối phân biệt bằng hình (đĩa đặc / đĩa khuyết) chứ không chỉ
+    bằng màu; bước bắt buộc có chữ "Bắt buộc" trong nội dung, không chỉ tô màu.
+  Toàn site trước đó có **0 sơ đồ**.
 - `[ ] C3` Dải ảnh chính hãng đúng chỗ trong mạch kể (infographic thành phần,
   routine sáng/tối, ảnh chất kem). Quy tắc: ảnh có chữ in đè **không** nằm cạnh
   chữ của trang — để nó đứng riêng thành một chặng.
