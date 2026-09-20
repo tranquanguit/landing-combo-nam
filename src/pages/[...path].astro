@@ -208,6 +208,7 @@ const articlesSorted = allArticles
     locale={locale}
     canonical={canonical}
     alternates={alternates}
+    articles={pick<any>(data.relatedArticles, articleBySlug)}
   />
 )}
 

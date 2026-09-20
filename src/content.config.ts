@@ -344,6 +344,16 @@ const products = defineCollection({
     /** Dòng sản phẩm chứa sản phẩm này. Trang dòng sẽ tự gom, không khai hai chiều. */
     line: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
     /**
+     * Bài tư vấn liên quan, hiện ở cuối trang sản phẩm.
+     *
+     * Trang sản phẩm là trang đích của quảng cáo, nên nó cũng là nơi người đọc
+     * dừng lại nhiều nhất. Không có đường nào dẫn sang nội dung giải thích thì
+     * trang thành ngõ cụt: người còn đang phân vân chỉ có hai lựa chọn là điền
+     * biểu mẫu hoặc thoát. Bài viết ở đây đã tồn tại sẵn — chỉ là trước đây
+     * liên kết một chiều, từ bài về sản phẩm chứ không có chiều ngược lại.
+     */
+    relatedArticles: z.array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)).default([]),
+    /**
      * Truy vấn mà trang này sở hữu. Hai trang cùng khai một truy vấn sẽ ăn thịt
      * nhau trên kết quả tìm kiếm — cổng bên dưới chặn việc đó ngay lúc build.
      */

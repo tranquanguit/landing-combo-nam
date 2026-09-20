@@ -22,7 +22,8 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import { expandProductTokens } from '../lib/money-text';
 import { productGraph } from '../lib/schema';
 import { resolveAssetUrl, resolveAssetImage } from '../lib/images';
-import { homePath, linePath, productPath } from '../lib/routes';
+import Section from '../components/Section.astro';
+import { articlePath, homePath, linePath, productPath } from '../lib/routes';
 import { assertTranslated, localePath, t, type Locale } from '../i18n/ui';
 
 interface Props {
@@ -33,9 +34,11 @@ interface Props {
   alternates?: { locale: Locale; url: string }[];
   nav?: { label: string; href: string }[];
   policies?: { label: string; href: string }[];
+  /** Bài tư vấn liên quan — xem `relatedArticles` trong schema sản phẩm. */
+  articles?: any[];
 }
 
-const { product: raw, brand: b, locale, canonical, alternates = [], nav = [], policies = [] } = Astro.props;
+const { product: raw, brand: b, locale, canonical, alternates = [], nav = [], policies = [], articles = [] } = Astro.props;
 
 /* Tên tổ chức công bố (in ở footer) phải trùng pháp nhân trong JSON-LD Organization.
    Kiểm định lần 6: bản EN khai "Mocha Vietnam Cosmeceuticals" trong khi structured
@@ -135,6 +138,21 @@ p.blocks.forEach((block: any, i: number) => {
         default:             return null;
       }
     })}
+
+    {articles.length > 0 && (
+      <Section id="doc-them" surface="bone" heading={t(locale, 'product.relatedArticles')}>
+        <ul class="reads">
+          {articles.map((a: any) => (
+            <li>
+              <a href={articlePath(a.slug, locale)}>
+                <span class="read-title">{a.title}</span>
+                <span class="read-lead">{a.lead}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    )}
   </main>
 
   <SiteFooter brand={b} product={p} locale={locale} nav={nav} policies={policies} />

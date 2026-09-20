@@ -415,5 +415,8 @@
     "refund": "exchange"
   },
   "line": "nam-tham",
-  "primaryKeyword": "combo kem và serum cho da nám mocha"
+  "primaryKeyword": "combo kem và serum cho da nám mocha",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ]
 }
