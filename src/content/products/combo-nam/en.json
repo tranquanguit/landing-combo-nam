@@ -373,6 +373,36 @@
       "footnote": "There is no sunscreen step at night, so the evening column is one step shorter — that is the only difference between the two routines, and it is also the step most often skipped."
     },
     {
+      "type": "cards",
+      "id": "ai-khong-nen-dung",
+      "eyebrow": "Said plainly",
+      "heading": "Four cases where you should think again, or ask a doctor first",
+      "intro": "This sits immediately before the form on purpose. Knowing a product is not for you is far better before it arrives than after.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Pregnant or breastfeeding",
+          "body": "The formulas contain no retinoids, but that is not a reason to decide alone. Ask a doctor before starting any skincare product during this period.",
+          "meta": "Ask a doctor first"
+        },
+        {
+          "heading": "Skin recovering from a procedure, or currently damaged",
+          "body": "Skin after laser, microneedling or peeling, or skin that is badly irritated, is a medical situation. The right person to answer is the doctor who treated you, not a website.",
+          "meta": "Ask a doctor first"
+        },
+        {
+          "heading": "Unable to use sunscreen every morning",
+          "body": "Plainly: if your work or habits make daily sun protection unrealistic, results will be noticeably worse than anything described on this page. That step is not optional.",
+          "meta": "Think again"
+        },
+        {
+          "heading": "Needing a visible change within a week or two",
+          "body": "Even the fastest-responding group takes around four weeks. If you need results for a deadline sooner than that, this is not the right thing and we would rather you knew now.",
+          "meta": "Think again"
+        }
+      ]
+    },
+    {
       "type": "order",
       "eyebrow": "Order",
       "heading": "Tell us where you are and we'll confirm shipping before you pay",

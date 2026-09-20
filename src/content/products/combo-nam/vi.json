@@ -434,6 +434,36 @@
       }
     },
     {
+      "type": "cards",
+      "id": "ai-khong-nen-dung",
+      "eyebrow": "Nói trước cho rõ",
+      "heading": "Bốn trường hợp bạn nên cân nhắc lại, hoặc hỏi bác sĩ trước",
+      "intro": "Phần này nằm ngay trước biểu mẫu là có chủ ý. Biết trước sản phẩm không hợp với mình thì tốt hơn nhiều so với biết sau khi đã nhận hàng.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Đang mang thai hoặc cho con bú",
+          "body": "Công thức không chứa retinoid, nhưng đó không phải là lý do để tự quyết. Hãy hỏi bác sĩ trước khi bắt đầu bất kỳ sản phẩm chăm sóc da nào trong giai đoạn này.",
+          "meta": "Hỏi bác sĩ trước"
+        },
+        {
+          "heading": "Da vừa qua thủ thuật hoặc đang tổn thương",
+          "body": "Da sau laser, lăn kim, peel hay đang kích ứng nặng là tình huống y khoa. Người trả lời đúng nhất là bác sĩ đã thực hiện thủ thuật cho bạn, không phải một trang web.",
+          "meta": "Hỏi bác sĩ trước"
+        },
+        {
+          "heading": "Không dùng được kem chống nắng mỗi sáng",
+          "body": "Nói thẳng: nếu công việc hoặc thói quen khiến bạn không thể chống nắng đều đặn, kết quả sẽ kém hơn hẳn những gì trang này mô tả. Bước đó không phải tuỳ chọn.",
+          "meta": "Nên cân nhắc lại"
+        },
+        {
+          "heading": "Cần thấy khác biệt trong một, hai tuần",
+          "body": "Nhóm phản ứng sớm nhất cũng cần khoảng bốn tuần. Nếu bạn đang cần kết quả cho một mốc gần hơn thế, đây không phải thứ phù hợp và chúng tôi không muốn bạn thất vọng.",
+          "meta": "Nên cân nhắc lại"
+        }
+      ]
+    },
+    {
       "type": "order",
       "eyebrow": "Đặt hàng",
       "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
