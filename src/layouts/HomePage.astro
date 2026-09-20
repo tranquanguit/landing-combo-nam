@@ -7,8 +7,9 @@ import Picture from '../components/Picture.astro';
 import ProductGrid from '../components/ProductGrid.astro';
 import Analytics from '../components/Analytics.astro';
 import { homeGraph } from '../lib/schema';
+import { money } from '../lib/format';
 import { resolveAssetImage, resolveAssetUrl } from '../lib/images';
-import { articlePath, linePath } from '../lib/routes';
+import { articlePath, linePath, productPath } from '../lib/routes';
 import { assertTranslated, t, type Locale } from '../i18n/ui';
 import { richText } from '../lib/richtext';
 
@@ -41,6 +42,19 @@ const jsonLd = homeGraph({
    sản phẩm nổi bật đầu tiên, hoặc dòng sản phẩm đầu tiên nếu chưa có. */
 const orderHref = page.hero.primaryCta?.href
   ?? (lines[0] ? linePath(lines[0].slug, locale) : '/');
+
+/*
+ * Mocha hiện có MỘT dòng và MỘT sản phẩm trên site, và sẽ còn như vậy một thời
+ * gian. Một lưới ba cột chứa đúng một thẻ để trống hai phần ba màn hình và
+ * trông như trang dựng dở — đó là lỗi nhìn thấy được ngay ở ảnh chụp trang chủ.
+ *
+ * Nên bố cục ở đây đổi theo SỐ LƯỢNG thật, chứ không cố định một khuôn:
+ * một mục thì dàn thành dải lớn chiếm hết chiều ngang, nhiều mục mới xếp lưới.
+ * Ngày Mocha có đủ sản phẩm, trang tự chuyển về lưới mà không phải sửa layout.
+ */
+const soloLine = lines.length === 1 ? lines[0] : undefined;
+const soloProduct = featured.length === 1 ? featured[0] : undefined;
+const soloArticle = articles.length === 1 ? articles[0] : undefined;
 ---
 <BaseLayout
   siteName={b.tradingName}
@@ -61,27 +75,62 @@ const orderHref = page.hero.primaryCta?.href
   <main id="main">
     <section class="hero">
       <div class="wrap hero-grid">
-        <div class="hero-text enter">
-          {page.hero.eyebrow && <p class="eyebrow">{page.hero.eyebrow}</p>}
-          <h1>{page.hero.heading}</h1>
-          <p class="lead" set:html={richText(page.hero.lead)} />
-          {page.hero.primaryCta && (
-            <a class="btn btn-primary btn-lg" href={page.hero.primaryCta.href} data-cta="home-hero">
-              {page.hero.primaryCta.label}
-            </a>
+        <div class="hero-text">
+          <div class="enter">
+            {page.hero.eyebrow && <p class="eyebrow">{page.hero.eyebrow}</p>}
+            <h1>{page.hero.heading}</h1>
+            <p class="lead" set:html={richText(page.hero.lead)} />
+            {page.hero.primaryCta && (
+              <a class="btn btn-primary btn-lg" href={page.hero.primaryCta.href} data-cta="home-hero">
+                {page.hero.primaryCta.label}
+              </a>
+            )}
+          </div>
+
+          {page.hero.proof.length > 0 && (
+            <ul class="proof">
+              {page.hero.proof.map((line: string) => <li set:html={richText(line)} />)}
+            </ul>
           )}
         </div>
+
         {page.hero.image && (
           <div class="hero-media">
             <Picture src={page.hero.image} alt={page.hero.imageAlt ?? b.tradingName}
-              width={900} height={680} sizes="(min-width: 1000px) 46vw, 92vw"
+              width={900} height={1000} sizes="(min-width: 1000px) 46vw, 100vw"
               widths={[600, 900, 1200]} loading="eager" fetchpriority="high" />
           </div>
         )}
       </div>
     </section>
 
-    {lines.length > 0 && (
+    {page.about && (
+      <Section id="ve-mocha" surface="navy" eyebrow={page.about.eyebrow} heading={page.about.heading}>
+        <div class="manifesto">
+          <p class="m-lead" set:html={richText(page.about.body[0])} />
+          {page.about.body.length > 1 && (
+            <div class="m-cols">
+              {page.about.body.slice(1).map((para: string) => <p set:html={richText(para)} />)}
+            </div>
+          )}
+        </div>
+      </Section>
+    )}
+
+    {soloLine ? (
+      <Section id="dong-san-pham" surface="paper" heading={t(locale, 'home.linesHeading')}>
+        <a class="band" href={linePath(soloLine.slug, locale)}>
+          <span class="band-main">
+            {soloLine.eyebrow && <span class="eyebrow">{soloLine.eyebrow}</span>}
+            <span class="band-name">{soloLine.heading}</span>
+          </span>
+          <span class="band-side">
+            <span class="band-lead">{soloLine.lead}</span>
+            <span class="more">{t(locale, 'line.readMore')}</span>
+          </span>
+        </a>
+      </Section>
+    ) : lines.length > 0 && (
       <Section id="dong-san-pham" surface="paper" heading={t(locale, 'home.linesHeading')}>
         <ul class="lines">
           {lines.map((line) => (
@@ -96,13 +145,48 @@ const orderHref = page.hero.primaryCta?.href
       </Section>
     )}
 
-    {featured.length > 0 && (
+    {soloProduct ? (
+      <Section id="san-pham" surface="bone" heading={t(locale, 'home.allProducts')}>
+        <div class="solo">
+          <div class="solo-shot">
+            {soloProduct.image && (
+              <Picture src={soloProduct.image} alt={soloProduct.imageAlt ?? soloProduct.name}
+                width={900} height={676} sizes="(min-width: 900px) 52vw, 92vw"
+                widths={[600, 900, 1200]} loading="lazy" />
+            )}
+          </div>
+          <div class="solo-text">
+            <h3><a href={productPath(soloProduct.slug, locale)}>{soloProduct.name}</a></h3>
+            {soloProduct.tagline && <p class="lead">{soloProduct.tagline}</p>}
+            <p class="solo-price">
+              <span class="muted">{t(locale, 'line.from')}</span>
+              <span class="figure">{money(soloProduct.price, soloProduct.currency, locale)}</span>
+            </p>
+            <a class="btn btn-primary" href={productPath(soloProduct.slug, locale)} data-cta="home-product">
+              {t(locale, 'line.readMore')}
+            </a>
+          </div>
+        </div>
+      </Section>
+    ) : featured.length > 0 && (
       <Section id="san-pham" surface="bone" heading={t(locale, 'home.allProducts')}>
         <ProductGrid products={featured} locale={locale} />
       </Section>
     )}
 
-    {articles.length > 0 && (
+    {soloArticle ? (
+      <Section id="tu-van" surface="paper" heading={t(locale, 'home.adviceHeading')}>
+        <a class="band" href={articlePath(soloArticle.slug, locale)}>
+          <span class="band-main">
+            <span class="band-name band-name-sm">{soloArticle.title}</span>
+          </span>
+          <span class="band-side">
+            <span class="band-lead">{soloArticle.lead}</span>
+            <span class="more">{t(locale, 'line.readMore')}</span>
+          </span>
+        </a>
+      </Section>
+    ) : articles.length > 0 && (
       <Section id="tu-van" surface="paper" heading={t(locale, 'home.adviceHeading')}>
         <ul class="reads">
           {articles.map((a) => (
@@ -116,14 +200,6 @@ const orderHref = page.hero.primaryCta?.href
         </ul>
       </Section>
     )}
-
-    {page.about && (
-      <Section id="ve-mocha" surface="bone" eyebrow={page.about.eyebrow} heading={page.about.heading}>
-        <div class="about">
-          {page.about.body.map((para: string) => <p set:html={richText(para)} />)}
-        </div>
-      </Section>
-    )}
   </main>
 
   <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} product={featured[0]} />
@@ -131,14 +207,112 @@ const orderHref = page.hero.primaryCta?.href
 </BaseLayout>
 
 <style>
-  .hero { padding-block: var(--s-7) var(--s-6); background: var(--paper); }
-  .hero-grid { display: grid; gap: var(--s-6); align-items: center; }
-  @media (min-width: 1000px) {
-    .hero-grid { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(40px, 5vw, 88px); }
+  /* Màn hình đầu tiên dùng ĐÚNG ngữ pháp của trang landing: chữ bên trái, ảnh
+     tràn hẳn ra mép phải. Bản trước đóng ảnh trong một khung có viền rõ giữa
+     nền sáng, nên nó đọc ra như một ảnh dán vào trang chứ không phải ảnh của
+     trang — và hai trang quan trọng nhất site mở đầu bằng hai ngôn ngữ khác nhau. */
+  .hero {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding-block: clamp(40px, 5vw, 72px) 0;
   }
-  .hero h1 { margin: 0 0 var(--s-4); }
-  .hero .lead { max-width: 54ch; margin: 0 0 var(--s-5); }
-  .hero-media :global(img) { width: 100%; height: auto; display: block; }
+  .hero-grid { display: grid; gap: var(--s-6); align-items: center; }
+  .hero-text { padding-bottom: clamp(32px, 4vw, 56px); }
+  .hero h1 { margin: 0 0 var(--s-4); font-size: clamp(2.4rem, 5.2vw, 4.1rem); }
+  .hero .lead { max-width: 52ch; margin: 0 0 var(--s-5); font-size: var(--t-base); }
+
+  @media (min-width: 1000px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: clamp(40px, 5vw, 88px);
+      align-items: stretch;
+    }
+    /* Kéo ảnh ra hết mép phải của khung nhìn, bất kể .wrap rộng bao nhiêu. */
+    .hero-media {
+      position: relative; overflow: hidden; align-self: stretch;
+      margin-top: calc(-1 * clamp(40px, 5vw, 72px));
+      margin-right: calc((100vw - min(100vw, var(--wrap))) / -2 - var(--s-5));
+      background: var(--bone);
+    }
+    .hero-media :global(img) {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover; object-position: 55% 35%;
+    }
+  }
+  .hero-media :global(img) { width: 100%; height: auto; display: block; background: var(--bone); }
+
+  /* Ba dòng cam kết: thứ lấp nửa dưới màn hình đầu tiên, vốn đang trống. */
+  .proof {
+    list-style: none; margin: var(--s-6) 0 0; padding: 0;
+    display: grid; gap: var(--s-3); max-width: 52ch; font-size: var(--t-sm);
+  }
+  .proof li {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: var(--s-3); line-height: 1.55;
+  }
+  .proof li:last-child { border-bottom: 0; padding-bottom: 0; }
+
+  /* Tuyên ngôn thương hiệu đứng ngay sau màn hình đầu tiên, trên nền tối: đây
+     là lý do tồn tại của Mocha, không phải phần ghi chú cuối trang. Trước đây
+     nó nằm dưới cùng và chỉ là ba đoạn chữ trần. */
+  /* Đoạn đầu chạy hết chiều ngang như một câu tuyên ngôn; hai đoạn giải thích
+     xếp thành hai cột bên dưới. Trước đây cả ba đoạn xếp dọc trong một cột hẹp
+     nên hơn nửa chiều ngang màn hình bỏ trống ngay ở khối quan trọng nhất. */
+  .manifesto { display: grid; gap: var(--s-6); }
+  .manifesto p { margin: 0; line-height: 1.72; }
+  .m-lead {
+    font-size: clamp(1.15rem, 1.9vw, 1.5rem); line-height: 1.5;
+    letter-spacing: -0.015em; max-width: 34ch;
+  }
+  .m-cols { display: grid; gap: var(--s-5); max-width: 92ch; }
+  @media (min-width: 860px) {
+    .m-cols { grid-template-columns: 1fr 1fr; gap: clamp(32px, 4vw, 72px); }
+  }
+
+  /* Dải cho trường hợp chỉ có MỘT dòng sản phẩm. */
+  .band {
+    display: grid; gap: var(--s-4);
+    padding: var(--s-6) 0;
+    border-top: 1px solid var(--ink-navy);
+    border-bottom: 1px solid var(--line);
+    text-decoration: none; color: inherit;
+  }
+  @media (min-width: 900px) {
+    .band { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 4vw, 72px); align-items: start; }
+  }
+  .band-name {
+    display: block;
+    font-family: var(--font-display); font-weight: 600;
+    font-size: clamp(1.9rem, 3.4vw, 2.75rem); line-height: 1.05;
+    letter-spacing: -0.03em; color: var(--ink-navy);
+  }
+  .band:hover .band-name { color: var(--cobalt); }
+  .band-name-sm { font-size: clamp(1.4rem, 2.4vw, 2rem); line-height: 1.15; }
+  .band-side { display: grid; gap: var(--s-4); align-content: start; }
+  .band-lead { color: var(--ink-muted); line-height: 1.65; max-width: 56ch; }
+  .more {
+    font-size: var(--t-2xs); letter-spacing: .12em; text-transform: uppercase;
+    color: var(--cobalt); font-weight: 600;
+  }
+
+  /* Dải cho trường hợp chỉ có MỘT sản phẩm. */
+  .solo { display: grid; gap: var(--s-6); align-items: center; }
+  @media (min-width: 900px) {
+    .solo { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(40px, 5vw, 80px); }
+  }
+  .solo-shot { display: block; background: var(--bone); overflow: hidden; }
+  .solo-shot :global(img) { width: 100%; height: auto; display: block; }
+  .solo-text h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); letter-spacing: -0.025em; margin: 0 0 var(--s-3); }
+  .solo-text h3 a { color: inherit; text-decoration: none; }
+  .solo-text h3 a:hover { color: var(--cobalt); }
+  .solo-text .lead { margin: 0 0 var(--s-5); max-width: 46ch; }
+  .solo-price {
+    display: flex; align-items: baseline; gap: var(--s-3);
+    margin: 0 0 var(--s-5); padding-top: var(--s-4);
+    border-top: 1px solid var(--line);
+  }
+  .solo-price .figure { font-size: var(--t-lg); font-weight: 600; color: var(--ink-navy); }
+  .solo-price .muted { font-size: var(--t-xs); }
 
   .lines, .reads { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
   .lines a, .reads a {
@@ -154,8 +328,4 @@ const orderHref = page.hero.primaryCta?.href
   }
   .lines a:hover .line-name, .reads a:hover .read-title { color: var(--cobalt); }
   .line-lead, .read-lead { color: var(--slate); max-width: 68ch; line-height: 1.6; }
-
-  .about { max-width: 68ch; }
-  .about p { margin: 0 0 var(--s-5); line-height: 1.72; }
-  .about p:last-child { margin-bottom: 0; }
 </style>

@@ -702,6 +702,10 @@ const pages = defineCollection({
       image: z.string().optional(),
       imageAlt: z.string().optional(),
       primaryCta: z.object({ label: z.string(), href: safeUrl }).strict().optional(),
+      /* Ba dòng cam kết dưới nút: chỗ này trước đây bỏ trống nên nửa dưới màn
+         hình đầu tiên không nói gì cả. Giới hạn 4 dòng để không biến thành
+         một danh sách tính năng — màn hình đầu tiên chỉ chịu được vài ý. */
+      proof: z.array(z.string()).max(4).default([]),
     }).strict(),
     /* Thứ tự hiển thị do file quyết định, không do thứ tự đọc thư mục —
        thư mục thì đổi theo hệ điều hành, còn trang chủ thì không được đổi. */

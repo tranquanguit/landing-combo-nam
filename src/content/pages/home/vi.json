@@ -14,11 +14,25 @@
     "lead": "Phần lớn mỹ phẩm chăm sóc da chỉ liệt kê tên hoạt chất. Mocha công bố cả nồng độ, để bạn so sánh được với bất kỳ sản phẩm nào khác trước khi quyết định.",
     "image": "/images/packshot-combo.jpg",
     "imageAlt": "Kem và serum Mocha đặt cạnh nhau trên nền sáng",
-    "primaryCta": { "label": "Xem dòng cho da nám", "href": "/nam-tham/" }
+    "primaryCta": {
+      "label": "Xem dòng cho da nám",
+      "href": "/nam-tham/"
+    },
+    "proof": [
+      "Công khai tỉ lệ từng hoạt chất chính, không giấu trong cụm “chiết xuất độc quyền”",
+      "Không corticoid, không hydroquinone",
+      "Nói rõ giới hạn: mỹ phẩm dùng ngoài da, không phải thuốc"
+    ]
   },
-  "lines": ["nam-tham"],
-  "featured": ["combo-nam"],
-  "articles": ["nam-noi-tiet-la-gi"],
+  "lines": [
+    "nam-tham"
+  ],
+  "featured": [
+    "combo-nam"
+  ],
+  "articles": [
+    "nam-noi-tiet-la-gi"
+  ],
   "about": {
     "eyebrow": "Về Mocha",
     "heading": "Vì sao chúng tôi in nồng độ lên bao bì",

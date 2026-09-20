@@ -14,11 +14,25 @@
     "lead": "Most skincare lists ingredient names and stops there. Mocha publishes the concentration of each active, so you can compare our products against anyone else's before you buy.",
     "image": "/images/packshot-combo.jpg",
     "imageAlt": "Mocha cream and serum side by side on a light background",
-    "primaryCta": { "label": "See the dark spot line", "href": "/en/nam-tham/" }
+    "primaryCta": {
+      "label": "See the dark spot line",
+      "href": "/en/nam-tham/"
+    },
+    "proof": [
+      "Every key active's percentage is published, not hidden behind “proprietary blend”",
+      "No corticosteroids, no hydroquinone",
+      "We state the limit plainly: cosmetics for external use, not medicine"
+    ]
   },
-  "lines": ["nam-tham"],
-  "featured": ["combo-nam"],
-  "articles": ["nam-noi-tiet-la-gi"],
+  "lines": [
+    "nam-tham"
+  ],
+  "featured": [
+    "combo-nam"
+  ],
+  "articles": [
+    "nam-noi-tiet-la-gi"
+  ],
   "about": {
     "eyebrow": "About Mocha",
     "heading": "Why we print the percentages",
