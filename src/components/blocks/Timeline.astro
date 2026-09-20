@@ -73,7 +73,9 @@ const pct = (n: number) => (n / max) * 100;
   /* Mốc đầu và mốc cuối nằm đúng mép dải, kéo vào trong để không bị cắt. */
   .tl-tick[data-edge="start"] { transform: none; }
   .tl-tick[data-edge="end"] { transform: translateX(-100%); }
-  .tl-tick i { display: block; width: 1px; height: 8px; background: var(--line-strong); margin: 0 auto 3px; }
+  /* --line-strong chỉ cho 1,86:1 trên nền giấy — vạch mờ tới mức không chỉ
+     được vào con số nào, tức là không làm nổi việc của nó. */
+  .tl-tick i { display: block; width: 1px; height: 8px; background: var(--line-control); margin: 0 auto 3px; }
   .tl-tick b {
     font-family: var(--font-figure); font-size: var(--t-2xs);
     color: var(--slate); font-weight: 400;
@@ -99,7 +101,7 @@ const pct = (n: number) => (n / max) * 100;
   /* Dải sau nhạt dần: nhóm cần lâu hơn không nên trông "nặng" hơn, chỉ nên
      trông DÀI hơn. Đậm nhạt ở đây mã hoá thứ tự đọc, không mã hoá mức độ. */
   .tl-row:nth-child(3) .tl-bar { background: var(--cobalt-lift); }
-  .tl-row:nth-child(4) .tl-bar { background: #6d76e4; }
+  .tl-row:nth-child(4) .tl-bar { background: var(--bar-late); }
   .tl-bar em {
     font-family: var(--font-figure); font-style: normal; font-size: var(--t-xs);
     color: #fff; letter-spacing: .01em; white-space: nowrap;

@@ -38,6 +38,10 @@
   /* --- điểm nhấn --- */
   --cobalt: #2b34b8;         /* cobalt của bao bì; dùng cho liên kết và nét nhấn */
   --cobalt-lift: #3f4ad6;
+  /* Dải thứ ba của khối mốc thời gian: phải sáng hơn --cobalt-lift để giữ thứ
+     tự đọc, nhưng vẫn đủ tương phản với chữ trắng cỡ nhỏ. #6d76e4 dùng lúc đầu
+     chỉ đạt 3,92:1 — trượt AA. Số này do scripts/check-contrast.mjs canh. */
+  --bar-late: #5a64dd;
   --indigo: #2b34b8;         /* tên cũ, trỏ về cobalt */
   --indigo-lift: #3f4ad6;
   --steel: #c8ccd8;          /* gạch tóc */

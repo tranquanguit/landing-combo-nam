@@ -59,6 +59,12 @@ jobs:
       - name: Bộ thử chuông hạn ưu đãi
         run: npm run test:offer
 
+      # Tương phản màu: tokens.css ghi tỉ lệ trong chú thích, nhưng đó là số
+      # viết tay và im lặng sai đi ở lần đổi màu kế tiếp. Bước này tính lại từ
+      # giá trị hex thật.
+      - name: Tương phản màu
+        run: npm run test:contrast
+
       - name: Ngân sách trọng lượng trang
         run: node scripts/check-budget.mjs
 
