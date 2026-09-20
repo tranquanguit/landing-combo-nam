@@ -92,8 +92,16 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
 
 ## D. SEO và AI search
 
-- `[ ] D1` Phát `HowTo` từ khối `steps` — hiện **không có**, dù mọi trang sản
-  phẩm đều có khối hướng dẫn. Rich result và là dạng trợ lý AI hay trích.
+- `[x] D0` **Phát hiện ngoài kế hoạch:** `seo-report.mjs` đếm số từ hiển thị
+  nhưng chỉ bóc `<script>`, không bóc `<style>` — nên CSS nội tuyến được đếm là
+  chữ và phép đo "nội dung hiển thị > 300 từ" **luôn xanh trên mọi trang kể từ
+  ngày viết ra**. Việc chuyển CSS ra file rời làm lộ chuyện này. Đã sửa.
+- `[x] D1b` Trang góc tư vấn từ 223 từ (vi) / 165 từ (en) lên 849 / 633 —
+  thêm collection `guides` cho nội dung biên tập của chính trang hub.
+
+- `[x] D1` **Xong.** `howToNode` trong `lib/schema.ts`, phát trên mọi trang có
+  khối `steps`. Đã sửa lại ghi chú đầu module cho khớp lý do thật: khai không
+  phải để lấy rich result (Google bỏ rồi) mà để máy đọc biết ranh giới từng bước.
 - `[ ] D2` Trang chủ 678 từ là quá mỏng để đấu Google. Viết lại cho dày và có
   mạch, không nhồi từ khoá.
 - `[ ] D3` `speakable` cho đoạn trả lời chính của mỗi trang.
@@ -111,9 +119,11 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
 
 ## F. Nợ kỹ thuật
 
-- `[ ] F1` `combo-nam` vượt ngân sách gzip 69B. Ba lối: chuyển
-  `inlineStylesheets` sang `'auto'`, nâng ngưỡng, hoặc cắt byte thật. Chọn lối
-  nào phải ghi lý do vào commit.
+- `[x] F1` **Xong — chọn `inlineStylesheets: 'auto'`.** Đo cả hai:
+  `always` 19 trang = 318KB gzip HTML, trang nặng nhất 25.015B (vượt);
+  `auto` = 152KB HTML + 9KB CSS = 161KB, nặng nhất 15.421B/24.576B (đạt).
+  Tổng byte cả site giảm một nửa, và ngay cả lượt xem một trang cũng không tệ
+  hơn. Lý do cũ đúng khi site có một trang landing, không còn đúng với 19 trang.
 - `[ ] F2` Sản phẩm mới cần dòng sản phẩm mới (Bảo vệ da, Làm sạch, Phục hồi da,
   Chăm sóc da mụn, Treatment). Mỗi dòng cần nội dung biên tập thật, không phải
   chỉ danh sách — build sẽ chặn trang mỏng.
