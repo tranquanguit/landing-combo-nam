@@ -8,6 +8,9 @@ chính file đó quyết định, không phải sửa code.
 > **Cần gửi ảnh?** [`docs/anh-can-co.md`](docs/anh-can-co.md) — từng vị trí, tỉ lệ,
 > kích thước tối thiểu (`npm run check:assets` để tự kiểm).
 >
+> **Chạy trên máy của bạn?** [`docs/chay-tren-may-local.md`](docs/chay-tren-may-local.md)
+> — clone, cài, chạy dev, và cách cào web mẫu về `refs/` để tham khảo bố cục.
+>
 > **Bắt đầu ở đây:** [`docs/kien-truc.md`](docs/kien-truc.md) — trang được tổ chức
 > thế nào, tại sao nó tốt cho SEO, và dữ liệu khách hàng đi về đâu.
 > Bằng chứng SEO đo từ bản build: [`docs/bao-cao-seo.md`](docs/bao-cao-seo.md)
