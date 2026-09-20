@@ -76,9 +76,19 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
   tức báo chí của mochavietnam.com: Facebook, Instagram, TikTok, YouTube. Khai
   qua trường `profiles` trong schema `brand` nên đi qua đúng các hàng rào của
   footer. Hiện cả ở chân trang với `rel="me"`.
-- `[ ] B3` Khối nhà cung cấp nguyên liệu (BASF, CHEMICO, AGC, AvantChem,
-  MahaChem) và báo chí đã đưa tin (VTV Online, Sức khoẻ & Đời sống, Emdep,
-  SaoStar, Tiền Phong). Logo có sẵn trong bản cào.
+- `[!] B3` **Không dựng được — chuyển sang chặn.** Đã soát kỹ bản cào:
+  * "Tin tức báo chí" trên mochavietnam.com **không phải báo ngoài đưa tin** mà
+    là chuyên mục blog do chính thương hiệu viết. Toàn bộ ~40 bài đều nằm trên
+    mochavietnam.com, không có URL bài báo nào của VTV / Sức khoẻ & Đời sống /
+    Emdep / SaoStar / Tiền Phong.
+  * Logo báo và logo nhà cung cấp (BASF, CHEMICO, AGC, AvantChem, MahaChem)
+    chỉ xuất hiện dưới dạng **ảnh chụp nằm trong ảnh marketing**, không kèm
+    chứng từ hay đường dẫn nào.
+  Dựng khối "được báo chí đưa tin" hay "nguyên liệu từ BASF" từ chừng đó là
+  tuyên bố không chống lưng được — đúng thứ mà mọi hàng rào của dự án này tồn
+  tại để chặn, và là rủi ro chính sách thật khi chạy Google Ads.
+  **Để mở khoá:** cần (a) đường dẫn bài báo thật, hoặc (b) chứng từ quan hệ
+  cung ứng. Có một trong hai thì dựng được ngay.
 - `[ ] B4` Khối chứng từ (TÜV SÜD + phiếu công bố) — chờ `A6`.
 
 ## C. Trực quan và kể chuyện
@@ -113,8 +123,11 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
 - `[x] D1` **Xong.** `howToNode` trong `lib/schema.ts`, phát trên mọi trang có
   khối `steps`. Đã sửa lại ghi chú đầu module cho khớp lý do thật: khai không
   phải để lấy rich result (Google bỏ rồi) mà để máy đọc biết ranh giới từng bước.
-- `[ ] D2` Trang chủ 678 từ là quá mỏng để đấu Google. Viết lại cho dày và có
-  mạch, không nhồi từ khoá.
+- `[x] D2` **Xong.** Trang chủ 678 → 1.316 từ (vi), 552 → 1.053 (en). Ba mục
+  viết theo việc khách phải làm: chọn đúng nhóm trước khi xem giá; đặt hàng ở
+  đây thì chuyện gì xảy ra; và những điều chúng tôi không nói. Kèm FAQ 4 câu,
+  phát FAQPage. Thêm trường `links` cho `proseSection` (href qua `safeUrl`) vì
+  `richText` cố ý không cho thẻ `a` — dùng chung cho pages/lines/articles/guides.
 - `[ ] D3` `speakable` cho đoạn trả lời chính của mỗi trang.
 - `[ ] D4` Cập nhật `llms.txt` theo các sản phẩm mới.
 - `[ ] D5` Kiểm lại nội bộ: mọi trang sản phẩm phải tới được từ trang chủ trong
