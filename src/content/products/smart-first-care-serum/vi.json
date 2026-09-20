@@ -1,0 +1,199 @@
+{
+  "slug": "smart-first-care-serum",
+  "translationKey": "smart-first-care-serum",
+  "status": "published",
+  "sku": "8938552914266",
+  "price": 550000,
+  "compareAtPrice": 840000,
+  "currency": "VND",
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "nam-tham",
+  "locale": "vi",
+  "name": "Mocha Smart First Care Serum – tinh chất làm mờ thâm nám chuyên sâu",
+  "shortName": "Serum Smart First Care",
+  "primaryKeyword": "serum mocha smart first care",
+  "seo": {
+    "title": "Serum Mocha Smart First Care 30ml | Mocha Việt Nam",
+    "description": "Serum 4-butylresorcinol 1000ppm, Niacinamide, Bio-Placenta — nồng độ in trên chai. Chai chân không vòi nhấn. {{price}}, freeship, trả tiền khi nhận."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "hỗ trợ làm mờ vùng da thâm sạm, dưỡng ẩm và cải thiện độ đều màu da",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
+      "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
+      "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Serum Smart First Care – 30ml",
+      "note": "Tiết kiệm {{save}} so với giá niêm yết",
+      "price": 550000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, xem tình trạng da qua hình ảnh",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước serum, dùng sáng và tối",
+      "heading": "Serum mở đường thẩm thấu, dùng trước bước kem",
+      "lead": "Chai 30ml mang <strong>4-butylresorcinol 1000ppm, Niacinamide, Bio-Placenta, Vietnam Bio-white Complex, Bioyoga và Black Truffle Extract</strong> — đúng danh sách in trên chai, ứng dụng công nghệ Liposome. Dành cho da mỏng yếu, da vừa qua treatment và da thâm sạm không đều màu.",
+      "usp": [
+        {
+          "text": "<strong>4-butylresorcinol 1000ppm ghi thẳng trên chai</strong>, không giấu trong cụm “thành phần độc quyền”",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "xem bảng thành phần ngay trên trang này"
+        },
+        {
+          "text": "<strong>Chai chân không vòi nhấn</strong> — không khí không vào được, mỗi lần nhấn ra đúng một lượng",
+          "evidence": "verified",
+          "qualifier": "kiểu đóng gói của chính sản phẩm, kiểm chứng được khi cầm trên tay",
+          "source": "#huong-dan"
+        },
+        {
+          "text": "<strong>Không corticoid, không hydroquinone</strong>",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "danh sách thành phần đầy đủ in trên bao bì"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-first-care-serum.webp",
+        "alt": "Chai serum Mocha Smart First Care Serum 30ml mở nắp, giọt serum chảy xuống nền trắng"
+      },
+      "primaryCta": "Đặt serum",
+      "secondaryCta": {
+        "label": "Xem bảng thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Bảng thành phần",
+      "heading": "Sáu hoạt chất in trên chai, và vai trò của từng cái",
+      "intro": "Không corticoid, không hydroquinone, không hương liệu tổng hợp gây kích ứng.",
+      "caption": "Bảng này liệt kê đúng những hoạt chất và nồng độ được IN TRÊN CHAI serum 30ml. Chúng tôi không tự điền con số nào không có trên bao bì. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
+      "rows": [
+        {
+          "name": "4-butylresorcinol 1000ppm",
+          "role": "Được nghiên cứu về khả năng ức chế enzyme tyrosinase — enzyme khởi đầu quá trình sinh melanin.",
+          "suitedFor": "Da nám mảng, nám hỗn hợp"
+        },
+        {
+          "name": "Niacinamide 4%",
+          "role": "Hỗ trợ hàng rào bảo vệ da và làm đều màu da; nồng độ vừa phải để hạn chế châm chích.",
+          "suitedFor": "Mọi loại da, kể cả da dễ kích ứng"
+        },
+        {
+          "name": "Bio-Placenta 1%",
+          "role": "Thành phần sinh học hỗ trợ phục hồi, bọc trong liposome để tăng dẫn truyền.",
+          "suitedFor": "Da mỏng yếu, vừa qua treatment"
+        },
+        {
+          "name": "Vietnam Bio-white Complex 3%",
+          "role": "Phức hợp chiết xuất bản địa lên men, hướng tới làm sáng đều màu.",
+          "suitedFor": "Da sạm màu không đều"
+        },
+        {
+          "name": "Bioyoga 2%",
+          "role": "Thành phần lên men, hỗ trợ làm dịu nền da.",
+          "suitedFor": "Da căng thẳng, dễ đỏ"
+        },
+        {
+          "name": "Black Truffle Extract 2%",
+          "role": "Chiết xuất nấm truffle đen, hỗ trợ dưỡng sáng.",
+          "suitedFor": "Da xỉn màu"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Ba bước, dùng sáng và tối",
+      "intro": "Thứ tự lấy từ hướng dẫn sử dụng in kèm sản phẩm.",
+      "totalTime": "PT2M",
+      "items": [
+        {
+          "heading": "Làm sạch da mặt",
+          "body": "Rửa mặt và lau khô trước khi dùng serum."
+        },
+        {
+          "heading": "Nhấn 1–2 lần cho cả mặt",
+          "body": "Thoa đều lên mặt, vỗ nhẹ cho dưỡng chất thấm. Vòi nhấn giúp mỗi lần ra đúng một lượng, không lấy thừa."
+        },
+        {
+          "heading": "Khoá lại bằng bước kem",
+          "body": "Serum là bước mở đường; thoa kem ngay sau đó để giữ dưỡng chất ở lại trên da."
+        }
+      ],
+      "footnote": "Buổi sáng cần kem chống nắng. Serum dùng một mình, không kèm bước chống nắng, thì sắc tố sẽ quay lại bất kể sản phẩm nào."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng phù hợp với tình trạng da của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt chu kỳ sử dụng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Serum Mocha giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho chai 30ml. Giá niêm yết là {{compareAtPrice}}. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Dùng serum trước hay kem trước?",
+          "a": "Serum trước, kem sau. Serum có kết cấu loãng hơn và đóng vai trò mở đường thẩm thấu; kem là bước khoá lại. Làm ngược thứ tự thì lớp kem cản serum."
+        },
+        {
+          "q": "Một chai dùng được bao lâu?",
+          "a": "Chai 30ml, mỗi lần nhấn 1–2 lần cho cả mặt, dùng sáng và tối. Thời gian dùng hết phụ thuộc lượng bạn lấy mỗi lần — vòi nhấn chân không giúp lượng ra đều nhau giữa các lần."
+        },
+        {
+          "q": "Da vừa laser hoặc lăn kim dùng được không?",
+          "a": "Nhà sản xuất định vị sản phẩm cho cả nhóm da vừa qua các can thiệp này. Tuy nhiên da sau thủ thuật là tình huống y khoa: hãy hỏi chính bác sĩ đã làm thủ thuật cho bạn trước khi thêm bất kỳ sản phẩm nào."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Tránh nhiệt độ cao và ánh nắng trực tiếp, đóng nắp sau khi dùng, để xa tầm tay trẻ em. Tránh tiếp xúc với mắt; nếu dính vào mắt thì rửa ngay bằng nước sạch."
+        }
+      ]
+    }
+  ]
+}

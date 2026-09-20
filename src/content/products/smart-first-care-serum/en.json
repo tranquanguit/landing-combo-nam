@@ -1,0 +1,200 @@
+{
+  "slug": "smart-first-care-serum",
+  "translationKey": "smart-first-care-serum",
+  "status": "published",
+  "sku": "8938552914266",
+  "price": 550000,
+  "compareAtPrice": 840000,
+  "currency": "VND",
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "nam-tham",
+  "locale": "en",
+  "name": "Mocha Smart First Care Serum – intensive dark-spot serum",
+  "shortName": "Smart First Care Serum",
+  "primaryKeyword": "mocha smart first care serum",
+  "seo": {
+    "title": "Mocha Smart First Care Serum, 30ml | Mocha Vietnam",
+    "description": "Serum with 4-butylresorcinol 1000ppm, Niacinamide and Bio-Placenta — printed on the bottle. Airless pump. {{price}}, free shipping, pay on delivery."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "helps soften areas of uneven pigmentation, hydrates and supports a more even skin tone",
+    "warnings": [
+      "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
+      "Discontinue use if irritation occurs. Avoid direct contact with the eyes.",
+      "If you are pregnant or breastfeeding, speak to your doctor before use.",
+      "Results vary between individuals and depend on consistent daily sun protection.",
+      "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Smart First Care Serum – 30ml",
+      "note": "You save {{save}} off the list price",
+      "price": 550000,
+      "recommended": true
+    },
+    {
+      "label": "I would like advice first",
+      "note": "An adviser calls you back and reviews your skin from photos",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "The serum step, morning and night",
+      "heading": "The step that opens the way, used before the cream",
+      "lead": "The 30ml bottle carries <strong>4-butylresorcinol 1000ppm, Niacinamide, Bio-Placenta, Vietnam Bio-white Complex, Bioyoga and Black Truffle Extract</strong> — exactly the list printed on the bottle, delivered with liposome technology. For thin or recently treated skin and for uneven tone.",
+      "usp": [
+        {
+          "text": "<strong>4-butylresorcinol 1000ppm printed on the bottle</strong>, not hidden behind a “proprietary complex”",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "see the ingredient table on this page"
+        },
+        {
+          "text": "<strong>Airless pump bottle</strong> — no air gets in, and each press gives the same dose",
+          "evidence": "verified",
+          "qualifier": "the packaging of the product itself, verifiable in your hand",
+          "source": "#huong-dan"
+        },
+        {
+          "text": "<strong>No corticosteroids, no hydroquinone</strong>",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "full ingredient list printed on the packaging"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-first-care-serum.webp",
+        "alt": "Open 30ml bottle of Mocha Smart First Care Serum with serum running down a white background"
+      },
+      "primaryCta": "Order the serum",
+      "secondaryCta": {
+        "label": "See the ingredient table",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Free delivery nationwide",
+        "Inspect before you pay",
+        "7-day return if the product is faulty"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Ingredients",
+      "heading": "Six actives printed on the bottle, and what each one does",
+      "intro": "No corticosteroids, no hydroquinone, no synthetic fragrance.",
+      "caption": "This table lists exactly the actives and concentrations PRINTED ON THE PACKAGING of the serum and the cream. We do not fill in any number the packaging does not state. The full INCI list is printed on the pack.",
+      "rows": [
+        {
+          "name": "4-butylresorcinol 1000ppm",
+          "role": "Studied for its ability to inhibit tyrosinase, the enzyme that starts melanin production.",
+          "suitedFor": "Surface patches, mixed pigmentation"
+        },
+        {
+          "name": "Niacinamide 4%",
+          "role": "Supports the skin barrier and evens tone; kept moderate to limit stinging.",
+          "suitedFor": "All skin types, including easily irritated skin"
+        },
+        {
+          "name": "Bio-Placenta 1%",
+          "role": "A biological ingredient supporting recovery, encapsulated in liposomes for delivery.",
+          "suitedFor": "Thin skin, skin recovering from treatment"
+        },
+        {
+          "name": "Vietnam Bio-white Complex 3%",
+          "role": "A fermented complex of native Vietnamese extracts aimed at evening out tone.",
+          "suitedFor": "Uneven, dull skin"
+        },
+        {
+          "name": "Bioyoga 2%",
+          "role": "A fermented ingredient that helps calm the skin.",
+          "suitedFor": "Stressed, easily reddened skin"
+        },
+        {
+          "name": "Black Truffle Extract 2%",
+          "role": "Black truffle extract, supporting brightness.",
+          "suitedFor": "Dull skin"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use",
+      "heading": "Three steps, morning and night",
+      "intro": "The order below is taken from the instructions supplied with the product.",
+      "totalTime": "PT2M",
+      "items": [
+        {
+          "heading": "Cleanse",
+          "body": "Wash and dry your face before applying the serum."
+        },
+        {
+          "heading": "One or two presses for the whole face",
+          "body": "Spread evenly and pat it in. The pump gives the same dose each time, so you do not take more than you need."
+        },
+        {
+          "heading": "Seal it with the cream step",
+          "body": "The serum opens the way; apply the cream straight after to keep the actives on the skin."
+        }
+      ],
+      "footnote": "Sunscreen in the morning is not optional. Serum on its own, with no sun protection, lets pigmentation return whatever product you use."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City — tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support through the full routine</strong> by email."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "FAQ",
+      "heading": "Questions people actually ask",
+      "items": [
+        {
+          "q": "How much is the serum?",
+          "a": "<strong>{{price}}</strong> for the 30ml bottle. The list price is {{compareAtPrice}}. Free delivery, pay on delivery."
+        },
+        {
+          "q": "Serum first or cream first?",
+          "a": "Serum first, cream second. The serum is lighter and opens the way; the cream seals it in. The other way round, the cream blocks the serum."
+        },
+        {
+          "q": "How long does one bottle last?",
+          "a": "30ml, one or two presses for the whole face, morning and night. How long it lasts depends on how much you take — the airless pump keeps the dose consistent between uses."
+        },
+        {
+          "q": "Can I use it after laser or microneedling?",
+          "a": "The manufacturer positions the product for skin that has been through those procedures. Even so, post-procedure skin is a medical situation: ask the doctor who performed it before adding any product."
+        },
+        {
+          "q": "How should it be stored?",
+          "a": "Keep away from heat and direct sunlight, close the lid after use, keep out of reach of children. Avoid contact with the eyes; if it gets in, rinse immediately with clean water."
+        }
+      ]
+    }
+  ]
+}
