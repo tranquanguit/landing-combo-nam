@@ -17,6 +17,7 @@ import Order from '../components/blocks/Order.astro';
 import Faq from '../components/blocks/Faq.astro';
 import Feature from '../components/blocks/Feature.astro';
 import Documents from '../components/blocks/Documents.astro';
+import Timeline from '../components/blocks/Timeline.astro';
 import Analytics from '../components/Analytics.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { expandProductTokens } from '../lib/money-text';
@@ -134,6 +135,7 @@ p.blocks.forEach((block: any, i: number) => {
         case 'order':        return <Order data={block} product={p} brand={b} locale={locale} />;
         case 'feature':      return <Feature data={block} id={block.id} />;
         case 'documents':    return <Documents data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
+        case 'timeline':     return <Timeline data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
         case 'faq':          return <Faq data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
         default:             return null;
       }

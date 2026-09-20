@@ -180,6 +180,36 @@
       ]
     },
     {
+      "type": "timeline",
+      "id": "moc-thoi-gian",
+      "eyebrow": "Kỳ vọng đúng",
+      "heading": "Ba nhóm, ba khoảng thời gian rất khác nhau",
+      "intro": "Đây là lý do chúng tôi không đưa một con số chung. Đặt kỳ vọng của nhóm đầu lên nhóm cuối là cách nhanh nhất để bỏ dở giữa chừng rồi kết luận rằng không sản phẩm nào có tác dụng.",
+      "max": 16,
+      "unitLabel": "tuần",
+      "items": [
+        {
+          "label": "Nám mảng (biểu bì)",
+          "from": 4,
+          "to": 8,
+          "note": "Sắc tố nằm ở lớp ngoài cùng nên phản ứng sớm nhất."
+        },
+        {
+          "label": "Nám chân sâu (trung bì)",
+          "from": 8,
+          "to": 12,
+          "note": "Sắc tố nằm sâu hơn, cần thêm thời gian cho quá trình thay mới tế bào."
+        },
+        {
+          "label": "Nám hỗn hợp",
+          "from": 8,
+          "to": 16,
+          "note": "Có cả hai dạng trên cùng một vùng da nên khoảng thời gian rộng nhất."
+        }
+      ],
+      "footnote": "Khoảng thời gian tham khảo, không phải cam kết. Kết quả khác nhau tùy cơ địa và mức độ chống nắng hằng ngày — bỏ bước chống nắng thì mọi mốc ở trên đều không còn đúng."
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
       "heading": "Từng hoạt chất, từng tỉ lệ, và vai trò của nó",

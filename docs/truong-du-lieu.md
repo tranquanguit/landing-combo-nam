@@ -14,6 +14,7 @@ Dấu `*` = bắt buộc.
 | `translationKey` | chữ | **có** |
 | `status` | một trong: `draft`, `published` | không (có sẵn mặc định) |
 | `line` | chữ | không |
+| `relatedArticles` | danh sách chữ | không (có sẵn mặc định) |
 | `primaryKeyword` | chữ | không |
 | `canonicalOf` | chữ | không |
 | `name` | chữ | **có** |
@@ -158,6 +159,17 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 - `eyebrow`
 - `heading *`
 - `intro`
+- `items *`
+- `footnote`
+
+### `timeline`
+
+- `id`
+- `eyebrow`
+- `heading *`
+- `intro`
+- `max *`
+- `unitLabel *`
 - `items *`
 - `footnote`
 

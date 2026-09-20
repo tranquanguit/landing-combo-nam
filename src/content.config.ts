@@ -321,6 +321,47 @@ const blocks = z.discriminatedUnion('type', [
     }).strict()).min(1),
     footnote: z.string().optional(),
   }).strict(),
+  /**
+   * Mốc thời gian so sánh giữa các nhóm.
+   *
+   * Nội dung của site nói đi nói lại rằng lý do số một khiến người ta bỏ dở là
+   * đặt kỳ vọng của nhóm này lên nhóm kia. Một bảng chữ nói điều đó; một dải
+   * thời gian đặt cạnh nhau thì cho thấy ngay khoảng cách 4 tuần và 16 tuần
+   * khác nhau thế nào.
+   *
+   * Số liệu vẫn nằm ở dạng CHỮ trong danh sách bên dưới hình. SVG chỉ là lớp
+   * nhìn: trình đọc màn hình bỏ qua nó, còn máy tìm kiếm và trợ lý AI đọc được
+   * đúng những con số ấy mà không phải hiểu một biểu đồ.
+   */
+  z.object({
+    type: z.literal('timeline'),
+    id: anchorId,
+    eyebrow: z.string().optional(),
+    heading: z.string(),
+    intro: z.string().optional(),
+    /** Mốc lớn nhất của trục, tính theo đơn vị của `unitLabel`. */
+    max: z.number().int().positive(),
+    unitLabel: z.string(),
+    items: z.array(z.object({
+      label: z.string(),
+      from: z.number().int().nonnegative(),
+      to: z.number().int().positive(),
+      note: z.string().optional(),
+    }).strict().superRefine((it, ctx) => {
+      if (it.to <= it.from) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom,
+          message: `"${it.label}": mốc kết thúc (${it.to}) phải lớn hơn mốc bắt đầu (${it.from}).` });
+      }
+    })).min(2),
+    footnote: z.string().optional(),
+  }).strict().superRefine((b, ctx) => {
+    const over = b.items.filter((i) => i.to > b.max);
+    if (over.length) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom,
+        message: `Mốc của "${over[0].label}" (${over[0].to}) vượt quá trục ${b.max}. ` +
+          `Dải sẽ bị vẽ tràn ra ngoài khung — nâng "max" lên.` });
+    }
+  }),
 ]);
 
 const products = defineCollection({

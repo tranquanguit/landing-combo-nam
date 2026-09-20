@@ -181,6 +181,36 @@
       ]
     },
     {
+      "type": "timeline",
+      "id": "moc-thoi-gian",
+      "eyebrow": "Setting expectations",
+      "heading": "Three groups, three very different timescales",
+      "intro": "This is why we do not quote one number. Applying the first group's expectations to the last is the quickest way to stop halfway and conclude that nothing works.",
+      "max": 16,
+      "unitLabel": "weeks",
+      "items": [
+        {
+          "label": "Surface patches (epidermal)",
+          "from": 4,
+          "to": 8,
+          "note": "Pigment sits in the outer layer, so it responds earliest."
+        },
+        {
+          "label": "Deeper pigment (dermal)",
+          "from": 8,
+          "to": 12,
+          "note": "Pigment sits deeper and needs more cell-turnover time."
+        },
+        {
+          "label": "Mixed",
+          "from": 8,
+          "to": 16,
+          "note": "Both forms on the same area, so the widest range."
+        }
+      ],
+      "footnote": "Reference ranges, not a promise. Results vary by individual and by daily sun protection — skip the sunscreen step and none of the figures above hold."
+    },
+    {
       "type": "ingredients",
       "eyebrow": "The formula",
       "heading": "Every active, its percentage, and what it is doing there",

@@ -10,6 +10,7 @@ export const DEFAULT_ANCHOR: Record<string, string> = {
   problem: 'van-de',
   ingredients: 'thanh-phan',
   steps: 'huong-dan',
+  timeline: 'moc-thoi-gian',
   gallery: 'hieu-qua',
   testimonials: 'danh-gia',
   order: 'dat-hang',
