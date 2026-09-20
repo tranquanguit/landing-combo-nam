@@ -3,6 +3,10 @@
 Astro 7, xuất HTML tĩnh. Mỗi sản phẩm là **một file JSON**; bố cục và thứ tự khối do
 chính file đó quyết định, không phải sửa code.
 
+> **Vì sao có website này?** [`docs/muc-tieu-va-tam-nhin.md`](docs/muc-tieu-va-tam-nhin.md)
+> — mục tiêu, định vị, kỳ vọng và những điều không đánh đổi. Đọc trước khi
+> quyết định bất cứ thứ gì mà hai phương án đều chạy được.
+>
 > **Sắp deploy?** [`docs/deploy.md`](docs/deploy.md) — danh sách làm theo từ trên
 > xuống, gồm cả bảng "còn thiếu gì, ai cung cấp".
 > **Cần gửi ảnh?** [`docs/anh-can-co.md`](docs/anh-can-co.md) — từng vị trí, tỉ lệ,
