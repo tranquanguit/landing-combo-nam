@@ -57,14 +57,25 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
 - `[!] A6` **Chứng từ có chữ ký giám đốc.** Phải che chữ ký và dấu cá nhân trước
   khi đăng lên trang công khai.
 - `[!] A7` **Văn bản đồng ý cho 4 ảnh trước/sau.** Cổng build đang chặn đúng.
+- `[!] A8` **Đăng ký Bộ Công Thương.** Bản cào có hồ sơ
+  `online.gov.vn/Home/WebDetails/139375`, nhưng đó là đăng ký cho **tên miền
+  mochavietnam.com**. Site này chạy tên miền khác, nên KHÔNG được gắn logo hay
+  dẫn hồ sơ đó — phải đăng ký riêng cho tên miền đang dùng. Cần chủ site xác
+  nhận tên miền cuối cùng rồi mới làm bước này.
+- `[!] A9` **Zalo OA.** Bản cào có `zalo.me/4500053981574656766` (OA chính
+  thức), trong khi site đang dùng `zalo.me/0367848918` (số cá nhân). Cần chủ
+  site chọn kênh nào là kênh chính thức để khai nhất quán.
 
 ## B. Danh tính và uy tín
 
-- `[ ] B1` Khối "Đại lý chính hãng" nói rõ: ai vận hành site, lấy hàng từ đâu,
-  ai chịu trách nhiệm công bố sản phẩm. Đặt ở chân trang + trang giới thiệu.
-- `[ ] B2` `sameAs` cho `Organization` — hiện **0**. Nối fanpage, gian hàng,
-  hồ sơ Google Business. Đây là tín hiệu gốc để Google và trợ lý AI xác nhận
-  thực thể. Cần chủ site cung cấp danh sách URL.
+- `[x] B1` **Xem lại: đã có sẵn.** Chân trang mọi trang đang khai pháp nhân, mã
+  số thuế 0317963313, địa chỉ, tổ chức công bố sản phẩm, số tiếp nhận phiếu công
+  bố và bốn dòng cảnh báo. Không thiếu gì để thêm. Việc còn lại là văn bản uỷ
+  quyền → `[!] A0`.
+- `[x] B2` **Xong.** `sameAs` phát bốn hồ sơ chính thức, lấy từ chính trang tin
+  tức báo chí của mochavietnam.com: Facebook, Instagram, TikTok, YouTube. Khai
+  qua trường `profiles` trong schema `brand` nên đi qua đúng các hàng rào của
+  footer. Hiện cả ở chân trang với `rel="me"`.
 - `[ ] B3` Khối nhà cung cấp nguyên liệu (BASF, CHEMICO, AGC, AvantChem,
   MahaChem) và báo chí đã đưa tin (VTV Online, Sức khoẻ & Đời sống, Emdep,
   SaoStar, Tiền Phong). Logo có sẵn trong bản cào.
