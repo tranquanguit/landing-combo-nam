@@ -167,11 +167,16 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
 
 ## E. Chuyển đổi
 
-- `[ ] E1` Rà biểu mẫu: bỏ mọi trường không dùng tới. Mỗi trường thừa là một
-  phần trăm rơi rụng.
-- `[ ] E2` Trạng thái sau khi gửi phải nói rõ chuyện gì xảy ra tiếp theo và
-  trong bao lâu — không chỉ "cảm ơn".
-- `[ ] E3` Đo INP thật khi bấm CTA, mở FAQ, chọn gói.
+- `[x] E1` **Đã rà, không có gì để bỏ.** Địa chỉ chỉ bắt buộc khi chọn gói có
+  giá (không bắt buộc với "tôi cần tư vấn"); ghi chú vốn tuỳ chọn; còn lại là
+  họ tên, số điện thoại và ô đồng ý — cả ba đều cần để gọi xác nhận được.
+- `[x] E2` **Xong.** Thông báo sau khi gửi trước đây dừng ở "sẽ gọi xác nhận
+  trong 2 giờ". Thêm nốt phần còn lại: hàng đi 2–5 ngày, mở kiểm tra rồi mới
+  trả tiền, và "chưa trừ tiền ở bước này".
+- `[x] E3` **Xong — dựng thành cổng.** `tests/inp.mjs` chạy Chromium thật trên
+  ba trang chính. Đo được: INP tệ nhất **24ms** (ngưỡng tốt của Google là
+  200ms), 0 tác vụ dài trong lúc tương tác, processingTime 0ms ở mọi tương tác.
+  Đã nối vào CI.
 
 ## F. Nợ kỹ thuật
 
