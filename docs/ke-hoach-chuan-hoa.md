@@ -101,8 +101,11 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
   ai không nên dùng → giá và cam kết → biểu mẫu.
   Thứ tự này đặt phần trung thực nhất ("ai không nên dùng") ngay trước lúc
   xin thông tin — đó là chỗ nó tăng tỉ lệ chốt chứ không làm giảm.
-- `[ ] C2` Sơ đồ SVG inline: cơ chế nhiều tầng, lộ trình sáng/tối, mốc thời
-  gian theo loại nám. Tự đổi màu theo theme, không phụ thuộc ảnh chụp.
+- `[~] C2` **Xong mốc thời gian.** Khối `timeline` dựng bằng CSS/HTML thuần
+  (không SVG — dải chỉ là hình chữ nhật bo tròn định vị theo %, nhẹ hơn và tự
+  dùng token màu). Số liệu ở dạng chữ trong `<dl>` là chính, biểu đồ mang
+  `aria-hidden` — máy đọc được số mà không cần hiểu hình.
+  Còn lại: lộ trình sáng/tối, và sơ đồ "kem hay serum trước" cho trang sản phẩm.
 - `[ ] C3` Dải ảnh chính hãng đúng chỗ trong mạch kể (infographic thành phần,
   routine sáng/tối, ảnh chất kem). Quy tắc: ảnh có chữ in đè **không** nằm cạnh
   chữ của trang — để nó đứng riêng thành một chặng.
