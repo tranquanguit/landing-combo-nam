@@ -397,6 +397,10 @@ npm run build          # dựng dist/
 npm run check          # 0 lỗi kiểu
 npm run test:guards    # 549 ca hàng rào
 npm run test:seo       # 299 phép đo SEO trên bản build
+
+# test:order đọc dist/, mà biểu mẫu chỉ bật khi bản build có endpoint —
+# không dựng lại kèm biến này thì mọi ô nhập đều disabled và bộ thử treo.
+PUBLIC_ORDER_ENDPOINT=http://localhost:8132/orders npm run build
 npm run test:order     # 9 kịch bản đặt hàng trong trình duyệt thật
 npm run test:orders-api # 20 kịch bản API đơn hàng trên SQLite thật
 npm run test:admin     # 9 kịch bản trang quản trị trong trình duyệt thật

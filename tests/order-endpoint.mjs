@@ -7,6 +7,8 @@
  */
 import { createServer } from 'node:http';
 import { createRequire } from 'node:module';
+import { readFile } from 'node:fs/promises';
+import { extname, join, normalize } from 'node:path';
 
 /* Playwright là dependency dùng để kiểm thử, cài ở cấp hệ thống trong môi
    trường này. Resolve tường minh để chạy được ở cả hai nơi. */
@@ -40,10 +42,30 @@ const api = createServer((req, res) => {
   });
 });
 
-const { spawn } = await import('node:child_process');
-const pageServer = spawn('python3', ['-m', 'http.server', String(PAGE_PORT)], {
-  cwd: 'dist', stdio: 'ignore',
+/* Phục vụ dist bằng node, không mượn `python3 -m http.server` nữa.
+   Trên Windows không có lệnh `python3` (chỉ có `python`), mà spawn lại chạy với
+   stdio:'ignore' nên lỗi "không tìm thấy lệnh" bị nuốt mất: bộ thử chết ở
+   ERR_CONNECTION_REFUSED và người đọc log đi tìm lỗi ở trang, không ở máy chủ. */
+const MIME = {
+  '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8',
+  '.svg': 'image/svg+xml', '.webp': 'image/webp', '.avif': 'image/avif',
+  '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png',
+  '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml',
+};
+const pages = createServer(async (req, res) => {
+  /* normalize() rồi bóc hết ../ và / ở đầu — không để leo ra ngoài dist. */
+  let rel = normalize(decodeURIComponent(req.url.split('?')[0])).replace(/^[/\\.]+/, '');
+  if (!rel || !extname(rel)) rel = join(rel, 'index.html');
+  try {
+    const buf = await readFile(join('dist', rel));
+    res.writeHead(200, { 'Content-Type': MIME[extname(rel).toLowerCase()] ?? 'application/octet-stream' }).end(buf);
+  } catch {
+    res.writeHead(404).end('not found');
+  }
 });
+await new Promise((r) => pages.listen(PAGE_PORT, r));
+const pageServer = { kill: () => pages.close() };
 
 api.on('error', (err) => {
   if (err.code === 'EADDRINUSE') {

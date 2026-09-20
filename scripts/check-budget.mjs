@@ -1,5 +1,5 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { join, extname } from 'node:path';
+import { join, extname, sep } from 'node:path';
 import { gzipSync } from 'node:zlib';
 
 /**
@@ -54,9 +54,13 @@ const SITE_ORIGIN = 'https://mochatrinam.com';
 const fail = [];
 const ok = [];
 
+/* Trả về đường dẫn luôn dùng dấu "/" — `join()` cho ra "\\" trên Windows, và mọi
+   hàng rào phía dưới đều so khớp bằng "/": cổng "ảnh chờ đồng ý" cắt tên tệp bằng
+   split('/'), cổng "trang tạm" dò /\/(zz-|test-|probe-)/. Trên Windows cả hai im
+   lặng cho qua — hai cổng tưởng là đang canh, thực ra không canh gì. */
 const walk = (dir) => readdirSync(dir).flatMap((f) => {
   const p = join(dir, f);
-  return statSync(p).isDirectory() ? walk(p) : [p];
+  return statSync(p).isDirectory() ? walk(p) : [p.split(sep).join('/')];
 });
 
 const files = walk(dist);

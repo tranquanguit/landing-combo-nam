@@ -24,8 +24,16 @@ git checkout claude/friendly-ride-3bnyfn
 npm ci
 ```
 
-`npm ci` sẽ tải cả Chromium cho Playwright (dùng để chụp màn hình và chạy kiểm
-thử trình duyệt). Lần đầu hơi lâu.
+`npm ci` **không** tải sẵn trình duyệt cho Playwright — package.json không có
+`postinstall`. Hai bộ thử chạy trong trình duyệt thật (`test:order`, `test:admin`)
+và công cụ chụp màn hình cần thêm một lần:
+
+```bash
+npx playwright install chromium
+```
+
+Khoảng 115 MB, chỉ tải một lần cho cả máy. Bỏ qua bước này thì `test:order` chết
+với "Executable doesn't exist" — không phải lỗi của trang.
 
 ## 3. Chạy thử
 
