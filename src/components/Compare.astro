@@ -1,0 +1,100 @@
+---
+import Section from './Section.astro';
+import { money } from '../lib/format';
+import { productPath } from '../lib/routes';
+import { richText } from '../lib/richtext';
+import { t, type Locale } from '../i18n/ui';
+
+interface Props {
+  data: {
+    eyebrow?: string; heading: string; intro?: string;
+    criteria: { label: string; values: string[] }[];
+    footnote?: string;
+  };
+  products: any[];
+  locale: Locale;
+  id?: string;
+}
+const { data, products, locale, id } = Astro.props;
+---
+<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading}>
+  {data.intro && <p class="cmp-intro" set:html={richText(data.intro)} />}
+
+  {/* Bảng thật, không phải lưới div: người dùng trình đọc màn hình điều hướng
+      theo hàng/cột và cần biết ô này thuộc sản phẩm nào. `scope` làm việc đó. */}
+  <div class="cmp-scroll">
+    <table class="cmp">
+      <thead>
+        <tr>
+          <td></td>
+          {products.map((p) => (
+            <th scope="col">
+              <a href={productPath(p.slug, locale)}>{p.shortName ?? p.name}</a>
+              <span class="cmp-price">{money(p.price, p.currency, locale)}</span>
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {data.criteria.map((c) => (
+          <tr>
+            <th scope="row">{c.label}</th>
+            {c.values.map((v, i) => (
+              <td data-col={products[i]?.shortName ?? products[i]?.name}>{v}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cmp-hint">{t(locale, 'compare.scrollHint')}</p>
+  {data.footnote && <p class="cmp-foot" set:html={richText(data.footnote)} />}
+</Section>
+
+<style>
+  .cmp-intro { max-width: 62ch; margin: 0 0 var(--s-6); color: var(--ink-muted); }
+
+  /* Cuộn ngang thay vì ép chữ xuống dòng thành cột 40px. Bảng ba cột không vừa
+     màn hình điện thoại, và nhồi cho vừa thì không ô nào đọc được. */
+  .cmp-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cmp { width: 100%; min-width: 34rem; border-collapse: collapse; }
+
+  .cmp thead th {
+    text-align: left; vertical-align: bottom; padding: 0 var(--s-4) var(--s-4);
+    border-bottom: 2px solid var(--ink-navy);
+  }
+  .cmp thead th a {
+    display: block; font-weight: 600; color: var(--ink-navy);
+    text-decoration: none; line-height: 1.25;
+  }
+  .cmp thead th a:hover { color: var(--cobalt); text-decoration: underline; }
+  .cmp-price {
+    display: block; margin-top: 4px;
+    font-family: var(--font-figure); font-size: var(--t-sm); color: var(--ink-muted);
+  }
+
+  .cmp tbody th {
+    text-align: left; vertical-align: top; font-weight: 600;
+    color: var(--ink-navy); padding: var(--s-4) var(--s-4) var(--s-4) 0;
+    border-bottom: 1px solid var(--line); white-space: nowrap;
+  }
+  .cmp tbody td {
+    vertical-align: top; padding: var(--s-4);
+    border-bottom: 1px solid var(--line);
+    color: var(--ink); line-height: 1.6;
+  }
+  /* Cột đầu tiên là lựa chọn được khuyên dùng — nền nhạt để mắt bám vào, chứ
+     không phải viền màu: viền màu ở bảng làm ô trông như đang báo lỗi. */
+  .cmp tbody td:first-of-type, .cmp thead th:first-of-type { background: var(--bone); }
+
+  .cmp-hint {
+    margin: var(--s-3) 0 0; font-size: var(--t-2xs); color: var(--slate);
+  }
+  @media (min-width: 720px) { .cmp-hint { display: none; } }
+
+  .cmp-foot {
+    margin: var(--s-5) 0 0; max-width: 62ch;
+    color: var(--ink-muted); font-size: var(--t-sm); line-height: 1.7;
+  }
+</style>

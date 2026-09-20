@@ -6,6 +6,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import Section from '../components/Section.astro';
 import Prose from '../components/blocks/Prose.astro';
 import ProductGrid from '../components/ProductGrid.astro';
+import Compare from '../components/Compare.astro';
 import Faq from '../components/blocks/Faq.astro';
 import Analytics from '../components/Analytics.astro';
 import { collectionGraph } from '../lib/schema';
@@ -84,6 +85,10 @@ const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath
       <Section id="san-pham" surface="bone" heading={t(locale, 'line.products')} aboveFold>
         <ProductGrid products={products} locale={locale} />
       </Section>
+    )}
+
+    {line.compare && products.length > 1 && (
+      <Compare data={line.compare} products={products} locale={locale} id="so-sanh" />
     )}
 
     {line.sections.map((section: any, i: number) => (

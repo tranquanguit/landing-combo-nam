@@ -64,5 +64,53 @@
   ],
   "articles": [
     "nam-noi-tiet-la-gi"
-  ]
+  ],
+  "compare": {
+    "eyebrow": "Which one",
+    "heading": "Three options, and what actually differs",
+    "intro": "Same formulas throughout. What differs is how many steps you do each day, and whether the two result-keeping steps come with it.",
+    "criteria": [
+      {
+        "label": "What you get",
+        "values": [
+          "Cream + serum, with cleanser and sunscreen included",
+          "The 30ml serum on its own",
+          "The 30g cream on its own"
+        ]
+      },
+      {
+        "label": "Who it suits",
+        "values": [
+          "Someone starting the full routine without buying extras",
+          "Someone who already has a moisturiser and needs the deeper step",
+          "Someone who already has a serum and needs the evening sealing step"
+        ]
+      },
+      {
+        "label": "Steps in the routine",
+        "values": [
+          "All four morning steps and all four evening steps",
+          "One step — used before the cream",
+          "One step — used after the serum"
+        ]
+      },
+      {
+        "label": "Sun protection included",
+        "values": [
+          "Yes, SPF50 sunscreen included",
+          "No — you need your own sunscreen",
+          "No — you need your own sunscreen"
+        ]
+      },
+      {
+        "label": "Main actives",
+        "values": [
+          "4-butylresorcinol 1000ppm, Niacinamide 4%, Tranexamic Acid, Bakuchiol",
+          "4-butylresorcinol 1000ppm, Niacinamide 4%, Bio-Placenta",
+          "Tranexamic Acid, NIO-NAG, Ceramide, Bakuchiol"
+        ]
+      }
+    ],
+    "footnote": "No option here is “stronger” than another — all three share the same formulas. The difference is which step of the routine you already own. Sun protection is needed in every column; the combo simply includes it and the other two do not."
+  }
 }

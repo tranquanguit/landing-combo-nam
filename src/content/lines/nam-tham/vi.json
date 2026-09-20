@@ -64,5 +64,53 @@
   ],
   "articles": [
     "nam-noi-tiet-la-gi"
-  ]
+  ],
+  "compare": {
+    "eyebrow": "Chọn cái nào",
+    "heading": "Ba lựa chọn, khác nhau ở chỗ nào",
+    "intro": "Cùng một công thức, khác nhau ở số bước bạn làm mỗi ngày và ở việc có kèm hai bước giữ kết quả hay không.",
+    "criteria": [
+      {
+        "label": "Gồm những gì",
+        "values": [
+          "Kem + serum, kèm sữa rửa mặt và kem chống nắng",
+          "Một mình chai serum 30ml",
+          "Một mình hũ kem 30gr"
+        ]
+      },
+      {
+        "label": "Hợp với ai",
+        "values": [
+          "Người muốn làm đủ lộ trình ngay từ đầu, không phải mua thêm",
+          "Người đã có kem dưỡng và chỉ cần thêm bước thẩm thấu sâu",
+          "Người đã có serum và chỉ cần bước khoá ẩm buổi tối"
+        ]
+      },
+      {
+        "label": "Bước trong lộ trình",
+        "values": [
+          "Đủ cả bốn bước sáng và bốn bước tối",
+          "Một bước — dùng trước bước kem",
+          "Một bước — dùng sau bước serum"
+        ]
+      },
+      {
+        "label": "Có bước chống nắng chưa",
+        "values": [
+          "Có, kem chống nắng SPF50 kèm sẵn",
+          "Chưa — phải tự có kem chống nắng riêng",
+          "Chưa — phải tự có kem chống nắng riêng"
+        ]
+      },
+      {
+        "label": "Hoạt chất chính",
+        "values": [
+          "4-butylresorcinol 1000ppm, Niacinamide 4%, Tranexamic Acid, Bakuchiol",
+          "4-butylresorcinol 1000ppm, Niacinamide 4%, Bio-Placenta",
+          "Tranexamic Acid, NIO-NAG, Ceramide, Bakuchiol"
+        ]
+      }
+    ],
+    "footnote": "Không có lựa chọn nào “mạnh hơn” lựa chọn nào — ba cột dùng chung công thức. Khác biệt nằm ở chỗ bạn đã có sẵn bước nào trong lộ trình rồi. Bước chống nắng thì cột nào cũng cần, chỉ là combo có sẵn còn hai cột kia thì không."
+  }
 }

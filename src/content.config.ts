@@ -844,10 +844,44 @@ const lines = defineCollection({
     /** Sản phẩm hiển thị, theo thứ tự này. Bỏ trống thì tự gom theo product.line. */
     products: z.array(slugField).default([]),
     sections: z.array(proseSection).default([]),
+    /**
+     * Bảng so sánh các lựa chọn trong dòng.
+     *
+     * Đây là thứ người gõ "nên chọn loại nào" đang tìm, và là dạng nội dung
+     * trợ lý AI trích lại nhiều nhất — vì nó đã ở sẵn dạng câu trả lời có cấu
+     * trúc, không cần đọc hiểu cả trang rồi tự lập bảng.
+     *
+     * Cột lấy từ `products`, đúng thứ tự đó. Không khai lại tên hay giá ở đây:
+     * chép giá vào bảng là tạo ra một bản sao sẽ lệch khỏi giá thật sau lần
+     * đổi giá đầu tiên — và `findHandwrittenMoney` chặn luôn từ lúc build.
+     */
+    compare: z.object({
+      eyebrow: z.string().optional(),
+      heading: z.string(),
+      intro: z.string().optional(),
+      criteria: z.array(z.object({
+        label: z.string(),
+        values: z.array(z.string().min(1)).min(2),
+      }).strict()).min(2),
+      footnote: z.string().optional(),
+    }).strict().optional(),
     faq: faqField,
     articles: z.array(slugField).default([]),
   }).strict().superRefine((line, ctx) => {
     scanEditorial(line, ctx);
+    /* Mỗi tiêu chí phải có đúng một ô cho mỗi sản phẩm. Lệch một ô là bảng
+       trượt cột — thứ trông vẫn "đúng" trên màn hình nhưng gán đặc điểm của
+       sản phẩm này sang sản phẩm khác. */
+    if (line.compare) {
+      const cols = line.products.length;
+      for (const [i, c] of line.compare.criteria.entries()) {
+        if (cols && c.values.length !== cols) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['compare', 'criteria', i],
+            message: `Tiêu chí "${c.label}" có ${c.values.length} ô nhưng dòng có ${cols} sản phẩm. ` +
+              `Thiếu hoặc thừa một ô là bảng trượt cột, gán đặc điểm sang nhầm sản phẩm.` });
+        }
+      }
+    }
     /* Một trang dòng không có sản phẩm nào và cũng không có nội dung biên tập
        là một trang rỗng — thứ Google gọi là thin content và là rủi ro lớn nhất
        khi nhân bản cấu trúc này ra nhiều dòng. */
