@@ -96,11 +96,13 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
 Chủ site yêu cầu: ảnh marketing chính hãng **kết hợp** UI hiện đại, mạch kể
 rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/nền, ảnh/chữ.
 
-- `[ ] C1` Mạch kể chuẩn cho trang landing sản phẩm, áp cho mọi sản phẩm:
-  vấn đề → vì sao cách cũ không ăn → cơ chế → bằng chứng → cách dùng →
-  ai không nên dùng → giá và cam kết → biểu mẫu.
-  Thứ tự này đặt phần trung thực nhất ("ai không nên dùng") ngay trước lúc
-  xin thông tin — đó là chỗ nó tăng tỉ lệ chốt chứ không làm giảm.
+- `[x] C1` **Xong.** Đã bổ sung chặng còn thiếu — khối "ai không nên dùng"
+  (bốn trường hợp, chia hai mức: hỏi bác sĩ trước / nên cân nhắc lại) đặt ngay
+  trước khối `order`.
+  **Giữ nguyên vị trí khối `offer` ở đầu trang, có lý do:** mạch kể mẫu đặt giá
+  ở gần cuối, nhưng cả trang được xây trên một giọng nói duy nhất là minh bạch.
+  Giấu giá tới cuối thì mâu thuẫn với chính giọng đó, và với người đến từ quảng
+  cáo thì giá là thứ họ tìm trước nhất.
 - `[x] C2` **Xong.** Hai khối trực quan, cả hai dựng bằng CSS/HTML thuần chứ
   không SVG — nhẹ hơn, tự co theo khung, tự dùng token màu:
   * `timeline` — ba nhóm nám, ba khoảng thời gian đặt cạnh nhau. Số liệu ở
@@ -109,9 +111,17 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
     sáng. Dấu sáng/tối phân biệt bằng hình (đĩa đặc / đĩa khuyết) chứ không chỉ
     bằng màu; bước bắt buộc có chữ "Bắt buộc" trong nội dung, không chỉ tô màu.
   Toàn site trước đó có **0 sơ đồ**.
-- `[ ] C3` Dải ảnh chính hãng đúng chỗ trong mạch kể (infographic thành phần,
-  routine sáng/tối, ảnh chất kem). Quy tắc: ảnh có chữ in đè **không** nằm cạnh
-  chữ của trang — để nó đứng riêng thành một chặng.
+- `[!] C3` **Không dựng được — chuyển sang chặn.** Đã soát lại toàn bộ 195 ảnh:
+  * Mọi infographic chính hãng đều **in chữ tiếng Việt lên ảnh**. Site này song
+    ngữ, nên chúng không đặt được lên trang `/en/`. Quan trọng hơn: chúng lặp
+    lại đúng nội dung mà trang đã trình bày tốt hơn ở dạng chữ (bảng thành
+    phần, khối `routine`) — và lặp lại dưới dạng ẢNH thì Google và trợ lý AI
+    không đọc được.
+  * Ảnh thật sự là ảnh chụp thì là **người mẫu stock phương Tây**, không phải
+    ảnh của Mocha, lại đặt trong ngữ cảnh da mụn. Dùng chúng trên một trang nói
+    "dành riêng cho làn da người Việt" là tự mâu thuẫn.
+  Thứ trang cần là ảnh ở `[!] A5` — chất kem 16:9 và thao tác dùng 3:2. Chủ site
+  đã chốt không hạ ngưỡng, nên mục này chờ ảnh gốc.
 - `[x] C4` **Xong.** Bảng `compare` trên trang dòng, năm tiêu chí: gồm những
   gì, hợp với ai, chiếm mấy bước trong lộ trình, đã có bước chống nắng chưa,
   hoạt chất chính. Cột lấy từ `products`, giá render từ dữ liệu sản phẩm chứ
