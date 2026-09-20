@@ -4,6 +4,13 @@ import { t, type Locale } from '../../i18n/ui';
 interface Props { data: any; id?: string; locale: Locale; }
 const { data, id = 'danh-gia', locale } = Astro.props;
 
+// `.video video` giữ chỗ bằng aspect-ratio 16/9 + object-fit:contain. Không có
+// width/height thì <video> lấy mặc định 300×150 cho tới khi poster tải xong rồi
+// nhảy sang tỉ lệ thật — CLS ngay giữa khối lời chứng. Schema chỉ khai
+// { src, poster } nên không biết trước tỉ lệ; `contain` để poster dọc viền đen
+// hai bên chứ không bị cắt. Lời giải thích để ở đây, không để trong <style>:
+// chú thích CSS đi thẳng ra HTML và đã từng đẩy trang vượt ngân sách gzip.
+
 // Cùng chuẩn với ảnh khách hàng: chưa có văn bản đồng ý thì không đăng
 // tên, tuổi, nơi ở của người thật.
 const publishable = data.consent?.obtained === true;
@@ -61,7 +68,10 @@ const showPlaceholder = !publishable && import.meta.env.DEV;
   .quotes { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-4); }
   @media (min-width: 760px) { .quotes { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); } }
   .card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
-  .video video { width: 100%; display: block; background: #000; }
+  .video video {
+    width: 100%; display: block; background: #000;
+    aspect-ratio: 16 / 9; object-fit: contain;
+  }
   figure { margin: 0; padding: var(--s-5); display: flex; flex-direction: column; gap: var(--s-4); flex: 1; }
   blockquote { margin: 0; color: var(--ink-muted); font-style: italic; }
   figcaption { display: flex; align-items: center; gap: var(--s-3); margin-top: auto; font-size: var(--t-sm); }
