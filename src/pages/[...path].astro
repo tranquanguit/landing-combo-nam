@@ -146,6 +146,11 @@ const homeEntry = (await getCollection('pages', ({ data: d }) =>
   d.status === 'published' && d.locale === locale && d.slug === 'home'))[0];
 const fallbackOgImage = homeEntry?.data.seo.ogImage ?? homeEntry?.data.hero.image;
 
+/* Nội dung biên tập của trang góc tư vấn. Không có entry thì trang vẫn dựng
+   được — chỉ là quay về đúng tình trạng thin content mà nó vừa thoát khỏi. */
+const guideEntry = (await getCollection('guides', ({ data: d }) =>
+  d.status === 'published' && d.locale === locale && d.translationKey === 'advice-index'))[0];
+
 const nav = siteNav(
   locale,
   allLines.map((l) => ({ slug: l.data.slug, heading: l.data.heading })),
@@ -231,6 +236,8 @@ const articlesSorted = allArticles
     canonical={canonical}
     alternates={alternates}
     articles={articlesSorted}
+    sections={guideEntry?.data.sections ?? []}
+    faq={guideEntry?.data.faq ?? []}
   />
 )}
 

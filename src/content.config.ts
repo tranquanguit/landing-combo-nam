@@ -823,6 +823,30 @@ const policies = defineCollection({
   }).strict().superRefine((d, ctx) => scanEditorial(d, ctx)),
 });
 
+/**
+ * Nội dung biên tập của trang góc tư vấn.
+ *
+ * Trang này trước chỉ có tiêu đề, một câu dẫn và danh sách bài — 223 từ tiếng
+ * Việt, 165 từ tiếng Anh. Đó là thin content: một trang hub không tự nói được
+ * điều gì thì Google không có lý do xếp hạng nó, và nó kéo theo cả những trang
+ * bài viết bên dưới. Mục nội dung để ở file dữ liệu chứ không nhét vào i18n:
+ * i18n là chuỗi giao diện, không phải nơi chứa bài viết.
+ */
+const guides = defineCollection({
+  loader: glob({
+    pattern: '**/*.json',
+    base: './src/content/guides',
+    generateId: ({ entry }) => entry.replace(/\.json$/, ''),
+  }),
+  schema: z.object({
+    locale: z.enum(['vi', 'en', 'th', 'id']),
+    translationKey: z.string(),
+    status: z.enum(['draft', 'published']).default('draft'),
+    sections: z.array(proseSection).min(1),
+    faq: faqField,
+  }).strict().superRefine((d, ctx) => scanEditorial(d, ctx)),
+});
+
 const brand = defineCollection({
   /* Bỏ qua file bắt đầu bằng "_": src/data còn chứa đặc tả ảnh, vốn không phải
      một thương hiệu. Không loại ra thì loader coi nó là một entry brand thiếu
@@ -889,4 +913,4 @@ const brand = defineCollection({
   }),
 });
 
-export const collections = { pages, products, lines, articles, policies, brand };
+export const collections = { pages, products, lines, articles, policies, guides, brand };

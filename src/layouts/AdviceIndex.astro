@@ -3,6 +3,8 @@ import BaseLayout from './BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import Prose from '../components/blocks/Prose.astro';
+import Faq from '../components/blocks/Faq.astro';
 import Analytics from '../components/Analytics.astro';
 import { collectionGraph } from '../lib/schema';
 import { resolveAssetImage, resolveAssetUrl } from '../lib/images';
@@ -19,9 +21,15 @@ interface Props {
   /** Ảnh dùng khi trang không tự khai ảnh chia sẻ. */
   fallbackOgImage?: string;
   articles: any[];
+  /** Nội dung biên tập của chính trang hub — xem collection `guides`. */
+  sections?: any[];
+  faq?: { q: string; a: string }[];
 }
 
-const { brand: b, locale, canonical, alternates = [], nav = [], policies = [], fallbackOgImage, articles } = Astro.props;
+const {
+  brand: b, locale, canonical, alternates = [], nav = [], policies = [],
+  fallbackOgImage, articles, sections = [], faq = [],
+} = Astro.props;
 const site = Astro.site?.origin ?? 'https://mochatrinam.com';
 assertTranslated(locale);
 
@@ -40,6 +48,7 @@ const jsonLd = collectionGraph({
     name: a.title, url: new URL(articlePath(a.slug, locale), site).href,
   })),
   breadcrumb,
+  faq,
 });
 ---
 <BaseLayout
@@ -80,6 +89,14 @@ const jsonLd = collectionGraph({
         ))}
       </ul>
     </div>
+
+    {sections.map((section: any, i: number) => (
+      <Prose section={section} surface={i % 2 === 0 ? 'paper' : 'bone'} />
+    ))}
+
+    {faq.length > 0 && (
+      <Faq data={{ heading: t(locale, 'faq.heading'), items: faq }} id="cau-hoi" />
+    )}
   </main>
 
   <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} />
