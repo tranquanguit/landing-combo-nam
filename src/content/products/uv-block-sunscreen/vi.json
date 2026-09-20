@@ -1,0 +1,266 @@
+{
+  "slug": "uv-block-sunscreen",
+  "translationKey": "uv-block-sunscreen",
+  "status": "published",
+  "sku": "8938552914129",
+  "price": 335000,
+  "compareAtPrice": 560000,
+  "currency": "VND",
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "bao-ve-da",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "locale": "vi",
+  "name": "Mocha UV-Block Plus – kem chống nắng lý hoá 7 màng lọc",
+  "shortName": "Kem chống nắng UV-Block Plus",
+  "primaryKeyword": "kem chống nắng mocha uv-block plus",
+  "seo": {
+    "title": "Kem chống nắng Mocha UV-Block Plus 50gr | Mocha Việt Nam",
+    "description": "Kem chống nắng lý hoá SPF 50, 7 màng lọc (5 hoá học + 2 vật lý nano), thêm Niacinamide và rau má. Không hương liệu, không paraben. {{price}}."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "hỗ trợ bảo vệ da khỏi tác động của tia UVA và UVB",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
+      "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
+      "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
+    ]
+  },
+  "variants": [
+    {
+      "label": "UV-Block Plus – 50gr",
+      "note": "Tiết kiệm {{save}} so với giá niêm yết",
+      "price": 335000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, xem tình trạng da qua hình ảnh",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước không được bỏ",
+      "heading": "Bước chống nắng, thứ quyết định mọi bước còn lại có ý nghĩa hay không",
+      "lead": "Tuýp 50gr, <strong>7 màng lọc</strong> gồm 5 lọc hoá học và 2 lọc vật lý nano, kèm <strong>EpiOn™, Niacinamide, Vitamin E</strong> và chiết xuất rau má — đúng danh sách in trên vỏ. Không hương liệu, không paraben.",
+      "usp": [
+        {
+          "text": "<strong>Bảy màng lọc gọi đúng tên INCI</strong>, không gói trong cụm “công nghệ chống nắng”",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "bảng thành phần ngay trên trang này"
+        },
+        {
+          "text": "<strong>Không hương liệu, không paraben</strong>",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "danh sách thành phần in trên bao bì"
+        },
+        {
+          "text": "<strong>Kết cấu mỏng, hãng định vị cho da dầu và da sau peel</strong>",
+          "evidence": "ingredient",
+          "qualifier": "theo mô tả của nhà sản xuất"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-uv-block.webp",
+        "alt": "Tuýp kem chống nắng Mocha UV-Block Plus 50gr, nhãn ghi 7 filters và UVA/UVB"
+      },
+      "primaryCta": "Đặt kem chống nắng",
+      "secondaryCta": {
+        "label": "Xem bảy màng lọc",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Vì sao bước này",
+      "heading": "Bỏ chống nắng thì mọi hoạt chất làm mờ sắc tố đều đang chạy ngược",
+      "quotes": [
+        "“Dùng kem nám đều mà da vẫn không sáng hơn, chẳng hiểu vì sao.”",
+        "“Ngày nào cũng ở trong phòng, chắc không cần chống nắng đâu.”",
+        "“Kem chống nắng nào cũng bết, bôi xong không chịu nổi.”"
+      ],
+      "explainer": {
+        "heading": "Tia UV kích hoạt lại sắc tố nhanh hơn bất kỳ hoạt chất nào làm mờ được nó",
+        "body": [
+          "Đây là lý do mọi lộ trình trên trang này đều kết thúc bằng bước chống nắng, và vì sao chúng tôi nói thẳng rằng một liệu trình không kèm chống nắng thì không nên kỳ vọng nhiều.",
+          "Ánh sáng qua cửa kính và ánh sáng xanh từ màn hình không mạnh bằng nắng trực tiếp, nhưng chúng có mặt suốt ngày làm việc. Khoảng thời gian tiếp xúc mới là thứ cộng dồn."
+        ]
+      }
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Bảng thành phần",
+      "heading": "Bảy màng lọc, gọi đúng tên từng cái",
+      "intro": "Năm màng lọc hoá học hấp thụ tia UV, hai màng lọc vật lý phản xạ nó. Phần lớn kem chống nắng chỉ ghi “công nghệ chống nắng” và dừng ở đó.",
+      "caption": "Bảng này liệt kê các màng lọc theo tên INCI mà nhà sản xuất công bố, cùng những hoạt chất dưỡng được IN TRÊN VỎ TUÝP 50gr. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
+      "rows": [
+        {
+          "name": "Butyl Methoxydibenzoylmethane",
+          "inProduct": "Lọc hoá học",
+          "role": "Hấp thụ tia UVA bước sóng dài.",
+          "suitedFor": "Chống nắng hằng ngày"
+        },
+        {
+          "name": "Octocrylene",
+          "inProduct": "Lọc hoá học",
+          "role": "Hấp thụ UVB và giữ ổn định các màng lọc khác.",
+          "suitedFor": "Chống nắng hằng ngày"
+        },
+        {
+          "name": "Benzophenone-3",
+          "inProduct": "Lọc hoá học",
+          "role": "Hấp thụ cả UVA lẫn UVB.",
+          "suitedFor": "Chống nắng hằng ngày"
+        },
+        {
+          "name": "Ethylhexyl Salicylate",
+          "inProduct": "Lọc hoá học",
+          "role": "Hấp thụ UVB, kết cấu nhẹ.",
+          "suitedFor": "Da dầu, da hỗn hợp"
+        },
+        {
+          "name": "Ethylhexyl Methoxycinnamate",
+          "inProduct": "Lọc hoá học",
+          "role": "Hấp thụ UVB, màng lọc phổ biến nhất trong nhóm.",
+          "suitedFor": "Chống nắng hằng ngày"
+        },
+        {
+          "name": "Zinc Oxide",
+          "inProduct": "Lọc vật lý",
+          "role": "Phản xạ và tán xạ tia UV trên bề mặt da, phổ rộng.",
+          "suitedFor": "Da nhạy cảm"
+        },
+        {
+          "name": "Titanium Dioxide",
+          "inProduct": "Lọc vật lý",
+          "role": "Phản xạ tia UV, thường dùng cùng Zinc Oxide.",
+          "suitedFor": "Da nhạy cảm"
+        },
+        {
+          "name": "EpiOn™",
+          "inProduct": "Dưỡng",
+          "role": "Hoạt chất công nghệ sinh học, in trên vỏ tuýp.",
+          "suitedFor": "Da mỏng, da sau treatment"
+        },
+        {
+          "name": "Niacinamide",
+          "inProduct": "Dưỡng",
+          "role": "Hỗ trợ hàng rào bảo vệ da và độ đều màu.",
+          "suitedFor": "Mọi loại da"
+        },
+        {
+          "name": "Vitamin E",
+          "inProduct": "Dưỡng",
+          "role": "Chống oxy hoá, thường đi kèm màng lọc hoá học.",
+          "suitedFor": "Mọi loại da"
+        },
+        {
+          "name": "Centella Asiatica Leaf Extract",
+          "inProduct": "Chiết xuất",
+          "role": "Chiết xuất rau má, hướng tới làm dịu nền da.",
+          "suitedFor": "Da dễ đỏ, da sau peel"
+        },
+        {
+          "name": "Cyathea Medullaris Leaf Extract",
+          "inProduct": "Chiết xuất",
+          "role": "Chiết xuất dương xỉ đen, hỗ trợ làm dịu.",
+          "suitedFor": "Da nhạy cảm"
+        },
+        {
+          "name": "Glycyrrhiza Glabra Root Extract",
+          "inProduct": "Chiết xuất",
+          "role": "Chiết xuất rễ cam thảo, hướng tới làm đều màu da.",
+          "suitedFor": "Da không đều màu"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Hai bước buổi sáng, một bước buổi tối",
+      "intro": "Thứ tự lấy từ hướng dẫn sử dụng của nhà sản xuất.",
+      "totalTime": "PT2M",
+      "items": [
+        {
+          "heading": "Làm sạch da",
+          "body": "Rửa mặt bằng sữa rửa mặt và lau khô."
+        },
+        {
+          "heading": "Chấm đều năm điểm",
+          "body": "Trán, mũi, cằm và hai bên má, rồi dàn đều ra toàn mặt. Chấm trước rồi dàn giúp lớp kem đều hơn so với xoa từ một chỗ."
+        },
+        {
+          "heading": "Cuối ngày phải tẩy trang",
+          "body": "Kem chống nắng cần được làm sạch kỹ vào cuối ngày; sữa rửa mặt một mình thường không đủ."
+        }
+      ],
+      "footnote": "Dùng lại sau mỗi vài giờ nếu bạn ở ngoài trời liên tục, đổ mồ hôi nhiều hoặc tiếp xúc với nước. Một lần thoa buổi sáng không giữ được suốt cả ngày ngoài nắng."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng phù hợp với tình trạng da của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt chu kỳ sử dụng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Kem chống nắng này giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho tuýp 50gr. Giá niêm yết là {{compareAtPrice}}. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Lý hoá nghĩa là gì?",
+          "a": "Là dùng cả hai nhóm màng lọc. Lọc hoá học hấp thụ tia UV rồi chuyển thành nhiệt; lọc vật lý phản xạ tia UV ngay trên bề mặt da. Dùng kết hợp cho phép giảm lượng của từng nhóm mà vẫn giữ được phổ bảo vệ rộng."
+        },
+        {
+          "q": "Da dầu dùng có bị bí không?",
+          "a": "Nhà sản xuất định vị sản phẩm cho da dầu và da hỗn hợp, kết cấu mỏng. Nhưng cảm giác trên da khác nhau theo từng người — nếu bạn từng thấy bí với mọi loại kem chống nắng thì hãy thử một lượng nhỏ trước."
+        },
+        {
+          "q": "Có dùng được cho da vừa peel không?",
+          "a": "Nhà sản xuất định vị cho cả da sau peel. Tuy nhiên da vừa qua thủ thuật là tình huống y khoa: hãy hỏi chính người đã thực hiện thủ thuật cho bạn."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Tránh nhiệt độ cao và ánh nắng trực tiếp, đóng nắp sau khi dùng, để xa tầm tay trẻ em. Tránh tiếp xúc với mắt; nếu dính vào mắt thì rửa ngay bằng nước sạch."
+        }
+      ]
+    }
+  ]
+}
