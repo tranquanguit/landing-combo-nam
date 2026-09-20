@@ -355,11 +355,44 @@ const blocks = z.discriminatedUnion('type', [
     })).min(2),
     footnote: z.string().optional(),
   }).strict().superRefine((b, ctx) => {
-    const over = b.items.filter((i) => i.to > b.max);
-    if (over.length) {
+    const over2 = b.items.filter((i) => i.to > b.max);
+    if (over2.length) {
       ctx.addIssue({ code: z.ZodIssueCode.custom,
-        message: `Mốc của "${over[0].label}" (${over[0].to}) vượt quá trục ${b.max}. ` +
+        message: `Mốc của "${over2[0].label}" (${over2[0].to}) vượt quá trục ${b.max}. ` +
           `Dải sẽ bị vẽ tràn ra ngoài khung — nâng "max" lên.` });
+    }
+  }),
+  /**
+   * Lộ trình sáng và tối đặt cạnh nhau.
+   *
+   * Khối `steps` trả lời "dùng thế nào", khối này trả lời "khi nào dùng cái
+   * gì" — hai câu hỏi khác nhau mà trước đây gộp làm một dòng "1–2 lần mỗi
+   * ngày". Đặt hai cột cạnh nhau cho thấy ngay điều mà cả trang nhắc đi nhắc
+   * lại: bước chống nắng chỉ có ở cột sáng, và nó là bước duy nhất không thể
+   * bỏ.
+   */
+  z.object({
+    type: z.literal('routine'),
+    id: anchorId,
+    eyebrow: z.string().optional(),
+    heading: z.string(),
+    intro: z.string().optional(),
+    columns: z.array(z.object({
+      when: z.enum(['morning', 'night']),
+      label: z.string(),
+      steps: z.array(z.object({
+        label: z.string(),
+        note: z.string().optional(),
+        /** Bước không được bỏ. Hiện một dấu riêng, không phải để trang trí. */
+        essential: z.boolean().default(false),
+      }).strict()).min(2),
+    }).strict()).length(2),
+    footnote: z.string().optional(),
+  }).strict().superRefine((b, ctx) => {
+    const when = b.columns.map((c) => c.when);
+    if (new Set(when).size !== 2) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom,
+        message: 'Hai cột phải là một "morning" và một "night"; hai cột cùng loại thì bố cục mất nghĩa.' });
     }
   }),
 ]);

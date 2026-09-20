@@ -173,6 +173,15 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 - `items *`
 - `footnote`
 
+### `routine`
+
+- `id`
+- `eyebrow`
+- `heading *`
+- `intro`
+- `columns *`
+- `footnote`
+
 ## Những điều máy sẽ chặn bạn (và vì sao)
 
 - **Viết số tiền trực tiếp** trong bất kỳ câu chữ nào. Dùng `{{price}}`,

@@ -318,6 +318,61 @@
       "footnote": "Recommended run: <strong>8–12 weeks without gaps</strong>. Unprotected sun exposure brings pigment back regardless of which product you use."
     },
     {
+      "type": "routine",
+      "id": "lo-trinh",
+      "eyebrow": "What goes when",
+      "heading": "The morning routine and the evening routine are not the same",
+      "intro": "The order below is taken from Mocha's own published routine, trimmed to the products in this combo.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Morning",
+          "steps": [
+            {
+              "label": "Bio-Active Cleanser",
+              "note": "Wash and dry before applying anything."
+            },
+            {
+              "label": "Smart First Care Serum",
+              "note": "One or two presses for the whole face, patted in."
+            },
+            {
+              "label": "Smart Brightening Cream X3",
+              "note": "About a fingertip's worth, avoiding the eye area."
+            },
+            {
+              "label": "UV-Block SPF50 sunscreen",
+              "note": "Not optional. Skip it and the three steps above lose most of their point.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Evening",
+          "steps": [
+            {
+              "label": "Make-up remover",
+              "note": "Only if you wore make-up or sunscreen that day."
+            },
+            {
+              "label": "Bio-Active Cleanser",
+              "note": "Damp skin or leftover residue both reduce absorption."
+            },
+            {
+              "label": "Smart First Care Serum",
+              "note": "The step that opens the way, before the cream."
+            },
+            {
+              "label": "Smart Brightening Cream X3",
+              "note": "The step that seals it in overnight."
+            }
+          ]
+        }
+      ],
+      "footnote": "There is no sunscreen step at night, so the evening column is one step shorter — that is the only difference between the two routines, and it is also the step most often skipped."
+    },
+    {
       "type": "order",
       "eyebrow": "Order",
       "heading": "Tell us where you are and we'll confirm shipping before you pay",

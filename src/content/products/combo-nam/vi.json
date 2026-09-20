@@ -317,6 +317,61 @@
       "footnote": "Chu kỳ khuyến nghị: <strong>8–12 tuần liên tục</strong>. Da tiếp xúc nắng mà không bảo vệ thì sắc tố sẽ quay lại, bất kể dùng sản phẩm nào."
     },
     {
+      "type": "routine",
+      "id": "lo-trinh",
+      "eyebrow": "Khi nào dùng cái gì",
+      "heading": "Lộ trình sáng và lộ trình tối không giống nhau",
+      "intro": "Thứ tự dưới đây lấy từ chu trình chính hãng của Mocha, rút gọn về đúng những sản phẩm có trong combo.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Buổi sáng",
+          "steps": [
+            {
+              "label": "Sữa rửa mặt Bio-Active Cleanser",
+              "note": "Làm sạch và lau khô trước khi thoa bất cứ thứ gì."
+            },
+            {
+              "label": "Serum Smart First Care",
+              "note": "Nhấn 1–2 lần cho cả mặt, vỗ nhẹ cho thấm."
+            },
+            {
+              "label": "Kem Smart Brightening X3",
+              "note": "Lượng khoảng một đốt ngón tay trỏ, tránh vùng mắt."
+            },
+            {
+              "label": "Kem chống nắng UV-Block SPF50",
+              "note": "Bắt buộc. Bỏ bước này thì ba bước trên gần như vô nghĩa.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Buổi tối",
+          "steps": [
+            {
+              "label": "Tẩy trang",
+              "note": "Chỉ khi có trang điểm hoặc kem chống nắng trên da."
+            },
+            {
+              "label": "Sữa rửa mặt Bio-Active Cleanser",
+              "note": "Da còn ẩm hoặc còn cặn đều làm giảm mức thẩm thấu."
+            },
+            {
+              "label": "Serum Smart First Care",
+              "note": "Bước mở đường, dùng trước bước kem."
+            },
+            {
+              "label": "Kem Smart Brightening X3",
+              "note": "Bước khoá lại, giữ dưỡng chất ở trên da qua đêm."
+            }
+          ]
+        }
+      ],
+      "footnote": "Buổi tối không có bước chống nắng, nên cột tối ngắn hơn một bước — đó là khác biệt duy nhất giữa hai lộ trình, và cũng là bước hay bị bỏ nhất."
+    },
+    {
       "type": "gallery",
       "eyebrow": "Hình ảnh khách hàng",
       "heading": "Trước và sau, do khách hàng gửi về",

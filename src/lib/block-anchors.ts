@@ -11,6 +11,7 @@ export const DEFAULT_ANCHOR: Record<string, string> = {
   ingredients: 'thanh-phan',
   steps: 'huong-dan',
   timeline: 'moc-thoi-gian',
+  routine: 'lo-trinh',
   gallery: 'hieu-qua',
   testimonials: 'danh-gia',
   order: 'dat-hang',
