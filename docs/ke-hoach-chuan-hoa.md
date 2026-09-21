@@ -97,6 +97,16 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
   (b) chủ site đồng ý đổi bố cục hero sang khung ngang, nhưng như vậy phần chữ
   và phần ảnh không còn cao bằng nhau. Đây là quyết định chỉ đạo hình ảnh nên
   tôi không tự chọn. Liên quan: `A5`.
+- `[!] A16` **Ảnh hero tràn 7px ở màn hình rộng — cần xem lại bố cục hero.**
+  Đo ở 1920px: `.hero-media` có mép phải 1912px trong khi vùng nội dung rộng
+  1905px. Nguyên nhân là `margin-right` tính theo `100vw`, mà `100vw` TÍNH CẢ
+  thanh cuộn còn vùng nội dung thì không — chênh lệch đúng bằng nửa bề rộng
+  thanh cuộn. Không tràn ở 1024px trở xuống vì ở đó hero xếp dọc.
+  Hiện `body { overflow-x: hidden }` che mất triệu chứng nên không ai thấy
+  thanh cuộn ngang; hậu quả thật chỉ là 7px mép phải ảnh bị cắt thêm.
+  Sửa đúng cách cần chuyển phần tràn lề ra khỏi đơn vị `vw` — tức là đổi cấu
+  trúc khối hero, cùng chỗ với `A15`. Gộp hai việc làm một lần, khi chủ site
+  quyết định hướng bố cục hero.
 - `[!] A9` **Zalo OA.** Bản cào có `zalo.me/4500053981574656766` (OA chính
   thức), trong khi site đang dùng `zalo.me/0367848918` (số cá nhân). Cần chủ
   site chọn kênh nào là kênh chính thức để khai nhất quán.
