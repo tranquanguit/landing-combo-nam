@@ -1,0 +1,181 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "phuc-hoi-da",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "collagen-peptide-cream",
+  "translationKey": "collagen-peptide-cream",
+  "sku": "8938552914044",
+  "price": 250000,
+  "locale": "vi",
+  "name": "Mocha Collagen Peptide Cream – kem dưỡng phục hồi 30gr",
+  "shortName": "Collagen Peptide Cream",
+  "primaryKeyword": "kem dưỡng phục hồi mocha collagen peptide",
+  "seo": {
+    "title": "Kem dưỡng phục hồi Mocha Collagen Peptide Cream 30gr | Mocha",
+    "description": "Kem dưỡng với Pro-vitamin B5, chiết xuất rau má, HA và tế bào gốc thực vật — đúng danh sách in trên hũ. {{price}}, freeship."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "hỗ trợ cấp ẩm, làm dịu da và duy trì độ mềm mịn",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
+      "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
+      "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Collagen Peptide Cream – 30gr",
+      "note": "Kem dưỡng dùng hằng ngày",
+      "price": 250000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, xem tình trạng da qua hình ảnh",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước dưỡng cơ bản",
+      "heading": "Kem dưỡng cho giai đoạn da cần yên, không cần thêm hoạt chất mạnh",
+      "lead": "Hũ 30gr với <strong>Pro-vitamin B5, chiết xuất rau má, HA và tế bào gốc thực vật</strong> — đúng bốn nhóm in trên hũ. Đây là bước dưỡng nền, không phải bước đặc trị.",
+      "usp": [
+        {
+          "text": "<strong>Bốn nhóm thành phần in thẳng trên hũ</strong>, đọc được trước khi mở nắp",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "in trên bao bì sản phẩm"
+        },
+        {
+          "text": "<strong>Không chứa hoạt chất đặc trị sắc tố</strong> — chủ ý, vì đây là bước để da nghỉ",
+          "evidence": "ingredient",
+          "qualifier": "xem bảng thành phần"
+        },
+        {
+          "text": "<strong>Nhà sản xuất định vị cho mọi loại da</strong>",
+          "evidence": "ingredient",
+          "qualifier": "theo mô tả của nhà sản xuất"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-collagen-peptide.webp",
+        "alt": "Hộp và hũ kem Mocha Collagen Peptide Cream 30gr màu xanh ngọc"
+      },
+      "primaryCta": "Đặt kem dưỡng",
+      "secondaryCta": {
+        "label": "Xem bảng thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Bảng thành phần",
+      "heading": "Bốn nhóm, và vai trò của từng nhóm",
+      "intro": "Đây là công thức dưỡng nền: giữ ẩm và làm dịu, không có hoạt chất tác động lên sắc tố.",
+      "caption": "Bảng này liệt kê bốn nhóm thành phần được IN TRÊN HŨ 30gr. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
+      "rows": [
+        {
+          "name": "Pro-vitamin B5 (Panthenol)",
+          "role": "Giữ ẩm, hướng tới làm dịu cảm giác căng và đỏ.",
+          "suitedFor": "Da khô, da vừa qua treatment"
+        },
+        {
+          "name": "Chiết xuất rau má (Centella)",
+          "role": "Thành phần quen thuộc trong nhóm làm dịu nền da.",
+          "suitedFor": "Da dễ đỏ, da sau peel"
+        },
+        {
+          "name": "Hyaluronic Acid",
+          "role": "Chất hút ẩm, giữ nước lại trên lớp sừng.",
+          "suitedFor": "Mọi loại da"
+        },
+        {
+          "name": "Tế bào gốc thực vật",
+          "role": "Chiết xuất từ mô thực vật nuôi cấy, dùng như thành phần dưỡng.",
+          "suitedFor": "Da cần bước dưỡng nhẹ"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Hai bước",
+      "totalTime": "PT1M",
+      "intro": "Thứ tự lấy từ hướng dẫn của nhà sản xuất.",
+      "items": [
+        {
+          "heading": "Chia đều năm điểm",
+          "body": "Lượng bằng hạt đậu, chấm lên hai má, cằm, trán và mũi."
+        },
+        {
+          "heading": "Thoa đều và vỗ nhẹ",
+          "body": "Vỗ nhẹ cho kem thấm, không chà xát."
+        }
+      ],
+      "footnote": "Nếu bạn đang dùng một liệu trình có hoạt chất tác động lên sắc tố, hãy chọn một trong hai chứ đừng chồng cả hai lớp kem — nhiều lớp không cộng thêm hiệu quả, chỉ cộng thêm nguy cơ bí da."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng phù hợp với tình trạng da của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt chu kỳ sử dụng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Kem này giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho hũ 30gr. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Khác gì kem nám Smart Brightening?",
+          "a": "Khác hẳn mục đích. Kem nám mang các hoạt chất tác động lên sắc tố; kem này là bước dưỡng nền, giữ ẩm và làm dịu. Da đang cần nghỉ thì dùng kem này; da đang trong liệu trình làm mờ sắc tố thì dùng kem kia."
+        },
+        {
+          "q": "Dùng được cùng lúc cả hai không?",
+          "a": "Không nên chồng hai lớp kem dưỡng. Chọn một, tuỳ giai đoạn da bạn đang ở."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Nơi khô ráo thoáng mát, tránh ánh nắng trực tiếp và nhiệt độ cao. Đậy kín nắp sau khi dùng."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "phuc-hoi-da",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "biovector-brightening-cream",
+  "translationKey": "biovector-brightening-cream",
+  "sku": "8938552914167",
+  "price": 335000,
+  "locale": "vi",
+  "name": "Mocha Biovector Brightening Cream – kem dưỡng 30gr",
+  "shortName": "Biovector Brightening Cream",
+  "primaryKeyword": "kem dưỡng mocha biovector",
+  "seo": {
+    "title": "Kem dưỡng Mocha Biovector Brightening Cream 30gr | Mocha",
+    "description": "Sản phẩm duy nhất của Mocha công bố trọn vẹn danh sách INCI: Niacinamide, bộ ba rau má, nghệ, cúc bất tử, dầu mù u. {{price}}."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "hỗ trợ cấp ẩm, làm dịu da và cải thiện độ đều màu da",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
+      "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
+      "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Biovector Brightening Cream – 30gr",
+      "note": "Công nghệ Aminovector",
+      "price": 335000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, xem tình trạng da qua hình ảnh",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Công bố trọn danh sách",
+      "heading": "Sản phẩm duy nhất ở đây công bố đủ cả 45 thành phần theo INCI",
+      "lead": "Không phải “thành phần chính”, không phải bốn nhóm chọn lọc — mà <strong>toàn bộ danh sách</strong>, theo đúng thứ tự tỉ lệ giảm dần. Bạn đối chiếu được với bất kỳ sản phẩm nào khác, kể cả của hãng khác.",
+      "usp": [
+        {
+          "text": "<strong>Toàn bộ 45 thành phần INCI công bố công khai</strong>, theo thứ tự tỉ lệ giảm dần",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "danh sách đầy đủ ngay trên trang này"
+        },
+        {
+          "text": "<strong>Niacinamide đứng thứ năm</strong> trong danh sách, tức trước phần lớn các chiết xuất",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "đọc được từ chính thứ tự INCI"
+        },
+        {
+          "text": "<strong>Bộ ba rau má khai riêng từng chất</strong>: Asiaticoside, Madecassic Acid, Asiatic Acid",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "thay vì gộp thành “chiết xuất rau má”"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-biovector.webp",
+        "alt": "Chai kem dưỡng Mocha Biovector Brightening Cream 30gr, nhãn ghi Aminovector Technology"
+      },
+      "primaryCta": "Đặt kem dưỡng",
+      "secondaryCta": {
+        "label": "Xem đủ 45 thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Bảng thành phần",
+      "heading": "Mười hai thành phần đáng nói, trong danh sách đầy đủ 45 chất",
+      "intro": "Thứ tự trong danh sách INCI phản ánh tỉ lệ giảm dần. Đó là lý do vị trí của Niacinamide đáng chú ý hơn bản thân việc nó có mặt.",
+      "caption": "Danh sách INCI đầy đủ do nhà sản xuất công bố: Aqua, Sodium Polyacrylate, C13-14 Isoalkane, Laureth-7, Niacinamide, Glycerin, Sodium Palmitoyl Proline, Nymphaea Alba Flower Extract, Dicaprylyl Ether, Safflower Seed Oil Piperonyl Esters, Propanediol, Hydrogenated Polyisobutene, Glyceryl Stearate, Cetearyl Alcohol, Xylitylglucoside, Anhydroxylitol, Xylitol, Cyclopentasiloxane, Calophyllum Inophyllum Seed Oil, Sea Water, Lactobacillus Ferment, Curcuma Longa Root Extract, Helichrysum Italicum Extract, Titanium Dioxide, Asiaticoside, Madecassic Acid, Asiatic Acid, Ceteareth-20, Ceteareth-12, Cetyl Palmitate, Physalis Angulata Extract, Caprylic/Capric Triglyceride, Dipotassium Glycyrrhizate, Zinc Oxide, Ethylhexylglycerin, Phenoxyethanol, Butylene Glycol, Polysorbate 80, 1,2-Hexanediol, Citric Acid, Triethoxycaprylylsilane, Aluminium Hydroxide, Silica, Lecithin, Disodium EDTA, CI 42090. — Bảng dưới đây giải thích những thành phần đáng nói nhất, không phải toàn bộ danh sách.",
+      "rows": [
+        {
+          "name": "Niacinamide",
+          "role": "Hỗ trợ hàng rào bảo vệ da và độ đều màu. Đứng thứ năm trong danh sách INCI.",
+          "suitedFor": "Mọi loại da"
+        },
+        {
+          "name": "Asiaticoside, Madecassic Acid, Asiatic Acid",
+          "role": "Bộ ba hoạt chất chính của rau má, khai riêng từng chất thay vì gộp thành “chiết xuất rau má”.",
+          "suitedFor": "Da dễ đỏ, da sau treatment"
+        },
+        {
+          "name": "Nymphaea Alba Flower Extract",
+          "role": "Chiết xuất hoa súng trắng, dùng trong nhóm làm dịu.",
+          "suitedFor": "Da nhạy cảm"
+        },
+        {
+          "name": "Xylitylglucoside, Anhydroxylitol, Xylitol",
+          "role": "Bộ ba giữ ẩm gốc xylitol, thường đi cùng nhau trong công thức cấp ẩm.",
+          "suitedFor": "Da khô"
+        },
+        {
+          "name": "Lactobacillus Ferment",
+          "role": "Thành phần lên men, liên quan tới hệ vi sinh bề mặt da.",
+          "suitedFor": "Da dễ mất cân bằng"
+        },
+        {
+          "name": "Curcuma Longa Root Extract",
+          "role": "Chiết xuất nghệ, thành phần chống oxy hoá quen thuộc.",
+          "suitedFor": "Da xỉn màu"
+        },
+        {
+          "name": "Helichrysum Italicum Extract",
+          "role": "Chiết xuất cúc bất tử, dùng trong nhóm làm dịu.",
+          "suitedFor": "Da đang căng thẳng"
+        },
+        {
+          "name": "Dipotassium Glycyrrhizate",
+          "role": "Dẫn xuất từ cam thảo, thành phần làm dịu phổ biến.",
+          "suitedFor": "Da dễ kích ứng"
+        },
+        {
+          "name": "Calophyllum Inophyllum Seed Oil",
+          "role": "Dầu mù u, thành phần dưỡng bản địa.",
+          "suitedFor": "Da khô"
+        },
+        {
+          "name": "Titanium Dioxide, Zinc Oxide",
+          "role": "Hai khoáng chất phản xạ ánh sáng. Ở đây với lượng nhỏ trong công thức kem dưỡng, KHÔNG thay thế được kem chống nắng.",
+          "suitedFor": "—"
+        },
+        {
+          "name": "Sea Water",
+          "role": "Nước biển, nguồn khoáng trong công thức.",
+          "suitedFor": "Mọi loại da"
+        },
+        {
+          "name": "Physalis Angulata Extract",
+          "role": "Chiết xuất tầm bóp, thành phần dưỡng.",
+          "suitedFor": "Mọi loại da"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Hai lần mỗi ngày",
+      "totalTime": "PT1M",
+      "intro": "Thứ tự lấy từ hướng dẫn của nhà sản xuất.",
+      "items": [
+        {
+          "heading": "Làm sạch da trước",
+          "body": "Rửa mặt và lau khô."
+        },
+        {
+          "heading": "Thoa đều và vỗ nhẹ",
+          "body": "Lấy lượng tuỳ nhu cầu của da, thoa đều rồi vỗ nhẹ cho thấm."
+        }
+      ],
+      "footnote": "Công thức có Titanium Dioxide và Zinc Oxide với lượng nhỏ, nhưng đây <strong>không phải kem chống nắng</strong> và không thay thế được bước chống nắng buổi sáng."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng phù hợp với tình trạng da của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt chu kỳ sử dụng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Kem này giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho chai 30gr. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Có Titanium Dioxide và Zinc Oxide thì có chống nắng được không?",
+          "a": "Không. Hai khoáng chất đó là màng lọc vật lý khi ở nồng độ cao trong một công thức chống nắng được thiết kế riêng và được kiểm nghiệm chỉ số. Ở đây chúng nằm cuối danh sách INCI với lượng nhỏ. Vẫn cần kem chống nắng riêng vào buổi sáng."
+        },
+        {
+          "q": "Vì sao chỉ sản phẩm này công bố đủ INCI?",
+          "a": "Đó là điều chúng tôi cũng muốn thấy ở mọi sản phẩm. Hiện tại nhà sản xuất mới công bố đầy đủ cho sản phẩm này; với các sản phẩm khác, trang chỉ ghi đúng những gì in trên bao bì và không tự điền thêm."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Tránh nhiệt độ cao và ánh nắng trực tiếp, đóng nắp sau khi dùng, để xa tầm tay trẻ em. Tránh tiếp xúc với mắt."
+        }
+      ]
+    }
+  ]
+}

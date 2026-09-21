@@ -1,0 +1,224 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "phuc-hoi-da",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "biovector-brightening-cream",
+  "translationKey": "biovector-brightening-cream",
+  "sku": "8938552914167",
+  "price": 335000,
+  "locale": "en",
+  "name": "Mocha Biovector Brightening Cream – 30g",
+  "shortName": "Biovector Brightening Cream",
+  "primaryKeyword": "mocha biovector brightening cream",
+  "seo": {
+    "title": "Mocha Biovector Brightening Cream, 30g | Mocha Vietnam",
+    "description": "The one Mocha product with its complete INCI list published: niacinamide, the centella trio, turmeric, immortelle, tamanu oil. {{price}}."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "helps hydrate, calm the skin and support an even tone",
+    "warnings": [
+      "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
+      "Discontinue use if irritation occurs. Avoid direct contact with the eyes.",
+      "If you are pregnant or breastfeeding, speak to your doctor before use.",
+      "Results vary between individuals and depend on consistent daily sun protection.",
+      "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Biovector Brightening Cream – 30g",
+      "note": "Aminovector technology",
+      "price": 335000,
+      "recommended": true
+    },
+    {
+      "label": "I would like advice first",
+      "note": "An adviser calls you back and reviews your skin from photos",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "The full list published",
+      "heading": "The one product here with all 45 INCI ingredients published",
+      "lead": "Not “key ingredients”, not four selected groups — the <strong>entire list</strong>, in descending order of proportion. You can compare it against any other product, including other brands.",
+      "usp": [
+        {
+          "text": "<strong>All 45 INCI ingredients published</strong>, in descending order of proportion",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "the complete list is on this page"
+        },
+        {
+          "text": "<strong>Niacinamide is fifth on the list</strong>, ahead of most of the extracts",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "readable from the INCI order itself"
+        },
+        {
+          "text": "<strong>The centella trio named individually</strong>: asiaticoside, madecassic acid, asiatic acid",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "rather than lumped into “centella extract”"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-biovector.webp",
+        "alt": "Bottle of Mocha Biovector Brightening Cream 30g labelled Aminovector Technology"
+      },
+      "primaryCta": "Order the cream",
+      "secondaryCta": {
+        "label": "See all 45 ingredients",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Free delivery nationwide",
+        "Inspect before you pay",
+        "7-day return if the product is faulty"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Ingredients",
+      "heading": "Twelve worth explaining, within the full list of 45",
+      "intro": "INCI order reflects descending proportion. That is why niacinamide's position matters more than the fact that it is present at all.",
+      "caption": "Full INCI list as published by the manufacturer: Aqua, Sodium Polyacrylate, C13-14 Isoalkane, Laureth-7, Niacinamide, Glycerin, Sodium Palmitoyl Proline, Nymphaea Alba Flower Extract, Dicaprylyl Ether, Safflower Seed Oil Piperonyl Esters, Propanediol, Hydrogenated Polyisobutene, Glyceryl Stearate, Cetearyl Alcohol, Xylitylglucoside, Anhydroxylitol, Xylitol, Cyclopentasiloxane, Calophyllum Inophyllum Seed Oil, Sea Water, Lactobacillus Ferment, Curcuma Longa Root Extract, Helichrysum Italicum Extract, Titanium Dioxide, Asiaticoside, Madecassic Acid, Asiatic Acid, Ceteareth-20, Ceteareth-12, Cetyl Palmitate, Physalis Angulata Extract, Caprylic/Capric Triglyceride, Dipotassium Glycyrrhizate, Zinc Oxide, Ethylhexylglycerin, Phenoxyethanol, Butylene Glycol, Polysorbate 80, 1,2-Hexanediol, Citric Acid, Triethoxycaprylylsilane, Aluminium Hydroxide, Silica, Lecithin, Disodium EDTA, CI 42090. — The table below explains the most notable ingredients, not the entire list.",
+      "rows": [
+        {
+          "name": "Niacinamide",
+          "role": "Supports the skin barrier and evenness of tone. Fifth on the INCI list.",
+          "suitedFor": "All skin types"
+        },
+        {
+          "name": "Asiaticoside, madecassic acid, asiatic acid",
+          "role": "The three main centella actives, named individually rather than lumped into “centella extract”.",
+          "suitedFor": "Easily flushed or recently treated skin"
+        },
+        {
+          "name": "Nymphaea alba flower extract",
+          "role": "White water lily extract, used among calming ingredients.",
+          "suitedFor": "Sensitive skin"
+        },
+        {
+          "name": "Xylitylglucoside, anhydroxylitol, xylitol",
+          "role": "A xylitol-based humectant trio that usually appears together.",
+          "suitedFor": "Dry skin"
+        },
+        {
+          "name": "Lactobacillus ferment",
+          "role": "Fermented ingredient, related to the skin surface microbiome.",
+          "suitedFor": "Easily unbalanced skin"
+        },
+        {
+          "name": "Curcuma longa root extract",
+          "role": "Turmeric extract, a familiar antioxidant.",
+          "suitedFor": "Dull skin"
+        },
+        {
+          "name": "Helichrysum italicum extract",
+          "role": "Immortelle extract, used among calming ingredients.",
+          "suitedFor": "Stressed skin"
+        },
+        {
+          "name": "Dipotassium glycyrrhizate",
+          "role": "Liquorice derivative, a common calming ingredient.",
+          "suitedFor": "Easily irritated skin"
+        },
+        {
+          "name": "Calophyllum inophyllum seed oil",
+          "role": "Tamanu oil, a regional conditioning ingredient.",
+          "suitedFor": "Dry skin"
+        },
+        {
+          "name": "Titanium dioxide, zinc oxide",
+          "role": "Two light-reflecting minerals. Present in small amounts in a moisturiser here and NOT a substitute for sunscreen.",
+          "suitedFor": "—"
+        },
+        {
+          "name": "Sea water",
+          "role": "Seawater, a mineral source in the formula.",
+          "suitedFor": "All skin types"
+        },
+        {
+          "name": "Physalis angulata extract",
+          "role": "Cutleaf groundcherry extract, a conditioning ingredient.",
+          "suitedFor": "All skin types"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use",
+      "heading": "Twice a day",
+      "totalTime": "PT1M",
+      "intro": "The order is taken from the manufacturer's instructions.",
+      "items": [
+        {
+          "heading": "Cleanse first",
+          "body": "Wash and dry your face."
+        },
+        {
+          "heading": "Spread and pat in",
+          "body": "Take as much as your skin needs, spread evenly and pat until absorbed."
+        }
+      ],
+      "footnote": "The formula contains small amounts of titanium dioxide and zinc oxide, but this is <strong>not a sunscreen</strong> and does not replace the morning sun protection step."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City — tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support through the full routine</strong> by email."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "FAQ",
+      "heading": "Questions people actually ask",
+      "items": [
+        {
+          "q": "How much is it?",
+          "a": "<strong>{{price}}</strong> for the 30g bottle. Free delivery, pay on delivery."
+        },
+        {
+          "q": "Does the titanium dioxide and zinc oxide make it a sunscreen?",
+          "a": "No. Those minerals act as physical filters at high concentration in a formula designed and tested for an SPF figure. Here they sit near the end of the INCI list in small amounts. You still need a separate sunscreen in the morning."
+        },
+        {
+          "q": "Why is this the only product with a full INCI list?",
+          "a": "It is what we would like to see for every product. At present the manufacturer publishes the complete list only for this one; for the others this site prints exactly what is on the packaging and does not fill in the rest."
+        },
+        {
+          "q": "How should it be stored?",
+          "a": "Keep away from heat and direct sunlight, close after use, keep out of reach of children. Avoid contact with the eyes."
+        }
+      ]
+    }
+  ]
+}
