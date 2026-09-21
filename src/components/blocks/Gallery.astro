@@ -1,0 +1,55 @@
+---
+import Section from '../Section.astro';
+import Picture from '../Picture.astro';
+import { t, type Locale } from '../../i18n/ui';
+interface Props { data: any; id?: string; locale: Locale; }
+const { data, id, locale } = Astro.props;
+
+// Không có văn bản đồng ý thì không đăng ảnh người thật. Ràng buộc này được thi
+// hành ở đây thay vì trông vào kỷ luật của người biên tập.
+const publishable = data.consent?.obtained === true;
+
+/**
+ * Chưa có văn bản đồng ý thì khối biến mất khỏi trang production.
+ *
+ * Bản trước để lại tiêu đề và một ô vàng ghi "chưa thu thập được văn bản đồng ý"
+ * — tức là in ghi chú nội bộ lên mặt khách hàng, và để lại một section cao vài
+ * trăm pixel không có nội dung gì. Khi chạy dev thì vẫn hiện để người biên tập
+ * biết mình đang thiếu gì.
+ */
+const showPlaceholder = !publishable && import.meta.env.DEV;
+---
+{(publishable || showPlaceholder) && (
+<Section id={id} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
+  {showPlaceholder && (
+    <p class="todo" data-todo>
+      ⚠️ {t(locale, 'todo')}: {data.consent?.statement}
+      {data.consent?.conditions && <> {data.consent.conditions}</>}
+      <br />Ảnh khách hàng đã được ẩn khỏi trang cho tới khi có văn bản đồng ý.
+    </p>
+  )}
+
+  {publishable && (
+  <ul class="gallery">
+    {data.images.map((img: any) => (
+      <li>
+        <Picture src={img.src} alt={img.alt} width={img.width} height={img.height}
+          sizes="(min-width: 860px) 25vw, 50vw" />
+        {img.caption && <p class="cap">{img.caption}</p>}
+      </li>
+    ))}
+  </ul>
+  )}
+  {publishable && data.disclaimer && <p class="disclaimer">{data.disclaimer}</p>}
+  {publishable && data.consent?.conditions && <p class="disclaimer">{data.consent.conditions}</p>}
+</Section>
+)}
+
+<style>
+  .gallery { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-4); grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 860px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+  .gallery li { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden; }
+  .gallery :global(img) { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top center; }
+  .cap { padding: var(--s-2) var(--s-3); margin: 0; font-size: var(--t-xs); color: var(--ink-muted); text-align: center; }
+  .disclaimer { margin-top: var(--s-4); text-align: center; font-size: var(--t-xs); color: var(--ink-muted); max-width: 70ch; margin-inline: auto; }
+</style>

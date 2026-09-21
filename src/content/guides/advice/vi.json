@@ -1,0 +1,54 @@
+{
+  "locale": "vi",
+  "translationKey": "advice-index",
+  "status": "published",
+  "sections": [
+    {
+      "id": "doc-gi-truoc",
+      "heading": "Đọc gì trước, nếu bạn mới bắt đầu tìm hiểu",
+      "body": [
+        "Phần lớn người tìm đến đây đã thử ít nhất một sản phẩm và thấy không ăn thua. Trước khi đọc tiếp về bất kỳ hoạt chất nào, có một câu cần trả lời xong: vùng da sẫm màu của bạn nằm ở tầng nào.",
+        "Sạm màu ở lớp biểu bì và sắc tố nằm sâu dưới trung bì phản ứng rất khác nhau với cùng một hoạt chất, và cần khoảng thời gian rất khác nhau. Đọc nhầm nhóm là lý do phổ biến nhất khiến người ta bỏ cuộc giữa chừng — không phải vì sản phẩm sai, mà vì kỳ vọng đặt sai chỗ."
+      ]
+    },
+    {
+      "id": "cach-chung-toi-viet",
+      "heading": "Những bài ở đây được viết theo nguyên tắc nào",
+      "body": [
+        "Mỗi bài giải thích cơ chế trước, nói tới sản phẩm sau, và nhiều bài không nhắc tới sản phẩm nào cả. Đó là chủ ý: một bài viết mà đoạn nào cũng dẫn về nút mua thì không còn là bài giải thích nữa.",
+        "Chúng tôi không đăng con số mà không nói nó đến từ đâu. Khi một nồng độ được nhắc tới, đó là nồng độ in trên bao bì sản phẩm, và bạn kiểm chứng được bằng cách nhìn vào chính vỏ hộp. Khi một mốc thời gian được nhắc tới, nó đi kèm điều kiện — vì không có mốc thời gian nào đúng cho tất cả mọi người.",
+        "Và có những câu chúng tôi không viết. Mỹ phẩm không chữa bệnh. Nếu tình trạng da của bạn cần can thiệp y khoa, thứ bạn cần là một bác sĩ da liễu chứ không phải một bài blog."
+      ]
+    },
+    {
+      "id": "khi-nao-di-kham",
+      "heading": "Khi nào nên dừng tự tìm hiểu và đi khám",
+      "body": [
+        "Có vài dấu hiệu mà không bài viết nào thay thế được việc gặp bác sĩ: vùng sẫm màu thay đổi nhanh về hình dạng hoặc bờ viền; da mỏng, nổi mạch máu, châm chích kéo dài sau khi dùng sản phẩm không rõ nguồn gốc; hoặc bạn đang dùng thuốc theo toa mà chưa hỏi ý kiến về việc thêm sản phẩm bôi ngoài da.",
+        "Phụ nữ mang thai hoặc đang cho con bú nên hỏi bác sĩ trước khi bắt đầu bất kỳ sản phẩm chăm sóc da nào, kể cả những sản phẩm không chứa retinoid."
+      ]
+    },
+    {
+      "id": "mot-viec-quan-trong-nhat",
+      "heading": "Nếu chỉ làm được một việc, hãy làm việc này",
+      "body": [
+        "Chống nắng mỗi sáng. Không phải vì nó là bước thú vị nhất, mà vì nó là bước duy nhất mà bỏ qua sẽ làm mọi bước còn lại mất ý nghĩa. Tia UV kích hoạt lại quá trình sinh sắc tố nhanh hơn bất kỳ hoạt chất nào làm mờ được nó.",
+        "Đây cũng là lý do mọi lộ trình trên trang này đều có bước chống nắng, và vì sao chúng tôi nói thẳng rằng một liệu trình không kèm chống nắng thì không nên kỳ vọng nhiều."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Góc tư vấn này do ai viết?",
+      "a": "Do đội ngũ vận hành website biên soạn, dựa trên thông tin nhà sản xuất công bố và tài liệu chuyên ngành về chăm sóc da. Đây là nội dung tham khảo, không phải tư vấn y khoa cá nhân hoá."
+    },
+    {
+      "q": "Vì sao nhiều bài không nhắc tới sản phẩm nào?",
+      "a": "Vì câu hỏi bạn mang tới thường chưa phải là câu hỏi về sản phẩm. Biết mình thuộc nhóm nào và kỳ vọng bao lâu là thứ quyết định bạn có đi hết liệu trình hay không — quan trọng hơn nhiều so với việc chọn nhãn nào."
+    },
+    {
+      "q": "Thông tin ở đây có thay thế được ý kiến bác sĩ không?",
+      "a": "Không. Đây là nội dung giải thích cơ chế chung. Tình trạng da cụ thể của bạn cần người khám trực tiếp mới kết luận được."
+    }
+  ]
+}

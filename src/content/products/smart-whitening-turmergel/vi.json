@@ -1,0 +1,210 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "cham-soc-da-mun",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "smart-whitening-turmergel",
+  "translationKey": "smart-whitening-turmergel",
+  "sku": "8938552914303",
+  "price": 215000,
+  "locale": "vi",
+  "name": "Mocha Smart Whitening Turmergel – gel chấm thâm sau mụn 20gr",
+  "shortName": "Smart Whitening Turmergel",
+  "primaryKeyword": "kem chấm thâm mụn mocha",
+  "seo": {
+    "title": "Gel chấm thâm sau mụn Mocha Smart Whitening 20gr | Mocha",
+    "description": "Sabiwhite 0,3%, Niacinamide 3%, Tranexamic Acid 3%, Glutathione, TECA, EGF — nồng độ công bố. Dùng buổi tối. {{price}}."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "hỗ trợ làm mờ vùng da sẫm màu sau mụn và cải thiện độ đều màu da",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
+      "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
+      "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Smart Whitening Turmergel – 20gr",
+      "note": "Dùng mỗi tối",
+      "price": 215000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, xem tình trạng da qua hình ảnh",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước sau khi nốt mụn đã lặn",
+      "heading": "Vết thâm sau mụn là chuyện sắc tố, không còn là chuyện mụn nữa",
+      "lead": "Tuýp 20gr với <strong>Sabiwhite® 0,3%, Niacinamide 3%, Tranexamic Acid 3%, Glutathione</strong> cùng TECA, EGF và MC Zyme E. Ba nồng độ đầu do nhà sản xuất công bố.",
+      "usp": [
+        {
+          "text": "<strong>Ba nồng độ công bố bằng số</strong>: Sabiwhite 0,3%, Niacinamide 3%, Tranexamic Acid 3%",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "số liệu nhà sản xuất công bố"
+        },
+        {
+          "text": "<strong>Cùng nhóm hoạt chất với kem nám</strong> — Tranexamic Acid và Niacinamide, ở dạng gel chấm điểm",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "so sánh được với bảng thành phần combo nám"
+        },
+        {
+          "text": "<strong>Dùng khi nốt mụn đã lặn</strong>, không phải khi đang sưng viêm",
+          "evidence": "ingredient",
+          "qualifier": "xem phần hướng dẫn"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-smart-white-plus.webp",
+        "alt": "Tuýp gel Mocha Smart Whitening Quickly Turmergel 20gr"
+      },
+      "primaryCta": "Đặt gel chấm thâm",
+      "secondaryCta": {
+        "label": "Xem bảng thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Bảng thành phần",
+      "heading": "Tám thành phần, ba trong số đó công bố bằng số",
+      "intro": "Nhóm hoạt chất ở đây trùng phần lớn với kem nám — vì vết thâm sau mụn và nám đều là chuyện sắc tố, chỉ khác nguyên nhân khởi phát.",
+      "caption": "Bảng này liệt kê các thành phần nhà sản xuất công bố; bốn hoạt chất chính cũng được IN TRÊN VỎ TUÝP. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
+      "rows": [
+        {
+          "name": "Sabiwhite® 0,3%",
+          "role": "Chiết xuất nghệ trắng chuẩn hoá. Nồng độ do nhà sản xuất công bố.",
+          "suitedFor": "Vùng da sẫm màu sau mụn"
+        },
+        {
+          "name": "Niacinamide 3%",
+          "role": "Hỗ trợ hàng rào bảo vệ da và độ đều màu.",
+          "suitedFor": "Mọi loại da"
+        },
+        {
+          "name": "Tranexamic Acid 3%",
+          "role": "Được nghiên cứu nhiều trong nhóm làm mờ vùng da sẫm màu do tăng sắc tố.",
+          "suitedFor": "Thâm sau mụn"
+        },
+        {
+          "name": "Glutathione",
+          "role": "Thành phần chống oxy hoá, quen thuộc trong nhóm làm đều màu da.",
+          "suitedFor": "Da không đều màu"
+        },
+        {
+          "name": "MC Zyme E",
+          "role": "Phức hợp enzyme, hỗ trợ làm sạch lớp sừng bề mặt.",
+          "suitedFor": "Da xỉn màu, lớp sừng dày"
+        },
+        {
+          "name": "TECA",
+          "role": "Chiết xuất rau má chuẩn hoá, thành phần làm dịu.",
+          "suitedFor": "Da sau mụn viêm"
+        },
+        {
+          "name": "EGF",
+          "role": "Yếu tố tăng trưởng biểu bì, thành phần dưỡng.",
+          "suitedFor": "Da đang phục hồi"
+        },
+        {
+          "name": "Biomimetic Fluid Tears",
+          "role": "Thành phần dưỡng ẩm, tạo lớp màng giữ nước.",
+          "suitedFor": "Da khô"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Ba bước, dùng buổi tối",
+      "totalTime": "PT2M",
+      "intro": "Thứ tự và liều lượng lấy từ hướng dẫn của nhà sản xuất.",
+      "items": [
+        {
+          "heading": "Làm sạch da mặt",
+          "body": "Rửa mặt và lau khô."
+        },
+        {
+          "heading": "Thoa đều hoặc chấm vùng thâm",
+          "body": "Hai đến ba hạt đậu là đủ cho toàn mặt. Massage nhẹ cho thấm."
+        },
+        {
+          "heading": "Dùng đều mỗi tối",
+          "body": "Sản phẩm dùng buổi tối; ban ngày cần kem chống nắng, nếu không thì vùng thâm sẽ sẫm lại."
+        }
+      ],
+      "footnote": "Dùng khi nốt mụn đã lặn. Vùng da đang sưng viêm cần bước khác — và nếu tình trạng mụn nặng hoặc kéo dài thì đó là việc của bác sĩ da liễu."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng phù hợp với tình trạng da của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt chu kỳ sử dụng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Gel này giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho tuýp 20gr. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Bao lâu thì thấy khác biệt?",
+          "a": "Chúng tôi không đưa con số. Vết thâm sau mụn nằm ở độ sâu rất khác nhau tuỳ mức độ viêm trước đó, nên một mốc thời gian chung sẽ sai với phần lớn người đọc. Điều chắc chắn hơn: không chống nắng thì vùng thâm sẽ sẫm lại nhanh hơn mức bất kỳ sản phẩm nào làm mờ được."
+        },
+        {
+          "q": "Khác gì kem nám Smart Brightening?",
+          "a": "Nhóm hoạt chất trùng phần lớn — cả hai đều có Tranexamic Acid và Niacinamide. Khác ở dạng dùng và diện tích: gel này 20gr để chấm vùng thâm sau mụn, kem nám 30gr cho toàn mặt trong một liệu trình dài hơn."
+        },
+        {
+          "q": "Dùng lúc đang có mụn viêm được không?",
+          "a": "Không phải lúc. Đây là bước sau khi nốt mụn đã lặn. Vùng đang sưng viêm cần sản phẩm khác."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Tránh nhiệt độ cao và ánh nắng trực tiếp, đóng nắp sau khi dùng, để xa tầm tay trẻ em."
+        }
+      ]
+    }
+  ]
+}

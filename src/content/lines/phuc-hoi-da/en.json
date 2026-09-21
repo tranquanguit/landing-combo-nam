@@ -1,0 +1,119 @@
+{
+  "slug": "phuc-hoi-da",
+  "locale": "en",
+  "translationKey": "phuc-hoi-da",
+  "status": "published",
+  "primaryKeyword": "moisturiser for skin recovering after treatment",
+  "seo": {
+    "title": "Recovery for skin after treatments and routines | Mocha Vietnam",
+    "description": "When to stop strong actives and fall back to a base routine, how to read INCI order, and why extra layers add no extra effect."
+  },
+  "eyebrow": "Product line",
+  "heading": "Recovery",
+  "lead": "A line for the phase when skin needs quiet: hydrate, calm, and add nothing that competes with anything else.",
+  "products": [
+    "biovector-brightening-cream",
+    "collagen-peptide-cream",
+    "ultra-egf-bio-gel-mask"
+  ],
+  "compare": {
+    "eyebrow": "Which one",
+    "heading": "Three options, chosen by what you need",
+    "intro": "Two moisturisers and a mask. All three hydrate and calm rather than treat.",
+    "criteria": [
+      {
+        "label": "Ingredient disclosure",
+        "values": [
+          "All 45 INCI ingredients, in order of proportion",
+          "Four groups printed on the jar",
+          "Eight ingredients printed on the tube"
+        ]
+      },
+      {
+        "label": "Notable ingredients",
+        "values": [
+          "Niacinamide (fifth), the centella trio named individually, turmeric, immortelle, tamanu oil",
+          "Pro-vitamin B5, centella extract, hyaluronic acid, plant stem cells",
+          "EGF, Epi-On, copper peptide, exosome cica, three nano ceramides"
+        ]
+      },
+      {
+        "label": "Who it suits",
+        "values": [
+          "Anyone who wants to check each ingredient before buying",
+          "Anyone who wants a light moisturising step without reading a list",
+          "Anyone wanting an occasional extra hydrating step"
+        ]
+      },
+      {
+        "label": "Acts on pigment",
+        "values": [
+          "Not a pigment treatment step",
+          "No — deliberately; this is the resting step",
+          "No — hydrating and calming only"
+        ]
+      },
+      {
+        "label": "Replaces sunscreen",
+        "values": [
+          "No, despite small amounts of titanium dioxide and zinc oxide",
+          "No",
+          "No"
+        ]
+      }
+    ],
+    "footnote": "Do not layer both. Extra layers add congestion risk rather than extra effect — pick one, according to the phase your skin is in."
+  },
+  "sections": [
+    {
+      "id": "khi-nao-dung-lai",
+      "heading": "When to stop the strong actives and fall back to a base routine",
+      "body": [
+        "There is a moment most people miss: when skin starts stinging at something it tolerated last week. That is not a sign to add another active, it is a sign the barrier is thinning.",
+        "Other signs in the same family: tightness right after washing even with a gentle cleanser; flushing at temperature changes; a familiar moisturiser suddenly feeling slightly sharp going on.",
+        "At that point the job is to subtract, not add. Keep three steps — cleanse, moisturise, sun protection — and pause everything else until those signs have gone."
+      ],
+      "links": [
+        {
+          "label": "See the full combo routine",
+          "href": "/en/combo-nam/#lo-trinh"
+        }
+      ]
+    },
+    {
+      "id": "doc-inci",
+      "heading": "How to read INCI order, and why position matters more than presence",
+      "body": [
+        "An INCI list runs in descending proportion down to the 1% threshold; below that the manufacturer chooses the order. So an ingredient listed fifth is certainly present in greater quantity than one listed thirtieth.",
+        "This is why “contains niacinamide” says almost nothing. A formula with niacinamide fifth and one with it thirty-eighth may both print that sentence on the box.",
+        "On this site, where the manufacturer publishes the full list we print the full list. Where the packaging shows only a few groups, we print only those groups and do not fill in the rest ourselves."
+      ]
+    },
+    {
+      "id": "nhieu-lop",
+      "heading": "Extra layers do not add extra effect",
+      "body": [
+        "Layering many products rests on a simple assumption: more is better. For skin that assumption fails — the amount of active that crosses the outer layer is limited, and the surplus sits on the surface.",
+        "What sits there does two unwanted things: it traps heat and sebum, and it makes sunscreen applied afterwards adhere less well.",
+        "Two moisturisers stacked on each other is the clearest case. Pick one."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "What should I use after laser or microneedling?",
+      "a": "That is a medical situation, and the right person to answer is the doctor who performed it. This site does not replace that advice, even where the manufacturer positions a product for that group."
+    },
+    {
+      "q": "Do I have to stop the brightening cream to use a recovery one?",
+      "a": "If your skin shows signs of thinning — stinging, tightness, redness — pause the treatment step and keep the three basics until it settles. Two weeks off and then returning is still faster than pushing through and needing two months off."
+    },
+    {
+      "q": "Can a moisturiser work as sunscreen?",
+      "a": "No, even where titanium dioxide or zinc oxide appear in the ingredients. Those work as filters only at high concentration in a formula designed and tested for that purpose."
+    }
+  ],
+  "articles": [
+    "nam-noi-tiet-la-gi"
+  ]
+}

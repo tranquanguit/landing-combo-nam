@@ -1,0 +1,66 @@
+{
+  "slug": "chinh-sach-doi-tra",
+  "locale": "en",
+  "translationKey": "policy-doi-tra",
+  "status": "published",
+  "seo": {
+    "title": "Returns policy | Mocha Vietnam",
+    "description": "When an exchange is possible, when it is not, who pays for shipping, and what to keep. Written plainly so you know before you order."
+  },
+  "title": "Returns policy",
+  "lead": "We have written this plainly, including the cases where an exchange is not possible. Knowing before you buy is better than finding out when you want to return something.",
+  "updatedAt": "2026-09-16",
+  "sections": [
+    {
+      "id": "check-on-delivery",
+      "heading": "Check the parcel on delivery",
+      "body": [
+        "You may <strong>open and inspect the parcel before paying</strong>. Check the product name, volume, expiry date and the seal in front of the delivery staff.",
+        "If the delivery is wrong, incomplete, damaged or expired, <strong>refuse it and do not pay</strong>. That is the fastest resolution for both sides; call the hotline straight afterwards and we will send a replacement."
+      ]
+    },
+    {
+      "id": "eligible",
+      "heading": "What can be exchanged",
+      "body": [
+        "Wrong product, wrong volume, or a missing item compared with the package you ordered.",
+        "Damage in transit: broken, cracked, leaking, or torn packaging.",
+        "The seal is intact but the product shows something abnormal: colour change, separation, unusual smell.",
+        "The product is past, or very close to, its expiry date at the time of delivery.",
+        "In all of these cases <strong>Mocha pays shipping in both directions</strong>."
+      ]
+    },
+    {
+      "id": "not-eligible",
+      "heading": "What cannot be exchanged",
+      "body": [
+        "<strong>The seal has been broken and the product used, with no fault in the product.</strong> Cosmetics are applied directly to skin; an opened product cannot be resold to someone else, so we do not accept change-of-mind returns.",
+        "<strong>The product did not suit your skin, or the result was not what you hoped for.</strong> This is why the product page states plainly that results vary with skin type and with daily sun protection, rather than promising one figure for everyone. If you experience irritation, stop using it and call the hotline — we handle those cases individually.",
+        "Damage from incorrect storage: left in heat or sunlight, in a closed car, or near a heat source.",
+        "Products bought anywhere other than Mocha or an official Mocha storefront."
+      ]
+    },
+    {
+      "id": "how-to-request",
+      "heading": "How to request an exchange",
+      "body": [
+        "Call the hotline or message us on Zalo using the details at the foot of the page, quoting your <strong>order code</strong> and attaching photographs of the product and its packaging.",
+        "Keep the box, the seal and the delivery note until the exchange is complete.",
+        "We reply within 24 working hours and agree the return method with you before you send anything back."
+      ]
+    },
+    {
+      "id": "outside-vietnam",
+      "heading": "If you are outside Vietnam",
+      "body": [
+        "Consumers in some countries have a statutory right to withdraw from a distance sale within a set period, even where the product is not faulty. We respect that right under the law where you live.",
+        "For cosmetics whose seal has been broken, many countries provide a hygiene exemption. Please contact us before sending anything back so we can confirm your specific case."
+      ]
+    }
+  ],
+  "pending": [
+    "The specific number of days in the exchange window from the date of delivery — not yet declared; it must be settled and entered both here and in the product file's returnPolicy field.",
+    "The return address, if different from the registered office.",
+    "Market-specific policy for countries outside Vietnam, if sales there actually take place."
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "slug": "nam-noi-tiet-la-gi",
+  "locale": "en",
+  "translationKey": "article-nam-noi-tiet",
+  "status": "published",
+  "primaryKeyword": "what is hormonal melasma",
+  "seo": {
+    "title": "What is hormonal pigmentation, and why does it come back?",
+    "description": "How hormone-linked facial pigmentation works: why it appears after pregnancy or a change in contraception, why it is symmetrical, and why it returns."
+  },
+  "title": "What is hormonal pigmentation, and why does it come back after fading?",
+  "lead": "If the darker areas on your face appeared after childbirth, after changing contraception, or fade in winter and return in summer, this is about your case specifically.",
+  "publishedAt": "2026-09-14",
+  "sections": [
+    {
+      "id": "mechanism",
+      "heading": "What happens under the skin",
+      "body": [
+        "Skin colour comes from melanin, made by cells called melanocytes. In healthy skin this runs at a steady rate and the pigment is spread fairly evenly.",
+        "Certain hormones — oestrogen and progesterone in particular — make those cells more reactive to stimulus, especially stimulus from ultraviolet light. When hormone levels shift sharply, the same amount of sun produces more pigment than it used to.",
+        "That is why this kind of darkening tends to show up during pregnancy, in the months after giving birth, or after starting an oral contraceptive. The skin has not suddenly become weaker; its reaction threshold has dropped."
+      ]
+    },
+    {
+      "id": "recognising",
+      "heading": "How to recognise it",
+      "body": [
+        "The clearest sign is symmetry: the two cheeks nearly mirror each other, sometimes reaching the forehead and the area above the lip. Darkening left behind by acne is scattered and not symmetrical like this.",
+        "The edges are usually soft, fading gradually rather than forming a sharply outlined spot. The colour runs brown or grey-brown depending on how deep the pigment sits.",
+        "And it moves with the seasons. Darker through the sunny months, lighter when there is less sun — this is the strongest clue separating it from darkening with other causes."
+      ]
+    },
+    {
+      "id": "recurrence",
+      "heading": "Why it returns",
+      "body": [
+        "This is the part people find discouraging. Topical products act on the pigment already present and on how fast new pigment forms. They do not change your hormonal background, and the melanocytes stay just as reactive underneath.",
+        "So when sun protection stops, or when hormones shift again — a second pregnancy, a change of medication, the years before menopause — the same mechanism starts over from the beginning.",
+        "A more useful way to think about it is long-term maintenance, closer to holding a body weight than to a course of treatment with an end date. Anyone telling you otherwise is selling something.",
+        "It also means sun protection is not a supporting step alongside a care product. It is the main step; the care product is the supporting one."
+      ]
+    },
+    {
+      "id": "when-to-see-a-professional",
+      "heading": "When to see a healthcare professional",
+      "body": [
+        "If a darker area appears suddenly on skin that was previously even, if it changes shape quickly, or if there is itching, bleeding or raised texture, this is not a cosmetics question. Go to a medical facility.",
+        "If you are pregnant or breastfeeding, ask a healthcare professional before using any skincare product, including products sold without prescription.",
+        "Cosmetics are topical products and are not a substitute for medical advice."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Does hormonal pigmentation clear up on its own after childbirth?",
+      "a": "For some people the darker areas fade over several months to a year after birth as hormones settle. For many others they do not, particularly when unprotected sun exposure continues. There is no way to know in advance which group you are in."
+    },
+    {
+      "q": "Do oral whitening supplements help?",
+      "a": "We do not sell and do not advise on oral products. Anything taken internally is worth raising with a healthcare professional first."
+    }
+  ],
+  "relatedLine": "nam-tham",
+  "relatedProducts": [
+    "combo-nam",
+    "smart-first-care-serum",
+    "smart-brightening-cream"
+  ]
+}

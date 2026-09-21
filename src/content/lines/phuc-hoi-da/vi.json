@@ -1,0 +1,119 @@
+{
+  "slug": "phuc-hoi-da",
+  "locale": "vi",
+  "translationKey": "phuc-hoi-da",
+  "status": "published",
+  "primaryKeyword": "kem dưỡng phục hồi da sau treatment",
+  "seo": {
+    "title": "Phục hồi da sau treatment và sau liệu trình | Mocha Việt Nam",
+    "description": "Khi nào nên dừng hoạt chất mạnh và chuyển sang bước dưỡng nền, cách đọc thứ tự INCI, và vì sao nhiều lớp kem không cộng thêm hiệu quả."
+  },
+  "eyebrow": "Dòng sản phẩm",
+  "heading": "Phục hồi da",
+  "lead": "Dòng dành cho giai đoạn da cần yên: giữ ẩm, làm dịu, và không thêm hoạt chất nào đang tranh việc với nhau.",
+  "products": [
+    "biovector-brightening-cream",
+    "collagen-peptide-cream",
+    "ultra-egf-bio-gel-mask"
+  ],
+  "compare": {
+    "eyebrow": "Chọn cái nào",
+    "heading": "Ba lựa chọn, chọn theo thứ bạn đang cần",
+    "intro": "Hai kem dưỡng và một mặt nạ. Cả ba đều thuộc nhóm cấp ẩm và làm dịu, không phải bước đặc trị.",
+    "criteria": [
+      {
+        "label": "Công bố thành phần",
+        "values": [
+          "Trọn vẹn 45 chất theo INCI, đúng thứ tự tỉ lệ",
+          "Bốn nhóm in trên hũ",
+          "Tám thành phần in trên vỏ tuýp"
+        ]
+      },
+      {
+        "label": "Thành phần nổi bật",
+        "values": [
+          "Niacinamide (đứng thứ 5), bộ ba rau má khai riêng, nghệ, cúc bất tử, dầu mù u",
+          "Pro-vitamin B5, chiết xuất rau má, HA, tế bào gốc thực vật",
+          "EGF, Epi-On, Copper Peptide, Exosome Cica, ba loại Nano Ceramide"
+        ]
+      },
+      {
+        "label": "Hợp với ai",
+        "values": [
+          "Người muốn đối chiếu được từng thành phần trước khi mua",
+          "Người cần một bước dưỡng nhẹ, không phải đọc bảng thành phần",
+          "Người muốn thêm một bước cấp ẩm thỉnh thoảng"
+        ]
+      },
+      {
+        "label": "Có tác động lên sắc tố không",
+        "values": [
+          "Không phải bước đặc trị sắc tố",
+          "Không — chủ ý, đây là bước để da nghỉ",
+          "Không — chỉ cấp ẩm và làm dịu"
+        ]
+      },
+      {
+        "label": "Thay được kem chống nắng không",
+        "values": [
+          "Không, dù công thức có Titanium Dioxide và Zinc Oxide lượng nhỏ",
+          "Không",
+          "Không"
+        ]
+      }
+    ],
+    "footnote": "Đừng chồng cả hai lớp kem. Nhiều lớp không cộng thêm hiệu quả, chỉ cộng thêm nguy cơ bí da — chọn một, tuỳ giai đoạn da bạn đang ở."
+  },
+  "sections": [
+    {
+      "id": "khi-nao-dung-lai",
+      "heading": "Khi nào nên dừng hoạt chất mạnh và chuyển sang bước dưỡng nền",
+      "body": [
+        "Có một khoảnh khắc mà phần lớn người dùng bỏ lỡ: lúc da bắt đầu châm chích với thứ mà tuần trước nó vẫn chịu được. Đó không phải dấu hiệu cần thêm hoạt chất, mà là dấu hiệu hàng rào bảo vệ đang mỏng đi.",
+        "Các dấu hiệu khác cùng nhóm: da căng ngay sau khi rửa dù dùng sữa rửa mặt dịu nhẹ; đỏ bừng khi thay đổi nhiệt độ; lớp kem dưỡng quen thuộc bỗng thấy rát nhẹ khi thoa.",
+        "Lúc đó việc cần làm là rút bớt, không phải thêm vào. Giữ ba bước — làm sạch, dưỡng ẩm, chống nắng — và tạm dừng mọi thứ còn lại cho tới khi những dấu hiệu trên hết hẳn."
+      ],
+      "links": [
+        {
+          "label": "Xem lộ trình đầy đủ của combo",
+          "href": "/combo-nam/#lo-trinh"
+        }
+      ]
+    },
+    {
+      "id": "doc-inci",
+      "heading": "Cách đọc thứ tự INCI, và vì sao vị trí quan trọng hơn sự có mặt",
+      "body": [
+        "Danh sách INCI xếp theo tỉ lệ giảm dần cho tới ngưỡng 1%; dưới ngưỡng đó thì thứ tự do nhà sản xuất chọn. Nghĩa là một thành phần đứng thứ năm chắc chắn có mặt nhiều hơn thành phần đứng thứ ba mươi.",
+        "Đây là lý do câu “có chứa niacinamide” gần như không nói gì. Một công thức có niacinamide ở vị trí thứ năm và một công thức có nó ở vị trí thứ ba mươi tám đều được phép ghi đúng câu đó trên bao bì.",
+        "Trên trang này, sản phẩm nào nhà sản xuất công bố đủ danh sách thì chúng tôi in đủ danh sách. Sản phẩm nào chỉ in vài nhóm trên bao bì thì chúng tôi chỉ ghi đúng vài nhóm ấy, và không tự điền thêm phần còn lại."
+      ]
+    },
+    {
+      "id": "nhieu-lop",
+      "heading": "Nhiều lớp không cộng thêm hiệu quả",
+      "body": [
+        "Thói quen chồng nhiều lớp dưỡng xuất phát từ một giả định đơn giản: nhiều hơn thì tốt hơn. Với da thì giả định đó không đúng — lượng hoạt chất thấm qua lớp sừng có giới hạn, và phần dư nằm lại trên bề mặt.",
+        "Phần nằm lại đó làm hai việc, cả hai đều không mong muốn: giữ nhiệt và bã nhờn gây bí, và làm lớp kem chống nắng thoa sau đó bám kém hơn.",
+        "Hai lớp kem dưỡng chồng nhau là trường hợp rõ nhất. Chọn một."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Da sau laser hay lăn kim thì dùng gì?",
+      "a": "Đó là tình huống y khoa, và người trả lời đúng là bác sĩ đã thực hiện thủ thuật cho bạn. Trang này không thay thế được lời khuyên đó, kể cả khi sản phẩm được nhà sản xuất định vị cho nhóm da ấy."
+    },
+    {
+      "q": "Dùng kem phục hồi thì có phải dừng kem nám không?",
+      "a": "Nếu da đang có dấu hiệu mỏng đi — châm chích, căng, đỏ — thì nên tạm dừng bước đặc trị và giữ ba bước cơ bản cho tới khi ổn lại. Dừng hai tuần rồi quay lại vẫn nhanh hơn là cố dùng tiếp rồi phải nghỉ hai tháng."
+    },
+    {
+      "q": "Kem dưỡng có chống nắng được không?",
+      "a": "Không, kể cả khi thành phần có Titanium Dioxide hoặc Zinc Oxide. Hai chất đó chỉ hoạt động như màng lọc ở nồng độ cao trong một công thức được thiết kế và kiểm nghiệm riêng cho mục đích chống nắng."
+    }
+  ],
+  "articles": [
+    "nam-noi-tiet-la-gi"
+  ]
+}

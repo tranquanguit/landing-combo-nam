@@ -1,0 +1,51 @@
+---
+import Section from '../Section.astro';
+import { richText } from '../../lib/richtext';
+interface Props {
+  section: {
+    id?: string; heading: string; body: string[];
+    links?: { label: string; href: string }[];
+  };
+  surface?: 'bone' | 'paper';
+  aboveFold?: boolean;
+}
+const { section, surface = 'paper', aboveFold = false } = Astro.props;
+const links = section.links ?? [];
+---
+<Section id={section.id} surface={surface} heading={section.heading} aboveFold={aboveFold}>
+  <div class="prose">
+    {section.body.map((para) => <p set:html={richText(para)} />)}
+    {links.length > 0 && (
+      <ul class="prose-links">
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    )}
+  </div>
+</Section>
+
+<style>
+  /* Văn bản dài đọc bằng mắt, không quét bằng mắt: dòng ngắn hơn phần còn lại
+     của trang, và khoảng cách dòng rộng hơn. 68 ký tự là mức dễ đọc nhất cho
+     tiếng Việt có dấu, vốn chiếm chiều cao dòng lớn hơn tiếng Anh. */
+  .prose { max-width: 68ch; }
+  .prose p { margin: 0 0 var(--s-5); line-height: 1.72; font-size: var(--t-base); }
+  .prose p:last-child { margin-bottom: 0; }
+
+  /* Liên kết đi kèm tách khỏi thân bài: người đọc lướt tới cuối mục mới quyết
+     định đi tiếp hay không, nên chúng đứng thành hàng riêng chứ không nằm lẫn
+     giữa câu. */
+  .prose-links {
+    list-style: none; padding: 0; margin: var(--s-5) 0 0;
+    display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-5);
+  }
+  .prose-links a {
+    display: inline-flex; align-items: center; gap: .45em;
+    font-weight: 600; text-decoration: none;
+    border-bottom: 1px solid currentColor; padding-bottom: 2px;
+  }
+  .prose-links a::after { content: "\2192"; transition: transform .18s ease; }
+  .prose-links a:hover::after { transform: translateX(3px); }
+  @media (prefers-reduced-motion: reduce) {
+    .prose-links a::after { transition: none; }
+  }
+</style>

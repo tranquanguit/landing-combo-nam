@@ -1,0 +1,78 @@
+{
+  "slug": "bao-ve-da",
+  "locale": "vi",
+  "translationKey": "bao-ve-da",
+  "status": "published",
+  "primaryKeyword": "kem chống nắng cho da nám",
+  "seo": {
+    "title": "Chống nắng cho da nám và da sau treatment | Mocha Việt Nam",
+    "description": "Vì sao bước chống nắng quyết định kết quả của mọi bước còn lại, cách chọn giữa lọc hoá học và lọc vật lý, và lượng dùng thực tế mỗi ngày."
+  },
+  "eyebrow": "Dòng sản phẩm",
+  "heading": "Bảo vệ da",
+  "lead": "Một dòng chỉ có một bước, nhưng là bước mà bỏ đi thì mọi bước khác mất phần lớn ý nghĩa.",
+  "products": [
+    "uv-block-sunscreen"
+  ],
+  "sections": [
+    {
+      "id": "vi-sao-buoc-nay",
+      "heading": "Vì sao chúng tôi đặt bước này thành một dòng riêng",
+      "body": [
+        "Chống nắng thường bị xếp cuối danh sách, sau kem dưỡng, sau serum, sau mọi thứ nghe có vẻ chủ động hơn. Nhưng trong chăm sóc da sạm nám, thứ tự quan trọng ấy bị đảo ngược.",
+        "Tia UV kích hoạt lại quá trình sinh sắc tố nhanh hơn bất kỳ hoạt chất nào làm mờ được nó. Nghĩa là một người dùng đủ serum và kem nhưng không chống nắng đang chạy hai chiều ngược nhau, và chiều mạnh hơn là chiều nắng.",
+        "Đó là lý do mọi lộ trình trên trang này đều kết thúc bằng bước chống nắng, và vì sao chúng tôi nói thẳng trong phần “ai không nên dùng” rằng người không chống nắng được mỗi sáng nên cân nhắc lại trước khi mua."
+      ],
+      "links": [
+        {
+          "label": "Xem lộ trình sáng và tối",
+          "href": "/combo-nam/#lo-trinh"
+        }
+      ]
+    },
+    {
+      "id": "hoa-hoc-hay-vat-ly",
+      "heading": "Lọc hoá học, lọc vật lý, và vì sao nhiều sản phẩm dùng cả hai",
+      "body": [
+        "Màng lọc hoá học hấp thụ tia UV rồi chuyển năng lượng đó thành nhiệt. Chúng thường cho kết cấu mỏng, thấm nhanh, không để lại vệt trắng — nhưng cần một lượng đủ lớn để đạt chỉ số ghi trên nhãn.",
+        "Màng lọc vật lý, chủ yếu là kẽm oxit và titan dioxit, phản xạ tia UV ngay trên bề mặt da. Chúng bền dưới nắng và ít gây kích ứng hơn, nhưng ở nồng độ cao thì nặng mặt và dễ để lại vệt trắng.",
+        "Dùng kết hợp cho phép giảm lượng của từng nhóm mà vẫn giữ phổ bảo vệ rộng. Đó là ý nghĩa của cụm “lý hoá” trên nhãn, và cũng là lý do một sản phẩm bảy màng lọc không đồng nghĩa với bảy lần hiệu quả — nó nghĩa là bảy thành phần chia nhau một nhiệm vụ."
+      ]
+    },
+    {
+      "id": "luong-dung",
+      "heading": "Lượng dùng mới là chỗ phần lớn người dùng hụt",
+      "body": [
+        "Chỉ số ghi trên nhãn được đo với một lượng chuẩn trong phòng thí nghiệm, dày hơn nhiều so với lượng người ta thực sự bôi. Bôi mỏng hơn thì mức bảo vệ thực tế giảm theo, không giảm tuyến tính mà giảm nhanh hơn.",
+        "Cách dễ nhất để không hụt là chấm đều năm điểm — trán, mũi, cằm, hai bên má — rồi mới dàn ra. Chấm trước rồi dàn cho lớp kem đều hơn hẳn so với lấy một cục rồi xoa từ một chỗ.",
+        "Và một lần bôi buổi sáng không giữ được suốt ngày nếu bạn ở ngoài trời liên tục, đổ mồ hôi nhiều hoặc tiếp xúc với nước."
+      ]
+    },
+    {
+      "id": "trong-nha",
+      "heading": "Ở trong nhà cả ngày thì có cần không",
+      "body": [
+        "Ánh sáng qua cửa kính và ánh sáng từ màn hình yếu hơn nắng trực tiếp rất nhiều. Nếu bạn ở sâu trong phòng, không gần cửa sổ, thì mức tiếp xúc là nhỏ.",
+        "Nhưng phần lớn ngày làm việc không diễn ra như vậy: có lúc ra ngoài ăn trưa, có lúc ngồi cạnh cửa kính, có lúc di chuyển. Thứ cộng dồn không phải cường độ mà là tổng thời gian.",
+        "Nói thẳng: nếu bạn thật sự không ra khỏi nhà và không ngồi gần cửa sổ, bỏ bước này vài hôm không phải thảm hoạ. Nhưng đừng xây cả một liệu trình trên giả định đó."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Chọn chỉ số bao nhiêu là đủ?",
+      "a": "Với khí hậu Việt Nam và với da đang trong liệu trình làm mờ sắc tố, SPF 50 là mức thường được khuyến nghị. Quan trọng không kém chỉ số là việc bạn có bôi đủ lượng và có bôi lại hay không."
+    },
+    {
+      "q": "Kem chống nắng có gây mụn không?",
+      "a": "Tuỳ công thức và tuỳ da. Yếu tố hay bị bỏ qua hơn là làm sạch: kem chống nắng cần được tẩy trang kỹ vào cuối ngày, và nhiều trường hợp nổi mụn đến từ việc làm sạch chưa đủ chứ không phải từ chính sản phẩm."
+    },
+    {
+      "q": "Đang dùng kem nám thì bôi chống nắng lúc nào?",
+      "a": "Chống nắng là bước cuối của buổi sáng, sau serum và sau kem dưỡng. Buổi tối không có bước này."
+    }
+  ],
+  "articles": [
+    "nam-noi-tiet-la-gi"
+  ]
+}

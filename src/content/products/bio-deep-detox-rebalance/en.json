@@ -1,0 +1,215 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "lam-sach",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "bio-deep-detox-rebalance",
+  "translationKey": "bio-deep-detox-rebalance",
+  "sku": "8938552914273",
+  "price": 215000,
+  "locale": "en",
+  "name": "Mocha Bio-Deep Detox & Rebalance – micellar cleansing water",
+  "shortName": "Bio-Deep Detox micellar water",
+  "primaryKeyword": "mocha micellar cleansing water",
+  "seo": {
+    "title": "Mocha Bio-Deep Detox & Rebalance micellar water | Mocha Vietnam",
+    "description": "pH 5.5 micellar cleansing water with exosome cica, Epi-On, fermented sake rice, green tea extract and vitamin B5. {{price}}, free shipping."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "helps remove make-up and daily grime from the face",
+    "warnings": [
+      "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
+      "Discontinue use if irritation occurs. Avoid direct contact with the eyes.",
+      "If you are pregnant or breastfeeding, speak to your doctor before use.",
+      "Results vary between individuals and depend on consistent daily sun protection.",
+      "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Bio-Deep Detox & Rebalance",
+      "note": "The first cleansing step of the evening",
+      "price": 215000,
+      "recommended": true
+    },
+    {
+      "label": "I would like advice first",
+      "note": "An adviser calls you back and reviews your skin from photos",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "The first step of the evening",
+      "heading": "Sunscreen does not simply rinse away when you wash your face",
+      "lead": "A micellar cleansing water with <strong>exosome cica, Epi-On, fermented sake rice, green tea extract, panthenol and propanediol</strong> — exactly as printed on the bottle, pH 5.5. Suitable for the eye and lip area.",
+      "usp": [
+        {
+          "text": "<strong>Solubule BR-02 micelles</strong> and Wilbride S-753D water-soluble oil — the maker names both cleansing agents",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "the ingredient table on this page"
+        },
+        {
+          "text": "<strong>pH 5.5</strong>, with panthenol present in the removal step itself",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "printed on the bottle"
+        },
+        {
+          "text": "<strong>Positioned by the maker for the eye and lip area</strong>",
+          "evidence": "ingredient",
+          "qualifier": "per the manufacturer's description"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-bio-deep-detox.webp",
+        "alt": "Bottle of Mocha Bio-Deep Detox & Rebalance micellar water"
+      },
+      "primaryCta": "Order the micellar water",
+      "secondaryCta": {
+        "label": "See the ingredient table",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Free delivery nationwide",
+        "Inspect before you pay",
+        "7-day return if the product is faulty"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Ingredients",
+      "heading": "Two cleansing agents, six conditioning ones",
+      "intro": "Make-up removal involves more friction against the skin than any other step of the day, so what accompanies the cleansing agent matters as much as the agent.",
+      "caption": "This table lists the ingredients the manufacturer publishes; the conditioning group is PRINTED ON THE BOTTLE. Full INCI list is printed on the packaging.",
+      "rows": [
+        {
+          "name": "Solubule BR-02",
+          "inProduct": "Cleansing",
+          "role": "Micellar molecule that lifts excess oil and make-up residue.",
+          "suitedFor": "All skin types"
+        },
+        {
+          "name": "Wilbride S-753D",
+          "inProduct": "Cleansing",
+          "role": "Water-soluble oil forming a cushion that reduces friction while wiping.",
+          "suitedFor": "Thin or easily flushed skin"
+        },
+        {
+          "name": "Epi-On",
+          "inProduct": "Conditioning",
+          "role": "Biotech active, aimed at calming the skin.",
+          "suitedFor": "Easily irritated skin"
+        },
+        {
+          "name": "Exosome cica",
+          "inProduct": "Conditioning",
+          "role": "Centella-derived extract, a familiar member of the calming group.",
+          "suitedFor": "Stressed skin"
+        },
+        {
+          "name": "Fermented sake rice extract",
+          "inProduct": "Conditioning",
+          "role": "Fermented rice extract, related to surface microbiome balance.",
+          "suitedFor": "Easily unbalanced skin"
+        },
+        {
+          "name": "Panthenol (vitamin B5)",
+          "inProduct": "Conditioning",
+          "role": "Humectant, limits dryness after wiping.",
+          "suitedFor": "Dry skin"
+        },
+        {
+          "name": "Propanediol",
+          "inProduct": "Conditioning",
+          "role": "Humectant that reduces water loss through the surface.",
+          "suitedFor": "All skin types"
+        },
+        {
+          "name": "Green tea extract",
+          "inProduct": "Conditioning",
+          "role": "Polyphenol-rich extract, commonly used for oily skin.",
+          "suitedFor": "Oily skin"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use",
+      "heading": "Two steps, evenings only",
+      "totalTime": "PT3M",
+      "intro": "The order and the cautions are taken from the manufacturer's instructions.",
+      "items": [
+        {
+          "heading": "Saturate a cotton pad",
+          "body": "Wipe across the face, paying attention to the sides of the nose, the eye area and under the lip — the narrow places where residue is left behind."
+        },
+        {
+          "heading": "Then wash with the cleanser",
+          "body": "Micellar water does not replace the wash step. Skip it and the remaining residue stays on the skin."
+        }
+      ],
+      "footnote": "Patch-test on the neck and watch for <strong>30–45 minutes</strong> before using it on the whole face. Do not rub hard: hand pressure does more harm than any ingredient in the bottle."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City — tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support through the full routine</strong> by email."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "FAQ",
+      "heading": "Questions people actually ask",
+      "items": [
+        {
+          "q": "How much is it?",
+          "a": "<strong>{{price}}</strong>. Free delivery, pay on delivery."
+        },
+        {
+          "q": "Do I still need to wash afterwards?",
+          "a": "Yes. The manufacturer's step two is to wash with a cleanser. Skip it and the residue stays on the skin."
+        },
+        {
+          "q": "Do I need this if I wear no make-up?",
+          "a": "If you use sunscreen, yes. Sunscreen clings fairly firmly and a face wash alone often does not lift all of it."
+        },
+        {
+          "q": "Can I use it around the eyes?",
+          "a": "The manufacturer positions it for the eye and lip area. Wipe gently, do not rub, and avoid getting it into the eye itself."
+        },
+        {
+          "q": "How should it be stored?",
+          "a": "Somewhere dry and cool, away from direct sunlight and heat. Close the cap after use and keep out of reach of children."
+        }
+      ]
+    }
+  ]
+}

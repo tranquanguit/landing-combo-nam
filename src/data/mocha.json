@@ -1,0 +1,31 @@
+{
+  "legalName": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+  "tradingName": "Mocha Việt Nam",
+  "address": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+  "phone": "+84367848918",
+  "phoneDisplay": "0367 848 918",
+  "zalo": "https://zalo.me/0367848918",
+  "email": "kemnammocha@gmail.com",
+  "hours": "8:00 – 21:00",
+  "logo": "/images/logo.webp",
+  "profiles": [
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/ctymochavietnam"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/mochavietnam/"
+    },
+    {
+      "name": "TikTok",
+      "url": "https://www.tiktok.com/@kemnammochavietnam"
+    },
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com/@mochasmartvietnam"
+    }
+  ],
+  "marketplaces": [],
+  "taxId": "0317963313"
+}

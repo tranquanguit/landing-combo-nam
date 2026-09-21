@@ -1,0 +1,64 @@
+# robots.txt — mochatrinam.com
+# Cho phép công cụ tìm kiếm truyền thống
+User-agent: *
+Allow: /
+# Không chặn URL có tham số theo dõi: chặn crawl thì Google không đọc được
+# rel=canonical trên chính những URL đó. Việc gộp bản sao để canonical lo.
+
+# ==== AI / LLM crawlers: cho phép thu thập để hiển thị trong câu trả lời AI ====
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+# Trang quản trị và API: không có gì để lập chỉ mục, và /admin hiển thị dữ liệu
+# cá nhân của khách. Cả hai cũng trả X-Robots-Tag: noindex ở phía máy chủ —
+# dòng dưới đây chỉ là lớp thứ hai, vì robots.txt là đề nghị chứ không phải khoá.
+User-agent: *
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: https://mochatrinam.com/sitemap-index.xml
+
+# Bản tóm tắt dành cho máy đọc (song ngữ)
+# https://mochatrinam.com/llms.txt

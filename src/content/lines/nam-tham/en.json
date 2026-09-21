@@ -1,0 +1,116 @@
+{
+  "slug": "nam-tham",
+  "locale": "en",
+  "translationKey": "line-nam-tham",
+  "status": "published",
+  "primaryKeyword": "how to choose a cream for melasma and dark spots",
+  "seo": {
+    "title": "Mocha dark spot line – How to choose, and what is inside",
+    "description": "Three kinds of facial pigmentation behave differently. A comparison, published active-ingredient percentages, and how to pick the right product for your skin.",
+    "ogImage": "/images/packshot-combo.jpg"
+  },
+  "eyebrow": "Product line",
+  "heading": "Dark spots and uneven tone",
+  "lead": "Surface patches, deep spots and mixed pigmentation respond differently to the same active. This page explains how to tell them apart before it talks about products.",
+  "products": [
+    "combo-nam",
+    "smart-first-care-serum",
+    "smart-brightening-cream"
+  ],
+  "sections": [
+    {
+      "id": "three-kinds",
+      "heading": "Three kinds of pigmentation, and why they differ",
+      "body": [
+        "Surface patches sit shallow in the skin, usually spreading across both cheeks in soft-edged brown areas. This is the kind that responds fastest to serious sun protection combined with a brightening active.",
+        "Deep spots sit lower in the skin and appear as small, round, darker marks with clear edges. They change slowly and barely move at all if a topical product is used without daily sun protection.",
+        "Mixed pigmentation is both kinds at once on the same face, and it is the most common pattern among Vietnamese women after thirty. It is hard to tell apart in a mirror; side lighting makes it easier.",
+        "Most skincare advertising talks about pigmentation as one single thing and then offers one single timeline. When three different skin types share one promise, at least two of them end up disappointed."
+      ]
+    },
+    {
+      "id": "actives",
+      "heading": "Actives with published research behind them",
+      "body": [
+        "Tranexamic acid is among the more widely studied topical options for softening areas darkened by excess pigment, usually at 2–5% in leave-on formulas. It is the lead active in this line.",
+        "Bakuchiol is a plant-derived compound studied as an alternative to retinol for skin that irritates easily, with the advantage that it does not increase light sensitivity.",
+        "Niacinamide supports the skin barrier and commonly appears in formulas aimed at evening out skin tone. The concentration here is kept modest to limit the stinging that thin skin often reports.",
+        "All three are in the products in this line, and each percentage is printed on the product page rather than hidden inside a single blended trade name."
+      ]
+    },
+    {
+      "id": "sun",
+      "heading": "The part nobody wants to hear",
+      "body": [
+        "No topical product holds its result if the skin keeps meeting unfiltered sun. UV restarts pigment production faster than any brightening active can offset it.",
+        "In practice that means broad-spectrum sunscreen every day, including overcast days and including time spent indoors near a window. A care product only means something once that condition is met.",
+        "We say this before you buy rather than in a footnote after you have paid."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "How long before I see a difference?",
+      "a": "It depends on the kind of pigmentation. Surface patches usually shift sooner than deep spots. The product page carries a timeline for each kind, alongside the condition that goes with it: daily sun protection. We do not give one number for everyone because that number would be wrong for most people."
+    },
+    {
+      "q": "Does it contain corticosteroids or hydroquinone?",
+      "a": "No. The full ingredient list is on the product page, with the percentage of each key active."
+    },
+    {
+      "q": "Can I use this while pregnant or breastfeeding?",
+      "a": "Please ask a healthcare professional before using any skincare product during this period. We do not give advice in their place."
+    }
+  ],
+  "articles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "compare": {
+    "eyebrow": "Which one",
+    "heading": "Three options, and what actually differs",
+    "intro": "Same formulas throughout. What differs is how many steps you do each day, and whether the two result-keeping steps come with it.",
+    "criteria": [
+      {
+        "label": "What you get",
+        "values": [
+          "Cream + serum, with cleanser and sunscreen included",
+          "The 30ml serum on its own",
+          "The 30g cream on its own"
+        ]
+      },
+      {
+        "label": "Who it suits",
+        "values": [
+          "Someone starting the full routine without buying extras",
+          "Someone who already has a moisturiser and needs the deeper step",
+          "Someone who already has a serum and needs the evening sealing step"
+        ]
+      },
+      {
+        "label": "Steps in the routine",
+        "values": [
+          "All four morning steps and all four evening steps",
+          "One step — used before the cream",
+          "One step — used after the serum"
+        ]
+      },
+      {
+        "label": "Sun protection included",
+        "values": [
+          "Yes, SPF50 sunscreen included",
+          "No — you need your own sunscreen",
+          "No — you need your own sunscreen"
+        ]
+      },
+      {
+        "label": "Main actives",
+        "values": [
+          "4-butylresorcinol 1000ppm, Niacinamide 4%, Tranexamic Acid, Bakuchiol",
+          "4-butylresorcinol 1000ppm, Niacinamide 4%, Bio-Placenta",
+          "Tranexamic Acid, NIO-NAG, Ceramide, Bakuchiol"
+        ]
+      }
+    ],
+    "footnote": "No option here is “stronger” than another — all three share the same formulas. The difference is which step of the routine you already own. Sun protection is needed in every column; the combo simply includes it and the other two do not."
+  }
+}

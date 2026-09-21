@@ -1,0 +1,78 @@
+{
+  "slug": "bao-ve-da",
+  "locale": "en",
+  "translationKey": "bao-ve-da",
+  "status": "published",
+  "primaryKeyword": "sunscreen for pigmented skin",
+  "seo": {
+    "title": "Sun protection for pigmented skin | Mocha Vietnam",
+    "description": "Why sun protection decides the result of every other step, how chemical and physical filters differ, and how much people actually need to apply."
+  },
+  "eyebrow": "Product line",
+  "heading": "Sun protection",
+  "lead": "A line with a single step in it — but the step whose absence takes most of the meaning out of the others.",
+  "products": [
+    "uv-block-sunscreen"
+  ],
+  "sections": [
+    {
+      "id": "vi-sao-buoc-nay",
+      "heading": "Why this step gets a line of its own",
+      "body": [
+        "Sun protection usually ends up last on the list, after moisturiser, after serum, after everything that sounds more active. In pigmentation care that ordering is exactly backwards.",
+        "UV restarts pigment production faster than any ingredient can soften it. Someone using a full serum-and-cream routine without sun protection is pulling in two directions at once, and the stronger direction is the sun.",
+        "That is why every routine on this site ends with a sun protection step, and why the \"who should think again\" section says plainly that anyone who cannot use it each morning should reconsider before buying."
+      ],
+      "links": [
+        {
+          "label": "See the morning and evening routines",
+          "href": "/en/combo-nam/#lo-trinh"
+        }
+      ]
+    },
+    {
+      "id": "hoa-hoc-hay-vat-ly",
+      "heading": "Chemical filters, physical filters, and why many products use both",
+      "body": [
+        "Chemical filters absorb UV and convert that energy into heat. They tend to give a light texture that absorbs quickly and leaves no white cast — but they need a generous amount to reach the figure on the label.",
+        "Physical filters, mainly zinc oxide and titanium dioxide, reflect UV at the skin surface. They are stable in sunlight and tend to irritate less, but at high concentrations they feel heavy and cast white.",
+        "Combining them allows less of each while keeping coverage broad. That is what \"hybrid\" means on a label, and it is also why a seven-filter product does not mean seven times the protection — it means seven ingredients sharing one job."
+      ]
+    },
+    {
+      "id": "luong-dung",
+      "heading": "The amount applied is where most people fall short",
+      "body": [
+        "The figure on the label is measured with a standard laboratory quantity, considerably thicker than what people actually apply. Apply less and real-world protection falls — and it falls faster than proportionally.",
+        "The simplest way not to fall short is to dot the product on five points — forehead, nose, chin and both cheeks — and only then spread it out. Dotting first gives a far more even layer than taking one blob and rubbing outwards.",
+        "And one morning application does not last all day if you are outdoors continuously, sweating heavily, or in water."
+      ]
+    },
+    {
+      "id": "trong-nha",
+      "heading": "Do you need it if you are indoors all day",
+      "body": [
+        "Light through a window and light from a screen are far weaker than direct sun. If you sit deep inside a room away from windows, exposure is small.",
+        "But most working days are not like that: lunch outside, a desk near glass, a commute. What accumulates is not intensity but total time.",
+        "Plainly: if you genuinely do not leave the house and do not sit near a window, skipping this for a few days is not a disaster. Just do not build a whole routine on that assumption."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "What SPF is enough?",
+      "a": "For Vietnam's climate, and for skin in the middle of a pigmentation routine, SPF 50 is the level usually recommended. Just as important as the number is whether you apply enough and whether you reapply."
+    },
+    {
+      "q": "Does sunscreen cause breakouts?",
+      "a": "It depends on the formula and on your skin. The factor people overlook more often is cleansing: sunscreen needs proper removal at night, and many breakouts come from incomplete cleansing rather than from the product itself."
+    },
+    {
+      "q": "When does it go in a pigmentation routine?",
+      "a": "Sun protection is the last morning step, after serum and after moisturiser. There is no sunscreen step at night."
+    }
+  ],
+  "articles": [
+    "nam-noi-tiet-la-gi"
+  ]
+}

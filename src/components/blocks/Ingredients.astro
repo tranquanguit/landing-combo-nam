@@ -1,0 +1,164 @@
+---
+import Section from '../Section.astro';
+import { t, type Locale } from '../../i18n/ui';
+interface Props { data: any; id?: string; locale: Locale; }
+const { data, id = 'thanh-phan', locale } = Astro.props;
+
+/* Cột "có trong" chỉ xuất hiện khi dữ liệu thật sự khai — sản phẩm đơn lẻ
+   không cần nó, và một cột rỗng chỉ làm bảng rộng thêm vô ích. */
+const showProduct = data.rows.some((r: any) => r.inProduct);
+
+/**
+ * Tách phần trăm ra khỏi tên hoạt chất để đặt bằng face dành cho chữ số.
+ * "Tranexamic Acid 3%" -> "Tranexamic Acid <span class=pct>3%</span>"
+ * Chỉ bọc thẻ quanh chính chuỗi số; phần còn lại escape bình thường.
+ */
+const esc = (v: string) => v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const splitPct = (name: string) =>
+  esc(name).replace(/(\d+(?:[.,]\d+)?\s*%)/g, '<span class="pct">$1</span>');
+---
+<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
+  {/* tabindex + role: vùng cuộn ngang phải tới được bằng bàn phím,
+      nếu không người dùng chỉ có bàn phím không đọc được các cột bên phải. */}
+  <div class="scroll" tabindex="0" role="region" aria-label={data.heading}>
+    <table>
+      {data.caption && <caption>{data.caption}</caption>}
+      <thead>
+        <tr>
+          <th scope="col">{t(locale, 'table.ingredient')}</th>
+          {showProduct && <th scope="col">{t(locale, 'table.inProduct')}</th>}
+          <th scope="col">{t(locale, 'table.role')}</th>
+          <th scope="col">{t(locale, 'table.suitedFor')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.rows.map((r: any) => (
+          <tr>
+            <th scope="row">
+              <span class="name" set:html={splitPct(r.name)} />
+              {r.reference && (
+                <> <a href={r.reference} rel="noopener nofollow" target="_blank" class="ref">{t(locale, 'table.source')}</a></>
+              )}
+              {r.referenceNote && <span class="ref-note">{r.referenceNote}</span>}
+            </th>
+            {showProduct && <td class="in">{r.inProduct}</td>}
+            <td data-label={t(locale, 'table.role')}>{r.role}</td>
+            <td data-label={t(locale, 'table.suitedFor')}>{r.suitedFor}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Section>
+
+<style>
+  /* Tờ đặc tả, không phải bảng dữ liệu.
+     Bản trước: hộp bo góc, hàng sọc xen kẽ, header navy đặc — ngôn ngữ của
+     trang quản trị. Nay chỉ còn gạch tóc ngang, nhiều khoảng trống, tên hoạt
+     chất lớn, và NỒNG ĐỘ tách ra đặt bằng face dành cho chữ số. */
+  .scroll { overflow-x: auto; }
+  .scroll:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 4px; }
+
+  table { width: 100%; border-collapse: collapse; min-width: 720px; }
+  caption {
+    text-align: left; padding: 0 0 var(--s-5);
+    color: var(--slate); font-size: var(--t-xs); max-width: 62ch;
+  }
+  thead th {
+    font-size: var(--t-2xs); font-weight: 600;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--slate);
+    padding: 0 var(--s-5) var(--s-3) 0;
+    text-align: left; vertical-align: bottom;
+    border-bottom: 1px solid var(--ink-navy);
+    background: transparent;
+  }
+  tbody th, tbody td {
+    padding: var(--s-5) var(--s-5) var(--s-5) 0;
+    text-align: left; vertical-align: top;
+    border-bottom: 1px solid var(--line);
+    font-size: var(--t-sm); line-height: 1.55;
+    color: var(--ink-muted);
+    font-weight: 400;
+  }
+  tbody tr:last-child :is(th, td) { border-bottom: 0; }
+  tbody th { width: 30%; }
+  /* Cột "có trong" hẹp và nhạt hơn: nó là nhãn phân loại, không phải nội dung
+     người đọc dừng lại để đọc kỹ. */
+  .in { width: 13%; color: var(--slate); font-size: var(--t-xs); }
+
+  .name {
+    display: block;
+    font-size: var(--t-md);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--ink-navy);
+    font-weight: 600;
+    margin-bottom: var(--s-2);
+  }
+  /* Nồng độ tách khỏi tên và đặt bằng face chữ số — chi tiết chỉ sản phẩm này
+     mới có, vì nó là thứ duy nhất nó thật sự công khai. */
+  .pct {
+    font-family: var(--font-figure);
+    font-variant-numeric: tabular-nums lining-nums;
+    color: var(--cobalt);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .ref {
+    font-size: var(--t-2xs); letter-spacing: .1em; text-transform: uppercase;
+    color: var(--slate); text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    display: inline-block; min-height: 24px; line-height: 24px;
+  }
+  .ref:hover { color: var(--cobalt); border-color: currentColor; }
+  .ref-note {
+    display: block; margin-top: var(--s-2);
+    font-size: var(--t-2xs); color: var(--slate); line-height: 1.5;
+  }
+
+  /*
+   * Dưới 760px bảng KHÔNG còn là bảng.
+   *
+   * Ảnh chụp màn hình 390px cho thấy bản cũ tràn ngang: cột "vai trò" bị cắt
+   * giữa chữ, cột cuối không với tới được, và chú thích bên trên cũng trôi
+   * theo vùng cuộn. Bảng thành phần là bằng chứng trung tâm của cả trang, mà
+   * phần lớn khách vào bằng điện thoại — nên ở khổ hẹp mỗi hoạt chất thành
+   * một thẻ xếp dọc, nhãn cột lấy từ data-label, không nhân đôi nội dung.
+   */
+  @media (max-width: 760px) {
+    .scroll { overflow-x: visible; }
+    table { min-width: 0; display: block; }
+    thead {
+      position: absolute; width: 1px; height: 1px;
+      margin: -1px; padding: 0; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+    caption { display: block; }
+    tbody, tbody tr, tbody th, tbody td { display: block; width: auto; }
+    tbody tr {
+      padding-block: var(--s-5);
+      border-bottom: 1px solid var(--line);
+    }
+    tbody tr:last-child { border-bottom: 0; }
+    tbody th, tbody td { padding: 0; border: 0; }
+    tbody td { margin-top: var(--s-3); }
+    /* Nhãn cột đi kèm từng ô, vì không còn hàng tiêu đề để đối chiếu. Ô "có
+       trong" không cần nhãn: nó đã là một nhãn tròn ghi rõ Serum hay Kem. */
+    tbody td[data-label]::before {
+      content: attr(data-label);
+      display: block; margin-bottom: 2px;
+      font-size: var(--t-2xs); letter-spacing: .14em; text-transform: uppercase;
+      color: var(--slate); font-weight: 600;
+    }
+    /* "Có trong" thành nhãn tròn ngay dưới tên: nó phân loại, không phải nội dung. */
+    /* tbody td.in chứ không phải .in: Astro thêm thuộc tính phạm vi vào MỌI
+       bộ chọn, nên "tbody td" nặng hơn ".in" và sẽ thắng nếu viết ngắn. */
+    tbody td.in {
+      margin-top: var(--s-2);
+      display: inline-block; padding: 1px 10px; border-radius: 999px;
+      background: var(--violet-mist); color: var(--indigo);
+      font-size: var(--t-xs); font-weight: 600;
+    }
+  }
+</style>

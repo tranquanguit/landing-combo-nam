@@ -1,0 +1,258 @@
+---
+import { t, type Locale } from '../../i18n/ui';
+import { money } from '../../lib/format';
+import { richText } from '../../lib/richtext';
+import Picture from '../Picture.astro';
+interface Props { data: any; locale: Locale; product: any; }
+const { data, locale, product: p } = Astro.props;
+
+/** Chỉ những giá trị thật sự điều hướng được mới thành liên kết. */
+const isLink = (v?: string): v is string => !!v && /^(#|\/|https?:\/\/)/.test(v);
+
+
+
+/** Nhãn cho biết mỗi tuyên bố dựa trên cái gì. */
+const evidenceLabel: Record<string, string> = {
+  verified: t(locale, 'evidence.verified'),
+  study: t(locale, 'evidence.study'),
+  survey: t(locale, 'evidence.survey'),
+  ingredient: t(locale, 'evidence.ingredient'),
+};
+
+/**
+ * Bằng chứng trình bày như CƯỚC CHÚ của bài báo, không phải dòng chữ xám dưới
+ * mỗi câu.
+ *
+ * Schema bắt mọi tuyên bố ở màn hình đầu phải khai dựa trên cái gì, và bản
+ * trước in nguyên câu đó ngay dưới từng gạch đầu dòng. Hệ quả thị giác: ba tầng
+ * chữ chồng nhau và cả khối đọc ra như tờ khai pháp lý. Cùng lượng thông tin,
+ * đặt dưới dạng ¹ ² ³ dẫn xuống khối "Cơ sở", vừa gọn vừa đúng quy ước của một
+ * tài liệu có dẫn nguồn.
+ */
+const notes = data.usp.map((u: any, i: number) => ({
+  n: i + 1,
+  label: evidenceLabel[u.evidence],
+  source: u.source as string | undefined,
+  qualifier: u.qualifier as string | undefined,
+}));
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div class="hero-text enter">
+      {data.eyebrow && <p class="eyebrow">{data.eyebrow}</p>}
+      <h1 id="hero-title">{data.heading}</h1>
+      <p class="lead measure" set:html={richText(data.lead)} />
+
+      {/* Giá ngay ở màn hình đầu: đo được trước đây khách phải cuộn gần ba màn
+          hình mới biết sản phẩm bao nhiêu tiền. Đặt như một dòng đặc tả, không
+          phải nhãn giảm giá. */}
+      <p class="hero-price">
+        <span class="now figure">{money(p.price, p.currency, locale)}</span>
+        {p.compareAtPrice && p.compareAtPrice > p.price && (
+          <span class="was">
+            <span class="figure">{money(p.compareAtPrice, p.currency, locale)}</span>
+            <span class="save">
+              {t(locale, 'price.save')} <span class="figure">{money(p.compareAtPrice - p.price, p.currency, locale)}</span>
+            </span>
+          </span>
+        )}
+      </p>
+
+      <ul class="usp">
+        {data.usp.map((u: any, i: number) => (
+          <li><Fragment set:html={richText(u.text)} /><a
+            class="fn" href={`#co-so-${i + 1}`}
+            aria-label={`Cơ sở của tuyên bố ${i + 1}`}>{i + 1}</a></li>
+        ))}
+      </ul>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="#dat-hang" data-cta="hero-primary">{data.primaryCta}</a>
+        {data.secondaryCta && (
+          <a class="btn btn-ghost" href={data.secondaryCta.href} data-cta="hero-secondary">
+            {data.secondaryCta.label}
+          </a>
+        )}
+      </div>
+    </div>
+
+    <div class="hero-media">
+      <Picture
+        src={data.image.src}
+        alt={data.image.alt}
+        sizes="(min-width: 900px) 46vw, 100vw"
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+      />
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-foot">
+      <ol class="notes" aria-label="Cơ sở của các tuyên bố ở trên">
+        {notes.map((nt: any) => (
+          <li id={`co-so-${nt.n}`}>
+            <span class="n figure">{nt.n}</span>
+            <span>
+              {isLink(nt.source)
+                ? <a href={nt.source} {...(nt.source.startsWith('#') ? {} : { rel: 'noopener nofollow' })}>{nt.label}</a>
+                : <>{nt.label}{nt.source ? <> · {nt.source}</> : null}</>}
+              {nt.qualifier && <> · {nt.qualifier}</>}
+            </span>
+          </li>
+        ))}
+      </ol>
+
+      {data.trustBadges.length > 0 && (
+        <ul class="trust">
+          {data.trustBadges.map((b: string) => <li>{b}</li>)}
+        </ul>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Nền giấy phòng thí nghiệm, không còn dải gradient tím. Một gạch tóc dưới
+     cùng nối hero với phần còn lại của tờ đặc tả. */
+  .hero {
+    padding-block: clamp(40px, 5vw, 72px) 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* Bố cục lệch 7/5: cột chữ rộng hơn, ảnh TRÀN khỏi mép phải thay vì ngồi
+     trong một hộp bo góc đổ bóng giữa trang. */
+  .hero-grid { display: grid; gap: var(--s-7); align-items: center; }
+  @media (min-width: 900px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: clamp(40px, 5vw, 88px);
+      align-items: center;
+    }
+    /* Ảnh thành một PANEL chạy hết chiều cao cột, tràn khỏi mép phải và ăn lên
+       tận mép trên của hero. Bản trước là tấm ảnh bo góc đổ bóng ngồi giữa
+       khoảng trắng — ngôn ngữ của trang niêm yết sàn, không phải của thương hiệu. */
+    .hero-grid { align-items: stretch; }
+    .hero-media {
+      margin-right: calc((100vw - min(100vw, var(--wrap))) / -2 - var(--s-5));
+      margin-top: calc(clamp(40px, 5vw, 72px) * -1);
+      align-self: stretch;
+      position: relative;
+      overflow: hidden;
+      background: var(--bone);
+    }
+    .hero-media :global(img) {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: 55% 30%;
+    }
+  }
+
+  .hero-text { padding-bottom: clamp(28px, 3.5vw, 48px); }
+  .hero h1 { font-size: clamp(2.4rem, 5.2vw, 4.1rem); }
+  .hero .lead { margin-bottom: var(--s-5); font-size: var(--t-base); }
+
+  .hero-media :global(img) {
+    width: 100%;
+    border-radius: 0;
+    background: var(--bone);
+  }
+
+  /* Giá: chữ số đặt bằng face riêng, cỡ lớn. Giá cũ và mức tiết kiệm lùi hẳn
+     xuống hàng chữ nhỏ — không viên thuốc màu, không nền xanh. */
+  .hero-price {
+    display: flex; align-items: baseline; flex-wrap: wrap;
+    gap: var(--s-3) var(--s-5);
+    margin: 0 0 var(--s-5);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--line);
+  }
+  .hero-price .now {
+    font-size: clamp(1.9rem, 3.6vw, var(--t-xl));
+    font-weight: 600; color: var(--ink-navy); line-height: 1;
+  }
+  .hero-price .was {
+    display: flex; align-items: baseline; gap: var(--s-3);
+    font-size: var(--t-sm); color: var(--slate);
+  }
+  .hero-price .was > .figure { text-decoration: line-through; }
+  /* Số tiền tiết kiệm là tài sản thương mại mạnh nhất của khối giá, nhưng bản
+     trước đặt nó cùng một màu xám với mọi chữ khác nên mắt trượt qua. Dùng đúng
+     màu vẫn dùng cho các tín hiệu kiểm chứng được — không phải đỏ giảm giá. */
+  .hero-price .save { letter-spacing: .02em; color: var(--verify); font-weight: 600; }
+
+  /* Gạch đầu dòng: một dòng chữ, một số cước chú. Không còn dòng xám phụ. */
+  /* Gạch đầu dòng gọn lại: chữ và số cước chú nằm CÙNG một dòng chảy, số bám
+     ngay sau câu như chỉ số trên trong bài báo. */
+  .usp {
+    list-style: none; padding: 0; margin: 0 0 var(--s-6);
+    display: grid; gap: var(--s-3);
+    max-width: 52ch;
+    font-size: var(--t-sm);
+  }
+  .usp li {
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid var(--line);
+    line-height: 1.55;
+  }
+  .usp li:last-child { border-bottom: 0; padding-bottom: 0; }
+
+  /* Số cước chú: vùng chạm đủ 24px nhưng nhìn vẫn như chỉ số trên. */
+  /* Số cước chú: nhìn như chỉ số trên, nhưng vùng chạm vẫn đủ 24px nhờ
+     ::after phủ ra ngoài — không nới chữ, không phá dòng chảy. */
+  .fn {
+    position: relative;
+    font-family: var(--font-figure);
+    font-size: .72em;
+    vertical-align: super;
+    line-height: 0;
+    margin-left: 2px;
+    color: var(--cobalt);
+    text-decoration: none;
+  }
+  .fn::after {
+    content: "";
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 24px; height: 24px;
+    transform: translate(-50%, -50%);
+  }
+  .fn:hover { color: var(--ink-navy); text-decoration: underline; }
+
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-4); }
+
+  /* Chân hero: khối cước chú + các dòng tin cậy, tách bằng gạch tóc. */
+  .hero-foot {
+    display: grid; gap: var(--s-6);
+    padding-block: var(--s-6) var(--s-7);
+    border-top: 1px solid var(--line);
+  }
+  @media (min-width: 900px) {
+    .hero-foot { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 5vw, 88px); }
+  }
+
+  .notes {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: var(--s-3);
+    font-size: var(--t-xs); color: var(--slate); line-height: 1.5;
+  }
+  .notes li { display: flex; gap: var(--s-3); }
+  .notes .n { color: var(--cobalt); flex: 0 0 1.2em; }
+  /* Vùng chạm 24px theo WCAG 2.2 AA 2.5.8 — đo được 129x15 trước khi thêm. */
+  .notes a {
+    color: var(--slate); text-decoration: underline; text-decoration-color: var(--line-strong);
+    display: inline-block; min-height: 24px; line-height: 24px;
+  }
+  .notes a:hover { color: var(--cobalt); text-decoration-color: currentColor; }
+  .notes li:target { color: var(--ink); }
+  .notes li:target .n { font-weight: 600; }
+
+  .trust {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: var(--s-2);
+    font-size: var(--t-2xs); letter-spacing: .12em; text-transform: uppercase;
+    color: var(--slate);
+  }
+</style>

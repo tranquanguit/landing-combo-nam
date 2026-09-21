@@ -1,0 +1,446 @@
+/* ==========================================================================
+   Mocha — hệ thị giác: "tờ đặc tả của nhà bào chế"
+
+   Điều duy nhất sản phẩm này thật sự khác biệt là CÔNG KHAI TỈ LỆ từng hoạt
+   chất. Nên trang đối xử với con số nồng độ như một hãng đồng hồ đối xử với
+   thông số bộ máy: đường nét mảnh, khoảng trống rộng, chữ số được đặt trang
+   trọng, và không một nhãn giảm giá nào.
+
+   Ba quyết định định hình toàn bộ:
+   1. Nền giấy phòng thí nghiệm xanh-xám (không phải kem ấm, không phải tím
+      nhạt). Mực indigo lấy từ chai thật; điểm nhấn cobalt cũng từ chai thật.
+   2. Be Vietnam Pro làm chữ HIỂN THỊ ở cỡ lớn — một thương hiệu Việt dùng
+      typeface vẽ riêng cho dấu tiếng Việt. Fraunces KHÔNG dùng cho tiêu đề nữa;
+      nó chỉ dành cho CON SỐ (3%, 2%, giá, mốc tuần), đúng cách một tờ đặc tả
+      tách chữ số ra khỏi văn bản.
+   3. Gạch tóc 1px thay cho viền hộp và đổ bóng. Trước đây mọi khối đều là thẻ
+      bo góc có bóng, nên không gì nổi bật được vì mọi thứ đều nổi.
+
+   Tương phản đã đo bằng công thức WCAG: ink-navy trên paper 15.15:1,
+   slate trên paper 5.40:1 và trên bone 4.99:1, cobalt trên paper 8.89:1.
+   ========================================================================== */
+:root {
+  /* --- mực --- */
+  --ink: #15162e;            /* gần đen ngả indigo, không dùng đen thuần */
+  --ink-navy: #1a1d52;       /* indigo sâu của chai */
+  --ink-muted: #5d6076;
+  /* 5.40:1 trên paper, 4.99:1 trên bone. Bản đầu dùng #767a90 (4.10:1) — trượt
+     AA cho chữ nhỏ. Đổi bảng màu là chỗ dễ làm vỡ tương phản nhất; số này đo
+     bằng công thức WCAG chứ không chọn bằng mắt. */
+  --slate: #63677c;
+
+  /* --- nền --- */
+  --paper: #fbfbfd;
+  --bone: #f1f2f6;           /* giấy phòng thí nghiệm, xanh-xám rất nhạt */
+  --vellum: #e8eaf1;         /* dải nền thứ ba, dùng rất tiết chế */
+  --violet-mist: #e8eaf1;    /* giữ tên cũ để không vỡ các surface đã dùng */
+
+  /* --- điểm nhấn --- */
+  --cobalt: #2b34b8;         /* cobalt của bao bì; dùng cho liên kết và nét nhấn */
+  --cobalt-lift: #3f4ad6;
+  /* Dải thứ ba của khối mốc thời gian: phải sáng hơn --cobalt-lift để giữ thứ
+     tự đọc, nhưng vẫn đủ tương phản với chữ trắng cỡ nhỏ. #6d76e4 dùng lúc đầu
+     chỉ đạt 3,92:1 — trượt AA. Số này do scripts/check-contrast.mjs canh. */
+  --bar-late: #5a64dd;
+  --indigo: #2b34b8;         /* tên cũ, trỏ về cobalt */
+  --indigo-lift: #3f4ad6;
+  --steel: #c8ccd8;          /* gạch tóc */
+  --line: #d9dce5;
+  --line-strong: #b6bbc9;
+  --line-control: #8b90a2;   /* viền ô nhập: 3.2:1 trên paper */
+
+  /* Xanh xác minh — chỉ dùng cho chấm ngữ nghĩa, không dùng cho nút hay nhãn */
+  --verify: #1f6b4d;
+  --green-clinic: #1f6b4d;
+  --green-lift: #185a40;
+
+  --amber-note: #fdf6e3;
+  --amber-edge: #8a6508;
+  --amber-ink: #6b4e00;
+
+  --font-display: 'Be Vietnam Pro', 'Be Vietnam Pro Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Be Vietnam Pro', 'Be Vietnam Pro Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Chỉ dành cho CHỮ SỐ: nồng độ, giá, mốc tuần. */
+  --font-figure: 'Fraunces', 'Fraunces Fallback', Georgia, 'Times New Roman', serif;
+
+  /* Thang 1.26 với tương phản mạnh ở hai đầu: chữ nhỏ nhỏ hẳn, chữ lớn lớn hẳn.
+     Bản trước đỉnh thang chỉ 3.06rem nên tiêu đề không bao giờ thành khoảnh khắc. */
+  --t-2xs: 0.6875rem;
+  --t-xs: 0.8125rem;
+  --t-sm: 0.9063rem;
+  --t-base: 1rem;
+  --t-md: 1.1875rem;
+  --t-lg: 1.5rem;
+  --t-xl: 2rem;
+  --t-2xl: 2.75rem;
+  --t-3xl: 3.75rem;
+  --t-4xl: 5rem;
+
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --s-9: 96px; --s-10: 144px;
+
+  /* Bo góc gần như phẳng: tờ đặc tả không có góc tròn. */
+  --r-input: 2px;
+  --r-card: 3px;
+  --r-media: 2px;
+  --r-btn: 2px;
+
+  /* Một cấp bóng duy nhất, chỉ dùng cho thẻ nổi thật sự (form đặt hàng). */
+  --shadow-1: none;
+  --shadow-2: 0 24px 60px -24px rgba(21, 22, 46, .28);
+
+  --wrap: 1200px;
+  --measure: 58ch;
+  --header-h: 60px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  /* Cho phép chuyển động tới các từ khoá kích thước (auto, min-content...).
+     Cần cho <details> mở ra mượt mà; trình duyệt chưa hỗ trợ thì bỏ qua. */
+  interpolate-size: allow-keywords;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 12px);
+}
+
+/* Cuộn mượt chỉ bật khi người dùng không yêu cầu giảm chuyển động */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ===================== CHUYỂN ĐỘNG =====================
+   Một đường cong, một thang thời lượng. Chuyển động ở đây có đúng một việc:
+   dẫn mắt theo thứ tự đọc. Không nảy, không xoay, không phóng to — những thứ
+   đó làm trang trông rẻ tiền chứ không làm nó sang.
+
+   Ba quy tắc tự đặt ra:
+   1. Chỉ animate `opacity` và `transform`. Hai thuộc tính này chạy trên GPU và
+      không gây reflow; animate `height` hay `top` là cách chắc chắn để trang
+      giật trên điện thoại tầm trung — đúng nhóm máy phần lớn khách đang dùng.
+   2. Không phần tử nào bị ẩn bởi CSS tĩnh. Lớp ẩn do JS tự thêm vào <html>,
+      nên khi JS hỏng hoặc chưa chạy, trang vẫn hiện đầy đủ. Đây là lỗi kinh
+      điển của các thư viện scroll-reveal: JS lỗi là trang trắng.
+   3. Khoảng dịch nhỏ (10px) và không bao giờ theo chiều ngang — dịch ngang
+      sinh thanh cuộn ngang trên màn hình hẹp. */
+:root {
+  --ease: cubic-bezier(.22, .61, .36, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --dur-1: 140ms;   /* phản hồi chạm/di chuột */
+  --dur-2: 260ms;   /* đổi trạng thái */
+  --dur-3: 560ms;   /* xuất hiện khi cuộn tới */
+  --reveal-shift: 10px;
+}
+
+/* Chỉ ẩn khi JS đã sẵn sàng VÀ người dùng không yêu cầu giảm chuyển động. */
+@media (prefers-reduced-motion: no-preference) {
+  html.reveal-ready [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-shift), 0);
+  }
+  html.reveal-ready [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity var(--dur-3) var(--ease-out),
+      transform var(--dur-3) var(--ease-out);
+    /* Các phần tử trong cùng một khối vào lệch nhau một nhịp ngắn, theo thứ tự
+       đọc. Trễ tối đa 3 nhịp: lâu hơn nữa thì người cuộn nhanh sẽ thấy trang
+       chưa dựng xong thay vì thấy một chuyển động. */
+    transition-delay: calc(var(--reveal-i, 0) * 70ms);
+  }
+}
+
+/* Hero không chờ cuộn: nó đã ở trong khung nhìn. Vào bằng animation riêng để
+   không phụ thuộc JS — phần trên màn hình đầu tiên phải hiện kể cả khi script
+   chưa tải xong. */
+@media (prefers-reduced-motion: no-preference) {
+  .enter > * {
+    animation: enter var(--dur-3) var(--ease-out) both;
+    animation-delay: calc(var(--reveal-i, 0) * 80ms);
+  }
+  /* Thứ tự lệch nhịp đặt bằng CSS thuần, không cần JS chạm tới phần trên màn
+     hình đầu tiên — đây là vùng quyết định LCP. */
+  .enter > :nth-child(2) { --reveal-i: 1; }
+  .enter > :nth-child(3) { --reveal-i: 2; }
+  .enter > :nth-child(n + 4) { --reveal-i: 3; }
+}
+@keyframes enter {
+  from { opacity: 0; transform: translate3d(0, var(--reveal-shift), 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+body {
+  margin: 0;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--t-base);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, video, svg, iframe { max-width: 100%; display: block; }
+img { height: auto; }
+a { color: var(--indigo); text-underline-offset: 3px; }
+a:hover { color: var(--indigo-lift); }
+
+:focus-visible {
+  outline: 3px solid var(--indigo-lift);
+  outline-offset: 3px;
+  border-radius: var(--r-input);
+}
+/* Trên nền tối, --indigo-lift (#4b4fd6) chỉ đạt 2.76–2.78:1 — dưới ngưỡng 3:1 của
+   WCAG 2.2 AA 1.4.11. Áp cho MỌI vùng nền tối, không riêng .surface-navy: footer
+   dùng --ink nên link hotline và email trong đó vẫn trượt sau lần sửa đầu. */
+.surface-navy :focus-visible:not(.on-light *),
+footer :focus-visible {
+  outline-color: #b9c0ff;   /* 9.87:1 trên --ink-navy, 12.4:1 trên --ink */
+}
+
+/* Tiêu đề: cỡ lớn, tracking âm, dòng sát. Đây là nơi tạo "khoảnh khắc" —
+   bản trước đỉnh thang quá nhỏ nên tiêu đề chỉ là chữ to hơn một chút. */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink-navy);
+  margin: 0 0 var(--s-4);
+  text-wrap: balance;
+}
+h1 {
+  font-size: clamp(2.5rem, 6.2vw, var(--t-4xl));
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+h2 {
+  font-size: clamp(1.85rem, 4vw, var(--t-2xl));
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+h3 {
+  font-size: var(--t-md);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+p { margin: 0 0 var(--s-4); }
+p:last-child { margin-bottom: 0; }
+
+/* Chữ số của công thức: nồng độ, giá, mốc tuần. Một face riêng cho số là
+   quy ước của tờ đặc tả, và là chi tiết duy nhất sản phẩm này mới có. */
+.figure {
+  font-family: var(--font-figure);
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -0.01em;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--s-5);
+}
+
+/* Khoảng trống là tín hiệu cao cấp rẻ nhất và bị bỏ qua nhiều nhất. */
+/* Nhịp dọc: bản trước dùng tới 152px trên desktop, nên mọi khối ngắn đều kết
+   thúc bằng một dải trống 150–180px — nhìn ra ngay khi chụp màn hình từng
+   trang một. Hạ trần xuống 112px giữ được khoảng thở mà không còn lỗ hổng. */
+section { padding-block: clamp(64px, 7vw, 112px); }
+
+.measure { max-width: var(--measure); }
+.lead { font-size: var(--t-md); color: var(--ink-muted); line-height: 1.6; }
+.muted { color: var(--ink-muted); }
+.tabular { font-variant-numeric: tabular-nums; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Skip link: ẩn cho tới khi người dùng bàn phím focus vào nó */
+.skip-link:focus {
+  position: fixed; top: var(--s-2); left: var(--s-2);
+  width: auto; height: auto; margin: 0; clip: auto; overflow: visible;
+  z-index: 100;
+  background: var(--ink-navy); color: #fff;
+  padding: 10px 18px; border-radius: var(--r-btn);
+  font-weight: 600; text-decoration: none;
+}
+
+/* Nhãn vi mô: nhỏ, giãn chữ rộng, màu xám thép — không phải viên thuốc màu.
+   Kèm một gạch tóc ngắn để nó đọc như số hiệu mục trong tờ đặc tả. */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-family: var(--font-body);
+  font-size: var(--t-2xs);
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-bottom: var(--s-5);
+}
+.eyebrow::before {
+  content: "";
+  width: 28px; height: 1px; flex: 0 0 28px;
+  background: var(--line-strong);
+}
+.section-head.center .eyebrow { justify-content: center; }
+
+/* Tiêu đề mục căn TRÁI theo mặc định. Bản trước căn giữa mọi mục, nên trang
+   không có mép trái để mắt bám vào và mọi section trông giống hệt nhau. */
+.section-head {
+  max-width: 22ch;
+  margin-bottom: clamp(36px, 5vw, 72px);
+}
+.section-head h2 { margin-bottom: var(--s-5); }
+.section-head .lead { max-width: 52ch; }
+/* Trên khổ hẹp câu dẫn nằm ngay dưới tiêu đề và gần bằng cỡ tiêu đề phụ, nên
+   hai thứ dính vào nhau thành một khối khó đọc — thấy rõ ở ảnh chụp 390px. */
+@media (max-width: 860px) {
+  .section-head h2 { margin-bottom: var(--s-3); }
+  .section-head .lead { font-size: var(--t-base); line-height: 1.6; }
+}
+.section-head.center { margin-inline: auto; text-align: center; max-width: 46ch; }
+.section-head.center .lead { margin-inline: auto; }
+
+/* Bố cục biên tập: tiêu đề chiếm cột hẹp bên trái, nội dung chạy bên phải. */
+@media (min-width: 960px) {
+  .section-head.split-head {
+    display: grid;
+    /* Cột tiêu đề phải đủ rộng cho 2–3 dòng ở cỡ chữ lớn. Bản đầu đặt 26ch nên
+       tiêu đề vỡ thành năm dòng cụt — trông như lỗi bố cục chứ không phải biên tập. */
+    grid-template-columns: minmax(0, 46%) minmax(0, 1fr);
+    gap: clamp(32px, 4vw, 72px);
+    max-width: none;
+    align-items: start;
+  }
+  .section-head.split-head h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); }
+  .section-head.split-head .lead { margin: 0; padding-top: .35em; }
+}
+.section-head .head-title h2 { margin-bottom: 0; }
+.section-head.center .head-title { max-width: 30ch; margin-inline: auto; }
+
+/* Nhịp nền: chỉ đổi giữa bone và paper, riêng 2 khối navy */
+.surface-paper { background: var(--paper); }
+.surface-mist { background: var(--violet-mist); }
+.surface-navy { background: var(--ink-navy); color: #fff; }
+
+/* Chỉ đổi màu chữ cho phần nằm TRỰC TIẾP trên nền navy.
+   Các thẻ nền sáng bên trong (.price-card, .form-card) giữ nguyên bảng màu tối
+   trên nền sáng — trước đây chúng thừa hưởng màu trắng và biến thành
+   chữ trắng trên nền trắng. */
+.surface-navy :is(h1, h2, h3):not(.on-light *) { color: #fff; }
+.surface-navy .eyebrow:not(.on-light *) { color: #b9c0ff; }
+.surface-navy :is(.lead, .muted):not(.on-light *) { color: rgba(255, 255, 255, .82); }
+.surface-navy .on-light { color: var(--ink); }
+.surface-navy .on-light :is(h1, h2, h3) { color: var(--ink-navy); }
+.surface-navy .on-light .muted { color: var(--ink-muted); }
+
+/* Nút: hình chữ nhật gần vuông góc, chữ giãn nhẹ. Nút chính màu mực indigo —
+   KHÔNG phải xanh lá. Bản trước dùng xanh "clinic" cho nút mua, vừa chọi với
+   indigo của thương hiệu vừa mang ngôn ngữ nhãn giảm giá. */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-3);
+  font: inherit; font-weight: 600; font-size: var(--t-sm);
+  letter-spacing: .04em; line-height: 1.2;
+  padding: 17px 34px; border: 1px solid transparent; border-radius: var(--r-btn);
+  cursor: pointer; text-decoration: none; text-align: center;
+  transition:
+    background-color var(--dur-2) var(--ease),
+    border-color var(--dur-2) var(--ease),
+    color var(--dur-2) var(--ease),
+    transform var(--dur-1) var(--ease),
+    box-shadow var(--dur-2) var(--ease);
+}
+.btn-primary { background: var(--ink-navy); color: #fff; }
+.btn-primary:hover { background: var(--cobalt); color: #fff; }
+
+/* Nhấc lên 1px khi di chuột, nhấn xuống khi bấm. Biên độ cố tình rất nhỏ: đủ
+   để ngón tay và con trỏ biết nút đã nhận lệnh, không đủ để thành hiệu ứng. */
+@media (hover: hover) {
+  .btn:hover { transform: translateY(-1px); }
+}
+.btn:active { transform: translateY(0); transition-duration: 60ms; }
+.btn[disabled], .btn[aria-disabled='true'] { transform: none; }
+.btn-secondary { background: var(--cobalt); color: #fff; }
+.btn-secondary:hover { background: var(--ink-navy); color: #fff; }
+.btn-ghost { background: transparent; color: var(--ink-navy); border-color: var(--line-strong); }
+.btn-ghost:hover { background: var(--ink-navy); color: #fff; border-color: var(--ink-navy); }
+.surface-navy .btn-ghost { color: #fff; border-color: rgba(255, 255, 255, .55); }
+.surface-navy .btn-ghost:hover { background: #fff; color: var(--ink-navy); border-color: #fff; }
+.btn-lg { padding: 17px 32px; font-size: var(--t-base); }
+.btn-block { width: 100%; }
+
+/* "Thẻ" mặc định KHÔNG còn là hộp. Một gạch tóc phía trên và khoảng trống là
+   đủ để tách nhóm; viền + bóng trên mọi khối làm phẳng toàn bộ thứ bậc. */
+.card {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  padding: var(--s-5) 0 0;
+}
+/* Dùng .card-raised cho đúng MỘT khối cần nổi thật: biểu mẫu đặt hàng. */
+.card-raised {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  padding: var(--s-6);
+  box-shadow: var(--shadow-2);
+}
+
+/* Gạch tóc dùng lại nhiều nơi */
+.rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
+
+/* Ô đánh dấu chỗ còn thiếu dữ liệu thật — hiển thị rõ để không lọt lên production */
+/* Link trong hộp cảnh báo là lối liên hệ duy nhất khi form chưa nối endpoint;
+   nó không thừa hưởng min-height như footer a nên chỉ cao 19px — trượt SC 2.5.8. */
+.todo a { display: inline-block; min-height: 24px; line-height: 24px; }
+.todo {
+  display: block;
+  background: var(--amber-note);
+  border: 1px dashed var(--amber-edge);
+  color: var(--amber-ink);
+  padding: 10px 14px;
+  border-radius: var(--r-card);
+  font-size: var(--t-sm);
+  margin-block: var(--s-3);
+}
+.surface-navy .todo:not(.on-light *) { background: rgba(255, 214, 102, .14); border-color: #8a6d1f; color: #ffd98a; }
+
+/* Con của grid mặc định có min-width:auto, nên một phần tử không xuống dòng
+   được (giá trong thẻ gói, nhãn dài) có thể kéo giãn cả cột và làm tràn trang
+   ở màn hình hẹp. Đo được 3px tràn ở 320px trước khi thêm luật này. */
+.hero-grid > *, .order-grid > *, .offer-grid > *, .split > *, .grid > * { min-width: 0; }
+
+/* Thanh CTA cố định và thanh đồng ý đo lường đều nằm đè lên trang.
+   Chừa chỗ cho cả hai để không khối nội dung nào bị che. */
+:root { --consent-h: 0px; }
+body { padding-bottom: var(--consent-h); }
+@media (max-width: 899px) {
+  body { padding-bottom: calc(64px + var(--consent-h) + env(safe-area-inset-bottom)); }
+}
+
+/* Trước đây dùng content-visibility:auto cho các section dưới màn hình đầu.
+   Đã gỡ: nó khai chiều cao giả nên mọi liên kết neo (#dat-hang) cuộn trượt đích
+   hơn 2000px. Tiết kiệm vài chục ms render không đáng đổi lấy việc không ai
+   bấm được nút Đặt hàng. */
+
+
+/* Thanh trên cùng dính đáy khung nhìn: lúc ở đầu trang thì hoà vào nền, cuộn
+   xuống mới tách ra bằng một gạch tóc. Trạng thái do JS đặt trên <html> chứ
+   không phải trên chính header — một lớp, mọi trang dùng chung. */
+html.scrolled header { border-bottom-color: var(--line-strong); }
+header { transition: border-color var(--dur-2) var(--ease); }

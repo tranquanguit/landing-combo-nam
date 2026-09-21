@@ -1,0 +1,211 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "phuc-hoi-da",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "ultra-egf-bio-gel-mask",
+  "translationKey": "ultra-egf-bio-gel-mask",
+  "sku": "8938552914297",
+  "price": 195000,
+  "locale": "en",
+  "name": "Mocha Ultra EGF Bio-Gel Mask – 100g",
+  "shortName": "Ultra EGF Bio-Gel Mask",
+  "primaryKeyword": "mocha egf bio gel mask",
+  "seo": {
+    "title": "Mocha Ultra EGF Bio-Gel Mask, 100g | Mocha Vietnam",
+    "description": "A gel mask with EGF, Epi-On, copper peptide, exosome cica and three liposome nano ceramides. A 100g tube, around 40 uses. {{price}}."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "helps hydrate and calm the skin",
+    "warnings": [
+      "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
+      "Discontinue use if irritation occurs. Avoid direct contact with the eyes.",
+      "If you are pregnant or breastfeeding, speak to your doctor before use.",
+      "Results vary between individuals and depend on consistent daily sun protection.",
+      "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Ultra EGF Bio-Gel Mask – 100g",
+      "note": "Around 40 uses",
+      "price": 195000,
+      "recommended": true
+    },
+    {
+      "label": "I would like advice first",
+      "note": "An adviser calls you back and reviews your skin from photos",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "An optional step, not a required one",
+      "heading": "A gel mask for the weeks when skin should be left alone",
+      "lead": "A 100g tube with <strong>EGF, Epi-On™, copper peptide and exosome cica</strong>, plus sodium hyaluronate, three liposome-encapsulated nano ceramides, panthenol and folic acid — exactly the list printed on the tube.",
+      "usp": [
+        {
+          "text": "<strong>Eight ingredients printed on the tube</strong>, readable before you open it",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "printed on the packaging"
+        },
+        {
+          "text": "<strong>A 100g tube, around 40 uses</strong> — the figure printed on the tube itself",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "“EQUAL TO 40 MASKS” on the packaging"
+        },
+        {
+          "text": "<strong>Not a required step</strong> in any routine on this site",
+          "evidence": "ingredient",
+          "qualifier": "see the instructions"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-bio-gel-mask.webp",
+        "alt": "Pale blue 100g tube of Mocha Ultra EGF Bio-Gel Mask"
+      },
+      "primaryCta": "Order the gel mask",
+      "secondaryCta": {
+        "label": "See the ingredient table",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Free delivery nationwide",
+        "Inspect before you pay",
+        "7-day return if the product is faulty"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Ingredients",
+      "heading": "Eight ingredients printed on the tube",
+      "intro": "The formula belongs to the hydrating and calming group, with nothing acting on pigment.",
+      "caption": "This table lists exactly the ingredients PRINTED ON THE 100g TUBE. Full INCI list is printed on the packaging.",
+      "rows": [
+        {
+          "name": "EGF",
+          "role": "Epidermal growth factor, used as a conditioning ingredient.",
+          "suitedFor": "Recovering skin"
+        },
+        {
+          "name": "Epi-On™",
+          "role": "Biotech active, aimed at calming the skin.",
+          "suitedFor": "Easily irritated skin"
+        },
+        {
+          "name": "Copper peptide",
+          "role": "A copper peptide complex, a familiar conditioning ingredient.",
+          "suitedFor": "Post-treatment skin"
+        },
+        {
+          "name": "Exosome cica",
+          "role": "Centella-derived extract, part of the calming group.",
+          "suitedFor": "Stressed skin"
+        },
+        {
+          "name": "Sodium hyaluronate",
+          "role": "The salt form of hyaluronic acid; holds water in the outer layer.",
+          "suitedFor": "Dry skin"
+        },
+        {
+          "name": "Three nano ceramides (liposome-encapsulated)",
+          "role": "Ceramides at nano scale, building blocks of the skin barrier.",
+          "suitedFor": "Thin skin"
+        },
+        {
+          "name": "Panthenol (vitamin B5)",
+          "role": "Humectant, limits the tight feeling.",
+          "suitedFor": "Dry or tight skin"
+        },
+        {
+          "name": "Folic acid (vitamin B9)",
+          "role": "A B-group vitamin used as a conditioning ingredient.",
+          "suitedFor": "All skin types"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use",
+      "heading": "Three steps, 15–20 minutes each time",
+      "totalTime": "PT20M",
+      "intro": "The amount and timing are taken verbatim from the manufacturer's instructions.",
+      "items": [
+        {
+          "heading": "Cleanse",
+          "body": "Wash and dry your face before applying."
+        },
+        {
+          "heading": "Apply a thin layer",
+          "body": "About 5–10g, roughly three fingertip joints, for one use."
+        },
+        {
+          "heading": "Leave 15–20 minutes, then rinse",
+          "body": "Rinse with clean water, then moisturise as usual."
+        }
+      ],
+      "footnote": "This is an optional step, not a required one. If this week you only manage the three basics — cleanse, moisturise, sun protection — skipping the mask makes no difference to the routine's outcome."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City — tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support through the full routine</strong> by email."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "FAQ",
+      "heading": "Questions people actually ask",
+      "items": [
+        {
+          "q": "How much is it?",
+          "a": "<strong>{{price}}</strong> for the 100g tube, which the manufacturer states is around 40 uses. Free delivery, pay on delivery."
+        },
+        {
+          "q": "How often should I use it?",
+          "a": "The manufacturer does not publish a frequency, so we do not quote one. For a hydrating and calming formula, how often you mask matters far less than whether the three basics happen consistently."
+        },
+        {
+          "q": "Do I rinse it off?",
+          "a": "Yes. The manufacturer states leaving it 15–20 minutes and then rinsing with clean water, followed by a moisturiser."
+        },
+        {
+          "q": "Can I use it during a pigmentation routine?",
+          "a": "Yes, because it is a hydrating step with nothing acting on pigment, so it does not compete with the cream or serum. But if your skin is stinging, the answer is to remove steps rather than add one."
+        },
+        {
+          "q": "How should it be stored?",
+          "a": "Somewhere dry and cool, away from direct sunlight and heat. Close the cap after use."
+        }
+      ]
+    }
+  ]
+}

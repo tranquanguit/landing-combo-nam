@@ -1,0 +1,214 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "lam-sach",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "bio-deep-detox-rebalance",
+  "translationKey": "bio-deep-detox-rebalance",
+  "sku": "8938552914273",
+  "price": 215000,
+  "locale": "vi",
+  "name": "Mocha Bio-Deep Detox & Rebalance – nước tẩy trang micellar",
+  "shortName": "Nước tẩy trang Bio-Deep Detox",
+  "primaryKeyword": "nước tẩy trang mocha micellar",
+  "seo": {
+    "title": "Nước tẩy trang Mocha Bio-Deep Detox & Rebalance | Mocha Việt Nam",
+    "description": "Nước tẩy trang micellar pH 5.5 với Exosome Cica, Epi-On, dịch gạo Sake lên men, chiết xuất trà xanh và vitamin B5. {{price}}, freeship."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "hỗ trợ làm sạch lớp trang điểm và bụi bẩn trên da mặt",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
+      "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
+      "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Bio-Deep Detox & Rebalance",
+      "note": "Bước làm sạch đầu tiên của buổi tối",
+      "price": 215000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, xem tình trạng da qua hình ảnh",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước đầu của buổi tối",
+      "heading": "Kem chống nắng không tự trôi đi khi bạn rửa mặt",
+      "lead": "Nước tẩy trang micellar với <strong>Exosome Cica, Epi-On, dịch gạo Sake lên men, chiết xuất trà xanh, Panthenol và Propanediol</strong> — đúng danh sách in trên vỏ chai, pH 5.5. Dùng được cho cả vùng mắt và môi.",
+      "usp": [
+        {
+          "text": "<strong>Phân tử micellar Solubule BR-02</strong> và dầu tan nước Wilbride S-753D — nhà sản xuất gọi đúng tên hai thành phần làm sạch",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "bảng thành phần ngay trên trang này"
+        },
+        {
+          "text": "<strong>pH 5.5</strong>, và có Panthenol ngay trong bước tẩy trang",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "in trên vỏ chai"
+        },
+        {
+          "text": "<strong>Nhà sản xuất định vị dùng được cho vùng mắt và môi</strong>",
+          "evidence": "ingredient",
+          "qualifier": "theo mô tả của nhà sản xuất"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-bio-deep-detox.webp",
+        "alt": "Chai nước tẩy trang Mocha Bio-Deep Detox & Rebalance Micellar Water"
+      },
+      "primaryCta": "Đặt nước tẩy trang",
+      "secondaryCta": {
+        "label": "Xem bảng thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Bảng thành phần",
+      "heading": "Hai thành phần làm sạch, sáu thành phần dưỡng",
+      "intro": "Tẩy trang là bước tiếp xúc với da bằng ma sát nhiều nhất trong ngày, nên thứ đi kèm chất làm sạch quan trọng không kém chính chất làm sạch.",
+      "caption": "Bảng này liệt kê các thành phần nhà sản xuất công bố, trong đó nhóm dưỡng được IN TRÊN VỎ CHAI. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
+      "rows": [
+        {
+          "name": "Solubule BR-02",
+          "inProduct": "Làm sạch",
+          "role": "Phân tử micellar, cuốn dầu thừa và cặn trang điểm theo cơ chế mixen.",
+          "suitedFor": "Mọi loại da"
+        },
+        {
+          "name": "Wilbride S-753D",
+          "inProduct": "Làm sạch",
+          "role": "Dầu tan trong nước, tạo lớp đệm giảm ma sát khi lau.",
+          "suitedFor": "Da mỏng, da dễ đỏ"
+        },
+        {
+          "name": "Epi-On",
+          "inProduct": "Dưỡng",
+          "role": "Hoạt chất công nghệ sinh học, hướng tới làm dịu nền da.",
+          "suitedFor": "Da dễ kích ứng"
+        },
+        {
+          "name": "Exosome Cica",
+          "inProduct": "Dưỡng",
+          "role": "Dịch chiết từ rau má, thành phần quen thuộc trong nhóm làm dịu.",
+          "suitedFor": "Da đang căng thẳng"
+        },
+        {
+          "name": "Sake Rice Fermented Extract",
+          "inProduct": "Dưỡng",
+          "role": "Dịch gạo Sake lên men, liên quan tới cân bằng hệ vi sinh bề mặt.",
+          "suitedFor": "Da dễ mất cân bằng"
+        },
+        {
+          "name": "Panthenol (Vitamin B5)",
+          "inProduct": "Dưỡng",
+          "role": "Giữ ẩm, hạn chế cảm giác khô sau khi lau.",
+          "suitedFor": "Da khô"
+        },
+        {
+          "name": "Propanediol",
+          "inProduct": "Dưỡng",
+          "role": "Chất giữ ẩm, giảm mất nước qua bề mặt da.",
+          "suitedFor": "Mọi loại da"
+        },
+        {
+          "name": "Chiết xuất trà xanh",
+          "inProduct": "Dưỡng",
+          "role": "Chiết xuất giàu polyphenol, thường dùng cho da dầu.",
+          "suitedFor": "Da dầu"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Hai bước, chỉ buổi tối",
+      "totalTime": "PT3M",
+      "intro": "Thứ tự và lưu ý lấy từ hướng dẫn sử dụng của nhà sản xuất.",
+      "items": [
+        {
+          "heading": "Thấm ướt đều bông tẩy trang",
+          "body": "Lau khắp mặt, chú ý hai bên cánh mũi, vùng mắt và dưới môi — những chỗ hẹp hay còn sót lại."
+        },
+        {
+          "heading": "Rửa mặt lại bằng sữa rửa mặt",
+          "body": "Tẩy trang không thay thế bước rửa mặt. Bỏ bước này thì phần cặn còn lại vẫn nằm trên da."
+        }
+      ],
+      "footnote": "Thử một lượng nhỏ ở vùng cổ và quan sát trong <strong>30–45 phút</strong> trước khi dùng toàn mặt. Không chà xát mạnh: lực tay mạnh gây hại nhiều hơn bất kỳ thành phần nào trong chai."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng phù hợp với tình trạng da của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt chu kỳ sử dụng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Nước tẩy trang này giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong>. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Tẩy trang xong có cần rửa mặt nữa không?",
+          "a": "Có. Nhà sản xuất ghi rõ bước hai là rửa lại bằng sữa rửa mặt. Bỏ bước đó thì phần cặn tẩy trang vẫn còn trên da."
+        },
+        {
+          "q": "Không trang điểm thì có cần tẩy trang không?",
+          "a": "Nếu bạn có dùng kem chống nắng thì có. Kem chống nắng bám khá chắc và sữa rửa mặt một mình thường không lấy hết."
+        },
+        {
+          "q": "Dùng cho vùng mắt được không?",
+          "a": "Nhà sản xuất định vị dùng được cho cả vùng mắt và môi. Lau nhẹ, không chà, và tránh để sản phẩm vào trong mắt."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp và nhiệt độ cao. Đóng nắp sau khi dùng, để xa tầm tay trẻ em."
+        }
+      ]
+    }
+  ]
+}

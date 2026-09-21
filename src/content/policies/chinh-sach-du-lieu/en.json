@@ -1,0 +1,79 @@
+{
+  "slug": "chinh-sach-du-lieu",
+  "locale": "en",
+  "translationKey": "policy-du-lieu",
+  "status": "published",
+  "seo": {
+    "title": "Personal data protection policy | Mocha Vietnam",
+    "description": "What Mocha collects, what it is used for, where it is stored, for how long, and what rights you have. Written to Vietnam's Decree 13/2023/ND-CP."
+  },
+  "title": "Personal data protection policy",
+  "lead": "This page describes what the system actually does with your information. If anything here differs from reality, that is our mistake — please tell us using the contact details at the foot of the page.",
+  "updatedAt": "2026-09-16",
+  "sections": [
+    {
+      "id": "what-we-collect",
+      "heading": "What we collect",
+      "body": [
+        "When you submit the order form we receive and store: <strong>your name, phone number and delivery address</strong>, any note you write, the package you selected and its price at the moment you ordered.",
+        "Alongside the order, the system stores <strong>the exact consent sentence you read</strong> when you pressed send. This means that if the wording on the site changes later, it is still possible to establish what you agreed to.",
+        "We also record the traffic source at campaign level (utm parameters) and the domain you arrived from. That is information about a campaign, not about you personally — we do not store the full URL.",
+        "We do <strong>not</strong> store raw IP addresses, browser details or advertising cookies in the order database. To limit automated bulk submissions the system counts submissions against a one-way hash of the IP address; that hash is truncated and cannot be reversed back to the original address."
+      ]
+    },
+    {
+      "id": "what-its-used-for",
+      "heading": "What it is used for",
+      "body": [
+        "Order information is used only to <strong>contact you to confirm and deliver that order</strong>. We do not use it to send marketing messages unless you have separately agreed to that.",
+        "We do <strong>not sell, trade or rent</strong> your information to third parties.",
+        "The delivery company receives your name, phone number and address — this is unavoidable in order to deliver, and covers only the fields delivery requires."
+      ]
+    },
+    {
+      "id": "measurement",
+      "heading": "Measurement and advertising",
+      "body": [
+        "The website may use measurement tools from Google, Meta and TikTok to understand which advertising brings visitors. These tools are <strong>loaded only after you press accept</strong> on the notice bar. If you decline, or have not yet answered, no third-party measurement code is downloaded to your device at all.",
+        "Your choice is stored in your own browser and is not sent to our servers. You can withdraw consent at any time using the button at the foot of every page.",
+        "Internal measurement events carry only the name of the product package — never your name, phone number or address."
+      ]
+    },
+    {
+      "id": "where-stored",
+      "heading": "Where it is stored, and for how long",
+      "body": [
+        "Orders are stored in a Cloudflare database on the same infrastructure that serves this website. Only Mocha staff who process orders can reach it, through an administration page protected by its own access code.",
+        "We keep order information for as long as is needed to complete the transaction and to meet accounting record-keeping obligations."
+      ]
+    },
+    {
+      "id": "your-rights",
+      "heading": "Your rights",
+      "body": [
+        "Under Decree 13/2023/ND-CP you have the right to know what data is being processed, and to request <strong>access</strong>, <strong>correction</strong>, <strong>deletion</strong>, <strong>restriction of processing</strong>, and to withdraw consent you have given.",
+        "To exercise these, call the hotline or email us using the details at the foot of the page, quoting the phone number you used when ordering so we can find the right record. We respond within 72 working hours.",
+        "Withdrawing consent does not undo processing that was lawful beforehand, and may mean we cannot complete an order already in transit."
+      ]
+    },
+    {
+      "id": "children",
+      "heading": "Children",
+      "body": [
+        "The website and the products are not intended for anyone under 16. We do not knowingly collect children's data. If we discover we have received such data, we delete it as soon as we become aware."
+      ]
+    },
+    {
+      "id": "changes",
+      "heading": "When this policy changes",
+      "body": [
+        "The update date is shown at the top of this page. If a change affects your rights, we will give notice before it takes effect."
+      ]
+    }
+  ],
+  "pending": [
+    "The specific retention period (in months) after an order is completed — to be settled against accounting record-keeping obligations.",
+    "Name and contact details of the personal data protection officer, if one is appointed.",
+    "The list of delivery partners currently used."
+  ]
+}

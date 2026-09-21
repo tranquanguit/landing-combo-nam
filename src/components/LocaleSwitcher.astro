@@ -1,0 +1,46 @@
+---
+import { htmlLang, type Locale } from '../i18n/ui';
+
+/** Chỉ hiện khi sản phẩm thật sự có bản dịch khác đã xuất bản. */
+interface Props { current: Locale; alternates: { locale: Locale; url: string }[]; }
+const { current, alternates } = Astro.props;
+
+/**
+ * Nhãn ngắn cố định chiều rộng. Nhãn dài ("Tiếng Việt", "Bahasa Indonesia") làm
+ * header co giãn khi font tải xong và đẩy toàn bộ trang xuống — đo được CLS 0.072
+ * trên bản tiếng Anh. Tên đầy đủ vẫn có cho trình đọc màn hình.
+ */
+const short: Record<Locale, string> = { vi: 'VI', en: 'EN', th: 'TH', id: 'ID' };
+const labels: Record<Locale, string> = {
+  vi: 'Tiếng Việt', en: 'English', th: 'ไทย', id: 'Bahasa Indonesia',
+};
+---
+{alternates.length > 1 && (
+  <nav class="locales" aria-label="Language">
+    {alternates.map((a) => (
+      a.locale === current
+        ? <span aria-current="true" lang={htmlLang[a.locale]}>
+            <span aria-hidden="true">{short[a.locale]}</span>
+            <span class="sr-only">{labels[a.locale]}</span>
+          </span>
+        : <a href={a.url} hreflang={htmlLang[a.locale]} lang={htmlLang[a.locale]}>
+            <span aria-hidden="true">{short[a.locale]}</span>
+            <span class="sr-only">{labels[a.locale]}</span>
+          </a>
+    ))}
+  </nav>
+)}
+
+<style>
+  .locales { display: flex; gap: var(--s-2); align-items: center; font-size: var(--t-xs); }
+  /* Chiều rộng cố định để nhãn không làm header co giãn lúc font swap */
+  /* Vùng chạm tối thiểu 24x24 theo WCAG 2.5.8 */
+  .locales > * {
+    min-width: 2.6em; min-height: 24px;
+    display: inline-flex; align-items: center; justify-content: center;
+    text-align: center; font-variant-numeric: tabular-nums;
+  }
+  .locales a { color: var(--ink-muted); text-decoration: none; }
+  .locales a:hover { color: var(--indigo); text-decoration: underline; }
+  .locales [aria-current] { color: var(--ink-navy); font-weight: 600; }
+</style>

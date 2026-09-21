@@ -1,0 +1,211 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "cham-soc-da-mun",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "smart-whitening-turmergel",
+  "translationKey": "smart-whitening-turmergel",
+  "sku": "8938552914303",
+  "price": 215000,
+  "locale": "en",
+  "name": "Mocha Smart Whitening Turmergel – post-blemish mark gel, 20g",
+  "shortName": "Smart Whitening Turmergel",
+  "primaryKeyword": "mocha post acne mark gel",
+  "seo": {
+    "title": "Mocha Smart Whitening Turmergel, 20g | Mocha Vietnam",
+    "description": "Sabiwhite 0.3%, niacinamide 3%, tranexamic acid 3%, glutathione, TECA, EGF — published figures. Evening use. {{price}}."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "helps soften darker marks left after blemishes and supports an even tone",
+    "warnings": [
+      "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
+      "Discontinue use if irritation occurs. Avoid direct contact with the eyes.",
+      "If you are pregnant or breastfeeding, speak to your doctor before use.",
+      "Results vary between individuals and depend on consistent daily sun protection.",
+      "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Smart Whitening Turmergel – 20g",
+      "note": "Evening use",
+      "price": 215000,
+      "recommended": true
+    },
+    {
+      "label": "I would like advice first",
+      "note": "An adviser calls you back and reviews your skin from photos",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "The step after the spot has gone",
+      "heading": "A mark left after a blemish is a pigment problem, no longer a blemish problem",
+      "lead": "A 20g tube with <strong>Sabiwhite® 0.3%, niacinamide 3%, tranexamic acid 3% and glutathione</strong>, plus TECA, EGF and MC Zyme E. The first three figures are published by the manufacturer.",
+      "usp": [
+        {
+          "text": "<strong>Three concentrations published as figures</strong>: Sabiwhite 0.3%, niacinamide 3%, tranexamic acid 3%",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "figures published by the manufacturer"
+        },
+        {
+          "text": "<strong>Same active family as the brightening cream</strong> — tranexamic acid and niacinamide, in a spot-use gel",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "comparable with the combo's ingredient table"
+        },
+        {
+          "text": "<strong>For use once the spot has settled</strong>, not while it is still inflamed",
+          "evidence": "ingredient",
+          "qualifier": "see the instructions"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-smart-white-plus.webp",
+        "alt": "Tube of Mocha Smart Whitening Quickly Turmergel 20g"
+      },
+      "primaryCta": "Order the mark gel",
+      "secondaryCta": {
+        "label": "See the ingredient table",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Free delivery nationwide",
+        "Inspect before you pay",
+        "7-day return if the product is faulty"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Ingredients",
+      "heading": "Eight ingredients, three of them with published figures",
+      "intro": "The active family here overlaps heavily with the brightening cream — because post-blemish marks and melasma are both pigment, differing only in what set them off.",
+      "caption": "This table lists the ingredients the manufacturer publishes; the four main actives are also PRINTED ON THE TUBE. Full INCI list is printed on the packaging.",
+      "rows": [
+        {
+          "name": "Sabiwhite® 0.3%",
+          "role": "Standardised white turmeric extract. Figure published by the manufacturer.",
+          "suitedFor": "Darker marks after blemishes"
+        },
+        {
+          "name": "Niacinamide 3%",
+          "role": "Supports the skin barrier and evenness of tone.",
+          "suitedFor": "All skin types"
+        },
+        {
+          "name": "Tranexamic acid 3%",
+          "role": "Widely studied among ingredients that soften areas darkened by excess pigment.",
+          "suitedFor": "Post-blemish marks"
+        },
+        {
+          "name": "Glutathione",
+          "role": "An antioxidant familiar in the evening-out group.",
+          "suitedFor": "Uneven tone"
+        },
+        {
+          "name": "MC Zyme E",
+          "role": "An enzyme complex that helps clear the surface layer.",
+          "suitedFor": "Dull skin, thickened surface layer"
+        },
+        {
+          "name": "TECA",
+          "role": "Standardised centella extract, a calming ingredient.",
+          "suitedFor": "Skin after inflamed blemishes"
+        },
+        {
+          "name": "EGF",
+          "role": "Epidermal growth factor, used as a conditioning ingredient.",
+          "suitedFor": "Recovering skin"
+        },
+        {
+          "name": "Biomimetic fluid tears",
+          "role": "A moisturising ingredient forming a water-holding film.",
+          "suitedFor": "Dry skin"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use",
+      "heading": "Three steps, evenings",
+      "totalTime": "PT2M",
+      "intro": "The order and amounts are taken from the manufacturer's instructions.",
+      "items": [
+        {
+          "heading": "Cleanse",
+          "body": "Wash and dry your face."
+        },
+        {
+          "heading": "Spread, or dab onto marks",
+          "body": "Two or three pea-sized amounts cover the whole face. Massage gently until absorbed."
+        },
+        {
+          "heading": "Use every evening",
+          "body": "This is an evening product; during the day you need sunscreen, or the marks will darken again."
+        }
+      ],
+      "footnote": "Use once the spot has settled. Actively inflamed areas need a different step — and if blemishes are severe or persistent, that is a dermatologist's work."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City — tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support through the full routine</strong> by email."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "FAQ",
+      "heading": "Questions people actually ask",
+      "items": [
+        {
+          "q": "How much is it?",
+          "a": "<strong>{{price}}</strong> for the 20g tube. Free delivery, pay on delivery."
+        },
+        {
+          "q": "How long until I see a difference?",
+          "a": "We do not quote a figure. Post-blemish marks sit at very different depths depending on how inflamed things were, so one shared timescale would be wrong for most readers. What is more certain: without sun protection the marks darken faster than any product can soften them."
+        },
+        {
+          "q": "How is it different from Smart Brightening Cream?",
+          "a": "The active families overlap — both carry tranexamic acid and niacinamide. They differ in format and area: this is a 20g gel for marks left after blemishes, the cream is 30g for the whole face over a longer routine."
+        },
+        {
+          "q": "Can I use it on an active breakout?",
+          "a": "Not the right moment. This is the step after the spot has settled. Inflamed areas need something else."
+        },
+        {
+          "q": "How should it be stored?",
+          "a": "Keep away from heat and direct sunlight, close after use, keep out of reach of children."
+        }
+      ]
+    }
+  ]
+}

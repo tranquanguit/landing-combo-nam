@@ -1,0 +1,171 @@
+---
+import { getCollection } from 'astro:content';
+import { DEFAULT_ANCHOR } from '../lib/block-anchors';
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import StickyCta from '../components/StickyCta.astro';
+import Hero from '../components/blocks/Hero.astro';
+import Offer from '../components/blocks/Offer.astro';
+import Problem from '../components/blocks/Problem.astro';
+import Cards from '../components/blocks/Cards.astro';
+import Ingredients from '../components/blocks/Ingredients.astro';
+import Steps from '../components/blocks/Steps.astro';
+import Gallery from '../components/blocks/Gallery.astro';
+import Testimonials from '../components/blocks/Testimonials.astro';
+import Order from '../components/blocks/Order.astro';
+import Faq from '../components/blocks/Faq.astro';
+import Feature from '../components/blocks/Feature.astro';
+import Documents from '../components/blocks/Documents.astro';
+import Timeline from '../components/blocks/Timeline.astro';
+import Routine from '../components/blocks/Routine.astro';
+import Analytics from '../components/Analytics.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { expandProductTokens } from '../lib/money-text';
+import { productGraph } from '../lib/schema';
+import { resolveAssetUrl, resolveAssetImage } from '../lib/images';
+import Section from '../components/Section.astro';
+import { articlePath, homePath, linePath, productPath } from '../lib/routes';
+import { assertTranslated, localePath, t, type Locale } from '../i18n/ui';
+
+interface Props {
+  product: any;
+  brand: any;
+  locale: Locale;
+  canonical: string;
+  alternates?: { locale: Locale; url: string }[];
+  nav?: { label: string; href: string }[];
+  policies?: { label: string; href: string }[];
+  /** Bài tư vấn liên quan — xem `relatedArticles` trong schema sản phẩm. */
+  articles?: any[];
+}
+
+const { product: raw, brand: b, locale, canonical, alternates = [], nav = [], policies = [], articles = [] } = Astro.props;
+
+/* Tên tổ chức công bố (in ở footer) phải trùng pháp nhân trong JSON-LD Organization.
+   Kiểm định lần 6: bản EN khai "Mocha Vietnam Cosmeceuticals" trong khi structured
+   data khai "Công ty Dược Mỹ Phẩm Mocha Việt Nam" — hai pháp nhân khác tên trên
+   cùng một trang. Tên pháp nhân là dữ kiện pháp lý, không dịch theo ngôn ngữ. */
+if (raw.compliance.declaringOrganization !== b.legalName) {
+  throw new Error(
+    `compliance.declaringOrganization ("${raw.compliance.declaringOrganization}") khác ` +
+    `brand.legalName ("${b.legalName}"). Tên pháp nhân phải giống nhau ở mọi ngôn ngữ.`
+  );
+}
+
+// Thay token tiền một lần cho toàn bộ dữ liệu, trước khi bất kỳ component nào
+// nhìn thấy nó. Nhờ vậy giá chỉ tồn tại ở trường `price` và không thể lệch.
+const p = expandProductTokens(raw, {
+  price: raw.price, compareAtPrice: raw.compareAtPrice, currency: raw.currency,
+}, locale);
+const site = Astro.site?.origin ?? 'https://mochatrinam.com';
+
+// Không xuất bản một ngôn ngữ chưa dịch xong phần giao diện.
+assertTranslated(locale);
+
+const faqBlock = p.blocks.find((x: any) => x.type === 'faq');
+
+/* Đường dẫn phân cấp thật: trang chủ -> dòng sản phẩm -> sản phẩm.
+   Bản trước bỏ hẳn breadcrumb cho sản phẩm ở gốc; nay không sản phẩm nào ở gốc
+   nữa, và bậc giữa (dòng sản phẩm) chính là trang gánh truy vấn không mang tên
+   thương hiệu — bỏ nó khỏi breadcrumb là cắt mất liên kết nội bộ quan trọng nhất. */
+const lineEntry = p.line
+  ? (await getCollection('lines')).find(
+    (l: any) => l.data.slug === p.line && l.data.locale === locale && l.data.status === 'published')
+  : undefined;
+const breadcrumb = [
+  { name: t(locale, 'nav.home'), url: new URL(homePath(locale), site).href },
+  ...(lineEntry
+    ? [{ name: lineEntry.data.heading, url: new URL(linePath(p.line, locale), site).href }]
+    : []),
+  { name: p.shortName ?? p.name, url: new URL(productPath(p.slug, locale), site).href },
+];
+
+// og:image và ảnh trong schema phải là URL sau khi build, không phải đường dẫn nguồn
+const heroBlock = p.blocks.find((x: any) => x.type === 'hero');
+const ogSrc = p.seo.ogImage ?? heroBlock?.image?.src;
+const ogResolved = await resolveAssetImage(ogSrc, site, 1200);
+const ogImage = ogResolved?.url;
+const ogImageDims = {
+  width: ogResolved?.width ?? 1200,
+  height: ogResolved?.height ?? 630,
+  // alt của ảnh hero chỉ dùng được khi og:image CHÍNH LÀ ảnh hero.
+  alt: ogSrc === heroBlock?.image?.src ? (heroBlock?.image?.alt ?? p.name) : p.name,
+};
+const logoUrl = await resolveAssetUrl(b.logo, site, 512);
+
+const jsonLd = productGraph({
+  product: p, brand: b, site, url: canonical, locale, faq: faqBlock?.items, breadcrumb,
+  imageUrls: ogImage ? [ogImage] : [],
+  logoUrl,
+});
+
+// Nền xen kẽ giữa các khối dạng thẻ, tính sẵn theo thứ tự xuất hiện
+// để hai khối liền nhau không dính vào nhau.
+const surfaceFor = new Map<number, 'bone' | 'paper'>();
+p.blocks.forEach((block: any, i: number) => {
+  if (block.type === 'cards') surfaceFor.set(i, surfaceFor.size % 2 === 0 ? 'bone' : 'paper');
+});
+---
+<BaseLayout siteName={b.tradingName}
+  locale={locale}
+  title={p.seo.title}
+  description={p.seo.description}
+  canonical={canonical}
+  ogImage={ogImage}
+  ogImageWidth={ogImageDims.width}
+  ogImageHeight={ogImageDims.height}
+  ogImageAlt={ogImageDims.alt}
+  alternates={alternates}
+  jsonLd={jsonLd}
+>
+  <SiteHeader brand={b} locale={locale} alternates={alternates} nav={nav} />
+  <Breadcrumb items={breadcrumb} locale={locale} />
+
+  <main id="main">
+    {p.blocks.map((block: any, i: number) => {
+      switch (block.type) {
+        case 'hero':         return <Hero data={block} locale={locale} product={p} />;
+        case 'offer':        return <Offer data={block} product={p} locale={locale} />;
+        case 'problem':      return <Problem data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
+        case 'cards':        return <Cards data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} surface={surfaceFor.get(i)} />;
+        case 'ingredients':  return <Ingredients data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} />;
+        case 'steps':        return <Steps data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
+        case 'gallery':      return <Gallery data={block} id={block.id ?? DEFAULT_ANCHOR.gallery} locale={locale} />;
+        case 'testimonials': return <Testimonials data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} />;
+        case 'order':        return <Order data={block} product={p} brand={b} locale={locale} />;
+        case 'feature':      return <Feature data={block} id={block.id} />;
+        case 'documents':    return <Documents data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
+        case 'timeline':     return <Timeline data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
+        case 'routine':      return <Routine data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
+        case 'faq':          return <Faq data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} />;
+        default:             return null;
+      }
+    })}
+
+    {articles.length > 0 && (
+      <Section id="doc-them" surface="bone" heading={t(locale, 'product.relatedArticles')}>
+        <ul class="reads">
+          {articles.map((a: any) => (
+            <li>
+              <a href={articlePath(a.slug, locale)}>
+                <span class="read-title">{a.title}</span>
+                <span class="read-lead">{a.lead}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    )}
+  </main>
+
+  <SiteFooter brand={b} product={p} locale={locale} nav={nav} policies={policies} />
+  <StickyCta brand={b} locale={locale} />
+  <Analytics
+    locale={locale}
+    value={p.price}
+    currency={p.currency}
+    itemId={p.sku}
+    itemName={p.shortName ?? p.name}
+  />
+</BaseLayout>

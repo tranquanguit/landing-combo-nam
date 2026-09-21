@@ -1,0 +1,477 @@
+---
+import { money } from '../../lib/format';
+import { t, type Locale } from '../../i18n/ui';
+import { richText } from '../../lib/richtext';
+interface Props { data: any; product: any; brand: any; locale: Locale; }
+const { data, product: p, brand: b, locale } = Astro.props;
+
+// Endpoint nhận đơn. Chưa cấu hình thì form KHÔNG giả vờ đã gửi thành công —
+// thay vào đó hiện lối liên hệ thật, vì một đơn hàng rơi vào hư không tệ hơn
+// nhiều so với một nút không hoạt động.
+const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
+
+/**
+ * Chưa có endpoint thì KHÔNG render thẻ <form>.
+ *
+ * Trước đây form vẫn tồn tại với nút aria-disabled. Nhưng khi tắt JavaScript,
+ * nhấn Enter trong một ô nhập vẫn submit ngầm, POST về chính trang và trả 501:
+ * khách mất sạch dữ liệu đã gõ. Không có phần tử form thì không có gì để submit.
+ */
+const Wrapper = endpoint ? 'form' : 'div';
+
+/**
+ * Chính câu khách đã đọc lúc bấm, dạng văn bản thuần, gửi kèm đơn và lưu vào
+ * cơ sở dữ liệu. Nghị định 13/2023/NĐ-CP đòi chứng minh được khách đã đồng ý
+ * với ĐIỀU GÌ — lưu một cờ true/false thì không chứng minh được điều đó, nhất
+ * là sau này khi câu chữ trên trang đã đổi.
+ */
+const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
+---
+<section id="dat-hang" class="surface-navy defer" aria-labelledby="dat-hang-title">
+  <div class="wrap order-grid">
+    <div>
+      {data.eyebrow && <p class="eyebrow">{data.eyebrow}</p>}
+      <h2 id="dat-hang-title">{data.heading}</h2>
+      <p class="lead" set:html={richText(data.body)} />
+      <ul class="points">
+        {data.points.map((pt: string) => <li set:html={richText(pt)} />)}
+      </ul>
+      <p class="hotline">
+        <a href={`tel:${b.phone}`} data-cta="order-call">{b.phoneDisplay}</a>
+        {b.zalo && <> · <a href={b.zalo} rel="noopener" data-cta="order-zalo">Zalo</a></>}
+      </p>
+    </div>
+
+    <div class="form-card on-light">
+      {/* Cố ý KHÔNG đặt action: POST native gửi form-urlencoded còn nhánh JS gửi
+          JSON — hai định dạng vào cùng một endpoint. Và không có action thì form
+          POST về chính trang, ném khách sang màn hình lỗi. Khi tắt JS, biểu mẫu
+          bị ẩn hẳn và chỉ còn lối gọi hotline (xem <noscript> bên dưới).
+          `novalidate` do JS gắn vào, để bản không-JS vẫn có kiểm tra của trình duyệt. */}
+      <Wrapper
+        id="order-form"
+        method={endpoint ? 'post' : undefined}
+        data-endpoint={endpoint ? 'configured' : 'missing'}
+        data-action={endpoint ?? undefined}
+      >
+        {p.variants.length > 0 && (
+          <fieldset>
+            <legend class="sr-only">{t(locale, 'form.selectPack')}</legend>
+            <div class="packs">
+              {p.variants.map((v: any, i: number) => (
+                <label class="pack">
+                  <input
+                    type="radio" name="pack" value={v.label}
+                    data-price={v.price ?? ''}
+                    data-price-text={v.price === null ? '' : money(v.price, p.currency, locale)}
+                    checked={p.variants.some((x: any) => x.recommended) ? v.recommended : i === 0}
+                  />
+                  <span class="pack-text">
+                    <strong>{v.label}</strong>
+                    {v.note && <span class="muted">{v.note}</span>}
+                  </span>
+                  <span class="pack-price tabular">
+                    {v.price === null ? t(locale, 'form.noPrice') : money(v.price, p.currency, locale)}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        )}
+
+        <div class="field" data-field="name">
+          <label for="name">{t(locale, 'form.name')} <span aria-hidden="true">*</span></label>
+          <input type="text" id="name" name="name" disabled={!endpoint} autocomplete="name" required
+            aria-describedby="name-err" placeholder={t(locale, 'form.phName')} />
+          <p class="err" id="name-err">{t(locale, 'form.errName')}</p>
+        </div>
+
+        <div class="field" data-field="phone">
+          <label for="phone">{t(locale, 'form.phone')} <span aria-hidden="true">*</span></label>
+          <input type="tel" id="phone" name="phone" disabled={!endpoint} autocomplete="tel" inputmode="numeric" required
+            aria-describedby="phone-hint phone-err" placeholder={t(locale, 'form.phPhone')} />
+          <p class="hint" id="phone-hint">{t(locale, 'form.privacy')}</p>
+          <p class="err" id="phone-err">{t(locale, 'form.errPhone')}</p>
+        </div>
+
+        <div class="field" data-field="address">
+          <label for="address">
+            {t(locale, 'form.address')}
+            <span aria-hidden="true" data-req>*</span>
+            <span class="muted" data-optional hidden>({t(locale, 'form.optional')})</span>
+          </label>
+          <input type="text" id="address" name="address" disabled={!endpoint} autocomplete="street-address" required
+            aria-describedby="address-err" placeholder={t(locale, 'form.phAddress')} />
+          <p class="err" id="address-err">{t(locale, 'form.errAddress')}</p>
+        </div>
+
+        {locale !== 'vi' && (
+          <div class="field" data-field="country">
+            <label for="country">{t(locale, 'form.country')} <span aria-hidden="true">*</span></label>
+            <input type="text" id="country" name="country" disabled={!endpoint} autocomplete="country-name" required
+              aria-describedby="country-err" />
+            <p class="err" id="country-err">{t(locale, 'form.errCountry')}</p>
+          </div>
+        )}
+
+        <div class="field">
+          <label for="note">{t(locale, 'form.note')}</label>
+          <textarea id="note" name="note" rows="2" disabled={!endpoint}></textarea>
+        </div>
+
+        {/* Bẫy bot: người thật không thấy và bàn phím không tới được. Không dùng
+            display:none — vài bot biết bỏ qua ô ẩn kiểu đó. */}
+        <div class="trap" aria-hidden="true">
+          <label for="website">Website</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        {/* Ngữ cảnh đơn hàng: máy chủ cần biết đơn này của sản phẩm nào, tiếng
+            gì, và khách đã đồng ý với câu chữ nào. */}
+        <input type="hidden" name="productSlug" value={p.slug} />
+        <input type="hidden" name="locale" value={locale} />
+        <input type="hidden" name="consentText" value={consentText} />
+
+        <label class="agree">
+          <input type="checkbox" id="data-consent" name="dataConsent" required disabled={!endpoint} />
+          <span set:html={richText(t(locale, 'form.dataConsent'))} />
+        </label>
+
+        <p class="total" id="order-total" data-currency={p.currency} data-locale={locale}>
+          {t(locale, 'form.total')} <strong class="tabular" data-total>{money(p.price, p.currency, locale)}</strong>
+          <span class="muted"> {t(locale, 'form.totalNote')}</span>
+        </p>
+
+        {/* Chưa có endpoint: nút là <button type="button"> đã disabled, và bên
+            ngoài không có thẻ <form> nào, nên không đường nào submit được —
+            kể cả nhấn Enter trong ô nhập khi JavaScript tắt. */}
+        <button
+          type={endpoint ? 'submit' : 'button'}
+          class="btn btn-primary btn-lg btn-block"
+          data-cta="form-submit"
+          data-sending-label={t(locale, 'form.sending')}
+          disabled={!endpoint}
+          aria-describedby={endpoint ? undefined : 'form-no-endpoint'}
+        >
+          {t(locale, 'form.submit')}
+        </button>
+
+      </Wrapper>
+
+      <noscript>
+        <p class="todo">
+          {t(locale, 'form.needsJs')} <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a>
+        </p>
+      </noscript>
+
+      <p class="ok" id="form-success" role="status" hidden>
+        {t(locale, 'form.success')}
+        <span class="code" id="order-code" hidden></span>
+      </p>
+
+      <p class="fail" id="form-error" role="alert" hidden>
+        {t(locale, 'form.failed')} <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a>
+      </p>
+
+      {!endpoint && (
+        <p class="todo" id="form-no-endpoint" data-todo>
+          ⚠️ {t(locale, 'form.noEndpoint')} <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a>
+        </p>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .order-grid { display: grid; gap: var(--s-6); align-items: start; }
+  @media (min-width: 940px) { .order-grid { grid-template-columns: 1fr 1.05fr; gap: var(--s-7); } }
+
+  .points { list-style: none; padding: 0; margin: var(--s-5) 0; display: grid; gap: var(--s-3); }
+  .points li { padding-left: var(--s-5); position: relative; color: rgba(255, 255, 255, .88); }
+  .points li::before {
+    content: ""; position: absolute; left: 0; top: .62em;
+    width: 8px; height: 8px; border-radius: 50%; background: #7de0b4;
+  }
+  .hotline a {
+    color: #b9c0ff; font-weight: 600;
+    display: inline-block; min-height: 24px; line-height: 24px;
+  }
+
+  .form-card { background: var(--paper); color: var(--ink); border-radius: var(--r-card); padding: var(--s-5); box-shadow: var(--shadow-2); }
+  fieldset { border: 0; padding: 0; margin: 0 0 var(--s-4); }
+  .packs { display: grid; gap: var(--s-2); }
+  .pack {
+    display: flex; align-items: flex-start; gap: var(--s-3);
+    border: 1.5px solid var(--line-control); border-radius: var(--r-card);
+    padding: var(--s-3) var(--s-4); cursor: pointer; background: var(--bone);
+  }
+  .pack:hover { border-color: var(--indigo-lift); }
+  .pack:has(input:checked) { border-color: var(--indigo); background: var(--paper); }
+  .pack input { margin-top: 2px; width: 24px; height: 24px; accent-color: var(--indigo); flex: 0 0 auto; }
+  .pack-text strong { display: block; color: var(--ink-navy); font-size: var(--t-sm); }
+  .pack-text .muted { font-size: var(--t-xs); }
+  .pack-price { margin-left: auto; font-weight: 600; color: var(--ink-navy); white-space: nowrap; font-size: var(--t-sm); }
+
+  .field { margin-bottom: var(--s-4); }
+  .field label { display: block; font-weight: 600; font-size: var(--t-sm); margin-bottom: 5px; color: var(--ink-navy); }
+  input, textarea {
+    width: 100%; font: inherit; font-size: var(--t-base); padding: 12px 14px;
+    border: 1.5px solid var(--line-control); border-radius: var(--r-input);
+    background: var(--bone); color: var(--ink);
+  }
+  /* Không dùng outline:none — nó đè lên :focus-visible trong tokens.css và xoá
+     sạch chỉ báo bàn phím. Viền dày hơn chỉ là trang trí thêm. */
+  input:focus-visible, textarea:focus-visible {
+    border-color: var(--indigo);
+    background: var(--paper);
+    outline: 3px solid var(--indigo-lift);
+    outline-offset: 2px;
+  }
+  input:focus:not(:focus-visible), textarea:focus:not(:focus-visible) {
+    border-color: var(--indigo); background: var(--paper);
+  }
+  .pack:focus-within { outline: 3px solid var(--indigo-lift); outline-offset: 2px; }
+  .hint { font-size: var(--t-xs); color: var(--ink-muted); margin: 5px 0 0; }
+  .err { font-size: var(--t-xs); color: #b3261e; margin: 5px 0 0; display: none; }
+  .field[data-invalid] input { border-color: #b3261e; }
+  .agree[data-invalid] { color: #b3261e; }
+  .field[data-invalid] .err { display: block; }
+
+  .agree {
+    display: flex; gap: var(--s-3); align-items: flex-start;
+    font-size: var(--t-xs); color: var(--ink-muted); margin: var(--s-4) 0;
+  }
+  .agree input { width: 24px; height: 24px; accent-color: var(--indigo); flex: 0 0 auto; margin: 0; }
+  .agree:focus-within { outline: 3px solid var(--indigo-lift); outline-offset: 3px; border-radius: var(--r-input); }
+
+  .trap {
+    position: absolute; width: 1px; height: 1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+  }
+
+  .total { font-size: var(--t-sm); margin: var(--s-4) 0; }
+  .total strong { color: var(--ink-navy); }
+  .fail {
+    background: #fdeceb; border: 1.5px solid #b3261e; color: #7c1d16;
+    border-radius: var(--r-card); padding: var(--s-4); font-weight: 600; margin: var(--s-3) 0 0;
+  }
+  button[data-busy] { opacity: .6; pointer-events: none; }
+  /* aria-disabled thay cho disabled để nút vẫn nhận được focus và trình đọc
+     màn hình vẫn đọc được lời giải thích kèm theo. Màu giữ đủ tương phản. */
+  button[aria-disabled='true'] { background: #6b7280; cursor: not-allowed; }
+  button[disabled] { background: #6b7280; cursor: not-allowed; }
+  input[disabled], textarea[disabled] { opacity: .6; cursor: not-allowed; }
+  /* Không có JavaScript thì biểu mẫu không gửi đi đâu được, nên ẩn hẳn
+     thay vì để nó POST về chính trang và làm mất dữ liệu khách đã gõ. */
+  html:not(.js) #order-form { display: none; }
+  .code {
+    display: block; margin-top: var(--s-2);
+    font-family: var(--font-figure); font-weight: 600; letter-spacing: .06em;
+    color: var(--ink-navy);
+  }
+  .ok {
+    background: #e6f4ee; border: 1.5px solid var(--green-clinic); color: #0a4b38;
+    border-radius: var(--r-card); padding: var(--s-4); font-weight: 600; margin: 0;
+  }
+</style>
+
+<script>
+  /* Khi chưa cấu hình endpoint, #order-form là một <div> chứ không phải <form>:
+     không có form.elements, không submit được. Script chỉ chạy khi có form thật. */
+  const node = document.getElementById('order-form');
+  const form = node instanceof HTMLFormElement ? node : null;
+
+  if (form) {
+    /* Gắn novalidate bằng JS: bản không-JS giữ được kiểm tra của trình duyệt. */
+    form.setAttribute('novalidate', '');
+    /* Chấp nhận cả 0912345678, +84912345678 và 84912345678 — khách hay dán
+       số ở định dạng quốc tế từ Zalo. Chuẩn hóa về dạng 0xxxxxxxxx rồi mới kiểm. */
+    /* CSS scroll-behavior đã tôn trọng prefers-reduced-motion, nhưng lệnh JS thì không. */
+    const scrollBehaviour = (): ScrollBehavior =>
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+
+    const normalisePhone = (v: string) =>
+      v.replace(/[\s.\-()]/g, '').replace(/^\+?84/, '0');
+
+    const vietnameseOnly = document.documentElement.lang.startsWith('vi');
+
+    const rules: Record<string, (v: string) => boolean> = {
+      name: (v) => v.trim().length >= 2,
+      phone: (v) =>
+        vietnameseOnly
+          ? /^0\d{9}$/.test(normalisePhone(v))
+          // Thị trường quốc tế: không đoán định dạng từng nước, chỉ đòi đủ chữ số.
+          : /^\+?[\d\s.\-()]{7,20}$/.test(v.trim()) && (v.match(/\d/g)?.length ?? 0) >= 7,
+      /* Gói "cần tư vấn trước" chưa mua gì thì không có lý do bắt nhập địa chỉ
+         giao hàng. Kiểm định lần 7 gọi đây là ma sát vô cớ đúng ở bước cuối phễu. */
+      address: (v) => !addressRequired() || v.trim().length >= 8,
+      country: (v) => v.trim().length >= 2,
+    };
+
+    const addressField = form.elements.namedItem('address') as HTMLInputElement | null;
+    /* Gói đang chọn — ba chỗ cần tới nó: bắt buộc địa chỉ hay không, tổng tiền,
+       và giá gửi kèm đơn. Một hàm, không phải ba lần truy vấn giống hệt nhau. */
+    const pickedPack = () => form.querySelector<HTMLInputElement>('input[name="pack"]:checked');
+
+    const addressRequired = () => {
+      const picked = pickedPack();
+      // Không có gói nào để chọn (sản phẩm không khai variants) thì đây là đơn
+      // mua bình thường và địa chỉ là bắt buộc. Kiểm định lần 8: bản trước trả
+      // false trong trường hợp này, nên cả một lớp sản phẩm nhận đơn KHÔNG có
+      // địa chỉ giao hàng mà người mua không hề bị nhắc.
+      if (!picked) return true;
+      return (picked.dataset.price ?? '') !== '';
+    };
+    const syncAddress = () => {
+      if (!addressField) return;
+      const need = addressRequired();
+      addressField.required = need;
+      const wrap = addressField.closest('.field');
+      wrap?.querySelector('[data-req]')?.toggleAttribute('hidden', !need);
+      wrap?.querySelector('[data-optional]')?.toggleAttribute('hidden', need);
+      if (!need) {
+        wrap?.removeAttribute('data-invalid');
+        addressField.setAttribute('aria-invalid', 'false');
+      }
+    };
+
+    /* Đồng ý xử lý dữ liệu cá nhân là điều kiện bắt buộc theo Nghị định
+       13/2023/NĐ-CP, không phải một ô đánh dấu cho đẹp. */
+    const agree = form.elements.namedItem('dataConsent') as HTMLInputElement | null;
+
+    const check = (el: HTMLInputElement) => {
+      const ok = rules[el.name] ? rules[el.name](el.value) : true;
+      el.closest('.field')?.toggleAttribute('data-invalid', !ok);
+      el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+      return ok;
+    };
+
+    for (const n of Object.keys(rules)) {
+      const el = form.elements.namedItem(n) as HTMLInputElement | null;
+      el?.addEventListener('blur', () => check(el));
+    }
+
+    /* Tổng tiền phải đi theo gói đang chọn, nếu không con số này là nói dối. */
+    const totalBox = document.getElementById('order-total');
+    const totalValue = totalBox?.querySelector('[data-total]');
+    const syncTotal = () => {
+      const picked = pickedPack();
+      if (!totalBox || !totalValue || !picked) return;
+      const text = picked.dataset.priceText ?? '';
+      totalBox.hidden = text === '';
+      if (text) totalValue.textContent = text;
+    };
+    form.querySelectorAll<HTMLInputElement>('input[name="pack"]')
+      .forEach((r) => r.addEventListener('change', () => { syncTotal(); syncAddress(); }));
+    syncTotal();
+    syncAddress();
+
+    const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (submitBtn?.getAttribute('aria-disabled') === 'true') {
+      submitBtn.addEventListener('click', (e) => e.preventDefault());
+    }
+
+    form.addEventListener('submit', (e) => {
+      let firstBad: HTMLInputElement | null = null;
+      for (const n of Object.keys(rules)) {
+        const el = form.elements.namedItem(n) as HTMLInputElement | null;
+        if (el && !check(el) && !firstBad) firstBad = el;
+      }
+      if (!firstBad && agree && !agree.checked) {
+        agree.closest('.agree')?.setAttribute('data-invalid', '');
+        firstBad = agree;
+      }
+      if (firstBad) {
+        e.preventDefault();
+        firstBad.focus();
+        return;
+      }
+
+      e.preventDefault();
+
+      /* Chưa cấu hình endpoint: không gửi đi đâu và cũng không giả vờ đã gửi.
+         Kiểm cờ do build đặt, KHÔNG kiểm form.action — thuộc tính đó không bao
+         giờ rỗng, thiếu action thì nó trả về URL của chính trang. */
+      if (form.dataset.endpoint !== 'configured') {
+        const warn = document.getElementById('form-no-endpoint');
+        if (warn) warn.scrollIntoView({ block: 'center', behavior: scrollBehaviour() });
+        return;
+      }
+
+      const payload = Object.fromEntries(new FormData(form).entries());
+      if (vietnameseOnly) payload.phone = normalisePhone(String(payload.phone ?? ''));
+
+      /* Giá của gói đang chọn: máy chủ không tin con số này để tính tiền, nhưng
+         lưu lại để đối chiếu nếu khách nói "lúc tôi đặt giá khác". */
+      payload.packPrice = pickedPack()?.dataset.price ?? '';
+
+      /* Nguồn quảng cáo: đọc từ URL, không từ cookie. Đây là thông tin về chiến
+         dịch, không phải về người — nên không cần đồng ý theo dõi. */
+      const q = new URLSearchParams(location.search);
+      for (const k of ['Source', 'Medium', 'Campaign']) {
+        const v = q.get(`utm_${k.toLowerCase()}`);
+        if (v) payload[`utm${k}`] = v.slice(0, 120);
+      }
+
+      const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      const failBox = document.getElementById('form-error');
+      /* Dọn thông báo lỗi của lần gửi trước: nếu không, gửi lại thành công sẽ
+         hiện đồng thời "đơn đã được ghi nhận" và "gửi đơn không thành công". */
+      if (failBox) failBox.hidden = true;
+      if (submit) {
+        submit.disabled = true;
+        submit.dataset.busy = 'true';
+        submit.dataset.idleLabel = submit.textContent ?? '';
+        submit.textContent = submit.dataset.sendingLabel || submit.textContent;
+      }
+
+      fetch(form.dataset.action!, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then(async (res) => {
+          if (!res.ok) throw new Error(String(res.status));
+          /* Máy chủ có thể trả 200 kèm ok:false; coi đó là thất bại, đừng báo
+             thành công cho một đơn chưa vào cơ sở dữ liệu. */
+          const data = await res.json().catch(() => ({}));
+          if (data.ok === false) throw new Error(data.error);
+          form.hidden = true;
+          const ok = document.getElementById('form-success');
+          if (ok) {
+            /* Mã đơn để khách đọc lại qua hotline. Chèn bằng textContent, không
+               phải innerHTML — chuỗi này đến từ mạng. */
+            const codeBox = document.getElementById('order-code');
+            if (codeBox && typeof data.orderCode === 'string') {
+              codeBox.textContent = data.orderCode;
+              codeBox.hidden = false;
+            }
+            ok.hidden = false;
+            /* Form biến mất nên focus rơi về body; đưa focus sang thông báo để
+               người dùng bàn phím và trình đọc màn hình biết chuyện gì xảy ra. */
+            ok.setAttribute('tabindex', '-1');
+            ok.focus();
+            ok.scrollIntoView({ block: 'center', behavior: scrollBehaviour() });
+          }
+          // Chỉ phát thông tin phi định danh: pixel quảng cáo (GA4, Meta, TikTok) chạy
+      // cùng trang và bất kỳ script nào cũng nghe được sự kiện này. Bản trước gửi
+      // cả tên, số điện thoại và địa chỉ ra window.
+      window.dispatchEvent(new CustomEvent('mocha:lead', { detail: { pack: payload.pack } }));
+        })
+        .catch(() => {
+          /* Gửi hỏng thì nói thật và đưa lối liên hệ khác, không nuốt lỗi. */
+          if (failBox) {
+            failBox.hidden = false;
+            failBox.setAttribute('tabindex', '-1');
+            failBox.focus();
+            failBox.scrollIntoView({ block: 'center', behavior: scrollBehaviour() });
+          }
+          if (submit) {
+            submit.disabled = false;
+            delete submit.dataset.busy;
+            if (submit.dataset.idleLabel) submit.textContent = submit.dataset.idleLabel;
+          }
+        });
+    });
+  }
+</script>

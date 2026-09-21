@@ -1,0 +1,174 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Section from '../components/Section.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+import Faq from '../components/blocks/Faq.astro';
+import Analytics from '../components/Analytics.astro';
+import { articleGraph } from '../lib/schema';
+import { resolveAssetImage, resolveAssetUrl } from '../lib/images';
+import { adviceIndexPath, articlePath, homePath, linePath, productPath } from '../lib/routes';
+import { assertTranslated, t, type Locale } from '../i18n/ui';
+import { richText } from '../lib/richtext';
+
+interface Props {
+  article: any;
+  brand: any;
+  locale: Locale;
+  canonical: string;
+  alternates?: { locale: Locale; url: string }[];
+  nav?: { label: string; href: string }[];
+  policies?: { label: string; href: string }[];
+  /** Ảnh dùng khi trang không tự khai ảnh chia sẻ. */
+  fallbackOgImage?: string;
+  line?: any;
+  products: any[];
+}
+
+const { article: a, brand: b, locale, canonical, alternates = [], nav = [], policies = [], fallbackOgImage, line, products } = Astro.props;
+const site = Astro.site?.origin ?? 'https://mochatrinam.com';
+assertTranslated(locale);
+
+const breadcrumb = [
+  { name: t(locale, 'nav.home'), url: new URL(homePath(locale), site).href },
+  { name: t(locale, 'nav.advice'), url: new URL(adviceIndexPath(locale), site).href },
+  { name: a.title, url: new URL(articlePath(a.slug, locale), site).href },
+];
+
+const og = await resolveAssetImage(a.seo.ogImage ?? fallbackOgImage, site, 1200);
+const logoUrl = await resolveAssetUrl(b.logo, site, 512);
+
+/* Số phút đọc tính từ chính nội dung, không gõ tay: một con số gõ tay sẽ sai
+   ngay lần sửa bài đầu tiên. 200 từ/phút là mức đọc hiểu thông thường. */
+const words = a.sections.flatMap((s: any) => s.body).join(' ').split(/\s+/).length;
+const readingMinutes = Math.max(1, Math.round(words / 200));
+
+const jsonLd = articleGraph({
+  brand: b, site, url: canonical, locale, logoUrl,
+  title: a.seo.title,
+  description: a.seo.description,
+  headline: a.title,
+  publishedAt: a.publishedAt,
+  updatedAt: a.updatedAt,
+  imageUrls: og?.url ? [og.url] : [],
+  breadcrumb,
+  faq: a.faq,
+});
+
+/* Mỗi mục có id để mục lục trỏ tới; mục không khai id thì tự đánh số. */
+const sections = a.sections.map((s: any, i: number) => ({ ...s, id: s.id ?? `muc-${i + 1}` }));
+const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath(locale);
+---
+<BaseLayout
+  siteName={b.tradingName}
+  locale={locale}
+  title={a.seo.title}
+  description={a.seo.description}
+  canonical={canonical}
+  ogImage={og?.url}
+  ogImageWidth={og?.width}
+  ogImageHeight={og?.height}
+  ogImageAlt={a.title}
+  ogType="article"
+  alternates={alternates}
+  jsonLd={jsonLd}
+>
+  <SiteHeader brand={b} locale={locale} alternates={alternates} nav={nav} orderHref={orderHref} />
+  <Breadcrumb items={breadcrumb} locale={locale} />
+
+  <main id="main">
+    <article>
+      <header class="head">
+        <div class="wrap enter">
+          <h1>{a.title}</h1>
+          <p class="lead" set:html={richText(a.lead)} />
+          <p class="meta">
+            <time datetime={a.updatedAt ?? a.publishedAt}>
+              {t(locale, 'article.updated')} {a.updatedAt ?? a.publishedAt}
+            </time>
+            <span aria-hidden="true">·</span>
+            <span>{readingMinutes} {t(locale, 'article.readingTime')}</span>
+          </p>
+        </div>
+      </header>
+
+      <div class="wrap body">
+        <nav class="toc" aria-label={t(locale, 'article.toc')}>
+          <h2>{t(locale, 'article.toc')}</h2>
+          <ol>
+            {sections.map((s: any) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+          </ol>
+        </nav>
+
+        <div class="prose">
+          {sections.map((s: any) => (
+            <section id={s.id} aria-labelledby={`${s.id}-title`}>
+              <h2 id={`${s.id}-title`}>{s.heading}</h2>
+              {s.body.map((para: string) => <p set:html={richText(para)} />)}
+            </section>
+          ))}
+        </div>
+      </div>
+    </article>
+
+    {a.faq.length > 0 && (
+      <Faq data={{ heading: t(locale, 'faq.heading'), items: a.faq }} id="cau-hoi" />
+    )}
+
+    {products.length > 0 && (
+      <Section id="san-pham" surface="bone" heading={t(locale, 'article.relatedProducts')}>
+        <ProductGrid products={products} locale={locale} />
+        {line && (
+          <p class="back">
+            <a href={linePath(line.slug, locale)}>{t(locale, 'article.backToLine')}</a>
+          </p>
+        )}
+      </Section>
+    )}
+  </main>
+
+  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} product={products[0]} />
+  <Analytics locale={locale} />
+</BaseLayout>
+
+<style>
+  .head { background: var(--paper); padding-block: var(--s-7) var(--s-5); }
+  .head h1 { margin: 0 0 var(--s-4); max-width: 22ch; }
+  .head .lead { max-width: 62ch; margin: 0 0 var(--s-4); }
+  .meta {
+    display: flex; gap: var(--s-3); flex-wrap: wrap;
+    font-size: var(--t-xs); color: var(--slate); margin: 0;
+  }
+
+  .body { display: grid; gap: var(--s-6); padding-block: var(--s-6) var(--s-7); }
+  /* Mục lục dính bên trái ở màn hình rộng: bài dài, người đọc cần biết mình
+     đang ở đâu mà không phải cuộn ngược lên đầu. */
+  @media (min-width: 1000px) {
+    .body { grid-template-columns: 15rem minmax(0, 1fr); gap: clamp(40px, 5vw, 80px); }
+    .toc { position: sticky; top: calc(var(--header-h) + var(--s-5)); align-self: start; }
+  }
+  .toc h2 {
+    font-size: var(--t-2xs); letter-spacing: .18em; text-transform: uppercase;
+    color: var(--slate); margin: 0 0 var(--s-3);
+  }
+  .toc ol { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-2); }
+  .toc a {
+    color: var(--ink-muted); text-decoration: none; font-size: var(--t-sm);
+    display: inline-block; min-height: 24px; line-height: 24px;
+  }
+  .toc a:hover { color: var(--cobalt); }
+
+  .prose { max-width: 68ch; }
+  .prose section + section { margin-top: var(--s-6); }
+  .prose h2 {
+    font-size: var(--t-lg); letter-spacing: -0.02em;
+    margin: 0 0 var(--s-4); scroll-margin-top: calc(var(--header-h) + var(--s-4));
+  }
+  .prose p { margin: 0 0 var(--s-5); line-height: 1.72; font-size: var(--t-base); }
+  .prose p:last-child { margin-bottom: 0; }
+
+  .back { margin: var(--s-6) 0 0; }
+  .back a { color: var(--cobalt); }
+</style>

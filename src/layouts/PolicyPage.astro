@@ -1,0 +1,154 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Analytics from '../components/Analytics.astro';
+import { breadcrumbNode, organizationNode } from '../lib/schema';
+import { resolveAssetImage, resolveAssetUrl } from '../lib/images';
+import { homePath, policyPath } from '../lib/routes';
+import { assertTranslated, htmlLang, t, type Locale } from '../i18n/ui';
+import { richText } from '../lib/richtext';
+
+interface Props {
+  policy: any;
+  brand: any;
+  locale: Locale;
+  canonical: string;
+  alternates?: { locale: Locale; url: string }[];
+  nav?: { label: string; href: string }[];
+  policies?: { label: string; href: string }[];
+  fallbackOgImage?: string;
+}
+
+const { policy: d, brand: b, locale, canonical, alternates = [], nav = [], policies = [], fallbackOgImage } = Astro.props;
+const site = Astro.site?.origin ?? 'https://mochatrinam.com';
+assertTranslated(locale);
+
+const breadcrumb = [
+  { name: t(locale, 'nav.home'), url: new URL(homePath(locale), site).href },
+  { name: d.title, url: new URL(policyPath(d.slug, locale), site).href },
+];
+const og = await resolveAssetImage(d.seo.ogImage ?? fallbackOgImage, site, 1200);
+const logoUrl = await resolveAssetUrl(b.logo, site, 512);
+
+/* Trang chính sách không cần Article: nó không phải nội dung biên tập, nó là
+   điều khoản. WebPage + BreadcrumbList là đủ và đúng. */
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    organizationNode(b, site, locale, logoUrl),
+    {
+      '@type': 'WebPage',
+      '@id': `${canonical}#webpage`,
+      url: canonical,
+      name: d.seo.title,
+      description: d.seo.description,
+      inLanguage: htmlLang[locale],
+      dateModified: d.updatedAt,
+      publisher: { '@id': `${site}/#organization` },
+    },
+    breadcrumbNode(canonical, breadcrumb),
+  ],
+};
+
+const sections = d.sections.map((s: any, i: number) => ({ ...s, id: s.id ?? `muc-${i + 1}` }));
+---
+<BaseLayout
+  siteName={b.tradingName}
+  locale={locale}
+  title={d.seo.title}
+  description={d.seo.description}
+  canonical={canonical}
+  ogImage={og?.url}
+  ogImageWidth={og?.width}
+  ogImageHeight={og?.height}
+  ogImageAlt={d.title}
+  ogType="website"
+  alternates={alternates}
+  jsonLd={jsonLd}
+>
+  <SiteHeader brand={b} locale={locale} alternates={alternates} nav={nav} orderHref={homePath(locale)} />
+  <Breadcrumb items={breadcrumb} locale={locale} />
+
+  <main id="main">
+    <div class="head">
+      <div class="wrap enter">
+        <p class="eyebrow">{t(locale, 'policy.heading')}</p>
+        <h1>{d.title}</h1>
+        <p class="lead" set:html={richText(d.lead)} />
+        <p class="meta">
+          <time datetime={d.updatedAt}>{t(locale, 'policy.updated')} {d.updatedAt}</time>
+        </p>
+      </div>
+    </div>
+
+    <div class="wrap body">
+      <nav class="toc" aria-label={t(locale, 'article.toc')}>
+        <h2>{t(locale, 'article.toc')}</h2>
+        <ol>{sections.map((s: any) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}</ol>
+      </nav>
+
+      <div class="prose">
+        {sections.map((s: any) => (
+          <section id={s.id} aria-labelledby={`${s.id}-title`}>
+            <h2 id={`${s.id}-title`}>{s.heading}</h2>
+            {s.body.map((para: string) => <p set:html={richText(para)} />)}
+          </section>
+        ))}
+
+        {/* Chỗ còn trống nói ra, không giấu: một chính sách im lặng về phần
+            chưa quyết chỉ tạo ra tranh cãi sau này. */}
+        {d.pending.length > 0 && (
+          <aside class="pending" aria-labelledby="pending-title">
+            <h2 id="pending-title">⚠️ {t(locale, 'policy.pending')}</h2>
+            <ul>{d.pending.map((x: string) => <li>{x}</li>)}</ul>
+          </aside>
+        )}
+      </div>
+    </div>
+  </main>
+
+  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} />
+  <Analytics locale={locale} />
+</BaseLayout>
+
+<style>
+  .head { background: var(--paper); padding-block: var(--s-7) var(--s-5); }
+  .head h1 { margin: 0 0 var(--s-4); max-width: 20ch; }
+  .head .lead { max-width: 62ch; margin: 0 0 var(--s-4); }
+  .meta { margin: 0; font-size: var(--t-xs); color: var(--slate); }
+
+  .body { display: grid; gap: var(--s-6); padding-block: var(--s-6) var(--s-7); }
+  @media (min-width: 1000px) {
+    .body { grid-template-columns: 16rem minmax(0, 1fr); gap: clamp(40px, 5vw, 80px); }
+    .toc { position: sticky; top: calc(var(--header-h) + var(--s-5)); align-self: start; }
+  }
+  .toc h2 {
+    font-size: var(--t-2xs); letter-spacing: .18em; text-transform: uppercase;
+    color: var(--slate); margin: 0 0 var(--s-3);
+  }
+  .toc ol { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-2); }
+  .toc a {
+    color: var(--ink-muted); text-decoration: none; font-size: var(--t-sm);
+    display: inline-block; min-height: 24px; line-height: 24px;
+  }
+  .toc a:hover { color: var(--cobalt); }
+
+  .prose { max-width: 68ch; }
+  .prose section + section { margin-top: var(--s-6); }
+  .prose h2 {
+    font-size: var(--t-md); letter-spacing: -0.015em;
+    margin: 0 0 var(--s-4); scroll-margin-top: calc(var(--header-h) + var(--s-4));
+  }
+  .prose p { margin: 0 0 var(--s-4); line-height: 1.72; }
+  .prose p:last-child { margin-bottom: 0; }
+
+  .pending {
+    margin-top: var(--s-7); padding: var(--s-5);
+    border: 1px solid #d9b441; background: #fdf8e8;
+  }
+  .pending h2 { font-size: var(--t-sm); margin: 0 0 var(--s-3); }
+  .pending ul { margin: 0; padding-left: 1.2em; display: grid; gap: var(--s-2); }
+  .pending li { font-size: var(--t-sm); line-height: 1.6; color: var(--ink-muted); }
+</style>

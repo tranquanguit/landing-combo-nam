@@ -1,0 +1,69 @@
+{
+  "slug": "nam-noi-tiet-la-gi",
+  "locale": "vi",
+  "translationKey": "article-nam-noi-tiet",
+  "status": "published",
+  "primaryKeyword": "nám nội tiết là gì",
+  "seo": {
+    "title": "Nám nội tiết là gì, và vì sao nó quay lại sau khi mờ đi?",
+    "description": "Giải thích cơ chế nám liên quan nội tiết: vì sao nó thường xuất hiện sau sinh hoặc khi dùng thuốc tránh thai, vì sao nó đối xứng, và vì sao nó tái phát."
+  },
+  "title": "Nám nội tiết là gì, và vì sao nó quay lại sau khi đã mờ đi?",
+  "lead": "Nếu vùng sẫm màu trên mặt bạn xuất hiện sau khi sinh con, sau khi đổi thuốc tránh thai, hoặc mờ đi vào mùa đông rồi đậm lại vào mùa hè, thì bài này nói về đúng trường hợp của bạn.",
+  "publishedAt": "2026-09-14",
+  "sections": [
+    {
+      "id": "co-che",
+      "heading": "Chuyện gì xảy ra dưới da",
+      "body": [
+        "Màu da đến từ melanin, do các tế bào gọi là melanocyte sản xuất. Ở làn da khoẻ, quá trình này diễn ra đều và sắc tố phân bố tương đối đồng nhất.",
+        "Một số hormone — đặc biệt là estrogen và progesterone — làm các tế bào này nhạy hơn với kích thích, nhất là kích thích từ tia cực tím. Khi nồng độ hormone thay đổi mạnh, cùng một lượng nắng sẽ tạo ra nhiều sắc tố hơn trước.",
+        "Đó là lý do vùng sẫm màu kiểu này thường xuất hiện trong thai kỳ, vài tháng sau sinh, hoặc sau khi bắt đầu dùng thuốc tránh thai đường uống. Không phải da đột nhiên yếu đi; ngưỡng phản ứng của nó đã hạ xuống."
+      ]
+    },
+    {
+      "id": "nhan-biet",
+      "heading": "Dấu hiệu nhận ra",
+      "body": [
+        "Đặc điểm dễ thấy nhất là tính đối xứng: hai bên gò má gần như soi gương nhau, đôi khi lan lên trán và quanh mép. Vùng sẫm màu do mụn để lại thì rải rác và không đối xứng như vậy.",
+        "Ranh giới thường mềm, chuyển màu dần chứ không phải một đốm rõ viền. Màu ngả nâu hoặc xám nâu tuỳ độ sâu của sắc tố trong da.",
+        "Và nó thay đổi theo mùa. Đậm lên vào những tháng nắng, nhạt bớt vào mùa ít nắng — đây là dấu hiệu phân biệt rõ nhất với các vùng sẫm màu do nguyên nhân khác."
+      ]
+    },
+    {
+      "id": "tai-phat",
+      "heading": "Vì sao nó quay lại",
+      "body": [
+        "Đây là phần làm nhiều người nản. Sản phẩm bôi ngoài da tác động lên lượng sắc tố đang có và lên tốc độ tạo sắc tố mới. Chúng không thay đổi được nền nội tiết, và melanocyte bên dưới vẫn nhạy cảm y như trước.",
+        "Nên khi bạn ngừng chống nắng, hoặc khi nội tiết lại biến động — lần sinh con tiếp theo, đổi thuốc, giai đoạn tiền mãn kinh — cơ chế cũ khởi động lại từ đầu.",
+        "Cách nghĩ hợp lý hơn là xem đây là việc duy trì dài hạn, giống như giữ cân nặng, chứ không phải một liệu trình có ngày kết thúc. Ai nói với bạn điều ngược lại thì đang bán hàng.",
+        "Điều này cũng có nghĩa là chống nắng không phải bước phụ trợ đi kèm sản phẩm chăm sóc. Nó là bước chính; sản phẩm chăm sóc là bước phụ."
+      ]
+    },
+    {
+      "id": "khi-nao-gap-chuyen-gia",
+      "heading": "Khi nào nên gặp chuyên gia y tế",
+      "body": [
+        "Nếu vùng sẫm màu xuất hiện đột ngột trên nền da trước đó hoàn toàn đều màu, nếu nó thay đổi hình dạng nhanh, nếu có ngứa, chảy máu hoặc nổi gồ, thì đó không phải chuyện của mỹ phẩm. Hãy đến cơ sở y tế.",
+        "Nếu bạn đang mang thai hoặc cho con bú, hãy hỏi nhân viên y tế trước khi dùng bất kỳ sản phẩm chăm sóc da nào, kể cả sản phẩm không kê đơn.",
+        "Mỹ phẩm là sản phẩm dùng ngoài da và không thay thế được tư vấn y tế."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Nám nội tiết có tự hết sau khi sinh không?",
+      "a": "Với một số người, vùng sẫm màu nhạt dần trong vòng vài tháng đến một năm sau sinh khi nội tiết ổn định trở lại. Với nhiều người khác thì không, đặc biệt nếu tiếp tục phơi nắng không che chắn. Không có cách dự đoán trước bạn thuộc nhóm nào."
+    },
+    {
+      "q": "Uống viên làm trắng da có giúp được không?",
+      "a": "Chúng tôi không bán và không tư vấn về sản phẩm uống. Mọi thứ đưa vào cơ thể qua đường uống nên hỏi nhân viên y tế trước."
+    }
+  ],
+  "relatedLine": "nam-tham",
+  "relatedProducts": [
+    "combo-nam",
+    "smart-first-care-serum",
+    "smart-brightening-cream"
+  ]
+}

@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+npm-debug.log*
+
+# Sản phẩm dùng để thử hàng rào build. Tiền tố zz- dành riêng cho việc này
+# và không bao giờ được commit — một lần đã lọt vào HEAD và suýt dựng ra
+# một trang sản phẩm giả cho bất kỳ ai clone repo.
+src/content/products/zz-*/
+
+# Ảnh và HTML cào về từ web của người khác để tham khảo bố cục.
+# Nội dung trong đây có bản quyền của họ — không bao giờ commit.
+refs/

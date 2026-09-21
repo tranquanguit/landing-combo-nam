@@ -1,0 +1,140 @@
+---
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+import { htmlLang, type Locale, localePath, t } from '../i18n/ui';
+import { safeJsonLd } from '../lib/richtext';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  canonical: string;
+  ogImage?: string;
+  /** Các bản dịch cùng sản phẩm, dùng sinh hreflang. Chỉ liệt kê bản đã xuất bản. */
+  alternates?: { locale: Locale; url: string }[];
+  jsonLd?: unknown;
+  /** Tên thương mại dùng cho og:site_name; trước đây hardcode "Mocha Việt Nam". */
+  siteName: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  ogImageAlt?: string;
+  /** og:type theo loại trang: product cho landing, article cho bài, website cho phần còn lại. */
+  ogType?: 'product' | 'article' | 'website';
+  /**
+   * Biến thể dành cho quảng cáo: không cho lập chỉ mục, và canonical đã trỏ về
+   * trang gốc. Thiếu cờ này thì năm biến thể của một landing sẽ cạnh tranh với
+   * chính trang gốc trên kết quả tìm kiếm.
+   */
+  noindex?: boolean;
+}
+
+const {
+  locale, title, description, canonical, ogImage, alternates = [], jsonLd, siteName,
+  ogImageWidth = 1200, ogImageHeight = 630, ogImageAlt, ogType = 'website', noindex = false,
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang={htmlLang[locale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0e1250" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta
+      name="robots"
+      content={noindex
+        ? 'noindex, follow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+    />
+
+    {alternates.length > 1 && alternates.map((a) => (
+      <link rel="alternate" hreflang={htmlLang[a.locale]} href={a.url} />
+    ))}
+    {alternates.length > 1 && (
+      <link rel="alternate" hreflang="x-default" href={alternates.find((a) => a.locale === 'vi')?.url ?? canonical} />
+    )}
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content={htmlLang[locale].replace('-', '_')} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {/* Kích thước và alt là bắt buộc trên thực tế: Facebook và Zalo hay bỏ qua
+        preview lớn ở lần scrape đầu khi thiếu og:image:width/height. */}
+    {ogImage && (
+      <>
+        <meta property="og:image" content={ogImage} />
+        {ogImageWidth > 0 && ogImageHeight > 0 && (
+          <>
+            <meta property="og:image:width" content={String(ogImageWidth)} />
+            <meta property="og:image:height" content={String(ogImageHeight)} />
+          </>
+        )}
+        <meta property="og:image:type" content={ogImage.endsWith('.jpeg') || ogImage.endsWith('.jpg') ? 'image/jpeg' : 'image/webp'} />
+        <meta property="og:image:alt" content={ogImageAlt ?? title} />
+      </>
+    )}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    {/* Font self-host, tách subset latin và vietnamese qua unicode-range.
+        Chỉ preload hai file cần ngay cho màn hình đầu: body 400 và tiêu đề Fraunces 600. */}
+    <link rel="preload" href="/fonts/bvp-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/bvp-400-vietnamese.woff2" as="font" type="font/woff2" crossorigin />
+    {/* Tiêu đề nay đặt ở cỡ rất lớn bằng weight 600, nên độ lệch metric giữa
+        font dự phòng và font thật bị phóng đại: đo được CLS 0.0368 trên bản EN
+        ở 390px khi chỉ preload weight 400. Preload thêm 600. */}
+    <link rel="preload" href="/fonts/bvp-600-vietnamese.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/bvp-600-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/fraunces-600-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/fraunces-600-vietnamese.woff2" as="font" type="font/woff2" crossorigin />
+
+    {jsonLd && <script type="application/ld+json" set:html={safeJsonLd(jsonLd)} />}
+  </head>
+
+  <body>
+    {/* Đánh dấu có JavaScript để CSS phân biệt được hai trạng thái. */}
+    <script is:inline>document.documentElement.classList.add('js');</script>
+
+    {/*
+      Xuất hiện khi cuộn tới, và trạng thái đã-cuộn của thanh trên cùng.
+
+      Ghi chú đặt trong khối chú thích của Astro chứ không phải bên trong thẻ
+      script: script nội tuyến được xuất NGUYÊN VĂN, không qua minify, nên mọi
+      dòng chú thích và mọi khoảng trắng đều được tải về máy khách. Bản đầu
+      tiên của đoạn này tốn 1.308 byte, phần lớn là chú thích — và cổng ngân
+      sách đã chặn lại.
+
+      Ba quyết định trong 12 dòng dưới đây:
+
+      1. Lớp ẩn `reveal-ready` do CHÍNH JS thêm vào <html>. JS hỏng, bị chặn,
+         hay chưa tải xong thì trang vẫn hiện đầy đủ. Thư viện scroll-reveal
+         thường làm ngược lại và biến một lỗi script thành một trang trắng.
+      2. Chạy inline trong <head> để lớp ẩn có mặt trước lần vẽ đầu tiên; đặt
+         ở cuối <body> sẽ thấy nội dung nhấp nháy một nhịp rồi mới biến mất.
+      3. Thứ tự lệch nhịp đếm trong PHẠM VI khối cha, không phải toàn trang:
+         đếm toàn trang thì phần tử thứ 40 trễ gần ba giây.
+    */}
+    <script is:inline>
+      (function(){var d=document,h=d.documentElement;
+      if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+      h.classList.add('reveal-ready');
+      var init=function(){
+      var io=new IntersectionObserver(function(es){for(var e of es)if(e.isIntersecting){
+      e.target.classList.add('is-in');io.unobserve(e.target)}},{rootMargin:'0px 0px -12% 0px'});
+      for(var el of d.querySelectorAll('[data-reveal]')){
+      var g=el.closest('[data-reveal-group]')||d.body;g.__n=(g.__n||0)+1;
+      el.style.setProperty('--reveal-i',Math.min(g.__n-1,3));io.observe(el)}
+      var t=function(){h.classList.toggle('scrolled',scrollY>8)};
+      addEventListener('scroll',t,{passive:true});t()};
+      d.readyState=='loading'?d.addEventListener('DOMContentLoaded',init):init()})();
+    </script>
+    <a class="sr-only skip-link" href="#main">{t(locale, 'nav.skip')}</a>
+    <slot />
+  </body>
+</html>

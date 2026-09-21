@@ -1,0 +1,537 @@
+{
+  "slug": "combo-nam",
+  "locale": "vi",
+  "translationKey": "combo-nam",
+  "status": "published",
+  "name": "Combo Nám Mocha – Smart Brightening Cream X3 + Smart First Care Serum",
+  "shortName": "Combo Nám Mocha",
+  "sku": "MOCHA-COMBO-NAM",
+  "includes": [
+    {
+      "name": "Mocha Smart Brightening Cream X3",
+      "note": "kem dưỡng sáng, dùng buổi tối"
+    },
+    {
+      "name": "Mocha Smart First Care Serum",
+      "note": "serum dark-spot control, dùng sáng và tối"
+    }
+  ],
+  "gifts": [
+    {
+      "name": "Kem chống nắng Mocha UV-Block SPF50",
+      "note": "bước giữ kết quả, dùng mỗi sáng"
+    },
+    {
+      "name": "Sữa rửa mặt Mocha Bio-Active Cleanser",
+      "note": "làm sạch dịu nhẹ, pH 5.5"
+    }
+  ],
+  "price": 1050000,
+  "compareAtPrice": 1800000,
+  "currency": "VND",
+  "variants": [
+    {
+      "label": "Combo đầy đủ – Kem + Serum",
+      "note": "Kèm 2 quà tặng, tiết kiệm {{save}}",
+      "price": 1050000,
+      "recommended": true
+    },
+    {
+      "label": "Chỉ Kem Smart Brightening X3",
+      "note": "Kèm sữa rửa mặt",
+      "price": 590000,
+      "recommended": false
+    },
+    {
+      "label": "Chỉ Serum Smart First Care",
+      "note": "Dùng sáng và tối",
+      "price": 550000,
+      "recommended": false
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, xem tình trạng da qua hình ảnh",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "seo": {
+    "title": "Combo Nám Mocha – Kem & Serum chăm sóc da nám | Mocha Việt Nam",
+    "description": "Serum 4-butylresorcinol 1000ppm, Niacinamide 4% + kem Tranexamic Acid, Bakuchiol. Nồng độ in trên bao bì. Không corticoid. {{price}}, freeship.",
+    "ogImage": "/images/packshot-combo.jpg"
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "hỗ trợ làm mờ vùng da sạm nám, dưỡng sáng và cải thiện độ đều màu da",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
+      "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
+      "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
+    ],
+    "productNotificationNumber": "1517/25/CBMP-LA"
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Kem + serum dùng cùng nhau, cho da nám",
+      "heading": "Hai bước chăm sóc da nám, công thức công khai từng tỉ lệ",
+      "lead": "Serum <strong>Smart First Care</strong> công bố 4-butylresorcinol 1000ppm, Niacinamide 4%, Bio-Placenta 1%; kem <strong>Smart Brightening X3</strong> mang Tranexamic Acid, NIO-NAG, Bakuchiol. Dành cho da đang gặp nám mảng, nám chân sâu và nám hỗn hợp.",
+      "usp": [
+        {
+          "text": "<strong>Không corticoid, không hydroquinone, không cồn khô</strong>",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "danh sách thành phần đầy đủ in trên bao bì"
+        },
+        {
+          "text": "<strong>Công khai đúng những tỉ lệ in trên bao bì</strong>, không giấu trong cụm “thành phần độc quyền”",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "xem bảng thành phần ngay trên trang này"
+        },
+        {
+          "text": "<strong>Nói rõ mốc thời gian theo từng loại nám</strong>, không hứa một con số chung cho tất cả",
+          "evidence": "ingredient",
+          "qualifier": "bảng mốc thời gian ở phần dưới"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-combo.webp",
+        "alt": "Hũ kem Mocha Smart Brightening Cream X3 và chai serum Mocha Smart First Care Serum"
+      },
+      "primaryCta": "Đặt combo",
+      "secondaryCta": {
+        "label": "Xem bảng thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "offer",
+      "eyebrow": "Ưu đãi",
+      "heading": "Giá bán hiện tại thấp hơn giá niêm yết, và được tặng thêm hai sản phẩm",
+      "body": "Giá niêm yết của combo là {{compareAtPrice}}. Giá bán hiện tại là <strong>{{price}}</strong>, và được tặng thêm kem chống nắng SPF50 cùng sữa rửa mặt — hai bước bắt buộc để giữ kết quả.",
+      "validUntil": "2026-12-31",
+      "notes": [
+        "Miễn phí vận chuyển",
+        "Thanh toán khi nhận hàng",
+        "Nhận hàng sau 2–5 ngày"
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Vấn đề",
+      "heading": "Vì sao nám cứ mờ đi rồi lại đậm lên?",
+      "quotes": [
+        "“Tôi đã thử năm bảy loại, cái nào cũng mờ được vài hôm rồi đâu lại vào đấy.”",
+        "“Trang điểm dày đến mấy cũng không che hết mảng sạm hai bên gò má.”",
+        "“Sợ nhất là mua phải kem trộn có corticoid, dùng xong da mỏng đi.”",
+        "“Không biết mua online thế nào cho khỏi trúng hàng giả.”"
+      ],
+      "explainer": {
+        "heading": "Phần lớn sản phẩm chỉ tác động lớp ngoài cùng",
+        "body": [
+          "Khi chỉ làm sáng lớp biểu bì, tế bào hắc tố bên dưới vẫn tiếp tục sản sinh melanin. Ngừng dùng là sắc tố quay lại, đôi khi đậm hơn trước.",
+          "Combo Nám Mocha đi theo hướng khác: vừa hạn chế tín hiệu tạo sắc tố, vừa hỗ trợ thay mới tế bào sạm màu, đồng thời củng cố hàng rào bảo vệ da để hạn chế sạm màu quay lại.",
+          "Điều này cũng có nghĩa là <strong>kết quả đến theo tuần chứ không theo ngày</strong> — và chúng tôi nói rõ mốc thời gian thực tế cho từng loại nám ở phần dưới."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Nhận diện",
+      "heading": "Ba loại nám và mốc thời gian thực tế",
+      "intro": "Xác định đúng loại nám giúp bạn kỳ vọng đúng. Đây cũng là lý do chúng tôi không hứa một con số chung cho tất cả mọi người.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Nám mảng (biểu bì)",
+          "body": "Mảng nâu nhạt đến nâu sẫm, bờ rõ, nằm ở lớp biểu bì. Thường liên quan tia UV, thay đổi nội tiết và mỹ phẩm chứa corticoid.",
+          "meta": "Cải thiện tham khảo: 4–8 tuần",
+          "image": {
+            "src": "/images/nam_01.webp",
+            "alt": "Nám mảng với các mảng nâu nhạt bờ rõ trên gò má"
+          }
+        },
+        {
+          "heading": "Nám chân sâu (trung bì)",
+          "body": "Nốt hoặc mảng nâu xám, bờ mờ, sắc tố nằm sâu ở trung bì. Liên quan di truyền, nội tiết, ánh nắng và căng thẳng kéo dài.",
+          "meta": "Cải thiện tham khảo: 8–12 tuần",
+          "image": {
+            "src": "/images/nam_02.webp",
+            "alt": "Nám chân sâu dạng nốt nâu xám bờ mờ"
+          }
+        },
+        {
+          "heading": "Nám hỗn hợp",
+          "body": "Có cả vùng sẫm màu rõ ràng lẫn vùng loang lổ mờ nhạt. Cần kiên trì lâu hơn và chống nắng nghiêm ngặt hơn.",
+          "meta": "Cải thiện tham khảo: 8–16 tuần",
+          "image": {
+            "src": "/images/nam_03.webp",
+            "alt": "Nám hỗn hợp gồm vùng sẫm màu và vùng loang lổ"
+          }
+        }
+      ]
+    },
+    {
+      "type": "timeline",
+      "id": "moc-thoi-gian",
+      "eyebrow": "Kỳ vọng đúng",
+      "heading": "Ba nhóm, ba khoảng thời gian rất khác nhau",
+      "intro": "Đây là lý do chúng tôi không đưa một con số chung. Đặt kỳ vọng của nhóm đầu lên nhóm cuối là cách nhanh nhất để bỏ dở giữa chừng rồi kết luận rằng không sản phẩm nào có tác dụng.",
+      "max": 16,
+      "unitLabel": "tuần",
+      "items": [
+        {
+          "label": "Nám mảng (biểu bì)",
+          "from": 4,
+          "to": 8,
+          "note": "Sắc tố nằm ở lớp ngoài cùng nên phản ứng sớm nhất."
+        },
+        {
+          "label": "Nám chân sâu (trung bì)",
+          "from": 8,
+          "to": 12,
+          "note": "Sắc tố nằm sâu hơn, cần thêm thời gian cho quá trình thay mới tế bào."
+        },
+        {
+          "label": "Nám hỗn hợp",
+          "from": 8,
+          "to": 16,
+          "note": "Có cả hai dạng trên cùng một vùng da nên khoảng thời gian rộng nhất."
+        }
+      ],
+      "footnote": "Khoảng thời gian tham khảo, không phải cam kết. Kết quả khác nhau tùy cơ địa và mức độ chống nắng hằng ngày — bỏ bước chống nắng thì mọi mốc ở trên đều không còn đúng."
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Bảng thành phần",
+      "heading": "Từng hoạt chất, từng tỉ lệ, và vai trò của nó",
+      "intro": "Không corticoid, không hydroquinone, không hương liệu tổng hợp gây kích ứng.",
+      "caption": "Bảng này liệt kê đúng những hoạt chất và nồng độ được IN TRÊN BAO BÌ của serum và kem. Chúng tôi không tự điền con số nào không có trên vỏ hộp. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
+      "rows": [
+        {
+          "name": "4-butylresorcinol 1000ppm",
+          "inProduct": "Serum",
+          "role": "Được nghiên cứu về khả năng ức chế enzyme tyrosinase — enzyme khởi đầu quá trình sinh melanin.",
+          "suitedFor": "Da nám mảng, nám hỗn hợp"
+        },
+        {
+          "name": "Niacinamide 4%",
+          "inProduct": "Serum",
+          "role": "Hỗ trợ hàng rào bảo vệ da và làm đều màu da; nồng độ vừa phải để hạn chế châm chích.",
+          "suitedFor": "Mọi loại da, kể cả da dễ kích ứng"
+        },
+        {
+          "name": "Bio-Placenta 1%",
+          "inProduct": "Serum",
+          "role": "Thành phần sinh học hỗ trợ phục hồi, bọc trong liposome để tăng dẫn truyền.",
+          "suitedFor": "Da mỏng yếu, vừa qua treatment"
+        },
+        {
+          "name": "Vietnam Bio-white Complex 3%",
+          "inProduct": "Serum",
+          "role": "Phức hợp chiết xuất bản địa lên men, hướng tới làm sáng đều màu.",
+          "suitedFor": "Da sạm màu không đều"
+        },
+        {
+          "name": "Bioyoga 2%",
+          "inProduct": "Serum",
+          "role": "Thành phần lên men, hỗ trợ làm dịu nền da.",
+          "suitedFor": "Da căng thẳng, dễ đỏ"
+        },
+        {
+          "name": "Black Truffle Extract 2%",
+          "inProduct": "Serum",
+          "role": "Chiết xuất nấm truffle đen, hỗ trợ dưỡng sáng.",
+          "suitedFor": "Da xỉn màu"
+        },
+        {
+          "name": "Tranexamic Acid 3%",
+          "inProduct": "Kem",
+          "role": "Được nghiên cứu nhiều trong nhóm làm mờ vùng da sẫm màu do tăng sắc tố.",
+          "suitedFor": "Nám mảng, nám hỗn hợp"
+        },
+        {
+          "name": "NIO-NAG 2%",
+          "inProduct": "Kem",
+          "role": "Dẫn xuất glucosamine, hỗ trợ điều tiết quá trình sinh sắc tố.",
+          "suitedFor": "Da tăng sắc tố sau viêm"
+        },
+        {
+          "name": "Ceramide 1%",
+          "inProduct": "Kem",
+          "role": "Thành phần cấu trúc của hàng rào bảo vệ da, hỗ trợ giữ ẩm.",
+          "suitedFor": "Da khô, da mất nước"
+        },
+        {
+          "name": "Bakuchiol 2%",
+          "inProduct": "Kem",
+          "role": "Dẫn xuất thực vật được nghiên cứu như lựa chọn thay thế retinol cho da dễ kích ứng; không làm tăng nhạy cảm ánh sáng.",
+          "suitedFor": "Da nhạy cảm, không hợp retinol"
+        },
+        {
+          "name": "Vietnam Bio-white Complex 3%",
+          "inProduct": "Kem",
+          "role": "Cùng phức hợp bản địa với serum, ở dạng kem giữ trên da lâu hơn.",
+          "suitedFor": "Da sạm màu không đều"
+        },
+        {
+          "name": "Black Truffle Extract 2%",
+          "inProduct": "Kem",
+          "role": "Chiết xuất nấm truffle đen, ở dạng kem lưu trên da qua đêm.",
+          "suitedFor": "Da xỉn màu"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Bốn bước, khoảng 5 phút mỗi lần",
+      "intro": "Dùng 1–2 lần mỗi ngày. Bước chống nắng buổi sáng là bắt buộc — bỏ bước này thì hai bước kia gần như vô nghĩa.",
+      "totalTime": "PT5M",
+      "items": [
+        {
+          "heading": "Làm sạch da",
+          "body": "Rửa mặt với sữa rửa mặt Bio-Active Cleanser, lau khô bằng khăn sạch."
+        },
+        {
+          "heading": "Thoa serum",
+          "body": "Lấy 3–4 giọt, thoa đều lên vùng sạm màu và toàn mặt, vỗ nhẹ cho thấm."
+        },
+        {
+          "heading": "Thoa kem",
+          "body": "Lượng khoảng một đốt ngón tay trỏ, thoa nhẹ lên mặt và cổ, tránh vùng mắt."
+        },
+        {
+          "heading": "Chống nắng ban ngày",
+          "body": "Buổi sáng luôn dùng kem chống nắng SPF50 được tặng kèm."
+        }
+      ],
+      "footnote": "Chu kỳ khuyến nghị: <strong>8–12 tuần liên tục</strong>. Da tiếp xúc nắng mà không bảo vệ thì sắc tố sẽ quay lại, bất kể dùng sản phẩm nào."
+    },
+    {
+      "type": "routine",
+      "id": "lo-trinh",
+      "eyebrow": "Khi nào dùng cái gì",
+      "heading": "Lộ trình sáng và lộ trình tối không giống nhau",
+      "intro": "Thứ tự dưới đây lấy từ chu trình chính hãng của Mocha, rút gọn về đúng những sản phẩm có trong combo.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Buổi sáng",
+          "steps": [
+            {
+              "label": "Sữa rửa mặt Bio-Active Cleanser",
+              "note": "Làm sạch và lau khô trước khi thoa bất cứ thứ gì."
+            },
+            {
+              "label": "Serum Smart First Care",
+              "note": "Nhấn 1–2 lần cho cả mặt, vỗ nhẹ cho thấm."
+            },
+            {
+              "label": "Kem Smart Brightening X3",
+              "note": "Lượng khoảng một đốt ngón tay trỏ, tránh vùng mắt."
+            },
+            {
+              "label": "Kem chống nắng UV-Block SPF50",
+              "note": "Bắt buộc. Bỏ bước này thì ba bước trên gần như vô nghĩa.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Buổi tối",
+          "steps": [
+            {
+              "label": "Tẩy trang",
+              "note": "Chỉ khi có trang điểm hoặc kem chống nắng trên da."
+            },
+            {
+              "label": "Sữa rửa mặt Bio-Active Cleanser",
+              "note": "Da còn ẩm hoặc còn cặn đều làm giảm mức thẩm thấu."
+            },
+            {
+              "label": "Serum Smart First Care",
+              "note": "Bước mở đường, dùng trước bước kem."
+            },
+            {
+              "label": "Kem Smart Brightening X3",
+              "note": "Bước khoá lại, giữ dưỡng chất ở trên da qua đêm."
+            }
+          ]
+        }
+      ],
+      "footnote": "Buổi tối không có bước chống nắng, nên cột tối ngắn hơn một bước — đó là khác biệt duy nhất giữa hai lộ trình, và cũng là bước hay bị bỏ nhất."
+    },
+    {
+      "type": "gallery",
+      "eyebrow": "Hình ảnh khách hàng",
+      "heading": "Trước và sau, do khách hàng gửi về",
+      "images": [
+        {
+          "src": "/images/tuong-phan-1.webp",
+          "alt": "So sánh làn da trước và sau 4 tuần",
+          "caption": "Sau 4 tuần"
+        },
+        {
+          "src": "/images/tuong-phan-3.webp",
+          "alt": "Vùng gò má sau 6 tuần sử dụng",
+          "caption": "Sau 6 tuần"
+        },
+        {
+          "src": "/images/tuong-phan-5.webp",
+          "alt": "Da đều màu hơn sau 8 tuần",
+          "caption": "Sau 8 tuần"
+        },
+        {
+          "src": "/images/tuong-phan-7.webp",
+          "alt": "Kết quả sau 12 tuần dùng đủ chu kỳ",
+          "caption": "Sau 12 tuần"
+        }
+      ],
+      "disclaimer": "Ảnh do khách hàng chia sẻ, chưa qua chỉnh sửa màu da. Điều kiện ánh sáng giữa các lần chụp có thể khác nhau. Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày.",
+      "consent": {
+        "obtained": false,
+        "statement": "Chưa thu thập được văn bản đồng ý cho những ảnh này. Cho tới khi có, ảnh chỉ được dùng để tham khảo nội bộ và không nên đăng công khai.",
+        "conditions": "Các cặp ảnh được chụp ở điều kiện ánh sáng, góc máy và mức trang điểm khác nhau, nên không so sánh trực tiếp được."
+      }
+    },
+    {
+      "type": "testimonials",
+      "eyebrow": "Trải nghiệm thật",
+      "heading": "Khách hàng nói gì sau khi dùng đủ chu kỳ",
+      "items": [
+        {
+          "quote": "Sau sinh tôi bị nám dai dẳng, thử nhiều thứ không ăn thua. Dùng combo này thì da sáng và đều màu hơn, tôi thấy rõ nhất từ tuần thứ tư.",
+          "name": "Chị Lan Anh, 40 tuổi",
+          "meta": "Hà Nội",
+          "sponsored": false
+        },
+        {
+          "quote": "Kem thấm nhanh, không nhờn, da nhạy cảm của tôi dùng không bị châm chích. Điều tôi thích là hộp ghi rõ tỉ lệ từng chất.",
+          "name": "Chị Hương, 29 tuổi",
+          "meta": "TP.HCM",
+          "sponsored": false
+        },
+        {
+          "quote": "Da mềm mịn hơn, vùng sạm nhạt dần. Được tư vấn nhắc chống nắng mỗi ngày nên tôi làm đều hơn hẳn trước.",
+          "name": "Chị Phương Thảo, 34 tuổi",
+          "meta": "Cần Thơ",
+          "sponsored": false
+        }
+      ],
+      "consent": {
+        "obtained": false,
+        "statement": "Chưa có văn bản đồng ý của khách hàng cho việc đăng tên, tuổi và nơi ở kèm lời chứng. Nội dung này đã được ẩn cho tới khi có."
+      }
+    },
+    {
+      "type": "cards",
+      "id": "ai-khong-nen-dung",
+      "eyebrow": "Nói trước cho rõ",
+      "heading": "Bốn trường hợp bạn nên cân nhắc lại, hoặc hỏi bác sĩ trước",
+      "intro": "Phần này nằm ngay trước biểu mẫu là có chủ ý. Biết trước sản phẩm không hợp với mình thì tốt hơn nhiều so với biết sau khi đã nhận hàng.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Đang mang thai hoặc cho con bú",
+          "body": "Công thức không chứa retinoid, nhưng đó không phải là lý do để tự quyết. Hãy hỏi bác sĩ trước khi bắt đầu bất kỳ sản phẩm chăm sóc da nào trong giai đoạn này.",
+          "meta": "Hỏi bác sĩ trước"
+        },
+        {
+          "heading": "Da vừa qua thủ thuật hoặc đang tổn thương",
+          "body": "Da sau laser, lăn kim, peel hay đang kích ứng nặng là tình huống y khoa. Người trả lời đúng nhất là bác sĩ đã thực hiện thủ thuật cho bạn, không phải một trang web.",
+          "meta": "Hỏi bác sĩ trước"
+        },
+        {
+          "heading": "Không dùng được kem chống nắng mỗi sáng",
+          "body": "Nói thẳng: nếu công việc hoặc thói quen khiến bạn không thể chống nắng đều đặn, kết quả sẽ kém hơn hẳn những gì trang này mô tả. Bước đó không phải tuỳ chọn.",
+          "meta": "Nên cân nhắc lại"
+        },
+        {
+          "heading": "Cần thấy khác biệt trong một, hai tuần",
+          "body": "Nhóm phản ứng sớm nhất cũng cần khoảng bốn tuần. Nếu bạn đang cần kết quả cho một mốc gần hơn thế, đây không phải thứ phù hợp và chúng tôi không muốn bạn thất vọng.",
+          "meta": "Nên cân nhắc lại"
+        }
+      ]
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng phù hợp với tình trạng da của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt chu kỳ sử dụng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Combo Nám Mocha giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho cả combo, đã gồm kem chống nắng và sữa rửa mặt tặng kèm. Giá niêm yết là {{compareAtPrice}}. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Bao lâu thì thấy khác biệt?",
+          "a": "Thời gian cải thiện khác nhau theo loại nám. Nám mảng thường cải thiện trong 4–8 tuần; nám chân sâu và nám hỗn hợp cần 8–16 tuần. Kết quả khác nhau tùy cơ địa và mức độ chống nắng hằng ngày."
+        },
+        {
+          "q": "Dùng đủ 8 tuần mà không thấy khác biệt thì sao?",
+          "a": "Nói thẳng: chúng tôi <strong>không hoàn tiền vì lý do không hợp</strong>. Đổi trả trong 7 ngày chỉ áp dụng khi hàng lỗi, sai hàng hoặc chưa mở seal. Lý do là mỹ phẩm đã mở nắp không thể bán lại, và không ai đoán trước được da bạn phản ứng thế nào. Nếu sau 8 tuần chưa thấy khác biệt, gọi hotline — chúng tôi sẽ xem lại cách dùng và mức chống nắng hằng ngày của bạn, vì đó là hai nguyên nhân hay gặp nhất; nếu vẫn không cải thiện thì nám của bạn có thể cần can thiệp y khoa chứ không phải mỹ phẩm. Nếu nám của bạn cần can thiệp y khoa, hãy đến gặp bác sĩ da liễu."
+        },
+        {
+          "q": "Da nhạy cảm dùng được không?",
+          "a": "Công thức dùng Bakuchiol thay cho retinol, không chứa corticoid, hydroquinone hay cồn khô. Bạn vẫn nên thử một lượng nhỏ ở vùng cằm trong 24 giờ trước khi dùng toàn mặt."
+        },
+        {
+          "q": "Đang mang thai hoặc cho con bú thì sao?",
+          "a": "Sản phẩm không chứa retinoid. Tuy nhiên nếu đang mang thai hoặc cho con bú, bạn nên hỏi ý kiến bác sĩ trước khi dùng bất kỳ sản phẩm chăm sóc da nào."
+        },
+        {
+          "q": "Dùng xong có bị lại không?",
+          "a": "Sạm nám là tình trạng dễ quay lại nếu da tiếp xúc nắng mà không bảo vệ. Dùng đủ chu kỳ 8–12 tuần kết hợp chống nắng mỗi sáng sẽ giúp giữ kết quả lâu hơn."
+        },
+        {
+          "q": "Giao hàng và thanh toán thế nào?",
+          "a": "Miễn phí vận chuyển toàn quốc, nhận hàng sau 2–5 ngày tùy khu vực. Bạn <strong>thanh toán khi nhận hàng</strong> và được mở kiểm tra sản phẩm trước khi trả tiền."
+        },
+        {
+          "q": "Làm sao biết là hàng chính hãng?",
+          "a": "Sản phẩm chính hãng có tem chống giả kèm mã QR tra cứu. Hiện Mocha chỉ bán qua website chính thức này và hotline 0367 848 918 — chưa có gian hàng trên sàn thương mại điện tử, nên hàng rao bán ở nơi khác không phải do Mocha phân phối."
+        }
+      ]
+    }
+  ],
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "nam-tham",
+  "primaryKeyword": "combo kem và serum cho da nám mocha",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ]
+}

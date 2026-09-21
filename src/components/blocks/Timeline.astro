@@ -1,0 +1,132 @@
+---
+import Section from '../Section.astro';
+import { richText } from '../../lib/richtext';
+
+interface Item { label: string; from: number; to: number; note?: string }
+interface Props {
+  data: {
+    eyebrow?: string; heading: string; intro?: string;
+    max: number; unitLabel: string; items: Item[]; footnote?: string;
+  };
+  id?: string;
+}
+const { data, id } = Astro.props;
+const { max, items } = data;
+
+/* Mốc trục: 0 và max luôn có, ở giữa chia tư rồi làm tròn về số nguyên. Không
+   vẽ mốc dày hơn thế — trục càng nhiều vạch thì càng khó đọc dải nào tới đâu. */
+const ticks = [...new Set([0, Math.round(max / 4), Math.round(max / 2), Math.round((max * 3) / 4), max])];
+const pct = (n: number) => (n / max) * 100;
+---
+<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading}>
+  {data.intro && <p class="tl-intro" set:html={richText(data.intro)} />}
+
+  <figure class="tl">
+    {/* Lớp nhìn. Trình đọc màn hình bỏ qua hẳn: mọi con số đã có ở danh sách
+        bên dưới dưới dạng chữ, nên đọc hai lần là thừa. */}
+    <div class="tl-chart" aria-hidden="true">
+      <div class="tl-axis">
+        {ticks.map((tk) => (
+          <span class="tl-tick" style={`left:${pct(tk)}%`} data-edge={tk === 0 ? "start" : tk === max ? "end" : undefined}><i></i><b>{tk}</b></span>
+        ))}
+      </div>
+      {items.map((it) => (
+        <div class="tl-row">
+          <span class="tl-name">{it.label}</span>
+          <span class="tl-track">
+            <span class="tl-bar" style={`left:${pct(it.from)}%;width:${pct(it.to - it.from)}%`}>
+              <em>{it.from}–{it.to}</em>
+            </span>
+          </span>
+        </div>
+      ))}
+      <p class="tl-unit">{data.unitLabel}</p>
+    </div>
+
+    {/* Dữ liệu thật. Đây mới là thứ máy tìm kiếm và trợ lý AI đọc được. */}
+    <figcaption>
+      <dl class="tl-data">
+        {items.map((it) => (
+          <div>
+            <dt>{it.label}</dt>
+            <dd>
+              <b>{it.from}–{it.to} {data.unitLabel}</b>
+              {it.note && <span>{it.note}</span>}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </figcaption>
+  </figure>
+
+  {data.footnote && <p class="tl-foot" set:html={richText(data.footnote)} />}
+</Section>
+
+<style>
+  .tl-intro { max-width: 62ch; margin: 0 0 var(--s-6); color: var(--ink-muted); }
+  .tl { margin: 0; }
+
+  /* --- lớp nhìn --- */
+  .tl-chart { margin-bottom: var(--s-6); }
+  .tl-axis { position: relative; height: 30px; margin-left: var(--tl-label, 0); }
+  .tl-tick { position: absolute; top: 0; transform: translateX(-50%); text-align: center; }
+  /* Mốc đầu và mốc cuối nằm đúng mép dải, kéo vào trong để không bị cắt. */
+  .tl-tick[data-edge="start"] { transform: none; }
+  .tl-tick[data-edge="end"] { transform: translateX(-100%); }
+  /* --line-strong chỉ cho 1,86:1 trên nền giấy — vạch mờ tới mức không chỉ
+     được vào con số nào, tức là không làm nổi việc của nó. */
+  .tl-tick i { display: block; width: 1px; height: 8px; background: var(--line-control); margin: 0 auto 3px; }
+  .tl-tick b {
+    font-family: var(--font-figure); font-size: var(--t-2xs);
+    color: var(--slate); font-weight: 400;
+  }
+
+  .tl-row { display: grid; grid-template-columns: 1fr; gap: 6px; margin-bottom: var(--s-4); }
+  @media (min-width: 640px) {
+    .tl-axis { margin-left: 14.5rem; }
+    .tl-row { grid-template-columns: 14.5rem 1fr; gap: 0; align-items: center; }
+  }
+  .tl-name { font-weight: 600; color: var(--ink-navy); padding-right: var(--s-4); line-height: 1.35; }
+
+  .tl-track {
+    position: relative; display: block; height: 34px;
+    background: var(--bone); border-radius: 999px;
+  }
+  .tl-bar {
+    position: absolute; top: 0; height: 100%;
+    background: var(--cobalt); border-radius: 999px;
+    display: flex; align-items: center; justify-content: center;
+    min-width: 3.4rem;
+  }
+  /* Dải sau nhạt dần: nhóm cần lâu hơn không nên trông "nặng" hơn, chỉ nên
+     trông DÀI hơn. Đậm nhạt ở đây mã hoá thứ tự đọc, không mã hoá mức độ. */
+  .tl-row:nth-child(3) .tl-bar { background: var(--cobalt-lift); }
+  .tl-row:nth-child(4) .tl-bar { background: var(--bar-late); }
+  .tl-bar em {
+    font-family: var(--font-figure); font-style: normal; font-size: var(--t-xs);
+    color: #fff; letter-spacing: .01em; white-space: nowrap;
+  }
+  .tl-unit {
+    margin: 2px 0 0; text-align: right;
+    font-size: var(--t-2xs); color: var(--slate); letter-spacing: .06em; text-transform: lowercase;
+  }
+
+  /* --- dữ liệu dạng chữ --- */
+  .tl-data { margin: 0; display: grid; gap: 0; }
+  .tl-data > div {
+    display: grid; gap: 4px; padding: var(--s-4) 0;
+    border-top: 1px solid var(--line);
+  }
+  @media (min-width: 640px) {
+    .tl-data > div { grid-template-columns: 14.5rem 1fr; gap: var(--s-4); align-items: baseline; }
+  }
+  .tl-data dt { font-weight: 600; color: var(--ink-navy); }
+  .tl-data dd { margin: 0; display: grid; gap: 2px; }
+  .tl-data dd b { font-family: var(--font-figure); font-weight: 500; color: var(--ink); }
+  .tl-data dd span { color: var(--ink-muted); font-size: var(--t-sm); line-height: 1.6; }
+
+  .tl-foot {
+    margin: var(--s-6) 0 0; max-width: 62ch;
+    color: var(--ink-muted); font-size: var(--t-sm); line-height: 1.7;
+  }
+</style>

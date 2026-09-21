@@ -1,0 +1,85 @@
+---
+import Section from '../Section.astro';
+import { t, type Locale } from '../../i18n/ui';
+interface Props { data: any; id?: string; locale: Locale; }
+const { data, id = 'danh-gia', locale } = Astro.props;
+
+// `.video video` giữ chỗ bằng aspect-ratio 16/9 + object-fit:contain. Không có
+// width/height thì <video> lấy mặc định 300×150 cho tới khi poster tải xong rồi
+// nhảy sang tỉ lệ thật — CLS ngay giữa khối lời chứng. Schema chỉ khai
+// { src, poster } nên không biết trước tỉ lệ; `contain` để poster dọc viền đen
+// hai bên chứ không bị cắt. Lời giải thích để ở đây, không để trong <style>:
+// chú thích CSS đi thẳng ra HTML và đã từng đẩy trang vượt ngân sách gzip.
+
+// Cùng chuẩn với ảnh khách hàng: chưa có văn bản đồng ý thì không đăng
+// tên, tuổi, nơi ở của người thật.
+const publishable = data.consent?.obtained === true;
+
+/**
+ * Chưa có văn bản đồng ý thì khối biến mất khỏi trang production.
+ *
+ * Bản trước để lại tiêu đề và một ô vàng ghi "chưa thu thập được văn bản đồng ý"
+ * — tức là in ghi chú nội bộ lên mặt khách hàng, và để lại một section cao vài
+ * trăm pixel không có nội dung gì. Khi chạy dev thì vẫn hiện để người biên tập
+ * biết mình đang thiếu gì.
+ */
+const showPlaceholder = !publishable && import.meta.env.DEV;
+---
+{(publishable || showPlaceholder) && (
+<Section id={id} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
+  {showPlaceholder && (
+    <p class="todo" data-todo>
+      ⚠️ {t(locale, 'todo')}: {data.consent?.statement}
+    </p>
+  )}
+
+  {publishable && (
+  <ul class="quotes">
+    {data.items.map((item: any) => (
+      <li class="card">
+        {item.video && (
+          <div class="video">
+            <video controls preload="none" playsinline poster={item.video.poster}>
+              <source src={item.video.src} type="video/mp4" />
+            </video>
+          </div>
+        )}
+        <figure>
+          <blockquote>{item.quote}</blockquote>
+          <figcaption>
+            {item.avatar && (
+              <img src={item.avatar.src} alt={item.avatar.alt} width="48" height="48" loading="lazy" decoding="async" />
+            )}
+            <span>
+              <strong>{item.name}</strong>
+              {item.meta && <span class="muted">{item.meta}</span>}
+              {item.sponsored && <span class="sponsored">{t(locale, 'testimonial.sponsored')}</span>}
+            </span>
+          </figcaption>
+        </figure>
+      </li>
+    ))}
+  </ul>
+  )}
+</Section>
+)}
+
+<style>
+  .quotes { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-4); }
+  @media (min-width: 760px) { .quotes { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); } }
+  .card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .video video {
+    width: 100%; display: block; background: #000;
+    aspect-ratio: 16 / 9; object-fit: contain;
+  }
+  figure { margin: 0; padding: var(--s-5); display: flex; flex-direction: column; gap: var(--s-4); flex: 1; }
+  blockquote { margin: 0; color: var(--ink-muted); font-style: italic; }
+  figcaption { display: flex; align-items: center; gap: var(--s-3); margin-top: auto; font-size: var(--t-sm); }
+  figcaption img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex: 0 0 48px; }
+  figcaption strong { display: block; color: var(--ink-navy); }
+  figcaption .muted { display: block; font-size: var(--t-xs); }
+  .sponsored {
+    display: inline-block; margin-top: 4px; font-size: var(--t-xs);
+    background: var(--violet-mist); color: var(--indigo); padding: 1px 8px; border-radius: 999px;
+  }
+</style>

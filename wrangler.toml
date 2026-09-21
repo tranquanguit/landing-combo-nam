@@ -1,0 +1,35 @@
+# Cấu hình Cloudflare Pages + D1.
+#
+# Trang vẫn là HTML tĩnh; chỉ có thư mục functions/ chạy phía máy chủ. Đơn hàng
+# đi vào D1 — SQLite của Cloudflare, chạy ngay cạnh trang, cùng tên miền, nên
+# connect-src 'self' trong CSP đã đủ và không có CORS để quên.
+#
+# Dựng lần đầu:
+#   npx wrangler d1 create mocha-orders
+#   # dán database_id nhận được vào bên dưới
+#   npx wrangler d1 execute mocha-orders --remote --file=migrations/0001_orders.sql
+#   npx wrangler pages secret put ADMIN_TOKEN     # chuỗi ngẫu nhiên >= 32 ký tự
+#   npx wrangler pages secret put IP_SALT         # chuỗi ngẫu nhiên, không đổi về sau
+
+name = "mocha-landing"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-09-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "mocha-orders"
+database_id = "PLACEHOLDER-CHAY-WRANGLER-D1-CREATE-ROI-DAN-VAO-DAY"
+
+[vars]
+# Chỉ nhận đơn gửi từ chính tên miền này. Đổi khi đổi tên miền.
+ALLOWED_ORIGIN = "https://mochatrinam.com"
+
+# ADMIN_TOKEN và IP_SALT KHÔNG đặt ở đây — đây là file trong repo.
+# Đặt bằng `wrangler pages secret put`, hoặc trong Cloudflare Dashboard.
+
+[env.preview]
+# Bản xem trước dùng cơ sở dữ liệu riêng, để đơn thử không lẫn vào đơn thật.
+[[env.preview.d1_databases]]
+binding = "DB"
+database_name = "mocha-orders-preview"
+database_id = "PLACEHOLDER-CSDL-XEM-TRUOC"

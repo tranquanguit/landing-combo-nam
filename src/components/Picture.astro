@@ -1,0 +1,107 @@
+---
+import { getImage } from 'astro:assets';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+/**
+ * Ảnh responsive cho ảnh được tham chiếu bằng đường dẫn chuỗi trong file nội dung JSON.
+ *
+ * astro:assets chỉ xử lý ảnh được import, mà nội dung sản phẩm lại là dữ liệu thuần
+ * nên không import trực tiếp được. import.meta.glob dựng sẵn bản đồ từ đường dẫn
+ * "/images/x.webp" tới ImageMetadata, nhờ đó vẫn có srcset và AVIF tự động mà
+ * người biên tập nội dung chỉ cần viết một chuỗi.
+ */
+const assets = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/**/*.{jpg,jpeg,png,webp,avif}',
+  { eager: true }
+);
+
+interface Props {
+  src: string;
+  alt: string;
+  /** Bỏ trống thì lấy từ chính file ảnh. */
+  width?: number;
+  height?: number;
+  sizes: string;
+  widths?: number[];
+  loading?: 'eager' | 'lazy';
+  fetchpriority?: 'high' | 'auto' | 'low';
+  decoding?: 'sync' | 'async' | 'auto';
+  class?: string;
+}
+
+const {
+  src, alt, width, height, sizes,
+  widths = [360, 480, 720, 960, 1200],
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  decoding = 'async',
+  class: className,
+} = Astro.props;
+
+const key = `/src/assets${src}`;
+const mod = assets[key];
+
+/**
+ * Đường dẫn ảnh sai thì DỪNG BUILD.
+ *
+ * Bản trước lặng lẽ fallback sang `src` thô, nên kiểm định lần 6 gõ sai một đường
+ * dẫn và nhận được build xanh cùng một ảnh LCP 404 — kèm og:image và Product.image
+ * trỏ vào URL chết. Với mô hình "thêm sản phẩm = thêm một file JSON", gõ sai đường
+ * dẫn ảnh là kịch bản thường gặp nhất, và nó là kịch bản duy nhất không có hàng rào.
+ * Ảnh trong public/ vẫn dùng được, chỉ cần tồn tại thật.
+ */
+if (!mod && !existsSync(join('public', src))) {
+  const gated = existsSync(join('src/media-gated', src));
+  throw new Error(
+    `Không tìm thấy ảnh "${src}".\n` +
+    (gated
+      ? `  Ảnh này đang nằm trong src/media-gated/ (chờ văn bản đồng ý). ` +
+        `Có đồng ý rồi thì chuyển vào src/assets${src} và đặt consent.obtained = true.`
+      : `  Đặt file tại src/assets${src} (được tối ưu, có srcset) hoặc public${src}.`)
+  );
+}
+
+const meta = mod?.default;
+
+/**
+ * Kích thước lấy từ CHÍNH FILE ẢNH, không phải từ số người biên tập gõ tay.
+ *
+ * Kiểm định lần 10: khai 999×111 cho ảnh 1002×762 thì build vẫn xanh và CLS
+ * vọt lên 0,0996 so với ngân sách 0,03 — mà người biên tập không có cách nào
+ * biết số pixel đúng. Số khai chỉ còn dùng cho ảnh nằm trong public/ (không có
+ * metadata); khai lệch với ảnh trong src/assets sẽ bị bỏ qua chứ không gây hại.
+ */
+const w = meta?.width ?? width;
+const h = meta?.height ?? height;
+if (!w || !h) {
+  throw new Error(
+    `Ảnh "${src}" nằm trong public/ nên không đọc được kích thước: ` +
+    `khai width và height trong file nội dung, hoặc chuyển ảnh vào src/assets${src}.`
+  );
+}
+const candidates = meta ? widths.filter((w) => w <= meta.width) : [];
+const list = candidates.length ? candidates : meta ? [meta.width] : [];
+
+const avif = meta ? await Promise.all(list.map((w) => getImage({ src: meta, width: w, format: 'avif' }))) : [];
+const webp = meta ? await Promise.all(list.map((w) => getImage({ src: meta, width: w, format: 'webp' }))) : [];
+const fallback = meta ? await getImage({ src: meta, width: list[list.length - 1], format: 'webp' }) : null;
+
+const srcset = (set: { src: string; options: { width?: number } }[]) =>
+  set.map((i) => `${i.src} ${i.options.width}w`).join(', ');
+---
+{meta ? (
+  <picture>
+    <source type="image/avif" srcset={srcset(avif)} sizes={sizes} />
+    <source type="image/webp" srcset={srcset(webp)} sizes={sizes} />
+    <img
+      src={fallback!.src} alt={alt} width={w} height={h}
+      loading={loading} fetchpriority={fetchpriority} decoding={decoding} class={className}
+    />
+  </picture>
+) : (
+  <img
+    src={src} alt={alt} width={w} height={h}
+    loading={loading} fetchpriority={fetchpriority} decoding={decoding} class={className}
+  />
+)}

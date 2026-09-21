@@ -1,0 +1,70 @@
+---
+import Picture from './Picture.astro';
+import { money } from '../lib/format';
+import { productPath } from '../lib/routes';
+import { t, type Locale } from '../i18n/ui';
+
+interface Props { products: any[]; locale: Locale; }
+const { products, locale } = Astro.props;
+---
+<ul class="grid" data-reveal-group>
+  {products.map((p) => (
+    <li data-reveal>
+      <a href={productPath(p.slug, locale)}>
+        {p.image && (
+          <span class="shot">
+            <Picture src={p.image} alt={p.imageAlt ?? p.name} width={520} height={390}
+              sizes="(min-width: 760px) 340px, 90vw" widths={[340, 520, 680]} loading="lazy" />
+          </span>
+        )}
+        <span class="name">{p.shortName ?? p.name}</span>
+        {p.tagline && <span class="tagline">{p.tagline}</span>}
+        <span class="foot">
+          <span class="price">{t(locale, 'line.from')} {money(p.price, p.currency, locale)}</span>
+          <span class="more">{t(locale, 'line.readMore')}</span>
+        </span>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .grid {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: var(--s-6);
+    /* auto-FILL chứ không auto-fit: một sản phẩm duy nhất giữ nguyên bề ngang
+       của một thẻ thay vì kéo dài hết hàng và trông như lỗi dựng trang. */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  }
+  /* Toàn bộ thẻ là một liên kết: vùng chạm bằng cả ô, không phải bằng dòng chữ.
+     display:grid để phần chân luôn dính đáy dù tên sản phẩm dài ngắn khác nhau. */
+  a {
+    display: grid; gap: var(--s-3); align-content: start;
+    height: 100%; text-decoration: none; color: inherit;
+    border-top: 1px solid var(--line-strong); padding-top: var(--s-4);
+  }
+  a:hover .name { color: var(--cobalt); }
+  /* Ảnh phóng rất nhẹ khi di chuột, cắt trong khung. Chỉ dùng transform nên
+     không gây reflow, và chỉ bật ở thiết bị có con trỏ thật — trên cảm ứng
+     hiệu ứng hover chỉ gây kẹt ở trạng thái "đang hover" sau khi chạm. */
+  .shot { display: block; background: var(--bone); overflow: hidden; }
+  .shot :global(img) {
+    width: 100%; height: auto; display: block;
+    transition: transform 620ms var(--ease-out);
+  }
+  @media (hover: hover) {
+    a:hover .shot :global(img) { transform: scale(1.035); }
+  }
+  .name {
+    font-size: var(--t-md); font-weight: 600; line-height: 1.25;
+    letter-spacing: -0.015em; color: var(--ink-navy);
+  }
+  .tagline { font-size: var(--t-sm); color: var(--slate); line-height: 1.55; }
+  .foot {
+    display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4);
+    align-items: baseline; margin-top: auto; padding-top: var(--s-2);
+    font-size: var(--t-xs);
+  }
+  .price { font-family: var(--font-figure); font-weight: 600; color: var(--ink-navy); }
+  .more { color: var(--cobalt); letter-spacing: .08em; text-transform: uppercase; }
+</style>

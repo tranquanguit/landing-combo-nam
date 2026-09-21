@@ -1,0 +1,258 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "treatment",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "retinol-mixpeel-kit",
+  "translationKey": "retinol-mixpeel-kit",
+  "sku": "8458527107262",
+  "price": 550000,
+  "includes": [
+    {
+      "name": "Ống tinh chất Peel",
+      "note": "Retinol 1% bọc liposome, 4 loại vi tảo"
+    },
+    {
+      "name": "Ống tinh chất siêu phục hồi",
+      "note": "Dùng sau mỗi lần peel"
+    },
+    {
+      "name": "Sữa rửa mặt Pro-vitamin B5",
+      "note": "Bước làm sạch trong suốt liệu trình"
+    },
+    {
+      "name": "Kem dưỡng phục hồi Collagen",
+      "note": "Bước dưỡng sau peel"
+    }
+  ],
+  "locale": "vi",
+  "name": "Mocha Retinol mixPEEL Kit – bộ peel tại nhà 4 món",
+  "shortName": "Retinol mixPEEL Kit",
+  "primaryKeyword": "bộ peel da tại nhà mocha retinol",
+  "seo": {
+    "title": "Bộ peel da tại nhà Mocha Retinol mixPEEL 4 món | Mocha",
+    "description": "Bộ 4 món với Retinol 1% bọc liposome và 4 loại vi tảo. Liệu trình 3 ngày. KHÔNG dùng khi mang thai hoặc cho con bú. {{price}}."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "hỗ trợ làm sạch lớp tế bào chết trên bề mặt da",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Sản phẩm CÓ CHỨA RETINOL. Không dùng cho phụ nữ mang thai hoặc đang cho con bú.",
+      "Sau khi dùng, da nhạy cảm hơn với ánh nắng. Chống nắng mỗi ngày là bắt buộc trong và sau liệu trình.",
+      "Ngưng sử dụng nếu da rát kéo dài, sưng, phồng rộp hoặc đau. Tránh tiếp xúc trực tiếp với mắt.",
+      "Kết quả khác nhau tùy cơ địa, loại da và mức độ chống nắng hằng ngày."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Retinol mixPEEL Kit – bộ 4 món",
+      "note": "Đủ một liệu trình 3 ngày",
+      "price": 550000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, xem tình trạng da qua hình ảnh",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Sản phẩm mạnh nhất trên trang này",
+      "heading": "Peel tại nhà là thứ dễ làm hỏng da nhất nếu làm sai, nên đọc hết trước khi đặt",
+      "lead": "Bộ 4 món cho một liệu trình <strong>3 ngày</strong>: ống peel chứa <strong>Retinol 1% bọc liposome</strong> và 4 loại vi tảo, ống phục hồi, sữa rửa mặt và kem dưỡng. Nhà sản xuất định vị đây là dòng phân phối chuyên dụng cho spa.",
+      "usp": [
+        {
+          "text": "<strong>Retinol 1% bọc liposome</strong> — nồng độ do nhà sản xuất công bố",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "xem bảng thành phần"
+        },
+        {
+          "text": "<strong>Liệu trình có điểm dừng rõ ràng</strong>: 3 ngày, mỗi ngày một lần — không phải sản phẩm dùng hằng ngày",
+          "evidence": "verified",
+          "source": "#huong-dan",
+          "qualifier": "trích từ hướng dẫn của nhà sản xuất"
+        },
+        {
+          "text": "<strong>KHÔNG dùng khi mang thai hoặc cho con bú</strong> — vì sản phẩm chứa retinol",
+          "evidence": "ingredient",
+          "qualifier": "khác với các sản phẩm khác trên trang này"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-retinol-mixpeel.webp",
+        "alt": "Bộ peel Mocha Retinol mixPEEL 4 món gồm hộp, hai ống tinh chất, sữa rửa mặt và kem dưỡng"
+      },
+      "primaryCta": "Đặt bộ peel",
+      "secondaryCta": {
+        "label": "Đọc phần ai không nên dùng",
+        "href": "#ai-khong-nen-dung"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "cards",
+      "id": "ai-khong-nen-dung",
+      "eyebrow": "Đọc trước khi đặt",
+      "heading": "Năm trường hợp không nên dùng bộ này",
+      "intro": "Đây là sản phẩm mạnh nhất trên trang, nên phần này đặt ngay dưới màn hình đầu tiên chứ không giấu xuống cuối.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Đang mang thai hoặc cho con bú",
+          "body": "Sản phẩm chứa retinol. Đây là khác biệt quan trọng so với các sản phẩm khác trên trang — combo nám dùng Bakuchiol chính là để tránh retinoid.",
+          "meta": "Không dùng"
+        },
+        {
+          "heading": "Da đang tổn thương hoặc nhiễm corticoid",
+          "body": "Da mỏng, nổi mạch máu, đang kích ứng hoặc vừa qua thủ thuật cần phục hồi trước. Peel lên nền da đang yếu làm tình trạng nặng thêm.",
+          "meta": "Không dùng"
+        },
+        {
+          "heading": "Không chống nắng được mỗi ngày",
+          "body": "Sau peel, da nhạy cảm hơn hẳn với ánh nắng. Không chống nắng được thì liệu trình này gây hại nhiều hơn lợi.",
+          "meta": "Không dùng"
+        },
+        {
+          "heading": "Đang dùng retinoid kê đơn hoặc acid nồng độ cao",
+          "body": "Chồng nhiều tác nhân cùng lúc là cách nhanh nhất làm hỏng hàng rào bảo vệ da. Hỏi bác sĩ trước.",
+          "meta": "Hỏi bác sĩ trước"
+        },
+        {
+          "heading": "Có sự kiện quan trọng trong hai tuần tới",
+          "body": "Da sẽ khô, căng và có thể sẫm màu tạm thời trước khi bong. Đừng bắt đầu liệu trình ngay trước một dịp bạn cần da trông đẹp nhất.",
+          "meta": "Nên hoãn lại"
+        }
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Bảng thành phần",
+      "heading": "Thành phần nhà sản xuất công bố",
+      "intro": "Nhà sản xuất công bố nhóm hoạt chất và nồng độ retinol, không công bố danh sách INCI đầy đủ cho bộ này.",
+      "caption": "Bảng dưới đây liệt kê đúng những gì nhà sản xuất công bố. Trang KHÔNG tự điền phần còn lại. Thành phần đầy đủ theo INCI in trên bao bì từng món trong bộ.",
+      "rows": [
+        {
+          "name": "Retinol 1% (bọc liposome)",
+          "inProduct": "Ống peel",
+          "role": "Dẫn xuất vitamin A. Bọc liposome nhằm đưa hoạt chất vào sâu hơn và giảm kích ứng bề mặt.",
+          "suitedFor": "Da dày, da dầu — KHÔNG dùng khi mang thai"
+        },
+        {
+          "name": "4 loại siêu vi tảo",
+          "inProduct": "Ống peel",
+          "role": "Nhóm vi tảo biển, thành phần cơ học và sinh học của công thức peel.",
+          "suitedFor": "Da sần sùi bề mặt"
+        },
+        {
+          "name": "Bốn thành phần dưỡng",
+          "inProduct": "Ống phục hồi",
+          "role": "Nhóm hỗ trợ phục hồi, dùng ngay sau mỗi lần peel.",
+          "suitedFor": "Da trong liệu trình peel"
+        },
+        {
+          "name": "Pro-vitamin B5",
+          "inProduct": "Sữa rửa mặt kèm bộ",
+          "role": "Giữ ẩm trong bước làm sạch — xem thêm ở trang sữa rửa mặt Bio-Active.",
+          "suitedFor": "Da đang khô sau peel"
+        },
+        {
+          "name": "Collagen Peptide",
+          "inProduct": "Kem dưỡng kèm bộ",
+          "role": "Bước dưỡng nền sau peel — xem thêm ở trang Collagen Peptide Cream.",
+          "suitedFor": "Da cần phục hồi"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Liệu trình ba ngày, mỗi ngày một lần",
+      "totalTime": "PT50M",
+      "intro": "Thời lượng và số ngày lấy nguyên từ hướng dẫn của nhà sản xuất. Đây không phải sản phẩm dùng hằng ngày lâu dài.",
+      "items": [
+        {
+          "heading": "Làm sạch da mặt",
+          "body": "Rửa mặt bằng sữa rửa mặt trong bộ và lau khô."
+        },
+        {
+          "heading": "Thoa peel, massage 3–5 phút",
+          "body": "Thoa đều lên mặt, massage nhẹ nhàng 3 đến 5 phút."
+        },
+        {
+          "heading": "Lưu trên da tới 45 phút",
+          "body": "Thời gian lưu tuỳ tình trạng da. Lần đầu nên để ngắn hơn mức tối đa."
+        },
+        {
+          "heading": "Rửa sạch, rồi dưỡng và chống nắng",
+          "body": "Rửa lại bằng nước sạch, dùng ống phục hồi và kem dưỡng. Hôm sau bắt buộc chống nắng."
+        }
+      ],
+      "footnote": "Nhà sản xuất mô tả những biểu hiện <strong>bình thường</strong> trong liệu trình: hơi rát và châm chích khi thoa, da khô và căng sau đó, và da có thể sẫm màu tạm thời trước khi bong. Nhưng <strong>rát kéo dài, sưng, phồng rộp hoặc đau thì phải dừng ngay</strong> — đó không nằm trong nhóm bình thường."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng phù hợp với tình trạng da của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt chu kỳ sử dụng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Bộ này giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho bộ 4 món, đủ một liệu trình 3 ngày. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Vì sao combo nám tránh retinoid mà bộ này lại có retinol?",
+          "a": "Vì hai sản phẩm giải quyết hai việc khác nhau. Combo nám là liệu trình dài nhiều tuần, dùng hằng ngày, nên chọn Bakuchiol để hạn chế kích ứng tích luỹ. Bộ peel là liệu trình ba ngày có điểm dừng, chấp nhận mức tác động mạnh hơn trong thời gian ngắn. Nếu bạn đang mang thai hoặc cho con bú thì chỉ combo nám phù hợp, bộ này thì không."
+        },
+        {
+          "q": "Bao lâu peel lại một lần?",
+          "a": "Chúng tôi không đưa con số, vì nhà sản xuất không công bố khoảng cách giữa các liệu trình. Hãy hỏi chuyên viên tư vấn hoặc bác sĩ da liễu trước khi lặp lại — peel quá dày là nguyên nhân phổ biến làm mỏng da."
+        },
+        {
+          "q": "Da sẫm màu sau peel có sao không?",
+          "a": "Nhà sản xuất mô tả đây là biểu hiện bình thường, da bong sẽ sáng và đều màu lại. Nhưng nếu kèm rát kéo dài, sưng hoặc đau thì đó là chuyện khác và cần dừng ngay."
+        },
+        {
+          "q": "Dùng được cùng combo nám không?",
+          "a": "Không cùng lúc. Chồng liệu trình peel lên liệu trình có hoạt chất tác động sắc tố là cách nhanh nhất làm hỏng hàng rào bảo vệ. Chọn một, hoàn thành, rồi mới tính tới cái kia."
+        }
+      ]
+    }
+  ]
+}

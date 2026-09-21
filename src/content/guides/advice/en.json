@@ -1,0 +1,54 @@
+{
+  "locale": "en",
+  "translationKey": "advice-index",
+  "status": "published",
+  "sections": [
+    {
+      "id": "doc-gi-truoc",
+      "heading": "Where to start, if this is new to you",
+      "body": [
+        "Most people who end up here have already tried at least one product and found it did not do much. Before reading about any active ingredient, there is one question worth settling: which layer of skin your darker patches sit in.",
+        "Pigment sitting in the outer layer and pigment sitting deeper down respond very differently to the same ingredient, and over very different timescales. Reading advice written for the other group is the most common reason people give up halfway — not because the product was wrong, but because the expectation was set against the wrong thing."
+      ]
+    },
+    {
+      "id": "cach-chung-toi-viet",
+      "heading": "The rules these articles are written under",
+      "body": [
+        "Each piece explains the mechanism first and mentions products second, and several mention no product at all. That is deliberate: an article that steers every paragraph towards a buy button has stopped being an explanation.",
+        "We do not publish a number without saying where it comes from. When a concentration appears, it is the concentration printed on the packaging, and you can check it against the box in your hand. When a timescale appears, it comes with conditions — because no single timescale is true for everyone.",
+        "And there are sentences we do not write. Cosmetics do not treat disease. If your skin needs medical care, what you need is a dermatologist, not a blog post."
+      ]
+    },
+    {
+      "id": "khi-nao-di-kham",
+      "heading": "When to stop reading and see a doctor",
+      "body": [
+        "A few signs no article can substitute for a consultation: a darker area that changes shape or border quickly; skin that has become thin, shows visible vessels, or stings for a long time after using a product of unclear origin; or being on prescription medication without having asked whether a topical product is a sensible addition.",
+        "If you are pregnant or breastfeeding, ask a doctor before starting any skincare product, including ones that contain no retinoids."
+      ]
+    },
+    {
+      "id": "mot-viec-quan-trong-nhat",
+      "heading": "If you only do one thing, do this",
+      "body": [
+        "Sunscreen every morning. Not because it is the interesting step, but because it is the one step whose absence makes every other step pointless. UV restarts pigment production faster than any ingredient can soften it.",
+        "It is also why every routine on this site ends with a sun protection step, and why we say plainly that a routine without it is not worth high expectations."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Who writes this section?",
+      "a": "The team running this website, working from what the manufacturer publishes and from general skincare literature. It is reference material, not personalised medical advice."
+    },
+    {
+      "q": "Why do so many articles mention no product?",
+      "a": "Because the question you arrive with is usually not a product question yet. Knowing which group you fall into, and how long to expect, decides whether you finish a routine at all — which matters far more than which label you pick."
+    },
+    {
+      "q": "Does this replace a doctor's opinion?",
+      "a": "No. These are general explanations of how things work. Your own skin needs someone who can examine it."
+    }
+  ]
+}

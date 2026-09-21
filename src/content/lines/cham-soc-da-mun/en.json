@@ -1,0 +1,119 @@
+{
+  "slug": "cham-soc-da-mun",
+  "locale": "en",
+  "translationKey": "cham-soc-da-mun",
+  "status": "published",
+  "primaryKeyword": "how to treat post acne marks",
+  "seo": {
+    "title": "Blemish care and post-blemish marks | Mocha Vietnam",
+    "description": "Telling an inflamed spot apart from the mark it leaves behind — two phases needing two different steps, and why the wrong order slows both."
+  },
+  "eyebrow": "Product line",
+  "heading": "Blemish care",
+  "lead": "Two phases, two different steps: while the spot is inflamed, and after it settles but leaves a darker mark.",
+  "products": [
+    "smart-target-acne-gel",
+    "smart-whitening-turmergel"
+  ],
+  "compare": {
+    "eyebrow": "Which one, when",
+    "heading": "Two steps for two phases, not two alternatives",
+    "intro": "This is where people commonly get it backwards: applying a mark-softening product to a still-inflamed spot, then concluding it does nothing.",
+    "criteria": [
+      {
+        "label": "When to use",
+        "values": [
+          "While the spot is swollen and red",
+          "After it settles, leaving a darker mark"
+        ]
+      },
+      {
+        "label": "How to apply",
+        "values": [
+          "Dab on the spot, a pea-sized amount",
+          "Spread over the area or face, two to three pea-sized amounts"
+        ]
+      },
+      {
+        "label": "Time of day",
+        "values": [
+          "As needed, morning or evening",
+          "Evening"
+        ]
+      },
+      {
+        "label": "Main actives",
+        "values": [
+          "Tamanu oil, Acnebusters 3%, BHA 0.5%, sulfur, zinc PCA",
+          "Sabiwhite 0.3%, niacinamide 3%, tranexamic acid 3%, glutathione"
+        ]
+      },
+      {
+        "label": "What it addresses",
+        "values": [
+          "Congested and inflamed areas",
+          "Pigment left behind once inflammation has gone"
+        ]
+      }
+    ],
+    "footnote": "If you only pick one: pick for the skin you have today, not for the outcome you worry about most. While a spot is inflamed, the mark-softening step is not yet its turn."
+  },
+  "sections": [
+    {
+      "id": "hai-giai-doan",
+      "heading": "A post-blemish mark is no longer a blemish",
+      "body": [
+        "A spot passes through two quite different phases. First inflammation: a congested pore, a red and swollen area. Then the consequence of that inflammation — the skin produces extra pigment where it was inflamed, leaving a darker mark once the spot itself has gone.",
+        "The two phases need different things. The inflamed phase needs something acting on congestion. The mark phase needs something acting on pigment — the same active family used for melasma, because underneath it is the same pigment problem.",
+        "Get the order wrong and both are slower: a mark-softening product on an inflamed spot does not settle it faster, and a spot gel on a healed mark only dries that patch of skin."
+      ],
+      "links": [
+        {
+          "label": "See how pigment works on the pigmentation line",
+          "href": "/en/nam-tham/"
+        }
+      ]
+    },
+    {
+      "id": "khong-nan",
+      "heading": "Squeezing makes the mark deeper, not faster",
+      "body": [
+        "How dark and how deep a mark ends up tracks fairly closely with how inflamed things were beforehand. Squeezing increases inflammation, so it deepens and prolongs exactly the mark you were trying to avoid.",
+        "With a deep spot that has no head, squeezing also pushes the contents downwards rather than out — which is how a spot becomes a depressed scar.",
+        "Plainly: no product on this site compensates for squeezing."
+      ]
+    },
+    {
+      "id": "chong-nang-tham",
+      "heading": "Marks darken in the sun too",
+      "body": [
+        "This gets overlooked because people file post-blemish marks under “acne” rather than under “pigment”. But pigment is what they are, and UV drives them exactly as it drives melasma.",
+        "So someone applying a mark gel faithfully each evening but skipping sunscreen each morning is pulling in two directions — the situation the sun protection line describes.",
+        "It is also why the mark gel is designed for evening use."
+      ],
+      "links": [
+        {
+          "label": "See the sun protection line",
+          "href": "/en/bao-ve-da/"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "What about severe or cystic acne?",
+      "a": "That needs a dermatologist. Severe inflammatory acne, cysts, or breakouts lasting months are not something a topical product resolves, and waiting usually makes the resulting scarring worse."
+    },
+    {
+      "q": "Do post-blemish marks fade on their own?",
+      "a": "Most fade over time, but how fast depends on how deep the pigment sits and on daily sun protection. Shallow marks may fade over a few months; deeper ones take considerably longer."
+    },
+    {
+      "q": "Can depressed scars be softened?",
+      "a": "No. A depressed scar is a change in the skin's structure, quite unlike a mark, which is only pigment. No topical product fills a depressed scar — that is work for medical procedures."
+    }
+  ],
+  "articles": [
+    "nam-noi-tiet-la-gi"
+  ]
+}

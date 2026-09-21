@@ -1,0 +1,504 @@
+{
+  "slug": "combo-nam",
+  "locale": "en",
+  "translationKey": "combo-nam",
+  "status": "published",
+  "name": "Mocha Dark Spot Duo – Smart Brightening Cream X3 + Smart First Care Serum",
+  "shortName": "Mocha Dark Spot Duo",
+  "sku": "MOCHA-COMBO-NAM",
+  "includes": [
+    {
+      "name": "Mocha Smart Brightening Cream X3",
+      "note": "night cream"
+    },
+    {
+      "name": "Mocha Smart First Care Serum",
+      "note": "dark-spot serum, morning and night"
+    }
+  ],
+  "gifts": [
+    {
+      "name": "Mocha UV-Block SPF50 sunscreen",
+      "note": "the step that protects your progress"
+    },
+    {
+      "name": "Mocha Bio-Active Cleanser",
+      "note": "gentle, pH 5.5"
+    }
+  ],
+  "price": 1050000,
+  "compareAtPrice": 1800000,
+  "currency": "VND",
+  "variants": [
+    {
+      "label": "The full duo – cream + serum",
+      "note": "Includes both gifts",
+      "price": 1050000,
+      "recommended": true
+    },
+    {
+      "label": "Smart Brightening Cream X3 only",
+      "note": "Includes the cleanser",
+      "price": 590000,
+      "recommended": false
+    },
+    {
+      "label": "Smart First Care Serum only",
+      "note": "Morning and night",
+      "price": 550000,
+      "recommended": false
+    },
+    {
+      "label": "I have questions first",
+      "note": "We reply by email within one business day",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "seo": {
+    "title": "Mocha Dark Spot Duo – 4-butylresorcinol 1000ppm + Niacinamide 4%",
+    "description": "Serum with 4-butylresorcinol 1000ppm and Niacinamide 4%, plus a cream with Tranexamic Acid and Bakuchiol. Only the percentages printed on the pack. {{price}}.",
+    "ogImage": "/images/packshot-combo.jpg"
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "helps visibly reduce the look of dark spots and supports a more even-looking skin tone",
+    "warnings": [
+      "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
+      "Discontinue use if irritation occurs. Avoid direct contact with the eyes.",
+      "If you are pregnant or breastfeeding, speak to your doctor before use.",
+      "Results vary between individuals and depend on consistent daily sun protection.",
+      "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
+    ],
+    "productNotificationNumber": "1517/25/CBMP-LA"
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "A cream and a serum, used together, for melasma-prone skin",
+      "heading": "A two-step routine for dark spots, with every percentage published",
+      "lead": "<strong>Smart First Care Serum</strong> publishes 4-butylresorcinol 1000ppm, Niacinamide 4% and Bio-Placenta 1%; <strong>Smart Brightening Cream X3</strong> carries Tranexamic Acid, NIO-NAG and Bakuchiol. Formulated for skin dealing with stubborn discolouration and uneven tone.",
+      "usp": [
+        {
+          "text": "<strong>No corticosteroids, no hydroquinone, no drying alcohol</strong>",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "the full ingredient list is printed on the pack"
+        },
+        {
+          "text": "<strong>Full percentages on the label</strong> — nothing hidden inside a “proprietary complex”",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "the full table is on this page"
+        },
+        {
+          "text": "<strong>Honest timelines by pigmentation type</strong>, not one number promised to everybody",
+          "evidence": "ingredient",
+          "qualifier": "see the timeline table below"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-combo.webp",
+        "alt": "Mocha Smart Brightening Cream X3 jar beside the Smart First Care Serum bottle"
+      },
+      "primaryCta": "Order the duo",
+      "secondaryCta": {
+        "label": "See the formula",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Ships from Ho Chi Minh City",
+        "7-day return if the product arrives faulty"
+      ]
+    },
+    {
+      "type": "offer",
+      "eyebrow": "The duo",
+      "heading": "Both steps together, cheaper than buying them apart",
+      "body": "The duo's list price is {{compareAtPrice}}. It currently sells at <strong>{{price}}</strong> and adds the SPF50 sunscreen and the cleanser on top.",
+      "validUntil": "2026-12-31",
+      "notes": [
+        "Sunscreen included",
+        "Cleanser included",
+        "Ships worldwide from Vietnam",
+        "Prices are shown in Vietnamese đồng (VND). International shipping is quoted per country before you pay — duties and import taxes are not included in the price above."
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "The problem",
+      "heading": "Why dark spots fade and then come straight back",
+      "quotes": [
+        "“Three different serums, and each one worked for about a fortnight.”",
+        "“Foundation doesn't really cover the patches on my cheeks.”",
+        "“I've been burned by a cream that turned out to have steroids in it.”",
+        "“Everything promises results in seven days and nothing delivers.”"
+      ],
+      "explainer": {
+        "heading": "Most products only work on the surface layer",
+        "body": [
+          "Brightening the epidermis alone leaves the melanocytes underneath doing exactly what they were doing before. Stop using the product and the pigment returns, sometimes darker than it started.",
+          "This routine takes a different route: it limits the signal that triggers pigment production, supports the turnover of discoloured cells, and rebuilds the skin barrier so the improvement holds.",
+          "Which also means <strong>progress is measured in weeks, not days</strong>. The realistic timelines for each type of discolouration are further down this page, because setting the wrong expectation is how people end up disappointed."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Know what you have",
+      "heading": "Three patterns of hyperpigmentation, and honest timelines",
+      "intro": "Knowing which one you have tells you what to expect. This is why we do not quote a single number for everybody.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Epidermal patches",
+          "body": "Light to dark brown patches with defined edges, sitting in the upper layer. Usually linked to UV exposure, hormonal change, or a previous steroid cream.",
+          "meta": "Typical improvement: 4–8 weeks",
+          "image": {
+            "src": "/images/nam_01.webp",
+            "alt": "Light brown patches with defined edges across the cheekbone"
+          }
+        },
+        {
+          "heading": "Dermal pigmentation",
+          "body": "Grey-brown spots or patches with soft edges, where pigment sits deeper in the skin. Linked to genetics, hormones, sun exposure and prolonged stress.",
+          "meta": "Typical improvement: 8–12 weeks",
+          "image": {
+            "src": "/images/nam_02.webp",
+            "alt": "Grey-brown pigmentation with soft edges"
+          }
+        },
+        {
+          "heading": "Mixed pigmentation",
+          "body": "Both at once: clearly defined dark areas alongside diffuse, patchy ones. It takes longer and demands stricter sun protection.",
+          "meta": "Typical improvement: 8–16 weeks",
+          "image": {
+            "src": "/images/nam_03.webp",
+            "alt": "Mixed pigmentation with both defined and diffuse areas"
+          }
+        }
+      ]
+    },
+    {
+      "type": "timeline",
+      "id": "moc-thoi-gian",
+      "eyebrow": "Setting expectations",
+      "heading": "Three groups, three very different timescales",
+      "intro": "This is why we do not quote one number. Applying the first group's expectations to the last is the quickest way to stop halfway and conclude that nothing works.",
+      "max": 16,
+      "unitLabel": "weeks",
+      "items": [
+        {
+          "label": "Surface patches (epidermal)",
+          "from": 4,
+          "to": 8,
+          "note": "Pigment sits in the outer layer, so it responds earliest."
+        },
+        {
+          "label": "Deeper pigment (dermal)",
+          "from": 8,
+          "to": 12,
+          "note": "Pigment sits deeper and needs more cell-turnover time."
+        },
+        {
+          "label": "Mixed",
+          "from": 8,
+          "to": 16,
+          "note": "Both forms on the same area, so the widest range."
+        }
+      ],
+      "footnote": "Reference ranges, not a promise. Results vary by individual and by daily sun protection — skip the sunscreen step and none of the figures above hold."
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "The formula",
+      "heading": "Every active, its percentage, and what it is doing there",
+      "intro": "No corticosteroids, no hydroquinone, no synthetic fragrance.",
+      "caption": "This table lists exactly the actives and concentrations PRINTED ON THE PACKAGING of the serum and the cream. We do not fill in any number the packaging does not state. The full INCI list is printed on the pack.",
+      "rows": [
+        {
+          "name": "4-butylresorcinol 1000ppm",
+          "inProduct": "Serum",
+          "role": "Studied for its ability to inhibit tyrosinase, the enzyme that starts melanin production.",
+          "suitedFor": "Surface patches, mixed pigmentation"
+        },
+        {
+          "name": "Niacinamide 4%",
+          "inProduct": "Serum",
+          "role": "Supports the skin barrier and evens tone; kept moderate to limit stinging.",
+          "suitedFor": "All skin types, including easily irritated skin"
+        },
+        {
+          "name": "Bio-Placenta 1%",
+          "inProduct": "Serum",
+          "role": "A biological ingredient supporting recovery, encapsulated in liposomes for delivery.",
+          "suitedFor": "Thin skin, skin recovering from treatment"
+        },
+        {
+          "name": "Vietnam Bio-white Complex 3%",
+          "inProduct": "Serum",
+          "role": "A fermented complex of native Vietnamese extracts aimed at evening out tone.",
+          "suitedFor": "Uneven, dull skin"
+        },
+        {
+          "name": "Bioyoga 2%",
+          "inProduct": "Serum",
+          "role": "A fermented ingredient that helps calm the skin.",
+          "suitedFor": "Stressed, easily reddened skin"
+        },
+        {
+          "name": "Black Truffle Extract 2%",
+          "inProduct": "Serum",
+          "role": "Black truffle extract, supporting brightness.",
+          "suitedFor": "Dull skin"
+        },
+        {
+          "name": "Tranexamic Acid 3%",
+          "inProduct": "Cream",
+          "role": "Among the more widely studied topical options for softening areas darkened by excess pigment.",
+          "suitedFor": "Surface patches, mixed pigmentation"
+        },
+        {
+          "name": "NIO-NAG 2%",
+          "inProduct": "Cream",
+          "role": "A glucosamine derivative that helps regulate pigment formation.",
+          "suitedFor": "Post-inflammatory pigmentation"
+        },
+        {
+          "name": "Ceramide 1%",
+          "inProduct": "Cream",
+          "role": "A structural part of the skin barrier that helps hold moisture.",
+          "suitedFor": "Dry, dehydrated skin"
+        },
+        {
+          "name": "Bakuchiol 2%",
+          "inProduct": "Cream",
+          "role": "A plant-derived alternative to retinol studied for easily irritated skin; it does not increase light sensitivity.",
+          "suitedFor": "Sensitive skin, skin that does not tolerate retinol"
+        },
+        {
+          "name": "Vietnam Bio-white Complex 3%",
+          "inProduct": "Cream",
+          "role": "The same native complex as the serum, in a cream that stays on skin longer.",
+          "suitedFor": "Uneven, dull skin"
+        },
+        {
+          "name": "Black Truffle Extract 2%",
+          "inProduct": "Cream",
+          "role": "Black truffle extract, in a cream that stays on the skin overnight.",
+          "suitedFor": "Dull skin"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use it",
+      "heading": "Four steps, about five minutes",
+      "intro": "Once or twice daily. The morning sunscreen is not optional — skip it and the other two steps are largely wasted.",
+      "totalTime": "PT5M",
+      "items": [
+        {
+          "heading": "Cleanse",
+          "body": "Wash with the Bio-Active Cleanser and pat dry with a clean towel."
+        },
+        {
+          "heading": "Serum",
+          "body": "Three to four drops over the affected areas and the whole face. Press in, don't rub."
+        },
+        {
+          "heading": "Cream",
+          "body": "About a fingertip's worth across face and neck, avoiding the eye area."
+        },
+        {
+          "heading": "Sunscreen",
+          "body": "Every morning, without exception, using the SPF50 included in the duo."
+        }
+      ],
+      "footnote": "Recommended run: <strong>8–12 weeks without gaps</strong>. Unprotected sun exposure brings pigment back regardless of which product you use."
+    },
+    {
+      "type": "routine",
+      "id": "lo-trinh",
+      "eyebrow": "What goes when",
+      "heading": "The morning routine and the evening routine are not the same",
+      "intro": "The order below is taken from Mocha's own published routine, trimmed to the products in this combo.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Morning",
+          "steps": [
+            {
+              "label": "Bio-Active Cleanser",
+              "note": "Wash and dry before applying anything."
+            },
+            {
+              "label": "Smart First Care Serum",
+              "note": "One or two presses for the whole face, patted in."
+            },
+            {
+              "label": "Smart Brightening Cream X3",
+              "note": "About a fingertip's worth, avoiding the eye area."
+            },
+            {
+              "label": "UV-Block SPF50 sunscreen",
+              "note": "Not optional. Skip it and the three steps above lose most of their point.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Evening",
+          "steps": [
+            {
+              "label": "Make-up remover",
+              "note": "Only if you wore make-up or sunscreen that day."
+            },
+            {
+              "label": "Bio-Active Cleanser",
+              "note": "Damp skin or leftover residue both reduce absorption."
+            },
+            {
+              "label": "Smart First Care Serum",
+              "note": "The step that opens the way, before the cream."
+            },
+            {
+              "label": "Smart Brightening Cream X3",
+              "note": "The step that seals it in overnight."
+            }
+          ]
+        }
+      ],
+      "footnote": "There is no sunscreen step at night, so the evening column is one step shorter — that is the only difference between the two routines, and it is also the step most often skipped."
+    },
+    {
+      "type": "cards",
+      "id": "ai-khong-nen-dung",
+      "eyebrow": "Said plainly",
+      "heading": "Four cases where you should think again, or ask a doctor first",
+      "intro": "This sits immediately before the form on purpose. Knowing a product is not for you is far better before it arrives than after.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Pregnant or breastfeeding",
+          "body": "The formulas contain no retinoids, but that is not a reason to decide alone. Ask a doctor before starting any skincare product during this period.",
+          "meta": "Ask a doctor first"
+        },
+        {
+          "heading": "Skin recovering from a procedure, or currently damaged",
+          "body": "Skin after laser, microneedling or peeling, or skin that is badly irritated, is a medical situation. The right person to answer is the doctor who treated you, not a website.",
+          "meta": "Ask a doctor first"
+        },
+        {
+          "heading": "Unable to use sunscreen every morning",
+          "body": "Plainly: if your work or habits make daily sun protection unrealistic, results will be noticeably worse than anything described on this page. That step is not optional.",
+          "meta": "Think again"
+        },
+        {
+          "heading": "Needing a visible change within a week or two",
+          "body": "Even the fastest-responding group takes around four weeks. If you need results for a deadline sooner than that, this is not the right thing and we would rather you knew now.",
+          "meta": "Think again"
+        }
+      ]
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City — tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support through the full routine</strong> by email."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Questions",
+      "heading": "What people ask before ordering",
+      "items": [
+        {
+          "q": "What does the duo cost?",
+          "a": "The Smart Brightening Cream X3 and Smart First Care Serum together are <strong>{{price}}</strong>, including the SPF50 sunscreen and cleanser. The list price is {{compareAtPrice}}, so you save {{save}}. We quote shipping to your country before you pay."
+        },
+        {
+          "q": "How long before I see a difference?",
+          "a": "How long it takes depends on which pattern of pigmentation you have. Surface patches tend to shift in 4–8 weeks; deeper and mixed pigmentation takes 8–16 weeks. This varies between individuals and depends heavily on daily sun protection."
+        },
+        {
+          "q": "What if I use it for eight weeks and see no difference?",
+          "a": "Outside the EU and UK we do <strong>not refund for change of mind or lack of results</strong>; the 7-day return covers faulty, incorrect or unopened items only, because opened cosmetics cannot be resold. <strong>EU and UK customers keep the statutory 14-day right to withdraw</strong> and receive a full refund, with return postage at your cost. Either way, if eight weeks pass with no change, contact us first: we will review how you are applying it and your daily sun protection, the two most common causes. If it still does not improve, your pigmentation may need medical treatment rather than a cosmetic product."
+        },
+        {
+          "q": "Is it suitable for sensitive skin?",
+          "a": "The formula uses Bakuchiol rather than retinol and contains no corticosteroids, hydroquinone or drying alcohol. Patch test on the jawline for 24 hours before applying to the whole face."
+        },
+        {
+          "q": "Can I use it while pregnant or breastfeeding?",
+          "a": "The formula is retinoid-free. Even so, speak to your doctor before adding any new product to your routine during pregnancy or breastfeeding."
+        },
+        {
+          "q": "Will the spots come back?",
+          "a": "Pigmentation returns readily when skin is exposed to UV without protection. Completing the 8–12 week run and wearing sunscreen every morning is what makes the improvement hold."
+        },
+        {
+          "q": "Do you ship outside Vietnam?",
+          "a": "Yes, from Ho Chi Minh City. Tell us your country in the order form and we will confirm shipping cost and delivery time before anything is charged."
+        }
+      ]
+    }
+  ],
+  "availability": "InStock",
+  "returnPolicy": [
+    {
+      "country": "VN",
+      "days": 7,
+      "scope": "defect",
+      "fees": "free",
+      "refund": "exchange"
+    },
+    {
+      "country": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE",
+        "GB"
+      ],
+      "days": 14,
+      "scope": "any",
+      "fees": "customer",
+      "refund": "full"
+    }
+  ],
+  "line": "nam-tham",
+  "primaryKeyword": "mocha dark spot cream and serum set",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ]
+}
