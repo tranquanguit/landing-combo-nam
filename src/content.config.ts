@@ -136,6 +136,22 @@ const image = z.object({
 /** Id neo dùng cho liên kết trong trang. Để trống thì component dùng id mặc định. */
 const anchorId = z.string().regex(/^[a-z0-9-]+$/).optional();
 
+/**
+ * Nhịp thị giác, khai được cho từng khối.
+ *
+ * Mặc định do `ProductLanding` tính theo vai trò của khối và vị trí của nó, và
+ * đúng cho phần lớn trang. Hai trường này để đè khi một trang cần khác — ví dụ
+ * một khối cần đứng tách hẳn ra vì nó là chỗ người đọc phải dừng lại.
+ *
+ * KHÔNG khai chúng chỉ để "cho khác": nền đổi mà không có lý do thì người đọc
+ * vẫn nhận ra ranh giới, chỉ là ranh giới đó không ứng với đoạn nào của câu
+ * chuyện — tệ hơn là không có ranh giới nào.
+ */
+const rhythmFields = {
+  surface: z.enum(['bone', 'paper', 'mist', 'navy']).optional(),
+  space: z.enum(['sm', 'md', 'lg']).optional(),
+};
+
 const blocks = z.discriminatedUnion('type', [
   z.object({
     type: z.literal('hero'),
@@ -163,6 +179,7 @@ const blocks = z.discriminatedUnion('type', [
   }).strict(),
   z.object({
     type: z.literal('problem'),
+    ...rhythmFields,
     id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
@@ -196,6 +213,7 @@ const blocks = z.discriminatedUnion('type', [
   }).strict(),
   z.object({
     type: z.literal('cards'),
+    ...rhythmFields,
     id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
@@ -211,6 +229,7 @@ const blocks = z.discriminatedUnion('type', [
   }).strict(),
   z.object({
     type: z.literal('ingredients'),
+    ...rhythmFields,
     id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
@@ -239,6 +258,7 @@ const blocks = z.discriminatedUnion('type', [
   }).strict(),
   z.object({
     type: z.literal('steps'),
+    ...rhythmFields,
     id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
@@ -300,6 +320,7 @@ const blocks = z.discriminatedUnion('type', [
   }).strict(),
   z.object({
     type: z.literal('faq'),
+    ...rhythmFields,
     id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
@@ -333,6 +354,7 @@ const blocks = z.discriminatedUnion('type', [
    */
   z.object({
     type: z.literal('documents'),
+    ...rhythmFields,
     id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
@@ -360,6 +382,7 @@ const blocks = z.discriminatedUnion('type', [
    */
   z.object({
     type: z.literal('timeline'),
+    ...rhythmFields,
     id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),
@@ -398,6 +421,7 @@ const blocks = z.discriminatedUnion('type', [
    */
   z.object({
     type: z.literal('routine'),
+    ...rhythmFields,
     id: anchorId,
     eyebrow: z.string().optional(),
     heading: z.string(),

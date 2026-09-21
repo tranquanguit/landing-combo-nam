@@ -255,7 +255,24 @@ p:last-child { margin-bottom: 0; }
 /* Nhịp dọc: bản trước dùng tới 152px trên desktop, nên mọi khối ngắn đều kết
    thúc bằng một dải trống 150–180px — nhìn ra ngay khi chụp màn hình từng
    trang một. Hạ trần xuống 112px giữ được khoảng thở mà không còn lỗ hổng. */
-section { padding-block: clamp(64px, 7vw, 112px); }
+/* Ba nhịp, không phải một.
+
+   Bản trước dùng đúng MỘT giá trị cho mọi khối, nên một bảng thành phần dày và
+   một dòng kết luận ngắn được chừa khoảng trống y hệt nhau. Kết quả là trang
+   đọc đều tăm tắp: không chỗ nào dừng lại, không chỗ nào dồn dập. Đó là thứ
+   chủ site gọi là "quá tuyến tính".
+
+   Nhịp là công cụ phân đoạn rẻ nhất: hai khối cùng một mạch đứng gần nhau,
+   sang mạch khác thì giãn ra. Mắt đọc được cấu trúc trước khi đọc chữ. */
+section { padding-block: var(--space-section, clamp(64px, 7vw, 112px)); }
+.space-sm { --space-section: clamp(40px, 4vw, 64px); }
+.space-md { --space-section: clamp(64px, 7vw, 112px); }
+.space-lg { --space-section: clamp(88px, 9vw, 144px); }
+
+/* Hai khối LIỀN NHAU cùng màu nền thì đường phân cách biến mất và chúng đọc
+   thành một khối dài. Bỏ bớt đệm ở chỗ nối để chúng thành một cụm có chủ ý,
+   thay vì một tai nạn. */
+section + section.same-surface { padding-top: 0; }
 
 .measure { max-width: var(--measure); }
 .lead { font-size: var(--t-md); color: var(--ink-muted); line-height: 1.6; }

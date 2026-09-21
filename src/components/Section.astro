@@ -8,14 +8,21 @@ interface Props {
   center?: boolean;
   /** Khối đầu trang không được defer, nếu không sẽ ảnh hưởng LCP. */
   aboveFold?: boolean;
+  /** Nhịp dọc. Bỏ trống là 'md' — đúng giá trị dùng chung trước đây. */
+  space?: 'sm' | 'md' | 'lg';
+  /** Khối ngay trên có cùng màu nền: bỏ đệm trên để hai khối thành một cụm. */
+  sameSurface?: boolean;
 }
-const { id, surface = 'bone', eyebrow, heading, intro, center = false, aboveFold = false } = Astro.props;
+const {
+  id, surface = 'bone', eyebrow, heading, intro,
+  center = false, aboveFold = false, space, sameSurface = false,
+} = Astro.props;
 const surfaceClass = surface === 'bone' ? '' : `surface-${surface}`;
 const headingId = id ? `${id}-title` : undefined;
 ---
 <section
   id={id}
-  class:list={[surfaceClass, !aboveFold && 'defer']}
+  class:list={[surfaceClass, !aboveFold && 'defer', space && `space-${space}`, sameSurface && 'same-surface']}
   aria-labelledby={headingId}
   data-reveal-group
 >

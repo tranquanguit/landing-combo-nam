@@ -2,9 +2,9 @@
 import Section from '../Section.astro';
 import Picture from '../Picture.astro';
 interface Props { data: any; id?: string; }
-const { data, id = 'chung-tu' } = Astro.props;
+const { data, id = 'chung-tu', surface = 'paper', space, sameSurface } = Astro.props;
 ---
-<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
+<Section id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
   <ul class="docs" data-reveal-group>
     {data.items.map((doc: any) => (
       <li data-reveal>

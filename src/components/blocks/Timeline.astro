@@ -10,7 +10,7 @@ interface Props {
   };
   id?: string;
 }
-const { data, id } = Astro.props;
+const { data, id, surface = 'paper', space, sameSurface } = Astro.props;
 const { max, items } = data;
 
 /* Mốc trục: 0 và max luôn có, ở giữa chia tư rồi làm tròn về số nguyên. Không
@@ -18,7 +18,7 @@ const { max, items } = data;
 const ticks = [...new Set([0, Math.round(max / 4), Math.round(max / 2), Math.round((max * 3) / 4), max])];
 const pct = (n: number) => (n / max) * 100;
 ---
-<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading}>
+<Section id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading}>
   {data.intro && <p class="tl-intro" set:html={richText(data.intro)} />}
 
   <figure class="tl">

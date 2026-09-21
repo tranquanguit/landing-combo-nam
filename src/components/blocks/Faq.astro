@@ -2,9 +2,9 @@
 import Section from '../Section.astro';
 import { richText } from '../../lib/richtext';
 interface Props { data: any; id?: string; }
-const { data, id = 'faq' } = Astro.props;
+const { data, id = 'faq', surface = 'paper', space, sameSurface } = Astro.props;
 ---
-<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading} center>
+<Section id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading} center>
   <div class="faq">
     {data.items.map((item: any, i: number) => (
       <details open={i === 0}>

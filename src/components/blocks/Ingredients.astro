@@ -2,7 +2,7 @@
 import Section from '../Section.astro';
 import { t, type Locale } from '../../i18n/ui';
 interface Props { data: any; id?: string; locale: Locale; }
-const { data, id = 'thanh-phan', locale } = Astro.props;
+const { data, id = 'thanh-phan', locale, surface = 'paper', space, sameSurface } = Astro.props;
 
 /* Cột "có trong" chỉ xuất hiện khi dữ liệu thật sự khai — sản phẩm đơn lẻ
    không cần nó, và một cột rỗng chỉ làm bảng rộng thêm vô ích. */
@@ -17,7 +17,7 @@ const esc = (v: string) => v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const splitPct = (name: string) =>
   esc(name).replace(/(\d+(?:[.,]\d+)?\s*%)/g, '<span class="pct">$1</span>');
 ---
-<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
+<Section id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
   {/* tabindex + role: vùng cuộn ngang phải tới được bằng bàn phím,
       nếu không người dùng chỉ có bàn phím không đọc được các cột bên phải. */}
   <div class="scroll" tabindex="0" role="region" aria-label={data.heading}>
