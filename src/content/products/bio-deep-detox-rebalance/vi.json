@@ -97,6 +97,50 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "Hiểu nhầm phổ biến",
+      "heading": "“Tôi không trang điểm nên không cần tẩy trang”",
+      "quotes": [
+        "“Ngày nào cũng chỉ bôi kem chống nắng thôi, rửa mặt là sạch rồi.”",
+        "“Rửa mặt kỹ lắm mà cuối ngày lau bông vẫn thấy vàng vàng.”",
+        "“Mụn ẩn quanh trán với cằm mãi không hết, không hiểu vì sao.”",
+        "“Tẩy trang xong mắt cay xè nên tôi bỏ luôn bước đó.”"
+      ],
+      "explainer": {
+        "heading": "Kem chống nắng được làm ra để bám lại, kể cả khi gặp nước",
+        "body": [
+          "Một lớp chống nắng tốt phải trụ được qua mồ hôi và độ ẩm suốt cả ngày — đó chính là điều khiến nó không trôi đi chỉ bằng nước và sữa rửa mặt.",
+          "Phần còn lại nằm trên da qua đêm, trộn với dầu thừa và bụi. Đây là một trong những nguyên nhân thường gặp của <strong>mụn ẩn ở vùng trán và cằm</strong> ở người vốn không trang điểm.",
+          "Nước micellar hoạt động theo cách khác sữa rửa mặt: các phân tử micelle bám vào dầu và kéo nó ra, nên nó lấy được thứ mà nước không lấy được. Chai này khai pH 5.5 và dùng được cho cả vùng mắt lẫn môi."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Ba kiểu ngày, ba mức cần thiết khác nhau",
+      "intro": "Không phải ngày nào cũng cần bước này như nhau. Nói rõ để bạn không dùng thừa.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Có trang điểm, hoặc ra nắng nhiều",
+          "body": "Bước bắt buộc. Lớp trang điểm và kem chống nắng đều không tan trong nước, và sữa rửa mặt một mình không lấy hết.",
+          "meta": "Cần mỗi tối"
+        },
+        {
+          "heading": "Chỉ bôi kem chống nắng, ở trong nhà",
+          "body": "Vẫn cần, nhưng nhẹ nhàng hơn — một miếng bông là đủ. Kem chống nắng được thiết kế để bám lại, kể cả loại dùng trong nhà.",
+          "meta": "Vẫn nên dùng"
+        },
+        {
+          "heading": "Không bôi gì cả, cả ngày ở nhà",
+          "body": "Không cần. Rửa mặt là đủ. Thêm một bước tẩy rửa vào ngày da không có gì để tẩy chỉ là lấy đi lớp dầu tự nhiên.",
+          "meta": "Bỏ qua được"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
       "heading": "Hai thành phần làm sạch, sáu thành phần dưỡng",
@@ -154,6 +198,54 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Đặt vào đâu trong ngày",
+      "heading": "Bước đầu tiên của buổi tối, trước cả sữa rửa mặt",
+      "intro": "Thứ tự ở đây không linh hoạt: tẩy trang trước, rửa mặt sau. Làm ngược thì bước rửa mặt phải gánh việc nó không làm được.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Buổi sáng",
+          "steps": [
+            {
+              "label": "Không cần tẩy trang",
+              "note": "Qua một đêm da chỉ có dầu tự nhiên và mồ hôi — sữa rửa mặt xử lý được."
+            },
+            {
+              "label": "Rửa mặt bằng nước mát",
+              "note": "Rồi đi tiếp các bước dưỡng quen thuộc."
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Buổi tối",
+          "steps": [
+            {
+              "label": "Thấm ướt đều bông tẩy trang",
+              "note": "Ướt đều, không nhỏ giọt. Bông khô kéo lê trên da là ma sát không cần thiết.",
+              "essential": true
+            },
+            {
+              "label": "Đặt lên da và đợi vài giây",
+              "note": "Đặc biệt ở vùng mắt và môi. Đợi cho lớp trang điểm mềm ra rồi mới lau — lau ngay là chà xát."
+            },
+            {
+              "label": "Lau nhẹ một chiều",
+              "note": "Không chà đi chà lại. Đổi miếng bông mới nếu còn thấy màu."
+            },
+            {
+              "label": "Rửa lại bằng sữa rửa mặt",
+              "note": "Bước này lấy phần cặn micelle còn lại và dầu thừa.",
+              "essential": true
+            }
+          ]
+        }
+      ],
+      "footnote": "Nếu mắt cay khi tẩy trang, thường là do <strong>lau quá nhanh khi lớp trang điểm chưa mềm</strong> chứ không phải do sản phẩm. Đặt bông lên và đếm đến năm trước khi lau."
+    },
+    {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
       "heading": "Hai bước, chỉ buổi tối",
@@ -170,6 +262,54 @@
         }
       ],
       "footnote": "Thử một lượng nhỏ ở vùng cổ và quan sát trong <strong>30–45 phút</strong> trước khi dùng toàn mặt. Không chà xát mạnh: lực tay mạnh gây hại nhiều hơn bất kỳ thành phần nào trong chai."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Câu hỏi hay gặp nhất",
+      "heading": "Nước tẩy trang có thay được sữa rửa mặt không?",
+      "intro": "Không. Hai bước lấy đi hai thứ khác nhau, và bước nào cũng để lại phần việc cho bước kia.",
+      "items": [
+        "bio-deep-detox-rebalance",
+        "bio-active-cleanser"
+      ],
+      "criteria": [
+        {
+          "label": "Lấy đi thứ gì",
+          "values": [
+            "Lớp trang điểm và kem chống nắng — những thứ không tan trong nước",
+            "Dầu thừa, mồ hôi, bụi bẩn tan trong nước"
+          ]
+        },
+        {
+          "label": "Dùng lúc nào",
+          "values": [
+            "Buổi tối, trước bước rửa mặt",
+            "Sáng và tối"
+          ]
+        },
+        {
+          "label": "Dùng được quanh mắt không",
+          "values": [
+            "Được, kể cả vùng mắt và môi",
+            "Tránh vùng mắt"
+          ]
+        },
+        {
+          "label": "Nếu chỉ dùng một thứ",
+          "values": [
+            "Không đủ — cần rửa lại để lấy phần cặn micelle",
+            "Đủ cho buổi sáng và cho ngày không ra nắng, không trang điểm"
+          ]
+        },
+        {
+          "label": "Dung tích",
+          "values": [
+            "Chai micellar, pH 5.5",
+            "300ml"
+          ]
+        }
+      ],
+      "footnote": "Bỏ bước rửa mặt sau khi tẩy trang thì phần cặn nằm lại trên da qua đêm. Đó là một cách khác để có đúng vấn đề mà bạn vừa bỏ tiền ra tránh."
     },
     {
       "type": "order",
@@ -208,6 +348,17 @@
           "q": "Bảo quản thế nào?",
           "a": "Nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp và nhiệt độ cao. Đóng nắp sau khi dùng, để xa tầm tay trẻ em."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Hai bước còn lại của một buổi tối đầy đủ",
+      "intro": "Tẩy trang là bước đầu. Đây là hai bước thường đi ngay sau nó.",
+      "items": [
+        "bio-active-cleanser",
+        "smart-first-care-serum",
+        "ultra-egf-bio-gel-mask"
       ]
     }
   ]

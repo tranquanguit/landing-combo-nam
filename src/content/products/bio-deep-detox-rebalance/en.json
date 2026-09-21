@@ -98,6 +98,50 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "A common misreading",
+      "heading": "“I do not wear make-up, so I do not need a remover”",
+      "quotes": [
+        "“All I put on is sunscreen. Washing my face handles it.”",
+        "“I wash thoroughly, and a cotton pad at the end of the day still comes away yellow.”",
+        "“Congestion around my forehead and chin that never clears, and I cannot work out why.”",
+        "“Removing make-up stung my eyes, so I dropped the step.”"
+      ],
+      "explainer": {
+        "heading": "Sunscreen is built to stay put, including when it meets water",
+        "body": [
+          "A sunscreen that works has to survive sweat and humidity all day — which is exactly what stops it rinsing away with water and a face wash.",
+          "What remains sits on the skin overnight, mixed with the day's oil and dust. This is one of the common causes of <strong>congestion across the forehead and chin</strong> in people who wear no make-up at all.",
+          "Micellar water works differently from a cleanser: micelles bind to oil and carry it off, so it lifts what water cannot. This bottle states pH 5.5 and is usable on eyes and lips."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Before you order",
+      "heading": "Three kinds of day, three different levels of need",
+      "intro": "Not every day calls for this step equally. Said plainly so you do not overuse it.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Make-up, or a lot of time in the sun",
+          "body": "Not optional. Neither make-up nor sunscreen is water-soluble, and a cleanser alone will not lift all of it.",
+          "meta": "Every night"
+        },
+        {
+          "heading": "Sunscreen only, indoors",
+          "body": "Still worth it, but lighter — one cotton pad will do. Sunscreen is designed to stay put, including the kind worn indoors.",
+          "meta": "Still advisable"
+        },
+        {
+          "heading": "Nothing applied, home all day",
+          "body": "Not needed. Washing is enough. Adding a removal step on a day with nothing to remove only takes away natural oils.",
+          "meta": "Skip it"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Ingredients",
       "heading": "Two cleansing agents, six conditioning ones",
@@ -155,6 +199,54 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Where it sits in the day",
+      "heading": "The first step of the evening, before the cleanser",
+      "intro": "The order here is not flexible: remove first, cleanse second. Reverse it and the cleanser is carrying work it cannot do.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Morning",
+          "steps": [
+            {
+              "label": "No removal step needed",
+              "note": "Overnight your skin has only its own oil and sweat, which a cleanser handles."
+            },
+            {
+              "label": "Wash with cool water",
+              "note": "Then carry on with your usual steps."
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Night",
+          "steps": [
+            {
+              "label": "Saturate the cotton pad evenly",
+              "note": "Evenly wet, not dripping. Dragging a dry pad across skin is friction you do not need.",
+              "essential": true
+            },
+            {
+              "label": "Hold it in place for a few seconds",
+              "note": "Especially on eyes and lips. Let the make-up soften before you wipe — wiping straight away is scrubbing."
+            },
+            {
+              "label": "Wipe once, in one direction",
+              "note": "No back and forth. Use a fresh pad if colour still comes away."
+            },
+            {
+              "label": "Follow with the cleanser",
+              "note": "This takes the remaining micelle residue and the excess oil.",
+              "essential": true
+            }
+          ]
+        }
+      ],
+      "footnote": "If your eyes sting, it is usually from <strong>wiping before the make-up has softened</strong> rather than from the product. Hold the pad in place and count to five first."
+    },
+    {
       "type": "steps",
       "eyebrow": "How to use",
       "heading": "Two steps, evenings only",
@@ -171,6 +263,54 @@
         }
       ],
       "footnote": "Patch-test on the neck and watch for <strong>30–45 minutes</strong> before using it on the whole face. Do not rub hard: hand pressure does more harm than any ingredient in the bottle."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "The question we get most",
+      "heading": "Can micellar water replace a cleanser?",
+      "intro": "No. The two steps lift different things, and each leaves work for the other.",
+      "items": [
+        "bio-deep-detox-rebalance",
+        "bio-active-cleanser"
+      ],
+      "criteria": [
+        {
+          "label": "What it lifts",
+          "values": [
+            "Make-up and sunscreen — the things water cannot lift",
+            "Excess oil, sweat, water-soluble dirt"
+          ]
+        },
+        {
+          "label": "When",
+          "values": [
+            "At night, before the cleanser",
+            "Morning and night"
+          ]
+        },
+        {
+          "label": "Safe around the eyes",
+          "values": [
+            "Yes, including eyes and lips",
+            "Avoid the eye area"
+          ]
+        },
+        {
+          "label": "If you only use one",
+          "values": [
+            "Not enough — residue needs rinsing off",
+            "Enough for mornings, and for days with no sun exposure and no make-up"
+          ]
+        },
+        {
+          "label": "Size",
+          "values": [
+            "Micellar bottle, pH 5.5",
+            "300ml"
+          ]
+        }
+      ],
+      "footnote": "Skipping the cleanser afterwards leaves residue on the skin overnight. That is another route to the exact problem you just paid to avoid."
     },
     {
       "type": "order",
@@ -209,6 +349,17 @@
           "q": "How should it be stored?",
           "a": "Somewhere dry and cool, away from direct sunlight and heat. Close the cap after use and keep out of reach of children."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Next step",
+      "heading": "The rest of a complete evening",
+      "intro": "Removal is the first step. These two usually follow it.",
+      "items": [
+        "bio-active-cleanser",
+        "smart-first-care-serum",
+        "ultra-egf-bio-gel-mask"
       ]
     }
   ]

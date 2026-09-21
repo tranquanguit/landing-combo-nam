@@ -99,6 +99,50 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "Where it usually goes wrong",
+      "heading": "That squeaky-clean feeling is a bad sign, not a good one",
+      "quotes": [
+        "“My face felt tight afterwards and I took that to mean clean.”",
+        "“Oily skin, so I washed four times a day. It only got oilier.”",
+        "“I upgraded to an expensive serum and my skin still stung. The problem was the wash.”",
+        "“Hot water feels good, and by winter I was flaking around my nose.”"
+      ],
+      "explainer": {
+        "heading": "A step repeated 730 times a year multiplies whatever it gets wrong",
+        "body": [
+          "Skin holds water in behind a thin layer of oil and ceramides. A harsh surfactant strips that layer along with the dirt — and the tight, squeaky feeling is the moment it comes off.",
+          "Skin answers by producing more oil. Which is why <strong>washing more often because your skin is oily usually makes it oilier</strong>, not less.",
+          "This bottle states four absences on the pack — no sulfates, no alcohol, no parabens, no silicones — and puts Ceramide and Pro-vitamin B5 into the step that takes things away. Nothing miraculous about it. The step you repeat most in a day is simply worth getting right."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Before you order",
+      "heading": "Three skin types, three different ways to use it",
+      "intro": "Same bottle, but frequency and water temperature should differ. This is the part most often skipped.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Oily skin, visible pores",
+          "body": "Twice a day, no more. A third wash starts taking away more than the skin can replace, and the oil-rebound cycle begins there.",
+          "meta": "Morning and night"
+        },
+        {
+          "heading": "Dry or thin skin",
+          "body": "Cleanser at night, cool water alone in the morning. Your skin does not collect enough overnight to justify another round of surfactant.",
+          "meta": "Once a day is enough"
+        },
+        {
+          "heading": "Skin that is flaking badly or stinging",
+          "body": "With a damaged barrier, every cleansing step makes it worse. Stop strong actives, use cool water for a few days, and see a doctor if it does not settle.",
+          "meta": "Not yet"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Ingredients",
       "heading": "Four actives printed on the bottle, and four things left out",
@@ -156,6 +200,54 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Where it sits in the day",
+      "heading": "The first step, and the one that decides whether the rest absorb",
+      "intro": "Everything applied afterwards goes onto skin you have just washed. Wash it wrong and the later steps pay for it.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Morning",
+          "steps": [
+            {
+              "label": "Wet with cool water",
+              "note": "Hot water strips natural oils faster than any active in the bottle replaces them."
+            },
+            {
+              "label": "Lather in your hands first",
+              "note": "Work it up before it touches your face. Rubbing unlathered cleanser on skin is rubbing with a paste.",
+              "essential": true
+            },
+            {
+              "label": "Rinse, then blot with a soft towel",
+              "note": "Blot, do not rub. Apply the next step while the skin is still slightly damp rather than waiting for it to dry."
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Night",
+          "steps": [
+            {
+              "label": "Remove make-up first",
+              "note": "Sunscreen and make-up are not water-soluble, so a cleanser alone will not lift all of it.",
+              "essential": true
+            },
+            {
+              "label": "Then cleanse",
+              "note": "This step takes the rest, plus the day's excess oil."
+            },
+            {
+              "label": "Blot dry and move on to treatment",
+              "note": "Do not let the skin dry out completely first."
+            }
+          ]
+        }
+      ],
+      "footnote": "Twice a day suits most people. After sport or a dusty day outside, an extra wash is reasonable — but <strong>do not let it become a daily habit</strong>."
+    },
+    {
       "type": "steps",
       "eyebrow": "How to use",
       "heading": "Three steps, morning and night",
@@ -176,6 +268,54 @@
         }
       ],
       "footnote": "Twice a day is enough. Washing more often does not make skin cleaner, it only thins the barrier."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "The question we get most",
+      "heading": "Do you need both micellar water and a cleanser?",
+      "intro": "Short answer: at night yes, in the morning no. The table says why.",
+      "items": [
+        "bio-active-cleanser",
+        "bio-deep-detox-rebalance"
+      ],
+      "criteria": [
+        {
+          "label": "What it lifts",
+          "values": [
+            "Excess oil, sweat, water-soluble dirt",
+            "Make-up and sunscreen — the things water cannot lift"
+          ]
+        },
+        {
+          "label": "When",
+          "values": [
+            "Morning and night",
+            "At night, before the cleanser"
+          ]
+        },
+        {
+          "label": "Safe around the eyes",
+          "values": [
+            "Avoid the eye area",
+            "Yes, including eyes and lips"
+          ]
+        },
+        {
+          "label": "If you only use one",
+          "values": [
+            "Enough for mornings, and for days with no sun exposure and no make-up",
+            "Not enough — it leaves excess oil and needs rinsing off"
+          ]
+        },
+        {
+          "label": "Size",
+          "values": [
+            "300ml",
+            "Micellar bottle, pH 5.5"
+          ]
+        }
+      ],
+      "footnote": "People who wear no make-up still need to remove sunscreen — and if you are working on melasma or dark marks then <strong>sunscreen is not a step you skip</strong>, so the removal step comes with it."
     },
     {
       "type": "order",
@@ -214,6 +354,17 @@
           "q": "How should it be stored?",
           "a": "Keep away from heat and direct sunlight, close the cap after use, keep out of reach of children. Avoid contact with the eyes; if it gets in, rinse immediately with clean water."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Next step",
+      "heading": "Once the basics are steady",
+      "intro": "Cleansing properly is a precondition, not a destination. What comes next depends on what you are working on.",
+      "items": [
+        "bio-deep-detox-rebalance",
+        "smart-first-care-serum",
+        "uv-block-sunscreen"
       ]
     }
   ]

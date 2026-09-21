@@ -98,6 +98,50 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "Chỗ thường hỏng",
+      "heading": "Cảm giác “sạch kin kít” là dấu hiệu xấu, không phải dấu hiệu tốt",
+      "quotes": [
+        "“Rửa xong mặt căng ra, tôi cứ tưởng thế là sạch.”",
+        "“Da dầu nên tôi rửa bốn lần một ngày, mà càng rửa càng đổ dầu.”",
+        "“Đổi sang serum đắt tiền mà da vẫn rát, hoá ra vấn đề nằm ở bước rửa mặt.”",
+        "“Nước nóng cho thoải mái, mùa đông xong là bong tróc quanh cánh mũi.”"
+      ],
+      "explainer": {
+        "heading": "Một bước lặp lại 730 lần mỗi năm thì sai số nào cũng bị nhân lên",
+        "body": [
+          "Da có một lớp dầu và ceramide mỏng giữ nước lại bên trong. Chất tẩy mạnh lấy đi cả lớp đó chứ không chỉ lấy đi bụi bẩn — và cảm giác căng kin kít chính là lúc nó vừa bị lấy đi.",
+          "Da phản ứng bằng cách tiết bù nhiều dầu hơn. Đó là lý do <strong>rửa mặt nhiều lần vì da dầu thường làm da dầu hơn</strong>, chứ không bớt đi.",
+          "Chai này khai bốn dấu không trên vỏ — không sulfate, không cồn, không paraben, không silicone — và bổ sung Ceramide cùng Pro-vitamin B5 vào chính bước lấy đi. Không có gì thần kỳ ở đây; chỉ là bước lặp lại nhiều nhất trong ngày thì đáng làm cho đúng."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Ba loại da, ba cách dùng khác nhau",
+      "intro": "Cùng một chai nhưng tần suất và nhiệt độ nước nên khác nhau. Đây là chỗ hay bị bỏ qua.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Da dầu, lỗ chân lông to",
+          "body": "Hai lần mỗi ngày, không hơn. Thêm lần thứ ba là bắt đầu lấy đi nhiều hơn mức da kịp bù, và vòng lặp tiết dầu bù bắt đầu từ đó.",
+          "meta": "Sáng và tối"
+        },
+        {
+          "heading": "Da khô, da mỏng yếu",
+          "body": "Buổi tối rửa bằng sữa rửa mặt, buổi sáng có thể chỉ cần nước mát. Nền da của bạn không tích đủ bụi bẩn qua một đêm để cần thêm một lần tẩy rửa.",
+          "meta": "Một lần mỗi ngày là đủ"
+        },
+        {
+          "heading": "Da đang bong tróc nặng, đang rát",
+          "body": "Hàng rào đang hỏng thì mọi bước tẩy rửa đều làm nặng thêm. Dừng hoạt chất mạnh, rửa bằng nước mát vài ngày, và nếu không đỡ thì đi khám.",
+          "meta": "Chưa phải lúc"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
       "heading": "Bốn hoạt chất in trên vỏ, và bốn thứ không có trong công thức",
@@ -155,6 +199,54 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Đặt vào đâu trong ngày",
+      "heading": "Bước đầu tiên, và là bước quyết định các bước sau có thấm không",
+      "intro": "Mọi thứ bôi sau đó đều đi qua lớp da vừa được rửa. Rửa sai thì các bước sau chịu hậu quả.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Buổi sáng",
+          "steps": [
+            {
+              "label": "Làm ướt bằng nước mát",
+              "note": "Nước nóng lấy đi lớp dầu tự nhiên nhanh hơn bất kỳ hoạt chất nào trong chai."
+            },
+            {
+              "label": "Tạo bọt rồi mới đưa lên mặt",
+              "note": "Xoa trong lòng bàn tay trước. Chà sữa rửa mặt chưa tạo bọt lên da là chà bằng chất đặc.",
+              "essential": true
+            },
+            {
+              "label": "Rửa sạch, thấm khô bằng khăn mềm",
+              "note": "Thấm, không chà. Bôi bước tiếp theo khi da còn hơi ẩm, đừng đợi khô hẳn."
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Buổi tối",
+          "steps": [
+            {
+              "label": "Tẩy trang trước",
+              "note": "Kem chống nắng và lớp trang điểm không tan trong nước, nên sữa rửa mặt một mình không lấy hết.",
+              "essential": true
+            },
+            {
+              "label": "Rửa lại bằng sữa rửa mặt",
+              "note": "Bước này lấy phần còn lại và phần dầu thừa trong ngày."
+            },
+            {
+              "label": "Thấm khô rồi bôi bước dưỡng",
+              "note": "Đừng để da khô hẳn rồi mới bôi."
+            }
+          ]
+        }
+      ],
+      "footnote": "Hai lần mỗi ngày là đủ cho phần lớn người. Nếu bạn vừa tập thể thao hoặc vừa đi ngoài trời nhiều bụi, rửa thêm một lần là hợp lý — nhưng <strong>đừng biến nó thành thói quen hằng ngày</strong>."
+    },
+    {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
       "heading": "Ba bước, sáng và tối",
@@ -175,6 +267,54 @@
         }
       ],
       "footnote": "Hai lần mỗi ngày là đủ. Rửa nhiều hơn không làm da sạch hơn, chỉ làm hàng rào bảo vệ mỏng đi."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Câu hỏi hay gặp nhất",
+      "heading": "Có cần cả nước tẩy trang lẫn sữa rửa mặt không?",
+      "intro": "Câu trả lời ngắn: buổi tối thì có, buổi sáng thì không. Bảng dưới nói rõ vì sao.",
+      "items": [
+        "bio-active-cleanser",
+        "bio-deep-detox-rebalance"
+      ],
+      "criteria": [
+        {
+          "label": "Lấy đi thứ gì",
+          "values": [
+            "Dầu thừa, mồ hôi, bụi bẩn tan trong nước",
+            "Lớp trang điểm và kem chống nắng — những thứ không tan trong nước"
+          ]
+        },
+        {
+          "label": "Dùng lúc nào",
+          "values": [
+            "Sáng và tối",
+            "Buổi tối, trước bước rửa mặt"
+          ]
+        },
+        {
+          "label": "Dùng được quanh mắt không",
+          "values": [
+            "Tránh vùng mắt",
+            "Được, kể cả vùng mắt và môi"
+          ]
+        },
+        {
+          "label": "Nếu chỉ dùng một thứ",
+          "values": [
+            "Đủ cho buổi sáng và cho ngày không ra nắng, không trang điểm",
+            "Không đủ — không lấy hết dầu thừa và cần rửa lại bằng nước"
+          ]
+        },
+        {
+          "label": "Dung tích",
+          "values": [
+            "300ml",
+            "Chai micellar, pH 5.5"
+          ]
+        }
+      ],
+      "footnote": "Người không trang điểm vẫn cần tẩy trang nếu có bôi kem chống nắng — và nếu bạn đang chăm sóc nám hay thâm thì <strong>chống nắng là bước không được bỏ</strong>, nên bước tẩy trang đi kèm theo nó."
     },
     {
       "type": "order",
@@ -213,6 +353,17 @@
           "q": "Bảo quản thế nào?",
           "a": "Tránh nhiệt độ cao và ánh nắng trực tiếp, đóng nắp sau khi dùng, để xa tầm tay trẻ em. Tránh tiếp xúc với mắt; nếu dính vào mắt thì rửa ngay bằng nước sạch."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Sau khi nền da đã ổn",
+      "intro": "Làm sạch đúng cách là điều kiện, không phải đích đến. Dưới đây là bước kế tiếp tuỳ vấn đề bạn đang quan tâm.",
+      "items": [
+        "bio-deep-detox-rebalance",
+        "smart-first-care-serum",
+        "uv-block-sunscreen"
       ]
     }
   ]
