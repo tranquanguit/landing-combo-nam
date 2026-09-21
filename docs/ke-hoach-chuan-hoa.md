@@ -19,7 +19,7 @@ nguyên là của Mocha. Hai hệ quả bắt buộc:
 2. Kênh liên hệ trên site (0367 848 918, gmail) **khác** kênh của trang chính
    hãng (1900 4498, cskh@mochavietnam.com). Khai pháp nhân của hãng nhưng đưa số
    của đại lý là chỗ khách và Google đều thấy vênh. Phải nói rõ quan hệ ngay
-   trên trang. → xem `[ ] B1`.
+   trên trang. → xem `[x] B1`.
 
 **Mục tiêu của site** (chủ site nêu): không phải sàn TMĐT. Là nơi người ta ghé
 đọc thông tin sản phẩm rồi **để lại thông tin mua hàng**. Mỗi sản phẩm có một
@@ -108,7 +108,8 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
   tại để chặn, và là rủi ro chính sách thật khi chạy Google Ads.
   **Để mở khoá:** cần (a) đường dẫn bài báo thật, hoặc (b) chứng từ quan hệ
   cung ứng. Có một trong hai thì dựng được ngay.
-- `[ ] B4` Khối chứng từ (TÜV SÜD + phiếu công bố) — chờ `A6`.
+- `[!] B4` Khối chứng từ (TÜV SÜD + phiếu công bố). Khối `documents` đã dựng
+  sẵn và đã kiểm thử; chỉ chờ file đã che chữ ký — xem `[!] A6`.
 
 ## C. Trực quan và kể chuyện
 
