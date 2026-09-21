@@ -26,10 +26,10 @@
   },
   "lines": [
     "nam-tham",
-    "bao-ve-da",
-    "lam-sach",
-    "phuc-hoi-da",
     "cham-soc-da-mun",
+    "phuc-hoi-da",
+    "lam-sach",
+    "bao-ve-da",
     "treatment"
   ],
   "featured": [
@@ -60,6 +60,63 @@
         {
           "label": "How the three groups differ",
           "href": "/en/nam-tham/"
+        }
+      ]
+    },
+    {
+      "id": "van-de-nao",
+      "heading": "What brought you here? Go straight to it",
+      "body": [
+        "The section above is about melasma because that is the largest group. If you came for something else, you do not need to read this page to find your way.",
+        "<strong>Active breakouts</strong> — a raised, inflamed spot and the mark it leaves behind are two different problems needing two different products. The acne line separates the two stages.",
+        "<strong>Stinging, redness, light flaking after actives</strong> — this phase needs fewer things acting on the skin, not more. Stop the strong actives first, then decide.",
+        "<strong>Not sure where to begin</strong> — begin with cleansing and sun protection. Those two decide whether anything else means anything, and they cost less than most of what you would buy next.",
+        "<strong>Want to move faster and accept a shedding phase</strong> — read the peel page fully before ordering, including the part about who should not peel at home."
+      ],
+      "links": [
+        {
+          "label": "Acne and post-acne marks",
+          "href": "/en/cham-soc-da-mun/"
+        },
+        {
+          "label": "Repairing a weakened barrier",
+          "href": "/en/phuc-hoi-da/"
+        },
+        {
+          "label": "Cleansing",
+          "href": "/en/lam-sach/"
+        },
+        {
+          "label": "Sun protection",
+          "href": "/en/bao-ve-da/"
+        },
+        {
+          "label": "At-home peel and retinol",
+          "href": "/en/treatment/"
+        }
+      ]
+    },
+    {
+      "id": "con-so-tren-bao-bi",
+      "heading": "These are the figures currently printed on the packs",
+      "body": [
+        "Anyone can say they disclose their concentrations. Below are the actual figures, taken from each pack, so you can compare without opening every page.",
+        "<strong>Smart First Care serum</strong> — 4-butylresorcinol 1000ppm, Niacinamide 4%, Bio-Placenta 1%.",
+        "<strong>Smart Brightening X3 cream</strong> — Tranexamic Acid 3%, NIO-NAG 2%, Ceramide 1%.",
+        "<strong>Smart Whitening mark gel</strong> — Sabiwhite® 0.3%, Niacinamide 3%, Tranexamic Acid 3%.",
+        "<strong>Smart Target spot gel</strong> — Acnebusters 3%, BHA 0.5%.",
+        "<strong>Retinol mixPEEL kit</strong> — liposome-encapsulated Retinol 1%.",
+        "Why it matters: knowing a product contains Niacinamide tells you little, because 1% and 5% are not the same product. Once the figure is printed, you can <strong>compare it against any other brand</strong> — including ones we do not sell.",
+        "Where there is no figure, the page says so rather than estimating one for you."
+      ],
+      "links": [
+        {
+          "label": "See the serum's full ingredient table",
+          "href": "/en/smart-first-care-serum/#thanh-phan"
+        },
+        {
+          "label": "The product declaring all 45 ingredients",
+          "href": "/en/biovector-brightening-cream/#thanh-phan"
         }
       ]
     },

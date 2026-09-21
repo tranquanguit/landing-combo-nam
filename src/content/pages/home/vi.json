@@ -26,10 +26,10 @@
   },
   "lines": [
     "nam-tham",
-    "bao-ve-da",
-    "lam-sach",
-    "phuc-hoi-da",
     "cham-soc-da-mun",
+    "phuc-hoi-da",
+    "lam-sach",
+    "bao-ve-da",
     "treatment"
   ],
   "featured": [
@@ -60,6 +60,63 @@
         {
           "label": "Xem cách phân biệt ba nhóm",
           "href": "/nam-tham/"
+        }
+      ]
+    },
+    {
+      "id": "van-de-nao",
+      "heading": "Bạn đang gặp chuyện gì? Đi thẳng tới đó",
+      "body": [
+        "Phần trên nói về nám vì đó là nhóm đông nhất. Nhưng nếu bạn tới đây vì một chuyện khác, không cần đọc hết trang này để tìm lối đi.",
+        "<strong>Đang nổi mụn</strong> — nốt đang sưng và nốt đã lặn để lại vết thâm là hai việc khác nhau, cần hai sản phẩm khác nhau. Trang dòng da mụn phân biệt rõ hai giai đoạn đó.",
+        "<strong>Da rát, đỏ, bong nhẹ sau khi dùng hoạt chất</strong> — giai đoạn này cần ít thứ tác động hơn chứ không phải nhiều hơn. Dừng hoạt chất mạnh trước, rồi mới tính tiếp.",
+        "<strong>Chưa biết bắt đầu</strong> — bắt đầu bằng làm sạch và chống nắng. Hai bước này quyết định mọi bước sau có ý nghĩa hay không, và chúng rẻ hơn phần lớn thứ bạn sẽ mua sau đó.",
+        "<strong>Muốn đi nhanh, chấp nhận có giai đoạn bong</strong> — đọc kỹ trang peel trước khi đặt, kể cả phần nói ai không nên tự peel ở nhà."
+      ],
+      "links": [
+        {
+          "label": "Da mụn và thâm sau mụn",
+          "href": "/cham-soc-da-mun/"
+        },
+        {
+          "label": "Phục hồi da đang yếu",
+          "href": "/phuc-hoi-da/"
+        },
+        {
+          "label": "Làm sạch",
+          "href": "/lam-sach/"
+        },
+        {
+          "label": "Chống nắng",
+          "href": "/bao-ve-da/"
+        },
+        {
+          "label": "Peel và retinol tại nhà",
+          "href": "/treatment/"
+        }
+      ]
+    },
+    {
+      "id": "con-so-tren-bao-bi",
+      "heading": "Đây là những con số đang được in trên bao bì",
+      "body": [
+        "Nói rằng mình công khai nồng độ thì ai cũng nói được. Dưới đây là con số thật, lấy từ bao bì của từng sản phẩm, để bạn đối chiếu được ngay mà không phải bấm vào từng trang.",
+        "<strong>Serum Smart First Care</strong> — 4-butylresorcinol 1000ppm, Niacinamide 4%, Bio-Placenta 1%.",
+        "<strong>Kem nám Smart Brightening X3</strong> — Tranexamic Acid 3%, NIO-NAG 2%, Ceramide 1%.",
+        "<strong>Gel chấm thâm Smart Whitening</strong> — Sabiwhite® 0,3%, Niacinamide 3%, Tranexamic Acid 3%.",
+        "<strong>Gel chấm mụn Smart Target</strong> — Acnebusters 3%, BHA 0,5%.",
+        "<strong>Bộ peel Retinol mixPEEL</strong> — Retinol 1% bọc liposome.",
+        "Vì sao điều này quan trọng: bạn biết trong một sản phẩm có Niacinamide, nhưng 1% và 5% không phải cùng một sản phẩm. Khi con số được in ra, bạn <strong>so sánh được với bất kỳ nhãn nào khác</strong> — kể cả nhãn chúng tôi không bán.",
+        "Chỗ nào không có số thì trang nói thẳng là không có, chứ không ước lượng hộ."
+      ],
+      "links": [
+        {
+          "label": "Xem bảng thành phần đầy đủ của serum",
+          "href": "/smart-first-care-serum/#thanh-phan"
+        },
+        {
+          "label": "Sản phẩm công bố đủ cả 45 thành phần",
+          "href": "/biovector-brightening-cream/#thanh-phan"
         }
       ]
     },
