@@ -58,23 +58,23 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Bước kem, dùng buổi tối",
-      "heading": "Kem nám Mocha Smart Brightening X3, công khai từng hoạt chất trên vỏ hộp",
-      "lead": "Hũ 30gr mang <strong>Tranexamic Acid, NIO-NAG, Ceramide, Bakuchiol, Vietnam Bio-white Complex và Black Truffle Extract</strong> — đúng danh sách in trên bao bì. Dành cho da sạm nám, không đều màu, và da đã qua nhiều biện pháp mà sắc tố vẫn quay lại.",
+      "eyebrow": "Bước kem buổi tối, cho da nám",
+      "heading": "Nám mờ rồi lại đậm — vấn đề thường không nằm ở việc bạn thiếu kiên trì",
+      "lead": "Phần lớn kem làm sáng chỉ tác động lớp ngoài cùng. Ngưng dùng là sắc tố quay lại. Hũ kem 30gr này đi theo hướng khác, và <strong>in thẳng tỉ lệ từng hoạt chất lên vỏ hộp</strong> để bạn đem so với bất kỳ sản phẩm nào khác trước khi quyết định.",
       "usp": [
         {
-          "text": "<strong>Không corticoid, không hydroquinone</strong>",
+          "text": "<strong>Không corticoid, không hydroquinone</strong> — hai thứ khiến da mỏng đi sau vài tháng dùng kem trộn",
           "evidence": "verified",
           "source": "#thanh-phan",
           "qualifier": "danh sách thành phần đầy đủ in trên bao bì"
         },
         {
-          "text": "<strong>Bakuchiol thay cho retinol</strong>, không gây bong tróc",
+          "text": "<strong>Bakuchiol thay cho retinol</strong>, nên không có giai đoạn bong tróc để chịu đựng",
           "evidence": "ingredient",
           "qualifier": "xem vai trò từng hoạt chất ở bảng thành phần"
         },
         {
-          "text": "<strong>Số tiếp nhận phiếu công bố ghi ngay trên trang</strong>, không phải tra ở đâu khác",
+          "text": "<strong>Số tiếp nhận phiếu công bố ghi ngay trên trang này</strong>, không bắt bạn đi tra chỗ khác",
           "evidence": "verified",
           "source": "#thanh-phan",
           "qualifier": "1517/25/CBMP-LA"
@@ -93,6 +93,50 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Vì sao lần trước không ăn thua",
+      "heading": "Bạn đã dùng đúng, chỉ là dùng thứ chỉ chạm tới lớp trên cùng",
+      "quotes": [
+        "“Bôi đều đặn hai tháng, mờ được chút rồi dừng lại ở đó.”",
+        "“Hết hũ là nám quay lại, có khi còn đậm hơn lúc đầu.”",
+        "“Đọc thành phần thì toàn cụm chung chung, chẳng biết trong đó bao nhiêu phần trăm.”",
+        "“Sợ nhất là dùng phải thứ có corticoid mà không biết.”"
+      ],
+      "explainer": {
+        "heading": "Làm sáng lớp biểu bì không chạm tới nơi sắc tố được tạo ra",
+        "body": [
+          "Melanin do tế bào hắc tố nằm sâu hơn sản sinh. Một sản phẩm chỉ làm sáng lớp ngoài sẽ cho kết quả thấy được trong vài tuần đầu, rồi dừng — vì bên dưới mọi thứ vẫn diễn ra như cũ.",
+          "Công thức của hũ kem này nhắm vào ba việc cùng lúc: hạn chế tín hiệu tạo sắc tố, hỗ trợ thay mới lớp tế bào đã sạm màu, và củng cố hàng rào bảo vệ da để hạn chế sạm màu quay lại.",
+          "Đổi lại, bạn cần kiên nhẫn theo tuần chứ không theo ngày. Và cần chống nắng. <strong>Bỏ bước chống nắng thì không sản phẩm nào giữ được kết quả</strong> — đây là điều kiện, không phải lời khuyên."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Ba trường hợp, và lời khuyên thật lòng cho từng trường hợp",
+      "intro": "Chúng tôi là đại lý, bán được hàng thì tốt. Nhưng bán nhầm thứ cho nhầm người thì bạn dùng vài tuần rồi bỏ, và đó là mất cả hai phía. Đọc xem bạn thuộc nhóm nào.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Nám mảng, mới vài năm",
+          "body": "Sắc tố còn nằm nông, bờ mảng rõ. Đây là nhóm hợp nhất với việc dùng riêng kem: bước khoá ẩm giữ hoạt chất ở lại trên da đủ lâu qua đêm.",
+          "meta": "Dùng riêng kem là đủ"
+        },
+        {
+          "heading": "Nám chân sâu hoặc nám hỗn hợp",
+          "body": "Sắc tố nằm sâu hơn và bờ mờ. Kem vẫn dùng được, nhưng nếu chỉ có bước kem thì phần thẩm thấu sâu bị bỏ trống — chậm hơn hẳn. Nên cân nhắc thêm serum.",
+          "meta": "Nên xem bản combo"
+        },
+        {
+          "heading": "Da đang kích ứng, bong tróc, hoặc vừa peel",
+          "body": "Chờ da ổn định lại trước đã. Đưa thêm hoạt chất vào một hàng rào bảo vệ đang hỏng là cách chắc chắn để da phản ứng mạnh hơn.",
+          "meta": "Chưa phải lúc"
+        }
       ]
     },
     {
@@ -133,6 +177,54 @@
           "suitedFor": "Da xỉn màu"
         }
       ]
+    },
+    {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Đặt vào đâu trong ngày",
+      "heading": "Hũ kem này nằm ở bước cuối buổi tối",
+      "intro": "Không cần đổi cả quy trình đang dùng. Chỉ cần đặt đúng chỗ — và giữ bước chống nắng buổi sáng.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Buổi sáng",
+          "steps": [
+            {
+              "label": "Rửa mặt",
+              "note": "Nước ấm, sữa rửa mặt dịu nhẹ."
+            },
+            {
+              "label": "Dưỡng ẩm",
+              "note": "Bước quen thuộc của bạn, không cần đổi."
+            },
+            {
+              "label": "Chống nắng",
+              "note": "Bỏ bước này thì sắc tố quay lại bất kể bạn dùng kem gì buổi tối.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Buổi tối",
+          "steps": [
+            {
+              "label": "Tẩy trang và rửa mặt",
+              "note": "Da còn cặn trang điểm thì hoạt chất nằm lại trên lớp cặn đó."
+            },
+            {
+              "label": "Lau thật khô",
+              "note": "Da còn ẩm làm loãng kem và giảm mức thẩm thấu."
+            },
+            {
+              "label": "Kem Smart Brightening X3",
+              "note": "Một đốt ngón tay, chấm 5 điểm rồi tán đều. Massage vùng sạm 1–2 phút.",
+              "essential": true
+            }
+          ]
+        }
+      ],
+      "footnote": "Tuần đầu nên dùng cách ngày để da làm quen, sau đó chuyển sang dùng mỗi tối. Thử một lượng nhỏ ở vùng cổ và quan sát <strong>30–45 phút</strong> trước lần dùng đầu tiên."
     },
     {
       "type": "steps",
