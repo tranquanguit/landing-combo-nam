@@ -189,13 +189,14 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
   `auto` = 152KB HTML + 9KB CSS = 161KB, nặng nhất 15.421B/24.576B (đạt).
   Tổng byte cả site giảm một nửa, và ngay cả lượt xem một trang cũng không tệ
   hơn. Lý do cũ đúng khi site có một trang landing, không còn đúng với 19 trang.
-- `[~] F2` **Dòng "Bảo vệ da" đã xong** (4 mục nội dung + FAQ + 1 sản phẩm).
-  Còn bốn dòng: Làm sạch, Phục hồi da, Chăm sóc da mụn, Treatment. Mỗi dòng cần
-  nội dung biên tập thật, không phải chỉ danh sách — build chặn trang mỏng.
+- `[~] F2` **Xong hai dòng:** "Bảo vệ da" (4 mục + FAQ + 1 sản phẩm) và
+  "Làm sạch" (3 mục + bảng so sánh + FAQ + 2 sản phẩm).
+  Còn ba dòng: Phục hồi da, Chăm sóc da mụn, Treatment.
 
-## G. Sản phẩm còn lại (9)
+## G. Sản phẩm còn lại (7)
 
-> `uv-block-sunscreen` đã xong — xem dòng Bảo vệ da.
+> Đã xong: `uv-block-sunscreen` (Bảo vệ da), `bio-active-cleanser` và
+> `bio-deep-detox-rebalance` (Làm sạch).
 
 Giá và mã vạch đã lấy từ cửa hàng chính hãng, chờ dựng trang:
 
@@ -203,11 +204,9 @@ Giá và mã vạch đã lấy từ cửa hàng chính hãng, chờ dựng trang
 |---|---|
 | 550.000đ | Peel vi gai tảo biển |
 | 335.000đ | Kem dưỡng sáng Biovector |
-| 285.000đ | Sữa rửa mặt Bio-Active Cleanser |
 | 250.000đ | Collagen Peptide Cream |
 | 235.000đ | Gel mù u Smart Target |
 | 215.000đ | Smart Whitening (giảm thâm mụn) |
-| 215.000đ | Tẩy trang Bio-Deep Detox & Rebalance |
 | 200.000đ | Tinh chất B5 10ml |
 | 195.000đ | Mặt nạ gel lạnh tế bào gốc |
 
