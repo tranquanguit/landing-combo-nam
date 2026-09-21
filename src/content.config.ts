@@ -123,6 +123,14 @@ const image = z.object({
   width: z.number().int().positive().optional(),
   height: z.number().int().positive().optional(),
   caption: z.string().optional(),
+  /**
+   * Cắt ảnh ở đâu, khi khối dùng khung tỉ lệ và `fit="cover"`.
+   *
+   * Giá trị của `object-position`, ví dụ 'center 30%'. Chỉ khai khi chủ thể
+   * lệch tâm — mặc định canh giữa đúng cho phần lớn ảnh. Đây là cách duy nhất
+   * người biên tập nói được "đừng cắt mất cái nhãn" mà không phải sửa CSS.
+   */
+  focus: z.string().max(40).optional(),
 }).strict();
 
 /** Id neo dùng cho liên kết trong trang. Để trống thì component dùng id mặc định. */

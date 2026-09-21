@@ -88,6 +88,15 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
   `https://tranquanguit.github.io/landing-combo-nam/`. Đây KHÔNG phải bản thật:
   chặn toàn bộ bot, và biểu mẫu đặt hàng không chạy (GitHub Pages không có
   Pages Function) nên trang chỉ hiện hotline.
+- `[!] A15` **Ảnh hero sai định dạng khung, không sửa được bằng code.** Đo trên
+  trang combo ở 1440px: cột ảnh hero là 594×804 (dọc), ảnh nguồn
+  `packshot-combo.webp` là 1002×762 (ngang). Để lấp đầy cột, trình duyệt bỏ
+  **44% chiều ngang** của ảnh. Đổi điểm cắt chỉ dịch được vài chục pixel —
+  không cứu được, vì vấn đề là một ảnh ngang bị ép vào một khung dọc.
+  Cần một trong hai: (a) bản chụp dọc 4:5 cho hero, tối thiểu 1600×2000, hoặc
+  (b) chủ site đồng ý đổi bố cục hero sang khung ngang, nhưng như vậy phần chữ
+  và phần ảnh không còn cao bằng nhau. Đây là quyết định chỉ đạo hình ảnh nên
+  tôi không tự chọn. Liên quan: `A5`.
 - `[!] A9` **Zalo OA.** Bản cào có `zalo.me/4500053981574656766` (OA chính
   thức), trong khi site đang dùng `zalo.me/0367848918` (số cá nhân). Cần chủ
   site chọn kênh nào là kênh chính thức để khai nhất quán.

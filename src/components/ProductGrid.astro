@@ -13,7 +13,14 @@ const { products, locale } = Astro.props;
       <a href={productPath(p.slug, locale)}>
         {p.image && (
           <span class="shot">
+            {/* Khung 4:3 cho MỌI thẻ, và `contain` chứ không `cover`.
+
+                Bộ ảnh hiện tại có tỉ lệ từ 1:1 tới 1:2,1. Không có khung thì
+                mỗi thẻ cao một kiểu và tiêu đề so le nhau — đúng lỗi nhìn thấy
+                trên trang dòng nám. Còn `cover` sẽ cắt chai 900×1890 mất gần
+                hết thân chai, mà nhãn mới là thứ người mua cần đọc. */}
             <Picture src={p.image} alt={p.imageAlt ?? p.name} width={520} height={390}
+              ratio="4/3" fit="contain"
               sizes="(min-width: 760px) 340px, 90vw" widths={[340, 520, 680]} loading="lazy" />
           </span>
         )}
@@ -49,7 +56,7 @@ const { products, locale } = Astro.props;
      hiệu ứng hover chỉ gây kẹt ở trạng thái "đang hover" sau khi chạm. */
   .shot { display: block; background: var(--bone); overflow: hidden; }
   .shot :global(img) {
-    width: 100%; height: auto; display: block;
+    width: 100%; display: block;
     transition: transform 620ms var(--ease-out);
   }
   @media (hover: hover) {

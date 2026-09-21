@@ -84,6 +84,7 @@ const notes = data.usp.map((u: any, i: number) => ({
         loading="eager"
         fetchpriority="high"
         decoding="sync"
+        focus={data.image.focus}
       />
     </div>
   </div>
@@ -146,7 +147,20 @@ const notes = data.usp.map((u: any, i: number) => ({
     .hero-media :global(img) {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
-      object-fit: cover; object-position: 55% 30%;
+      object-fit: cover;
+      /* Điểm cắt do CHÍNH ẢNH khai, không phải một con số dùng chung.
+
+         Bản trước đóng cứng `55% 30%` cho mọi sản phẩm. Với ảnh dọc thì nó
+         đúng; với ảnh ngang như packshot combo (1002×762) đặt vào cột cao,
+         nó đẩy khung sang phải và lên trên, cắt mất chai bên phải — đúng chỗ
+         chủ site chỉ ra. Mặc định giữ nguyên để không trang nào đổi ngoài ý
+         muốn; ảnh nào lệch thì khai `focus` trong file JSON. */
+      /* Mặc định canh GIỮA theo chiều ngang. Bản trước để 55%, tức đẩy khung
+         cắt sang phải; đo trên trang combo: khung 594×804 lấy từ ảnh 662×504
+         nên 44% chiều ngang bị bỏ, và 5% lệch đó rơi đúng vào chai bên phải.
+         Lệch dọc 30% thì giữ — ảnh dọc cần nó, ảnh ngang không bị cắt dọc nên
+         không ảnh hưởng. */
+      object-position: var(--pos, 50% 30%);
     }
   }
 

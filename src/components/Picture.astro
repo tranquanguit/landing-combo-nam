@@ -28,6 +28,25 @@ interface Props {
   fetchpriority?: 'high' | 'auto' | 'low';
   decoding?: 'sync' | 'async' | 'auto';
   class?: string;
+  /**
+   * Khung tỉ lệ cố định, ví dụ '4/3'. Bỏ trống thì ảnh cao theo đúng tỉ lệ file.
+   *
+   * Vì sao cần: bộ ảnh hiện tại có tỉ lệ từ 1:1 tới 1:2,1 (packshot cao nhất là
+   * 900×1890). Đặt chúng vào một lưới mà không có khung thì mỗi thẻ cao một
+   * kiểu, tiêu đề so le, và cả hàng trông như bị lỗi. Khung tỉ lệ cũng khoá
+   * CLS: trình duyệt biết chỗ phải chừa trước khi ảnh tải xong.
+   */
+  ratio?: string;
+  /**
+   * 'contain' (mặc định khi có `ratio`) hay 'cover'.
+   *
+   * Ảnh sản phẩm dùng `contain`: cắt một chai 900×1890 vào khung 4:3 là cắt mất
+   * phần lớn sản phẩm, và người mua cần nhìn thấy cả vỏ hộp lẫn nhãn. Ảnh biên
+   * tập và ảnh nền thì `cover` — chúng có vùng thừa để cắt.
+   */
+  fit?: 'cover' | 'contain';
+  /** `object-position` khi `fit="cover"`, ví dụ 'center 30%'. Chủ thể lệch tâm thì khai. */
+  focus?: string;
 }
 
 const {
@@ -37,6 +56,7 @@ const {
   fetchpriority = 'auto',
   decoding = 'async',
   class: className,
+  ratio, fit = 'contain', focus,
 } = Astro.props;
 
 const key = `/src/assets${src}`;
@@ -89,19 +109,60 @@ const fallback = meta ? await getImage({ src: meta, width: list[list.length - 1]
 
 const srcset = (set: { src: string; options: { width?: number } }[]) =>
   set.map((i) => `${i.src} ${i.options.width}w`).join(', ');
+
+/* Không có khung tỉ lệ thì điểm cắt phải đi thẳng lên <img>: khối cha (hero)
+   tự đặt `object-fit` và đọc `--pos`. Có khung thì biến đã nằm trên khung rồi,
+   đặt thêm ở đây là khai hai nơi cho một thứ. */
+const imgStyle = !ratio && focus ? `--pos:${focus}` : undefined;
 ---
-{meta ? (
+{ratio ? (
+  <span
+    class:list={['ratio', className]}
+    style={`--r:${ratio};--fit:${fit};${focus ? `--pos:${focus};` : ''}`}
+  >
+    {meta ? (
+      <picture>
+        <source type="image/avif" srcset={srcset(avif)} sizes={sizes} />
+        <source type="image/webp" srcset={srcset(webp)} sizes={sizes} />
+        <img src={fallback!.src} alt={alt} width={w} height={h}
+          loading={loading} fetchpriority={fetchpriority} decoding={decoding} />
+      </picture>
+    ) : (
+      <img src={src} alt={alt} width={w} height={h}
+        loading={loading} fetchpriority={fetchpriority} decoding={decoding} />
+    )}
+  </span>
+) : meta ? (
   <picture>
     <source type="image/avif" srcset={srcset(avif)} sizes={sizes} />
     <source type="image/webp" srcset={srcset(webp)} sizes={sizes} />
     <img
       src={fallback!.src} alt={alt} width={w} height={h}
       loading={loading} fetchpriority={fetchpriority} decoding={decoding} class={className}
+      style={imgStyle}
     />
   </picture>
 ) : (
   <img
     src={src} alt={alt} width={w} height={h}
     loading={loading} fetchpriority={fetchpriority} decoding={decoding} class={className}
+    style={imgStyle}
   />
 )}
+
+<style>
+  /* Khung tỉ lệ. `display: block` trên <span> chứ không đổi sang <div>: khung
+     này nằm trong <a> của thẻ sản phẩm, và <div> trong <a> là HTML hợp lệ
+     nhưng <span> giữ cho cây DOM đúng ý nghĩa hơn ở mọi chỗ khác. */
+  .ratio {
+    display: block; position: relative;
+    aspect-ratio: var(--r);
+    overflow: hidden;
+  }
+  .ratio :global(picture) { display: block; height: 100%; }
+  .ratio :global(img) {
+    width: 100%; height: 100%;
+    object-fit: var(--fit);
+    object-position: var(--pos, center);
+  }
+</style>
