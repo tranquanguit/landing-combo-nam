@@ -174,16 +174,19 @@ const nav = siteNav(
       : allProducts.filter((p) => p.data.line === l.data.slug).map((p) => p.data.slug),
   })),
   allArticles.length > 0,
-  { home: t(locale, 'nav.home'), advice: t(locale, 'nav.advice'), products: t(locale, 'nav.products') },
+  { advice: t(locale, 'nav.advice'), products: t(locale, 'nav.products'), contact: t(locale, 'nav.contact') },
   (slug) => productBySlug.get(slug)?.shortName ?? productBySlug.get(slug)?.name,
+  allPolicies.find((x) => x.data.topLevel && x.data.translationKey === 'lien-he')?.data.slug,
 );
 
 /* Chính sách chỉ trỏ từ chân trang — không đưa lên điều hướng chính vì nó
    không phải thứ khách cần khi đang chọn mua. Nhưng phải có đường vào, nếu
    không phép đo "trang mồ côi" sẽ đỏ, và đúng như vậy. */
-const policies = allPolicies.map((x) => ({
-  label: x.data.title, href: policyPath(x.data.slug, locale),
-}));
+const policies = allPolicies
+  /* Trang ở gốc (Liên hệ) đã có mục riêng trên thanh điều hướng. Liệt kê lại
+     dưới tiêu đề "chính sách" là xếp nó vào nhóm sai. */
+  .filter((x) => !x.data.topLevel)
+  .map((x) => ({ label: x.data.title, href: policyPath(x.data.slug, locale) }));
 
 const articlesSorted = allArticles
   .map((a) => a.data)

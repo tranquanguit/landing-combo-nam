@@ -8,10 +8,22 @@ import { DEFAULT_ANCHOR } from './lib/block-anchors.ts';
 import { readFileSync } from 'node:fs';
 
 /* Số liên hệ của chính doanh nghiệp không phải dữ liệu cá nhân của khách. */
+/**
+ * Thông tin liên hệ CỦA CHÍNH DOANH NGHIỆP — được phép xuất hiện trong nội dung.
+ *
+ * Hàng rào dữ liệu cá nhân tồn tại để một số điện thoại hay email của KHÁCH
+ * không lọt vào file nội dung rồi được xuất bản. Nhưng hotline, email và mã số
+ * thuế của bên bán thì đã in ở chân mọi trang và bắt buộc phải công khai theo
+ * quy định về thương mại điện tử. Chặn chúng là chặn nhầm hướng: trang liên hệ
+ * sẽ không viết nổi, và người viết sẽ tìm cách lách thay vì sửa.
+ *
+ * Danh sách đọc từ `mocha.json` chứ không gõ tay ở đây — đổi số hotline mà quên
+ * đổi danh sách thì hàng rào lại chặn đúng số đang dùng.
+ */
 const BRAND_NUMBERS: string[] = (() => {
   try {
     const b = JSON.parse(readFileSync('src/data/mocha.json', 'utf8'));
-    return [b.phone, b.phoneDisplay].filter(Boolean);
+    return [b.phone, b.phoneDisplay, b.email, b.taxId].filter(Boolean);
   } catch {
     return [];
   }
@@ -972,6 +984,15 @@ const policies = defineCollection({
     title: z.string(),
     lead: z.string(),
     updatedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    /**
+     * Trang đứng ở gốc (`/lien-he/`) thay vì trong `/chinh-sach/`.
+     *
+     * Trang liên hệ dùng chung khuôn với chính sách — cùng là văn bản có mục,
+     * không có gì để dựng thêm. Nhưng nó KHÔNG phải một chính sách: chôn nó
+     * dưới `/chinh-sach/` là đặt thứ người ta tìm nhiều nhất vào chỗ khó tìm
+     * nhất, và nói sai với máy tìm kiếm về vai trò của trang.
+     */
+    topLevel: z.boolean().default(false),
     sections: z.array(proseSection).min(1),
     /* Những chỗ doanh nghiệp còn phải tự điền (thời hạn lưu, điều kiện đổi
        trả). Khai ra để trang tự hiện cảnh báo thay vì im lặng phát hành một

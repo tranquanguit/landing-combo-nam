@@ -15,6 +15,16 @@ interface Props {
   nav?: { label: string; href: string }[];
 }
 const { brand: b, locale, alternates = [], orderHref = '#dat-hang', nav = [] } = Astro.props;
+
+/** Danh sách phẳng -> từng nhóm có tiêu đề là tên dòng. */
+function groupChildren(children: { label: string; href: string; note?: string }[]) {
+  const groups: { label: string; href: string; items: { label: string; href: string }[] }[] = [];
+  for (const c of children) {
+    if (c.note === 'line') groups.push({ label: c.label, href: c.href, items: [] });
+    else groups[groups.length - 1]?.items.push(c);
+  }
+  return groups;
+}
 ---
 <header>
   <div class="wrap bar">
@@ -36,15 +46,23 @@ const { brand: b, locale, alternates = [], orderHref = '#dat-hang', nav = [] } =
               {item.children?.length ? (
                 /* Bảng danh mục mở bằng :hover và :focus-within — không JavaScript.
                    Mọi liên kết trong bảng đều là <a> thật và nằm trong DOM ngay từ
-                   đầu, nên máy tìm kiếm thấy hết, và bàn phím Tab đi qua được. */
+                   đầu, nên máy tìm kiếm thấy hết, và bàn phím Tab đi qua được.
+
+                   Mỗi dòng sản phẩm là MỘT <ul> riêng, không phải một danh sách
+                   phẳng chia cột bằng `grid-auto-flow: column`. Bản trước làm thế
+                   và cột bị cắt ngang giữa nhóm: tên dòng rơi xuống cuối cột này
+                   còn sản phẩm của nó nằm đầu cột kia. */
                 <div class="panel">
-                  <ul class="panel-list">
-                    {item.children.map((c) => (
-                      <li class={c.note === 'line' ? 'is-line' : 'is-product'}>
-                        <a href={c.href}>{c.label}</a>
-                      </li>
+                  <div class="panel-cols">
+                    {groupChildren(item.children).map((g) => (
+                      <ul class="panel-group">
+                        <li class="is-line"><a href={g.href}>{g.label}</a></li>
+                        {g.items.map((c) => (
+                          <li class="is-product"><a href={c.href}>{c.label}</a></li>
+                        ))}
+                      </ul>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               ) : null}
             </li>
@@ -82,11 +100,12 @@ const { brand: b, locale, alternates = [], orderHref = '#dat-hang', nav = [] } =
   .nav { display: none; }
   @media (min-width: 860px) {
     .nav { display: block; margin-inline: auto; }
-    .nav ul { list-style: none; display: flex; gap: var(--s-5); margin: 0; padding: 0; }
-    .nav a {
-      color: var(--ink-muted); text-decoration: none; font-size: var(--t-sm);
-      display: inline-block; min-height: 24px; line-height: 24px;
-    }
+    /* `> ul` chứ không phải ` ul`: bảng danh mục cũng là <ul> nằm trong .nav,
+       nên bộ chọn con cháu biến nó thành một hàng ngang và mỗi tên sản phẩm co
+       lại thành một cột chữ dọc một ký tự. */
+    .nav > ul { list-style: none; display: flex; gap: var(--s-5); margin: 0; padding: 0; }
+    .nav a { color: var(--ink-muted); text-decoration: none; font-size: var(--t-sm); }
+    .nav > ul > li > a { display: inline-block; min-height: 24px; line-height: 24px; }
     .nav > ul > li > a:hover { color: var(--cobalt); }
 
     /* Mục có bảng: dấu mũi tên nhỏ báo trước rằng bấm vào sẽ mở ra thêm. Không
@@ -105,9 +124,11 @@ const { brand: b, locale, alternates = [], orderHref = '#dat-hang', nav = [] } =
     .has-panel:focus-within .caret { transform: rotate(180deg); }
 
     .panel {
-      position: absolute; top: 100%; left: 50%; translate: -50% 0;
-      /* Khoảng hở giữa mục và bảng sẽ làm chuột rời ra và bảng đóng giữa chừng.
-         Đệm bằng padding-top trong suốt thay vì margin. */
+      position: absolute; top: 100%;
+      /* Neo theo mép trái của mục, KHÔNG căn giữa. Mục "Sản phẩm" nằm gần mép
+         trái màn hình, nên một bảng rộng căn giữa sẽ tràn ra ngoài khung nhìn —
+         đúng lỗi ở ảnh chụp: ba nhóm cuối bị cắt mất một nửa. */
+      left: 0;
       padding-top: 10px;
       opacity: 0; visibility: hidden; transform: translateY(-6px);
       transition: opacity var(--dur-2) var(--ease), transform var(--dur-2) var(--ease),
@@ -119,31 +140,34 @@ const { brand: b, locale, alternates = [], orderHref = '#dat-hang', nav = [] } =
       transition-delay: 0s;
     }
 
-    .panel-list {
-      display: grid; gap: 0 var(--s-6);
-      /* Sáu dòng, mỗi dòng kéo theo sản phẩm của nó. Ba cột giữ bảng gọn trong
-         một màn hình mà không phải cuộn. */
-      grid-template-columns: repeat(3, minmax(9.5rem, 1fr));
-      grid-auto-flow: column; grid-template-rows: repeat(7, auto);
-      margin: 0; padding: var(--s-5) var(--s-6); list-style: none;
+    .panel-cols {
+      display: grid; grid-template-columns: repeat(3, minmax(11rem, 13rem));
+      gap: var(--s-5) var(--s-6);
+      /* Căn đỉnh: ba nhóm có số sản phẩm khác nhau, để `stretch` thì nhóm một
+         sản phẩm bị kéo cao bằng nhóm ba sản phẩm và khoảng trắng dồn vào giữa. */
+      align-items: start;
+      padding: var(--s-5) var(--s-6);
       background: var(--paper); border: 1px solid var(--line);
       border-radius: 14px; box-shadow: 0 18px 44px -18px rgba(16, 24, 64, .28);
     }
-    .panel-list a { display: block; padding: 5px 0; line-height: 1.35; }
+
+    .panel-group { margin: 0; padding: 0; list-style: none; }
+    .panel-group a { display: block; padding: 5px 0; line-height: 1.35; }
 
     /* Tên dòng là tiêu đề của nhóm; sản phẩm thụt vào dưới nó. Phân cấp bằng
        cỡ chữ và độ đậm, không bằng màu — bảng này đã có đủ màu rồi. */
-    .panel-list .is-line { margin-top: var(--s-4); }
-    .panel-list .is-line:first-child { margin-top: 0; }
-    .panel-list .is-line > a {
+    .panel-group .is-line > a {
       font-weight: 600; font-size: var(--t-xs); letter-spacing: .08em;
       text-transform: uppercase; color: var(--ink-navy);
+      padding-bottom: var(--s-3);
     }
-    .panel-list .is-product > a {
+    .panel-group .is-product > a {
       padding-left: var(--s-3); font-size: var(--t-sm); color: var(--ink-muted);
       border-left: 2px solid var(--line);
+      /* Tên sản phẩm dài thì xuống dòng trong cột của nó, không đẩy cột rộng ra. */
+      overflow-wrap: anywhere;
     }
-    .panel-list .is-product > a:hover {
+    .panel-group .is-product > a:hover {
       color: var(--cobalt); border-left-color: var(--cobalt);
     }
   }

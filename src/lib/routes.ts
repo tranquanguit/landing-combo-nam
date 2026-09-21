@@ -42,8 +42,8 @@ export function adviceIndexPath(locale: Locale): string {
 }
 
 /** Trang chính sách, dưới đoạn chuyên mục đã dịch. */
-export function policyPath(slug: string, locale: Locale): string {
-  return withSlash(localePath(locale, `/${POLICY_SEGMENT[locale]}/${slug}/`));
+export function policyPath(slug: string, locale: Locale, topLevel = false): string {
+  return withSlash(localePath(locale, topLevel ? `/${slug}/` : `/${POLICY_SEGMENT[locale]}/${slug}/`));
 }
 
 export type RouteKind = 'home' | 'product' | 'line' | 'article' | 'advice-index' | 'policy';
@@ -112,7 +112,7 @@ export async function allRoutes(): Promise<Route[]> {
 
   for (const e of published(policies as any[])) {
     routes.push({
-      kind: 'policy', path: policyPath(e.data.slug, e.data.locale), locale: e.data.locale,
+      kind: 'policy', path: policyPath(e.data.slug, e.data.locale, e.data.topLevel), locale: e.data.locale,
       translationKey: e.data.translationKey, slug: e.data.slug, entry: e,
     });
   }
@@ -140,27 +140,23 @@ export interface NavItem {
 /**
  * Điều hướng chính, sinh từ nội dung đang có.
  *
- * Không viết cứng danh sách: thêm một dòng sản phẩm là nó tự xuất hiện, và một
- * tầng chưa có nội dung thì không sinh ra liên kết chết. Chính phép đo "trang mồ
- * côi" ở cổng SEO dựa vào đây.
+ * Ba mục, không hơn: **Sản phẩm · Tư vấn · Liên hệ**. Đây là ba việc một người
+ * ghé qua có thể muốn làm — xem hàng, đọc trước khi quyết, hoặc hỏi thẳng
+ * người bán. Không có việc thứ tư.
  *
- * Vì sao GOM sáu dòng vào một mục thay vì trải phẳng: bản trước có tám mục
- * ngang hàng, xuống hai dòng trên màn hình 1440px và xếp theo bảng chữ cái của
- * slug — tức là dòng bán chạy nhất nằm thứ năm, cạnh một mục tên "Treatment".
- * Một thanh điều hướng có tám lựa chọn ngang nhau thì không lựa chọn nào nổi;
- * người đọc phải đọc hết rồi mới quyết định, và phần lớn sẽ không đọc.
- *
- * Còn ba mục: một cửa vào toàn bộ danh mục, một lối tắt tới dòng chủ lực, và
- * nội dung tư vấn. Dòng chủ lực được nhấc lên hàng đầu VÀ vẫn nằm trong bảng —
- * trùng lặp có chủ ý: người biết mình cần gì đi thẳng, người chưa biết thì mở
- * bảng ra xem.
+ * Bản trước có tám mục ngang hàng xếp theo bảng chữ cái của slug. Bản sau đó
+ * còn ba, nhưng nhấc "Nám & thâm sạm" lên hàng đầu TRONG KHI nó vẫn nằm trong
+ * bảng Sản phẩm — một mục xuất hiện hai lần cạnh nhau thì người đọc không hiểu
+ * hai chỗ đó khác gì nhau, và tự hỏi mình có đang bỏ lỡ gì không. Dòng chủ lực
+ * đứng đầu bảng là đủ để nó được thấy trước.
  */
 export function siteNav(
   locale: Locale,
   lines: { slug: string; heading: string; navLabel?: string; order?: number; products?: string[] }[],
   hasArticles: boolean,
-  labels: { home: string; advice: string; products: string },
+  labels: { advice: string; products: string; contact: string },
   productLabel: (slug: string) => string | undefined = () => undefined,
+  contactSlug?: string,
 ): NavItem[] {
   const ordered = [...lines].sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
   const nameOf = (l: { heading: string; navLabel?: string }) => l.navLabel ?? l.heading;
@@ -181,14 +177,10 @@ export function siteNav(
     ]),
   };
 
-  const flagship = ordered[0]
-    ? [{ label: nameOf(ordered[0]), href: linePath(ordered[0].slug, locale) }]
-    : [];
-
   return [
     ...(ordered.length ? [catalogue] : []),
-    ...flagship,
     ...(hasArticles ? [{ label: labels.advice, href: adviceIndexPath(locale) }] : []),
+    ...(contactSlug ? [{ label: labels.contact, href: policyPath(contactSlug, locale, true) }] : []),
   ];
 }
 

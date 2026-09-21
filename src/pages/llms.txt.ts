@@ -225,7 +225,7 @@ export const GET: APIRoute = async ({ site }) => {
     const locale = d.locale as Locale;
     const x = lab(locale);
     lines.push(`## ${d.title}${locale === 'vi' ? '' : ` (${locale.toUpperCase()})`}`, '');
-    lines.push(`- ${x.page}: ${origin}${policyPath(d.slug, locale)}`);
+    lines.push(`- ${x.page}: ${origin}${policyPath(d.slug, locale, d.topLevel)}`);
     lines.push(`- ${x.updated}: ${d.updatedAt}`);
     lines.push(`- ${plainText(d.lead)}`);
     lines.push('');

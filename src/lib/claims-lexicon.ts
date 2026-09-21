@@ -485,6 +485,11 @@ export function findPersonalData(
      hoá mà biểu mẫu đặt hàng đã dùng. */
   const digitsJoined = plain.replace(/(\d)[\s.\-]+(?=\d)/g, '$1');
   const allow = new Set(allowedNumbers.map((n) => n.replace(/\D/g, '').replace(/^84/, '0')));
+  /* Danh sách cho phép không chỉ có số điện thoại: email và mã số thuế của bên
+     bán cũng bắt buộc phải công khai, và trang liên hệ không viết nổi nếu hàng
+     rào chặn chúng. So khớp NGUYÊN VĂN, không theo mẫu — chỉ đúng giá trị của
+     doanh nghiệp được đi qua, mọi email khác vẫn bị chặn như cũ. */
+  const allowLiteral = new Set(allowedNumbers.map((n) => String(n).trim().toLowerCase()));
   const out: PersonalDataHit[] = [];
   for (const rule of PERSONAL) {
     if (rule.kind === 'họ tên đầy đủ kèm xưng hô' && !opts.testimonyContext) {
@@ -504,6 +509,7 @@ export function findPersonalData(
     for (const haystack of [plain, digitsJoined]) {
       for (const m of haystack.matchAll(re)) {
         const value = m[0].trim();
+        if (allowLiteral.has(value.toLowerCase())) continue;
         if (rule.kind === 'số điện thoại') {
           const digits = value.replace(/\D/g, '').replace(/^84/, '0');
           if (allow.has(digits)) continue;

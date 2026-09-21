@@ -1,0 +1,56 @@
+{
+  "slug": "lien-he",
+  "locale": "vi",
+  "translationKey": "lien-he",
+  "status": "published",
+  "topLevel": true,
+  "seo": {
+    "title": "Liên hệ Mocha Việt Nam – hotline, Zalo và địa chỉ",
+    "description": "Hotline 0367 848 918 (8:00–21:00), Zalo, email và địa chỉ pháp nhân. Ai đang bán hàng cho bạn, và liên hệ bằng cách nào khi cần đổi trả hoặc hỏi về da."
+  },
+  "title": "Liên hệ",
+  "lead": "Bạn nên biết mình đang mua của ai trước khi để lại số điện thoại. Trang này nói rõ điều đó, và nói luôn cách liên hệ nào nhanh nhất cho từng loại việc.",
+  "updatedAt": "2026-09-21",
+  "sections": [
+    {
+      "id": "cach-nhanh-nhat",
+      "heading": "Việc nào thì gọi, việc nào thì nhắn",
+      "body": [
+        "<strong>Cần tư vấn về da hoặc chọn sản phẩm</strong> — nhắn Zalo. Bạn gửi được ảnh vùng da đang quan tâm, và chuyên viên xem ảnh rồi trả lời sẽ sát hơn nhiều so với mô tả bằng lời qua điện thoại.",
+        "<strong>Cần đặt hàng gấp, hỏi về đơn đang giao, hoặc đổi trả</strong> — gọi hotline. Những việc này cần trả lời ngay, và qua tin nhắn thì mất cả buổi.",
+        "<strong>Cần hoá đơn, hợp đồng, hoặc hỏi việc hợp tác phân phối</strong> — gửi email. Loại việc này cần văn bản để hai bên còn đối chiếu về sau."
+      ],
+      "links": [
+        { "label": "Nhắn Zalo 0367 848 918", "href": "https://zalo.me/0367848918" }
+      ]
+    },
+    {
+      "id": "gio-lam-viec",
+      "heading": "Giờ làm việc và thời gian phản hồi",
+      "body": [
+        "Hotline và Zalo trực <strong>8:00 – 21:00</strong> tất cả các ngày trong tuần, kể cả cuối tuần.",
+        "Ngoài khung giờ trên, bạn cứ để lại tin nhắn — chúng tôi trả lời vào đầu giờ sáng hôm sau. Đơn đặt qua biểu mẫu trên trang được gọi lại xác nhận trong <strong>2 giờ làm việc</strong>.",
+        "Nếu quá khung thời gian đó mà chưa ai liên hệ, gọi thẳng hotline. Đơn trôi mất là lỗi của chúng tôi, không phải việc bạn phải chờ thêm."
+      ]
+    },
+    {
+      "id": "chung-toi-la-ai",
+      "heading": "Chúng tôi là đại lý, không phải nhà sản xuất",
+      "body": [
+        "Nói rõ ngay từ đầu để bạn khỏi hiểu nhầm: chúng tôi phân phối sản phẩm Mocha, được uỷ quyền sử dụng pháp nhân của hãng cho hoạt động bán hàng này. Sản phẩm, công thức và phiếu công bố đều thuộc về công ty sản xuất ghi bên dưới.",
+        "Điều này có nghĩa gì với bạn: chúng tôi trả lời được mọi câu về sản phẩm, giá, giao hàng và đổi trả. Còn những câu thuộc về công thức hay hồ sơ công bố, chúng tôi chuyển về hãng chứ không tự trả lời — trả lời bừa những chuyện đó là cách nhanh nhất để nói sai.",
+        "Số tiếp nhận phiếu công bố của từng sản phẩm được in ngay trên trang sản phẩm tương ứng, để bạn đối chiếu mà không phải hỏi ai."
+      ]
+    },
+    {
+      "id": "thong-tin-phap-nhan",
+      "heading": "Thông tin pháp nhân",
+      "body": [
+        "<strong>Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha</strong>",
+        "Địa chỉ: 290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+        "Mã số thuế: 0317963313",
+        "Email: kemnammocha@gmail.com"
+      ]
+    }
+  ]
+}
