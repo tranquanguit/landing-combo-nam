@@ -57,6 +57,11 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
 - `[!] A6` **Chứng từ có chữ ký giám đốc.** Phải che chữ ký và dấu cá nhân trước
   khi đăng lên trang công khai.
 - `[!] A7` **Văn bản đồng ý cho 4 ảnh trước/sau.** Cổng build đang chặn đúng.
+- `[!] A11` **Tinh chất phục hồi B5 10ml — thiếu dữ liệu để dựng trang.** Trang
+  sản phẩm chính hãng chỉ có xuất xứ, dung tích và hai dòng công dụng; không có
+  bảng thành phần nào, và nhãn chai cũng chỉ đọc được "PRO-VITAMIN B5
+  PERFECTION". Dựng một trang gần như trống trên site có nhận diện "công khai
+  từng thành phần" thì tự mâu thuẫn. Cần bảng thành phần hoặc ảnh nhãn rõ hơn.
 - `[!] A10` **Chỉ số PA của kem chống nắng UV-Block Plus.** Hai nguồn của chính
   hãng mâu thuẫn: trang sản phẩm ghi `SPF 50 PA+`, bốn tài liệu marketing ghi
   `SPF 50 PA++++`. Trang hiện để trống chỉ số PA và chỉ ghi SPF 50 (cả hai
@@ -191,20 +196,20 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
   hơn. Lý do cũ đúng khi site có một trang landing, không còn đúng với 19 trang.
 - `[~] F2` **Xong hai dòng:** "Bảo vệ da" (4 mục + FAQ + 1 sản phẩm) và
   "Làm sạch" (3 mục + bảng so sánh + FAQ + 2 sản phẩm).
-  Còn ba dòng: Phục hồi da, Chăm sóc da mụn, Treatment.
+  Thêm "Phục hồi da" (3 mục + bảng so sánh + FAQ + 2 sản phẩm).
+  Còn hai dòng: Chăm sóc da mụn, Treatment.
 
-## G. Sản phẩm còn lại (7)
+## G. Sản phẩm còn lại (5)
 
-> Đã xong: `uv-block-sunscreen` (Bảo vệ da), `bio-active-cleanser` và
-> `bio-deep-detox-rebalance` (Làm sạch).
+> Đã xong: `uv-block-sunscreen` · `bio-active-cleanser` ·
+> `bio-deep-detox-rebalance` · `biovector-brightening-cream` ·
+> `collagen-peptide-cream`.
 
 Giá và mã vạch đã lấy từ cửa hàng chính hãng, chờ dựng trang:
 
 | Giá bán | Sản phẩm |
 |---|---|
 | 550.000đ | Peel vi gai tảo biển |
-| 335.000đ | Kem dưỡng sáng Biovector |
-| 250.000đ | Collagen Peptide Cream |
 | 235.000đ | Gel mù u Smart Target |
 | 215.000đ | Smart Whitening (giảm thâm mụn) |
 | 200.000đ | Tinh chất B5 10ml |
