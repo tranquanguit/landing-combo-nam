@@ -98,6 +98,50 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "One thing said up front",
+      "heading": "A mask cannot rescue a routine that is wrong",
+      "quotes": [
+        "“My skin was bad, so I masked every day to speed up recovery.”",
+        "“Plump right afterwards, back to normal by morning.”",
+        "“A dozen different masks and my skin is no better underneath.”",
+        "“I never know whether it goes before or after serum.”"
+      ],
+      "explainer": {
+        "heading": "This is an additional step, and we say so at the top of the page",
+        "body": [
+          "Three steps decide the state of your skin: cleansing properly, moisturising consistently, and daily sun protection. A tube of mask replaces none of them.",
+          "The plump feeling straight after is mostly water just delivered into the outermost layer. It is real, but it <strong>does not last if the daily moisturising step is still missing</strong>.",
+          "So when is it worth it? Once the three basics are steady and you want a heavier hydrating step during weeks when skin needs quiet. In that role it does its job well; in any other role it does not."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Before you order",
+      "heading": "Three situations, including one where you should keep your money",
+      "intro": "This is the cheapest product in the range, but cheap is not a reason to buy before you need it.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Basics are steady, you want a heavier hydrating step",
+          "body": "The role this tube was made for. Once or twice a week, during drier stretches or after a treatment.",
+          "meta": "Best fit"
+        },
+        {
+          "heading": "No sunscreen yet, or moisturising is not consistent",
+          "body": "Spend on those two first. Adding a mask to a routine missing its base is investing in the part that changes least.",
+          "meta": "Not yet"
+        },
+        {
+          "heading": "A lot of active, inflamed breakouts",
+          "body": "A thick gel left sitting on inflamed skin is not a good idea. Deal with the breakout first, then come back to this step.",
+          "meta": "Worth waiting"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Ingredients",
       "heading": "Eight ingredients printed on the tube",
@@ -147,6 +191,54 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Where it sits in the week",
+      "heading": "Once or twice a week, in the evening",
+      "intro": "An addition to the evening routine, not a replacement for part of it.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Morning",
+          "steps": [
+            {
+              "label": "No masking in the morning",
+              "note": "A gel layer needs time and undisturbed skin. Mornings usually offer neither."
+            },
+            {
+              "label": "Your usual routine",
+              "note": "Cleanse, moisturise, sunscreen."
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Night (on masking days)",
+          "steps": [
+            {
+              "label": "Remove make-up and cleanse",
+              "note": "Skin must be fully clean, or the gel seals in the residue too."
+            },
+            {
+              "label": "Apply a thick layer",
+              "note": "Avoid the eye and lip areas.",
+              "essential": true
+            },
+            {
+              "label": "Leave it, then rinse with cool water",
+              "note": "For the time stated on the tube. Longer does not give a better result."
+            },
+            {
+              "label": "Moisturise as usual",
+              "note": "The mask does not replace the cream step.",
+              "essential": true
+            }
+          ]
+        }
+      ],
+      "footnote": "More than twice a week shortens nothing. Skin renews on its own cycle, and <strong>the number of masks does not speed that cycle up</strong>."
+    },
+    {
       "type": "steps",
       "eyebrow": "How to use",
       "heading": "Three steps, 15–20 minutes each time",
@@ -167,6 +259,54 @@
         }
       ],
       "footnote": "This is an optional step, not a required one. If this week you only manage the three basics — cleanse, moisturise, sun protection — skipping the mask makes no difference to the routine's outcome."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Extra step or base step",
+      "heading": "If you can only pick one for a recovery phase",
+      "intro": "The honest answer: buy the moisturiser first. Here is why.",
+      "items": [
+        "ultra-egf-bio-gel-mask",
+        "collagen-peptide-cream"
+      ],
+      "criteria": [
+        {
+          "label": "Role",
+          "values": [
+            "An addition, used in bursts",
+            "A base step, used daily"
+          ]
+        },
+        {
+          "label": "Frequency",
+          "values": [
+            "Once or twice a week",
+            "Morning and night"
+          ]
+        },
+        {
+          "label": "If you dropped it entirely",
+          "values": [
+            "The routine still works",
+            "The moisture-holding step is gone, and the other steps lose their effect with it"
+          ]
+        },
+        {
+          "label": "Which to buy first",
+          "values": [
+            "Second, once the base is steady",
+            "First"
+          ]
+        },
+        {
+          "label": "Size",
+          "values": [
+            "100gr tube",
+            "30gr jar"
+          ]
+        }
+      ],
+      "footnote": "We put the cheaper product second because that is the right order for skin, not the right order for an order value."
     },
     {
       "type": "order",
@@ -205,6 +345,17 @@
           "q": "How should it be stored?",
           "a": "Somewhere dry and cool, away from direct sunlight and heat. Close the cap after use."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Next step",
+      "heading": "The three base steps that come first",
+      "intro": "If any of these three is missing, that is where the money goes before a mask.",
+      "items": [
+        "collagen-peptide-cream",
+        "bio-active-cleanser",
+        "uv-block-sunscreen"
       ]
     }
   ]

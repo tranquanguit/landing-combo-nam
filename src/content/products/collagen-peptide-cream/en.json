@@ -97,6 +97,50 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "Signs you are using too much",
+      "heading": "Stinging, redness, light flaking — while following every instruction correctly",
+      "quotes": [
+        "“Serum, toner, essence, masks. The more complete the routine, the more it stings.”",
+        "“All good products, all used together, and my face went red with no way to tell which one.”",
+        "“Retinol made me flake. I was told to push through, so I did.”",
+        "“A week off everything and my skin calmed right down — but the marks came back darker.”"
+      ],
+      "explainer": {
+        "heading": "With a damaged barrier, every active behind it is beside the point",
+        "body": [
+          "The outermost layer keeps water in and irritants out. When it weakens, actives penetrate faster than intended — which is why the same product can feel fine one week and sting the next.",
+          "This phase needs <strong>fewer things acting on the skin, not more</strong>. The four groups printed on this jar are all hydrating and soothing; there are no brightening or exfoliating actives in it.",
+          "It is a basic moisturising step. We call it that rather than a treatment, because putting treatment expectations on a moisturiser is the fastest way to be disappointed by one."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Before you order",
+      "heading": "Three phases, and which one this jar is for",
+      "intro": "A basic moisturiser cannot do an active's job. Said plainly so you do not buy the wrong expectation.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Recently irritated, peeled, or off retinol",
+          "body": "Exactly the phase this jar exists for: few ingredients, no strong actives, and a quiet stretch for the skin.",
+          "meta": "Best fit"
+        },
+        {
+          "heading": "Dry year-round, no pigmentation concerns",
+          "body": "Fine as a long-term daily moisturiser. No reason to move to a busier formula while your skin is settled.",
+          "meta": "Good long term"
+        },
+        {
+          "heading": "Working on melasma or dark marks",
+          "body": "There are no brightening actives here. It keeps the barrier in shape so other steps can work, but on its own it does not act on pigment — you need something else.",
+          "meta": "Not what you need"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Ingredients",
       "heading": "Four groups, and what each one does",
@@ -126,6 +170,56 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Where it sits in the day",
+      "heading": "The last step, morning and night",
+      "intro": "While skin needs quiet, a shorter routine is better. This is the minimum.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Morning",
+          "steps": [
+            {
+              "label": "Rinse with cool water",
+              "note": "During this phase you can skip the morning cleanser."
+            },
+            {
+              "label": "Collagen Peptide Cream",
+              "note": "Apply while skin is still slightly damp to hold that water in.",
+              "essential": true
+            },
+            {
+              "label": "Sunscreen",
+              "note": "Weakened skin darkens more easily after every exposure.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Night",
+          "steps": [
+            {
+              "label": "Remove make-up and cleanse",
+              "note": "Something gentle, with cool water."
+            },
+            {
+              "label": "Pause the strong actives",
+              "note": "Retinol, exfoliating acids, high-strength vitamin C — stop until the stinging ends.",
+              "essential": true
+            },
+            {
+              "label": "Collagen Peptide Cream",
+              "note": "A slightly thicker layer than the morning.",
+              "essential": true
+            }
+          ]
+        }
+      ],
+      "footnote": "Most skin settles within <strong>one to two weeks</strong> once actives are reduced. If it is still stinging, red or flaking after two weeks, that is no longer a moisturiser's job — see a dermatologist."
+    },
+    {
       "type": "steps",
       "eyebrow": "How to use",
       "heading": "Two steps",
@@ -142,6 +236,54 @@
         }
       ],
       "footnote": "If you are running a routine with pigment-targeting actives, pick one cream rather than layering both — extra layers add congestion risk, not extra effect."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Two creams, where they differ",
+      "heading": "Which jar for which phase?",
+      "intro": "Both are 30gr moisturising steps. They differ in how many ingredients they carry, and in the phase of skin they suit.",
+      "items": [
+        "collagen-peptide-cream",
+        "biovector-brightening-cream"
+      ],
+      "criteria": [
+        {
+          "label": "Ingredients declared",
+          "values": [
+            "The four key groups printed on the jar",
+            "45, the full INCI list in order"
+          ]
+        },
+        {
+          "label": "Suits skin that is",
+          "values": [
+            "Recently irritated, and needs fewer things acting on it",
+            "Settled, and wants many actives in one step"
+          ]
+        },
+        {
+          "label": "Its particular strength",
+          "values": [
+            "Fewer ingredients, so fewer variables while skin is reactive",
+            "Every substance can be checked before use"
+          ]
+        },
+        {
+          "label": "Physical UV filters",
+          "values": [
+            "None",
+            "TiO2 and ZnO present, but no declared SPF, so not a sunscreen substitute"
+          ]
+        },
+        {
+          "label": "Just peeled, or just stopped retinol",
+          "values": [
+            "This is the jar for that phase",
+            "Wait until skin settles"
+          ]
+        }
+      ],
+      "footnote": "Fewer ingredients does not mean lesser. For reacting skin, <strong>fewer variables is precisely what you need</strong>, and that is this jar's job."
     },
     {
       "type": "order",
@@ -176,6 +318,17 @@
           "q": "How should it be stored?",
           "a": "Somewhere dry and cool, away from direct sunlight and heat. Close the lid tightly after use."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Next step",
+      "heading": "Once skin has settled again",
+      "intro": "Actives come back after recovery, not during it. These usually follow.",
+      "items": [
+        "ultra-egf-bio-gel-mask",
+        "smart-first-care-serum",
+        "uv-block-sunscreen"
       ]
     }
   ]

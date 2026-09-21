@@ -99,6 +99,50 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "Why full ingredient lists are rare",
+      "heading": "“Proprietary extract” is a lawful way of saying nothing",
+      "quotes": [
+        "“Five appealing names on the box, then one long phrase in English.”",
+        "“I react to one specific ingredient, and almost no brand lists enough for me to check.”",
+        "“Two products, a threefold price difference, near-identical ingredient panels.”",
+        "“I want to compare, and there is nothing to compare with.”"
+      ],
+      "explainer": {
+        "heading": "The order in an INCI list says more than the list itself",
+        "body": [
+          "INCI lists run in descending order of proportion. An active sitting 38th out of 45 is in the formula — and its position already tells you roughly at what level.",
+          "Which is why many panels name only “key ingredients”: list everything and the reader can see the order, and order is hard to dress up.",
+          "This jar declares <strong>all 45 ingredients in INCI order</strong>. We are not claiming that makes the formula better — only that you have enough to judge it yourself, including against other brands."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Before you order",
+      "heading": "Three things worth knowing first, including one that may stop you buying",
+      "intro": "A few parts of this formula are easy to misread. Better said up front.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "It contains Titanium Dioxide and Zinc Oxide — but it is NOT a sunscreen",
+          "body": "Both are physical filters, but the pack declares no SPF or PA rating. With no rating there is no basis for using it in place of sunscreen. Keep applying a separate one.",
+          "meta": "Not a sunscreen substitute"
+        },
+        {
+          "heading": "Sensitive skin, or a known ingredient allergy",
+          "body": "This is where a full panel earns its keep: you can look up the exact substance you reacted to, instead of guessing behind a trade name.",
+          "meta": "Best fit"
+        },
+        {
+          "heading": "You just want a simple moisturiser",
+          "body": "Forty-five ingredients is a lot for skin to meet. If yours is settled and only needs hydration, a shorter formula is the more sensible choice.",
+          "meta": "May not be needed"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Ingredients",
       "heading": "Twelve worth explaining, within the full list of 45",
@@ -168,6 +212,59 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Where it sits in the day",
+      "heading": "The cream step, after serum and before sunscreen",
+      "intro": "This jar is a moisturising step. It does not replace anything else in the routine.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Morning",
+          "steps": [
+            {
+              "label": "Cleanse",
+              "note": "Cool water, a gentle cleanser."
+            },
+            {
+              "label": "Serum, if you use one",
+              "note": "Let it dry before the cream."
+            },
+            {
+              "label": "Biovector Brightening Cream",
+              "note": "A pea-sized amount over face and neck.",
+              "essential": true
+            },
+            {
+              "label": "Sunscreen",
+              "note": "A separate step. Do not substitute this jar for it, physical filters or not.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Night",
+          "steps": [
+            {
+              "label": "Remove make-up and cleanse",
+              "note": "Fully clean before anything goes on."
+            },
+            {
+              "label": "Serum, if you use one",
+              "note": "Let it dry."
+            },
+            {
+              "label": "Biovector Brightening Cream",
+              "note": "Same amount as the morning.",
+              "essential": true
+            }
+          ]
+        }
+      ],
+      "footnote": "Use it once a day for the first week so your skin meets a long ingredient list gradually, then twice daily if nothing reacts. Patch test on the neck and watch for <strong>30–45 minutes</strong> before the first use."
+    },
+    {
       "type": "steps",
       "eyebrow": "How to use",
       "heading": "Twice a day",
@@ -184,6 +281,54 @@
         }
       ],
       "footnote": "The formula contains small amounts of titanium dioxide and zinc oxide, but this is <strong>not a sunscreen</strong> and does not replace the morning sun protection step."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Two creams, where they differ",
+      "heading": "Which jar for which phase?",
+      "intro": "Both are 30gr moisturising steps. They differ in how many ingredients they carry, and in the phase of skin they suit.",
+      "items": [
+        "biovector-brightening-cream",
+        "collagen-peptide-cream"
+      ],
+      "criteria": [
+        {
+          "label": "Ingredients declared",
+          "values": [
+            "45, the full INCI list in order",
+            "The four key groups printed on the jar"
+          ]
+        },
+        {
+          "label": "Suits skin that is",
+          "values": [
+            "Settled, and wants many actives in one step",
+            "Recently irritated, and needs fewer things acting on it"
+          ]
+        },
+        {
+          "label": "Its particular strength",
+          "values": [
+            "Every substance can be checked before use",
+            "Fewer ingredients, so fewer variables while skin is reactive"
+          ]
+        },
+        {
+          "label": "Physical UV filters",
+          "values": [
+            "TiO2 and ZnO present, but no declared SPF, so not a sunscreen substitute",
+            "None"
+          ]
+        },
+        {
+          "label": "Just peeled, or just stopped retinol",
+          "values": [
+            "Wait until skin settles",
+            "This is the better jar for that phase"
+          ]
+        }
+      ],
+      "footnote": "More ingredients does not mean more suitable. For settled skin it is a choice; for reacting skin, <strong>fewer variables is what you need</strong>."
     },
     {
       "type": "order",
@@ -218,6 +363,17 @@
           "q": "How should it be stored?",
           "a": "Keep away from heat and direct sunlight, close after use, keep out of reach of children. Avoid contact with the eyes."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Next step",
+      "heading": "The steps that usually go with it",
+      "intro": "A moisturiser is one step in a routine, not the routine.",
+      "items": [
+        "collagen-peptide-cream",
+        "uv-block-sunscreen",
+        "bio-active-cleanser"
       ]
     }
   ]
