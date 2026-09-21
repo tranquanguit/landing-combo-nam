@@ -98,6 +98,50 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "Vì sao bảng thành phần đầy đủ lại hiếm",
+      "heading": "“Chiết xuất độc quyền” là cách hợp pháp để không nói gì cả",
+      "quotes": [
+        "“Đọc vỏ hộp thấy năm cái tên hay ho, còn lại là một cụm tiếng Anh dài.”",
+        "“Tôi bị dị ứng một chất, mà chẳng hãng nào ghi đủ để tôi kiểm tra.”",
+        "“Hai sản phẩm giá chênh nhau ba lần, nhìn bảng thành phần thì y hệt.”",
+        "“Muốn so sánh cũng không biết lấy gì ra mà so.”"
+      ],
+      "explainer": {
+        "heading": "Thứ tự trong bảng INCI nói nhiều hơn bản thân danh sách",
+        "body": [
+          "Danh sách INCI xếp theo tỉ lệ giảm dần. Một hoạt chất đứng thứ 38 trong 45 chất có mặt trong công thức — nhưng có mặt ở mức nào thì vị trí đó đã nói rồi.",
+          "Đó là lý do nhiều bảng thành phần chỉ nêu “các thành phần chính”: nêu đủ thì người đọc thấy được thứ tự, và thứ tự là thứ khó tô vẽ.",
+          "Hũ này công bố <strong>toàn bộ 45 thành phần theo đúng thứ tự INCI</strong>. Chúng tôi không nói như vậy nghĩa là công thức tốt hơn — chỉ nói rằng bạn có đủ dữ kiện để tự đánh giá, kể cả khi so với sản phẩm của hãng khác."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Ba điều nên biết trước, kể cả điều khiến bạn không mua",
+      "intro": "Công thức này có vài điểm dễ hiểu nhầm. Nói trước thì hơn.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Có Titanium Dioxide và Zinc Oxide — nhưng đây KHÔNG phải kem chống nắng",
+          "body": "Hai chất này là màng lọc vật lý, nhưng bao bì không công bố chỉ số SPF hay PA. Không có chỉ số thì không có cơ sở để dùng thay kem chống nắng. Vẫn phải bôi kem chống nắng riêng.",
+          "meta": "Đừng dùng thay chống nắng"
+        },
+        {
+          "heading": "Da nhạy cảm, hay dị ứng thành phần lạ",
+          "body": "Đây là chỗ bảng đầy đủ có giá trị thật: bạn tra được đúng chất mình từng phản ứng, thay vì đoán qua một cụm tên thương mại.",
+          "meta": "Hợp nhất"
+        },
+        {
+          "heading": "Chỉ muốn một hũ dưỡng ẩm đơn giản",
+          "body": "Công thức 45 thành phần là nhiều thứ để da làm quen. Nếu da bạn đang yên và chỉ cần cấp ẩm, một công thức gọn hơn là lựa chọn hợp lý hơn.",
+          "meta": "Có thể chưa cần"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
       "heading": "Mười hai thành phần đáng nói, trong danh sách đầy đủ 45 chất",
@@ -167,6 +211,59 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Đặt vào đâu trong ngày",
+      "heading": "Bước kem, sau serum và trước kem chống nắng",
+      "intro": "Hũ này là bước dưỡng, không thay thế bước nào khác trong quy trình.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Buổi sáng",
+          "steps": [
+            {
+              "label": "Rửa mặt",
+              "note": "Nước mát, sữa rửa mặt dịu nhẹ."
+            },
+            {
+              "label": "Serum nếu bạn đang dùng",
+              "note": "Đợi khô rồi mới sang bước kem."
+            },
+            {
+              "label": "Biovector Brightening Cream",
+              "note": "Lượng bằng một hạt đậu, tán đều mặt và cổ.",
+              "essential": true
+            },
+            {
+              "label": "Kem chống nắng",
+              "note": "Bước riêng, không thay bằng hũ kem này dù trong đó có màng lọc vật lý.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Buổi tối",
+          "steps": [
+            {
+              "label": "Tẩy trang và rửa mặt",
+              "note": "Sạch hẳn trước khi bôi bất cứ thứ gì."
+            },
+            {
+              "label": "Serum nếu có",
+              "note": "Đợi khô."
+            },
+            {
+              "label": "Biovector Brightening Cream",
+              "note": "Cùng lượng như buổi sáng.",
+              "essential": true
+            }
+          ]
+        }
+      ],
+      "footnote": "Tuần đầu nên dùng một lần mỗi ngày để da làm quen với một công thức nhiều thành phần, sau đó tăng lên hai lần nếu không có phản ứng. Thử một lượng nhỏ ở vùng cổ và quan sát <strong>30–45 phút</strong> trước lần dùng đầu tiên."
+    },
+    {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
       "heading": "Hai lần mỗi ngày",
@@ -183,6 +280,54 @@
         }
       ],
       "footnote": "Công thức có Titanium Dioxide và Zinc Oxide với lượng nhỏ, nhưng đây <strong>không phải kem chống nắng</strong> và không thay thế được bước chống nắng buổi sáng."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Hai hũ kem, khác nhau ở đâu",
+      "heading": "Hũ nào cho giai đoạn nào?",
+      "intro": "Cả hai đều là bước kem dưỡng 30gr. Khác nhau ở số lượng thành phần và ở giai đoạn da phù hợp.",
+      "items": [
+        "biovector-brightening-cream",
+        "collagen-peptide-cream"
+      ],
+      "criteria": [
+        {
+          "label": "Số thành phần công bố",
+          "values": [
+            "45 chất, đủ danh sách INCI theo thứ tự",
+            "Bốn nhóm chính in trên hũ"
+          ]
+        },
+        {
+          "label": "Hợp với giai đoạn",
+          "values": [
+            "Da đang ổn, muốn nhiều hoạt chất trong một bước",
+            "Da vừa kích ứng, đang cần ít thứ tác động"
+          ]
+        },
+        {
+          "label": "Điểm mạnh riêng",
+          "values": [
+            "Tra được từng chất trước khi dùng",
+            "Ít thành phần nên ít biến số khi da đang nhạy"
+          ]
+        },
+        {
+          "label": "Có màng lọc vật lý không",
+          "values": [
+            "Có TiO2 và ZnO, nhưng không công bố SPF nên không dùng thay chống nắng",
+            "Không"
+          ]
+        },
+        {
+          "label": "Nếu bạn vừa peel hoặc vừa dùng retinol",
+          "values": [
+            "Đợi da ổn lại rồi hãy dùng",
+            "Đây là hũ hợp hơn cho giai đoạn đó"
+          ]
+        }
+      ],
+      "footnote": "Nhiều thành phần hơn không có nghĩa là phù hợp hơn. Với da đang yên thì đó là lựa chọn; với da đang phản ứng thì <strong>ít biến số lại là điều bạn cần</strong>."
     },
     {
       "type": "order",
@@ -217,6 +362,17 @@
           "q": "Bảo quản thế nào?",
           "a": "Tránh nhiệt độ cao và ánh nắng trực tiếp, đóng nắp sau khi dùng, để xa tầm tay trẻ em. Tránh tiếp xúc với mắt."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Những bước thường đi cùng",
+      "intro": "Kem dưỡng là một bước trong quy trình, không phải cả quy trình.",
+      "items": [
+        "collagen-peptide-cream",
+        "uv-block-sunscreen",
+        "bio-active-cleanser"
       ]
     }
   ]

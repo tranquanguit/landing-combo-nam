@@ -97,6 +97,50 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "Nói trước một điều",
+      "heading": "Mặt nạ không cứu được một quy trình đang sai",
+      "quotes": [
+        "“Da xấu quá nên tôi đắp mặt nạ mỗi ngày cho nhanh hồi.”",
+        "“Đắp xong da căng mọng, sáng hôm sau lại như cũ.”",
+        "“Mua cả chục loại mặt nạ mà nền da vẫn không khá lên.”",
+        "“Không biết nên đắp trước hay sau serum.”"
+      ],
+      "explainer": {
+        "heading": "Đây là bước thêm, và chúng tôi ghi đúng như vậy ngay trên đầu trang",
+        "body": [
+          "Ba bước quyết định nền da là làm sạch đúng cách, dưỡng ẩm đều đặn và chống nắng hằng ngày. Một tuýp mặt nạ không thay được bước nào trong ba bước đó.",
+          "Cảm giác căng mọng ngay sau khi đắp phần lớn đến từ lượng nước vừa được cấp vào lớp ngoài cùng. Nó có thật, nhưng nó <strong>không tồn tại lâu nếu bước dưỡng ẩm hằng ngày vẫn bỏ trống</strong>.",
+          "Vậy khi nào nó đáng dùng? Khi ba bước nền đã đều, và bạn muốn thêm một bước cấp ẩm đậm hơn trong những tuần da cần được để yên. Đúng vai trò đó thì nó làm tốt; đặt vào vai trò khác thì không."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Ba trường hợp, và trường hợp nào nên để dành tiền",
+      "intro": "Đây là sản phẩm rẻ nhất trong danh mục, nhưng rẻ không có nghĩa là nên mua khi chưa cần.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Quy trình nền đã đều, muốn thêm bước cấp ẩm đậm",
+          "body": "Đúng vai trò của tuýp này. Một đến hai lần mỗi tuần, trong những giai đoạn da khô hơn bình thường hoặc vừa qua can thiệp.",
+          "meta": "Hợp nhất"
+        },
+        {
+          "heading": "Chưa có bước chống nắng hoặc chưa dưỡng ẩm đều",
+          "body": "Để dành tiền cho hai bước đó trước. Thêm mặt nạ vào một quy trình còn thiếu nền là đầu tư vào phần ít ảnh hưởng nhất.",
+          "meta": "Chưa phải lúc"
+        },
+        {
+          "heading": "Da đang nổi mụn viêm nhiều",
+          "body": "Một lớp gel dày để lâu trên da đang viêm không phải ý hay. Xử lý đợt mụn trước, rồi mới quay lại bước này.",
+          "meta": "Nên chờ"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
       "heading": "Tám thành phần in trên vỏ tuýp",
@@ -146,6 +190,54 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Đặt vào đâu trong tuần",
+      "heading": "Một đến hai lần mỗi tuần, vào buổi tối",
+      "intro": "Đây là bước thêm vào quy trình buổi tối, không phải bước thay thế.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Buổi sáng",
+          "steps": [
+            {
+              "label": "Không dùng mặt nạ buổi sáng",
+              "note": "Lớp gel cần thời gian và cần da được để yên — buổi sáng thường không có cả hai."
+            },
+            {
+              "label": "Quy trình thường ngày",
+              "note": "Rửa mặt, dưỡng ẩm, chống nắng."
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Buổi tối (ngày đắp)",
+          "steps": [
+            {
+              "label": "Tẩy trang và rửa mặt",
+              "note": "Da phải sạch hẳn, nếu không lớp gel giữ luôn cả phần cặn."
+            },
+            {
+              "label": "Đắp một lớp dày lên mặt",
+              "note": "Tránh vùng mắt và vùng môi.",
+              "essential": true
+            },
+            {
+              "label": "Để yên rồi rửa lại bằng nước mát",
+              "note": "Theo thời gian ghi trên vỏ tuýp. Để lâu hơn không cho kết quả tốt hơn."
+            },
+            {
+              "label": "Dưỡng ẩm như thường",
+              "note": "Mặt nạ không thay bước kem dưỡng.",
+              "essential": true
+            }
+          ]
+        }
+      ],
+      "footnote": "Đắp nhiều hơn hai lần một tuần không rút ngắn được gì. Da thay mới theo chu kỳ của nó, và <strong>số lần đắp không đẩy nhanh chu kỳ đó</strong>."
+    },
+    {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
       "heading": "Ba bước, mỗi lần 15–20 phút",
@@ -166,6 +258,54 @@
         }
       ],
       "footnote": "Đây là bước thêm, không phải bước bắt buộc. Nếu tuần này bạn chỉ làm được ba bước cơ bản — làm sạch, dưỡng ẩm, chống nắng — thì bỏ mặt nạ không ảnh hưởng gì tới kết quả của liệu trình."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Bước thêm hay bước nền",
+      "heading": "Nếu chỉ chọn được một thứ cho giai đoạn phục hồi",
+      "intro": "Câu trả lời thật lòng: chọn hũ kem dưỡng trước. Bảng dưới nói vì sao.",
+      "items": [
+        "ultra-egf-bio-gel-mask",
+        "collagen-peptide-cream"
+      ],
+      "criteria": [
+        {
+          "label": "Vai trò",
+          "values": [
+            "Bước thêm, tăng cường theo đợt",
+            "Bước nền, dùng mỗi ngày"
+          ]
+        },
+        {
+          "label": "Tần suất",
+          "values": [
+            "Một đến hai lần mỗi tuần",
+            "Sáng và tối"
+          ]
+        },
+        {
+          "label": "Nếu bỏ hẳn",
+          "values": [
+            "Quy trình vẫn chạy được",
+            "Thiếu bước giữ ẩm, các bước khác mất tác dụng theo"
+          ]
+        },
+        {
+          "label": "Nên mua trước cái nào",
+          "values": [
+            "Mua sau, khi nền đã đều",
+            "Mua trước"
+          ]
+        },
+        {
+          "label": "Dung tích",
+          "values": [
+            "Tuýp 100gr",
+            "Hũ 30gr"
+          ]
+        }
+      ],
+      "footnote": "Chúng tôi xếp sản phẩm rẻ hơn xuống hàng thứ hai vì đó là thứ tự đúng cho da, không phải thứ tự đúng cho một đơn hàng."
     },
     {
       "type": "order",
@@ -204,6 +344,17 @@
           "q": "Bảo quản thế nào?",
           "a": "Nơi khô ráo thoáng mát, tránh ánh nắng trực tiếp và nhiệt độ cao. Đóng nắp sau khi dùng."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Ba bước nền nên có trước",
+      "intro": "Nếu một trong ba bước này còn trống, đó là chỗ đáng đầu tư trước tuýp mặt nạ.",
+      "items": [
+        "collagen-peptide-cream",
+        "bio-active-cleanser",
+        "uv-block-sunscreen"
       ]
     }
   ]

@@ -96,6 +96,50 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "Dấu hiệu bạn đang dùng quá nhiều",
+      "heading": "Da rát, đỏ, bong nhẹ — và bạn đang làm đúng mọi thứ theo hướng dẫn",
+      "quotes": [
+        "“Serum, toner, tinh chất, mặt nạ — càng đủ bước da càng rát.”",
+        "“Mua đồ tốt cả, dùng cùng lúc, xong da đỏ ửng không rõ vì cái nào.”",
+        "“Đang dùng retinol thì bong tróc, nghe nói phải chịu nên tôi cố.”",
+        "“Bỏ hết một tuần thì da đỡ hẳn, nhưng bỏ luôn thì thâm lại đậm lên.”"
+      ],
+      "explainer": {
+        "heading": "Hàng rào bảo vệ da hỏng thì mọi hoạt chất phía sau đều vô nghĩa",
+        "body": [
+          "Lớp ngoài cùng của da giữ nước bên trong và giữ chất kích ứng bên ngoài. Khi nó yếu đi, hoạt chất thấm vào nhanh hơn mức dự tính — và đó là lý do cùng một sản phẩm hôm nay êm, tuần sau lại rát.",
+          "Giai đoạn này cần <strong>ít thứ tác động hơn, không phải nhiều hơn</strong>. Bốn nhóm in trên hũ này đều thuộc nhóm cấp ẩm và làm dịu, không có hoạt chất làm sáng hay tẩy tế bào chết.",
+          "Đây là bước dưỡng nền. Chúng tôi gọi đúng tên nó chứ không gọi là bước đặc trị, vì đặt nhầm kỳ vọng vào một hũ kem dưỡng là cách nhanh nhất để thất vọng với nó."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Ba giai đoạn, và hũ này hợp với giai đoạn nào",
+      "intro": "Một hũ kem dưỡng nền không làm được việc của hoạt chất mạnh. Nói rõ để bạn khỏi mua nhầm kỳ vọng.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Da vừa kích ứng, vừa peel, vừa ngưng retinol",
+          "body": "Đây là đúng giai đoạn hũ này được làm ra để phục vụ: ít thành phần, không hoạt chất mạnh, để da có một khoảng yên.",
+          "meta": "Hợp nhất"
+        },
+        {
+          "heading": "Da khô quanh năm, không có vấn đề sắc tố",
+          "body": "Dùng được lâu dài như bước dưỡng ẩm hằng ngày. Không cần đổi sang công thức nhiều hoạt chất nếu da bạn đang ổn.",
+          "meta": "Dùng lâu dài được"
+        },
+        {
+          "heading": "Muốn làm mờ nám hoặc thâm",
+          "body": "Hũ này không có hoạt chất làm sáng. Nó giữ nền da tốt để các bước khác làm việc, nhưng tự nó không xử lý sắc tố — cần sản phẩm khác.",
+          "meta": "Không phải thứ bạn cần"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
       "heading": "Bốn nhóm, và vai trò của từng nhóm",
@@ -125,6 +169,56 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Đặt vào đâu trong ngày",
+      "heading": "Bước cuối của quy trình, cả sáng lẫn tối",
+      "intro": "Trong giai đoạn da đang cần yên, quy trình càng ngắn càng tốt. Dưới đây là mức tối thiểu.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Buổi sáng",
+          "steps": [
+            {
+              "label": "Rửa bằng nước mát",
+              "note": "Giai đoạn này có thể bỏ sữa rửa mặt buổi sáng."
+            },
+            {
+              "label": "Collagen Peptide Cream",
+              "note": "Thoa khi da còn hơi ẩm để giữ lại phần nước đó.",
+              "essential": true
+            },
+            {
+              "label": "Kem chống nắng",
+              "note": "Da đang yếu thì càng dễ sạm màu sau mỗi lần phơi nắng.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Buổi tối",
+          "steps": [
+            {
+              "label": "Tẩy trang và rửa mặt",
+              "note": "Dùng loại dịu nhẹ, nước mát."
+            },
+            {
+              "label": "Tạm dừng hoạt chất mạnh",
+              "note": "Retinol, acid tẩy da chết, vitamin C nồng độ cao — dừng cho tới khi hết rát.",
+              "essential": true
+            },
+            {
+              "label": "Collagen Peptide Cream",
+              "note": "Lớp dày hơn buổi sáng một chút.",
+              "essential": true
+            }
+          ]
+        }
+      ],
+      "footnote": "Phần lớn trường hợp da dịu lại trong <strong>một đến hai tuần</strong> khi bỏ bớt hoạt chất. Nếu sau hai tuần vẫn rát, đỏ hoặc bong nhiều, đó không còn là chuyện của một hũ kem dưỡng — nên đi khám da liễu."
+    },
+    {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
       "heading": "Hai bước",
@@ -141,6 +235,54 @@
         }
       ],
       "footnote": "Nếu bạn đang dùng một liệu trình có hoạt chất tác động lên sắc tố, hãy chọn một trong hai chứ đừng chồng cả hai lớp kem — nhiều lớp không cộng thêm hiệu quả, chỉ cộng thêm nguy cơ bí da."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Hai hũ kem, khác nhau ở đâu",
+      "heading": "Hũ nào cho giai đoạn nào?",
+      "intro": "Cả hai đều là bước kem dưỡng 30gr. Khác nhau ở số lượng thành phần và ở giai đoạn da phù hợp.",
+      "items": [
+        "collagen-peptide-cream",
+        "biovector-brightening-cream"
+      ],
+      "criteria": [
+        {
+          "label": "Số thành phần công bố",
+          "values": [
+            "Bốn nhóm chính in trên hũ",
+            "45 chất, đủ danh sách INCI theo thứ tự"
+          ]
+        },
+        {
+          "label": "Hợp với giai đoạn",
+          "values": [
+            "Da vừa kích ứng, đang cần ít thứ tác động",
+            "Da đang ổn, muốn nhiều hoạt chất trong một bước"
+          ]
+        },
+        {
+          "label": "Điểm mạnh riêng",
+          "values": [
+            "Ít thành phần nên ít biến số khi da đang nhạy",
+            "Tra được từng chất trước khi dùng"
+          ]
+        },
+        {
+          "label": "Có màng lọc vật lý không",
+          "values": [
+            "Không",
+            "Có TiO2 và ZnO, nhưng không công bố SPF nên không dùng thay chống nắng"
+          ]
+        },
+        {
+          "label": "Nếu bạn vừa peel hoặc vừa dùng retinol",
+          "values": [
+            "Đây là hũ hợp cho giai đoạn đó",
+            "Đợi da ổn lại rồi hãy dùng"
+          ]
+        }
+      ],
+      "footnote": "Ít thành phần hơn không có nghĩa là kém hơn. Với da đang phản ứng thì <strong>ít biến số chính là điều bạn cần</strong>, và đó là việc hũ này làm."
     },
     {
       "type": "order",
@@ -175,6 +317,17 @@
           "q": "Bảo quản thế nào?",
           "a": "Nơi khô ráo thoáng mát, tránh ánh nắng trực tiếp và nhiệt độ cao. Đậy kín nắp sau khi dùng."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Khi da đã yên trở lại",
+      "intro": "Phục hồi xong thì mới tới lúc quay lại với hoạt chất. Đây là những bước thường đi sau.",
+      "items": [
+        "ultra-egf-bio-gel-mask",
+        "smart-first-care-serum",
+        "uv-block-sunscreen"
       ]
     }
   ]
