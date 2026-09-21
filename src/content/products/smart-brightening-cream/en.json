@@ -59,23 +59,23 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "The cream step, used at night",
-      "heading": "Every active printed on the jar, listed here in full",
-      "lead": "The 30g jar carries <strong>Tranexamic Acid, NIO-NAG, Ceramide, Bakuchiol, Vietnam Bio-white Complex and Black Truffle Extract</strong> — exactly the list printed on the packaging. For skin with uneven tone and dark patches that keep coming back.",
+      "eyebrow": "The evening cream step, for melasma-prone skin",
+      "heading": "Fading, then darkening again — usually this is not about how consistent you were",
+      "lead": "Most brightening creams act on the outermost layer only. Stop using them and the pigment returns. This 30gr jar takes a different route, and <strong>prints the proportion of each active on the carton</strong> so you can hold it up against anything else before deciding.",
       "usp": [
         {
-          "text": "<strong>No corticosteroids, no hydroquinone</strong>",
+          "text": "<strong>No corticosteroids, no hydroquinone</strong> — the two things that thin skin after a few months of a mixed cream",
           "evidence": "verified",
           "source": "#thanh-phan",
-          "qualifier": "full ingredient list printed on the packaging"
+          "qualifier": "full ingredient list printed on the pack"
         },
         {
-          "text": "<strong>Bakuchiol instead of retinol</strong>, no peeling",
+          "text": "<strong>Bakuchiol instead of retinol</strong>, so there is no flaking phase to sit through",
           "evidence": "ingredient",
-          "qualifier": "see what each active does in the table below"
+          "qualifier": "see each active's role in the ingredient table"
         },
         {
-          "text": "<strong>Cosmetic notification number shown on this page</strong>, not hidden elsewhere",
+          "text": "<strong>The product notification number is on this page</strong>, not somewhere you have to go and look it up",
           "evidence": "verified",
           "source": "#thanh-phan",
           "qualifier": "1517/25/CBMP-LA"
@@ -94,6 +94,50 @@
         "Free delivery nationwide",
         "Inspect before you pay",
         "7-day return if the product is faulty"
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Why last time did not hold",
+      "heading": "You were doing it right. You were using something that only reaches the top layer.",
+      "quotes": [
+        "“Two months of daily use. It lightened a little, then stopped there.”",
+        "“The jar runs out and the pigment comes back, sometimes darker than before.”",
+        "“The ingredient list is all vague groupings. No idea how much of anything is in there.”",
+        "“What worries me most is using something with corticosteroids without knowing.”"
+      ],
+      "explainer": {
+        "heading": "Brightening the epidermis does not reach where the pigment is made",
+        "body": [
+          "Melanin is produced by cells sitting deeper down. A product acting only on the surface shows results in the first few weeks, then stops — because underneath, everything continues as before.",
+          "This jar's formula aims at three things at once: limiting the signal to produce pigment, supporting the turnover of already-darkened cells, and reinforcing the barrier so darkening is less likely to return.",
+          "In exchange, you need patience measured in weeks rather than days. And you need sun protection. <strong>Skip sunscreen and no product holds its result</strong> — that is a precondition, not advice."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Before you order",
+      "heading": "Three cases, and an honest answer for each",
+      "intro": "We are a reseller; selling is good. But selling the wrong thing to the wrong person means you use it for a few weeks and stop — a loss on both sides. Find yourself below.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Patchy melasma, a few years old",
+          "body": "Pigment still sits near the surface with defined edges. This is the group the cream alone suits best: the sealing step holds actives on the skin through the night.",
+          "meta": "The cream alone is enough"
+        },
+        {
+          "heading": "Deep or mixed melasma",
+          "body": "Pigment sits deeper and the edges are soft. The cream still works, but with only a sealing step the deeper-absorbing part is missing — noticeably slower. Worth considering the serum too.",
+          "meta": "Look at the combo"
+        },
+        {
+          "heading": "Skin that is irritated, flaking, or just peeled",
+          "body": "Let it settle first. Adding actives to a damaged barrier is the surest way to make skin react harder.",
+          "meta": "Not yet"
+        }
       ]
     },
     {
@@ -134,6 +178,54 @@
           "suitedFor": "Dull skin"
         }
       ]
+    },
+    {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Where it sits in the day",
+      "heading": "This jar is the last step at night",
+      "intro": "No need to change the routine you have. Just put it in the right place — and keep the morning sunscreen.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Morning",
+          "steps": [
+            {
+              "label": "Cleanse",
+              "note": "Warm water, a gentle cleanser."
+            },
+            {
+              "label": "Moisturise",
+              "note": "Whatever you already use; no need to change it."
+            },
+            {
+              "label": "Sunscreen",
+              "note": "Skip this and pigment returns whatever you applied the night before.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Night",
+          "steps": [
+            {
+              "label": "Remove make-up and cleanse",
+              "note": "Actives land on residue if any is left on the skin."
+            },
+            {
+              "label": "Pat completely dry",
+              "note": "Damp skin dilutes the cream and reduces how much goes in."
+            },
+            {
+              "label": "Smart Brightening X3 cream",
+              "note": "A fingertip's worth, dotted at five points and spread. Massage darker areas for one to two minutes.",
+              "essential": true
+            }
+          ]
+        }
+      ],
+      "footnote": "Use it every other night for the first week so your skin adjusts, then nightly. Patch test on the neck and watch for <strong>30–45 minutes</strong> before the first full use."
     },
     {
       "type": "steps",
