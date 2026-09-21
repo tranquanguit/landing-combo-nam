@@ -58,8 +58,8 @@
     {
       "type": "hero",
       "eyebrow": "Bước serum, dùng sáng và tối",
-      "heading": "Serum mở đường thẩm thấu, dùng trước bước kem",
-      "lead": "Chai 30ml mang <strong>4-butylresorcinol 1000ppm, Niacinamide, Bio-Placenta, Vietnam Bio-white Complex, Bioyoga và Black Truffle Extract</strong> — đúng danh sách in trên chai, ứng dụng công nghệ Liposome. Dành cho da mỏng yếu, da vừa qua treatment và da thâm sạm không đều màu.",
+      "heading": "Bôi đều đặn mà da vẫn không đổi? Có thể hoạt chất chưa đi được tới đâu",
+      "lead": "Kem là bước giữ. Serum là bước đưa vào. Thiếu bước đưa vào thì hoạt chất nằm lại trên bề mặt rồi trôi đi cùng lần rửa mặt kế tiếp. Chai 30ml này <strong>ghi thẳng 4-butylresorcinol 1000ppm lên vỏ</strong> để bạn đem so với bất kỳ sản phẩm nào khác.",
       "usp": [
         {
           "text": "<strong>4-butylresorcinol 1000ppm ghi thẳng trên chai</strong>, không giấu trong cụm “thành phần độc quyền”",
@@ -93,6 +93,50 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Chỗ thường hỏng",
+      "heading": "Hoạt chất tốt đến mấy cũng vô nghĩa nếu nó nằm ngoài da",
+      "quotes": [
+        "“Dùng kem đắt tiền mấy tháng liền, da mềm hơn nhưng vết thâm thì y nguyên.”",
+        "“Bôi xong thấy trơn trơn trên mặt, sáng dậy rửa là hết sạch.”",
+        "“Đọc thành phần thấy toàn chất tốt, nhưng chẳng ghi bao nhiêu phần trăm.”",
+        "“Da tôi mỏng, thử retinol thì bong tróc, mà không dùng gì thì thâm cứ đậm thêm.”"
+      ],
+      "explainer": {
+        "heading": "Một quy trình chỉ có bước khoá ẩm là một quy trình thiếu một nửa",
+        "body": [
+          "Kem dưỡng có kết cấu đặc, việc chính của nó là giữ ẩm và tạo một lớp trên bề mặt. Đó là việc cần thiết — nhưng nó là bước <strong>giữ</strong>, không phải bước <strong>đưa vào</strong>.",
+          "Serum có kết cấu lỏng và phân tử nhỏ hơn, nên nó là bước đưa hoạt chất vào trước. Chai này dùng công nghệ Liposome, và bảng thành phần ghi rõ tỉ lệ từng chất thay vì gộp chúng vào một cái tên thương mại.",
+          "Thứ tự vì thế quan trọng không kém bản thân sản phẩm: <strong>serum trước, kem sau</strong>. Làm ngược lại thì lớp kem đã đóng đường, và chai serum bạn vừa mua chỉ nằm bên ngoài."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Ba trường hợp, và lời khuyên thật lòng",
+      "intro": "Chúng tôi là đại lý. Bán được thì tốt, nhưng bán nhầm thứ cho nhầm người thì bạn dùng vài tuần rồi bỏ — mất cả hai phía.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Da mỏng yếu, từng bong tróc vì retinol",
+          "body": "Đây là nhóm chai serum này được thiết kế cho. Công thức không có retinoid và không có cồn khô, nên không có giai đoạn bong tróc phải chịu đựng.",
+          "meta": "Hợp nhất"
+        },
+        {
+          "heading": "Thâm sạm rõ, muốn đi nhanh hơn",
+          "body": "Serum làm tốt bước đưa vào, nhưng nếu không có bước khoá lại thì hoạt chất bay hơi cùng độ ẩm. Nhóm này nên có cả kem — đó là lý do có bản combo.",
+          "meta": "Nên xem bản combo"
+        },
+        {
+          "heading": "Da đang kích ứng, đỏ rát, hoặc vừa peel",
+          "body": "Chờ hàng rào bảo vệ da ổn định lại đã. Đưa thêm hoạt chất vào lúc này là cách chắc chắn để da phản ứng mạnh hơn, và bạn sẽ đổ lỗi cho sản phẩm.",
+          "meta": "Chưa phải lúc"
+        }
       ]
     },
     {
@@ -135,6 +179,63 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Đặt vào đâu trong ngày",
+      "heading": "Serum đứng ngay sau bước rửa mặt, cả sáng lẫn tối",
+      "intro": "Không phải đổi cả quy trình. Chỉ cần đặt đúng chỗ — và đúng thứ tự so với bước kem.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Buổi sáng",
+          "steps": [
+            {
+              "label": "Rửa mặt",
+              "note": "Nước ấm, sữa rửa mặt dịu nhẹ."
+            },
+            {
+              "label": "Serum Smart First Care",
+              "note": "2–3 lần nhấn, vỗ nhẹ cho thấm. Đợi khô rồi mới sang bước sau.",
+              "essential": true
+            },
+            {
+              "label": "Dưỡng ẩm",
+              "note": "Bước quen thuộc của bạn."
+            },
+            {
+              "label": "Chống nắng",
+              "note": "Không có bước này thì sắc tố quay lại bất kể bạn dùng gì phía trước.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Buổi tối",
+          "steps": [
+            {
+              "label": "Tẩy trang và rửa mặt",
+              "note": "Còn cặn trang điểm thì hoạt chất nằm lại trên lớp cặn."
+            },
+            {
+              "label": "Lau khô",
+              "note": "Da còn ướt làm loãng serum."
+            },
+            {
+              "label": "Serum Smart First Care",
+              "note": "Cùng lượng như buổi sáng.",
+              "essential": true
+            },
+            {
+              "label": "Kem dưỡng",
+              "note": "Bước khoá lại. Thoa sau khi serum đã khô hẳn."
+            }
+          ]
+        }
+      ],
+      "footnote": "Chai chân không vòi nhấn: không khí không vào được và mỗi lần nhấn ra đúng một lượng, nên không cần ước lượng bằng mắt. Thử một lượng nhỏ ở vùng cổ và quan sát <strong>30–45 phút</strong> trước lần dùng đầu tiên."
+    },
+    {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
       "heading": "Ba bước, dùng sáng và tối",
@@ -155,6 +256,54 @@
         }
       ],
       "footnote": "Buổi sáng cần kem chống nắng. Serum dùng một mình, không kèm bước chống nắng, thì sắc tố sẽ quay lại bất kể sản phẩm nào."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "So sánh",
+      "heading": "Serum một mình, hay cả hai bước?",
+      "intro": "Trả lời trước khi đặt thì hơn là sau khi dùng hết chai đầu.",
+      "items": [
+        "smart-first-care-serum",
+        "combo-nam"
+      ],
+      "criteria": [
+        {
+          "label": "Gồm những gì",
+          "values": [
+            "Một chai serum 30ml",
+            "Chai serum và hũ kem 30gr"
+          ]
+        },
+        {
+          "label": "Bước tác động",
+          "values": [
+            "Đưa hoạt chất vào",
+            "Đưa vào, rồi khoá lại"
+          ]
+        },
+        {
+          "label": "Dùng mấy lần mỗi ngày",
+          "values": [
+            "Sáng và tối",
+            "Serum sáng và tối, kem buổi tối"
+          ]
+        },
+        {
+          "label": "Hợp nhất với",
+          "values": [
+            "Da mỏng yếu, vừa qua treatment",
+            "Thâm sạm rõ, muốn đi nhanh hơn"
+          ]
+        },
+        {
+          "label": "Nếu đang dùng kem dưỡng bạn đã quen",
+          "values": [
+            "Ghép thêm được ngay, không phải bỏ kem cũ",
+            "Thay luôn cả bước kem"
+          ]
+        }
+      ],
+      "footnote": "Nếu bạn đã có một hũ kem dưỡng đang dùng tốt, chai serum riêng là lựa chọn hợp lý hơn — không có lý do gì phải bỏ thứ đang hiệu quả để mua trọn bộ."
     },
     {
       "type": "order",
@@ -193,6 +342,17 @@
           "q": "Bảo quản thế nào?",
           "a": "Tránh nhiệt độ cao và ánh nắng trực tiếp, đóng nắp sau khi dùng, để xa tầm tay trẻ em. Tránh tiếp xúc với mắt; nếu dính vào mắt thì rửa ngay bằng nước sạch."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Nếu bạn còn đang cân nhắc",
+      "intro": "Ba hướng khác nhau, tuỳ chỗ bạn đang đứng.",
+      "items": [
+        "combo-nam",
+        "smart-brightening-cream",
+        "bio-active-cleanser"
       ]
     }
   ],

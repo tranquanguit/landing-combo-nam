@@ -59,8 +59,8 @@
     {
       "type": "hero",
       "eyebrow": "The serum step, morning and night",
-      "heading": "The step that opens the way, used before the cream",
-      "lead": "The 30ml bottle carries <strong>4-butylresorcinol 1000ppm, Niacinamide, Bio-Placenta, Vietnam Bio-white Complex, Bioyoga and Black Truffle Extract</strong> — exactly the list printed on the bottle, delivered with liposome technology. For thin or recently treated skin and for uneven tone.",
+      "heading": "Using it every day and nothing changes? The actives may never be getting in",
+      "lead": "Cream is the sealing step. Serum is the step that gets actives in. Without it they sit on the surface and rinse away at the next wash. This 30ml bottle <strong>prints 4-butylresorcinol 1000ppm on the label</strong> so you can compare it against anything else.",
       "usp": [
         {
           "text": "<strong>4-butylresorcinol 1000ppm printed on the bottle</strong>, not hidden behind a “proprietary complex”",
@@ -94,6 +94,50 @@
         "Free delivery nationwide",
         "Inspect before you pay",
         "7-day return if the product is faulty"
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Where it usually breaks",
+      "heading": "A good active is worth nothing if it stays on top of the skin",
+      "quotes": [
+        "“Months of an expensive cream. Softer skin, same dark patches.”",
+        "“It feels slick on my face, and by morning it has washed off.”",
+        "“The ingredient list looks good, but no percentages anywhere.”",
+        "“My skin is thin. Retinol made it flake, and doing nothing makes the marks worse.”"
+      ],
+      "explainer": {
+        "heading": "A routine with only a sealing step is half a routine",
+        "body": [
+          "A moisturiser is thick, and its job is to hold water in and form a layer on the surface. That job matters — but it is the <strong>sealing</strong> step, not the step that gets anything in.",
+          "A serum is thinner, so it is the step that carries actives first. This bottle uses Liposome technology, and the ingredient table states each percentage rather than hiding them behind one trade name.",
+          "Which makes order as important as the product itself: <strong>serum first, cream after</strong>. Reverse it and the cream has already closed the route, and the serum you just paid for stays outside."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Before you order",
+      "heading": "Three cases, and an honest answer for each",
+      "intro": "We are a reseller. Selling is good, but selling the wrong thing to the wrong person means you stop after a few weeks — a loss on both sides.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Thin skin that has flaked on retinol",
+          "body": "This is who the bottle was formulated for. No retinoids and no drying alcohol, so there is no peeling phase to sit through.",
+          "meta": "Best fit"
+        },
+        {
+          "heading": "Marked pigmentation, wanting faster progress",
+          "body": "The serum handles getting actives in, but without a sealing step they leave with the moisture. This case wants the cream too — hence the combo.",
+          "meta": "Consider the combo"
+        },
+        {
+          "heading": "Skin that is irritated, red, or just peeled",
+          "body": "Let the barrier settle first. Adding actives to a damaged barrier is the surest way to make skin react, and you will blame the product.",
+          "meta": "Not yet"
+        }
       ]
     },
     {
@@ -136,6 +180,63 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Where it sits in the day",
+      "heading": "Straight after cleansing, morning and night",
+      "intro": "No need to change your routine. Just put it in the right place — and in the right order relative to your cream.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Morning",
+          "steps": [
+            {
+              "label": "Cleanse",
+              "note": "Warm water, a gentle cleanser."
+            },
+            {
+              "label": "Smart First Care serum",
+              "note": "Two or three pumps, patted in. Let it dry before the next step.",
+              "essential": true
+            },
+            {
+              "label": "Moisturise",
+              "note": "Whatever you already use."
+            },
+            {
+              "label": "Sunscreen",
+              "note": "Skip this and pigment returns whatever you used before it.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Night",
+          "steps": [
+            {
+              "label": "Remove make-up and cleanse",
+              "note": "Actives land on residue if any is left."
+            },
+            {
+              "label": "Pat dry",
+              "note": "Wet skin dilutes the serum."
+            },
+            {
+              "label": "Smart First Care serum",
+              "note": "Same amount as the morning.",
+              "essential": true
+            },
+            {
+              "label": "Moisturiser",
+              "note": "The sealing step. Apply once the serum is fully dry."
+            }
+          ]
+        }
+      ],
+      "footnote": "An airless pump bottle: no air gets in and each press gives the same dose, so there is nothing to judge by eye. Patch test on the neck and watch for <strong>30–45 minutes</strong> before the first full use."
+    },
+    {
       "type": "steps",
       "eyebrow": "How to use",
       "heading": "Three steps, morning and night",
@@ -156,6 +257,54 @@
         }
       ],
       "footnote": "Sunscreen in the morning is not optional. Serum on its own, with no sun protection, lets pigmentation return whatever product you use."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Compare",
+      "heading": "The serum alone, or both steps?",
+      "intro": "Better answered before you order than after the first bottle runs out.",
+      "items": [
+        "smart-first-care-serum",
+        "combo-nam"
+      ],
+      "criteria": [
+        {
+          "label": "What you get",
+          "values": [
+            "One 30ml serum",
+            "The serum plus the 30gr cream"
+          ]
+        },
+        {
+          "label": "What the step does",
+          "values": [
+            "Gets actives in",
+            "Gets them in, then seals"
+          ]
+        },
+        {
+          "label": "Times per day",
+          "values": [
+            "Morning and night",
+            "Serum twice, cream at night"
+          ]
+        },
+        {
+          "label": "Best suited to",
+          "values": [
+            "Thin skin, recently treated skin",
+            "Marked pigmentation, wanting faster progress"
+          ]
+        },
+        {
+          "label": "If you already like your moisturiser",
+          "values": [
+            "Slots in without replacing it",
+            "Replaces the cream step too"
+          ]
+        }
+      ],
+      "footnote": "If you already have a moisturiser that works for you, the serum on its own is the more sensible buy — there is no reason to drop something that works in order to buy a set."
     },
     {
       "type": "order",
@@ -194,6 +343,17 @@
           "q": "How should it be stored?",
           "a": "Keep away from heat and direct sunlight, close the lid after use, keep out of reach of children. Avoid contact with the eyes; if it gets in, rinse immediately with clean water."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Next step",
+      "heading": "If you are still deciding",
+      "intro": "Three directions, depending on where you are starting from.",
+      "items": [
+        "combo-nam",
+        "smart-brightening-cream",
+        "bio-active-cleanser"
       ]
     }
   ],
