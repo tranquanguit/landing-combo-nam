@@ -23,10 +23,18 @@ function lastmodFor(pathname) {
   }
 }
 
-export const SITE = 'https://mochatrinam.com';
+/**
+ * Tên miền thật của site. Bản xem thử trên GitHub Pages đặt PUBLIC_SITE_URL và
+ * PUBLIC_BASE_PATH để dựng ở một địa chỉ khác mà KHÔNG đụng vào bản production:
+ * thiếu hai biến này thì mọi thứ y hệt như trước.
+ */
+export const SITE = process.env.PUBLIC_SITE_URL ?? 'https://mochatrinam.com';
+/** Đường dẫn con, ví dụ '/landing-combo-nam'. Rỗng nghĩa là chạy ở gốc tên miền. */
+export const BASE_PATH = process.env.PUBLIC_BASE_PATH ?? '';
 
 export default defineConfig({
   site: SITE,
+  ...(BASE_PATH ? { base: BASE_PATH } : {}),
   // Một dạng URL duy nhất: canonical và sitemap phải khớp nhau tuyệt đối
   trailingSlash: 'always',
 

@@ -265,7 +265,19 @@ export const POLICY_SEGMENT: Record<Locale, string> = {
 };
 
 /** Đường dẫn có tiền tố ngôn ngữ; tiếng Việt không prefix. */
+/**
+ * Tiền tố đường dẫn con khi site không chạy ở gốc tên miền (bản xem thử trên
+ * GitHub Pages). Astro tự thêm tiền tố cho tài nguyên nó sinh ra, nhưng KHÔNG
+ * đụng vào chuỗi href do chính mình viết — nên phải thêm ở đây, nơi duy nhất
+ * mọi đường dẫn nội bộ đi qua.
+ *
+ * `?.` để hàm này vẫn chạy được khi bị import từ script node trần (các bộ thử),
+ * nơi `import.meta.env` không tồn tại.
+ */
+const BASE = ((import.meta as any).env?.BASE_URL ?? '/').replace(/\/$/, '');
+
 export function localePath(locale: Locale, path = '/'): string {
   const clean = path.startsWith('/') ? path : `/${path}`;
-  return locale === defaultLocale ? clean : `/${locale}${clean}`;
+  const withLocale = locale === defaultLocale ? clean : `/${locale}${clean}`;
+  return `${BASE}${withLocale}`;
 }

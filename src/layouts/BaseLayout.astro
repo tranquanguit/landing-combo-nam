@@ -2,6 +2,7 @@
 import '../styles/fonts.css';
 import '../styles/tokens.css';
 import { htmlLang, type Locale, localePath, t } from '../i18n/ui';
+import { withBase } from '../lib/base';
 import { safeJsonLd } from '../lib/richtext';
 
 interface Props {
@@ -28,6 +29,14 @@ interface Props {
   noindex?: boolean;
 }
 
+/**
+ * Bản xem thử (GitHub Pages) dựng với PUBLIC_NOINDEX=1 để KHÔNG lọt vào chỉ mục
+ * Google. Quan trọng hơn bình thường ở dự án này: trang khai pháp nhân và mã số
+ * thuế của Mocha, nên một bản sao được lập chỉ mục ở tên miền khác là rủi ro
+ * nhầm lẫn thực thể thật, không phải chuyện thẩm mỹ.
+ */
+const FORCE_NOINDEX = import.meta.env.PUBLIC_NOINDEX === '1';
+
 const {
   locale, title, description, canonical, ogImage, alternates = [], jsonLd, siteName,
   ogImageWidth = 1200, ogImageHeight = 630, ogImageAlt, ogType = 'website', noindex = false,
@@ -45,7 +54,7 @@ const {
     <link rel="canonical" href={canonical} />
     <meta
       name="robots"
-      content={noindex
+      content={noindex || FORCE_NOINDEX
         ? 'noindex, follow'
         : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
     />
@@ -80,19 +89,19 @@ const {
     )}
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
 
     {/* Font self-host, tách subset latin và vietnamese qua unicode-range.
         Chỉ preload hai file cần ngay cho màn hình đầu: body 400 và tiêu đề Fraunces 600. */}
-    <link rel="preload" href="/fonts/bvp-400-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/bvp-400-vietnamese.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={withBase("/fonts/bvp-400-latin.woff2")} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={withBase("/fonts/bvp-400-vietnamese.woff2")} as="font" type="font/woff2" crossorigin />
     {/* Tiêu đề nay đặt ở cỡ rất lớn bằng weight 600, nên độ lệch metric giữa
         font dự phòng và font thật bị phóng đại: đo được CLS 0.0368 trên bản EN
         ở 390px khi chỉ preload weight 400. Preload thêm 600. */}
-    <link rel="preload" href="/fonts/bvp-600-vietnamese.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/bvp-600-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/fraunces-600-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/fraunces-600-vietnamese.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={withBase("/fonts/bvp-600-vietnamese.woff2")} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={withBase("/fonts/bvp-600-latin.woff2")} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={withBase("/fonts/fraunces-600-latin.woff2")} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={withBase("/fonts/fraunces-600-vietnamese.woff2")} as="font" type="font/woff2" crossorigin />
 
     {jsonLd && <script type="application/ld+json" set:html={safeJsonLd(jsonLd)} />}
   </head>

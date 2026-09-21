@@ -1,6 +1,6 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import { productPath } from '../lib/routes';
+import { homePath, productPath } from '../lib/routes';
 import type { Locale } from '../i18n/ui';
 import '../styles/fonts.css';
 import '../styles/tokens.css';
@@ -43,7 +43,7 @@ const en = pick('en', '/en/');
       </p>
 
       <ul class="links">
-        <li><a href="/">Trang chủ</a></li>
+        <li><a href={homePath("vi")}>Trang chủ</a></li>
         {vi.map((p) => (
           <li><a href={productPath(p.data.slug, p.data.locale as Locale)}>{p.data.name}</a></li>
         ))}
@@ -58,7 +58,7 @@ const en = pick('en', '/en/');
         The link you opened no longer exists or was mistyped. These pages are live:
       </p>
       <ul class="links" lang="en">
-        <li><a href="/en/">Home (English)</a></li>
+        <li><a href={homePath("en")}>Home (English)</a></li>
         {en.map((p) => (
           <li><a href={productPath(p.data.slug, p.data.locale as Locale)}>{p.data.name}</a></li>
         ))}

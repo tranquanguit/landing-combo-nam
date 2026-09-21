@@ -1,0 +1,77 @@
+# Bản xem thử trên GitHub Pages.
+#
+# ĐÂY KHÔNG PHẢI BẢN PRODUCTION. Ba khác biệt quan trọng so với bản thật:
+#
+#   1. Biểu mẫu đặt hàng KHÔNG hoạt động. `functions/api/orders.ts` là Cloudflare
+#      Pages Function; GitHub Pages chỉ phục vụ file tĩnh nên không chạy được.
+#      Build ở đây cố ý KHÔNG đặt PUBLIC_ORDER_ENDPOINT, nên trang tự ẩn thẻ
+#      <form> và chỉ hiện hotline — đúng hành vi đã thiết kế sẵn: một đơn hàng
+#      rơi vào hư không tệ hơn một nút không hoạt động.
+#   2. Site chạy ở đường dẫn con, nên PUBLIC_BASE_PATH và PUBLIC_SITE_URL đổi
+#      canonical, sitemap và mọi liên kết nội bộ sang địa chỉ github.io.
+#   3. PUBLIC_NOINDEX=1 và robots.txt chặn toàn bộ. Trang khai pháp nhân và mã
+#      số thuế của Mocha, nên một bản sao được Google lập chỉ mục ở tên miền
+#      khác là rủi ro nhầm lẫn thực thể — không phải chuyện thẩm mỹ.
+#
+# Bản production vẫn dựng bằng `npm run build` không có biến nào ở trên, nên
+# không đổi một byte nào.
+name: Bản xem thử (GitHub Pages)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Một lượt deploy tại một thời điểm; không huỷ lượt đang chạy giữa chừng.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Chặn mọi bot trước khi dựng
+        run: |
+          printf '%s\n' \
+            '# Bản xem thử — KHÔNG phải site thật của Mocha.' \
+            '# Site thật: https://mochatrinam.com' \
+            'User-agent: *' \
+            'Disallow: /' \
+            > public/robots.txt
+
+      - name: Dựng bản xem thử
+        env:
+          PUBLIC_SITE_URL: https://tranquanguit.github.io
+          PUBLIC_BASE_PATH: /landing-combo-nam
+          PUBLIC_NOINDEX: '1'
+        run: npm run build
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -28,6 +28,12 @@ import { t, type Locale } from '../i18n/ui';
  * cổng bên dưới nhìn thấy va chạm ngay lúc build.
  */
 export const getStaticPaths = (async () => {
+  /* Khai TRONG hàm, không ở frontmatter: Astro tách `getStaticPaths` ra một
+     module riêng lúc build, nên hằng số ở phạm vi frontmatter không nhìn thấy
+     được từ đây — lỗi chỉ lộ ra lúc sinh trang, không phải lúc kiểm kiểu. */
+  const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+  const stripBase = (p: string) => (BASE && p.startsWith(BASE) ? p.slice(BASE.length) || '/' : p);
+
   const routes = await allRoutes();
 
   const seen = new Map<string, Route>();
@@ -84,7 +90,12 @@ export const getStaticPaths = (async () => {
   }
 
   return routes.map((r) => ({
-    params: { path: r.path.replace(/^\/|\/$/g, '') || undefined },
+    /* Bỏ tiền tố đường dẫn con trước khi làm `params`.
+       `r.path` đã mang tiền tố (ví dụ /landing-combo-nam/combo-nam/) vì liên kết
+       và canonical cần nó. Nhưng Astro TỰ thêm base vào đường dẫn xuất file, nên
+       để nguyên tiền tố ở đây là ghi ra dist/<base>/<base>/... — thư mục lồng
+       hai lần. Tiền tố thuộc về URL, không thuộc về tên file. */
+    params: { path: stripBase(r.path).replace(/^\/|\/$/g, '') || undefined },
     props: { route: r },
   }));
 }) satisfies GetStaticPaths;

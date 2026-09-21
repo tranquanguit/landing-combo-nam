@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { withBase } from './lib/base.ts';
 import { MONEY_TOKENS } from './lib/money-text.ts';
 import { findHandwrittenMoney } from './lib/money-scan.ts';
 import { findForbiddenClaims, findPersonalData } from './lib/claims-lexicon.ts';
@@ -51,7 +52,11 @@ export function isSafeHref(v: string): boolean {
 const safeUrl = z.string().refine(isSafeHref, {
   message: 'Link phải là http(s), neo #trong-trang hoặc đường dẫn /noi-bo. ' +
     'Scheme khác (javascript:, data:, vbscript:) bị chặn vì chạy được mã trên trang.',
-});
+}).transform(withBase);
+/* `.transform` sau `.refine`: người biên tập viết `/nam-tham/` trong JSON và
+   không cần biết site có chạy ở đường dẫn con hay không. Đây là chỗ DUY NHẤT
+   mọi link do người viết đi qua, nên thêm tiền tố ở đây thay vì nhớ gọi một
+   hàm ở hàng chục component. Link tuyệt đối và neo #: withBase trả nguyên. */
 /** Chuỗi có thể là link hoặc chỉ là chữ (số phiếu, tên đơn vị kiểm nghiệm). */
 const textOrSafeUrl = z.string().refine((v) => !/^[a-z][a-z0-9+.-]*:/i.test(v) || isSafeHref(v), {
   message: 'Nguồn viết dạng scheme: thì chỉ được http(s). Muốn ghi chữ thường thì đừng dùng dấu hai chấm sau một từ.',
