@@ -199,24 +199,24 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
   `auto` = 152KB HTML + 9KB CSS = 161KB, nặng nhất 15.421B/24.576B (đạt).
   Tổng byte cả site giảm một nửa, và ngay cả lượt xem một trang cũng không tệ
   hơn. Lý do cũ đúng khi site có một trang landing, không còn đúng với 19 trang.
-- `[~] F2` **Xong hai dòng:** "Bảo vệ da" (4 mục + FAQ + 1 sản phẩm) và
+- `[x] F2` **Xong hai dòng:** "Bảo vệ da" (4 mục + FAQ + 1 sản phẩm) và
   "Làm sạch" (3 mục + bảng so sánh + FAQ + 2 sản phẩm).
   Thêm "Phục hồi da" (3 mục + bảng so sánh + FAQ + 2 sản phẩm).
-  Thêm "Chăm sóc da mụn" (3 mục + bảng so sánh + FAQ + 2 sản phẩm).
-  Còn một dòng: Treatment (peel vi gai tảo biển).
+  Thêm "Chăm sóc da mụn" và "Treatment". **Đủ sáu dòng, đóng mục này.**
 
-## G. Sản phẩm còn lại (3)
+## G. Sản phẩm còn lại (2)
 
 > Đã xong: `uv-block-sunscreen` · `bio-active-cleanser` ·
 > `bio-deep-detox-rebalance` · `biovector-brightening-cream` ·
 > `collagen-peptide-cream` · `smart-target-acne-gel` ·
-> `smart-whitening-turmergel`.
+> `smart-whitening-turmergel` · `retinol-mixpeel-kit`.
+>
+> Còn lại: mặt nạ gel lạnh (195.000đ) và tinh chất B5 10ml (`[!] A11`).
 
 Giá và mã vạch đã lấy từ cửa hàng chính hãng, chờ dựng trang:
 
 | Giá bán | Sản phẩm |
 |---|---|
-| 550.000đ | Peel vi gai tảo biển |
 | 200.000đ | Tinh chất B5 10ml |
 | 195.000đ | Mặt nạ gel lạnh tế bào gốc |
 
