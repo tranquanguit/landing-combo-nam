@@ -81,6 +81,13 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
   mochavietnam.com**. Site này chạy tên miền khác, nên KHÔNG được gắn logo hay
   dẫn hồ sơ đó — phải đăng ký riêng cho tên miền đang dùng. Cần chủ site xác
   nhận tên miền cuối cùng rồi mới làm bước này.
+- `[!] A14` **Bật GitHub Pages.** Workflow `.github/workflows/deploy-pages.yml`
+  đã đẩy lên `main` và chạy được phần dựng, nhưng bước deploy cần chủ repo vào
+  **Settings -> Pages -> Build and deployment -> Source: GitHub Actions** một
+  lần. Sau đó bản xem thử nằm ở
+  `https://tranquanguit.github.io/landing-combo-nam/`. Đây KHÔNG phải bản thật:
+  chặn toàn bộ bot, và biểu mẫu đặt hàng không chạy (GitHub Pages không có
+  Pages Function) nên trang chỉ hiện hotline.
 - `[!] A9` **Zalo OA.** Bản cào có `zalo.me/4500053981574656766` (OA chính
   thức), trong khi site đang dùng `zalo.me/0367848918` (số cá nhân). Cần chủ
   site chọn kênh nào là kênh chính thức để khai nhất quán.
