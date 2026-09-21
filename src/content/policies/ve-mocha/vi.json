@@ -1,0 +1,66 @@
+{
+  "slug": "ve-mocha",
+  "locale": "vi",
+  "translationKey": "ve-mocha",
+  "status": "published",
+  "topLevel": true,
+  "seo": {
+    "title": "Về Mocha Việt Nam – chúng tôi là ai và viết theo quy tắc nào",
+    "description": "Chúng tôi là đại lý được uỷ quyền, không phải nhà sản xuất. Trang này nói rõ quan hệ đó, và cả những quy tắc chúng tôi tự đặt cho nội dung."
+  },
+  "title": "Về Mocha",
+  "lead": "Phần lớn trang “về chúng tôi” kể một câu chuyện. Trang này làm việc khác: nói rõ chúng tôi đứng ở đâu trong chuỗi phân phối, chịu trách nhiệm tới đâu, và viết nội dung theo những quy tắc nào.",
+  "updatedAt": "2026-09-22",
+  "sections": [
+    {
+      "id": "chung-toi-la-ai",
+      "heading": "Đại lý, không phải nhà sản xuất",
+      "body": [
+        "Chúng tôi phân phối sản phẩm Mocha và được uỷ quyền sử dụng pháp nhân của hãng cho hoạt động bán hàng này. Công thức, quy trình sản xuất và hồ sơ công bố sản phẩm đều thuộc về công ty sản xuất ghi ở cuối trang.",
+        "Điều này quyết định chúng tôi trả lời được những gì. <strong>Sản phẩm, giá, giao hàng, đổi trả, cách dùng</strong> — đây là phần việc của chúng tôi và chúng tôi trả lời trực tiếp. <strong>Công thức và hồ sơ công bố</strong> — chúng tôi chuyển câu hỏi về hãng chứ không tự trả lời, vì trả lời bừa những chuyện đó là cách nhanh nhất để nói sai.",
+        "Nói rõ ngay từ đầu vì một lý do thực tế: nếu bạn cần đối chiếu thông tin ở nguồn gốc, bạn nên biết nguồn gốc đó nằm ở đâu."
+      ]
+    },
+    {
+      "id": "vi-sao-chon-mocha",
+      "heading": "Vì sao chúng tôi chọn phân phối dòng này",
+      "body": [
+        "Phần lớn mỹ phẩm chăm sóc da chỉ liệt kê tên hoạt chất. Bạn biết trong đó có Niacinamide, nhưng không biết là 1% hay 5% — và hai con số đó không phải cùng một sản phẩm.",
+        "Mocha in tỉ lệ từng hoạt chất chính lên bao bì. Một sản phẩm trong dòng còn công bố đủ cả 45 thành phần theo thứ tự INCI. Chúng tôi không nói như vậy nghĩa là công thức tốt hơn của hãng khác — nói thế là một tuyên bố so sánh mà chúng tôi không có cơ sở để đưa ra.",
+        "Chúng tôi nói điều khác: <strong>khi con số được in ra, bạn có thể tự so sánh</strong>. Và một hãng sẵn sàng để bạn so sánh là một hãng dễ làm đại lý hơn, vì chúng tôi không phải bán bằng những câu không kiểm chứng được."
+      ]
+    },
+    {
+      "id": "quy-tac-noi-dung",
+      "heading": "Những quy tắc chúng tôi tự đặt cho nội dung trên trang này",
+      "body": [
+        "<strong>Không con số nào không có trên bao bì.</strong> Không có thì bỏ số ra, không ước lượng. Nếu bạn thấy một trang sản phẩm thiếu chỉ số mà lẽ ra phải có, thường là vì chúng tôi đang chờ xác nhận từ hãng — và trang sẽ nói thẳng điều đó thay vì im lặng.",
+        "<strong>Không tuyên bố chữa bệnh.</strong> Mọi sản phẩm ở đây là mỹ phẩm dùng ngoài da. Chúng không thay thế thuốc chữa bệnh, và chúng tôi không mô tả chúng theo cách gợi ý điều ngược lại.",
+        "<strong>Không tạo sự khan hiếm giả.</strong> Không đồng hồ đếm ngược, không “chỉ còn 3 sản phẩm”, không ưu đãi hết hạn rồi lại gia hạn âm thầm. Những thứ đó làm tăng đơn hàng trong ngắn hạn và làm mất khách trong dài hạn.",
+        "<strong>Không lời chứng hay ảnh khách hàng khi chưa có văn bản đồng ý.</strong> Trang có sẵn chỗ cho những nội dung đó, nhưng chỗ đó để trống cho tới khi có đồng ý bằng văn bản.",
+        "<strong>Nói trước điều bất lợi.</strong> Mỗi trang sản phẩm đều có một mục nói rõ trường hợp nào không nên mua, hoặc chưa phải lúc mua — và mục đó nằm trước phần giá, không nằm sau."
+      ]
+    },
+    {
+      "id": "vi-sao-viet-ra",
+      "heading": "Vì sao viết những quy tắc này ra thay vì chỉ làm theo",
+      "body": [
+        "Vì quy tắc không viết ra thì không kiểm được. Phần lớn những điều ở trên được kiểm tự động mỗi lần trang được dựng lại: một con số tiền viết tay không khớp dữ liệu giá sẽ chặn bản build, một câu chứa từ ngữ bị cấm trong quảng cáo mỹ phẩm cũng vậy.",
+        "Và vì nếu chúng tôi phá một trong những quy tắc này, bạn có cái để chỉ ra."
+      ]
+    },
+    {
+      "id": "thong-tin-phap-nhan",
+      "heading": "Thông tin pháp nhân",
+      "body": [
+        "<strong>Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha</strong>",
+        "Địa chỉ: 290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+        "Mã số thuế: 0317963313",
+        "Số tiếp nhận phiếu công bố của từng sản phẩm được in trên trang sản phẩm tương ứng."
+      ],
+      "links": [
+        { "label": "Liên hệ với chúng tôi", "href": "/lien-he/" }
+      ]
+    }
+  ]
+}

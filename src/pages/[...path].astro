@@ -188,6 +188,11 @@ const policies = allPolicies
   .filter((x) => !x.data.topLevel)
   .map((x) => ({ label: x.data.title, href: policyPath(x.data.slug, locale) }));
 
+/** Trang đứng ở gốc. Chúng đi vào một cột riêng ở chân trang, không lẫn vào chính sách. */
+const topPages = allPolicies
+  .filter((x) => x.data.topLevel)
+  .map((x) => ({ label: x.data.title, href: policyPath(x.data.slug, locale, true) }));
+
 const articlesSorted = allArticles
   .map((a) => a.data)
   .sort((a, b) => (b.updatedAt ?? b.publishedAt).localeCompare(a.updatedAt ?? a.publishedAt));
@@ -196,6 +201,7 @@ const articlesSorted = allArticles
   <HomePage
     nav={nav}
     policies={policies}
+    pages={topPages}
     page={data}
     brand={brand.data}
     locale={locale}
@@ -211,6 +217,7 @@ const articlesSorted = allArticles
   <LinePage
     nav={nav}
     policies={policies}
+    pages={topPages}
     fallbackOgImage={fallbackOgImage}
     line={data}
     brand={brand.data}
@@ -226,6 +233,7 @@ const articlesSorted = allArticles
   <ProductLanding
     nav={nav}
     policies={policies}
+    pages={topPages}
     product={data}
     brand={brand.data}
     locale={locale}
@@ -240,6 +248,7 @@ const articlesSorted = allArticles
   <ArticlePage
     nav={nav}
     policies={policies}
+    pages={topPages}
     fallbackOgImage={fallbackOgImage}
     article={data}
     brand={brand.data}
@@ -255,6 +264,7 @@ const articlesSorted = allArticles
   <AdviceIndex
     nav={nav}
     policies={policies}
+    pages={topPages}
     fallbackOgImage={fallbackOgImage}
     brand={brand.data}
     locale={locale}
@@ -270,6 +280,7 @@ const articlesSorted = allArticles
   <PolicyPage
     nav={nav}
     policies={policies}
+    pages={topPages}
     fallbackOgImage={fallbackOgImage}
     policy={data}
     brand={brand.data}

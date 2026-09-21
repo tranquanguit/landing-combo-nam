@@ -1,0 +1,66 @@
+{
+  "slug": "ve-mocha",
+  "locale": "en",
+  "translationKey": "ve-mocha",
+  "status": "published",
+  "topLevel": true,
+  "seo": {
+    "title": "About Mocha Vietnam – who we are and the rules we write by",
+    "description": "We are an authorised reseller, not the manufacturer. This page states that relationship plainly, and the rules we write by."
+  },
+  "title": "About Mocha",
+  "lead": "Most “about us” pages tell a story. This one does something else: it states where we sit in the distribution chain, what we are answerable for, and the rules we write by.",
+  "updatedAt": "2026-09-22",
+  "sections": [
+    {
+      "id": "chung-toi-la-ai",
+      "heading": "A reseller, not the manufacturer",
+      "body": [
+        "We distribute Mocha products and are authorised to use the company's legal entity for this sales activity. The formulations, the manufacturing and the product notification filings belong to the manufacturing company named at the foot of this page.",
+        "That decides what we can answer. <strong>Product, price, delivery, returns, how to use it</strong> — our side of things, answered directly. <strong>Formulation and notification records</strong> — we pass those back to the manufacturer rather than answering ourselves, because guessing at them is the fastest way to say something untrue.",
+        "Stated up front for a practical reason: if you need to verify something at source, you should know where the source is."
+      ]
+    },
+    {
+      "id": "vi-sao-chon-mocha",
+      "heading": "Why we chose to distribute this range",
+      "body": [
+        "Most skincare lists its actives by name only. You learn that Niacinamide is in there, but not whether it is 1% or 5% — and those are not the same product.",
+        "Mocha prints the proportion of each key active on the pack. One product in the range declares all 45 ingredients in INCI order. We are not claiming that makes the formulation better than anyone else's — that would be a comparative claim we have no basis for.",
+        "What we do claim is narrower: <strong>when the number is printed, you can compare it yourself</strong>. And a manufacturer willing to be compared is an easier one to resell, because we are not required to sell on statements nobody can check."
+      ]
+    },
+    {
+      "id": "quy-tac-noi-dung",
+      "heading": "The rules we set ourselves for everything published here",
+      "body": [
+        "<strong>No figure that is not on the pack.</strong> If it is not there, the number comes out rather than getting estimated. Where a product page is missing a figure you would expect, it is usually because we are waiting on confirmation from the manufacturer — and the page says so rather than staying quiet.",
+        "<strong>No medical claims.</strong> Everything here is a topical cosmetic. None of it replaces medicine, and nothing on this site is described as if it did.",
+        "<strong>No manufactured scarcity.</strong> No countdown timers, no “only 3 left”, no offers that expire and then quietly get extended. Those lift orders in the short run and lose customers in the long run.",
+        "<strong>No customer photos or testimonials without written consent.</strong> The site has places for them, and those places stay empty until consent exists in writing.",
+        "<strong>The inconvenient part comes first.</strong> Every product page states which cases should not buy, or should not buy yet — and that section sits before the price, not after it."
+      ]
+    },
+    {
+      "id": "vi-sao-viet-ra",
+      "heading": "Why write the rules down rather than simply follow them",
+      "body": [
+        "Because a rule that is not written down cannot be checked. Most of the above is verified automatically every time the site is rebuilt: a hand-typed price that does not match the price data blocks the build, and so does a phrase that is prohibited in cosmetics advertising.",
+        "And because if we break one of them, you have something to point at."
+      ]
+    },
+    {
+      "id": "thong-tin-phap-nhan",
+      "heading": "Company details",
+      "body": [
+        "<strong>Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha</strong>",
+        "Address: 290/2 Nam Ky Khoi Nghia, Vo Thi Sau Ward, District 3, Ho Chi Minh City, Vietnam",
+        "Tax code: 0317963313",
+        "Each product's notification receipt number is printed on its own product page."
+      ],
+      "links": [
+        { "label": "Contact us", "href": "/en/lien-he/" }
+      ]
+    }
+  ]
+}

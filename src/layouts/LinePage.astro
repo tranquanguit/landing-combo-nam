@@ -23,13 +23,14 @@ interface Props {
   alternates?: { locale: Locale; url: string }[];
   nav?: { label: string; href: string }[];
   policies?: { label: string; href: string }[];
+  pages?: { label: string; href: string }[];
   /** Ảnh dùng khi trang không tự khai ảnh chia sẻ. */
   fallbackOgImage?: string;
   products: any[];
   articles: any[];
 }
 
-const { line, brand: b, locale, canonical, alternates = [], nav = [], policies = [], fallbackOgImage, products, articles } = Astro.props;
+const { line, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], fallbackOgImage, products, articles } = Astro.props;
 const site = Astro.site?.origin ?? 'https://mochatrinam.com';
 assertTranslated(locale);
 
@@ -115,7 +116,7 @@ const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath
     )}
   </main>
 
-  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} product={products[0]} />
+  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} pages={pages} product={products[0]} />
   <Analytics locale={locale} />
 </BaseLayout>
 

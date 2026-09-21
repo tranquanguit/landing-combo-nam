@@ -39,13 +39,14 @@ interface Props {
   alternates?: { locale: Locale; url: string }[];
   nav?: { label: string; href: string }[];
   policies?: { label: string; href: string }[];
+  pages?: { label: string; href: string }[];
   /** Bài tư vấn liên quan — xem `relatedArticles` trong schema sản phẩm. */
   articles?: any[];
   /** Tra cứu thẻ sản phẩm theo slug, cho khối `relatedProducts`. */
   productCards?: Map<string, any>;
 }
 
-const { product: raw, brand: b, locale, canonical, alternates = [], nav = [], policies = [], articles = [], productCards = new Map() } = Astro.props;
+const { product: raw, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], articles = [], productCards = new Map() } = Astro.props;
 
 /* Tên tổ chức công bố (in ở footer) phải trùng pháp nhân trong JSON-LD Organization.
    Kiểm định lần 6: bản EN khai "Mocha Vietnam Cosmeceuticals" trong khi structured
@@ -219,7 +220,7 @@ const r = (i: number) => rhythm.get(i) ?? {};
     )}
   </main>
 
-  <SiteFooter brand={b} product={p} locale={locale} nav={nav} policies={policies} />
+  <SiteFooter brand={b} product={p} locale={locale} nav={nav} policies={policies} pages={pages} />
   <StickyCta brand={b} locale={locale} />
   <Analytics
     locale={locale}

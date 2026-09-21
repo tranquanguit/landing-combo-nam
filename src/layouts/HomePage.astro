@@ -23,12 +23,13 @@ interface Props {
   alternates?: { locale: Locale; url: string }[];
   nav?: { label: string; href: string }[];
   policies?: { label: string; href: string }[];
+  pages?: { label: string; href: string }[];
   lines: any[];
   featured: any[];
   articles: any[];
 }
 
-const { page, brand: b, locale, canonical, alternates = [], nav = [], policies = [], lines, featured, articles } = Astro.props;
+const { page, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], lines, featured, articles } = Astro.props;
 const site = Astro.site?.origin ?? 'https://mochatrinam.com';
 assertTranslated(locale);
 
@@ -213,7 +214,7 @@ const soloArticle = articles.length === 1 ? articles[0] : undefined;
     )}
   </main>
 
-  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} product={featured[0]} />
+  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} pages={pages} product={featured[0]} />
   <Analytics locale={locale} />
 </BaseLayout>
 

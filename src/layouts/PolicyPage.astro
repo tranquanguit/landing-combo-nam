@@ -18,10 +18,11 @@ interface Props {
   alternates?: { locale: Locale; url: string }[];
   nav?: { label: string; href: string }[];
   policies?: { label: string; href: string }[];
+  pages?: { label: string; href: string }[];
   fallbackOgImage?: string;
 }
 
-const { policy: d, brand: b, locale, canonical, alternates = [], nav = [], policies = [], fallbackOgImage } = Astro.props;
+const { policy: d, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], fallbackOgImage } = Astro.props;
 const site = Astro.site?.origin ?? 'https://mochatrinam.com';
 assertTranslated(locale);
 
@@ -109,7 +110,7 @@ const sections = d.sections.map((s: any, i: number) => ({ ...s, id: s.id ?? `muc
     </div>
   </main>
 
-  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} />
+  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} pages={pages} />
   <Analytics locale={locale} />
 </BaseLayout>
 

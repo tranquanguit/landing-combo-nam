@@ -18,6 +18,7 @@ interface Props {
   alternates?: { locale: Locale; url: string }[];
   nav?: { label: string; href: string }[];
   policies?: { label: string; href: string }[];
+  pages?: { label: string; href: string }[];
   /** Ảnh dùng khi trang không tự khai ảnh chia sẻ. */
   fallbackOgImage?: string;
   articles: any[];
@@ -27,7 +28,7 @@ interface Props {
 }
 
 const {
-  brand: b, locale, canonical, alternates = [], nav = [], policies = [],
+  brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [],
   fallbackOgImage, articles, sections = [], faq = [],
 } = Astro.props;
 const site = Astro.site?.origin ?? 'https://mochatrinam.com';
@@ -99,7 +100,7 @@ const jsonLd = collectionGraph({
     )}
   </main>
 
-  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} />
+  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} pages={pages} />
   <Analytics locale={locale} />
 </BaseLayout>
 

@@ -9,8 +9,10 @@ interface Props {
   nav?: { label: string; href: string; children?: { label: string; href: string; note?: string }[] }[];
   /** Trang chính sách đã xuất bản. Rỗng thì chân trang tự hiện cảnh báo còn thiếu. */
   policies?: { label: string; href: string }[];
+  /** Trang đứng ở gốc (Về Mocha, Liên hệ). Không phải chính sách, nên không gộp chung. */
+  pages?: { label: string; href: string }[];
 }
-const { brand: b, product: p, locale, nav = [], policies = [] } = Astro.props;
+const { brand: b, product: p, locale, nav = [], policies = [], pages = [] } = Astro.props;
 
 /** Chỉ tên dòng, không kèm từng sản phẩm: chân trang liệt kê cả 17 liên kết thì
     không còn là điều hướng mà là một bức tường. */
@@ -73,6 +75,17 @@ const c = p?.compliance;
         <a href={`mailto:${b.email}`}>{b.email}</a><br />
         {t(locale, 'footer.hours')}: {b.hours}
       </p>
+      {pages.length > 0 && (
+        <>
+          {/* "Về Mocha" chỉ có đường vào từ đây: thanh trên cùng cố ý giữ ba
+              mục, nên chân trang là nơi duy nhất trỏ tới nó. Thiếu liên kết này
+              là một trang mồ côi, và cổng SEO bắt đúng điều đó. */}
+          <h3 style="margin-top:1.4em">{t(locale, 'footer.about')}</h3>
+          <ul class="channels">
+            {pages.map((x) => <li><a href={x.href}>{x.label}</a></li>)}
+          </ul>
+        </>
+      )}
       {policies.length > 0 ? (
         <>
           <h3 style="margin-top:1.4em">{t(locale, 'footer.policies')}</h3>
