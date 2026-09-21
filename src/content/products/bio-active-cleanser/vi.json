@@ -1,0 +1,219 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "lam-sach",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "bio-active-cleanser",
+  "translationKey": "bio-active-cleanser",
+  "sku": "8938552914150",
+  "price": 285000,
+  "compareAtPrice": 385000,
+  "locale": "vi",
+  "name": "Mocha Bio-Active Cleanser – sữa rửa mặt Cera-B Complex 300ml",
+  "shortName": "Sữa rửa mặt Bio-Active Cleanser",
+  "primaryKeyword": "sữa rửa mặt mocha bio-active cleanser",
+  "seo": {
+    "title": "Sữa rửa mặt Mocha Bio-Active Cleanser 300ml | Mocha Việt Nam",
+    "description": "Sữa rửa mặt pH 5.5 với Pro-vitamin B5, Nano-Ceramide, Lactobacillus ferment. Không sulfate, không cồn, không paraben, không silicone. {{price}}."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "hỗ trợ làm sạch da mặt và duy trì độ ẩm sau khi rửa",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
+      "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
+      "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Bio-Active Cleanser – 300ml",
+      "note": "Tiết kiệm {{save}} so với giá niêm yết",
+      "price": 285000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, xem tình trạng da qua hình ảnh",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước đầu của cả hai lộ trình",
+      "heading": "Rửa mặt là bước dễ làm hỏng nền da nhất, vì nó lặp lại mỗi ngày hai lần",
+      "lead": "Chai 300ml, <strong>Cera-B Complex</strong> gồm Pro-vitamin B5, Nano-Ceramide, Lactobacillus ferment và Hydroxyethyl Urea — đúng danh sách in trên vỏ. Bốn dấu trên chai: không sulfate, không cồn, không paraben, không silicone.",
+      "usp": [
+        {
+          "text": "<strong>Không sulfate, không cồn, không paraben, không silicone</strong> — in thành bốn dấu trên vỏ chai",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "đọc được trên chính bao bì"
+        },
+        {
+          "text": "<strong>Có Ceramide và Pro-vitamin B5 ngay trong bước rửa</strong>, không đợi tới bước dưỡng",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "thành phần in trên vỏ chai"
+        },
+        {
+          "text": "<strong>pH 5.5</strong>, gần với độ pH tự nhiên của bề mặt da",
+          "evidence": "ingredient",
+          "qualifier": "theo công bố của nhà sản xuất"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-bio-active-cleanser.webp",
+        "alt": "Chai sữa rửa mặt Mocha Bio-Active Cleanser 300ml màu xanh, nhãn ghi Cera-B Complex"
+      },
+      "primaryCta": "Đặt sữa rửa mặt",
+      "secondaryCta": {
+        "label": "Xem bảng thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Bảng thành phần",
+      "heading": "Bốn hoạt chất in trên vỏ, và bốn thứ không có trong công thức",
+      "intro": "Một sữa rửa mặt tốt được đánh giá bằng thứ nó không làm: không kéo căng, không để lại cảm giác khô rát sau khi rửa.",
+      "caption": "Bảng này liệt kê các hoạt chất được IN TRÊN VỎ CHAI 300ml. Bốn dấu “free” cũng in trên chính bao bì. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
+      "rows": [
+        {
+          "name": "Pro-vitamin B5 (Panthenol)",
+          "inProduct": "Cera-B Complex",
+          "role": "Giữ ẩm, hướng tới giảm cảm giác căng sau khi rửa.",
+          "suitedFor": "Da khô, da dễ căng"
+        },
+        {
+          "name": "Nano-Ceramide",
+          "inProduct": "Cera-B Complex",
+          "role": "Ceramide kích thước nano, thành phần cấu tạo nên hàng rào bảo vệ da.",
+          "suitedFor": "Da mỏng, da sau treatment"
+        },
+        {
+          "name": "Lactobacillus ferment",
+          "inProduct": "Cera-B Complex",
+          "role": "Thành phần lên men, liên quan tới hệ vi sinh trên bề mặt da.",
+          "suitedFor": "Da dễ mất cân bằng"
+        },
+        {
+          "name": "Hydroxyethyl Urea",
+          "inProduct": "Cera-B Complex",
+          "role": "Chất hút ẩm, giữ nước lại trên lớp sừng.",
+          "suitedFor": "Da khô"
+        },
+        {
+          "name": "Không chứa Sulfate",
+          "inProduct": "Dấu trên vỏ",
+          "role": "Nhóm chất tạo bọt mạnh, hay bị gắn với cảm giác khô rát sau khi rửa.",
+          "suitedFor": "Da nhạy cảm"
+        },
+        {
+          "name": "Không chứa cồn",
+          "inProduct": "Dấu trên vỏ",
+          "role": "Không dùng cồn khô trong công thức.",
+          "suitedFor": "Da dễ đỏ"
+        },
+        {
+          "name": "Không chứa Paraben",
+          "inProduct": "Dấu trên vỏ",
+          "role": "Không dùng nhóm chất bảo quản paraben.",
+          "suitedFor": "Người muốn tránh paraben"
+        },
+        {
+          "name": "Không chứa Silicone",
+          "inProduct": "Dấu trên vỏ",
+          "role": "Không dùng silicone tạo cảm giác trơn mượt giả.",
+          "suitedFor": "Da dầu, da dễ bí"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Ba bước, sáng và tối",
+      "totalTime": "PT2M",
+      "intro": "Buổi tối, nếu có trang điểm hoặc kem chống nắng trên da thì tẩy trang trước rồi mới tới bước này.",
+      "items": [
+        {
+          "heading": "Làm ướt mặt bằng nước mát",
+          "body": "Nước nóng lấy đi nhiều dầu tự nhiên hơn mức cần thiết và để lại cảm giác căng."
+        },
+        {
+          "heading": "Tạo bọt trong lòng bàn tay",
+          "body": "Tạo bọt trước rồi mới đưa lên mặt; xoa trực tiếp sản phẩm chưa tạo bọt lên da là cách chà xát không cần thiết."
+        },
+        {
+          "heading": "Rửa sạch và thấm khô",
+          "body": "Thấm bằng khăn sạch, không chà. Thoa bước tiếp theo khi da còn hơi ẩm."
+        }
+      ],
+      "footnote": "Hai lần mỗi ngày là đủ. Rửa nhiều hơn không làm da sạch hơn, chỉ làm hàng rào bảo vệ mỏng đi."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng phù hợp với tình trạng da của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt chu kỳ sử dụng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Sữa rửa mặt này giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho chai 300ml. Giá niêm yết là {{compareAtPrice}}. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Không sulfate thì có sạch được không?",
+          "a": "Sulfate là nhóm chất tạo bọt mạnh; bọt nhiều không đồng nghĩa với sạch hơn. Công thức không sulfate cho ít bọt hơn và đó là điều bình thường, không phải dấu hiệu sản phẩm yếu."
+        },
+        {
+          "q": "Có cần tẩy trang trước không?",
+          "a": "Có, nếu trên da còn trang điểm hoặc kem chống nắng. Sữa rửa mặt một mình thường không lấy hết lớp kem chống nắng, và phần còn lại tích tụ là nguyên nhân phổ biến gây bít tắc."
+        },
+        {
+          "q": "Dùng được cho da đang trong liệu trình làm mờ sắc tố không?",
+          "a": "Đây là bước làm sạch của chính lộ trình đó — bước 1 buổi sáng và bước 2 buổi tối. Nó được tặng kèm trong combo vì lý do này."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Tránh nhiệt độ cao và ánh nắng trực tiếp, đóng nắp sau khi dùng, để xa tầm tay trẻ em. Tránh tiếp xúc với mắt; nếu dính vào mắt thì rửa ngay bằng nước sạch."
+        }
+      ]
+    }
+  ]
+}

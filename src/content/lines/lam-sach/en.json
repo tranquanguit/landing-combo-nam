@@ -1,0 +1,113 @@
+{
+  "slug": "lam-sach",
+  "locale": "en",
+  "translationKey": "lam-sach",
+  "status": "published",
+  "primaryKeyword": "gentle cleanser for pigmented skin",
+  "seo": {
+    "title": "Cleansing for pigmented and sensitive skin | Mocha Vietnam",
+    "description": "Why the cleansing step decides the three that follow, when make-up removal is needed, and why less foam does not mean a poorer wash."
+  },
+  "eyebrow": "Product line",
+  "heading": "Cleansing",
+  "lead": "The step that repeats most often in a day, and for that reason the easiest one to thin your skin barrier with unnoticed.",
+  "products": [
+    "bio-active-cleanser",
+    "bio-deep-detox-rebalance"
+  ],
+  "compare": {
+    "eyebrow": "Which one",
+    "heading": "Two products doing two different jobs",
+    "intro": "These are not alternatives to each other. They are two consecutive steps in the same evening.",
+    "criteria": [
+      {
+        "label": "What it does",
+        "values": [
+          "Washes the skin with water; the final step of cleansing",
+          "Lifts make-up and sunscreen before the wash"
+        ]
+      },
+      {
+        "label": "When",
+        "values": [
+          "Morning and night, twice a day",
+          "Evenings only, and only when make-up or sunscreen is on the skin"
+        ]
+      },
+      {
+        "label": "Order",
+        "values": [
+          "After make-up removal",
+          "Before the face wash"
+        ]
+      },
+      {
+        "label": "Printed on the packaging",
+        "values": [
+          "Pro-vitamin B5, nano-ceramide, lactobacillus ferment, hydroxyethyl urea",
+          "Exosome cica, Epi-On, fermented sake rice, green tea, panthenol"
+        ]
+      },
+      {
+        "label": "Can one replace the other",
+        "values": [
+          "No — it will not lift sunscreen fully",
+          "No — the maker states you must wash afterwards"
+        ]
+      }
+    ],
+    "footnote": "If you use no sunscreen and wear no make-up, the cleanser alone is enough. But this site recommends sunscreen every morning, so for most readers the answer is both."
+  },
+  "sections": [
+    {
+      "id": "vi-sao-quan-trong",
+      "heading": "Why the cheapest step decides the three expensive ones after it",
+      "body": [
+        "Serum and cream get discussed the most, but both are applied to a surface the cleansing step created. Wash too aggressively and the barrier thins; on thin skin every active stings more readily.",
+        "Wash too little and the opposite happens: leftover sunscreen accumulates over days and congests the skin, and people usually blame whichever serum or cream they added most recently rather than the wash.",
+        "Two opposite mistakes with one cause: the cleansing step being treated as the trivial one."
+      ],
+      "links": [
+        {
+          "label": "See the morning and evening routines",
+          "href": "/en/combo-nam/#lo-trinh"
+        }
+      ]
+    },
+    {
+      "id": "it-bot",
+      "heading": "Less foam does not mean a poorer wash",
+      "body": [
+        "That squeaky feeling after washing is widely read as clean. It is actually a sign that too much of the skin's own oil has gone, and the skin is compensating — on oily skin that compensation can mean more oil, not less.",
+        "Sulfates are strong, inexpensive foaming agents, so abundant foam has become tied to the feeling of cleanliness. A sulfate-free formula foams less; that follows from the formula rather than indicating a weak product.",
+        "The better measure is how the skin feels once blotted dry: soft, not tight, with no urge to put something on immediately just to relieve discomfort."
+      ]
+    },
+    {
+      "id": "nuoc-am",
+      "heading": "Water temperature, and hand pressure",
+      "body": [
+        "Hot water dissolves oil more effectively, so it removes more of the skin's own oil than needed. Cool or slightly warm water is enough for any cleanser.",
+        "Hand pressure matters more than temperature. Scrubbing while washing, or dragging a cotton pad, causes mechanical damage — the kind no ingredient in the bottle compensates for.",
+        "Blot dry with a clean towel rather than rubbing, and apply the next step while the skin is still slightly damp."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "How often should I wash?",
+      "a": "Twice a day. More often does not make skin cleaner, it only thins the barrier — and on thin skin every active in the routine stings more readily."
+    },
+    {
+      "q": "Do I need make-up remover if I wear no make-up?",
+      "a": "If you use sunscreen, yes. Sunscreen clings fairly firmly and a face wash alone often does not lift all of it; the residue building up over days is a common cause of congestion."
+    },
+    {
+      "q": "How should I wash irritated skin?",
+      "a": "Cool water, the lightest pressure you can manage, and pause any exfoliating step. If it persists or worsens, that is a dermatologist's job, not a cleanser's."
+    }
+  ],
+  "articles": [
+    "nam-noi-tiet-la-gi"
+  ]
+}
