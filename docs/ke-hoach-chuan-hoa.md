@@ -57,6 +57,11 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
 - `[!] A6` **Chứng từ có chữ ký giám đốc.** Phải che chữ ký và dấu cá nhân trước
   khi đăng lên trang công khai.
 - `[!] A7` **Văn bản đồng ý cho 4 ảnh trước/sau.** Cổng build đang chặn đúng.
+- `[!] A13` **Đối chiếu lại toàn bộ ảnh sản phẩm.** Trong lúc dựng, tôi đã đặt
+  nhầm ảnh mặt nạ gel (`mochavietnam-com-8`) làm ảnh cho nước tẩy trang — phát
+  hiện và sửa ở commit 92de33f. Không cổng nào bắt được: ảnh có thật, kích
+  thước đúng, alt text tự viết nên cũng "khớp". Nên người review cần mở từng
+  trang sản phẩm và đối chiếu ảnh với vỏ hộp thật một lượt.
 - `[!] A12` **Bao bì Smart Whitening in tuyên bố "DARK SPOTS DISAPPEAR IN JUST
   4 DAYS".** Đó là mốc thời gian tuyệt đối, mâu thuẫn với toàn bộ lập trường của
   site về kỳ vọng, và claims-guard chặn. Trang không bê câu đó sang. Nhưng chữ
@@ -204,21 +209,23 @@ rõ ràng, và cân nhắc tâm lý hành vi — màu sắc, tương quan ảnh/
   Thêm "Phục hồi da" (3 mục + bảng so sánh + FAQ + 2 sản phẩm).
   Thêm "Chăm sóc da mụn" và "Treatment". **Đủ sáu dòng, đóng mục này.**
 
-## G. Sản phẩm còn lại (2)
+## G. Sản phẩm còn lại (1) — bị chặn
 
 > Đã xong: `uv-block-sunscreen` · `bio-active-cleanser` ·
 > `bio-deep-detox-rebalance` · `biovector-brightening-cream` ·
 > `collagen-peptide-cream` · `smart-target-acne-gel` ·
 > `smart-whitening-turmergel` · `retinol-mixpeel-kit`.
 >
-> Còn lại: mặt nạ gel lạnh (195.000đ) và tinh chất B5 10ml (`[!] A11`).
+> `ultra-egf-bio-gel-mask`.
+>
+> Còn lại DUY NHẤT tinh chất B5 10ml, đang bị chặn vì thiếu dữ liệu — xem `[!] A11`.
+> Nghĩa là **mọi sản phẩm dựng được đã dựng xong**.
 
 Giá và mã vạch đã lấy từ cửa hàng chính hãng, chờ dựng trang:
 
 | Giá bán | Sản phẩm |
 |---|---|
 | 200.000đ | Tinh chất B5 10ml |
-| 195.000đ | Mặt nạ gel lạnh tế bào gốc |
 
 ## Nguồn tài nguyên
 
