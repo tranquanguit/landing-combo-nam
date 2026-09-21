@@ -13,45 +13,51 @@
   "lead": "Dòng dành cho giai đoạn da cần yên: giữ ẩm, làm dịu, và không thêm hoạt chất nào đang tranh việc với nhau.",
   "products": [
     "biovector-brightening-cream",
-    "collagen-peptide-cream"
+    "collagen-peptide-cream",
+    "ultra-egf-bio-gel-mask"
   ],
   "compare": {
     "eyebrow": "Chọn cái nào",
-    "heading": "Hai kem dưỡng, chọn theo thứ bạn đang cần",
-    "intro": "Cả hai đều là bước dưỡng nền, không phải bước đặc trị. Khác nhau ở mức độ chi tiết mà nhà sản xuất công bố và ở nhóm thành phần đi kèm.",
+    "heading": "Ba lựa chọn, chọn theo thứ bạn đang cần",
+    "intro": "Hai kem dưỡng và một mặt nạ. Cả ba đều thuộc nhóm cấp ẩm và làm dịu, không phải bước đặc trị.",
     "criteria": [
       {
         "label": "Công bố thành phần",
         "values": [
           "Trọn vẹn 45 chất theo INCI, đúng thứ tự tỉ lệ",
-          "Bốn nhóm in trên hũ"
+          "Bốn nhóm in trên hũ",
+          "Tám thành phần in trên vỏ tuýp"
         ]
       },
       {
         "label": "Thành phần nổi bật",
         "values": [
           "Niacinamide (đứng thứ 5), bộ ba rau má khai riêng, nghệ, cúc bất tử, dầu mù u",
-          "Pro-vitamin B5, chiết xuất rau má, HA, tế bào gốc thực vật"
+          "Pro-vitamin B5, chiết xuất rau má, HA, tế bào gốc thực vật",
+          "EGF, Epi-On, Copper Peptide, Exosome Cica, ba loại Nano Ceramide"
         ]
       },
       {
         "label": "Hợp với ai",
         "values": [
           "Người muốn đối chiếu được từng thành phần trước khi mua",
-          "Người cần một bước dưỡng nhẹ, không phải đọc bảng thành phần"
+          "Người cần một bước dưỡng nhẹ, không phải đọc bảng thành phần",
+          "Người muốn thêm một bước cấp ẩm thỉnh thoảng"
         ]
       },
       {
         "label": "Có tác động lên sắc tố không",
         "values": [
           "Không phải bước đặc trị sắc tố",
-          "Không — chủ ý, đây là bước để da nghỉ"
+          "Không — chủ ý, đây là bước để da nghỉ",
+          "Không — chỉ cấp ẩm và làm dịu"
         ]
       },
       {
         "label": "Thay được kem chống nắng không",
         "values": [
           "Không, dù công thức có Titanium Dioxide và Zinc Oxide lượng nhỏ",
+          "Không",
           "Không"
         ]
       }

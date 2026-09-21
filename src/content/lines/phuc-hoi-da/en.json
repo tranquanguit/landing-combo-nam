@@ -13,45 +13,51 @@
   "lead": "A line for the phase when skin needs quiet: hydrate, calm, and add nothing that competes with anything else.",
   "products": [
     "biovector-brightening-cream",
-    "collagen-peptide-cream"
+    "collagen-peptide-cream",
+    "ultra-egf-bio-gel-mask"
   ],
   "compare": {
     "eyebrow": "Which one",
-    "heading": "Two moisturisers, chosen by what you need",
-    "intro": "Both are base moisturisers rather than treatment steps. They differ in how much the manufacturer discloses and in the supporting ingredients.",
+    "heading": "Three options, chosen by what you need",
+    "intro": "Two moisturisers and a mask. All three hydrate and calm rather than treat.",
     "criteria": [
       {
         "label": "Ingredient disclosure",
         "values": [
           "All 45 INCI ingredients, in order of proportion",
-          "Four groups printed on the jar"
+          "Four groups printed on the jar",
+          "Eight ingredients printed on the tube"
         ]
       },
       {
         "label": "Notable ingredients",
         "values": [
           "Niacinamide (fifth), the centella trio named individually, turmeric, immortelle, tamanu oil",
-          "Pro-vitamin B5, centella extract, hyaluronic acid, plant stem cells"
+          "Pro-vitamin B5, centella extract, hyaluronic acid, plant stem cells",
+          "EGF, Epi-On, copper peptide, exosome cica, three nano ceramides"
         ]
       },
       {
         "label": "Who it suits",
         "values": [
           "Anyone who wants to check each ingredient before buying",
-          "Anyone who wants a light moisturising step without reading a list"
+          "Anyone who wants a light moisturising step without reading a list",
+          "Anyone wanting an occasional extra hydrating step"
         ]
       },
       {
         "label": "Acts on pigment",
         "values": [
           "Not a pigment treatment step",
-          "No — deliberately; this is the resting step"
+          "No — deliberately; this is the resting step",
+          "No — hydrating and calming only"
         ]
       },
       {
         "label": "Replaces sunscreen",
         "values": [
           "No, despite small amounts of titanium dioxide and zinc oxide",
+          "No",
           "No"
         ]
       }

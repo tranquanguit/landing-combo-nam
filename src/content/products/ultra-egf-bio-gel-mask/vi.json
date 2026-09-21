@@ -1,0 +1,210 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "phuc-hoi-da",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "ultra-egf-bio-gel-mask",
+  "translationKey": "ultra-egf-bio-gel-mask",
+  "sku": "8938552914297",
+  "price": 195000,
+  "locale": "vi",
+  "name": "Mocha Ultra EGF Bio-Gel Mask – mặt nạ gel 100gr",
+  "shortName": "Ultra EGF Bio-Gel Mask",
+  "primaryKeyword": "mặt nạ gel phục hồi mocha egf",
+  "seo": {
+    "title": "Mặt nạ gel Mocha Ultra EGF Bio-Gel Mask 100gr | Mocha",
+    "description": "Mặt nạ gel với EGF, Epi-On, Copper Peptide, Exosome Cica và 3 loại Nano Ceramide bọc Liposome. Tuýp 100gr, khoảng 40 lần đắp. {{price}}."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "hỗ trợ cấp ẩm và làm dịu da",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
+      "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
+      "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Ultra EGF Bio-Gel Mask – 100gr",
+      "note": "Khoảng 40 lần đắp",
+      "price": 195000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, xem tình trạng da qua hình ảnh",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước thêm, không phải bước bắt buộc",
+      "heading": "Mặt nạ gel cho những tuần da cần được để yên",
+      "lead": "Tuýp 100gr với <strong>EGF, Epi-On™, Copper Peptide, Exosome Cica</strong> cùng Sodium Hyaluronate, ba loại Nano Ceramide bọc Liposome, Panthenol và Acid Folic — đúng danh sách in trên vỏ tuýp.",
+      "usp": [
+        {
+          "text": "<strong>Tám thành phần in thẳng trên vỏ tuýp</strong>, đọc được trước khi mở nắp",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "in trên bao bì sản phẩm"
+        },
+        {
+          "text": "<strong>Tuýp 100gr, khoảng 40 lần đắp</strong> — con số in trên chính vỏ",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "“EQUAL TO 40 MASKS” in trên tuýp"
+        },
+        {
+          "text": "<strong>Không phải bước bắt buộc</strong> trong bất kỳ lộ trình nào trên trang này",
+          "evidence": "ingredient",
+          "qualifier": "xem phần hướng dẫn"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-bio-gel-mask.webp",
+        "alt": "Tuýp mặt nạ gel Mocha Ultra EGF Bio-Gel Mask 100gr màu xanh nhạt"
+      },
+      "primaryCta": "Đặt mặt nạ gel",
+      "secondaryCta": {
+        "label": "Xem bảng thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Bảng thành phần",
+      "heading": "Tám thành phần in trên vỏ tuýp",
+      "intro": "Công thức thuộc nhóm cấp ẩm và làm dịu, không có hoạt chất tác động lên sắc tố.",
+      "caption": "Bảng này liệt kê đúng những thành phần được IN TRÊN VỎ TUÝP 100gr. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
+      "rows": [
+        {
+          "name": "EGF",
+          "role": "Yếu tố tăng trưởng biểu bì, thành phần dưỡng.",
+          "suitedFor": "Da đang phục hồi"
+        },
+        {
+          "name": "Epi-On™",
+          "role": "Hoạt chất công nghệ sinh học, hướng tới làm dịu nền da.",
+          "suitedFor": "Da dễ kích ứng"
+        },
+        {
+          "name": "Copper Peptide",
+          "role": "Phức hợp peptide đồng, thành phần dưỡng quen thuộc.",
+          "suitedFor": "Da sau treatment"
+        },
+        {
+          "name": "Exosome Cica",
+          "role": "Dịch chiết từ rau má, thuộc nhóm làm dịu.",
+          "suitedFor": "Da đang căng thẳng"
+        },
+        {
+          "name": "Sodium Hyaluronate",
+          "role": "Dạng muối của hyaluronic acid, giữ nước trên lớp sừng.",
+          "suitedFor": "Da khô"
+        },
+        {
+          "name": "3 loại Nano Ceramide (bọc Liposome)",
+          "role": "Ceramide kích thước nano, thành phần cấu tạo hàng rào bảo vệ da.",
+          "suitedFor": "Da mỏng"
+        },
+        {
+          "name": "Panthenol (Vitamin B5)",
+          "role": "Giữ ẩm, hạn chế cảm giác căng.",
+          "suitedFor": "Da khô, da căng"
+        },
+        {
+          "name": "Acid Folic (Vitamin B9)",
+          "role": "Vitamin nhóm B, dùng như thành phần dưỡng.",
+          "suitedFor": "Mọi loại da"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Ba bước, mỗi lần 15–20 phút",
+      "totalTime": "PT20M",
+      "intro": "Liều lượng và thời gian lấy nguyên từ hướng dẫn của nhà sản xuất.",
+      "items": [
+        {
+          "heading": "Rửa mặt sạch",
+          "body": "Làm sạch da và lau khô trước khi đắp."
+        },
+        {
+          "heading": "Thoa một lớp mỏng",
+          "body": "Khoảng 5–10gr, tương đương ba đốt ngón tay trỏ, cho một lần dùng."
+        },
+        {
+          "heading": "Lưu 15–20 phút rồi rửa lại",
+          "body": "Rửa sạch bằng nước, sau đó dùng bước dưỡng ẩm như bình thường."
+        }
+      ],
+      "footnote": "Đây là bước thêm, không phải bước bắt buộc. Nếu tuần này bạn chỉ làm được ba bước cơ bản — làm sạch, dưỡng ẩm, chống nắng — thì bỏ mặt nạ không ảnh hưởng gì tới kết quả của liệu trình."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng phù hợp với tình trạng da của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt chu kỳ sử dụng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Mặt nạ này giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho tuýp 100gr, nhà sản xuất ghi tương đương khoảng 40 lần đắp. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Một tuần đắp mấy lần?",
+          "a": "Nhà sản xuất không công bố tần suất, nên chúng tôi không đưa con số. Với một công thức cấp ẩm và làm dịu thì đắp thưa hay dày ít quan trọng bằng việc ba bước cơ bản có đều đặn hay không."
+        },
+        {
+          "q": "Có cần rửa lại không?",
+          "a": "Có. Nhà sản xuất ghi rõ lưu 15–20 phút rồi rửa sạch bằng nước, sau đó dùng kem dưỡng."
+        },
+        {
+          "q": "Dùng được khi đang trong liệu trình làm mờ sắc tố không?",
+          "a": "Được, vì đây là bước cấp ẩm, không có hoạt chất tác động lên sắc tố nên không tranh việc với kem hay serum. Nhưng nếu da đang châm chích thì việc cần làm là rút bớt các bước, không phải thêm một bước."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Nơi khô ráo thoáng mát, tránh ánh nắng trực tiếp và nhiệt độ cao. Đóng nắp sau khi dùng."
+        }
+      ]
+    }
+  ]
+}
