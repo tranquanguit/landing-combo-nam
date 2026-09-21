@@ -845,6 +845,20 @@ const lines = defineCollection({
     seo: seoField,
     eyebrow: z.string().optional(),
     heading: z.string(),
+    /**
+     * Nhãn trên thanh điều hướng, khi `heading` quá dài hoặc quá mơ hồ để đứng
+     * cạnh các mục khác. Thanh menu có vài chục pixel cho mỗi mục; tiêu đề trang
+     * có cả một dòng. Bắt hai thứ đó dùng chung một chuỗi là để một trong hai
+     * chỗ chịu thiệt.
+     */
+    navLabel: z.string().optional(),
+    /**
+     * Thứ tự trên điều hướng và trên trang chủ. Số nhỏ đứng trước.
+     *
+     * Không có trường này thì thứ tự là bảng chữ cái của slug — tức là ngẫu
+     * nhiên đối với người đọc, và đẩy dòng bán chạy nhất xuống giữa danh sách.
+     */
+    order: z.number().int().default(99),
     lead: z.string(),
     /** Sản phẩm hiển thị, theo thứ tự này. Bỏ trống thì tự gom theo product.line. */
     products: z.array(slugField).default([]),

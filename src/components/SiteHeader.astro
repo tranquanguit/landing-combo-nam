@@ -28,7 +28,26 @@ const { brand: b, locale, alternates = [], orderHref = '#dat-hang', nav = [] } =
       <nav class="nav" aria-label={b.tradingName}>
         <ul>
           {nav.map((item) => (
-            <li><a href={item.href}>{item.label}</a></li>
+            <li class={item.children?.length ? 'has-panel' : undefined}>
+              <a href={item.href}>
+                {item.label}
+                {item.children?.length ? <span class="caret" aria-hidden="true"></span> : null}
+              </a>
+              {item.children?.length ? (
+                /* Bảng danh mục mở bằng :hover và :focus-within — không JavaScript.
+                   Mọi liên kết trong bảng đều là <a> thật và nằm trong DOM ngay từ
+                   đầu, nên máy tìm kiếm thấy hết, và bàn phím Tab đi qua được. */
+                <div class="panel">
+                  <ul class="panel-list">
+                    {item.children.map((c) => (
+                      <li class={c.note === 'line' ? 'is-line' : 'is-product'}>
+                        <a href={c.href}>{c.label}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </li>
           ))}
         </ul>
       </nav>
@@ -68,7 +87,69 @@ const { brand: b, locale, alternates = [], orderHref = '#dat-hang', nav = [] } =
       color: var(--ink-muted); text-decoration: none; font-size: var(--t-sm);
       display: inline-block; min-height: 24px; line-height: 24px;
     }
-    .nav a:hover { color: var(--cobalt); }
+    .nav > ul > li > a:hover { color: var(--cobalt); }
+
+    /* Mục có bảng: dấu mũi tên nhỏ báo trước rằng bấm vào sẽ mở ra thêm. Không
+       có dấu này thì người dùng không biết có gì bên dưới và bảng chỉ bật ra
+       khi chuột đi ngang qua — một cú giật không ai yêu cầu. */
+    .caret {
+      display: inline-block; width: 0; height: 0; margin-left: 6px;
+      vertical-align: middle;
+      border-inline: 4px solid transparent;
+      border-top: 4px solid currentColor;
+      transition: transform var(--dur-1) var(--ease);
+    }
+    .has-panel { position: relative; }
+    .has-panel > a { display: inline-flex; align-items: center; }
+    .has-panel:hover .caret,
+    .has-panel:focus-within .caret { transform: rotate(180deg); }
+
+    .panel {
+      position: absolute; top: 100%; left: 50%; translate: -50% 0;
+      /* Khoảng hở giữa mục và bảng sẽ làm chuột rời ra và bảng đóng giữa chừng.
+         Đệm bằng padding-top trong suốt thay vì margin. */
+      padding-top: 10px;
+      opacity: 0; visibility: hidden; transform: translateY(-6px);
+      transition: opacity var(--dur-2) var(--ease), transform var(--dur-2) var(--ease),
+        visibility 0s linear var(--dur-2);
+    }
+    .has-panel:hover .panel,
+    .has-panel:focus-within .panel {
+      opacity: 1; visibility: visible; transform: none;
+      transition-delay: 0s;
+    }
+
+    .panel-list {
+      display: grid; gap: 0 var(--s-6);
+      /* Sáu dòng, mỗi dòng kéo theo sản phẩm của nó. Ba cột giữ bảng gọn trong
+         một màn hình mà không phải cuộn. */
+      grid-template-columns: repeat(3, minmax(9.5rem, 1fr));
+      grid-auto-flow: column; grid-template-rows: repeat(7, auto);
+      margin: 0; padding: var(--s-5) var(--s-6); list-style: none;
+      background: var(--paper); border: 1px solid var(--line);
+      border-radius: 14px; box-shadow: 0 18px 44px -18px rgba(16, 24, 64, .28);
+    }
+    .panel-list a { display: block; padding: 5px 0; line-height: 1.35; }
+
+    /* Tên dòng là tiêu đề của nhóm; sản phẩm thụt vào dưới nó. Phân cấp bằng
+       cỡ chữ và độ đậm, không bằng màu — bảng này đã có đủ màu rồi. */
+    .panel-list .is-line { margin-top: var(--s-4); }
+    .panel-list .is-line:first-child { margin-top: 0; }
+    .panel-list .is-line > a {
+      font-weight: 600; font-size: var(--t-xs); letter-spacing: .08em;
+      text-transform: uppercase; color: var(--ink-navy);
+    }
+    .panel-list .is-product > a {
+      padding-left: var(--s-3); font-size: var(--t-sm); color: var(--ink-muted);
+      border-left: 2px solid var(--line);
+    }
+    .panel-list .is-product > a:hover {
+      color: var(--cobalt); border-left-color: var(--cobalt);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .panel, .caret { transition: none; }
   }
   .actions { display: flex; align-items: center; gap: var(--s-4); }
   .tel {

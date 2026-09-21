@@ -10,6 +10,8 @@
   },
   "eyebrow": "Product line",
   "heading": "Sun protection",
+  "navLabel": "Sun protection",
+  "order": 5,
   "lead": "A line with a single step in it — but the step whose absence takes most of the meaning out of the others.",
   "products": [
     "uv-block-sunscreen"

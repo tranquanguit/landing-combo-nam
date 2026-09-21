@@ -164,9 +164,18 @@ const guideEntry = (await getCollection('guides', ({ data: d }) =>
 
 const nav = siteNav(
   locale,
-  allLines.map((l) => ({ slug: l.data.slug, heading: l.data.heading })),
+  allLines.map((l) => ({
+    slug: l.data.slug, heading: l.data.heading,
+    navLabel: l.data.navLabel, order: l.data.order,
+    /* Dòng không tự khai danh sách thì lấy theo product.line — cùng quy tắc
+       trang dòng đang dùng, để bảng menu và trang dòng không bao giờ lệch nhau. */
+    products: l.data.products.length
+      ? l.data.products
+      : allProducts.filter((p) => p.data.line === l.data.slug).map((p) => p.data.slug),
+  })),
   allArticles.length > 0,
-  { home: t(locale, 'nav.home'), advice: t(locale, 'nav.advice') },
+  { home: t(locale, 'nav.home'), advice: t(locale, 'nav.advice'), products: t(locale, 'nav.products') },
+  (slug) => productBySlug.get(slug)?.shortName ?? productBySlug.get(slug)?.name,
 );
 
 /* Chính sách chỉ trỏ từ chân trang — không đưa lên điều hướng chính vì nó

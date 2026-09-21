@@ -10,6 +10,8 @@
   },
   "eyebrow": "Product line",
   "heading": "Blemish care",
+  "navLabel": "Acne-prone skin",
+  "order": 2,
   "lead": "Two phases, two different steps: while the spot is inflamed, and after it settles but leaves a darker mark.",
   "products": [
     "smart-target-acne-gel",

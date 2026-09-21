@@ -10,6 +10,8 @@
   },
   "eyebrow": "Dòng sản phẩm",
   "heading": "Bảo vệ da",
+  "navLabel": "Chống nắng",
+  "order": 5,
   "lead": "Một dòng chỉ có một bước, nhưng là bước mà bỏ đi thì mọi bước khác mất phần lớn ý nghĩa.",
   "products": [
     "uv-block-sunscreen"

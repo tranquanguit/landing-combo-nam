@@ -6,11 +6,19 @@ import { t, type Locale } from '../i18n/ui';
 interface Props {
   brand: any; product?: any; locale: Locale;
   /** Cùng danh sách với điều hướng ở đầu trang — trên điện thoại đây là lối đi duy nhất. */
-  nav?: { label: string; href: string }[];
+  nav?: { label: string; href: string; children?: { label: string; href: string; note?: string }[] }[];
   /** Trang chính sách đã xuất bản. Rỗng thì chân trang tự hiện cảnh báo còn thiếu. */
   policies?: { label: string; href: string }[];
 }
 const { brand: b, product: p, locale, nav = [], policies = [] } = Astro.props;
+
+/** Chỉ tên dòng, không kèm từng sản phẩm: chân trang liệt kê cả 17 liên kết thì
+    không còn là điều hướng mà là một bức tường. */
+const footerLinks = nav.flatMap((item) =>
+  item.children?.length
+    ? item.children.filter((c) => c.note === 'line').map(({ label, href }) => ({ label, href }))
+    : [{ label: item.label, href: item.href }],
+).filter((v, i, a) => a.findIndex((x) => x.href === v.href) === i);
 const c = p?.compliance;
 ---
 <footer>
@@ -43,7 +51,11 @@ const c = p?.compliance;
     <div>
       <h2>{t(locale, 'nav.lines')}</h2>
       <ul class="channels">
-        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        {/* Chân trang TRẢI PHẲNG những gì thanh trên cùng gom vào bảng.
+            Trên cùng cần ít lựa chọn để người đọc quyết định nhanh; chân trang
+            thì ngược lại — người cuộn tới đây là người chưa tìm thấy thứ mình
+            cần, và đây cũng là nơi máy tìm kiếm đọc quan hệ giữa các trang. */}
+        {footerLinks.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
       </ul>
     </div>
     )}

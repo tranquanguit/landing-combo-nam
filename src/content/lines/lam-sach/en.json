@@ -10,6 +10,8 @@
   },
   "eyebrow": "Product line",
   "heading": "Cleansing",
+  "navLabel": "Cleansing",
+  "order": 4,
   "lead": "The step that repeats most often in a day, and for that reason the easiest one to thin your skin barrier with unnoticed.",
   "products": [
     "bio-active-cleanser",
