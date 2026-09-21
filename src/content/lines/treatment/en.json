@@ -1,0 +1,73 @@
+{
+  "slug": "treatment",
+  "locale": "en",
+  "translationKey": "treatment",
+  "status": "published",
+  "primaryKeyword": "is at home peeling safe",
+  "seo": {
+    "title": "At-home peeling: who should and who should not | Mocha Vietnam",
+    "description": "Peeling is the strongest thing you can do to your own skin at home. What is normal, what means stop, and who should not attempt it."
+  },
+  "eyebrow": "Product line",
+  "heading": "Treatment",
+  "lead": "A line with a single kit in it, and the strongest thing on this site. Most of what follows is about when NOT to use it.",
+  "products": [
+    "retinol-mixpeel-kit"
+  ],
+  "sections": [
+    {
+      "id": "peel-la-gi",
+      "heading": "Peeling is not a skincare step, it is a controlled intervention",
+      "body": [
+        "Every other step on this site is care: cleanse, hydrate, protect, and deliver actives gradually over weeks. Peeling is different in kind — it actively sheds the surface layer over a short window.",
+        "So it has a clear beginning and a clear end rather than being something used evenly every day. The kit in this line is designed by the manufacturer for a three-day course, no longer.",
+        "And because it removes part of the surface barrier, the period straight afterwards is when skin is most vulnerable — sun protection then is not advice, it is a condition."
+      ]
+    },
+    {
+      "id": "binh-thuong-hay-khong",
+      "heading": "Telling normal reactions from signs to stop",
+      "body": [
+        "The manufacturer describes three reactions as normal: mild stinging during application, dryness and tightness afterwards, and skin possibly darkening temporarily before it flakes.",
+        "The stop-now group is quite different: stinging that persists after rinsing, swelling, blistering, or pain. These are not a stronger version of the first group — they are a different kind of reaction.",
+        "That boundary matters because many people endure a burning feeling on the theory that it must be working. With peeling, that theory is how people give themselves chemical burns at home."
+      ]
+    },
+    {
+      "id": "ai-khong-tu-peel",
+      "heading": "Who should not peel at home",
+      "body": [
+        "Anyone pregnant or breastfeeding: this kit contains retinol, so it is not suitable. That is a difference from the rest of the site — the pigmentation combo uses bakuchiol precisely to avoid retinoids.",
+        "Anyone whose barrier is already weakened: thin skin, visible vessels, a history of corticosteroid-laced creams, or a recent laser or microneedling session. Peeling over a weakened barrier worsens things rather than improving them.",
+        "And anyone who cannot use sunscreen daily during and after the course. For that group peeling does more harm than good — post-inflammatory pigment from sun exposure can end up darker than the original concern."
+      ],
+      "links": [
+        {
+          "label": "See the sun protection line",
+          "href": "/en/bao-ve-da/"
+        },
+        {
+          "label": "See the recovery line",
+          "href": "/en/phuc-hoi-da/"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "How does peeling at home differ from a salon peel?",
+      "a": "In concentration, in having someone watching how your skin reacts, and in what can be done if something goes wrong. Home kits are formulated more gently, but in exchange you are responsible for reading your own skin correctly."
+    },
+    {
+      "q": "Can I use a pigmentation cream straight after peeling?",
+      "a": "Better not. Stacking a peel course on top of a pigment routine is the fastest way to break the barrier. Finish one, let the skin settle, then consider the other."
+    },
+    {
+      "q": "How often can a course be repeated?",
+      "a": "The manufacturer does not publish an interval between courses, so we do not quote one. Ask an adviser or a dermatologist before repeating — peeling too frequently is a common cause of thinned skin."
+    }
+  ],
+  "articles": [
+    "nam-noi-tiet-la-gi"
+  ]
+}

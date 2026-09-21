@@ -1,0 +1,258 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "treatment",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "retinol-mixpeel-kit",
+  "translationKey": "retinol-mixpeel-kit",
+  "sku": "8458527107262",
+  "price": 550000,
+  "includes": [
+    {
+      "name": "Peel ampoule",
+      "note": "1% liposome retinol, four microalgae"
+    },
+    {
+      "name": "Recovery ampoule",
+      "note": "Used after each peel session"
+    },
+    {
+      "name": "Pro-vitamin B5 cleanser",
+      "note": "The cleansing step throughout the course"
+    },
+    {
+      "name": "Collagen recovery cream",
+      "note": "The moisturising step after peeling"
+    }
+  ],
+  "locale": "en",
+  "name": "Mocha Retinol mixPEEL Kit – four-piece at-home peel",
+  "shortName": "Retinol mixPEEL Kit",
+  "primaryKeyword": "mocha at home retinol peel kit",
+  "seo": {
+    "title": "Mocha Retinol mixPEEL Kit, four pieces | Mocha Vietnam",
+    "description": "Four-piece kit with 1% liposome retinol and four microalgae. A three-day course. NOT for use in pregnancy or breastfeeding. {{price}}."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "helps clear dead surface cells from the skin",
+    "warnings": [
+      "This is a topical cosmetic, not a medicine, and is not a substitute for medical treatment.",
+      "This product CONTAINS RETINOL. Not for use during pregnancy or breastfeeding.",
+      "After use the skin is more sensitive to sunlight. Daily sun protection is mandatory during and after the course.",
+      "Stop use if stinging persists, or if there is swelling, blistering or pain. Avoid direct contact with the eyes.",
+      "Results vary by individual, skin type and daily sun protection."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Retinol mixPEEL Kit – four pieces",
+      "note": "One complete three-day course",
+      "price": 550000,
+      "recommended": true
+    },
+    {
+      "label": "I would like advice first",
+      "note": "An adviser calls you back and reviews your skin from photos",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "The strongest product on this site",
+      "heading": "An at-home peel is the easiest thing here to damage your skin with, so read all of this first",
+      "lead": "A four-piece kit for a <strong>three-day</strong> course: a peel ampoule with <strong>1% liposome-encapsulated retinol</strong> and four microalgae, a recovery ampoule, a cleanser and a moisturiser. The manufacturer positions this as a professional line supplied to salons.",
+      "usp": [
+        {
+          "text": "<strong>1% liposome-encapsulated retinol</strong> — figure published by the manufacturer",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "see the ingredient table"
+        },
+        {
+          "text": "<strong>A course with a clear end</strong>: three days, once a day — not a daily product",
+          "evidence": "verified",
+          "source": "#huong-dan",
+          "qualifier": "quoted from the manufacturer's instructions"
+        },
+        {
+          "text": "<strong>NOT for use in pregnancy or breastfeeding</strong> — because it contains retinol",
+          "evidence": "ingredient",
+          "qualifier": "unlike the other products on this site"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-retinol-mixpeel.webp",
+        "alt": "Mocha Retinol mixPEEL four-piece kit: box, two ampoules, cleanser and moisturiser"
+      },
+      "primaryCta": "Order the kit",
+      "secondaryCta": {
+        "label": "Read who should not use it",
+        "href": "#ai-khong-nen-dung"
+      },
+      "trustBadges": [
+        "Free delivery nationwide",
+        "Inspect before you pay",
+        "7-day return if the product is faulty"
+      ]
+    },
+    {
+      "type": "cards",
+      "id": "ai-khong-nen-dung",
+      "eyebrow": "Read before ordering",
+      "heading": "Five cases where this kit is not for you",
+      "intro": "This is the strongest product on the site, so this section sits right below the first screen rather than hidden at the bottom.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Pregnant or breastfeeding",
+          "body": "This product contains retinol. That is an important difference from everything else here — the pigmentation combo uses bakuchiol precisely to avoid retinoids.",
+          "meta": "Do not use"
+        },
+        {
+          "heading": "Damaged skin, or skin affected by corticosteroid creams",
+          "body": "Thin skin, visible vessels, active irritation or a recent procedure all need recovery first. Peeling over a weakened barrier makes it worse.",
+          "meta": "Do not use"
+        },
+        {
+          "heading": "Unable to use sunscreen daily",
+          "body": "After peeling, skin is markedly more sensitive to sunlight. Without daily protection this course does more harm than good.",
+          "meta": "Do not use"
+        },
+        {
+          "heading": "Already using prescription retinoids or strong acids",
+          "body": "Stacking several agents at once is the fastest way to break the skin barrier. Ask a doctor first.",
+          "meta": "Ask a doctor first"
+        },
+        {
+          "heading": "An important event within two weeks",
+          "body": "Skin will be dry, tight and may darken temporarily before it flakes. Do not start a course right before an occasion where you want your skin at its best.",
+          "meta": "Postpone"
+        }
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Ingredients",
+      "heading": "What the manufacturer publishes",
+      "intro": "The manufacturer publishes the active groups and the retinol figure, but not a full INCI list for this kit.",
+      "caption": "The table below lists exactly what the manufacturer publishes. This page does NOT fill in the rest. Full INCI lists are printed on each item's packaging.",
+      "rows": [
+        {
+          "name": "Retinol 1% (liposome-encapsulated)",
+          "inProduct": "Peel ampoule",
+          "role": "A vitamin A derivative. Liposome encapsulation aims to carry it deeper while reducing surface irritation.",
+          "suitedFor": "Thicker, oilier skin — NOT during pregnancy"
+        },
+        {
+          "name": "Four microalgae",
+          "inProduct": "Peel ampoule",
+          "role": "A group of marine microalgae; the mechanical and biological part of the peel formula.",
+          "suitedFor": "Rough surface texture"
+        },
+        {
+          "name": "Four conditioning ingredients",
+          "inProduct": "Recovery ampoule",
+          "role": "A recovery group applied immediately after each peel session.",
+          "suitedFor": "Skin during a peel course"
+        },
+        {
+          "name": "Pro-vitamin B5",
+          "inProduct": "Cleanser in the kit",
+          "role": "Hydration during cleansing — see the Bio-Active Cleanser page.",
+          "suitedFor": "Skin drying out after peeling"
+        },
+        {
+          "name": "Collagen peptide",
+          "inProduct": "Moisturiser in the kit",
+          "role": "The base moisturising step after peeling — see the Collagen Peptide Cream page.",
+          "suitedFor": "Recovering skin"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use",
+      "heading": "A three-day course, once a day",
+      "totalTime": "PT50M",
+      "intro": "The timings and the number of days are taken verbatim from the manufacturer. This is not a long-term daily product.",
+      "items": [
+        {
+          "heading": "Cleanse",
+          "body": "Wash with the cleanser in the kit and dry."
+        },
+        {
+          "heading": "Apply the peel, massage 3–5 minutes",
+          "body": "Spread evenly and massage gently for three to five minutes."
+        },
+        {
+          "heading": "Leave on for up to 45 minutes",
+          "body": "The time depends on your skin. On a first session, stay well under the maximum."
+        },
+        {
+          "heading": "Rinse, then recover and protect",
+          "body": "Rinse with clean water, use the recovery ampoule and the moisturiser. Sunscreen the next day is mandatory."
+        }
+      ],
+      "footnote": "The manufacturer describes what is <strong>normal</strong> during the course: mild stinging on application, dryness and tightness afterwards, and skin possibly darkening temporarily before it flakes. But <strong>persistent stinging, swelling, blistering or pain means stop immediately</strong> — none of those are in the normal group."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City — tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support through the full routine</strong> by email."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "FAQ",
+      "heading": "Questions people actually ask",
+      "items": [
+        {
+          "q": "How much is the kit?",
+          "a": "<strong>{{price}}</strong> for four pieces, one complete three-day course. Free delivery, pay on delivery."
+        },
+        {
+          "q": "Why does the pigmentation combo avoid retinoids while this contains retinol?",
+          "a": "Because they do different jobs. The combo is a multi-week daily routine, so it uses bakuchiol to limit cumulative irritation. The peel is a three-day course with a defined end, accepting stronger action over a short period. If you are pregnant or breastfeeding, only the combo is suitable; this kit is not."
+        },
+        {
+          "q": "How often can I repeat it?",
+          "a": "We do not quote a figure, because the manufacturer does not publish an interval between courses. Ask an adviser or a dermatologist before repeating — peeling too frequently is a common cause of thinned skin."
+        },
+        {
+          "q": "Is it normal for skin to darken after peeling?",
+          "a": "The manufacturer describes this as normal, with tone evening out as the skin flakes. But if it comes with persistent stinging, swelling or pain, that is something else and you should stop."
+        },
+        {
+          "q": "Can I use it alongside the pigmentation combo?",
+          "a": "Not at the same time. Stacking a peel course on top of a pigment routine is the fastest way to break the skin barrier. Pick one, finish it, then consider the other."
+        }
+      ]
+    }
+  ]
+}
