@@ -72,7 +72,7 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
   bảng thành phần nào, và nhãn chai cũng chỉ đọc được "PRO-VITAMIN B5
   PERFECTION". Dựng một trang gần như trống trên site có nhận diện "công khai
   từng thành phần" thì tự mâu thuẫn. Cần bảng thành phần hoặc ảnh nhãn rõ hơn.
-- `[!] A10` **Chỉ số PA của kem chống nắng UV-Block Plus.** Hai nguồn của chính
+- `[!] A10` **Chỉ số PA của kem chống nắng UV-Block Plus.** (Trang sản phẩm nay nói thẳng rằng chưa in chỉ số nào và đang chờ hãng xác nhận — xem thẻ đầu tiên trong khối "Trước khi đặt".) Hai nguồn của chính
   hãng mâu thuẫn: trang sản phẩm ghi `SPF 50 PA+`, bốn tài liệu marketing ghi
   `SPF 50 PA++++`. Trang hiện để trống chỉ số PA và chỉ ghi SPF 50 (cả hai
   nguồn khớp). Cần đọc từ vỏ hộp thật rồi khai đúng một con số.

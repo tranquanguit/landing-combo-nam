@@ -116,6 +116,25 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "Read this part carefully",
+      "heading": "A peel is not a stronger skincare step — it is a different kind of thing",
+      "quotes": [
+        "“I saw how bright people looked afterwards, so I bought a kit to do it myself.”",
+        "“A few days of peeling, which I read as it working, so I carried on.”",
+        "“I was told to stay out of the sun, but I still have to go to work.”",
+        "“I am not sure whether I am in the group who should not peel at all.”"
+      ],
+      "explainer": {
+        "heading": "It has a start and a stop — which is what separates it from every other step",
+        "body": [
+          "Everything else on this site is care: cleansing, hydrating, shielding, delivering actives gradually over weeks. A peel deliberately sheds the surface layer over a short window, which makes it <strong>a course with an end, not a habit</strong>.",
+          "The manufacturer designed this kit for three days, and three days means three days. Extending it because the peeling looks incomplete is the fastest route from a controlled course to an injury.",
+          "And because it removes part of the protective surface, the period straight afterwards is when skin is most vulnerable. Sun protection during that window is not advice but a <strong>precondition</strong> — if you cannot avoid sun over the next two weeks, postpone the peel."
+        ]
+      }
+    },
+    {
       "type": "cards",
       "id": "ai-khong-nen-dung",
       "eyebrow": "Read before ordering",
@@ -190,6 +209,42 @@
       ]
     },
     {
+      "type": "timeline",
+      "id": "lich-trinh",
+      "eyebrow": "The real schedule",
+      "heading": "Three days of treatment, and the two weeks after that decide the outcome",
+      "intro": "Most people plan the three days and forget what follows. What follows is longer, and getting it wrong wastes the three days entirely.",
+      "max": 21,
+      "unitLabel": "days",
+      "items": [
+        {
+          "label": "The peel course",
+          "from": 0,
+          "to": 3,
+          "note": "Three days exactly as the enclosed instructions state. Do not extend it."
+        },
+        {
+          "label": "Shedding and recovery",
+          "from": 3,
+          "to": 10,
+          "note": "Skin peels and is sensitive. Gentle cleansing, moisturiser and sunscreen only. No strong actives, no exfoliation, and do not pick at the flaking."
+        },
+        {
+          "label": "Strict sun avoidance",
+          "from": 3,
+          "to": 21,
+          "note": "New skin darkens very readily. This is where a course goes from an improvement to worse pigmentation than before."
+        },
+        {
+          "label": "Return to your usual actives",
+          "from": 14,
+          "to": 21,
+          "note": "Once sensitivity and flaking have ended. Going back sooner puts actives into a barrier that has not finished rebuilding."
+        }
+      ],
+      "footnote": "These markers come from the manufacturer's instructions for the three-day course and from standard post-peel care. <strong>Skin differs from person to person</strong>, and if stinging persists, redness deepens, or the skin weeps, stop and see a doctor — that is no longer a normal response."
+    },
+    {
       "type": "steps",
       "eyebrow": "How to use",
       "heading": "A three-day course, once a day",
@@ -214,6 +269,54 @@
         }
       ],
       "footnote": "The manufacturer describes what is <strong>normal</strong> during the course: mild stinging on application, dryness and tightness afterwards, and skin possibly darkening temporarily before it flakes. But <strong>persistent stinging, swelling, blistering or pain means stop immediately</strong> — none of those are in the normal group."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Stronger is not always more correct",
+      "heading": "A peel, or the slow route with daily actives?",
+      "intro": "Both target darkened surface cells, but they ask different things of you and carry different risks.",
+      "items": [
+        "retinol-mixpeel-kit",
+        "smart-first-care-serum"
+      ],
+      "criteria": [
+        {
+          "label": "How it works",
+          "values": [
+            "Sheds the surface layer over a short course",
+            "Delivers actives steadily over weeks"
+          ]
+        },
+        {
+          "label": "Time it costs you",
+          "values": [
+            "3 days, plus 2 weeks of strict sun avoidance",
+            "A few minutes daily, with no restricted period"
+          ]
+        },
+        {
+          "label": "Effect on daily life",
+          "values": [
+            "A visible shedding phase, hard to cover with make-up",
+            "Almost none"
+          ]
+        },
+        {
+          "label": "Risk if done wrong",
+          "values": [
+            "Post-inflammatory pigmentation — skin darker than it started",
+            "Mild irritation, resolved by pausing for a few days"
+          ]
+        },
+        {
+          "label": "Who it suits",
+          "values": [
+            "Someone who can genuinely arrange two low-sun weeks",
+            "Someone who cannot avoid sun, or does not want a shedding phase"
+          ]
+        }
+      ],
+      "footnote": "If you are not sure you can arrange those two weeks, <strong>the slow route is the more correct choice</strong> — not because it is gentler, but because a half-finished peel usually leaves more damage than no peel at all."
     },
     {
       "type": "order",
@@ -252,6 +355,17 @@
           "q": "Can I use it alongside the pigmentation combo?",
           "a": "Not at the same time. Stacking a peel course on top of a pigment routine is the fastest way to break the skin barrier. Pick one, finish it, then consider the other."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Next step",
+      "heading": "Three things to have on hand before you start",
+      "intro": "The post-peel period needs exactly these three. Buying them after the peel is already a few days too late.",
+      "items": [
+        "uv-block-sunscreen",
+        "collagen-peptide-cream",
+        "bio-active-cleanser"
       ]
     }
   ]

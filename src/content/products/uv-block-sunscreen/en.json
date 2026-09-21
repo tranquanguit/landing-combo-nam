@@ -116,6 +116,31 @@
       }
     },
     {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Before you order",
+      "heading": "Three things said up front, including one against our own interest",
+      "intro": "This is the most important step in the routine, which makes it the one most worth being straight about.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "We have not printed an SPF or PA rating on this page",
+          "body": "The manufacturer's own material currently gives two different PA ratings for the same product. We have asked and have no confirmation yet, so we print no figure — a number that might be wrong is worse than no number. The rating on the tube stands until we hear back.",
+          "meta": "Awaiting confirmation"
+        },
+        {
+          "heading": "Working on melasma, dark marks, or just peeled",
+          "body": "This is the group for whom the step matters most. UV undoes brightening actives faster than they work, so skipping it means skipping the result of every other step.",
+          "meta": "Not optional"
+        },
+        {
+          "heading": "Indoors all day, away from windows",
+          "body": "The need is genuinely lower, and we are not going to argue otherwise to sell a tube. But if you sit by a window, or go out even fifteen minutes a day, it still earns its place.",
+          "meta": "Depends"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Ingredients",
       "heading": "Seven filters, each one named",
@@ -203,6 +228,55 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Where it sits in the day",
+      "heading": "The last step of the morning, and again during the day",
+      "intro": "Order and quantity decide most of the real-world result — more than the formula does.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Morning",
+          "steps": [
+            {
+              "label": "Finish your skincare steps",
+              "note": "Sunscreen goes last, after the moisturiser."
+            },
+            {
+              "label": "Use enough",
+              "note": "Roughly two finger-lengths for the face alone. This is where most people fall short, and half the amount does not give half the protection.",
+              "essential": true
+            },
+            {
+              "label": "Spread evenly, wait a few minutes before make-up",
+              "note": "The film needs time to set. Make-up applied straight on top drags it off."
+            },
+            {
+              "label": "Do not skip neck, ears and the backs of your hands",
+              "note": "The areas that show sun damage most clearly, and get forgotten most often."
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "During the day and at night",
+          "steps": [
+            {
+              "label": "Reapply every 2–3 hours outdoors",
+              "note": "Sweat and friction thin the film. Indoors all day, reapplication is unnecessary.",
+              "essential": true
+            },
+            {
+              "label": "At night: remove it before cleansing",
+              "note": "Sunscreen is not water-soluble; a cleanser alone will not lift all of it.",
+              "essential": true
+            }
+          ]
+        }
+      ],
+      "footnote": "Enough of a reasonable sunscreen beats a thin layer of an expensive one. <strong>Quantity is the largest variable</strong> between the number on the tube and the protection actually on your face."
+    },
+    {
       "type": "steps",
       "eyebrow": "How to use",
       "heading": "Two steps in the morning, one at night",
@@ -223,6 +297,54 @@
         }
       ],
       "footnote": "Reapply every few hours if you are outdoors continuously, sweating heavily, or in water. One morning application does not last a full day in the sun."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Two kinds of cover",
+      "heading": "A dedicated sunscreen, or a moisturiser containing filters?",
+      "intro": "Biovector lists Titanium Dioxide and Zinc Oxide, so this question comes up often. Short answer: one does not replace the other.",
+      "items": [
+        "uv-block-sunscreen",
+        "biovector-brightening-cream"
+      ],
+      "criteria": [
+        {
+          "label": "Category declared on the pack",
+          "values": [
+            "Sunscreen",
+            "Moisturiser"
+          ]
+        },
+        {
+          "label": "Filters",
+          "values": [
+            "7 filters, 5 chemical and 2 nano physical",
+            "TiO2 and ZnO appear in the INCI list"
+          ]
+        },
+        {
+          "label": "Declared sun protection rating",
+          "values": [
+            "On the tube",
+            "None declared"
+          ]
+        },
+        {
+          "label": "Can one replace the other",
+          "values": [
+            "This is the sun protection step",
+            "No — with no rating there is no basis for substituting"
+          ]
+        },
+        {
+          "label": "Reapplication during the day",
+          "values": [
+            "Yes, when outdoors",
+            "Not applicable"
+          ]
+        }
+      ],
+      "footnote": "An ingredient being present in a formula is not the same as a measured level of protection. A sun protection rating is the result of the whole formula plus a test procedure; it cannot be inferred from an ingredient list."
     },
     {
       "type": "order",
@@ -261,6 +383,17 @@
           "q": "How should it be stored?",
           "a": "Keep away from heat and direct sunlight, close the cap after use, keep out of reach of children. Avoid contact with the eyes; if it gets in, rinse immediately with clean water."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Next step",
+      "heading": "The two steps that come with sun protection",
+      "intro": "Wearing sunscreen means removing it at night. And if you are working on pigment, this is what follows.",
+      "items": [
+        "bio-deep-detox-rebalance",
+        "smart-brightening-cream",
+        "collagen-peptide-cream"
       ]
     }
   ]
