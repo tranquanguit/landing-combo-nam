@@ -98,6 +98,50 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "Why marks outlast the spot",
+      "heading": "The spot clears in a week. The mark stays for months.",
+      "quotes": [
+        "“The acne goes fast, but the brown mark is still there three months on.”",
+        "“I assumed it would fade on its own. The ones I squeezed are clearly darker.”",
+        "“Make-up covers it, but I still see it in the mirror after washing.”",
+        "“One summer afternoon outside and the old marks look new again.”"
+      ],
+      "explainer": {
+        "heading": "This is no longer acne — it is pigment left behind after the inflammation ended",
+        "body": [
+          "When a spot becomes inflamed, the skin responds by producing more melanin in that area. The spot settles, the melanin does not, and it leaves on pigment's timescale — weeks and months, not days.",
+          "Which explains two things. First, a product made for acne does nothing for a mark, because there is no acne left to act on. Second, <strong>squeezing makes the mark deeper and longer-lasting</strong>, because it drives the damage further down and prolongs the inflammation.",
+          "And because this is pigment, sun darkens it exactly as it darkens melasma. A mark kept out of the sun fades noticeably faster than the same mark exposed daily."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Before you order",
+      "heading": "Three kinds of post-acne mark, and which one this tube addresses",
+      "intro": "Not every mark left by acne is the same thing. Telling them apart first saves both money and time.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Flat brown marks",
+          "body": "Pigment left after inflammation, with the skin surface still smooth. This is what the tube was made for.",
+          "meta": "Best fit"
+        },
+        {
+          "heading": "Flat red or pink marks",
+          "body": "Dilated vessels left after inflammation, not melanin. These usually fade on their own; brightening actives do little. Moisturising and sun protection do the work.",
+          "meta": "Needs more patience"
+        },
+        {
+          "heading": "Indented or raised scars",
+          "body": "A change in the structure of the skin, not in its pigment. No topical product fills an indented scar — that needs a clinic.",
+          "meta": "Not what you need"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Ingredients",
       "heading": "Eight ingredients, three of them with published figures",
@@ -147,6 +191,63 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Where it sits in the day",
+      "heading": "Onto healed skin, after cleansing",
+      "intro": "Only on areas with no inflammation left. Layering it over an active spot puts both in the wrong place.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Morning",
+          "steps": [
+            {
+              "label": "Cleanse and pat dry",
+              "note": "Dry skin keeps the gel on the area you intended."
+            },
+            {
+              "label": "A thin layer over the marks",
+              "note": "Fully healed areas only; avoid inflamed spots.",
+              "essential": true
+            },
+            {
+              "label": "Moisturise",
+              "note": "Whatever you already use."
+            },
+            {
+              "label": "Sunscreen",
+              "note": "Marks darken in sun exactly as melasma does. Skipping this undoes every step above it.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Night",
+          "steps": [
+            {
+              "label": "Remove make-up and cleanse",
+              "note": "Residue traps dirt and slows the skin's own renewal."
+            },
+            {
+              "label": "Pat dry",
+              "note": "Damp skin dilutes the gel."
+            },
+            {
+              "label": "Apply over the marks",
+              "note": "Same amount as the morning.",
+              "essential": true
+            },
+            {
+              "label": "Moisturise",
+              "note": "A healthy barrier renews more evenly."
+            }
+          ]
+        }
+      ],
+      "footnote": "Marks fade on the skin's renewal cycle, so count in <strong>weeks</strong> rather than days, and photograph from the same angle in the same light to compare — daily glances do not register slow change."
+    },
+    {
       "type": "steps",
       "eyebrow": "How to use",
       "heading": "Three steps, evenings",
@@ -167,6 +268,54 @@
         }
       ],
       "footnote": "Use once the spot has settled. Actively inflamed areas need a different step — and if blemishes are severe or persistent, that is a dermatologist's work."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Do not mix these two up",
+      "heading": "Mark left behind, or still breaking out?",
+      "intro": "The two tubes are both 20gr and look alike, but they are for two different stages. Using the wrong one does no harm — it simply does nothing.",
+      "items": [
+        "smart-whitening-turmergel",
+        "smart-target-acne-gel"
+      ],
+      "criteria": [
+        {
+          "label": "When to use it",
+          "values": [
+            "Once it has healed and only a darker mark remains",
+            "While the spot is raised and inflamed"
+          ]
+        },
+        {
+          "label": "What it targets",
+          "values": [
+            "Pigment left behind after healing",
+            "Skin with active breakouts"
+          ]
+        },
+        {
+          "label": "Key actives printed on the pack",
+          "values": [
+            "Sabiwhite® 0.3%, Niacinamide 3%, Tranexamic Acid 3%, Glutathione",
+            "Tamanu oil, Acnebusters 3%, BHA 0.5%, Sulfur, Zinc PCA"
+          ]
+        },
+        {
+          "label": "How it goes on",
+          "values": [
+            "Dotted, or spread thinly over the marked area",
+            "Dotted on each spot"
+          ]
+        },
+        {
+          "label": "Can they be used together",
+          "values": [
+            "Yes — on healed areas",
+            "Yes — on inflamed spots, not overlapping"
+          ]
+        }
+      ],
+      "footnote": "Plenty of people have both at once on the same face. Using both then makes sense, but on different areas rather than on top of each other."
     },
     {
       "type": "order",
@@ -205,6 +354,17 @@
           "q": "How should it be stored?",
           "a": "Keep away from heat and direct sunlight, close after use, keep out of reach of children."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Next step",
+      "heading": "If new spots are still appearing",
+      "intro": "Old marks and new spots usually coexist. Two different jobs, two different products.",
+      "items": [
+        "smart-target-acne-gel",
+        "bio-active-cleanser",
+        "smart-brightening-cream"
       ]
     }
   ]

@@ -97,6 +97,50 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "Vì sao vết thâm ở lại lâu thế",
+      "heading": "Nốt mụn lặn trong một tuần, vết thâm ở lại hàng tháng",
+      "quotes": [
+        "“Mụn thì hết nhanh, nhưng vết nâu thì ba tháng vẫn còn.”",
+        "“Cứ tưởng để lâu sẽ tự mờ, hoá ra chỗ nào nặn thì đậm hơn hẳn.”",
+        "“Trang điểm che được, nhưng rửa mặt xong nhìn gương vẫn thấy.”",
+        "“Mùa hè đi nắng về là mấy vết cũ sẫm lại như mới.”"
+      ],
+      "explainer": {
+        "heading": "Đây không còn là mụn — đây là sắc tố ở lại sau khi viêm đã hết",
+        "body": [
+          "Khi một nốt mụn viêm, da phản ứng bằng cách tăng sản sinh melanin ở vùng đó. Nốt lặn rồi nhưng melanin vẫn còn, và nó nằm lại theo thời gian của sắc tố — tính bằng tuần và tháng, không tính bằng ngày.",
+          "Điều này giải thích hai chuyện. Một: sản phẩm dành cho mụn không làm gì được vết thâm, vì không còn mụn để xử lý. Hai: <strong>nặn mụn làm vết thâm sâu hơn và lâu hơn</strong>, vì nó đẩy tổn thương xuống sâu và kéo dài phản ứng viêm.",
+          "Và vì đây là sắc tố, nắng làm nó đậm lại y như với nám. Một vết thâm được che nắng tử tế mờ nhanh hơn hẳn cùng vết đó phơi nắng mỗi ngày."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Ba loại dấu vết sau mụn, và loại nào tuýp này xử lý được",
+      "intro": "Không phải dấu vết nào sau mụn cũng cùng một bản chất. Phân biệt trước thì đỡ mất tiền và mất thời gian.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Vết nâu, phẳng",
+          "body": "Sắc tố ở lại sau viêm, bề mặt da vẫn phẳng. Đây là loại tuýp này được làm ra để xử lý.",
+          "meta": "Hợp nhất"
+        },
+        {
+          "heading": "Vết đỏ hoặc hồng, phẳng",
+          "body": "Mạch máu giãn còn lại sau viêm, không phải melanin. Thường tự nhạt dần; sản phẩm làm sáng tác động ít. Giữ ẩm và chống nắng là việc chính.",
+          "meta": "Cần kiên nhẫn hơn"
+        },
+        {
+          "heading": "Sẹo lõm hoặc sẹo lồi",
+          "body": "Đây là thay đổi cấu trúc da, không phải sắc tố. Không một sản phẩm bôi ngoài nào làm đầy được sẹo lõm — cần can thiệp ở cơ sở chuyên khoa.",
+          "meta": "Không phải thứ bạn cần"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
       "heading": "Tám thành phần, ba trong số đó công bố bằng số",
@@ -146,6 +190,63 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Đặt vào đâu trong ngày",
+      "heading": "Thoa lên vùng đã lành, sau bước làm sạch",
+      "intro": "Chỉ dùng ở vùng da không còn viêm. Chồng lên nốt đang sưng thì cả hai đều không đúng chỗ.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Buổi sáng",
+          "steps": [
+            {
+              "label": "Rửa mặt và lau khô",
+              "note": "Da khô giúp lớp gel bám đúng vùng bạn muốn."
+            },
+            {
+              "label": "Thoa mỏng lên vùng thâm",
+              "note": "Chỉ vùng đã lành hẳn, tránh nốt đang viêm.",
+              "essential": true
+            },
+            {
+              "label": "Dưỡng ẩm",
+              "note": "Bước quen thuộc của bạn."
+            },
+            {
+              "label": "Chống nắng",
+              "note": "Vết thâm sẫm lại dưới nắng y như nám. Bỏ bước này là xoá công của mọi bước trên.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Buổi tối",
+          "steps": [
+            {
+              "label": "Tẩy trang và rửa mặt",
+              "note": "Cặn trang điểm giữ lại bụi và làm chậm quá trình da tự thay mới."
+            },
+            {
+              "label": "Lau khô",
+              "note": "Da còn ẩm làm loãng lớp gel."
+            },
+            {
+              "label": "Thoa lên vùng thâm",
+              "note": "Cùng lượng như buổi sáng.",
+              "essential": true
+            },
+            {
+              "label": "Dưỡng ẩm",
+              "note": "Hàng rào bảo vệ da khoẻ thì da thay mới đều hơn."
+            }
+          ]
+        }
+      ],
+      "footnote": "Vết thâm mờ theo chu kỳ thay mới của da, nên hãy tính bằng <strong>tuần</strong> chứ không bằng ngày, và chụp ảnh cùng một góc cùng một ánh sáng để so — mắt nhìn hằng ngày không nhận ra thay đổi chậm."
+    },
+    {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
       "heading": "Ba bước, dùng buổi tối",
@@ -166,6 +267,54 @@
         }
       ],
       "footnote": "Dùng khi nốt mụn đã lặn. Vùng da đang sưng viêm cần bước khác — và nếu tình trạng mụn nặng hoặc kéo dài thì đó là việc của bác sĩ da liễu."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Đừng nhầm hai tuýp",
+      "heading": "Đã hết mụn, hay vẫn đang có mụn?",
+      "intro": "Hai tuýp cùng cỡ 20gr và trông giống nhau, nhưng dùng cho hai giai đoạn khác nhau. Dùng nhầm thì không hại, chỉ là không có tác dụng gì.",
+      "items": [
+        "smart-whitening-turmergel",
+        "smart-target-acne-gel"
+      ],
+      "criteria": [
+        {
+          "label": "Dùng khi nào",
+          "values": [
+            "Nốt đã lặn, chỉ còn vết sẫm màu",
+            "Nốt đang sưng, đang viêm"
+          ]
+        },
+        {
+          "label": "Nhắm vào",
+          "values": [
+            "Sắc tố còn lại sau khi mụn lành",
+            "Vùng da đang có mụn"
+          ]
+        },
+        {
+          "label": "Hoạt chất chính in trên bao bì",
+          "values": [
+            "Sabiwhite® 0,3%, Niacinamide 3%, Tranexamic Acid 3%, Glutathione",
+            "Dầu mù u, Acnebusters 3%, BHA 0,5%, Sulfur, Zinc PCA"
+          ]
+        },
+        {
+          "label": "Cách dùng",
+          "values": [
+            "Chấm hoặc thoa mỏng cả vùng thâm",
+            "Chấm từng nốt"
+          ]
+        },
+        {
+          "label": "Dùng được cùng lúc không",
+          "values": [
+            "Được — thoa ở vùng đã lành",
+            "Được — chấm ở nốt đang viêm, tránh chồng lên nhau"
+          ]
+        }
+      ],
+      "footnote": "Nhiều người có cả hai tình trạng cùng lúc trên cùng một khuôn mặt. Lúc đó dùng cả hai là hợp lý, nhưng ở hai vùng khác nhau chứ không chồng lên nhau."
     },
     {
       "type": "order",
@@ -204,6 +353,17 @@
           "q": "Bảo quản thế nào?",
           "a": "Tránh nhiệt độ cao và ánh nắng trực tiếp, đóng nắp sau khi dùng, để xa tầm tay trẻ em."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Nếu vẫn còn nốt mới mọc",
+      "intro": "Vết thâm cũ và nốt mới thường cùng tồn tại. Hai việc khác nhau, hai sản phẩm khác nhau.",
+      "items": [
+        "smart-target-acne-gel",
+        "bio-active-cleanser",
+        "smart-brightening-cream"
       ]
     }
   ]

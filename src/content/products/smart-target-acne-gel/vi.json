@@ -98,6 +98,50 @@
       ]
     },
     {
+      "type": "problem",
+      "eyebrow": "Chỗ thường hỏng",
+      "heading": "Phần lớn người dùng sai ở chỗ dùng quá nhiều, chứ không phải quá ít",
+      "quotes": [
+        "“Thấy mụn là bôi cả vùng cho chắc, xong cả vùng đó khô ráp bong tróc.”",
+        "“Nặn xong bôi vào cho nhanh khỏi, nhưng chỗ đó thâm lại lâu hơn chỗ không nặn.”",
+        "“Bôi hai hôm không thấy xẹp nên đổi sang loại khác.”",
+        "“Dùng chung với BHA toàn mặt, da rát mấy ngày liền.”"
+      ],
+      "explainer": {
+        "heading": "Gel chấm điểm mạnh hơn kem toàn mặt — vì nó không được thiết kế cho cả mặt",
+        "body": [
+          "Nồng độ trong một tuýp chấm điểm được tính cho một diện tích rất nhỏ và một khoảng thời gian ngắn. Đem nó bôi cả vùng là đưa vào da lượng hoạt chất gấp nhiều lần mức dự tính — và kết quả thường là khô ráp, bong tróc, rồi hàng rào bảo vệ da yếu đi.",
+          "Hàng rào yếu đi thì nốt tiếp theo mọc dễ hơn. Đó là lý do một số người càng bôi nhiều càng thấy mụn dai dẳng hơn.",
+          "<strong>Chấm đúng nốt, để yên, và đợi theo ngày chứ không theo giờ.</strong> Nếu mụn lan ra cả vùng má hay cả trán thì đó không còn là việc của một tuýp chấm điểm — nên đi khám da liễu."
+        ]
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Ba tình huống, và lời khuyên cho từng tình huống",
+      "intro": "Chúng tôi là đại lý. Nói trước chỗ sản phẩm này không giúp được thì hơn là để bạn mua rồi thất vọng.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Vài nốt viêm đơn lẻ",
+          "body": "Đây là đúng thứ tuýp này được làm ra để xử lý: chấm lên từng nốt, không lan sang vùng da lành xung quanh.",
+          "meta": "Hợp nhất"
+        },
+        {
+          "heading": "Mụn lan cả vùng, hoặc mụn bọc, mụn nang",
+          "body": "Một tuýp chấm điểm không giải quyết được diện rộng, và mụn nang là chuyện cần bác sĩ da liễu. Chúng tôi không bán cho bạn kỳ vọng đó.",
+          "meta": "Nên đi khám"
+        },
+        {
+          "heading": "Nốt mụn đã lặn, chỉ còn vết thâm",
+          "body": "Thâm sau mụn là chuyện sắc tố, không còn là chuyện mụn. Tuýp này không phải thứ bạn cần — xem gel chấm thâm ở phần dưới.",
+          "meta": "Cần sản phẩm khác"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
       "heading": "Bảy thành phần, và vì sao gel này không dùng khắp mặt",
@@ -142,6 +186,63 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Đặt vào đâu trong ngày",
+      "heading": "Chấm lên da khô, trước bước dưỡng ẩm",
+      "intro": "Thứ tự quyết định lượng hoạt chất thật sự chạm vào nốt mụn.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Buổi sáng",
+          "steps": [
+            {
+              "label": "Rửa mặt và lau khô",
+              "note": "Da còn ẩm làm gel loang sang vùng xung quanh."
+            },
+            {
+              "label": "Chấm lên từng nốt",
+              "note": "Một lượng rất nhỏ, chỉ phủ đúng nốt. Đợi khô.",
+              "essential": true
+            },
+            {
+              "label": "Dưỡng ẩm phần còn lại",
+              "note": "Tránh chồng lên chỗ vừa chấm."
+            },
+            {
+              "label": "Chống nắng",
+              "note": "Vùng da đang viêm rất dễ sạm màu sau khi lành.",
+              "essential": true
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Buổi tối",
+          "steps": [
+            {
+              "label": "Tẩy trang và rửa mặt",
+              "note": "Sạch hẳn rồi mới chấm."
+            },
+            {
+              "label": "Lau thật khô",
+              "note": "Đây là bước hay bị bỏ, và là bước quyết định gel nằm đúng chỗ."
+            },
+            {
+              "label": "Chấm lên từng nốt",
+              "note": "Cùng lượng như buổi sáng.",
+              "essential": true
+            },
+            {
+              "label": "Dưỡng ẩm",
+              "note": "Giữ hàng rào bảo vệ da, để nốt tiếp theo khó mọc hơn."
+            }
+          ]
+        }
+      ],
+      "footnote": "Không chà xát, không nặn trước khi chấm. Nặn làm tổn thương lan xuống sâu hơn và <strong>kéo dài thời gian vết thâm tồn tại</strong>, chứ không rút ngắn. Thử một lượng nhỏ ở vùng cổ và quan sát 30–45 phút trước lần dùng đầu tiên."
+    },
+    {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
       "heading": "Chấm, không bôi",
@@ -162,6 +263,54 @@
         }
       ],
       "footnote": "Nhà sản xuất ghi rõ: <strong>dùng quá nhiều gây bí da, hoặc khô và bong tróc với da mỏng yếu</strong>. Đây là sản phẩm mà thêm liều không đổi lấy thêm kết quả."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Đừng nhầm hai tuýp",
+      "heading": "Đang có mụn, hay đã hết mụn còn vết thâm?",
+      "intro": "Hai tuýp trông giống nhau và cùng cỡ 20gr, nhưng dùng cho hai giai đoạn khác nhau. Dùng nhầm thì không hại, chỉ là không có tác dụng gì.",
+      "items": [
+        "smart-target-acne-gel",
+        "smart-whitening-turmergel"
+      ],
+      "criteria": [
+        {
+          "label": "Dùng khi nào",
+          "values": [
+            "Nốt đang sưng, đang viêm",
+            "Nốt đã lặn, chỉ còn vết sẫm màu"
+          ]
+        },
+        {
+          "label": "Nhắm vào",
+          "values": [
+            "Vùng da đang có mụn",
+            "Sắc tố còn lại sau khi mụn lành"
+          ]
+        },
+        {
+          "label": "Hoạt chất chính in trên bao bì",
+          "values": [
+            "Dầu mù u, Acnebusters 3%, BHA 0,5%, Sulfur, Zinc PCA",
+            "Sabiwhite® 0,3%, Niacinamide 3%, Tranexamic Acid 3%, Glutathione"
+          ]
+        },
+        {
+          "label": "Cách dùng",
+          "values": [
+            "Chấm từng nốt",
+            "Chấm hoặc thoa mỏng cả vùng thâm"
+          ]
+        },
+        {
+          "label": "Dùng được cùng lúc không",
+          "values": [
+            "Được — chấm ở nốt đang viêm",
+            "Được — thoa ở vùng đã lành, tránh chồng lên nốt đang viêm"
+          ]
+        }
+      ],
+      "footnote": "Nhiều người có cả hai tình trạng cùng lúc trên cùng một khuôn mặt. Lúc đó dùng cả hai là hợp lý, nhưng ở hai vùng khác nhau chứ không chồng lên nhau."
     },
     {
       "type": "order",
@@ -200,6 +349,17 @@
           "q": "Mụn nặng, mụn nang thì sao?",
           "a": "Đó là tình huống cần bác sĩ da liễu, không phải một sản phẩm chấm điểm."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Sau khi nốt mụn đã lặn",
+      "intro": "Da mụn cần cả bước làm sạch đúng cách và bước xử lý vết thâm còn lại.",
+      "items": [
+        "smart-whitening-turmergel",
+        "bio-active-cleanser",
+        "bio-deep-detox-rebalance"
       ]
     }
   ]
