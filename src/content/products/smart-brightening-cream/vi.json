@@ -286,6 +286,17 @@
           "a": "Tránh nhiệt độ cao và ánh nắng trực tiếp, đóng nắp sau khi dùng, để xa tầm tay trẻ em. Tránh tiếp xúc với mắt; nếu dính vào mắt thì rửa ngay bằng nước sạch."
         }
       ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Nếu bạn còn đang cân nhắc",
+      "intro": "Ba hướng đi khác nhau, tuỳ chỗ bạn đang đứng. Không phải ai cũng nên bắt đầu bằng hũ kem này.",
+      "items": [
+        "combo-nam",
+        "smart-first-care-serum",
+        "bio-active-cleanser"
+      ]
     }
   ],
   "relatedArticles": [

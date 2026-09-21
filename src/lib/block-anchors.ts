@@ -17,4 +17,6 @@ export const DEFAULT_ANCHOR: Record<string, string> = {
   order: 'dat-hang',
   documents: 'chung-tu',
   faq: 'faq',
+  relatedProducts: 'goi-y',
+  finalCta: 'lien-he-nhanh',
 };

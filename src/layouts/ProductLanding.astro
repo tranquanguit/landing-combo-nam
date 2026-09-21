@@ -19,6 +19,8 @@ import Feature from '../components/blocks/Feature.astro';
 import Documents from '../components/blocks/Documents.astro';
 import Timeline from '../components/blocks/Timeline.astro';
 import Routine from '../components/blocks/Routine.astro';
+import RelatedProducts from '../components/blocks/RelatedProducts.astro';
+import FinalCta from '../components/blocks/FinalCta.astro';
 import Analytics from '../components/Analytics.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { expandProductTokens } from '../lib/money-text';
@@ -38,9 +40,11 @@ interface Props {
   policies?: { label: string; href: string }[];
   /** Bài tư vấn liên quan — xem `relatedArticles` trong schema sản phẩm. */
   articles?: any[];
+  /** Tra cứu thẻ sản phẩm theo slug, cho khối `relatedProducts`. */
+  productCards?: Map<string, any>;
 }
 
-const { product: raw, brand: b, locale, canonical, alternates = [], nav = [], policies = [], articles = [] } = Astro.props;
+const { product: raw, brand: b, locale, canonical, alternates = [], nav = [], policies = [], articles = [], productCards = new Map() } = Astro.props;
 
 /* Tên tổ chức công bố (in ở footer) phải trùng pháp nhân trong JSON-LD Organization.
    Kiểm định lần 6: bản EN khai "Mocha Vietnam Cosmeceuticals" trong khi structured
@@ -128,6 +132,7 @@ const ACT: Record<string, 'bone' | 'paper' | 'mist'> = {
   problem: 'bone', cards: 'bone',
   ingredients: 'paper', timeline: 'paper', documents: 'paper', faq: 'paper',
   routine: 'mist', steps: 'mist',
+  relatedProducts: 'bone',
 };
 
 const rhythm = new Map<number, { surface?: string; space?: string; sameSurface?: boolean }>();
@@ -178,6 +183,15 @@ const r = (i: number) => rhythm.get(i) ?? {};
         case 'timeline':     return <Timeline data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
         case 'routine':      return <Routine data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
         case 'faq':          return <Faq data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
+        case 'relatedProducts': return (
+          <RelatedProducts data={block} locale={locale}
+            id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)}
+            products={block.items
+              .filter((slug: string) => slug !== p.slug)   /* tự trỏ về mình là một ngõ cụt khác */
+              .map((slug: string) => productCards.get(slug))
+              .filter(Boolean)} />
+        );
+        case 'finalCta':     return <FinalCta data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
         default:             return null;
       }
     })}

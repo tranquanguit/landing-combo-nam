@@ -133,6 +133,11 @@ const image = z.object({
   focus: z.string().max(40).optional(),
 }).strict();
 
+/* Khai TRƯỚC `blocks`: khối `relatedProducts` tham chiếu slug, và một const
+   khai sau chỗ dùng sẽ ném 'Cannot access before initialization' lúc sinh
+   kiểu — không phải lúc kiểm kiểu. */
+const slugField = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'slug chỉ gồm chữ thường, số và gạch nối');
+
 /** Id neo dùng cho liên kết trong trang. Để trống thì component dùng id mặc định. */
 const anchorId = z.string().regex(/^[a-z0-9-]+$/).optional();
 
@@ -318,6 +323,44 @@ const blocks = z.discriminatedUnion('type', [
     body: z.string(),
     points: z.array(z.string()),
   }).strict(),
+  /**
+   * Bước tiếp theo ở cuối trang.
+   *
+   * Trước khối này, một landing kết thúc bằng FAQ rồi tới chân trang — người
+   * đọc xong mà chưa mua thì không còn chỗ nào để đi. Với trang đích của quảng
+   * cáo, đó là chỗ tiền quảng cáo rơi ra ngoài.
+   *
+   * Chỉ khai slug; tên, giá và ảnh lấy từ chính sản phẩm được trỏ tới, để
+   * không có hai chỗ cùng giữ một dữ kiện rồi lệch nhau.
+   */
+  z.object({
+    type: z.literal('relatedProducts'),
+    id: anchorId,
+    ...rhythmFields,
+    eyebrow: z.string().optional(),
+    heading: z.string(),
+    intro: z.string().optional(),
+    /* Tối đa 3: đây là gợi ý bước tiếp theo, không phải một trang danh mục thứ
+       hai. Đưa 8 lựa chọn cho người vừa đọc xong 2.000 chữ là bắt họ quyết định
+       lại từ đầu. */
+    items: z.array(slugField).min(1).max(3),
+  }).strict(),
+
+  /**
+   * Lời mời cuối cùng, khi biểu mẫu đặt hàng đã ở phía trên và người đọc vẫn
+   * chưa quyết. Không hứa thêm gì — chỉ nhắc lại đường liên hệ.
+   */
+  z.object({
+    type: z.literal('finalCta'),
+    id: anchorId,
+    ...rhythmFields,
+    eyebrow: z.string().optional(),
+    heading: z.string(),
+    body: z.string().optional(),
+    primary: z.object({ label: z.string(), href: safeUrl }).strict(),
+    secondary: z.object({ label: z.string(), href: safeUrl }).strict().optional(),
+  }).strict(),
+
   z.object({
     type: z.literal('faq'),
     ...rhythmFields,
@@ -765,7 +808,6 @@ const products = defineCollection({
    từ dòng đầu tiên, chứ không phải "bổ sung sau".
 -------------------------------------------------------------------*/
 
-const slugField = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'slug chỉ gồm chữ thường, số và gạch nối');
 
 const seoField = z.object({
   title: z.string().max(70),

@@ -513,6 +513,17 @@
           "a": "Sản phẩm chính hãng có tem chống giả kèm mã QR tra cứu. Hiện Mocha chỉ bán qua website chính thức này và hotline 0367 848 918 — chưa có gian hàng trên sàn thương mại điện tử, nên hàng rao bán ở nơi khác không phải do Mocha phân phối."
         }
       ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Dùng riêng từng bước, hoặc bổ sung bước làm sạch",
+      "intro": "Combo là hai bước đi cùng nhau. Nếu bạn muốn bắt đầu nhỏ hơn, đây là từng phần của nó.",
+      "items": [
+        "smart-first-care-serum",
+        "smart-brightening-cream",
+        "bio-active-cleanser"
+      ]
     }
   ],
   "availability": "InStock",

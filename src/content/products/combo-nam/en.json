@@ -448,6 +448,17 @@
           "a": "Yes, from Ho Chi Minh City. Tell us your country in the order form and we will confirm shipping cost and delivery time before anything is charged."
         }
       ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Next step",
+      "heading": "Use each step on its own, or add a cleansing step",
+      "intro": "The combo is two steps used together. If you would rather start smaller, here are its parts.",
+      "items": [
+        "smart-first-care-serum",
+        "smart-brightening-cream",
+        "bio-active-cleanser"
+      ]
     }
   ],
   "availability": "InStock",

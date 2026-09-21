@@ -79,6 +79,8 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 ### `problem`
 
+- `surface`
+- `space`
 - `id`
 - `eyebrow`
 - `heading *`
@@ -88,6 +90,8 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 ### `cards`
 
+- `surface`
+- `space`
 - `id`
 - `eyebrow`
 - `heading *`
@@ -97,6 +101,8 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 ### `ingredients`
 
+- `surface`
+- `space`
 - `id`
 - `eyebrow`
 - `heading *`
@@ -106,6 +112,8 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 ### `steps`
 
+- `surface`
+- `space`
 - `id`
 - `eyebrow`
 - `heading *`
@@ -140,8 +148,31 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 - `body *`
 - `points *`
 
+### `relatedProducts`
+
+- `id`
+- `surface`
+- `space`
+- `eyebrow`
+- `heading *`
+- `intro`
+- `items *`
+
+### `finalCta`
+
+- `id`
+- `surface`
+- `space`
+- `eyebrow`
+- `heading *`
+- `body`
+- `primary *`
+- `secondary`
+
 ### `faq`
 
+- `surface`
+- `space`
 - `id`
 - `eyebrow`
 - `heading *`
@@ -155,6 +186,8 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 ### `documents`
 
+- `surface`
+- `space`
 - `id`
 - `eyebrow`
 - `heading *`
@@ -164,6 +197,8 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 ### `timeline`
 
+- `surface`
+- `space`
 - `id`
 - `eyebrow`
 - `heading *`
@@ -175,6 +210,8 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 ### `routine`
 
+- `surface`
+- `space`
 - `id`
 - `eyebrow`
 - `heading *`
