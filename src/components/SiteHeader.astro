@@ -12,7 +12,7 @@ interface Props {
    */
   orderHref?: string;
   /** Điều hướng chính. Sinh từ dữ liệu ở route, không viết cứng ở đây. */
-  nav?: { label: string; href: string }[];
+  nav?: { label: string; href: string; children?: { label: string; href: string; note?: string }[] }[];
 }
 const { brand: b, locale, alternates = [], orderHref = '#dat-hang', nav = [] } = Astro.props;
 
@@ -74,6 +74,54 @@ function groupChildren(children: { label: string; href: string; note?: string }[
       <LocaleSwitcher current={locale} alternates={alternates} />
       <a class="tel" href={`tel:${b.phone}`} data-cta="header-call">{b.phoneDisplay}</a>
       <a class="btn btn-primary compact" href={orderHref} data-cta="header-order">{t(locale, 'nav.order')}</a>
+
+      {/* Ngăn kéo cho màn hình hẹp.
+
+          Dùng <details> chứ không phải JavaScript, và không phải vì gọn: ngân
+          sách JS nội tuyến trên trang sản phẩm đang là 7.971B trên trần 8.192B
+          — còn 221 byte. Một drawer viết tay cần nhiều hơn thế, nên lựa chọn
+          duy nhất còn lại là thứ trình duyệt đã làm sẵn.
+
+          Được thêm: <details> có trạng thái đóng/mở gắn liền với phần tử, nên
+          bàn phím và trình đọc màn hình hiểu nó mà không cần một dòng aria nào
+          do ta tự khai — và nó vẫn mở được khi JS hỏng.
+
+          Trước bản này, dưới 860px KHÔNG có điều hướng nào cả: `.nav` bị ẩn và
+          không có gì thay thế. Người dùng điện thoại chỉ còn hotline, nút đặt
+          mua, và chân trang. Đó là phần lớn lưu lượng của một trang bán mỹ phẩm. */}
+      {nav.length > 0 && (
+        <details class="drawer" name="mocha-nav">
+          <summary aria-label={t(locale, 'nav.menu')}>
+            <span class="bars" aria-hidden="true"></span>
+          </summary>
+          <div class="drawer-panel">
+            <nav aria-label={t(locale, 'nav.menu')}>
+              {nav.map((item) => (
+                <div class="dgroup">
+                  <a class="dtop" href={item.href}>{item.label}</a>
+                  {item.children?.length ? (
+                    <ul class="dlist">
+                      {groupChildren(item.children).map((g) => (
+                        <li>
+                          <a class="dline" href={g.href}>{g.label}</a>
+                          {g.items.length > 0 && (
+                            <ul>
+                              {g.items.map((c) => (
+                                <li><a class="ditem" href={c.href}>{c.label}</a></li>
+                              ))}
+                            </ul>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              ))}
+            </nav>
+            <a class="dcall" href={`tel:${b.phone}`} data-cta="drawer-call">{b.phoneDisplay}</a>
+          </div>
+        </details>
+      )}
     </div>
   </div>
 </header>
@@ -183,4 +231,87 @@ function groupChildren(children: { label: string; href: string; note?: string }[
   }
   @media (min-width: 620px) { .tel { display: inline-flex; } }
   .compact { padding: 9px 18px; font-size: var(--t-sm); }
+
+  /* ===================== NGĂN KÉO DI ĐỘNG ===================== */
+  .drawer { position: relative; }
+  @media (min-width: 860px) { .drawer { display: none; } }
+
+  .drawer > summary {
+    list-style: none; cursor: pointer;
+    /* 44px: ngưỡng vùng chạm tối thiểu. Nút nhỏ hơn thì người dùng bấm trượt,
+       và bấm trượt vào thanh điều hướng là chỗ họ rời trang. */
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    border-radius: var(--r-btn);
+  }
+  .drawer > summary::-webkit-details-marker { display: none; }
+  .drawer > summary::marker { content: ''; }
+
+  /* Ba gạch vẽ bằng một phần tử: thân là chính nó, hai gạch kia là ::before và
+     ::after. Không dùng SVG hay icon font — cả hai đều tốn byte cho một hình
+     ba đường thẳng. */
+  .bars, .bars::before, .bars::after {
+    content: ''; display: block;
+    width: 20px; height: 2px; background: var(--ink-navy);
+    border-radius: 2px;
+    transition: transform var(--dur-2) var(--ease), opacity var(--dur-1) var(--ease);
+  }
+  .bars { position: relative; }
+  .bars::before { position: absolute; top: -6px; }
+  .bars::after { position: absolute; top: 6px; }
+
+  /* Mở ra thì ba gạch thành dấu X — cùng một nút đóng và mở, nên người dùng
+     không phải đi tìm nút đóng ở góc khác. */
+  .drawer[open] > summary .bars { background: transparent; }
+  .drawer[open] > summary .bars::before { transform: translateY(6px) rotate(45deg); }
+  .drawer[open] > summary .bars::after { transform: translateY(-6px) rotate(-45deg); }
+
+  .drawer-panel {
+    position: fixed; left: 0; right: 0;
+    top: var(--header-h);
+    /* Cao tối đa tới đáy màn hình rồi tự cuộn: danh mục 6 dòng + 12 sản phẩm
+       không vừa màn hình điện thoại, và một bảng bị cắt cụt thì không ai biết
+       là mình đang thiếu gì. `dvh` để thanh địa chỉ của trình duyệt di động
+       thu vào ra không làm hụt đáy. */
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto; overscroll-behavior: contain;
+    /* Đệm đáy phải cao hơn thanh CTA cố định (~64px), nếu không mục cuối cùng
+       trong danh mục nằm khuất sau nó và người dùng tưởng danh sách hết ở đó. */
+    padding: var(--s-5) var(--s-4) calc(var(--s-9) + env(safe-area-inset-bottom));
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    box-shadow: var(--shadow-2);
+  }
+
+  .dgroup + .dgroup { margin-top: var(--s-5); padding-top: var(--s-5); border-top: 1px solid var(--line); }
+  .dtop {
+    display: block; padding: 6px 0;
+    font-family: var(--font-display); font-size: var(--t-md); font-weight: 600;
+    color: var(--ink-navy); text-decoration: none;
+  }
+
+  .dlist, .dlist ul { list-style: none; margin: 0; padding: 0; }
+  .dlist { margin-top: var(--s-3); }
+  .dlist > li + li { margin-top: var(--s-4); }
+  .dline {
+    display: block; padding: 4px 0;
+    font-size: var(--t-xs); letter-spacing: .08em; text-transform: uppercase;
+    color: var(--slate); text-decoration: none;
+  }
+  .ditem {
+    display: block; padding: 9px 0 9px var(--s-4);
+    font-size: var(--t-sm); color: var(--ink); text-decoration: none;
+    border-left: 2px solid var(--line);
+  }
+
+  .dcall {
+    display: block; margin-top: var(--s-6); padding-top: var(--s-5);
+    border-top: 1px solid var(--line);
+    font-family: var(--font-figure); font-size: var(--t-lg);
+    color: var(--ink-navy); text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bars, .bars::before, .bars::after { transition: none; }
+  }
 </style>
