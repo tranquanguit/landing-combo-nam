@@ -148,6 +148,18 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 - `body *`
 - `points *`
 
+### `compare`
+
+- `id`
+- `surface`
+- `space`
+- `eyebrow`
+- `heading *`
+- `intro`
+- `items *`
+- `criteria *`
+- `footnote`
+
 ### `relatedProducts`
 
 - `id`

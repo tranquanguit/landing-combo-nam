@@ -249,6 +249,54 @@
       "footnote": "Thử một lượng nhỏ ở vùng cổ và quan sát trong <strong>30–45 phút</strong> trước khi dùng toàn mặt. Buổi sáng cần kem chống nắng — bỏ bước này thì sắc tố sẽ quay lại bất kể dùng sản phẩm nào."
     },
     {
+      "type": "compare",
+      "eyebrow": "So sánh",
+      "heading": "Kem một mình, hay cả hai bước?",
+      "intro": "Câu hỏi này nên trả lời trước khi đặt, không phải sau khi dùng hết hũ đầu tiên. Bảng dưới nói thẳng chỗ khác nhau.",
+      "items": [
+        "smart-brightening-cream",
+        "combo-nam"
+      ],
+      "criteria": [
+        {
+          "label": "Gồm những gì",
+          "values": [
+            "Một hũ kem 30gr",
+            "Hũ kem 30gr và chai serum"
+          ]
+        },
+        {
+          "label": "Bước tác động",
+          "values": [
+            "Khoá ẩm và giữ hoạt chất trên da qua đêm",
+            "Thêm bước thẩm thấu sâu trước khi khoá ẩm"
+          ]
+        },
+        {
+          "label": "Hợp nhất với",
+          "values": [
+            "Nám mảng, sắc tố còn nằm nông",
+            "Nám chân sâu và nám hỗn hợp, bờ mờ"
+          ]
+        },
+        {
+          "label": "Số bước thêm vào quy trình",
+          "values": [
+            "Một",
+            "Hai"
+          ]
+        },
+        {
+          "label": "Nếu bạn chưa từng dùng hoạt chất làm sáng",
+          "values": [
+            "Điểm bắt đầu nhẹ nhàng hơn",
+            "Nên chia ra, dùng kem trước vài tuần"
+          ]
+        }
+      ],
+      "footnote": "Không có lựa chọn nào <strong>sai</strong> ở đây. Khác nhau là ở tốc độ và ở số bước bạn sẵn sàng giữ đều mỗi ngày — một quy trình hai bước mà bỏ giữa chừng thì chậm hơn một quy trình một bước làm đủ."
+    },
+    {
       "type": "order",
       "eyebrow": "Đặt hàng",
       "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",

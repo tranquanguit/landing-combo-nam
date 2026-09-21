@@ -333,6 +333,43 @@ const blocks = z.discriminatedUnion('type', [
    * Chỉ khai slug; tên, giá và ảnh lấy từ chính sản phẩm được trỏ tới, để
    * không có hai chỗ cùng giữ một dữ kiện rồi lệch nhau.
    */
+  /**
+   * Bảng so sánh ngay trên landing.
+   *
+   * Tầng dòng đã có bảng này, nhưng người đến thẳng landing từ quảng cáo không
+   * đi qua trang dòng — họ thấy đúng một sản phẩm và không có gì để đối chiếu.
+   * Với đơn hàng vài trăm nghìn tới gần hai triệu, "so với cái kia thì sao"
+   * là câu hỏi xảy ra TRƯỚC khi bấm đặt hàng, không phải sau.
+   *
+   * Cột lấy từ `items`. Không khai lại tên hay giá ở đây: chép giá vào bảng là
+   * tạo một bản sao sẽ lệch khỏi giá thật sau lần đổi giá đầu tiên.
+   */
+  z.object({
+    type: z.literal('compare'),
+    id: anchorId,
+    ...rhythmFields,
+    eyebrow: z.string().optional(),
+    heading: z.string(),
+    intro: z.string().optional(),
+    items: z.array(slugField).min(2).max(3),
+    criteria: z.array(z.object({
+      label: z.string(),
+      values: z.array(z.string().min(1)).min(2),
+    }).strict()).min(2),
+    footnote: z.string().optional(),
+  }).strict().superRefine((b, ctx) => {
+    /* Cùng hàng rào chống trượt cột như bảng ở tầng dòng: lệch một ô là bảng
+       vẫn trông đúng trên màn hình nhưng gán đặc điểm của sản phẩm này sang
+       sản phẩm khác — sai lặng lẽ, và đúng loại sai không ai soát ra. */
+    for (const [i, c] of b.criteria.entries()) {
+      if (c.values.length !== b.items.length) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['criteria', i],
+          message: `Tiêu chí "${c.label}" có ${c.values.length} ô nhưng bảng có ${b.items.length} cột. ` +
+            `Thiếu hoặc thừa một ô là bảng trượt cột, gán đặc điểm sang nhầm sản phẩm.` });
+      }
+    }
+  }),
+
   z.object({
     type: z.literal('relatedProducts'),
     id: anchorId,

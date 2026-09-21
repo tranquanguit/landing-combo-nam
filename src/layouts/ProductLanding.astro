@@ -19,6 +19,7 @@ import Feature from '../components/blocks/Feature.astro';
 import Documents from '../components/blocks/Documents.astro';
 import Timeline from '../components/blocks/Timeline.astro';
 import Routine from '../components/blocks/Routine.astro';
+import Compare from '../components/Compare.astro';
 import RelatedProducts from '../components/blocks/RelatedProducts.astro';
 import FinalCta from '../components/blocks/FinalCta.astro';
 import Analytics from '../components/Analytics.astro';
@@ -131,6 +132,7 @@ const jsonLd = productGraph({
 const ACT: Record<string, 'bone' | 'paper' | 'mist'> = {
   problem: 'bone', cards: 'bone',
   ingredients: 'paper', timeline: 'paper', documents: 'paper', faq: 'paper',
+  compare: 'paper',
   routine: 'mist', steps: 'mist',
   relatedProducts: 'bone',
 };
@@ -183,6 +185,11 @@ const r = (i: number) => rhythm.get(i) ?? {};
         case 'timeline':     return <Timeline data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
         case 'routine':      return <Routine data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
         case 'faq':          return <Faq data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
+        case 'compare':      return (
+          <Compare data={block} locale={locale}
+            id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)}
+            products={block.items.map((slug: string) => productCards.get(slug)).filter(Boolean)} />
+        );
         case 'relatedProducts': return (
           <RelatedProducts data={block} locale={locale}
             id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)}

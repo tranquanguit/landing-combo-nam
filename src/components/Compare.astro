@@ -14,10 +14,13 @@ interface Props {
   products: any[];
   locale: Locale;
   id?: string;
+  surface?: 'bone' | 'paper' | 'mist' | 'navy';
+  space?: 'sm' | 'md' | 'lg';
+  sameSurface?: boolean;
 }
-const { data, products, locale, id } = Astro.props;
+const { data, products, locale, id, surface = 'paper', space, sameSurface } = Astro.props;
 ---
-<Section id={id} surface="paper" eyebrow={data.eyebrow} heading={data.heading}>
+<Section id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading}>
   {data.intro && <p class="cmp-intro" set:html={richText(data.intro)} />}
 
   {/* Bảng thật, không phải lưới div: người dùng trình đọc màn hình điều hướng
