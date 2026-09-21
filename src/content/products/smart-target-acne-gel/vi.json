@@ -1,0 +1,206 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "cham-soc-da-mun",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "smart-target-acne-gel",
+  "translationKey": "smart-target-acne-gel",
+  "sku": "8938552914280",
+  "price": 235000,
+  "locale": "vi",
+  "name": "Mocha Smart Target – gel chấm mụn dầu mù u 20gr",
+  "shortName": "Gel chấm mụn Smart Target",
+  "primaryKeyword": "gel chấm mụn mocha smart target",
+  "seo": {
+    "title": "Gel chấm mụn Mocha Smart Target 20gr | Mocha Việt Nam",
+    "description": "Gel chấm mụn với dầu mù u Việt Nam, 3% Acnebusters, BHA, Sulfur, Zinc PCA và Bioecolia. Nồng độ in trên bao bì. {{price}}."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "hỗ trợ chăm sóc vùng da có mụn",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
+      "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
+      "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Smart Target – 20gr",
+      "note": "Dùng chấm điểm hoặc bôi vùng",
+      "price": 235000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, xem tình trạng da qua hình ảnh",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước chấm điểm",
+      "heading": "Gel chấm điểm, không phải kem bôi toàn mặt",
+      "lead": "Tuýp 20gr với <strong>dầu mù u Việt Nam, 3% Acnebusters, BHA, Salicylic Acid, Sulfur, Zinc PCA và Bioecolia®</strong>. Đây là sản phẩm dùng đúng chỗ cần, không phải dùng khắp mặt.",
+      "usp": [
+        {
+          "text": "<strong>3% Acnebusters và 0,5% BHA</strong> — nồng độ in trên bao bì",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "đọc được trên chính vỏ hộp"
+        },
+        {
+          "text": "<strong>Dầu mù u Việt Nam</strong>, nguyên liệu bản địa trong nhóm làm dịu",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "thành phần công bố trên bao bì"
+        },
+        {
+          "text": "<strong>Nhà sản xuất cảnh báo không dùng quá nhiều</strong> — dùng thừa gây bí da hoặc khô bong với da mỏng",
+          "evidence": "verified",
+          "source": "#huong-dan",
+          "qualifier": "trích từ chính hướng dẫn sử dụng"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-smart-target.webp",
+        "alt": "Hộp và tuýp gel chấm mụn Mocha Smart Target Clearing Solution"
+      },
+      "primaryCta": "Đặt gel chấm mụn",
+      "secondaryCta": {
+        "label": "Xem bảng thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Bảng thành phần",
+      "heading": "Bảy thành phần, và vì sao gel này không dùng khắp mặt",
+      "intro": "Công thức tập trung nồng độ vào một diện tích nhỏ. Đó là lý do nó hiệu quả khi chấm đúng chỗ và là lý do nó không hợp để bôi toàn mặt.",
+      "caption": "Bảng này liệt kê các thành phần nhà sản xuất công bố, trong đó nồng độ 3% Acnebusters và 0,5% BHA được IN TRÊN BAO BÌ. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
+      "rows": [
+        {
+          "name": "Dầu mù u Việt Nam",
+          "role": "Nguyên liệu bản địa, dùng trong nhóm làm dịu vùng da đang kích ứng.",
+          "suitedFor": "Vùng da đang sưng đỏ"
+        },
+        {
+          "name": "Acnebusters 3%",
+          "role": "Phức hợp hoạt chất chuyên biệt cho vùng da mụn, nồng độ in trên vỏ.",
+          "suitedFor": "Nốt mụn riêng lẻ"
+        },
+        {
+          "name": "BHA 0,5% (Salicylic Acid)",
+          "role": "Tan trong dầu nên đi được vào lỗ chân lông, làm sạch bề mặt vùng bít tắc.",
+          "suitedFor": "Da dầu, lỗ chân lông bít"
+        },
+        {
+          "name": "Sulfur",
+          "role": "Lưu huỳnh, thành phần lâu đời trong nhóm chăm sóc vùng da mụn.",
+          "suitedFor": "Vùng da nhiều dầu"
+        },
+        {
+          "name": "Zinc PCA",
+          "role": "Dẫn xuất kẽm, liên quan tới kiểm soát dầu trên bề mặt.",
+          "suitedFor": "Da dầu"
+        },
+        {
+          "name": "Bioecolia®",
+          "role": "Thành phần prebiotic, liên quan tới hệ vi sinh trên da.",
+          "suitedFor": "Da dễ mất cân bằng"
+        },
+        {
+          "name": "Potassium Azeloyl Diglycinate",
+          "role": "Dẫn xuất tan trong nước của azelaic acid.",
+          "suitedFor": "Da không đều màu sau mụn"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Chấm, không bôi",
+      "totalTime": "PT1M",
+      "intro": "Liều lượng dưới đây lấy nguyên từ hướng dẫn của nhà sản xuất.",
+      "items": [
+        {
+          "heading": "Làm sạch da trước",
+          "body": "Rửa mặt và lau khô."
+        },
+        {
+          "heading": "Một hạt đậu để chấm điểm",
+          "body": "Chấm lên nốt mụn hoặc vùng đang sưng. Bề mặt lớn thì hai hạt đậu, không hơn."
+        },
+        {
+          "heading": "Đợi thấm hẳn rồi mới thoa bước sau",
+          "body": "Thoa chồng khi gel chưa thấm làm cả hai lớp đều kém tác dụng."
+        }
+      ],
+      "footnote": "Nhà sản xuất ghi rõ: <strong>dùng quá nhiều gây bí da, hoặc khô và bong tróc với da mỏng yếu</strong>. Đây là sản phẩm mà thêm liều không đổi lấy thêm kết quả."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng phù hợp với tình trạng da của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt chu kỳ sử dụng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Gel này giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho tuýp 20gr. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Bôi cả mặt được không?",
+          "a": "Không nên. Công thức tập trung nồng độ cho một diện tích nhỏ; bôi khắp mặt vừa lãng phí vừa dễ gây khô bong, nhất là với da mỏng."
+        },
+        {
+          "q": "Dùng chung với kem nám được không?",
+          "a": "Được, nhưng không chồng lên nhau ở cùng một chỗ. Chấm gel vào nốt mụn, chờ thấm, rồi thoa kem ở phần còn lại."
+        },
+        {
+          "q": "Bao lâu thì thấy khác?",
+          "a": "Chúng tôi không đưa con số. Vùng da mụn phản ứng rất khác nhau giữa người này và người kia, và một mốc thời gian chung sẽ sai với phần lớn người đọc."
+        },
+        {
+          "q": "Mụn nặng, mụn nang thì sao?",
+          "a": "Đó là tình huống cần bác sĩ da liễu, không phải một sản phẩm chấm điểm."
+        }
+      ]
+    }
+  ]
+}

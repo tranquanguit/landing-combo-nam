@@ -1,0 +1,207 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "cham-soc-da-mun",
+  "relatedArticles": [
+    "nam-noi-tiet-la-gi"
+  ],
+  "slug": "smart-target-acne-gel",
+  "translationKey": "smart-target-acne-gel",
+  "sku": "8938552914280",
+  "price": 235000,
+  "locale": "en",
+  "name": "Mocha Smart Target – tamanu oil spot gel, 20g",
+  "shortName": "Smart Target spot gel",
+  "primaryKeyword": "mocha smart target acne gel",
+  "seo": {
+    "title": "Mocha Smart Target spot gel, 20g | Mocha Vietnam",
+    "description": "Spot gel with Vietnamese tamanu oil, 3% Acnebusters, BHA, sulfur, zinc PCA and Bioecolia. Concentrations printed on the pack. {{price}}."
+  },
+  "compliance": {
+    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "functions": "helps care for areas of skin affected by blemishes",
+    "warnings": [
+      "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
+      "Discontinue use if irritation occurs. Avoid direct contact with the eyes.",
+      "If you are pregnant or breastfeeding, speak to your doctor before use.",
+      "Results vary between individuals and depend on consistent daily sun protection.",
+      "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Smart Target – 20g",
+      "note": "For spot or small-area use",
+      "price": 235000,
+      "recommended": true
+    },
+    {
+      "label": "I would like advice first",
+      "note": "An adviser calls you back and reviews your skin from photos",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "The spot step",
+      "heading": "A spot gel, not an all-over cream",
+      "lead": "A 20g tube with <strong>Vietnamese tamanu oil, 3% Acnebusters, BHA, salicylic acid, sulfur, zinc PCA and Bioecolia®</strong>. It is meant for the places that need it, not for the whole face.",
+      "usp": [
+        {
+          "text": "<strong>3% Acnebusters and 0.5% BHA</strong> — concentrations printed on the pack",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "readable on the packaging itself"
+        },
+        {
+          "text": "<strong>Vietnamese tamanu oil</strong>, a regional ingredient in the calming group",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "ingredient published on the packaging"
+        },
+        {
+          "text": "<strong>The maker warns against using too much</strong> — excess congests, or dries and flakes thin skin",
+          "evidence": "verified",
+          "source": "#huong-dan",
+          "qualifier": "quoted from the instructions themselves"
+        }
+      ],
+      "image": {
+        "src": "/images/packshot-smart-target.webp",
+        "alt": "Box and tube of Mocha Smart Target Clearing Solution spot gel"
+      },
+      "primaryCta": "Order the spot gel",
+      "secondaryCta": {
+        "label": "See the ingredient table",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Free delivery nationwide",
+        "Inspect before you pay",
+        "7-day return if the product is faulty"
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Ingredients",
+      "heading": "Seven ingredients, and why this is not an all-over product",
+      "intro": "The formula concentrates its actives into a small area. That is why it works applied to the right spot, and why it does not suit whole-face use.",
+      "caption": "This table lists the ingredients the manufacturer publishes; the 3% Acnebusters and 0.5% BHA figures are PRINTED ON THE PACKAGING. Full INCI list is printed on the packaging.",
+      "rows": [
+        {
+          "name": "Vietnamese tamanu oil",
+          "role": "A regional ingredient used among calming actives for irritated areas.",
+          "suitedFor": "Red, swollen spots"
+        },
+        {
+          "name": "Acnebusters 3%",
+          "role": "A complex aimed at blemish-prone areas; the figure is printed on the pack.",
+          "suitedFor": "Individual spots"
+        },
+        {
+          "name": "BHA 0.5% (salicylic acid)",
+          "role": "Oil-soluble, so it reaches into pores and clears the surface of congested areas.",
+          "suitedFor": "Oily skin, congested pores"
+        },
+        {
+          "name": "Sulfur",
+          "role": "A long-established ingredient in blemish care.",
+          "suitedFor": "Oilier areas"
+        },
+        {
+          "name": "Zinc PCA",
+          "role": "A zinc derivative associated with surface oil control.",
+          "suitedFor": "Oily skin"
+        },
+        {
+          "name": "Bioecolia®",
+          "role": "A prebiotic ingredient, related to the skin microbiome.",
+          "suitedFor": "Easily unbalanced skin"
+        },
+        {
+          "name": "Potassium azeloyl diglycinate",
+          "role": "A water-soluble derivative of azelaic acid.",
+          "suitedFor": "Uneven tone after blemishes"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use",
+      "heading": "Dab, do not spread",
+      "totalTime": "PT1M",
+      "intro": "The amounts below are taken verbatim from the manufacturer's instructions.",
+      "items": [
+        {
+          "heading": "Cleanse first",
+          "body": "Wash and dry your face."
+        },
+        {
+          "heading": "A pea-sized amount for spots",
+          "body": "Dab onto the spot or swollen area. For a larger area, two pea-sized amounts and no more."
+        },
+        {
+          "heading": "Let it absorb before the next step",
+          "body": "Layering over gel that has not absorbed weakens both layers."
+        }
+      ],
+      "footnote": "The manufacturer states plainly: <strong>using too much congests the skin, or dries and flakes thinner skin</strong>. This is a product where more does not buy more."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City — tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support through the full routine</strong> by email."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "FAQ",
+      "heading": "Questions people actually ask",
+      "items": [
+        {
+          "q": "How much is it?",
+          "a": "<strong>{{price}}</strong> for the 20g tube. Free delivery, pay on delivery."
+        },
+        {
+          "q": "Can I use it all over?",
+          "a": "Better not. The formula concentrates its actives for a small area; spreading it everywhere wastes product and readily dries thinner skin."
+        },
+        {
+          "q": "Can I use it alongside a pigmentation cream?",
+          "a": "Yes, but not stacked in the same place. Dab the gel on the spot, let it absorb, then apply the cream elsewhere."
+        },
+        {
+          "q": "How long until I see a difference?",
+          "a": "We do not quote a figure. Blemish-prone skin responds very differently from person to person, and one shared timescale would be wrong for most readers."
+        },
+        {
+          "q": "What about severe or cystic acne?",
+          "a": "That needs a dermatologist, not a spot treatment."
+        }
+      ]
+    }
+  ]
+}
