@@ -115,6 +115,31 @@
       }
     },
     {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Ba điều nói trước, kể cả điều bất lợi cho chúng tôi",
+      "intro": "Đây là bước quan trọng nhất trong cả quy trình, nên nó cũng là chỗ đáng nói thật nhất.",
+      "columns": 3,
+      "items": [
+        {
+          "heading": "Chúng tôi chưa in chỉ số SPF và PA lên trang này",
+          "body": "Tài liệu của hãng đang ghi hai mức PA khác nhau cho cùng sản phẩm. Chúng tôi đã hỏi lại và chưa có xác nhận, nên chưa in con số nào — ghi một con số chưa chắc đúng lên trang còn tệ hơn là không ghi. Chỉ số in trên vỏ tuýp là căn cứ cho tới khi có trả lời.",
+          "meta": "Đang chờ hãng xác nhận"
+        },
+        {
+          "heading": "Đang chăm sóc nám, thâm hoặc vừa peel",
+          "body": "Đây là nhóm bước này quan trọng nhất. Mọi hoạt chất làm sáng đều bị tia UV vô hiệu hoá nhanh hơn tốc độ chúng làm việc, nên bỏ bước này là bỏ luôn kết quả của các bước kia.",
+          "meta": "Bắt buộc"
+        },
+        {
+          "heading": "Ở trong nhà cả ngày, không gần cửa sổ",
+          "body": "Nhu cầu thấp hơn hẳn, và chúng tôi không nói ngược lại để bán thêm một tuýp. Nhưng nếu bạn ngồi cạnh cửa sổ hoặc ra ngoài dù chỉ 15 phút mỗi ngày, bước này vẫn đáng có.",
+          "meta": "Tuỳ hoàn cảnh"
+        }
+      ]
+    },
+    {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
       "heading": "Bảy màng lọc, gọi đúng tên từng cái",
@@ -202,6 +227,55 @@
       ]
     },
     {
+      "type": "routine",
+      "id": "dung-luc-nao",
+      "eyebrow": "Đặt vào đâu trong ngày",
+      "heading": "Bước cuối cùng của buổi sáng, và bôi lại giữa ngày",
+      "intro": "Thứ tự và lượng dùng quyết định phần lớn hiệu quả thực tế, hơn cả bản thân công thức.",
+      "columns": [
+        {
+          "when": "morning",
+          "label": "Buổi sáng",
+          "steps": [
+            {
+              "label": "Hoàn tất các bước dưỡng",
+              "note": "Chống nắng đi sau cùng, sau cả kem dưỡng."
+            },
+            {
+              "label": "Lấy đủ lượng",
+              "note": "Khoảng hai đốt ngón trỏ và ngón giữa cho riêng vùng mặt. Đây là chỗ phần lớn người dùng hụt, và dùng nửa lượng không cho một nửa mức bảo vệ.",
+              "essential": true
+            },
+            {
+              "label": "Tán đều, chờ vài phút rồi mới trang điểm",
+              "note": "Lớp chống nắng cần thời gian tạo màng. Trang điểm chồng ngay lên sẽ kéo lớp đó đi."
+            },
+            {
+              "label": "Đừng quên cổ, tai và mu bàn tay",
+              "note": "Những vùng này lão hoá theo nắng rõ nhất và bị bỏ quên nhiều nhất."
+            }
+          ]
+        },
+        {
+          "when": "night",
+          "label": "Trong ngày và buổi tối",
+          "steps": [
+            {
+              "label": "Bôi lại sau mỗi 2–3 giờ nếu ở ngoài trời",
+              "note": "Mồ hôi và ma sát làm mỏng lớp màng. Ngồi trong nhà cả ngày thì không cần bôi lại.",
+              "essential": true
+            },
+            {
+              "label": "Buổi tối: tẩy trang trước khi rửa mặt",
+              "note": "Kem chống nắng không tan trong nước, sữa rửa mặt một mình không lấy hết.",
+              "essential": true
+            }
+          ]
+        }
+      ],
+      "footnote": "Bôi đủ lượng một loại vừa phải tốt hơn bôi mỏng một loại đắt tiền. <strong>Lượng dùng là biến số lớn nhất</strong> giữa con số in trên vỏ và mức bảo vệ thực tế trên mặt bạn."
+    },
+    {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
       "heading": "Hai bước buổi sáng, một bước buổi tối",
@@ -222,6 +296,54 @@
         }
       ],
       "footnote": "Dùng lại sau mỗi vài giờ nếu bạn ở ngoài trời liên tục, đổ mồ hôi nhiều hoặc tiếp xúc với nước. Một lần thoa buổi sáng không giữ được suốt cả ngày ngoài nắng."
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Hai cách che chắn",
+      "heading": "Kem chống nắng riêng, hay hũ kem dưỡng có màng lọc?",
+      "intro": "Biovector có Titanium Dioxide và Zinc Oxide trong bảng thành phần, nên câu hỏi này xuất hiện thường xuyên. Câu trả lời ngắn: không thay được.",
+      "items": [
+        "uv-block-sunscreen",
+        "biovector-brightening-cream"
+      ],
+      "criteria": [
+        {
+          "label": "Vai trò được khai trên bao bì",
+          "values": [
+            "Kem chống nắng",
+            "Kem dưỡng"
+          ]
+        },
+        {
+          "label": "Số màng lọc",
+          "values": [
+            "7 màng lọc, 5 hoá học và 2 vật lý nano",
+            "Có TiO2 và ZnO trong danh sách INCI"
+          ]
+        },
+        {
+          "label": "Có chỉ số chống nắng công bố không",
+          "values": [
+            "Có trên vỏ tuýp",
+            "Không công bố SPF hay PA"
+          ]
+        },
+        {
+          "label": "Dùng thay cho nhau được không",
+          "values": [
+            "Đây là bước chống nắng",
+            "Không — không có chỉ số thì không có cơ sở để thay"
+          ]
+        },
+        {
+          "label": "Bôi lại giữa ngày",
+          "values": [
+            "Có, khi ở ngoài trời",
+            "Không áp dụng"
+          ]
+        }
+      ],
+      "footnote": "Một thành phần có mặt trong công thức không đồng nghĩa với một mức bảo vệ đo được. Chỉ số chống nắng là kết quả của cả công thức và quy trình thử nghiệm, không suy ra được từ bảng thành phần."
     },
     {
       "type": "order",
@@ -260,6 +382,17 @@
           "q": "Bảo quản thế nào?",
           "a": "Tránh nhiệt độ cao và ánh nắng trực tiếp, đóng nắp sau khi dùng, để xa tầm tay trẻ em. Tránh tiếp xúc với mắt; nếu dính vào mắt thì rửa ngay bằng nước sạch."
         }
+      ]
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Hai bước đi cùng với chống nắng",
+      "intro": "Bôi chống nắng thì phải tẩy trang buổi tối. Và nếu bạn đang chăm sóc sắc tố, đây là bước tiếp theo.",
+      "items": [
+        "bio-deep-detox-rebalance",
+        "smart-brightening-cream",
+        "collagen-peptide-cream"
       ]
     }
   ]
