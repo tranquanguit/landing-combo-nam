@@ -383,21 +383,6 @@ const blocks = z.discriminatedUnion('type', [
     items: z.array(slugField).min(1).max(3),
   }).strict(),
 
-  /**
-   * Lời mời cuối cùng, khi biểu mẫu đặt hàng đã ở phía trên và người đọc vẫn
-   * chưa quyết. Không hứa thêm gì — chỉ nhắc lại đường liên hệ.
-   */
-  z.object({
-    type: z.literal('finalCta'),
-    id: anchorId,
-    ...rhythmFields,
-    eyebrow: z.string().optional(),
-    heading: z.string(),
-    body: z.string().optional(),
-    primary: z.object({ label: z.string(), href: safeUrl }).strict(),
-    secondary: z.object({ label: z.string(), href: safeUrl }).strict().optional(),
-  }).strict(),
-
   z.object({
     type: z.literal('faq'),
     ...rhythmFields,

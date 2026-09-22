@@ -170,17 +170,6 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 - `intro`
 - `items *`
 
-### `finalCta`
-
-- `id`
-- `surface`
-- `space`
-- `eyebrow`
-- `heading *`
-- `body`
-- `primary *`
-- `secondary`
-
 ### `faq`
 
 - `surface`

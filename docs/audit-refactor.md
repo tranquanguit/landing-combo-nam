@@ -158,8 +158,14 @@ Ba việc, theo thứ tự:
 1. **Bề mặt và nhịp thành dữ liệu.** Thêm `surface?` và `space?` (tuỳ chọn) vào
    mọi khối trong schema. Mặc định giữ nguyên hành vi hôm nay, nên không trang
    nào đổi cho tới khi người biên tập chủ động khai. Đây là chìa khoá cho §45.
-2. **Ba khối mới, có lý do rõ**: `relatedProducts`, `compare` (tầng sản phẩm),
-   `finalCta`.
+2. **Hai khối mới, có lý do rõ**: `relatedProducts` và `compare` (tầng sản phẩm).
+
+   Ban đầu định ba, có cả `finalCta`. Đã dựng rồi gỡ: nó không có chỗ nào dùng
+   được mà không trùng lặp. Trên trang sản phẩm thì biểu mẫu đặt hàng, hotline
+   trong khối `order` và thanh CTA cố định đã phủ hết đường liên hệ — thêm một
+   lời mời nữa là spam đúng nghĩa. Còn chỗ nó THỰC SỰ có ích (trang dòng, bài
+   viết, trang chủ) thì lại không dùng hệ thống khối. Đây là đúng thứ chính bản
+   yêu cầu cấm: dựng component khi chưa có chỗ dùng.
 3. **Không tạo** `Texture`, `Lifestyle`, `KOL`, `BeforeAfter` cho tới khi có ảnh.
 
 ---

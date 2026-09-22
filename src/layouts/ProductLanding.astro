@@ -21,7 +21,6 @@ import Timeline from '../components/blocks/Timeline.astro';
 import Routine from '../components/blocks/Routine.astro';
 import Compare from '../components/Compare.astro';
 import RelatedProducts from '../components/blocks/RelatedProducts.astro';
-import FinalCta from '../components/blocks/FinalCta.astro';
 import Analytics from '../components/Analytics.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { expandProductTokens } from '../lib/money-text';
@@ -199,7 +198,6 @@ const r = (i: number) => rhythm.get(i) ?? {};
               .map((slug: string) => productCards.get(slug))
               .filter(Boolean)} />
         );
-        case 'finalCta':     return <FinalCta data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
         default:             return null;
       }
     })}
