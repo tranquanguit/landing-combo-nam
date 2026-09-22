@@ -1,7 +1,8 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import { homePath, productPath } from '../lib/routes';
-import type { Locale } from '../i18n/ui';
+import { homePath, linePath, policyPath, productPath, siteNav } from '../lib/routes';
+import SiteHeader from '../components/SiteHeader.astro';
+import { t, type Locale } from '../i18n/ui';
 import '../styles/fonts.css';
 import '../styles/tokens.css';
 
@@ -24,6 +25,40 @@ const pick = (loc: Locale, home: string) => all
   .filter((p) => productPath(p.data.slug, p.data.locale as Locale) !== home);
 const vi = pick('vi', '/');
 const en = pick('en', '/en/');
+
+/* Dòng sản phẩm thay cho danh sách phẳng 24 liên kết.
+
+   Bản trước liệt kê THẲNG mọi sản phẩm của cả hai ngôn ngữ: 24 liên kết xếp
+   dọc, không nhóm, không thứ tự có nghĩa. Người vừa bấm một quảng cáo và rơi
+   vào 404 thì cần một lối đi, không cần một bản kê. Sáu dòng thì đọc hết
+   trong vài giây, và từng sản phẩm vẫn tới được qua bảng danh mục ở đầu trang. */
+const lines = await getCollection('lines', ({ data }) => data.status === 'published');
+const linesOf = (loc: Locale) => lines
+  .filter((l) => l.data.locale === loc)
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const policies = await getCollection('policies', ({ data }) => data.status === 'published');
+const contactSlug = policies.find((x) => x.data.topLevel && x.data.translationKey === 'lien-he')?.data.slug;
+
+/* Thanh điều hướng thật, giống hệt mọi trang khác.
+
+   Bản trước trang 404 không có header, không footer, không menu — người dùng
+   chỉ còn một danh sách link trần. Trang lỗi là chỗ người ta đã lạc đường;
+   lấy nốt điều hướng của họ đi là đẩy họ ra khỏi site. */
+const nav = siteNav(
+  'vi',
+  linesOf('vi').map((l) => ({
+    slug: l.data.slug, heading: l.data.heading,
+    navLabel: l.data.navLabel, order: l.data.order,
+    products: l.data.products.length
+      ? l.data.products
+      : all.filter((p) => p.data.line === l.data.slug && p.data.locale === 'vi').map((p) => p.data.slug),
+  })),
+  true,
+  { advice: t('vi', 'nav.advice'), products: t('vi', 'nav.products'), contact: t('vi', 'nav.contact') },
+  (slug) => all.find((p) => p.data.slug === slug && p.data.locale === 'vi')?.data.shortName,
+  contactSlug,
+);
 ---
 <!DOCTYPE html>
 <html lang="vi">
@@ -35,6 +70,7 @@ const en = pick('en', '/en/');
     <meta name="robots" content="noindex, follow" />
   </head>
   <body>
+    <SiteHeader brand={b} locale="vi" nav={nav} orderHref={homePath('vi')} />
     <main id="main" class="wrap notfound">
       <p class="eyebrow">Lỗi 404</p>
       <h1>Không tìm thấy trang này</h1>
@@ -44,8 +80,8 @@ const en = pick('en', '/en/');
 
       <ul class="links">
         <li><a href={homePath("vi")}>Trang chủ</a></li>
-        {vi.map((p) => (
-          <li><a href={productPath(p.data.slug, p.data.locale as Locale)}>{p.data.name}</a></li>
+        {linesOf('vi').map((l) => (
+          <li><a href={linePath(l.data.slug, 'vi')}>{l.data.heading}</a></li>
         ))}
       </ul>
 
@@ -59,8 +95,8 @@ const en = pick('en', '/en/');
       </p>
       <ul class="links" lang="en">
         <li><a href={homePath("en")}>Home (English)</a></li>
-        {en.map((p) => (
-          <li><a href={productPath(p.data.slug, p.data.locale as Locale)}>{p.data.name}</a></li>
+        {linesOf('en').map((l) => (
+          <li><a href={linePath(l.data.slug, 'en')}>{l.data.heading}</a></li>
         ))}
       </ul>
 
