@@ -123,6 +123,24 @@ const notes = data.usp.map((u: any, i: number) => ({
     border-bottom: 1px solid var(--line);
   }
 
+  /* KHAY ẢNH — quy tắc nền, viết trước media query.
+
+     Thứ tự nguồn quan trọng ở đây: bản đầu tôi đặt khối này SAU
+     `@media (min-width: 900px)`, và vì hai bộ chọn cùng độ đặc hiệu nên khối
+     sau thắng — hero nhận khung 4:3 ở MỌI khổ màn hình, kể cả 1920px. Media
+     query chỉ đè được khi nó đứng sau. */
+  .hero-media {
+    aspect-ratio: 4 / 3;
+    background: #fff;
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .hero-media :global(img) {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    object-position: var(--pos, center);
+  }
+
   /* Bố cục lệch 7/5: cột chữ rộng hơn, ảnh TRÀN khỏi mép phải thay vì ngồi
      trong một hộp bo góc đổ bóng giữa trang. */
   .hero-grid { display: grid; gap: var(--s-7); align-items: center; }
@@ -132,35 +150,34 @@ const notes = data.usp.map((u: any, i: number) => ({
       gap: clamp(40px, 5vw, 88px);
       align-items: center;
     }
-    /* Ảnh thành một PANEL chạy hết chiều cao cột, tràn khỏi mép phải và ăn lên
-       tận mép trên của hero. Bản trước là tấm ảnh bo góc đổ bóng ngồi giữa
-       khoảng trắng — ngôn ngữ của trang niêm yết sàn, không phải của thương hiệu. */
-    .hero-grid { align-items: stretch; }
+    /* Ảnh là một KHAY vuông, cùng ngôn ngữ với khay trong thẻ sản phẩm.
+
+       Bản trước là panel tràn khỏi mép phải, cao bằng cột chữ, ảnh `cover`.
+       Hai lý do bỏ:
+
+       1. Nó cắt mất sản phẩm. Đo trên trang kem nám sau khi chuẩn hoá ảnh:
+          khung 403×835 lấy từ ảnh vuông 471×471 nên 52% chiều ngang bị bỏ.
+          Ảnh càng vuông thì khung càng cao, cắt càng nhiều — chuẩn hoá ảnh
+          làm thẻ đẹp lên lại làm hero xấu đi.
+       2. `margin-right` tính theo `100vw`, mà `100vw` tính cả thanh cuộn còn
+          vùng nội dung thì không. Đó là nguồn của 7px tràn ngang ở màn hình
+          rộng (A16).
+
+       `contain` trên nền trắng: không cắt một phần nào của sản phẩm, và mười
+       hai ảnh có mười hai hình dạng khác nhau đều nằm gọn trong cùng một khay.
+       Đổi lại là mất hiệu ứng tràn mép — một đánh đổi đáng, vì sức mạnh của hệ
+       thị giác này là sự tiết chế, không phải sự kịch tính. */
     .hero-media {
-      margin-right: calc((100vw - min(100vw, var(--wrap))) / -2 - var(--s-5));
-      margin-top: calc(clamp(40px, 5vw, 72px) * -1);
-      align-self: stretch;
-      position: relative;
+      align-self: center;
+      aspect-ratio: 1 / 1;
+      background: #fff;
+      border: 1px solid var(--line);
       overflow: hidden;
-      background: var(--bone);
     }
     .hero-media :global(img) {
-      position: absolute; inset: 0;
       width: 100%; height: 100%;
-      object-fit: cover;
-      /* Điểm cắt do CHÍNH ẢNH khai, không phải một con số dùng chung.
-
-         Bản trước đóng cứng `55% 30%` cho mọi sản phẩm. Với ảnh dọc thì nó
-         đúng; với ảnh ngang như packshot combo (1002×762) đặt vào cột cao,
-         nó đẩy khung sang phải và lên trên, cắt mất chai bên phải — đúng chỗ
-         chủ site chỉ ra. Mặc định giữ nguyên để không trang nào đổi ngoài ý
-         muốn; ảnh nào lệch thì khai `focus` trong file JSON. */
-      /* Mặc định canh GIỮA theo chiều ngang. Bản trước để 55%, tức đẩy khung
-         cắt sang phải; đo trên trang combo: khung 594×804 lấy từ ảnh 662×504
-         nên 44% chiều ngang bị bỏ, và 5% lệch đó rơi đúng vào chai bên phải.
-         Lệch dọc 30% thì giữ — ảnh dọc cần nó, ảnh ngang không bị cắt dọc nên
-         không ảnh hưởng. */
-      object-position: var(--pos, 50% 30%);
+      object-fit: contain;
+      object-position: var(--pos, center);
     }
   }
 
@@ -168,11 +185,6 @@ const notes = data.usp.map((u: any, i: number) => ({
   .hero h1 { font-size: clamp(2.4rem, 5.2vw, 4.1rem); }
   .hero .lead { margin-bottom: var(--s-5); font-size: var(--t-base); }
 
-  .hero-media :global(img) {
-    width: 100%;
-    border-radius: 0;
-    background: var(--bone);
-  }
 
   /* Giá: chữ số đặt bằng face riêng, cỡ lớn. Giá cũ và mức tiết kiệm lùi hẳn
      xuống hàng chữ nhỏ — không viên thuốc màu, không nền xanh. */

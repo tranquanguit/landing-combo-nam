@@ -120,7 +120,11 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
   `https://tranquanguit.github.io/landing-combo-nam/`. Đây KHÔNG phải bản thật:
   chặn toàn bộ bot, và biểu mẫu đặt hàng không chạy (GitHub Pages không có
   Pages Function) nên trang chỉ hiện hotline.
-- `[!] A15` **Ảnh hero sai định dạng khung, không sửa được bằng code.** Đo trên
+- `[x] A15` **ĐÃ SỬA — hero đổi sang khay vuông, `contain`, không cắt gì.**
+  Ghi chép gốc giữ lại bên dưới. Cách sửa không phải chụp lại ảnh mà là thôi ép
+  ảnh vào một khung cao: khay `aspect-ratio: 1/1` với `object-fit: contain` cho
+  thấy trọn sản phẩm ở mọi hình dạng ảnh. Đo lại: cắt 0%.
+  ~~Ảnh hero sai định dạng khung, không sửa được bằng code.~~ Đo trên
   trang combo ở 1440px: cột ảnh hero là 594×804 (dọc), ảnh nguồn
   `packshot-combo.webp` là 1002×762 (ngang). Để lấp đầy cột, trình duyệt bỏ
   **44% chiều ngang** của ảnh. Đổi điểm cắt chỉ dịch được vài chục pixel —
@@ -129,7 +133,9 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
   (b) chủ site đồng ý đổi bố cục hero sang khung ngang, nhưng như vậy phần chữ
   và phần ảnh không còn cao bằng nhau. Đây là quyết định chỉ đạo hình ảnh nên
   tôi không tự chọn. Liên quan: `A5`.
-- `[!] A16` **Ảnh hero tràn 7px ở màn hình rộng — cần xem lại bố cục hero.**
+- `[x] A16` **ĐÃ SỬA cùng lúc với A15.** Bỏ `margin-right` tính theo `100vw`
+  là hết tràn: đo lại ở 1920px, `scrollWidth == clientWidth`.
+  ~~Ảnh hero tràn 7px ở màn hình rộng.~~
   Đo ở 1920px: `.hero-media` có mép phải 1912px trong khi vùng nội dung rộng
   1905px. Nguyên nhân là `margin-right` tính theo `100vw`, mà `100vw` TÍNH CẢ
   thanh cuộn còn vùng nội dung thì không — chênh lệch đúng bằng nửa bề rộng
