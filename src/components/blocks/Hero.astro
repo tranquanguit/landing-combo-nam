@@ -146,6 +146,10 @@ const notes = data.usp.map((u: any, i: number) => ({
   .hero-grid { display: grid; gap: var(--s-7); align-items: center; }
   @media (min-width: 900px) {
     .hero-grid {
+      /* Giữ 7/5. Đã thử 6,5/5,5 để ảnh to hơn: sản phẩm lên 495px thật, nhưng
+         cột chữ hẹp lại làm tiêu đề từ 4 dòng thành 5, và giá bị đẩy xuống dưới
+         nếp gấp. Trên một trang đích quảng cáo thì giá quan trọng hơn 45px ảnh.
+         Cân đối chiều dọc giải quyết bằng tỉ lệ khay, không bằng bề ngang cột. */
       grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
       gap: clamp(40px, 5vw, 88px);
       align-items: center;
@@ -169,7 +173,11 @@ const notes = data.usp.map((u: any, i: number) => ({
        thị giác này là sự tiết chế, không phải sự kịch tính. */
     .hero-media {
       align-self: center;
-      aspect-ratio: 1 / 1;
+      /* 4:5 chứ không vuông. Ảnh sản phẩm là ảnh vuông nên `contain` chừa hai
+         dải trống trên dưới — nhưng cả khay lẫn nền ảnh đều TRẮNG nên hai dải
+         đó vô hình. Đổi lại, khay cao hơn và cân với cột chữ: tỉ lệ chiều cao
+         khay/chữ đi từ 55% lên 75%. */
+      aspect-ratio: 4 / 5;
       background: #fff;
       border: 1px solid var(--line);
       overflow: hidden;
