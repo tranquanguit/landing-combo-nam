@@ -731,17 +731,15 @@ const products = defineCollection({
       }
     });
 
-    /* availability chỉ có trong JSON-LD: đặt OutOfStock thì máy đọc thấy hết
-       hàng còn trang vẫn mời đặt mua — đúng loại "ba nguồn nói ba điều".
-       Chưa dựng giao diện hết hàng, nên chặn ở cổng thay vì phát hành mâu thuẫn. */
-    if (p.availability && p.availability !== 'InStock' && p.status === 'published') {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: `availability="${p.availability}" nhưng giao diện chưa có trạng thái hết hàng: ` +
-          `trang vẫn hiện nút đặt mua và biểu mẫu. Hoặc đặt status="draft", hoặc dựng giao diện ` +
-          `hết hàng trước khi khai trạng thái này.`,
-      });
-    }
+    /* Hàng rào "chưa dựng giao diện hết hàng" ĐÃ GỠ.
+
+       Nó từng chặn mọi `availability` khác `InStock`, vì lúc đó trường này chỉ
+       đi vào JSON-LD: máy đọc thấy hết hàng còn trang vẫn mời đặt mua. Chặn ở
+       cổng là đúng khi giao diện chưa tồn tại.
+
+       Nay `Order.astro` đã có trạng thái đó: khoá ô nhập, khoá nút, không render
+       thẻ <form>, và nói thẳng lý do kèm hotline. Giữ hàng rào nữa thì nó chặn
+       đúng thứ nó được dựng ra để chờ. */
 
     const wanted: [string, string][] = [];
     /* Mọi chuỗi bắt đầu bằng "#" ở BẤT KỲ trường nào đều là neo trong trang.

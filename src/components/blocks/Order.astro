@@ -11,13 +11,28 @@ const { data, product: p, brand: b, locale } = Astro.props;
 const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
 
 /**
+ * Hết hàng thì KHÔNG nhận đơn.
+ *
+ * `availability` trước đây chỉ đi vào JSON-LD và không xuất hiện ở bất kỳ đâu
+ * trên trang nhìn thấy được. Nghĩa là đánh dấu một sản phẩm `OutOfStock` vẫn
+ * để nguyên giá, nút "Đặt mua" và biểu mẫu hoạt động bình thường — khách đặt
+ * được hàng không có, và dữ liệu có cấu trúc nói một đằng còn trang nói một
+ * nẻo. Đó đúng là loại lệch mà README cảnh báo: markup rộng hơn lời hứa thật.
+ *
+ * Dùng lại nguyên khuôn mẫu của trạng thái "chưa cấu hình endpoint": khoá ô
+ * nhập, khoá nút, nói thẳng lý do, và đưa hotline.
+ */
+const inStock = (p.availability ?? 'InStock') === 'InStock';
+const canOrder = Boolean(endpoint) && inStock;
+
+/**
  * Chưa có endpoint thì KHÔNG render thẻ <form>.
  *
  * Trước đây form vẫn tồn tại với nút aria-disabled. Nhưng khi tắt JavaScript,
  * nhấn Enter trong một ô nhập vẫn submit ngầm, POST về chính trang và trả 501:
  * khách mất sạch dữ liệu đã gõ. Không có phần tử form thì không có gì để submit.
  */
-const Wrapper = endpoint ? 'form' : 'div';
+const Wrapper = canOrder ? 'form' : 'div';
 
 /**
  * Chính câu khách đã đọc lúc bấm, dạng văn bản thuần, gửi kèm đơn và lưu vào
@@ -50,9 +65,9 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
           `novalidate` do JS gắn vào, để bản không-JS vẫn có kiểm tra của trình duyệt. */}
       <Wrapper
         id="order-form"
-        method={endpoint ? 'post' : undefined}
-        data-endpoint={endpoint ? 'configured' : 'missing'}
-        data-action={endpoint ?? undefined}
+        method={canOrder ? 'post' : undefined}
+        data-endpoint={canOrder ? 'configured' : 'missing'}
+        data-action={canOrder ? endpoint : undefined}
       >
         {p.variants.length > 0 && (
           <fieldset>
@@ -81,14 +96,14 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
 
         <div class="field" data-field="name">
           <label for="name">{t(locale, 'form.name')} <span aria-hidden="true">*</span></label>
-          <input type="text" id="name" name="name" disabled={!endpoint} autocomplete="name" required
+          <input type="text" id="name" name="name" disabled={!canOrder} autocomplete="name" required
             aria-describedby="name-err" placeholder={t(locale, 'form.phName')} />
           <p class="err" id="name-err">{t(locale, 'form.errName')}</p>
         </div>
 
         <div class="field" data-field="phone">
           <label for="phone">{t(locale, 'form.phone')} <span aria-hidden="true">*</span></label>
-          <input type="tel" id="phone" name="phone" disabled={!endpoint} autocomplete="tel" inputmode="numeric" required
+          <input type="tel" id="phone" name="phone" disabled={!canOrder} autocomplete="tel" inputmode="numeric" required
             aria-describedby="phone-hint phone-err" placeholder={t(locale, 'form.phPhone')} />
           <p class="hint" id="phone-hint">{t(locale, 'form.privacy')}</p>
           <p class="err" id="phone-err">{t(locale, 'form.errPhone')}</p>
@@ -100,7 +115,7 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
             <span aria-hidden="true" data-req>*</span>
             <span class="muted" data-optional hidden>({t(locale, 'form.optional')})</span>
           </label>
-          <input type="text" id="address" name="address" disabled={!endpoint} autocomplete="street-address" required
+          <input type="text" id="address" name="address" disabled={!canOrder} autocomplete="street-address" required
             aria-describedby="address-err" placeholder={t(locale, 'form.phAddress')} />
           <p class="err" id="address-err">{t(locale, 'form.errAddress')}</p>
         </div>
@@ -108,7 +123,7 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
         {locale !== 'vi' && (
           <div class="field" data-field="country">
             <label for="country">{t(locale, 'form.country')} <span aria-hidden="true">*</span></label>
-            <input type="text" id="country" name="country" disabled={!endpoint} autocomplete="country-name" required
+            <input type="text" id="country" name="country" disabled={!canOrder} autocomplete="country-name" required
               aria-describedby="country-err" />
             <p class="err" id="country-err">{t(locale, 'form.errCountry')}</p>
           </div>
@@ -116,7 +131,7 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
 
         <div class="field">
           <label for="note">{t(locale, 'form.note')}</label>
-          <textarea id="note" name="note" rows="2" disabled={!endpoint}></textarea>
+          <textarea id="note" name="note" rows="2" disabled={!canOrder}></textarea>
         </div>
 
         {/* Bẫy bot: người thật không thấy và bàn phím không tới được. Không dùng
@@ -133,7 +148,7 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
         <input type="hidden" name="consentText" value={consentText} />
 
         <label class="agree">
-          <input type="checkbox" id="data-consent" name="dataConsent" required disabled={!endpoint} />
+          <input type="checkbox" id="data-consent" name="dataConsent" required disabled={!canOrder} />
           <span set:html={richText(t(locale, 'form.dataConsent'))} />
         </label>
 
@@ -146,12 +161,12 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
             ngoài không có thẻ <form> nào, nên không đường nào submit được —
             kể cả nhấn Enter trong ô nhập khi JavaScript tắt. */}
         <button
-          type={endpoint ? 'submit' : 'button'}
+          type={canOrder ? 'submit' : 'button'}
           class="btn btn-primary btn-lg btn-block"
           data-cta="form-submit"
           data-sending-label={t(locale, 'form.sending')}
-          disabled={!endpoint}
-          aria-describedby={endpoint ? undefined : 'form-no-endpoint'}
+          disabled={!canOrder}
+          aria-describedby={canOrder ? undefined : (inStock ? 'form-no-endpoint' : 'form-sold-out')}
         >
           {t(locale, 'form.submit')}
         </button>
@@ -173,7 +188,13 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
         {t(locale, 'form.failed')} <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a>
       </p>
 
-      {!endpoint && (
+      {!inStock && (
+        <p class="todo" id="form-sold-out" role="status">
+          ⚠️ {t(locale, 'form.soldOut')} <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a>
+        </p>
+      )}
+
+      {inStock && !endpoint && (
         <p class="todo" id="form-no-endpoint" data-todo>
           ⚠️ {t(locale, 'form.noEndpoint')} <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a>
         </p>

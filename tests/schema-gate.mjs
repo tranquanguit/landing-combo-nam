@@ -281,9 +281,15 @@ const CASES = [
     expect: 'fail',
   },
   {
-    name: 'availability khác InStock khi chưa có giao diện hết hàng',
+    /* ĐỔI TỪ 'fail' SANG 'pass'.
+       Hàng rào cũ chặn mọi `availability` khác InStock vì trường này chỉ đi vào
+       JSON-LD, nên khai hết hàng mà trang vẫn mời đặt mua. Nay `Order.astro` có
+       trạng thái hết hàng thật: khoá ô nhập, khoá nút, không render thẻ <form>,
+       và nói thẳng lý do kèm hotline. Giữ 'fail' nữa là bắt schema chặn đúng
+       thứ giao diện vừa hỗ trợ. */
+    name: 'availability OutOfStock được chấp nhận khi đã có giao diện hết hàng',
     doc: withDoc((d) => { d.availability = 'OutOfStock'; }),
-    expect: 'fail',
+    expect: 'pass',
   },
   {
     name: 'slug sai định dạng',
