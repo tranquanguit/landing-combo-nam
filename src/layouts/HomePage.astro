@@ -174,7 +174,7 @@ const soloArticle = articles.length === 1 ? articles[0] : undefined;
       </Section>
     ) : featured.length > 0 && (
       <Section id="san-pham" surface="bone" heading={t(locale, 'home.allProducts')}>
-        <ProductGrid products={featured} locale={locale} />
+        <ProductGrid products={featured} locale={locale} priority />
       </Section>
     )}
 

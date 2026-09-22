@@ -4,11 +4,24 @@ import { money } from '../lib/format';
 import { productPath } from '../lib/routes';
 import { t, type Locale } from '../i18n/ui';
 
-interface Props { products: any[]; locale: Locale; }
-const { products, locale } = Astro.props;
+interface Props {
+  products: any[];
+  locale: Locale;
+  /**
+   * Lưới này nằm trong màn hình đầu tiên (trang dòng, trang chủ) hay ở cuối
+   * trang (khối gợi ý)?
+   *
+   * Đo trên trang dòng ở 1440×900: ba thẻ bắt đầu ở y=616, cao 270 — nằm TRỌN
+   * trong màn hình đầu, mà cả ba đều `loading="lazy"`. Ảnh lazy trong khung
+   * nhìn vẫn tải, nhưng phải đợi trình duyệt tính xong bố cục mới bắt đầu, nên
+   * nó hoãn đúng phần tử có khả năng là LCP của trang.
+   */
+  priority?: boolean;
+}
+const { products, locale, priority = false } = Astro.props;
 ---
 <ul class="grid" data-reveal-group>
-  {products.map((p) => (
+  {products.map((p, i) => (
     <li data-reveal>
       <a href={productPath(p.slug, locale)}>
         {p.image && (
@@ -19,9 +32,14 @@ const { products, locale } = Astro.props;
                 mỗi thẻ cao một kiểu và tiêu đề so le nhau — đúng lỗi nhìn thấy
                 trên trang dòng nám. Còn `cover` sẽ cắt chai 900×1890 mất gần
                 hết thân chai, mà nhãn mới là thứ người mua cần đọc. */}
+            {/* Chỉ ảnh ĐẦU TIÊN được ưu tiên, không phải cả hàng. Trên điện
+                thoại lưới chỉ một cột nên chỉ một ảnh nằm trong màn hình đầu;
+                nạp sớm cả ba là lãng phí đúng trên đường truyền hẹp nhất. */}
             <Picture src={p.image} alt={p.imageAlt ?? p.name} width={520} height={390}
               ratio="4/3" fit="contain"
-              sizes="(min-width: 760px) 340px, 90vw" widths={[340, 520, 680]} loading="lazy" />
+              sizes="(min-width: 760px) 340px, 90vw" widths={[340, 520, 680]}
+              loading={priority && i === 0 ? 'eager' : 'lazy'}
+              fetchpriority={priority && i === 0 ? 'high' : 'auto'} />
           </span>
         )}
         <span class="name">{p.shortName ?? p.name}</span>
