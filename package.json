@@ -24,7 +24,8 @@
     "check:assets": "node scripts/check-assets.mjs",
     "docs:assets": "node scripts/check-assets.mjs --md docs/anh-can-co.md",
     "test:contrast": "node scripts/check-contrast.mjs",
-    "test:inp": "node tests/inp.mjs"
+    "test:inp": "node tests/inp.mjs",
+    "check:rhythm": "node scripts/check-rhythm.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
