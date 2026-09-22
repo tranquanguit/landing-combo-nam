@@ -25,7 +25,12 @@ const { data, products, locale, id, surface = 'paper', space, sameSurface } = As
 
   {/* Bảng thật, không phải lưới div: người dùng trình đọc màn hình điều hướng
       theo hàng/cột và cần biết ô này thuộc sản phẩm nào. `scope` làm việc đó. */}
-  <div class="cmp-scroll">
+  {/* tabindex + role: cùng khuôn mẫu với vùng cuộn của bảng thành phần.
+      Một vùng cuộn ngang không nhận được focus thì người dùng chỉ có bàn phím
+      không cuộn tới được các cột bên phải — tức là không đọc được nửa bảng.
+      `aria-label` lấy chính tiêu đề khối để vùng này có tên trong danh sách
+      landmark, thay vì một "region" vô danh. */}
+  <div class="cmp-scroll" tabindex="0" role="region" aria-label={data.heading}>
     <table class="cmp">
       <thead>
         <tr>
@@ -61,6 +66,7 @@ const { data, products, locale, id, surface = 'paper', space, sameSurface } = As
   /* Cuộn ngang thay vì ép chữ xuống dòng thành cột 40px. Bảng ba cột không vừa
      màn hình điện thoại, và nhồi cho vừa thì không ô nào đọc được. */
   .cmp-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cmp-scroll:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 4px; }
   .cmp { width: 100%; min-width: 34rem; border-collapse: collapse; }
 
   .cmp thead th {
