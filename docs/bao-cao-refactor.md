@@ -135,3 +135,35 @@ che, `requestAnimationFrame` không chạy nên transition của hiệu ứng cu
 băng ở `opacity: 0` và ảnh chụp ra trắng. Mọi khẳng định về bố cục trong báo
 cáo này đo bằng `getComputedStyle` và `getBoundingClientRect`, không bằng mắt
 nhìn ảnh chụp.
+
+---
+
+## Phụ lục — vòng lặp phản biện UI/UX
+
+Chạy sau khi chín giai đoạn đã đóng, theo yêu cầu "tự phản biện, tìm ra điểm
+chưa tốt và cải thiện liên tục". Mỗi vòng soi một trục khác nhau.
+
+| Vòng | Trục soi | Kết quả |
+|---|---|---|
+| 1 | Hình ảnh | Sản phẩm chiếm 24%–100% khung ảnh; chuẩn hoá 10 ảnh về 82%, khung vuông, **không phóng to pixel nào**. Phát hiện bao bì in tuyên bố bị cấm (`A12`) |
+| 2 | Hero sản phẩm | Chuẩn hoá ảnh làm hero xấu đi: cắt 52%. Đổi sang khay `contain` — cắt về **0%**, đóng luôn `A15` và `A16` |
+| 3 | Cân đối hero | Khay vuông chỉ cao 55% cột chữ. Đổi 4:5 → 69%. Một thử nghiệm bị loại và ghi lại lý do |
+| 4 | Hero trang chủ | Component khác nên bản sửa vòng 2 không áp vào; cắt 48%. Sửa + giới hạn bề ngang ở khổ hẹp |
+| 5 | Rà `100vw` / `cover` | Hai chỗ đã sửa là hai chỗ duy nhất. Gỡ khối `finalCta` tôi dựng mà không dùng |
+| 6 | Biểu mẫu đặt hàng | **Bốn nghi ngờ đều sai** — mã có chú thích giải thích sẵn. Ghi `A18` (WCAG 1.4.13) |
+| 7 | Bài viết, góc tư vấn | Hub có 643 từ nhưng **một** liên kết đi ra. Nối 6 liên kết theo đúng nội dung từng mục |
+| 8 | Chính sách, 404 | 404 không có điều hướng và liệt kê 24 URL phẳng. Thêm header, rút còn 6 dòng |
+| 9 | Trạng thái bất thường | `availability` chỉ nằm trong JSON-LD. Dựng trạng thái hết hàng, **gỡ hàng rào vốn dựng ra để chờ đúng việc này** |
+| 10 | Ưu tiên tải ảnh | Trang dòng lazy-load ảnh LCP nằm trong màn hình đầu. Thêm `priority` cho lưới |
+| 11 | Bản tiếng Anh | Bố cục không vỡ. Vùng cuộn bảng so sánh không nhận focus bàn phím (WCAG **mức A**) |
+| 12 | Rà mẫu hình lặp | Bốn phép rà sạch: thứ bậc tiêu đề 51/51 trang, liên kết trùng chữ 0, `prefers-reduced-motion` phủ toàn cục, JSON-LD khớp trang 22/22 |
+
+**Một mẫu hình đáng ghi hơn cả các bản sửa.** Năm lần trong vòng lặp này tôi
+tưởng tìm ra lỗi và cả năm lần **phép đo của tôi sai, không phải mã sai**:
+`label.textContent` đọc cả chữ bị `hidden`; đơn vị `ch` tính theo chữ số "0"
+chứ không phải chữ thường; bộ dò tràn ngang đếm cả phần tử trong vùng cuộn
+hợp lệ; `requestAnimationFrame` không chạy khi cửa sổ bị che nên ảnh chụp ra
+trắng. Đo sai thì "sửa" xong sẽ làm hỏng thứ đang đúng.
+
+**Xác minh cuối:** `npm run test:order` với endpoint thật — 9/9 kịch bản đạt,
+gồm cả gửi dưới CSP và gói tư vấn không cần địa chỉ.
