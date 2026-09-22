@@ -45,7 +45,7 @@
       "id": "vi-sao-viet-ra",
       "heading": "Vì sao viết những quy tắc này ra thay vì chỉ làm theo",
       "body": [
-        "Vì quy tắc không viết ra thì không kiểm được. Phần lớn những điều ở trên được kiểm tự động mỗi lần trang được dựng lại: một con số tiền viết tay không khớp dữ liệu giá sẽ chặn bản build, một câu chứa từ ngữ bị cấm trong quảng cáo mỹ phẩm cũng vậy.",
+        "Vì quy tắc không viết ra thì không kiểm được. Phần lớn những điều ở trên được kiểm tự động mỗi lần trang được dựng lại. Một con số tiền viết tay không khớp dữ liệu giá sẽ chặn bản build. Một câu chứa từ ngữ bị cấm trong quảng cáo mỹ phẩm cũng vậy.",
         "Và vì nếu chúng tôi phá một trong những quy tắc này, bạn có cái để chỉ ra."
       ]
     },
