@@ -54,7 +54,19 @@ const { products, locale } = Astro.props;
   /* Ảnh phóng rất nhẹ khi di chuột, cắt trong khung. Chỉ dùng transform nên
      không gây reflow, và chỉ bật ở thiết bị có con trỏ thật — trên cảm ứng
      hiệu ứng hover chỉ gây kẹt ở trạng thái "đang hover" sau khi chạm. */
-  .shot { display: block; background: var(--bone); overflow: hidden; }
+  /* Khay sản phẩm nền TRẮNG, không phải nền bone.
+
+     Chín trên mười hai ảnh được chụp trên nền #ffffff. Đặt chúng lên nền bone
+     (#f1f2f6) thì mỗi thẻ hiện ra một hình chữ nhật trắng lạc lõng — người đọc
+     thấy cái khung ảnh trước khi thấy sản phẩm. Cho khay cùng màu với nền ảnh
+     thì ranh giới biến mất và chỉ còn lại sản phẩm.
+
+     Gạch tóc 1px thay cho viền hộp hay đổ bóng, đúng quy ước của hệ thị giác:
+     nó tách khay khỏi nền mà không biến thẻ thành một cái hộp. */
+  .shot {
+    display: block; background: #fff; overflow: hidden;
+    border: 1px solid var(--line);
+  }
   .shot :global(img) {
     width: 100%; display: block;
     transition: transform 620ms var(--ease-out);

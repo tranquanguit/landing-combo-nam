@@ -62,11 +62,43 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
   hiện và sửa ở commit 92de33f. Không cổng nào bắt được: ảnh có thật, kích
   thước đúng, alt text tự viết nên cũng "khớp". Nên người review cần mở từng
   trang sản phẩm và đối chiếu ảnh với vỏ hộp thật một lượt.
-- `[!] A12` **Bao bì Smart Whitening in tuyên bố "DARK SPOTS DISAPPEAR IN JUST
-  4 DAYS".** Đó là mốc thời gian tuyệt đối, mâu thuẫn với toàn bộ lập trường của
-  site về kỳ vọng, và claims-guard chặn. Trang không bê câu đó sang. Nhưng chữ
-  vẫn nằm trên vỏ hộp khách nhận được — cần Mocha biết, và cần thống nhất xem
-  trang nói gì nếu khách hỏi tại sao hai nơi nói khác nhau.
+- `[!] A12` **Bao bì in tuyên bố bị cấm, và ảnh sản phẩm đang hiển thị chúng ở
+  cỡ hero. Đây là rủi ro pháp lý, không phải chuyện thẩm mỹ.**
+
+  Đọc trực tiếp từ file ảnh (phóng to vùng chữ trên vỏ):
+
+  | Ảnh | Chữ in trên bao bì |
+  |---|---|
+  | `packshot-smart-white-plus` | **"DARK SPOTS DISAPPEAR IN JUST 6 DAYS"**, "BEST CHOICE FOR DARKSPOT", "Minimize scarring", "Skin restoration" |
+  | `packshot-smart-target` | **"REDUCE INFLAMMATION AND SWELLING IN JUST 8 HOURS"**, **"CONTROL ALL CAUSES OF ACNE"**, "INTENSIVE ACNE TREATMENT", "REPAIR AND PREVENT ACNE FROM COMING BACK" |
+
+  (Ghi chú trước đây viết "4 DAYS" — số thật trên vỏ là **6 DAYS**. Đã sửa.)
+
+  Hai trên hai ảnh kiểm tra đều có. Chưa kiểm mười ảnh còn lại.
+
+  **Vì sao nghiêm trọng.** Mốc thời gian bảo đảm ("in just 6 days", "in just 8
+  hours"), cực cấp ("BEST CHOICE"), tuyệt đối hoá ("ALL causes"), và từ
+  "TREATMENT" gợi ý tác dụng như thuốc — đều là thứ `claims-guard` chặn ngay
+  nếu ai gõ chúng vào file nội dung. Nhưng ở đây chúng là **pixel**, không phải
+  chuỗi, nên không một cổng nào trong CI nhìn thấy. Đó là lỗ hổng của chính hệ
+  thống hàng rào: nó quét chữ, không quét ảnh.
+
+  Và chúng đang nằm trên **trang đích của quảng cáo Google**, ở cỡ hero, đúng
+  chỗ bộ phận duyệt quảng cáo và cơ quan quản lý nhìn vào đầu tiên.
+
+  **Cần chủ site quyết, ba hướng:**
+  1. Hỏi Mocha xin bộ ảnh chụp góc không lộ những panel đó.
+  2. Cắt lại khung ảnh để chữ không đọc được. Làm được ngay, nhưng đây là
+     che một dòng chữ có thật trên hộp khách sẽ nhận — cần chủ site đồng ý
+     rằng đó là lựa chọn đúng.
+  3. Giữ nguyên và chấp nhận rủi ro.
+
+  Tôi không tự chọn hướng 2: giấu một tuyên bố trên bao bì là quyết định về
+  rủi ro pháp lý và về mức trung thực với khách, không phải quyết định thiết kế.
+
+  **Việc kèm theo:** cần một người đọc hết mười hai ảnh còn lại và ghi ra mọi
+  dòng chữ in trên bao bì. Tôi không có cách đọc chữ trong ảnh đủ tin cậy để
+  khẳng định ảnh nào sạch.
 - `[!] A11` **Tinh chất phục hồi B5 10ml — thiếu dữ liệu để dựng trang.** Trang
   sản phẩm chính hãng chỉ có xuất xứ, dung tích và hai dòng công dụng; không có
   bảng thành phần nào, và nhãn chai cũng chỉ đọc được "PRO-VITAMIN B5
@@ -107,6 +139,14 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
   Sửa đúng cách cần chuyển phần tràn lề ra khỏi đơn vị `vw` — tức là đổi cấu
   trúc khối hero, cùng chỗ với `A15`. Gộp hai việc làm một lần, khi chủ site
   quyết định hướng bố cục hero.
+- `[!] A17` **Hai ảnh là ảnh bối cảnh, không phải packshot.**
+  `packshot-combo` (nền xanh #bfe2f5, cảnh có bục) và `packshot-smart-white-plus`
+  (banner cao 900×1890, nền gradient xanh, có dụng cụ thí nghiệm) thuộc một ngôn
+  ngữ hình ảnh khác hẳn mười ảnh còn lại — vốn là packshot trên nền trắng.
+  Đặt cạnh nhau trong cùng một lưới thì thấy ngay là hai bộ ảnh khác nhau.
+  Script `scripts/normalize-packshots.mjs` cố ý bỏ qua chúng: không có viền
+  đồng nhất để cắt, và cắt cũng không làm chúng thành packshot được.
+  Cần chụp lại trên nền trắng như mười ảnh kia.
 - `[!] A9` **Zalo OA.** Bản cào có `zalo.me/4500053981574656766` (OA chính
   thức), trong khi site đang dùng `zalo.me/0367848918` (số cá nhân). Cần chủ
   site chọn kênh nào là kênh chính thức để khai nhất quán.
