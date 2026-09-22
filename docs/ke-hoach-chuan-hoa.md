@@ -153,6 +153,38 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
   Script `scripts/normalize-packshots.mjs` cố ý bỏ qua chúng: không có viền
   đồng nhất để cắt, và cắt cũng không làm chúng thành packshot được.
   Cần chụp lại trên nền trắng như mười ảnh kia.
+- `[!] A18` **Bảng danh mục không đóng được bằng phím Escape — WCAG 2.1 AA
+  1.4.13. Sửa được, nhưng tốn đúng toàn bộ ngân sách JS còn lại.**
+
+  Đã kiểm và ĐẠT hai trong ba yêu cầu của tiêu chí "Content on Hover or Focus":
+  - *Hoverable*: con trỏ di vào bảng được, phần đệm trong suốt nối mục cha với
+    bảng nên không bị đóng giữa chừng. Đạt.
+  - *Persistent*: bảng ở lại tới khi rời chuột hoặc rời focus. Đạt.
+  - *Dismissible*: **không đạt.** Không có cách đóng bảng mà không di chuột.
+
+  Bàn phím thì đi qua được — đã kiểm: focus mục cha làm `:focus-within` đúng,
+  bảng chuyển `visibility: visible`, rồi Tab vào được mục đầu tiên. Vấn đề chỉ
+  là không có đường thoát nhanh.
+
+  **Vì sao chưa sửa.** Không có cách nào thuần CSS: không tồn tại bộ chọn cho
+  phím Escape. Bản vá nhỏ nhất cần khoảng 170 byte JavaScript:
+
+  ```js
+  addEventListener('keydown', e => { if (e.key == 'Escape') { h.dataset.esc = 1; document.activeElement.blur() } });
+  addEventListener('pointermove', () => h.removeAttribute('data-esc'), { passive: true });
+  ```
+
+  Ngân sách JS nội tuyến còn **203 byte** trên trần 8.192. Tức là sửa được,
+  nhưng tiêu gần hết phần dư cuối cùng — sau đó mọi tính năng tương tác về sau
+  đều phải thuần CSS, vĩnh viễn.
+
+  Đây là đánh đổi thuộc về chủ site chứ không thuộc về tôi: trần 8KB là một
+  quyết định đã có từ trước, và tiêu nốt nó cho một tiêu chí mức trung bình là
+  chuyện cần người đặt ra trần đó đồng ý. Ba hướng:
+  1. Nâng trần lên 8,5KB rồi thêm handler.
+  2. Tiêu 170 byte còn lại cho việc này và chốt rằng về sau không thêm JS nữa.
+  3. Chấp nhận khoảng trống, ghi nhận rằng bảng nằm ở đầu trang nên ít che nội
+     dung người dùng đang đọc.
 - `[!] A9` **Zalo OA.** Bản cào có `zalo.me/4500053981574656766` (OA chính
   thức), trong khi site đang dùng `zalo.me/0367848918` (số cá nhân). Cần chủ
   site chọn kênh nào là kênh chính thức để khai nhất quán.
