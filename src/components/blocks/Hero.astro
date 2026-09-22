@@ -133,7 +133,14 @@ const notes = data.usp.map((u: any, i: number) => ({
     aspect-ratio: 4 / 3;
     background: #fff;
     border: 1px solid var(--line);
-    overflow: hidden;
+    overflow: hidden;    /* Khổ hẹp: giới hạn bề ngang và canh giữa, không để ảnh chạy hết mép.
+
+       Đo trên trang chủ ở 768px khi ảnh còn full-width: khay 705×529 và cả
+       hero cao 1059px — vượt màn hình 1024px, nên người dùng tablet không thấy
+       trọn màn hình đầu tiên. Thu khay lại còn tối đa 32rem là hero vừa khít,
+       và một tấm ảnh canh giữa trông cố ý hơn một tấm chạy sát hai mép. */
+    max-width: 32rem;
+    margin-inline: auto;
   }
   .hero-media :global(img) {
     width: 100%; height: 100%;
