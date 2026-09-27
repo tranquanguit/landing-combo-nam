@@ -120,7 +120,7 @@ const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath
 
     {products.length > 0 && (
       <Section id="san-pham" surface="bone" heading={t(locale, 'article.relatedProducts')}>
-        <ProductGrid products={products} locale={locale} />
+        <ProductGrid products={products} locale={locale} source="article-products" />
         {line && (
           <p class="back">
             <a href={linePath(line.slug, locale)}>{t(locale, 'article.backToLine')}</a>
