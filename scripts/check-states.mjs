@@ -6,7 +6,7 @@
  * để nhìn được bằng mắt.
  */
 import { createServer } from 'node:http';
-import { readFileSync, existsSync, mkdirSync } from 'node:fs';
+import { readFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { createRequire } from 'node:module';
 
@@ -196,6 +196,38 @@ for (const w of [390, 768]) {
   await ctx.close();
 }
 
+
+/* ---------- 6. Không được lộ ngày ISO ra chữ người đọc ---------- */
+/*
+ * `shortDate()` đã có sẵn trong lib/format.ts, kèm lý do: "người Việt đọc hạn
+ * ưu đãi là 30/09/2026". Nhưng ba layout từng in thẳng chuỗi ISO ra thân văn
+ * bản — "Cập nhật ngày 2026-09-16" đọc như một trường cơ sở dữ liệu.
+ *
+ * Không cổng nào bắt được: build xanh, dữ liệu đúng, chỉ có con người đọc mới
+ * thấy sai. Nay có cổng.
+ *
+ * Thuộc tính `datetime` và JSON-LD VẪN phải là ISO — đó là phần dành cho máy.
+ * Nên phép quét bỏ qua <script> và chỉ soi chữ nằm giữa các thẻ.
+ */
+{
+  const walk = (d, out = []) => {
+    for (const e of readdirSync(d, { withFileTypes: true })) {
+      const p = join(d, e.name);
+      if (e.isDirectory()) walk(p, out);
+      else if (e.name.endsWith('.html')) out.push(p);
+    }
+    return out;
+  };
+  const leaks = [];
+  for (const file of walk('dist')) {
+    const html = readFileSync(file, 'utf8').replace(/<script[\s\S]*?<\/script>/g, '');
+    for (const m of html.matchAll(/>([^<]{0,40}20[0-9]{2}-[0-9]{2}-[0-9]{2}[^<]{0,20})</g)) {
+      leaks.push(file.replace('dist' + String.fromCharCode(92), '').replace('dist/', '') + ': ' + m[1].trim());
+    }
+  }
+  ok('không lộ ngày ISO ra chữ người đọc', leaks.length === 0,
+    leaks.length ? leaks.slice(0, 3).join(' | ') : walk('dist').length + ' trang sạch');
+}
 await browser.close(); pages.close(); api.close();
 console.log(`\n${pass} đạt, ${fail.length} lỗi`);
 if (fail.length) { console.log('Lỗi:\n  ' + fail.join('\n  ')); process.exit(1); }

@@ -1,4 +1,5 @@
 ---
+import { shortDate } from '../lib/format';
 import BaseLayout from './BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -79,7 +80,7 @@ const sections = d.sections.map((s: any, i: number) => ({ ...s, id: s.id ?? `muc
         <h1>{d.title}</h1>
         <p class="lead" set:html={richText(d.lead)} />
         <p class="meta">
-          <time datetime={d.updatedAt}>{t(locale, 'policy.updated')} {d.updatedAt}</time>
+          <time datetime={d.updatedAt}>{t(locale, 'policy.updated')} {shortDate(d.updatedAt, locale)}</time>
         </p>
       </div>
     </div>

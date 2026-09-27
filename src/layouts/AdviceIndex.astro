@@ -1,4 +1,5 @@
 ---
+import { shortDate } from '../lib/format';
 import BaseLayout from './BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -84,7 +85,7 @@ const jsonLd = collectionGraph({
             <a href={articlePath(a.slug, locale)}>
               <span class="read-title">{a.title}</span>
               <span class="read-lead">{a.lead}</span>
-              <time datetime={a.updatedAt ?? a.publishedAt}>{a.updatedAt ?? a.publishedAt}</time>
+              <time datetime={a.updatedAt ?? a.publishedAt}>{shortDate(a.updatedAt ?? a.publishedAt, locale)}</time>
             </a>
           </li>
         ))}

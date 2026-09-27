@@ -1,4 +1,5 @@
 ---
+import { shortDate } from '../lib/format';
 import BaseLayout from './BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -87,7 +88,7 @@ const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath
           <p class="lead" set:html={richText(a.lead)} />
           <p class="meta">
             <time datetime={a.updatedAt ?? a.publishedAt}>
-              {t(locale, 'article.updated')} {a.updatedAt ?? a.publishedAt}
+              {t(locale, 'article.updated')} {shortDate(a.updatedAt ?? a.publishedAt, locale)}
             </time>
             <span aria-hidden="true">·</span>
             <span>{readingMinutes} {t(locale, 'article.readingTime')}</span>
