@@ -1,15 +1,16 @@
 ---
+import type { RhythmProps } from '../../lib/narrative';
 import Section from '../Section.astro';
 import Picture from '../Picture.astro';
-interface Props {
+interface Props extends RhythmProps {
   data: any; id?: string;
   surface?: 'bone' | 'paper' | 'mist' | 'navy';
   space?: 'sm' | 'md' | 'lg';
   sameSurface?: boolean;
 }
-const { data, id, surface = 'bone', space, sameSurface } = Astro.props;
+const { data, id, surface = 'bone', space, sameSurface, role, transition } = Astro.props;
 ---
-<Section id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
+<Section role={role} transition={transition} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
   <ul class="grid" style={`--cols:${data.columns}`}>
     {data.items.map((item: any) => (
       <li class="card">

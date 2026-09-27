@@ -12,10 +12,28 @@ interface Props {
   space?: 'sm' | 'md' | 'lg';
   /** Khối ngay trên có cùng màu nền: bỏ đệm trên để hai khối thành một cụm. */
   sameSurface?: boolean;
+  /**
+   * Vai của khối trong câu chuyện.
+   *
+   * Phát ra `data-narrative-role` trên thẻ <section>. Không có tác dụng thị
+   * giác nào: nó tồn tại để trình tự kể chuyện ĐỌC ĐƯỢC từ HTML đã dựng, nên
+   * cổng `tests/narrative.mjs` kiểm được trang thật thay vì kiểm lại file JSON
+   * mà nó vừa đọc — kiểm dữ liệu đầu vào bằng chính dữ liệu đầu vào thì không
+   * chứng minh được gì về trang.
+   */
+  role?: string;
+  /**
+   * Câu nối sang khối kế tiếp, in ở cuối khối.
+   *
+   * Không phải một khối riêng: nó là một dòng dẫn, và chỉ hiện khi file nội
+   * dung thật sự khai. Đặt ở mọi khối thì nó thành nhiễu.
+   */
+  transition?: string;
 }
 const {
   id, surface = 'bone', eyebrow, heading, intro,
   center = false, aboveFold = false, space, sameSurface = false,
+  role, transition,
 } = Astro.props;
 const surfaceClass = surface === 'bone' ? '' : `surface-${surface}`;
 const headingId = id ? `${id}-title` : undefined;
@@ -24,6 +42,7 @@ const headingId = id ? `${id}-title` : undefined;
   id={id}
   class:list={[surfaceClass, !aboveFold && 'defer', space && `space-${space}`, sameSurface && 'same-surface']}
   aria-labelledby={headingId}
+  data-narrative-role={role}
   data-reveal-group
 >
   <div class="wrap">
@@ -37,5 +56,30 @@ const headingId = id ? `${id}-title` : undefined;
       </div>
     )}
     <div data-reveal><slot /></div>
+    {transition && (
+      <p class="transition" data-reveal>{transition}</p>
+    )}
   </div>
 </section>
+
+<style>
+  /* Dòng nối: đọc như lời dẫn của người biên tập, không như một tiêu đề phụ.
+     Căn theo mép trái của nội dung và giới hạn độ dài dòng, vì nó là một CÂU
+     chứ không phải một nhãn. */
+  .transition {
+    margin: clamp(32px, 4vw, 56px) 0 0;
+    max-width: 46ch;
+    font-size: var(--t-md);
+    line-height: 1.5;
+    color: var(--ink-muted);
+    text-wrap: pretty;
+  }
+  .transition::before {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--line-strong);
+    margin-bottom: var(--s-4);
+  }
+</style>

@@ -5,6 +5,7 @@ import { MONEY_TOKENS } from './lib/money-text.ts';
 import { findHandwrittenMoney } from './lib/money-scan.ts';
 import { findForbiddenClaims, findPersonalData } from './lib/claims-lexicon.ts';
 import { DEFAULT_ANCHOR } from './lib/block-anchors.ts';
+import { NARRATIVE_ROLES, STORY_ARCHETYPES } from './lib/narrative.ts';
 import { readFileSync } from 'node:fs';
 
 /* Số liên hệ của chính doanh nghiệp không phải dữ liệu cá nhân của khách. */
@@ -155,6 +156,26 @@ const anchorId = z.string().regex(/^[a-z0-9-]+$/).optional();
 const rhythmFields = {
   surface: z.enum(['bone', 'paper', 'mist', 'navy']).optional(),
   space: z.enum(['sm', 'md', 'lg']).optional(),
+  /**
+   * Vai của khối trong câu chuyện — xem `src/lib/narrative.ts`.
+   *
+   * Tách "khối LÀ GÌ" khỏi "khối ở ĐÂY để làm gì". Cùng một bảng thành phần có
+   * thể là `proof` ở trang này (bằng chứng chính) và `mechanism` ở trang kia
+   * (giải thích cách hoạt động, còn bằng chứng nằm ở khối chứng từ). Nhịp thị
+   * giác tính theo VAI, nên hai trang ấy đọc khác nhau mà không phải sửa CSS.
+   *
+   * Không khai thì rơi về `DEFAULT_ROLE` theo loại khối — mọi nội dung đang có
+   * giữ nguyên hành vi.
+   */
+  narrativeRole: z.enum(NARRATIVE_ROLES).optional(),
+  /**
+   * Một câu nối sang khối kế tiếp.
+   *
+   * Việc của nó là trả lời "vì sao phần sau tồn tại" trước khi người đọc phải
+   * tự đoán. Dùng TIẾT CHẾ: đặt câu nối ở mọi khối thì nó thành một loại nhiễu
+   * mới, và người đọc học cách bỏ qua nó.
+   */
+  transition: z.string().max(180).optional(),
 };
 
 const blocks = z.discriminatedUnion('type', [
@@ -552,6 +573,56 @@ const products = defineCollection({
      * trang gốc và Google chọn nhầm trang để hiển thị.
      */
     canonicalOf: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
+
+    /**
+     * Nguyên mẫu câu chuyện của trang — xem `src/lib/narrative.ts`.
+     *
+     * KHÔNG ép thứ tự khối. Nó nói cho người biên tập và cho cổng QA biết trang
+     * này định kể kiểu gì, để `tests/narrative.mjs` đối chiếu rồi BÁO chứ không
+     * chặn. Ép thứ tự thì lại về đúng chỗ cũ: mười hai trang một khuôn, chỉ là
+     * khuôn mới.
+     */
+    storyArchetype: z.enum(STORY_ARCHETYPES).optional(),
+
+    /**
+     * Bối cảnh quảng cáo mà trang này được dựng để đón.
+     *
+     * KHÔNG hiển thị ra trang. Bốn việc nó làm:
+     *  1. ghi lại trang đích này phục vụ ý định nào, để người sau không phải đoán;
+     *  2. cho phép đối chiếu lời quảng cáo với nội dung thật (`scripts/check-ad-integrity.mjs`);
+     *  3. làm đầu vào cho `docs/ad-readiness.md`;
+     *  4. chặn việc một mẩu quảng cáo hứa rộng hơn những gì trang chống lưng được.
+     *
+     * Đây KHÔNG phải danh sách từ khoá. Quảng cáo trong hội thoại bắt Ý ĐỊNH,
+     * không bắt cụm khớp chính xác; nhồi từ khoá vào đây chỉ tạo một bản sao
+     * sai lệch của thứ vốn không tồn tại.
+     */
+    adContext: z.object({
+      /** Nhu cầu chính, viết như người mua tự nói ra. */
+      primaryNeed: z.string().min(8),
+      /** Hoàn cảnh cụ thể của người đọc khi họ tới đây. */
+      audienceSituations: z.array(z.string().min(8)).min(1).max(6),
+      /** Bối cảnh hội thoại mà trang này là câu trả lời hợp lý. */
+      contextHints: z.array(z.string().min(8)).max(8).default([]),
+      /**
+       * Lời hứa được phép dùng trong quảng cáo.
+       *
+       * Mỗi câu ở đây phải được CHÍNH nội dung trang chống lưng. Cổng
+       * `check-ad-integrity` đối chiếu từng câu với hero và seo của trang.
+       */
+      approvedAngles: z.array(z.string().min(8)).min(1).max(6),
+      /**
+       * Hướng tiếp cận KHÔNG được dùng, mô tả bằng lời trung tính.
+       *
+       * Viết "hứa khỏi hẳn sau một liệu trình" chứ ĐỪNG trích nguyên câu bị
+       * cấm: mọi chuỗi trong file này đều đi qua hàng rào claims, nên trích
+       * nguyên văn sẽ làm hỏng build đúng ở chỗ đang cố ghi lại điều phải
+       * tránh. Dự án không có cơ chế miễn trừ, và đó là chủ ý.
+       */
+      riskyAngles: z.array(z.string().min(8)).default([]),
+      /** Neo trong trang mà quảng cáo nên trỏ tới, nếu không phải đầu trang. */
+      preferredDestination: z.string().regex(/^#[a-z0-9-]+$/).optional(),
+    }).strict().optional(),
 
     name: z.string(),
     shortName: z.string().optional(),
