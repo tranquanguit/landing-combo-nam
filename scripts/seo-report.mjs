@@ -51,8 +51,23 @@ const urlOf = (file) => {
   return `${SITE}/${rel}`;
 };
 
-/* Trang lỗi không phải nội dung được đánh chỉ mục — kiểm riêng. */
-const contentPages = pages.filter((p) => path.basename(p) !== '404.html');
+/* Trang không phải nội dung bán hàng: không đánh chỉ mục, không vào sitemap,
+   không cần canonical/hreflang/Open Graph/JSON-LD.
+
+   Danh sách này là TƯỜNG MINH, không suy ra từ thẻ noindex. Nếu suy ra, một
+   trang bán hàng lỡ dính noindex sẽ tự động thoát khỏi mọi phép đo SEO — đúng
+   lúc cần kêu to nhất thì cổng lại im. Ngược lại, mỗi mục ở đây được kiểm lại ở
+   mục "nội bộ" bên dưới: khai đúng noindex và vắng mặt trong sitemap. */
+const INTERNAL = [
+  '404.html',        // trang lỗi
+  'kien-truc/',      // tài liệu kiến trúc repo, cho người làm site
+];
+const relOf = (file) => path.relative(DIST, file).split(path.sep).join('/');
+const isInternal = (file) => {
+  const rel = relOf(file);
+  return INTERNAL.some((x) => (x.endsWith('/') ? rel.startsWith(x) : rel === x));
+};
+const contentPages = pages.filter((p) => !isInternal(p));
 
 const rows = [];
 let fails = 0;
@@ -370,14 +385,26 @@ const missLlms = wanted.filter((u) => !llms.includes(u));
 check('llms', 'llms.txt dẫn URL của mọi trang nội dung', missLlms.length === 0,
   missLlms.join(' ') || `${wanted.length} URL`);
 
-/* ====================== 4. Trang 404 ====================== */
-const p404 = path.join(DIST, '404.html');
-if (fs.existsSync(p404)) {
-  const h = fs.readFileSync(p404, 'utf8');
+/* ============ 4. Trang nội bộ (404, tài liệu kiến trúc) ============ */
+
+/* Những trang này được MIỄN mọi phép đo SEO ở trên. Miễn mà không kiểm lại thì
+   `INTERNAL` thành một cái lỗ: thêm một dòng vào đó là tắt được cổng cho cả một
+   nhánh URL. Nên mỗi mục phải trả lại hai bằng chứng — tự khai noindex, và
+   vắng mặt trong sitemap. Mục khai trong INTERNAL nhưng không tồn tại trong
+   dist cũng là lỗi: nó chỉ còn là một dòng miễn trừ chết. */
+const internalPages = pages.filter(isInternal);
+for (const x of INTERNAL) {
+  check('nội bộ', `INTERNAL '${x}' khớp trang có thật`,
+    internalPages.some((p) => { const r = relOf(p); return x.endsWith('/') ? r.startsWith(x) : r === x; }),
+    'có trong dist');
+}
+for (const f of internalPages) {
+  const rel = relOf(f);
+  const h = fs.readFileSync(f, 'utf8');
   const rb = tagsOf(h, 'meta').find((t) => attr(t, 'name') === 'robots');
-  check('404', '404 khai noindex', /noindex/i.test(rb ? attr(rb, 'content') : ''),
+  check('nội bộ', `${rel} khai noindex`, /noindex/i.test(rb ? attr(rb, 'content') : ''),
     rb ? attr(rb, 'content') : '(không khai báo)');
-  check('404', '404 không nằm trong sitemap', !smUrls.includes(`${SITE}/404.html`), 'không');
+  check('nội bộ', `${rel} không nằm trong sitemap`, !smUrls.includes(urlOf(f)), 'không');
 }
 
 /* ====================== in ra ====================== */

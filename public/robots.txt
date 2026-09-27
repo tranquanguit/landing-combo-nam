@@ -54,9 +54,12 @@ Allow: /
 # Trang quản trị và API: không có gì để lập chỉ mục, và /admin hiển thị dữ liệu
 # cá nhân của khách. Cả hai cũng trả X-Robots-Tag: noindex ở phía máy chủ —
 # dòng dưới đây chỉ là lớp thứ hai, vì robots.txt là đề nghị chứ không phải khoá.
+# /kien-truc/ là tài liệu nội bộ cho người làm site, không phải nội dung bán hàng
+# — nó tự mang thẻ noindex, dòng này là lớp thứ hai.
 User-agent: *
 Disallow: /admin
 Disallow: /api/
+Disallow: /kien-truc/
 
 Sitemap: https://mochatrinam.com/sitemap-index.xml
 
