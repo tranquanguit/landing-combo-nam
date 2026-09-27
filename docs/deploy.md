@@ -58,6 +58,22 @@ Sau khi đổi, `npm run test:seo` sẽ đỏ nếu còn sót chỗ nào.
 
 ### B2. Cơ sở dữ liệu đơn hàng
 
+> **Chạy migration bằng `npm run db:migrate`, đừng chạy tay từng tệp.**
+>
+> Lệnh này trước đây ghim cứng `migrations/0001_orders.sql`. Từ khi có tệp
+> `0002` (thêm cột `utm_content` và `utm_term`), ghim cứng như vậy nghĩa là
+> deploy mã mới lên một cơ sở dữ liệu chưa có hai cột đó — và MỌI đơn hàng sẽ
+> lỗi `table orders has no column named utm_content`. Đường đặt hàng là thứ
+> đắt nhất để hỏng.
+>
+> Nay lệnh dùng `wrangler d1 migrations apply`: nó chạy đủ các tệp theo thứ tự
+> tên và GHI LẠI tệp nào đã chạy, nên chạy lại không hỏng. `npm run
+> db:migrate:status` cho biết cơ sở dữ liệu đang ở đâu.
+>
+> Thứ tự đúng khi deploy: **chạy migration TRƯỚC, rồi mới đẩy mã lên.**
+> Ngược lại thì có một khoảng thời gian mã mới gặp bảng cũ.
+
+
 ```bash
 npx wrangler d1 create mocha-orders          # dán database_id vào wrangler.toml
 npm run db:migrate                            # tạo bảng orders + rate_limit

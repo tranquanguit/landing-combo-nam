@@ -19,8 +19,8 @@
     "docs:seo": "node scripts/seo-report.mjs --md docs/bao-cao-seo.md",
     "test:orders-api": "node --experimental-strip-types --experimental-sqlite tests/orders-api.mjs",
     "test:admin": "node --experimental-strip-types --experimental-sqlite tests/admin-page.mjs",
-    "db:migrate": "wrangler d1 execute mocha-orders --remote --file=migrations/0001_orders.sql",
-    "db:migrate:local": "wrangler d1 execute mocha-orders --local --file=migrations/0001_orders.sql",
+    "db:migrate": "wrangler d1 migrations apply mocha-orders --remote",
+    "db:migrate:local": "wrangler d1 migrations apply mocha-orders --local",
     "check:assets": "node scripts/check-assets.mjs",
     "docs:assets": "node scripts/check-assets.mjs --md docs/anh-can-co.md",
     "test:contrast": "node scripts/check-contrast.mjs",
@@ -33,7 +33,8 @@
     "check:responsive": "node scripts/check-responsive.mjs",
     "docs:responsive": "node scripts/check-responsive.mjs --md docs/responsive-qa.md --shots .responsive-shots",
     "check:gaps": "node --experimental-strip-types scripts/check-content-gaps.mjs",
-    "docs:gaps": "node --experimental-strip-types scripts/check-content-gaps.mjs --md docs/content-gaps.md"
+    "docs:gaps": "node --experimental-strip-types scripts/check-content-gaps.mjs --md docs/content-gaps.md",
+    "db:migrate:status": "wrangler d1 migrations list mocha-orders --remote"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
