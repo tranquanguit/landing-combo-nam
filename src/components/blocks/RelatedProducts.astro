@@ -23,7 +23,7 @@ const { data, products, locale, id, surface = 'bone', space, sameSurface, role, 
   <Section role={role} transition={transition} cta={cta} id={id} surface={surface} space={space} sameSurface={sameSurface}
     eyebrow={data.eyebrow} heading={data.heading}>
     {data.intro && <p class="rp-intro" set:html={richText(data.intro)} />}
-    <ProductGrid products={products} locale={locale} />
+    <ProductGrid products={products} locale={locale} source="product-related" />
   </Section>
 )}
 

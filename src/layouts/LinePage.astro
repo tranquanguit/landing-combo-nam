@@ -6,12 +6,13 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import Section from '../components/Section.astro';
 import Prose from '../components/blocks/Prose.astro';
 import ProductGrid from '../components/ProductGrid.astro';
+import { money } from '../lib/format';
+import { articlePath, homePath, linePath, productPath } from '../lib/routes';
 import Compare from '../components/Compare.astro';
 import Faq from '../components/blocks/Faq.astro';
 import Analytics from '../components/Analytics.astro';
 import { collectionGraph } from '../lib/schema';
 import { resolveAssetImage, resolveAssetUrl } from '../lib/images';
-import { articlePath, homePath, linePath, productPath } from '../lib/routes';
 import { assertTranslated, t, type Locale } from '../i18n/ui';
 import { richText } from '../lib/richtext';
 
@@ -31,6 +32,12 @@ interface Props {
 }
 
 const { line, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], fallbackOgImage, products, articles } = Astro.props;
+
+/* Tiêu chí trả lời "ai hợp với cái nào" — nguồn chữ cho khối chọn.
+   Không có thì khối chọn không render; thà thiếu một khối còn hơn dựng nó
+   bằng chữ tự nghĩ ra. */
+const fitCriterion = line.compare?.criteria?.find((c: any) => c.fit)
+  ?? null;
 const site = Astro.site?.origin ?? 'https://mochatrinam.com';
 assertTranslated(locale);
 
@@ -84,17 +91,67 @@ const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath
 
     {products.length > 0 && (
       <Section id="san-pham" surface="bone" heading={t(locale, 'line.products')} aboveFold>
-        <ProductGrid products={products} locale={locale} priority />
+        <ProductGrid products={products} locale={locale} priority source="line-grid" />
       </Section>
     )}
 
-    {line.compare && products.length > 1 && (
-      <Compare data={line.compare} products={products} locale={locale} id="so-sanh" />
-    )}
-
+    {/*
+      * Bảng so sánh đứng SAU phần giải thích, không đứng trước.
+      *
+      * Đo được trên /nam-tham/ ở 390px: bảng so sánh bắt đầu ở y=1921, trong
+      * khi "ba loại nám" ở y=3415 và "những hoạt chất có cơ sở nghiên cứu" ở
+      * y=4355. Tức 2.942px đầu tiên — 3,5 màn hình điện thoại — là bán hàng
+      * thuần, đặt trước mọi thứ giúp người đọc hiểu.
+      *
+      * Tầng trang dòng tồn tại để bắt người gõ "kem trị nám loại nào tốt", tức
+      * người CHƯA có tiêu chí để so. Đưa bảng ba cột cho họ ở màn hình thứ hai
+      * không tạo ra quyết định, nó tạo ra tê liệt lựa chọn — và với đơn hàng
+      * quanh một triệu, tê liệt nghĩa là thoát.
+      *
+      * Lưới sản phẩm thì GIỮ ở đầu: người vừa gõ truy vấn cần thấy ngay "ở đây
+      * có cái gì". Cái phải dời là việc cần tiêu chí, không phải việc nhận
+      * diện. Neo #so-sanh không đổi, nên mọi liên kết cũ vẫn tới đúng chỗ.
+      */}
     {line.sections.map((section: any, i: number) => (
       <Prose section={section} surface={i % 2 === 0 ? 'paper' : 'bone'} />
     ))}
+
+    {line.compare && products.length > 1 && (
+      <Compare data={line.compare} products={products} locale={locale} id="so-sanh" source="line-compare" />
+    )}
+
+    {/*
+      * Khối CHỌN — một điểm quyết định, đặt đúng chỗ người đọc đã có tiêu chí.
+      *
+      * Trước khối này, cả trang dòng 8.456px có ĐÚNG MỘT lời mời hành động
+      * (nút ở thanh đầu trang, trỏ cứng vào một sản phẩm). Liên kết trong lưới
+      * và trong bảng là ĐIỀU HƯỚNG, không phải lời mời: người đọc hết phần
+      * hoạt chất đang ở đỉnh tin tưởng cao nhất của cả phiên, và trang im lặng
+      * đúng lúc đó.
+      *
+      * Việc của tầng này là giao đúng một người vào đúng một landing, nên hành
+      * động ở đây là CHỌN, không phải MUA — và vì vậy trang dòng cố tình KHÔNG
+      * có thanh mua dính đáy như trang sản phẩm: một nút "Đặt mua" thường trực
+      * trên trang đang bày ba lựa chọn thì phải đoán hộ người dùng.
+      *
+      * Chữ mô tả lấy TỪ tiêu chí đã đánh dấu `fit` trong bảng so sánh, không
+      * viết lại — để hai chỗ không thể lệch nhau.
+      */}
+    {fitCriterion && products.length > 1 && (
+      <Section id="chon" surface="bone" heading={t(locale, 'line.choose')} intro={t(locale, 'line.chooseLead')}>
+        <ul class="choose">
+          {products.map((p: any, i: number) => (
+            <li>
+              <a href={productPath(p.slug, locale)} data-cta="line-choose-product" data-cta-kind="select">
+                <span class="choose-name">{p.shortName ?? p.name}</span>
+                <span class="choose-price figure">{money(p.price, p.currency, locale)}</span>
+              </a>
+              <p class="choose-fit">{fitCriterion.values[i]}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    )}
 
     {line.faq.length > 0 && (
       <Faq data={{ heading: t(locale, 'faq.heading'), items: line.faq }} id="cau-hoi" />
@@ -121,6 +178,28 @@ const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath
 </BaseLayout>
 
 <style>
+  /* Khối chọn: ba dòng, ngăn bằng gạch tóc — không hộp, không bo góc, không
+     đổ bóng. Giá dùng face chữ số, đúng luật "serif chỉ dành cho số". */
+  .choose { list-style: none; margin: 0; padding: 0; }
+  .choose li { border-top: 1px solid var(--line); }
+  .choose li:last-child { border-bottom: 1px solid var(--line); }
+  .choose a {
+    display: flex; align-items: baseline; gap: var(--s-4);
+    justify-content: space-between;
+    padding: var(--s-5) 0 var(--s-2);
+    min-height: 44px;
+    text-decoration: none; color: var(--ink-navy);
+    border-bottom: 0;
+  }
+  .choose a:hover .choose-name { color: var(--cobalt); text-decoration: underline; }
+  .choose-name { font-size: var(--t-md); font-weight: 600; line-height: 1.25; }
+  .choose-price { color: var(--ink-muted); font-size: var(--t-base); white-space: nowrap; }
+  .choose-fit {
+    margin: 0; padding-bottom: var(--s-5);
+    color: var(--ink-muted); font-size: var(--t-sm); line-height: 1.55;
+    max-width: 52ch;
+  }
+
   .head { background: var(--paper); padding-block: var(--s-7) var(--s-6); }
   .head h1 { margin: 0 0 var(--s-4); max-width: 18ch; }
   .head .lead { max-width: 62ch; margin: 0; }

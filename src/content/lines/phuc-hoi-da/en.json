@@ -45,7 +45,8 @@
           "Anyone who wants to check each ingredient before buying",
           "Anyone who wants a light moisturising step without reading a list",
           "Anyone wanting an occasional extra hydrating step"
-        ]
+        ],
+        "fit": true
       },
       {
         "label": "Acts on pigment",

@@ -1081,9 +1081,28 @@ const lines = defineCollection({
       criteria: z.array(z.object({
         label: z.string(),
         values: z.array(z.string().min(1)).min(2),
+        /**
+         * Tiêu chí này trả lời "ai hợp với sản phẩm nào".
+         *
+         * Khối chọn ở cuối trang dòng dựng TỪ tiêu chí được đánh dấu, không
+         * viết lại bằng chữ mới. Lý do: một bản mô tả thứ hai về cùng một việc
+         * sẽ lệch khỏi bảng so sánh sau lần sửa nội dung đầu tiên, và khi đó
+         * trang tự mâu thuẫn với chính nó ngay trong một màn hình cuộn.
+         *
+         * Không đánh dấu thì khối chọn không hiện — thà không có còn hơn có
+         * bằng chữ bịa.
+         */
+        fit: z.boolean().default(false),
       }).strict()).min(2),
       footnote: z.string().optional(),
-    }).strict().optional(),
+    }).strict().superRefine((c, ctx) => {
+      const n = c.criteria.filter((x) => x.fit).length;
+      if (n > 1) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['criteria'],
+          message: `${n} tiêu chí cùng khai fit: true. Khối chọn chỉ dựng được từ MỘT tiêu chí; ` +
+            `hai tiêu chí thì không biết lấy cái nào, và im lặng chọn bừa là cách sai.` });
+      }
+    }).optional(),
     faq: faqField,
     articles: z.array(slugField).default([]),
   }).strict().superRefine((line, ctx) => {
