@@ -228,8 +228,19 @@ const lastProse = line.sections.length - 1;
     text-decoration: none; color: var(--ink-navy);
     border-bottom: 0;
   }
-  .choose a:hover .choose-name { color: var(--cobalt); text-decoration: underline; }
-  .choose-name { font-size: var(--t-md); font-weight: 600; line-height: 1.25; }
+  /* Tên sản phẩm phải TRÔNG như bấm được, không chỉ khi di chuột.
+
+     Nhìn ảnh chụp ở 390px mới thấy: ba dòng này là liên kết nhưng ở trạng
+     thái nghỉ không có dấu hiệu nào — mà trên điện thoại thì không có hover,
+     nên dấu hiệu chỉ-hiện-khi-hover là không có dấu hiệu. CTA inline trong
+     thân trang đã dùng gạch tóc 1px làm dấu hiệu; chỗ này phải giống, vì hai
+     loại liên kết đang làm cùng một việc: đưa người đọc sang bước quyết định. */
+  .choose-name {
+    font-size: var(--t-md); font-weight: 600; line-height: 1.25;
+    border-bottom: 1px solid var(--line-strong);
+    transition: color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+  }
+  .choose a:hover .choose-name { color: var(--cobalt); border-bottom-color: var(--cobalt); }
   .choose-price { color: var(--ink-muted); font-size: var(--t-base); white-space: nowrap; }
   .choose-fit {
     margin: 0; padding-bottom: var(--s-5);
