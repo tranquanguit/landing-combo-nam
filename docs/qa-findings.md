@@ -10,28 +10,20 @@ Các issue đã đóng đủ chu trình nằm trong lịch sử commit, không l
 
 ## 1. Còn mở — cần quyết định
 
-### QA-01 · Câu báo hết hàng nằm sau các ô đã bị khoá — P2, tiềm ẩn
+### QA-01 · Trạng thái hết hàng — ĐÓNG, không áp dụng
 
-**Đo được:** đặt tạm một sản phẩm thành `availability: OutOfStock` và dựng lại.
-Khối đặt hàng render đúng về mặt kỹ thuật — không có thẻ `<form>`, 9 ô bị khoá,
-JSON-LD khai `OutOfStock`, có câu giải thích kèm hotline, và nút submit trỏ
-`aria-describedby="form-sold-out"`.
+Đã từng ghi là P2. **Bỏ.** Chủ site chỉ ra đúng: đây là landing page, không
+phải sàn thương mại điện tử. Không có tồn kho hiển thị, không có giỏ hàng, và
+không có luồng nào khiến một sản phẩm chuyển sang hết hàng rồi có lại trong
+ngày. Dựng cả một trạng thái giao diện cho tình huống đó là thừa.
 
-**Vấn đề:** câu giải thích đứng **sau** toàn bộ các ô nhập. Người đọc gặp lời mời
-"Điền thông tin đặt hàng…", rồi bảng giá, rồi một loạt ô xám — và chỉ biết lý do
-ở cuối khối.
+Trường `availability` vẫn giữ, nhưng chỉ vì nó đi vào JSON-LD `Offer` — máy
+tìm kiếm đọc nó. Phần giao diện đã có sẵn trong mã và hoạt động đúng nếu ai đó
+thật sự đặt `OutOfStock`; không cần sửa gì thêm, và cũng không cần chăm nó.
 
-**Vì sao chưa sửa:** hiện **không sản phẩm nào** đang hết hàng. Đổi bố cục khối
-đặt hàng lúc này là đặt 12 trang đang chạy vào rủi ro để đổi lấy lợi ích bằng 0.
-Đây là quyết định thương mại (có nên bày trang hết hàng không, và bày thế nào),
-không phải quyết định kỹ thuật.
-
-**Cách tái hiện:**
-```bash
-# đặt availability = "OutOfStock" trong một file sản phẩm, rồi:
-PUBLIC_ORDER_ENDPOINT=http://localhost:8132/orders npx astro build
-grep -c 'form-sold-out' dist/<slug>/index.html   # phải > 0
-```
+**Bài học cho vòng QA:** tôi đã đem một mô hình sai (TMĐT) áp lên sản phẩm này
+rồi tự tạo ra việc. Trước khi xếp mức nghiêm trọng, phải hỏi "tình huống này
+có xảy ra trên chính sản phẩm này không".
 
 ### QA-02 · Hai trang dòng không có khối `#chon` — content gap
 

@@ -158,7 +158,7 @@
           "Và vì nó lấy đi một phần lớp bảo vệ bề mặt, khoảng thời gian ngay sau đó là lúc da dễ tổn thương nhất. Chống nắng trong giai đoạn này không phải lời khuyên mà là <strong>điều kiện</strong> — nếu bạn không thể tránh nắng trong hai tuần tới, hãy lùi lịch peel lại."
         ]
       },
-      "transition": "Vì đây là loại việc khác, danh sách dưới đây quan trọng hơn phần giới thiệu sản phẩm."
+      "transition": "Nên danh sách ngay dưới đây quan trọng hơn mọi lời giới thiệu. Đọc hết rồi hãy quyết."
     },
     {
       "type": "cards",
@@ -196,7 +196,7 @@
       ],
       "narrativeRole": "safety",
       "cta": {
-        "note": "Nếu bạn không thuộc những trường hợp vừa nêu:",
+        "note": "Không rơi vào trường hợp nào ở trên?",
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }
@@ -240,7 +240,7 @@
         }
       ],
       "cta": {
-        "note": "Đó là toàn bộ căn cứ chúng tôi có, kèm nguồn dẫn. Nếu vậy là đủ với bạn:",
+        "note": "Bằng chứng chúng tôi có chỉ tới đây. Nếu thế là đủ với bạn:",
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }
@@ -280,7 +280,7 @@
         }
       ],
       "footnote": "Các mốc trên lấy từ hướng dẫn của nhà sản xuất cho liệu trình ba ngày và từ nguyên tắc chăm sóc sau peel. <strong>Cơ địa mỗi người khác nhau</strong>, và nếu da rát kéo dài, đỏ đậm hoặc rỉ dịch thì dừng ngay và đi khám — đó không còn là biểu hiện bình thường.",
-      "transition": "Lịch trình chỉ đúng nếu làm đúng thao tác. Phần dưới là ba ngày, từng bước một."
+      "transition": "Lịch trình chỉ đúng nếu thao tác đúng. Ba ngày, từng bước một."
     },
     {
       "type": "steps",

@@ -185,7 +185,7 @@
         }
       ],
       "footnote": "Một thành phần có mặt trong công thức không đồng nghĩa với một mức bảo vệ đo được. Chỉ số chống nắng là kết quả của cả công thức và quy trình thử nghiệm, không suy ra được từ bảng thành phần.",
-      "transition": "Nếu bạn chọn một lọ chống nắng riêng, phần còn lại của trang nói về bảy màng lọc trong lọ này."
+      "transition": "Chọn lọ riêng? Vậy câu hỏi tiếp theo là trong lọ có gì. Bảy màng lọc, gọi đúng tên từng cái."
     },
     {
       "type": "cards",
@@ -299,7 +299,7 @@
         }
       ],
       "cta": {
-        "note": "Đó là toàn bộ căn cứ chúng tôi có, kèm nguồn dẫn. Nếu vậy là đủ với bạn:",
+        "note": "Bằng chứng chúng tôi có chỉ tới đây. Nếu thế là đủ với bạn:",
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }

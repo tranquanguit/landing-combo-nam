@@ -278,9 +278,9 @@
           "suitedFor": "Da xỉn màu"
         }
       ],
-      "transition": "Bảng trên nói có những gì trong hộp. Phần dưới nói dùng chúng thế nào cho đúng thứ tự.",
+      "transition": "Biết trong hộp có gì rồi. Còn thứ tự dùng lại là chuyện khác — và sai thứ tự thì phí cả hai lọ.",
       "cta": {
-        "note": "Đó là toàn bộ căn cứ chúng tôi có, kèm nguồn dẫn. Nếu vậy là đủ với bạn:",
+        "note": "Bằng chứng chúng tôi có chỉ tới đây. Nếu thế là đủ với bạn:",
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }
@@ -459,7 +459,7 @@
       ],
       "narrativeRole": "safety",
       "cta": {
-        "note": "Nếu bạn không thuộc những trường hợp vừa nêu:",
+        "note": "Không rơi vào trường hợp nào ở trên?",
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }

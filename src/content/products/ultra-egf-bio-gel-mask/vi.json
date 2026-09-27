@@ -138,7 +138,7 @@
           "Vậy khi nào nó đáng dùng? Khi ba bước nền đã đều, và bạn muốn thêm một bước cấp ẩm đậm hơn trong những tuần da cần được để yên. Đúng vai trò đó thì nó làm tốt; đặt vào vai trò khác thì không."
         ]
       },
-      "transition": "Nếu quy trình nền đã ổn, phần dưới nói bước thêm này hợp với trường hợp nào."
+      "transition": "Quy trình nền ổn rồi mới tính tới bước thêm. Ba trường hợp — và một trường hợp nên để dành tiền."
     },
     {
       "type": "cards",
@@ -214,7 +214,7 @@
         }
       ],
       "cta": {
-        "note": "Đó là toàn bộ căn cứ chúng tôi có, kèm nguồn dẫn. Nếu vậy là đủ với bạn:",
+        "note": "Bằng chứng chúng tôi có chỉ tới đây. Nếu thế là đủ với bạn:",
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }

@@ -22,7 +22,7 @@ export const ui = {
     'advice.lead': 'Những bài giải thích cơ chế, viết để đọc trước khi mua chứ không phải để bán hàng.',
     'nav.choose': 'Chọn mua',
     'line.choose': 'Chọn theo tình trạng của bạn',
-    'line.chooseLead': 'Ba lựa chọn dưới đây khác nhau ở chỗ ai nên dùng, không phải ở chỗ cái nào tốt hơn.',
+    'line.chooseLead': 'Ba lựa chọn này không hơn kém nhau. Chúng khác nhau ở chỗ hợp với ai.',
     'line.products': 'Sản phẩm trong dòng này',
     'line.readMore': 'Xem chi tiết',
     'line.from': 'Từ',
