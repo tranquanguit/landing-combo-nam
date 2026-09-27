@@ -40,6 +40,8 @@ export interface CleanOrder {
   utmSource: string | null;
   utmMedium: string | null;
   utmCampaign: string | null;
+  utmContent: string | null;
+  utmTerm: string | null;
   referrerHost: string | null;
 }
 
@@ -183,6 +185,8 @@ export function validateOrder(
       utmSource: utm(body.utmSource),
       utmMedium: utm(body.utmMedium),
       utmCampaign: utm(body.utmCampaign),
+      utmContent: utm(body.utmContent),
+      utmTerm: utm(body.utmTerm),
       referrerHost: typeof body.referrerHost === 'string' ? body.referrerHost.slice(0, 120) : null,
     },
   };
@@ -192,14 +196,14 @@ export const INSERT_SQL = `
 INSERT INTO orders (
   order_code, created_at, product_slug, locale, pack, pack_price, currency,
   name, phone, address, country, note, data_consent, consent_text,
-  utm_source, utm_medium, utm_campaign, referrer_host
-) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?)`;
+  utm_source, utm_medium, utm_campaign, utm_content, utm_term, referrer_host
+) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?)`;
 
 export function insertParams(o: CleanOrder): unknown[] {
   return [
     o.orderCode, o.createdAt, o.productSlug, o.locale, o.pack, o.packPrice, o.currency,
     o.name, o.phone, o.address, o.country, o.note, o.consentText,
-    o.utmSource, o.utmMedium, o.utmCampaign, o.referrerHost,
+    o.utmSource, o.utmMedium, o.utmCampaign, o.utmContent, o.utmTerm, o.referrerHost,
   ];
 }
 
