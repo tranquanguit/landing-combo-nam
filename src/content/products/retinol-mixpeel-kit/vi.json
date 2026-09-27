@@ -194,7 +194,12 @@
           "meta": "Nên hoãn lại"
         }
       ],
-      "narrativeRole": "safety"
+      "narrativeRole": "safety",
+      "cta": {
+        "note": "Nếu bạn không thuộc những trường hợp vừa nêu:",
+        "label": "Xem giá và đặt hàng",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "ingredients",
@@ -233,7 +238,12 @@
           "role": "Bước dưỡng nền sau peel — xem thêm ở trang Collagen Peptide Cream.",
           "suitedFor": "Da cần phục hồi"
         }
-      ]
+      ],
+      "cta": {
+        "note": "Đó là toàn bộ căn cứ chúng tôi có, kèm nguồn dẫn. Nếu vậy là đủ với bạn:",
+        "label": "Xem giá và đặt hàng",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "timeline",
@@ -383,7 +393,12 @@
           "q": "Dùng được cùng combo nám không?",
           "a": "Không cùng lúc. Chồng liệu trình peel lên liệu trình có hoạt chất tác động sắc tố là cách nhanh nhất làm hỏng hàng rào bảo vệ. Chọn một, hoàn thành, rồi mới tính tới cái kia."
         }
-      ]
+      ],
+      "cta": {
+        "note": "Không còn câu hỏi nào nữa?",
+        "label": "Quay lại phần đặt hàng",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "relatedProducts",

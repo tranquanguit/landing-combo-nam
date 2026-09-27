@@ -258,7 +258,12 @@
           "role": "A water-soluble derivative of azelaic acid.",
           "suitedFor": "Uneven tone after blemishes"
         }
-      ]
+      ],
+      "cta": {
+        "note": "That is every piece of evidence we hold, with its sources. If that is enough for you:",
+        "label": "See the price and order",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "routine",
@@ -376,7 +381,12 @@
           "q": "What about severe or cystic acne?",
           "a": "That needs a dermatologist, not a spot treatment."
         }
-      ]
+      ],
+      "cta": {
+        "note": "No questions left?",
+        "label": "Back to the order form",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "relatedProducts",

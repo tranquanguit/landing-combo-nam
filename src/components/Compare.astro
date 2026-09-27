@@ -19,9 +19,9 @@ interface Props extends RhythmProps {
   space?: 'sm' | 'md' | 'lg';
   sameSurface?: boolean;
 }
-const { data, products, locale, id, surface = 'paper', space, sameSurface, role, transition } = Astro.props;
+const { data, products, locale, id, surface = 'paper', space, sameSurface, role, transition, cta } = Astro.props;
 ---
-<Section role={role} transition={transition} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading}>
+<Section role={role} transition={transition} cta={cta} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading}>
   {data.intro && <p class="cmp-intro" set:html={richText(data.intro)} />}
 
   {/* Bảng thật, không phải lưới div: người dùng trình đọc màn hình điều hướng

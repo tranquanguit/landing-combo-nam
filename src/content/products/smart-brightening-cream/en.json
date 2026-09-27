@@ -250,7 +250,12 @@
           "role": "Black truffle extract, in a cream that stays on the skin overnight.",
           "suitedFor": "Dull skin"
         }
-      ]
+      ],
+      "cta": {
+        "note": "That is every piece of evidence we hold, with its sources. If that is enough for you:",
+        "label": "See the price and order",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "routine",
@@ -359,7 +364,12 @@
           "q": "How should it be stored?",
           "a": "Keep away from heat and direct sunlight, close the lid after use, keep out of reach of children. Avoid contact with the eyes; if it gets in, rinse immediately with clean water."
         }
-      ]
+      ],
+      "cta": {
+        "note": "No questions left?",
+        "label": "Back to the order form",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "relatedProducts",

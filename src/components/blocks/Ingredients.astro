@@ -3,22 +3,53 @@ import type { RhythmProps } from '../../lib/narrative';
 import Section from '../Section.astro';
 import { t, type Locale } from '../../i18n/ui';
 interface Props extends RhythmProps { data: any; id?: string; locale: Locale; }
-const { data, id = 'thanh-phan', locale, surface = 'paper', space, sameSurface, role, transition } = Astro.props;
-
-/* Cột "có trong" chỉ xuất hiện khi dữ liệu thật sự khai — sản phẩm đơn lẻ
-   không cần nó, và một cột rỗng chỉ làm bảng rộng thêm vô ích. */
-const showProduct = data.rows.some((r: any) => r.inProduct);
+const { data, id = 'thanh-phan', locale, surface = 'paper', space, sameSurface, role, transition, cta } = Astro.props;
 
 /**
- * Tách phần trăm ra khỏi tên hoạt chất để đặt bằng face dành cho chữ số.
- * "Tranexamic Acid 3%" -> "Tranexamic Acid <span class=pct>3%</span>"
+ * Gom hoạt chất theo SẢN PHẨM, thay vì lặp tên sản phẩm ở từng dòng.
+ *
+ * Đo được ở 390px trên /combo-nam/: section cao 3.406px, trong đó 12 dòng
+ * chiếm 2.869px (84%). Mỗi dòng in lại giá trị "Serum" hoặc "Kem" — một
+ * trường chỉ có hai giá trị, tức gần như không mang thông tin mới, nhưng
+ * chiếm chỗ ở cả 12 dòng và nằm ngay cạnh con số nồng độ, thứ duy nhất cần
+ * được nhìn thấy trước.
+ *
+ * Chuyển nó lên tiêu đề nhóm thì tổng thông tin TĂNG (biết mỗi sản phẩm có
+ * bao nhiêu hoạt chất) trong khi chiều cao giảm. Đây là phân cấp, không phải
+ * nén: cỡ chữ và giãn dòng giữ nguyên.
+ *
+ * Sản phẩm đơn lẻ không khai `inProduct` -> một nhóm không tiêu đề, hành vi
+ * y như trước.
+ */
+const grouped: { label: string | null; rows: any[] }[] = [];
+for (const r of data.rows) {
+  const label = r.inProduct ?? null;
+  const last = grouped[grouped.length - 1];
+  if (last && last.label === label) last.rows.push(r);
+  else grouped.push({ label, rows: [r] });
+}
+const hasGroups = grouped.some((g) => g.label);
+/* Số cột sau khi bỏ cột "có trong": hoạt chất + vai trò + phù hợp với. */
+const COLS = 3;
+
+/**
+ * Tách NỒNG ĐỘ ra khỏi tên hoạt chất để đặt bằng face dành cho chữ số.
+ *
+ *   "Tranexamic Acid 3%"          -> Tranexamic Acid <span class=pct>3%</span>
+ *   "4-butylresorcinol 1000ppm"   -> 4-butylresorcinol <span class=pct>1000ppm</span>
+ *
+ * Bản đầu chỉ bắt dấu %, nên đúng hoạt chất được nêu ĐẦU TIÊN trên trang —
+ * thứ khai bằng ppm — lại là thứ duy nhất không được đặt bằng face chữ số.
+ * Công khai tỉ lệ là điểm khác biệt của sản phẩm này; đơn vị nào cũng là tỉ lệ.
+ *
  * Chỉ bọc thẻ quanh chính chuỗi số; phần còn lại escape bình thường.
  */
 const esc = (v: string) => v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const splitPct = (name: string) =>
-  esc(name).replace(/(\d+(?:[.,]\d+)?\s*%)/g, '<span class="pct">$1</span>');
+  esc(name).replace(/(\d+(?:[.,]\d+)?\s*(?:%|ppm|mg\/g|mg|IU))/gi,
+    '<span class="pct">$1</span>');
 ---
-<Section role={role} transition={transition} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
+<Section role={role} transition={transition} cta={cta} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
   {/* tabindex + role: vùng cuộn ngang phải tới được bằng bàn phím,
       nếu không người dùng chỉ có bàn phím không đọc được các cột bên phải. */}
   <div class="scroll" tabindex="0" role="region" aria-label={data.heading}>
@@ -27,27 +58,39 @@ const splitPct = (name: string) =>
       <thead>
         <tr>
           <th scope="col">{t(locale, 'table.ingredient')}</th>
-          {showProduct && <th scope="col">{t(locale, 'table.inProduct')}</th>}
           <th scope="col">{t(locale, 'table.role')}</th>
           <th scope="col">{t(locale, 'table.suitedFor')}</th>
         </tr>
       </thead>
-      <tbody>
-        {data.rows.map((r: any) => (
-          <tr>
-            <th scope="row">
-              <span class="name" set:html={splitPct(r.name)} />
-              {r.reference && (
-                <> <a href={r.reference} rel="noopener nofollow" target="_blank" class="ref">{t(locale, 'table.source')}</a></>
-              )}
-              {r.referenceNote && <span class="ref-note">{r.referenceNote}</span>}
-            </th>
-            {showProduct && <td class="in">{r.inProduct}</td>}
-            <td data-label={t(locale, 'table.role')}>{r.role}</td>
-            <td data-label={t(locale, 'table.suitedFor')}>{r.suitedFor}</td>
-          </tr>
-        ))}
-      </tbody>
+      {grouped.map((g) => (
+        <tbody>
+          {g.label && (
+            /* scope="colgroup" là cách đúng để một hàng làm tiêu đề cho cả
+               nhóm bên dưới TRONG một bảng. Không dùng <h3> ở đây: heading
+               không hợp lệ bên trong <table>, và trình đọc màn hình đã có
+               quan hệ nhóm sẵn qua scope. */
+            <tr class="group">
+              <th scope="colgroup" colspan={COLS}>
+                <span class="group-name">{g.label}</span>
+                <span class="group-count">{g.rows.length} {t(locale, 'table.activeCount')}</span>
+              </th>
+            </tr>
+          )}
+          {g.rows.map((r: any) => (
+            <tr>
+              <th scope="row">
+                <span class="name" set:html={splitPct(r.name)} />
+                {r.reference && (
+                  <> <a href={r.reference} rel="noopener nofollow" target="_blank" class="ref">{t(locale, 'table.source')}</a></>
+                )}
+                {r.referenceNote && <span class="ref-note">{r.referenceNote}</span>}
+              </th>
+              <td data-label={t(locale, 'table.role')}>{r.role}</td>
+              <td data-label={t(locale, 'table.suitedFor')}>{r.suitedFor}</td>
+            </tr>
+          ))}
+        </tbody>
+      ))}
     </table>
   </div>
 </Section>
@@ -83,10 +126,26 @@ const splitPct = (name: string) =>
     font-weight: 400;
   }
   tbody tr:last-child :is(th, td) { border-bottom: 0; }
-  tbody th { width: 30%; }
-  /* Cột "có trong" hẹp và nhạt hơn: nó là nhãn phân loại, không phải nội dung
-     người đọc dừng lại để đọc kỹ. */
-  .in { width: 13%; color: var(--slate); font-size: var(--t-xs); }
+  tbody th { width: 34%; }
+
+  /* Tiêu đề nhóm: một dòng đặc tả, không phải một dải nền màu.
+     Gạch tóc đậm hơn một cấp + chữ in hoa nhỏ là đủ để mắt thấy ranh giới
+     nhóm mà không cần hộp hay nền. */
+  tr.group th {
+    padding: var(--s-6) 0 var(--s-3);
+    border-bottom: 1px solid var(--line-strong);
+    font-size: var(--t-2xs);
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-navy);
+  }
+  tbody:first-of-type tr.group th { padding-top: var(--s-4); }
+  .group-count {
+    margin-left: var(--s-3);
+    color: var(--slate);
+    letter-spacing: .12em;
+  }
 
   .name {
     display: block;
@@ -137,29 +196,39 @@ const splitPct = (name: string) =>
     }
     caption { display: block; }
     tbody, tbody tr, tbody th, tbody td { display: block; width: auto; }
+    /* 24px trên + 24px dưới mỗi dòng = 576px thuần khoảng trắng cho 12 dòng,
+       tức 0,68 màn hình điện thoại. Hạ xuống 16px vẫn giữ được nhịp thở giữa
+       hai hoạt chất, vì ranh giới đã có gạch tóc và nhóm đã có tiêu đề —
+       khoảng trắng không còn phải gánh một mình việc phân tách. */
     tbody tr {
-      padding-block: var(--s-5);
+      padding-block: var(--s-4);
       border-bottom: 1px solid var(--line);
     }
-    tbody tr:last-child { border-bottom: 0; }
+    tbody:last-of-type tr:last-child { border-bottom: 0; }
     tbody th, tbody td { padding: 0; border: 0; }
-    tbody td { margin-top: var(--s-3); }
+    tbody td { margin-top: var(--s-2); }
+
+    /* Nhóm ở khổ hẹp: vẫn là một hàng, nhưng đọc như một nhãn mục. */
+    tbody tr.group { padding-block: var(--s-5) 0; border-bottom: 0; }
+    tbody:first-of-type tr.group { padding-top: 0; }
+    tr.group th { padding: 0 0 var(--s-3); }
     /* Nhãn cột đi kèm từng ô, vì không còn hàng tiêu đề để đối chiếu. Ô "có
        trong" không cần nhãn: nó đã là một nhãn tròn ghi rõ Serum hay Kem. */
+    /* Nhãn ĐI CÙNG HÀNG với giá trị, không chiếm một dòng riêng.
+       Mỗi nhãn xuống dòng riêng tốn ~17px; hai nhãn mỗi dòng, mười hai dòng
+       là hơn 400px — gần nửa màn hình điện thoại chỉ để in hai chữ lặp lại
+       mười hai lần. Đặt cùng hàng vẫn giữ nguyên quan hệ nhãn–giá trị cho
+       trình đọc màn hình, vì nhãn vẫn là nội dung thật đứng trước giá trị. */
     tbody td[data-label]::before {
       content: attr(data-label);
-      display: block; margin-bottom: 2px;
+      display: inline;
+      margin-right: .55em;
       font-size: var(--t-2xs); letter-spacing: .14em; text-transform: uppercase;
       color: var(--slate); font-weight: 600;
+      /* Nhãn không được tách khỏi chữ đầu của giá trị khi xuống dòng. */
+      white-space: nowrap;
     }
-    /* "Có trong" thành nhãn tròn ngay dưới tên: nó phân loại, không phải nội dung. */
-    /* tbody td.in chứ không phải .in: Astro thêm thuộc tính phạm vi vào MỌI
-       bộ chọn, nên "tbody td" nặng hơn ".in" và sẽ thắng nếu viết ngắn. */
-    tbody td.in {
-      margin-top: var(--s-2);
-      display: inline-block; padding: 1px 10px; border-radius: 999px;
-      background: var(--violet-mist); color: var(--indigo);
-      font-size: var(--t-xs); font-weight: 600;
-    }
+    /* Nhãn tròn "có trong" đã GỠ: thông tin đó nay nằm ở tiêu đề nhóm, nên
+       giữ lại nhãn là in cùng một dữ kiện hai lần — đúng thứ vừa sửa. */
   }
 </style>

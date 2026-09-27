@@ -176,6 +176,29 @@ const rhythmFields = {
    * mới, và người đọc học cách bỏ qua nó.
    */
   transition: z.string().max(180).optional(),
+  /**
+   * Lời mời hành động đặt ở CUỐI khối.
+   *
+   * Vì sao là dữ liệu chứ không phải luật: số lượng CTA phải phụ thuộc câu
+   * chuyện, không phải một quy tắc kiểu "cứ 500px một nút". Đo được trên
+   * /combo-nam/: giữa CTA ở hero (y=939) và khối ưu đãi (y=14.444) có 13.505px
+   * — khoảng 16 màn hình điện thoại — không một lời mời nào, trong khi trang
+   * đi qua ít nhất sáu điểm người mua thật sự ra quyết định.
+   *
+   * Thanh CTA dính đáy vẫn luôn ở đó, nên người đọc KHÔNG phải không mua được.
+   * Thiếu là thiếu một câu nói đúng lúc: thanh dính đáy đưa cùng hai hành động
+   * ở mọi giai đoạn, nên nó là thanh công cụ, không phải lời mời.
+   *
+   * Chỉ nhận neo trong trang: mọi đường mua đều về `#dat-hang`, không sinh
+   * thêm đích đến mới. Neo này đi qua đúng cổng kiểm neo đã có — trỏ tới khối
+   * không tồn tại thì build dừng.
+   */
+  cta: z.object({
+    /** Câu dẫn ngắn đặt trên hành động. Nối tiếp nội dung vừa đọc. */
+    note: z.string().min(8).max(110).optional(),
+    label: z.string().min(2).max(44),
+    href: z.string().regex(/^#[a-z0-9-]+$/, 'CTA trong khối chỉ nhận neo dạng #ten-khoi'),
+  }).strict().optional(),
 };
 
 const blocks = z.discriminatedUnion('type', [

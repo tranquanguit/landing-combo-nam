@@ -278,7 +278,12 @@
           "suitedFor": "Da xỉn màu"
         }
       ],
-      "transition": "Bảng trên nói có những gì trong hộp. Phần dưới nói dùng chúng thế nào cho đúng thứ tự."
+      "transition": "Bảng trên nói có những gì trong hộp. Phần dưới nói dùng chúng thế nào cho đúng thứ tự.",
+      "cta": {
+        "note": "Đó là toàn bộ căn cứ chúng tôi có, kèm nguồn dẫn. Nếu vậy là đủ với bạn:",
+        "label": "Xem giá và đặt hàng",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "steps",
@@ -452,7 +457,12 @@
           "meta": "Nên cân nhắc lại"
         }
       ],
-      "narrativeRole": "safety"
+      "narrativeRole": "safety",
+      "cta": {
+        "note": "Nếu bạn không thuộc những trường hợp vừa nêu:",
+        "label": "Xem giá và đặt hàng",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "offer",
@@ -515,7 +525,12 @@
           "q": "Làm sao biết là hàng chính hãng?",
           "a": "Sản phẩm chính hãng có tem chống giả kèm mã QR tra cứu. Hiện Mocha chỉ bán qua website chính thức này và hotline 0367 848 918 — chưa có gian hàng trên sàn thương mại điện tử, nên hàng rao bán ở nơi khác không phải do Mocha phân phối."
         }
-      ]
+      ],
+      "cta": {
+        "note": "Không còn câu hỏi nào nữa?",
+        "label": "Quay lại phần đặt hàng",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "relatedProducts",

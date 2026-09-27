@@ -15,12 +15,12 @@ interface Props extends RhythmProps {
   space?: 'sm' | 'md' | 'lg';
   sameSurface?: boolean;
 }
-const { data, products, locale, id, surface = 'bone', space, sameSurface, role, transition } = Astro.props;
+const { data, products, locale, id, surface = 'bone', space, sameSurface, role, transition, cta } = Astro.props;
 ---
 {/* Không có sản phẩm nào phân giải được thì KHÔNG dựng khối rỗng: một tiêu đề
     "Bạn có thể quan tâm" đứng trên khoảng trắng tệ hơn là không có gì. */}
 {products.length > 0 && (
-  <Section role={role} transition={transition} id={id} surface={surface} space={space} sameSurface={sameSurface}
+  <Section role={role} transition={transition} cta={cta} id={id} surface={surface} space={space} sameSurface={sameSurface}
     eyebrow={data.eyebrow} heading={data.heading}>
     {data.intro && <p class="rp-intro" set:html={richText(data.intro)} />}
     <ProductGrid products={products} locale={locale} />

@@ -257,7 +257,12 @@
           "role": "Dẫn xuất tan trong nước của azelaic acid.",
           "suitedFor": "Da không đều màu sau mụn"
         }
-      ]
+      ],
+      "cta": {
+        "note": "Đó là toàn bộ căn cứ chúng tôi có, kèm nguồn dẫn. Nếu vậy là đủ với bạn:",
+        "label": "Xem giá và đặt hàng",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "routine",
@@ -375,7 +380,12 @@
           "q": "Mụn nặng, mụn nang thì sao?",
           "a": "Đó là tình huống cần bác sĩ da liễu, không phải một sản phẩm chấm điểm."
         }
-      ]
+      ],
+      "cta": {
+        "note": "Không còn câu hỏi nào nữa?",
+        "label": "Quay lại phần đặt hàng",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "relatedProducts",

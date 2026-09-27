@@ -171,6 +171,8 @@ export interface RhythmProps {
   role?: NarrativeRole;
   /** Câu nối sang khối kế tiếp. */
   transition?: string;
+  /** Lời mời hành động ở cuối khối, tại một mốc quyết định có thật. */
+  cta?: { note?: string; label: string; href: string };
 }
 
 export interface BlockRhythm {

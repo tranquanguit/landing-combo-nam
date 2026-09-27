@@ -125,7 +125,11 @@ const jsonLd = productGraph({
  */
 const rhythm = resolveRhythm(p.blocks as any[]);
 /** Nhịp + vai + câu nối của khối thứ i, spread thẳng vào component. */
-const r = (i: number, block: any) => ({ ...(rhythm.get(i) ?? {}), transition: block.transition });
+const r = (i: number, block: any) => ({
+  ...(rhythm.get(i) ?? {}),
+  transition: block.transition,
+  cta: block.cta,
+});
 ---
 <BaseLayout siteName={b.tradingName}
   locale={locale}
