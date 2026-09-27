@@ -17,7 +17,7 @@
       "body": [
         "Khi bạn gửi biểu mẫu đặt hàng, chúng tôi nhận và lưu: <strong>họ tên, số điện thoại, địa chỉ nhận hàng</strong>, ghi chú bạn tự nhập, gói sản phẩm bạn chọn và giá của gói đó tại thời điểm đặt.",
         "Cùng với đơn, hệ thống lưu <strong>đúng câu đồng ý bạn đã đọc</strong> lúc bấm gửi. Việc này để khi câu chữ trên trang thay đổi về sau, vẫn xác định được bạn đã đồng ý với nội dung nào.",
-        "Chúng tôi cũng ghi nguồn truy cập ở mức chiến dịch quảng cáo (các tham số utm) và tên miền bạn đến từ đó. Đây là thông tin về chiến dịch, không phải về cá nhân bạn — chúng tôi không lưu URL đầy đủ.",
+        "Chúng tôi cũng ghi nguồn truy cập ở mức chiến dịch quảng cáo (các tham số utm) và tên miền bạn đến từ đó. Đây là thông tin về chiến dịch, không phải về cá nhân bạn. Chúng tôi không lưu URL đầy đủ.",
         "Chúng tôi <strong>không</strong> lưu địa chỉ IP thô, không lưu thông tin trình duyệt, không lưu cookie quảng cáo trong cơ sở dữ liệu đơn hàng. Để hạn chế gửi tự động hàng loạt, hệ thống có đếm số lần gửi theo một chuỗi băm một chiều của địa chỉ IP; chuỗi đó được cắt ngắn và không truy ngược lại được thành địa chỉ ban đầu."
       ]
     },
@@ -27,7 +27,7 @@
       "body": [
         "Thông tin đơn hàng chỉ dùng để <strong>liên hệ xác nhận và giao đơn hàng đó</strong>. Chúng tôi không dùng nó để gửi tin nhắn tiếp thị nếu bạn chưa đồng ý riêng cho việc đó.",
         "Chúng tôi <strong>không bán, không trao đổi, không cho thuê</strong> thông tin của bạn cho bên thứ ba.",
-        "Đơn vị vận chuyển sẽ nhận họ tên, số điện thoại và địa chỉ của bạn — đây là điều bắt buộc để giao được hàng, và chỉ gồm đúng các trường cần cho việc giao."
+        "Đơn vị vận chuyển sẽ nhận họ tên, số điện thoại và địa chỉ của bạn. Đây là điều bắt buộc để giao được hàng, và chỉ gồm đúng các trường cần cho việc giao."
       ]
     },
     {
@@ -72,7 +72,7 @@
     }
   ],
   "pending": [
-    "Thời hạn lưu cụ thể (số tháng) sau khi đơn hàng hoàn tất — cần chốt theo nghĩa vụ chứng từ kế toán.",
+    "Thời hạn lưu cụ thể (số tháng) sau khi đơn hàng hoàn tất: cần chốt theo nghĩa vụ chứng từ kế toán.",
     "Tên và thông tin liên hệ của bộ phận phụ trách bảo vệ dữ liệu cá nhân, nếu doanh nghiệp có chỉ định.",
     "Danh sách đơn vị vận chuyển đang hợp tác."
   ]

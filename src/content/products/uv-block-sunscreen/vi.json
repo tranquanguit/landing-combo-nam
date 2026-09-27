@@ -86,7 +86,7 @@
       "type": "hero",
       "eyebrow": "Bước không được bỏ",
       "heading": "Bước chống nắng, thứ quyết định mọi bước còn lại có ý nghĩa hay không",
-      "lead": "Tuýp 50gr, <strong>7 màng lọc</strong> gồm 5 lọc hoá học và 2 lọc vật lý nano, kèm <strong>EpiOn™, Niacinamide, Vitamin E</strong> và chiết xuất rau má — đúng danh sách in trên vỏ. Không hương liệu, không paraben.",
+      "lead": "Tuýp 50gr, <strong>7 màng lọc</strong> gồm 5 lọc hoá học và 2 lọc vật lý nano, kèm <strong>EpiOn™, Niacinamide, Vitamin E</strong> và chiết xuất rau má, đúng danh sách in trên vỏ. Không hương liệu, không paraben.",
       "usp": [
         {
           "text": "<strong>Bảy màng lọc gọi đúng tên INCI</strong>, không gói trong cụm “công nghệ chống nắng”",
@@ -172,8 +172,8 @@
         {
           "label": "Dùng thay cho nhau được không",
           "values": [
-            "Đây là bước chống nắng",
-            "Không — không có chỉ số thì không có cơ sở để thay"
+            "Chính là bước chống nắng",
+            "Không: không có chỉ số thì không có cơ sở để thay"
           ]
         },
         {
@@ -197,12 +197,12 @@
       "items": [
         {
           "heading": "Chúng tôi chưa in chỉ số SPF và PA lên trang này",
-          "body": "Tài liệu của hãng đang ghi hai mức PA khác nhau cho cùng sản phẩm. Chúng tôi đã hỏi lại và chưa có xác nhận, nên chưa in con số nào — ghi một con số chưa chắc đúng lên trang còn tệ hơn là không ghi. Chỉ số in trên vỏ tuýp là căn cứ cho tới khi có trả lời.",
+          "body": "Tài liệu của hãng đang ghi hai mức PA khác nhau cho cùng sản phẩm. Chúng tôi đã hỏi lại và chưa có xác nhận, nên chưa in con số nào. Ghi một con số chưa chắc đúng lên trang còn tệ hơn là không ghi. Chỉ số in trên vỏ tuýp là căn cứ cho tới khi có trả lời.",
           "meta": "Đang chờ hãng xác nhận"
         },
         {
           "heading": "Đang chăm sóc nám, thâm hoặc vừa peel",
-          "body": "Đây là nhóm bước này quan trọng nhất. Mọi hoạt chất làm sáng đều bị tia UV vô hiệu hoá nhanh hơn tốc độ chúng làm việc, nên bỏ bước này là bỏ luôn kết quả của các bước kia.",
+          "body": "Với nhóm này, bước chống nắng quan trọng nhất. Mọi hoạt chất làm sáng đều bị tia UV vô hiệu hoá nhanh hơn tốc độ chúng làm việc, nên bỏ bước này là bỏ luôn kết quả của các bước kia.",
           "meta": "Bắt buộc"
         },
         {
@@ -402,7 +402,7 @@
         },
         {
           "q": "Da dầu dùng có bị bí không?",
-          "a": "Nhà sản xuất định vị sản phẩm cho da dầu và da hỗn hợp, kết cấu mỏng. Nhưng cảm giác trên da khác nhau theo từng người — nếu bạn từng thấy bí với mọi loại kem chống nắng thì hãy thử một lượng nhỏ trước."
+          "a": "Nhà sản xuất định vị sản phẩm cho da dầu và da hỗn hợp, kết cấu mỏng. Nhưng cảm giác trên da khác nhau theo từng người. Nếu bạn từng thấy bí với mọi loại kem chống nắng thì hãy thử một lượng nhỏ trước."
         },
         {
           "q": "Có dùng được cho da vừa peel không?",

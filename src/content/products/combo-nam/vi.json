@@ -127,7 +127,7 @@
         "body": [
           "Khi chỉ làm sáng lớp biểu bì, tế bào hắc tố bên dưới vẫn tiếp tục sản sinh melanin. Ngừng dùng là sắc tố quay lại, đôi khi đậm hơn trước.",
           "Combo Nám Mocha đi theo hướng khác: vừa hạn chế tín hiệu tạo sắc tố, vừa hỗ trợ thay mới tế bào sạm màu, đồng thời củng cố hàng rào bảo vệ da để hạn chế sạm màu quay lại.",
-          "Điều này cũng có nghĩa là <strong>kết quả đến theo tuần chứ không theo ngày</strong> — và chúng tôi nói rõ mốc thời gian thực tế cho từng loại nám ở phần dưới."
+          "Điều này cũng có nghĩa là <strong>kết quả đến theo tuần chứ không theo ngày</strong>. Mốc thời gian thực tế cho từng loại nám nằm ở phần dưới."
         ]
       },
       "transition": "Nám không phải một loại. Trước khi bàn tới công thức, phải biết mảng sạm trên mặt bạn thuộc nhóm nào."
@@ -196,7 +196,7 @@
           "note": "Có cả hai dạng trên cùng một vùng da nên khoảng thời gian rộng nhất."
         }
       ],
-      "footnote": "Khoảng thời gian tham khảo, không phải cam kết. Kết quả khác nhau tùy cơ địa và mức độ chống nắng hằng ngày — bỏ bước chống nắng thì mọi mốc ở trên đều không còn đúng."
+      "footnote": "Khoảng thời gian tham khảo, không phải cam kết. Kết quả khác nhau tùy cơ địa và mức độ chống nắng hằng ngày. Bỏ bước chống nắng thì mọi mốc ở trên đều không còn đúng."
     },
     {
       "type": "ingredients",
@@ -208,7 +208,7 @@
         {
           "name": "4-butylresorcinol 1000ppm",
           "inProduct": "Serum",
-          "role": "Được nghiên cứu về khả năng ức chế enzyme tyrosinase — enzyme khởi đầu quá trình sinh melanin.",
+          "role": "Được nghiên cứu về khả năng ức chế tyrosinase, enzyme khởi đầu quá trình sinh melanin.",
           "suitedFor": "Da nám mảng, nám hỗn hợp"
         },
         {
@@ -278,7 +278,7 @@
           "suitedFor": "Da xỉn màu"
         }
       ],
-      "transition": "Biết trong hộp có gì rồi. Còn thứ tự dùng lại là chuyện khác — và sai thứ tự thì phí cả hai lọ.",
+      "transition": "Biết trong hộp có gì rồi. Còn thứ tự dùng lại là chuyện khác. Sai thứ tự thì phí cả hai lọ.",
       "cta": {
         "note": "Bằng chứng chúng tôi có chỉ tới đây. Nếu thế là đủ với bạn:",
         "label": "Xem giá và đặt hàng",
@@ -289,7 +289,7 @@
       "type": "steps",
       "eyebrow": "Hướng dẫn",
       "heading": "Bốn bước, khoảng 5 phút mỗi lần",
-      "intro": "Dùng 1–2 lần mỗi ngày. Bước chống nắng buổi sáng là bắt buộc — bỏ bước này thì hai bước kia gần như vô nghĩa.",
+      "intro": "Dùng 1–2 lần mỗi ngày. Bước chống nắng buổi sáng là bắt buộc. Bỏ bước này thì hai bước kia gần như vô nghĩa.",
       "totalTime": "PT5M",
       "items": [
         {
@@ -364,7 +364,7 @@
           ]
         }
       ],
-      "footnote": "Buổi tối không có bước chống nắng, nên cột tối ngắn hơn một bước — đó là khác biệt duy nhất giữa hai lộ trình, và cũng là bước hay bị bỏ nhất."
+      "footnote": "Buổi tối không có bước chống nắng, nên cột tối ngắn hơn một bước. Đó là khác biệt duy nhất giữa hai lộ trình, và cũng là bước hay bị bỏ nhất."
     },
     {
       "type": "gallery",
@@ -468,7 +468,7 @@
       "type": "offer",
       "eyebrow": "Ưu đãi",
       "heading": "Giá bán hiện tại thấp hơn giá niêm yết, và được tặng thêm hai sản phẩm",
-      "body": "Giá niêm yết của combo là {{compareAtPrice}}. Giá bán hiện tại là <strong>{{price}}</strong>, và được tặng thêm kem chống nắng SPF50 cùng sữa rửa mặt — hai bước bắt buộc để giữ kết quả.",
+      "body": "Giá niêm yết của combo là {{compareAtPrice}}. Giá bán hiện tại là <strong>{{price}}</strong>, tặng kèm kem chống nắng SPF50 và sữa rửa mặt. Đó là hai bước bắt buộc để giữ kết quả.",
       "validUntil": "2026-12-31",
       "notes": [
         "Miễn phí vận chuyển",
@@ -503,7 +503,7 @@
         },
         {
           "q": "Dùng đủ 8 tuần mà không thấy khác biệt thì sao?",
-          "a": "Nói thẳng: chúng tôi <strong>không hoàn tiền vì lý do không hợp</strong>. Đổi trả trong 7 ngày chỉ áp dụng khi hàng lỗi, sai hàng hoặc chưa mở seal. Lý do là mỹ phẩm đã mở nắp không thể bán lại, và không ai đoán trước được da bạn phản ứng thế nào. Nếu sau 8 tuần chưa thấy khác biệt, gọi hotline. Chúng tôi sẽ xem lại cách dùng và mức chống nắng hằng ngày của bạn — đó là hai nguyên nhân hay gặp nhất. Nếu vẫn không cải thiện, nám của bạn có thể cần can thiệp y khoa chứ không phải mỹ phẩm. Nếu nám của bạn cần can thiệp y khoa, hãy đến gặp bác sĩ da liễu."
+          "a": "Nói thẳng: chúng tôi <strong>không hoàn tiền vì lý do không hợp</strong>. Đổi trả trong 7 ngày chỉ áp dụng khi hàng lỗi, sai hàng hoặc chưa mở seal. Lý do là mỹ phẩm đã mở nắp không thể bán lại, và không ai đoán trước được da bạn phản ứng thế nào. Nếu sau 8 tuần chưa thấy khác biệt, gọi hotline. Chúng tôi sẽ xem lại cách dùng và mức chống nắng hằng ngày của bạn. Đó là hai nguyên nhân hay gặp nhất. Nếu vẫn không cải thiện, nám của bạn có thể cần can thiệp y khoa chứ không phải mỹ phẩm. Nếu nám của bạn cần can thiệp y khoa, hãy đến gặp bác sĩ da liễu."
         },
         {
           "q": "Da nhạy cảm dùng được không?",
@@ -523,7 +523,7 @@
         },
         {
           "q": "Làm sao biết là hàng chính hãng?",
-          "a": "Sản phẩm chính hãng có tem chống giả kèm mã QR tra cứu. Hiện Mocha chỉ bán qua website chính thức này và hotline 0367 848 918 — chưa có gian hàng trên sàn thương mại điện tử, nên hàng rao bán ở nơi khác không phải do Mocha phân phối."
+          "a": "Sản phẩm chính hãng có tem chống giả kèm mã QR tra cứu. Hiện Mocha chỉ bán qua website chính thức này và hotline 0367 848 918. Mocha chưa có gian hàng trên sàn thương mại điện tử, nên hàng rao bán ở nơi khác không phải do Mocha phân phối."
         }
       ],
       "cta": {

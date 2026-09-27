@@ -92,7 +92,7 @@
           "qualifier": "xem bảng thành phần ngay trên trang này"
         },
         {
-          "text": "<strong>Chai chân không vòi nhấn</strong> — không khí không vào được, mỗi lần nhấn ra đúng một lượng",
+          "text": "<strong>Chai chân không vòi nhấn</strong>: không khí không vào được, mỗi lần nhấn ra đúng một lượng",
           "evidence": "verified",
           "qualifier": "kiểu đóng gói của chính sản phẩm, kiểm chứng được khi cầm trên tay",
           "source": "#huong-dan"
@@ -132,7 +132,7 @@
       "explainer": {
         "heading": "Một quy trình chỉ có bước khoá ẩm là một quy trình thiếu một nửa",
         "body": [
-          "Kem dưỡng có kết cấu đặc, việc chính của nó là giữ ẩm và tạo một lớp trên bề mặt. Đó là việc cần thiết — nhưng nó là bước <strong>giữ</strong>, không phải bước <strong>đưa vào</strong>.",
+          "Kem dưỡng có kết cấu đặc, việc chính của nó là giữ ẩm và tạo một lớp trên bề mặt. Đó là việc cần thiết, nhưng nó là bước <strong>giữ</strong>, không phải bước <strong>đưa vào</strong>.",
           "Serum có kết cấu lỏng và phân tử nhỏ hơn, nên nó là bước đưa hoạt chất vào trước. Chai này dùng công nghệ Liposome, và bảng thành phần ghi rõ tỉ lệ từng chất thay vì gộp chúng vào một cái tên thương mại.",
           "Thứ tự vì thế quan trọng không kém bản thân sản phẩm: <strong>serum trước, kem sau</strong>. Làm ngược lại thì lớp kem đã đóng đường, và chai serum bạn vừa mua chỉ nằm bên ngoài."
         ]
@@ -184,7 +184,7 @@
           ]
         }
       ],
-      "footnote": "Nếu bạn đã có một hũ kem dưỡng đang dùng tốt, chai serum riêng là lựa chọn hợp lý hơn — không có lý do gì phải bỏ thứ đang hiệu quả để mua trọn bộ.",
+      "footnote": "Nếu bạn đã có một hũ kem dưỡng đang dùng tốt, chai serum riêng là lựa chọn hợp lý hơn. Không có lý do gì phải bỏ thứ đang hiệu quả để mua trọn bộ.",
       "transition": "Bắt đầu bằng serum thì đây là thứ bạn đang bôi lên mặt. Sáu hoạt chất, in thẳng trên chai."
     },
     {
@@ -221,7 +221,7 @@
       "rows": [
         {
           "name": "4-butylresorcinol 1000ppm",
-          "role": "Được nghiên cứu về khả năng ức chế enzyme tyrosinase — enzyme khởi đầu quá trình sinh melanin.",
+          "role": "Được nghiên cứu về khả năng ức chế tyrosinase, enzyme khởi đầu quá trình sinh melanin.",
           "suitedFor": "Da nám mảng, nám hỗn hợp"
         },
         {
@@ -362,7 +362,7 @@
         },
         {
           "q": "Một chai dùng được bao lâu?",
-          "a": "Chai 30ml, mỗi lần nhấn 1–2 lần cho cả mặt, dùng sáng và tối. Thời gian dùng hết phụ thuộc lượng bạn lấy mỗi lần — vòi nhấn chân không giúp lượng ra đều nhau giữa các lần."
+          "a": "Chai 30ml, mỗi lần nhấn 1–2 lần cho cả mặt, dùng sáng và tối. Thời gian dùng hết phụ thuộc lượng bạn lấy mỗi lần. Vòi nhấn chân không giúp lượng ra đều nhau giữa các lần."
         },
         {
           "q": "Da vừa laser hoặc lăn kim dùng được không?",

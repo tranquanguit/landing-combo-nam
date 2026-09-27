@@ -86,10 +86,10 @@
       "type": "hero",
       "eyebrow": "Bước đầu của cả hai lộ trình",
       "heading": "Rửa mặt là bước dễ làm hỏng nền da nhất, vì nó lặp lại mỗi ngày hai lần",
-      "lead": "Chai 300ml, <strong>Cera-B Complex</strong> gồm Pro-vitamin B5, Nano-Ceramide, Lactobacillus ferment và Hydroxyethyl Urea — đúng danh sách in trên vỏ. Bốn dấu trên chai: không sulfate, không cồn, không paraben, không silicone.",
+      "lead": "Chai 300ml, <strong>Cera-B Complex</strong> gồm Pro-vitamin B5, Nano-Ceramide, Lactobacillus ferment và Hydroxyethyl Urea, đúng danh sách in trên vỏ. Bốn dấu trên chai: không sulfate, không cồn, không paraben, không silicone.",
       "usp": [
         {
-          "text": "<strong>Không sulfate, không cồn, không paraben, không silicone</strong> — in thành bốn dấu trên vỏ chai",
+          "text": "<strong>Không sulfate, không cồn, không paraben, không silicone</strong>, in thành bốn dấu trên vỏ chai",
           "evidence": "verified",
           "source": "#thanh-phan",
           "qualifier": "đọc được trên chính bao bì"
@@ -134,7 +134,7 @@
       "explainer": {
         "heading": "Một bước lặp lại 730 lần mỗi năm thì sai số nào cũng bị nhân lên",
         "body": [
-          "Da có một lớp dầu và ceramide mỏng giữ nước lại bên trong. Chất tẩy mạnh lấy đi cả lớp đó chứ không chỉ lấy đi bụi bẩn — và cảm giác căng kin kít chính là lúc nó vừa bị lấy đi.",
+          "Da có một lớp dầu và ceramide mỏng giữ nước lại bên trong. Chất tẩy mạnh lấy đi cả lớp đó chứ không chỉ lấy đi bụi bẩn. Cảm giác căng kin kít chính là lúc nó vừa bị lấy đi.",
           "Da phản ứng bằng cách tiết bù nhiều dầu hơn. Đó là lý do <strong>rửa mặt nhiều lần vì da dầu thường làm da dầu hơn</strong>, chứ không bớt đi.",
           "Chai này khai bốn dấu không trên vỏ — không sulfate, không cồn, không paraben, không silicone — và bổ sung Ceramide cùng Pro-vitamin B5 vào chính bước lấy đi. Không có gì thần kỳ ở đây; chỉ là bước lặp lại nhiều nhất trong ngày thì đáng làm cho đúng."
         ]
@@ -274,7 +274,7 @@
           ]
         }
       ],
-      "footnote": "Hai lần mỗi ngày là đủ cho phần lớn người. Nếu bạn vừa tập thể thao hoặc vừa đi ngoài trời nhiều bụi, rửa thêm một lần là hợp lý — nhưng <strong>đừng biến nó thành thói quen hằng ngày</strong>."
+      "footnote": "Hai lần mỗi ngày là đủ cho phần lớn người. Nếu bạn vừa tập thể thao hoặc vừa đi ngoài trời nhiều bụi, rửa thêm một lần là hợp lý, nhưng <strong>đừng biến nó thành thói quen hằng ngày</strong>."
     },
     {
       "type": "steps",
@@ -312,7 +312,7 @@
           "label": "Lấy đi thứ gì",
           "values": [
             "Dầu thừa, mồ hôi, bụi bẩn tan trong nước",
-            "Lớp trang điểm và kem chống nắng — những thứ không tan trong nước"
+            "Lớp trang điểm và kem chống nắng: những thứ không tan trong nước"
           ]
         },
         {
@@ -333,7 +333,7 @@
           "label": "Nếu chỉ dùng một thứ",
           "values": [
             "Đủ cho buổi sáng và cho ngày không ra nắng, không trang điểm",
-            "Không đủ — không lấy hết dầu thừa và cần rửa lại bằng nước"
+            "Không đủ: không lấy hết dầu thừa, và cần rửa lại bằng nước"
           ]
         },
         {
@@ -344,7 +344,7 @@
           ]
         }
       ],
-      "footnote": "Người không trang điểm vẫn cần tẩy trang nếu có bôi kem chống nắng — và nếu bạn đang chăm sóc nám hay thâm thì <strong>chống nắng là bước không được bỏ</strong>, nên bước tẩy trang đi kèm theo nó."
+      "footnote": "Người không trang điểm vẫn cần tẩy trang nếu có bôi kem chống nắng. Nếu bạn đang chăm sóc nám hay thâm thì <strong>chống nắng là bước không được bỏ</strong>, nên bước tẩy trang đi kèm theo nó."
     },
     {
       "type": "order",
@@ -377,7 +377,7 @@
         },
         {
           "q": "Dùng được cho da đang trong liệu trình làm mờ sắc tố không?",
-          "a": "Đây là bước làm sạch của chính lộ trình đó — bước 1 buổi sáng và bước 2 buổi tối. Nó được tặng kèm trong combo vì lý do này."
+          "a": "Đây là bước làm sạch của chính lộ trình đó: bước 1 buổi sáng và bước 2 buổi tối. Nó được tặng kèm trong combo vì lý do này."
         },
         {
           "q": "Bảo quản thế nào?",

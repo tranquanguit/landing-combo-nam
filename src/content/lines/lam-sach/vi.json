@@ -54,7 +54,7 @@
         "label": "Có thay thế nhau được không",
         "values": [
           "Không — không lấy hết được lớp kem chống nắng",
-          "Không — nhà sản xuất ghi rõ phải rửa lại sau khi tẩy trang"
+          "Không: nhà sản xuất ghi rõ phải rửa lại sau khi tẩy trang"
         ]
       }
     ],
@@ -80,7 +80,7 @@
       "id": "it-bot",
       "heading": "Ít bọt không có nghĩa là rửa chưa sạch",
       "body": [
-        "Cảm giác “kêu ken két” sau khi rửa thường được hiểu là sạch. Thực ra đó là dấu hiệu lớp dầu tự nhiên đã bị lấy đi quá mức, và da đang phải bù lại — với da dầu thì việc bù đó có thể khiến da tiết nhiều hơn chứ không ít đi.",
+        "Cảm giác “kêu ken két” sau khi rửa thường được hiểu là sạch. Thực ra đó là dấu hiệu lớp dầu tự nhiên đã bị lấy đi quá mức, và da đang phải bù lại. Với da dầu thì việc bù đó có thể khiến da tiết nhiều hơn chứ không ít đi.",
         "Sulfate là nhóm chất tạo bọt mạnh và rẻ, nên bọt nhiều gắn liền với cảm giác sạch trong thói quen của người dùng. Một công thức không sulfate cho ít bọt hơn; đó là hệ quả của công thức, không phải dấu hiệu sản phẩm yếu.",
         "Thước đo đúng không phải lượng bọt mà là cảm giác sau khi thấm khô: da nên mềm, không căng, không cần vội vàng thoa gì lên ngay để đỡ khó chịu."
       ]
@@ -90,7 +90,7 @@
       "heading": "Nhiệt độ nước, và lực tay",
       "body": [
         "Nước nóng hoà tan dầu tốt hơn, nên nó lấy đi nhiều dầu tự nhiên hơn mức cần. Nước mát hoặc hơi ấm là đủ cho mọi loại sữa rửa mặt.",
-        "Lực tay còn quan trọng hơn nhiệt độ. Chà xát mạnh khi rửa hay khi lau bông tẩy trang gây tổn thương cơ học — đó là loại tổn thương không thành phần nào trong chai bù lại được.",
+        "Lực tay còn quan trọng hơn nhiệt độ. Chà xát mạnh khi rửa hay khi lau bông tẩy trang gây tổn thương cơ học. Đó là loại tổn thương không thành phần nào trong chai bù lại được.",
         "Thấm khô bằng khăn sạch thay vì chà, và thoa bước tiếp theo khi da còn hơi ẩm."
       ]
     }
@@ -98,7 +98,7 @@
   "faq": [
     {
       "q": "Rửa mặt mấy lần một ngày là đủ?",
-      "a": "Hai lần. Rửa nhiều hơn không làm da sạch hơn, chỉ làm hàng rào bảo vệ mỏng đi — và da mỏng thì mọi hoạt chất trong liệu trình đều dễ gây châm chích hơn."
+      "a": "Hai lần. Rửa nhiều hơn không làm da sạch hơn, chỉ làm hàng rào bảo vệ mỏng đi. Da mỏng thì mọi hoạt chất trong liệu trình đều dễ gây châm chích hơn."
     },
     {
       "q": "Không trang điểm thì có cần tẩy trang không?",

@@ -25,6 +25,7 @@
     "docs:assets": "node scripts/check-assets.mjs --md docs/anh-can-co.md",
     "test:contrast": "node scripts/check-contrast.mjs",
     "test:inp": "node tests/inp.mjs",
+    "check:voice": "node scripts/check-voice.mjs",
     "check:rhythm": "node scripts/check-rhythm.mjs",
     "check:ads": "node --experimental-strip-types scripts/check-ad-readiness.mjs",
     "docs:ads": "node --experimental-strip-types scripts/check-ad-readiness.mjs --md docs/ad-readiness.md",

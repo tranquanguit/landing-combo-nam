@@ -85,10 +85,10 @@
       "type": "hero",
       "eyebrow": "Bước đầu của buổi tối",
       "heading": "Kem chống nắng không tự trôi đi khi bạn rửa mặt",
-      "lead": "Nước tẩy trang micellar với <strong>Exosome Cica, Epi-On, dịch gạo Sake lên men, chiết xuất trà xanh, Panthenol và Propanediol</strong> — đúng danh sách in trên vỏ chai, pH 5.5. Dùng được cho cả vùng mắt và môi.",
+      "lead": "Nước tẩy trang micellar với <strong>Exosome Cica, Epi-On, dịch gạo Sake lên men, chiết xuất trà xanh, Panthenol và Propanediol</strong>, đúng danh sách in trên vỏ chai, pH 5.5. Dùng được cho cả vùng mắt và môi.",
       "usp": [
         {
-          "text": "<strong>Phân tử micellar Solubule BR-02</strong> và dầu tan nước Wilbride S-753D — nhà sản xuất gọi đúng tên hai thành phần làm sạch",
+          "text": "<strong>Phân tử micellar Solubule BR-02</strong> và dầu tan nước Wilbride S-753D: nhà sản xuất gọi đúng tên hai thành phần làm sạch",
           "evidence": "verified",
           "source": "#thanh-phan",
           "qualifier": "bảng thành phần ngay trên trang này"
@@ -133,7 +133,7 @@
       "explainer": {
         "heading": "Kem chống nắng được làm ra để bám lại, kể cả khi gặp nước",
         "body": [
-          "Một lớp chống nắng tốt phải trụ được qua mồ hôi và độ ẩm suốt cả ngày — đó chính là điều khiến nó không trôi đi chỉ bằng nước và sữa rửa mặt.",
+          "Một lớp chống nắng tốt phải trụ được qua mồ hôi và độ ẩm suốt cả ngày. Chính vì thế nó không trôi đi chỉ bằng nước và sữa rửa mặt.",
           "Phần còn lại nằm trên da qua đêm, trộn với dầu thừa và bụi. Đây là một trong những nguyên nhân thường gặp của <strong>mụn ẩn ở vùng trán và cằm</strong> ở người vốn không trang điểm.",
           "Nước micellar hoạt động theo cách khác sữa rửa mặt: các phân tử micelle bám vào dầu và kéo nó ra, nên nó lấy được thứ mà nước không lấy được. Chai này khai pH 5.5 và dùng được cho cả vùng mắt lẫn môi."
         ]
@@ -152,7 +152,7 @@
         {
           "label": "Lấy đi thứ gì",
           "values": [
-            "Lớp trang điểm và kem chống nắng — những thứ không tan trong nước",
+            "Lớp trang điểm và kem chống nắng: những thứ không tan trong nước",
             "Dầu thừa, mồ hôi, bụi bẩn tan trong nước"
           ]
         },
@@ -288,7 +288,7 @@
           "steps": [
             {
               "label": "Không cần tẩy trang",
-              "note": "Qua một đêm da chỉ có dầu tự nhiên và mồ hôi — sữa rửa mặt xử lý được."
+              "note": "Qua một đêm da chỉ có dầu tự nhiên và mồ hôi, sữa rửa mặt xử lý được."
             },
             {
               "label": "Rửa mặt bằng nước mát",
@@ -307,7 +307,7 @@
             },
             {
               "label": "Đặt lên da và đợi vài giây",
-              "note": "Đặc biệt ở vùng mắt và môi. Đợi cho lớp trang điểm mềm ra rồi mới lau — lau ngay là chà xát."
+              "note": "Đặc biệt ở vùng mắt và môi. Đợi cho lớp trang điểm mềm ra rồi mới lau. Lau ngay là chà xát."
             },
             {
               "label": "Lau nhẹ một chiều",
@@ -332,7 +332,7 @@
       "items": [
         {
           "heading": "Thấm ướt đều bông tẩy trang",
-          "body": "Lau khắp mặt, chú ý hai bên cánh mũi, vùng mắt và dưới môi — những chỗ hẹp hay còn sót lại."
+          "body": "Lau khắp mặt, chú ý hai bên cánh mũi, vùng mắt và dưới môi, những chỗ hẹp hay còn sót lại."
         },
         {
           "heading": "Rửa mặt lại bằng sữa rửa mặt",

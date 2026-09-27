@@ -41,7 +41,7 @@
       "người hỏi nên ưu tiên bước nền hay bước thêm"
     ],
     "approvedAngles": [
-      "Bước thêm, không phải bước bắt buộc — nói rõ ngay ở màn hình đầu",
+      "Bước thêm, không phải bước bắt buộc, nói rõ ngay ở màn hình đầu",
       "Tám thành phần in trên vỏ tuýp",
       "Một đến hai lần mỗi tuần, vào buổi tối"
     ],
@@ -85,7 +85,7 @@
       "type": "hero",
       "eyebrow": "Bước thêm, không phải bước bắt buộc",
       "heading": "Mặt nạ gel cho những tuần da cần được để yên",
-      "lead": "Tuýp 100gr với <strong>EGF, Epi-On™, Copper Peptide, Exosome Cica</strong> cùng Sodium Hyaluronate, ba loại Nano Ceramide bọc Liposome, Panthenol và Acid Folic — đúng danh sách in trên vỏ tuýp.",
+      "lead": "Tuýp 100gr với <strong>EGF, Epi-On™, Copper Peptide, Exosome Cica</strong> cùng Sodium Hyaluronate, ba loại Nano Ceramide bọc Liposome, Panthenol và Acid Folic, đúng danh sách in trên vỏ tuýp.",
       "usp": [
         {
           "text": "<strong>Tám thành phần in thẳng trên vỏ tuýp</strong>, đọc được trước khi mở nắp",
@@ -232,7 +232,7 @@
           "steps": [
             {
               "label": "Không dùng mặt nạ buổi sáng",
-              "note": "Lớp gel cần thời gian và cần da được để yên — buổi sáng thường không có cả hai."
+              "note": "Lớp gel cần thời gian và cần da được để yên. Buổi sáng thường không có cả hai."
             },
             {
               "label": "Quy trình thường ngày",
@@ -287,7 +287,7 @@
           "body": "Rửa sạch bằng nước, sau đó dùng bước dưỡng ẩm như bình thường."
         }
       ],
-      "footnote": "Đây là bước thêm, không phải bước bắt buộc. Nếu tuần này bạn chỉ làm được ba bước cơ bản — làm sạch, dưỡng ẩm, chống nắng — thì bỏ mặt nạ không ảnh hưởng gì tới kết quả của liệu trình."
+      "footnote": "Bước thêm, không phải bước bắt buộc. Nếu tuần này bạn chỉ làm được ba bước cơ bản — làm sạch, dưỡng ẩm, chống nắng — thì bỏ mặt nạ không ảnh hưởng gì tới kết quả của liệu trình."
     },
     {
       "type": "compare",

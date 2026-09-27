@@ -53,7 +53,7 @@
   },
   "seo": {
     "title": "Kem dưỡng phục hồi Mocha Collagen Peptide Cream 30gr | Mocha",
-    "description": "Kem dưỡng với Pro-vitamin B5, chiết xuất rau má, HA và tế bào gốc thực vật — đúng danh sách in trên hũ. {{price}}, freeship."
+    "description": "Kem dưỡng với Pro-vitamin B5, chiết xuất rau má, HA và tế bào gốc thực vật, đúng danh sách in trên hũ. {{price}}, freeship."
   },
   "compliance": {
     "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
@@ -85,7 +85,7 @@
       "type": "hero",
       "eyebrow": "Bước dưỡng cơ bản",
       "heading": "Kem dưỡng cho giai đoạn da cần yên, không cần thêm hoạt chất mạnh",
-      "lead": "Hũ 30gr với <strong>Pro-vitamin B5, chiết xuất rau má, HA và tế bào gốc thực vật</strong> — đúng bốn nhóm in trên hũ. Đây là bước dưỡng nền, không phải bước đặc trị.",
+      "lead": "Hũ 30gr với <strong>Pro-vitamin B5, chiết xuất rau má, HA và tế bào gốc thực vật</strong>, đúng bốn nhóm in trên hũ. Một bước dưỡng nền, không phải bước đặc trị.",
       "usp": [
         {
           "text": "<strong>Bốn nhóm thành phần in thẳng trên hũ</strong>, đọc được trước khi mở nắp",
@@ -94,7 +94,7 @@
           "qualifier": "in trên bao bì sản phẩm"
         },
         {
-          "text": "<strong>Không chứa hoạt chất đặc trị sắc tố</strong> — chủ ý, vì đây là bước để da nghỉ",
+          "text": "<strong>Không chứa hoạt chất đặc trị sắc tố</strong>: chủ ý, vì đây là bước để da nghỉ",
           "evidence": "ingredient",
           "qualifier": "xem bảng thành phần"
         },
@@ -122,7 +122,7 @@
     {
       "type": "problem",
       "eyebrow": "Dấu hiệu bạn đang dùng quá nhiều",
-      "heading": "Da rát, đỏ, bong nhẹ — và bạn đang làm đúng mọi thứ theo hướng dẫn",
+      "heading": "Da rát, đỏ, bong nhẹ, mà bạn vẫn đang làm đúng mọi thứ theo hướng dẫn",
       "quotes": [
         "“Serum, toner, tinh chất, mặt nạ — càng đủ bước da càng rát.”",
         "“Mua đồ tốt cả, dùng cùng lúc, xong da đỏ ửng không rõ vì cái nào.”",
@@ -132,9 +132,9 @@
       "explainer": {
         "heading": "Hàng rào bảo vệ da hỏng thì mọi hoạt chất phía sau đều vô nghĩa",
         "body": [
-          "Lớp ngoài cùng của da giữ nước bên trong và giữ chất kích ứng bên ngoài. Khi nó yếu đi, hoạt chất thấm vào nhanh hơn mức dự tính — và đó là lý do cùng một sản phẩm hôm nay êm, tuần sau lại rát.",
+          "Lớp ngoài cùng của da giữ nước bên trong và giữ chất kích ứng bên ngoài. Khi nó yếu đi, hoạt chất thấm vào nhanh hơn mức dự tính. Cùng một sản phẩm vì thế hôm nay êm, tuần sau lại rát.",
           "Giai đoạn này cần <strong>ít thứ tác động hơn, không phải nhiều hơn</strong>. Bốn nhóm in trên hũ này đều thuộc nhóm cấp ẩm và làm dịu, không có hoạt chất làm sáng hay tẩy tế bào chết.",
-          "Đây là bước dưỡng nền. Chúng tôi gọi đúng tên nó chứ không gọi là bước đặc trị, vì đặt nhầm kỳ vọng vào một hũ kem dưỡng là cách nhanh nhất để thất vọng với nó."
+          "Hũ này là bước dưỡng nền. Chúng tôi gọi đúng tên nó chứ không gọi là bước đặc trị, vì đặt nhầm kỳ vọng vào một hũ kem dưỡng là cách nhanh nhất để thất vọng với nó."
         ]
       }
     },
@@ -179,7 +179,7 @@
         {
           "label": "Nếu bạn vừa peel hoặc vừa dùng retinol",
           "values": [
-            "Đây là hũ hợp cho giai đoạn đó",
+            "Hũ này hợp cho giai đoạn đó",
             "Đợi da ổn lại rồi hãy dùng"
           ]
         }
@@ -283,7 +283,7 @@
             },
             {
               "label": "Tạm dừng hoạt chất mạnh",
-              "note": "Retinol, acid tẩy da chết, vitamin C nồng độ cao — dừng cho tới khi hết rát.",
+              "note": "Retinol, acid tẩy da chết, vitamin C nồng độ cao: dừng cho tới khi hết rát.",
               "essential": true
             },
             {
@@ -294,7 +294,7 @@
           ]
         }
       ],
-      "footnote": "Phần lớn trường hợp da dịu lại trong <strong>một đến hai tuần</strong> khi bỏ bớt hoạt chất. Nếu sau hai tuần vẫn rát, đỏ hoặc bong nhiều, đó không còn là chuyện của một hũ kem dưỡng — nên đi khám da liễu."
+      "footnote": "Phần lớn trường hợp da dịu lại trong <strong>một đến hai tuần</strong> khi bỏ bớt hoạt chất. Nếu sau hai tuần vẫn rát, đỏ hoặc bong nhiều, đó không còn là chuyện của một hũ kem dưỡng. Nên đi khám da liễu."
     },
     {
       "type": "steps",
@@ -312,7 +312,7 @@
           "body": "Vỗ nhẹ cho kem thấm, không chà xát."
         }
       ],
-      "footnote": "Nếu bạn đang dùng một liệu trình có hoạt chất tác động lên sắc tố, hãy chọn một trong hai chứ đừng chồng cả hai lớp kem — nhiều lớp không cộng thêm hiệu quả, chỉ cộng thêm nguy cơ bí da."
+      "footnote": "Nếu bạn đang dùng một liệu trình có hoạt chất tác động lên sắc tố, hãy chọn một trong hai chứ đừng chồng cả hai lớp kem. Nhiều lớp không cộng thêm hiệu quả, chỉ cộng thêm nguy cơ bí da."
     },
     {
       "type": "order",

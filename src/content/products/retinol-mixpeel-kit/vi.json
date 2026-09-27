@@ -114,13 +114,13 @@
           "qualifier": "xem bảng thành phần"
         },
         {
-          "text": "<strong>Liệu trình có điểm dừng rõ ràng</strong>: 3 ngày, mỗi ngày một lần — không phải sản phẩm dùng hằng ngày",
+          "text": "<strong>Liệu trình có điểm dừng rõ ràng</strong>: 3 ngày, mỗi ngày một lần, không phải sản phẩm dùng hằng ngày",
           "evidence": "verified",
           "source": "#huong-dan",
           "qualifier": "trích từ hướng dẫn của nhà sản xuất"
         },
         {
-          "text": "<strong>KHÔNG dùng khi mang thai hoặc cho con bú</strong> — vì sản phẩm chứa retinol",
+          "text": "<strong>KHÔNG dùng khi mang thai hoặc cho con bú</strong>, vì sản phẩm chứa retinol",
           "evidence": "ingredient",
           "qualifier": "khác với các sản phẩm khác trên trang này"
         }
@@ -143,7 +143,7 @@
     {
       "type": "problem",
       "eyebrow": "Đọc kỹ phần này",
-      "heading": "Peel không phải một bước dưỡng da mạnh hơn — nó là một loại việc khác",
+      "heading": "Peel không phải một bước dưỡng da mạnh hơn. Nó là một loại việc khác",
       "quotes": [
         "“Thấy người ta peel xong da sáng hẳn nên tôi mua về tự làm.”",
         "“Bong tróc mấy hôm thì tôi nghĩ là đang có tác dụng, cứ thế làm tiếp.”",
@@ -151,11 +151,11 @@
         "“Không rõ mình có thuộc nhóm không nên peel hay không.”"
       ],
       "explainer": {
-        "heading": "Có điểm bắt đầu và có điểm dừng — đó là điều phân biệt nó với mọi bước khác",
+        "heading": "Có điểm bắt đầu và có điểm dừng. Đó là điều phân biệt nó với mọi bước khác",
         "body": [
           "Mọi sản phẩm còn lại trên trang này đều là chăm sóc: làm sạch, cấp ẩm, che chắn, đưa hoạt chất vào từ từ qua nhiều tuần. Peel chủ động làm bong lớp tế bào bề mặt trong một khoảng thời gian ngắn, nên nó là <strong>một liệu trình có hạn, không phải một thói quen</strong>.",
           "Bộ này được nhà sản xuất thiết kế cho ba ngày, và ba ngày là ba ngày. Kéo dài thêm vì thấy chưa đủ bong là cách nhanh nhất để đi từ một liệu trình có kiểm soát sang một tổn thương.",
-          "Và vì nó lấy đi một phần lớp bảo vệ bề mặt, khoảng thời gian ngay sau đó là lúc da dễ tổn thương nhất. Chống nắng trong giai đoạn này không phải lời khuyên mà là <strong>điều kiện</strong> — nếu bạn không thể tránh nắng trong hai tuần tới, hãy lùi lịch peel lại."
+          "Và vì nó lấy đi một phần lớp bảo vệ bề mặt, khoảng thời gian ngay sau đó là lúc da dễ tổn thương nhất. Chống nắng trong giai đoạn này không phải lời khuyên mà là <strong>điều kiện</strong>. Nếu bạn không thể tránh nắng trong hai tuần tới, hãy lùi lịch peel lại."
         ]
       },
       "transition": "Nên danh sách ngay dưới đây quan trọng hơn mọi lời giới thiệu. Đọc hết rồi hãy quyết."
@@ -170,7 +170,7 @@
       "items": [
         {
           "heading": "Đang mang thai hoặc cho con bú",
-          "body": "Sản phẩm chứa retinol. Đây là khác biệt quan trọng so với các sản phẩm khác trên trang — combo nám dùng Bakuchiol chính là để tránh retinoid.",
+          "body": "Sản phẩm chứa retinol. Đây là khác biệt quan trọng so với các sản phẩm khác trên trang: combo nám dùng Bakuchiol chính là để tránh retinoid.",
           "meta": "Không dùng"
         },
         {
@@ -279,7 +279,7 @@
           "note": "Khi da hết nhạy và hết bong. Quay lại sớm hơn thì đưa hoạt chất vào một hàng rào chưa dựng xong."
         }
       ],
-      "footnote": "Các mốc trên lấy từ hướng dẫn của nhà sản xuất cho liệu trình ba ngày và từ nguyên tắc chăm sóc sau peel. <strong>Cơ địa mỗi người khác nhau</strong>, và nếu da rát kéo dài, đỏ đậm hoặc rỉ dịch thì dừng ngay và đi khám — đó không còn là biểu hiện bình thường.",
+      "footnote": "Các mốc trên lấy từ hướng dẫn của nhà sản xuất cho liệu trình ba ngày và từ nguyên tắc chăm sóc sau peel. <strong>Cơ địa mỗi người khác nhau</strong>, và nếu da rát kéo dài, đỏ đậm hoặc rỉ dịch thì dừng ngay và đi khám. Đó không còn là biểu hiện bình thường.",
       "transition": "Lịch trình chỉ đúng nếu thao tác đúng. Ba ngày, từng bước một."
     },
     {
@@ -287,7 +287,7 @@
       "eyebrow": "Hướng dẫn",
       "heading": "Liệu trình ba ngày, mỗi ngày một lần",
       "totalTime": "PT50M",
-      "intro": "Thời lượng và số ngày lấy nguyên từ hướng dẫn của nhà sản xuất. Đây không phải sản phẩm dùng hằng ngày lâu dài.",
+      "intro": "Thời lượng và số ngày lấy nguyên từ hướng dẫn của nhà sản xuất. Bộ này không phải sản phẩm dùng hằng ngày lâu dài.",
       "items": [
         {
           "heading": "Làm sạch da mặt",
@@ -306,7 +306,7 @@
           "body": "Rửa lại bằng nước sạch, dùng ống phục hồi và kem dưỡng. Hôm sau bắt buộc chống nắng."
         }
       ],
-      "footnote": "Nhà sản xuất mô tả những biểu hiện <strong>bình thường</strong> trong liệu trình: hơi rát và châm chích khi thoa, da khô và căng sau đó, và da có thể sẫm màu tạm thời trước khi bong. Nhưng <strong>rát kéo dài, sưng, phồng rộp hoặc đau thì phải dừng ngay</strong> — đó không nằm trong nhóm bình thường."
+      "footnote": "Nhà sản xuất mô tả những biểu hiện <strong>bình thường</strong> trong liệu trình: hơi rát và châm chích khi thoa, da khô và căng sau đó, và da có thể sẫm màu tạm thời trước khi bong. Nhưng <strong>rát kéo dài, sưng, phồng rộp hoặc đau thì phải dừng ngay</strong>. Những dấu hiệu đó không nằm trong nhóm bình thường."
     },
     {
       "type": "compare",
@@ -383,7 +383,7 @@
         },
         {
           "q": "Bao lâu peel lại một lần?",
-          "a": "Chúng tôi không đưa con số, vì nhà sản xuất không công bố khoảng cách giữa các liệu trình. Hãy hỏi chuyên viên tư vấn hoặc bác sĩ da liễu trước khi lặp lại — peel quá dày là nguyên nhân phổ biến làm mỏng da."
+          "a": "Chúng tôi không đưa con số, vì nhà sản xuất không công bố khoảng cách giữa các liệu trình. Hãy hỏi chuyên viên tư vấn hoặc bác sĩ da liễu trước khi lặp lại. Peel quá dày là nguyên nhân phổ biến làm mỏng da."
         },
         {
           "q": "Da sẫm màu sau peel có sao không?",

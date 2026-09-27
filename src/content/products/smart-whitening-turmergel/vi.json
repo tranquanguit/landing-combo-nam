@@ -94,7 +94,7 @@
           "qualifier": "số liệu nhà sản xuất công bố"
         },
         {
-          "text": "<strong>Cùng nhóm hoạt chất với kem nám</strong> — Tranexamic Acid và Niacinamide, ở dạng gel chấm điểm",
+          "text": "<strong>Cùng nhóm hoạt chất với kem nám</strong>: Tranexamic Acid và Niacinamide, ở dạng gel chấm điểm",
           "evidence": "verified",
           "source": "#thanh-phan",
           "qualifier": "so sánh được với bảng thành phần combo nám"
@@ -131,9 +131,9 @@
         "“Mùa hè đi nắng về là mấy vết cũ sẫm lại như mới.”"
       ],
       "explainer": {
-        "heading": "Đây không còn là mụn — đây là sắc tố ở lại sau khi viêm đã hết",
+        "heading": "Không còn là mụn nữa. Sắc tố ở lại sau khi viêm đã hết",
         "body": [
-          "Khi một nốt mụn viêm, da phản ứng bằng cách tăng sản sinh melanin ở vùng đó. Nốt lặn rồi nhưng melanin vẫn còn, và nó nằm lại theo thời gian của sắc tố — tính bằng tuần và tháng, không tính bằng ngày.",
+          "Khi một nốt mụn viêm, da phản ứng bằng cách tăng sản sinh melanin ở vùng đó. Nốt lặn rồi nhưng melanin vẫn còn, và nó nằm lại theo thời gian của sắc tố, tính bằng tuần và tháng, không tính bằng ngày.",
           "Điều này giải thích hai chuyện. Một: sản phẩm dành cho mụn không làm gì được vết thâm, vì không còn mụn để xử lý. Hai: <strong>nặn mụn làm vết thâm sâu hơn và lâu hơn</strong>, vì nó đẩy tổn thương xuống sâu và kéo dài phản ứng viêm.",
           "Và vì đây là sắc tố, nắng làm nó đậm lại y như với nám. Một vết thâm được che nắng tử tế mờ nhanh hơn hẳn cùng vết đó phơi nắng mỗi ngày."
         ]
@@ -198,7 +198,7 @@
       "items": [
         {
           "heading": "Vết nâu, phẳng",
-          "body": "Sắc tố ở lại sau viêm, bề mặt da vẫn phẳng. Đây là loại tuýp này được làm ra để xử lý.",
+          "body": "Sắc tố ở lại sau viêm, bề mặt da vẫn phẳng. Đúng loại tuýp này được làm ra để xử lý.",
           "meta": "Hợp nhất"
         },
         {
@@ -208,7 +208,7 @@
         },
         {
           "heading": "Sẹo lõm hoặc sẹo lồi",
-          "body": "Đây là thay đổi cấu trúc da, không phải sắc tố. Không một sản phẩm bôi ngoài nào làm đầy được sẹo lõm — cần can thiệp ở cơ sở chuyên khoa.",
+          "body": "Đây là thay đổi cấu trúc da, không phải sắc tố. Không một sản phẩm bôi ngoài nào làm đầy được sẹo lõm. Việc đó cần can thiệp ở cơ sở chuyên khoa.",
           "meta": "Không phải thứ bạn cần"
         }
       ]
@@ -217,7 +217,7 @@
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
       "heading": "Tám thành phần, ba trong số đó công bố bằng số",
-      "intro": "Nhóm hoạt chất ở đây trùng phần lớn với kem nám — vì vết thâm sau mụn và nám đều là chuyện sắc tố, chỉ khác nguyên nhân khởi phát.",
+      "intro": "Nhóm hoạt chất ở đây trùng phần lớn với kem nám, vì vết thâm sau mụn và nám đều là chuyện sắc tố, chỉ khác nguyên nhân khởi phát.",
       "caption": "Bảng này liệt kê các thành phần nhà sản xuất công bố; bốn hoạt chất chính cũng được IN TRÊN VỎ TUÝP. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
       "rows": [
         {
@@ -322,7 +322,7 @@
           ]
         }
       ],
-      "footnote": "Vết thâm mờ theo chu kỳ thay mới của da, nên hãy tính bằng <strong>tuần</strong> chứ không bằng ngày, và chụp ảnh cùng một góc cùng một ánh sáng để so — mắt nhìn hằng ngày không nhận ra thay đổi chậm."
+      "footnote": "Vết thâm mờ theo chu kỳ thay mới của da, nên hãy tính bằng <strong>tuần</strong> chứ không bằng ngày, và chụp ảnh cùng một góc cùng một ánh sáng để so. Mắt nhìn hằng ngày không nhận ra thay đổi chậm."
     },
     {
       "type": "steps",
@@ -344,7 +344,7 @@
           "body": "Sản phẩm dùng buổi tối; ban ngày cần kem chống nắng, nếu không thì vùng thâm sẽ sẫm lại."
         }
       ],
-      "footnote": "Dùng khi nốt mụn đã lặn. Vùng da đang sưng viêm cần bước khác — và nếu tình trạng mụn nặng hoặc kéo dài thì đó là việc của bác sĩ da liễu."
+      "footnote": "Dùng khi nốt mụn đã lặn. Vùng da đang sưng viêm cần bước khác. Nếu tình trạng mụn nặng hoặc kéo dài thì đó là việc của bác sĩ da liễu."
     },
     {
       "type": "order",

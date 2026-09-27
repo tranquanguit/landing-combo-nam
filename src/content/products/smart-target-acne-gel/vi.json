@@ -86,7 +86,7 @@
       "type": "hero",
       "eyebrow": "Bước chấm điểm",
       "heading": "Gel chấm điểm, không phải kem bôi toàn mặt",
-      "lead": "Tuýp 20gr với <strong>dầu mù u Việt Nam, 3% Acnebusters, BHA, Salicylic Acid, Sulfur, Zinc PCA và Bioecolia®</strong>. Đây là sản phẩm dùng đúng chỗ cần, không phải dùng khắp mặt.",
+      "lead": "Tuýp 20gr với <strong>dầu mù u Việt Nam, 3% Acnebusters, BHA, Salicylic Acid, Sulfur, Zinc PCA và Bioecolia®</strong>. Tuýp này dùng đúng chỗ cần, không phải dùng khắp mặt.",
       "usp": [
         {
           "text": "<strong>3% Acnebusters và 0,5% BHA</strong> — nồng độ in trên bao bì",
@@ -101,7 +101,7 @@
           "qualifier": "thành phần công bố trên bao bì"
         },
         {
-          "text": "<strong>Nhà sản xuất cảnh báo không dùng quá nhiều</strong> — dùng thừa gây bí da hoặc khô bong với da mỏng",
+          "text": "<strong>Nhà sản xuất cảnh báo không dùng quá nhiều</strong>: dùng thừa gây bí da hoặc khô bong với da mỏng",
           "evidence": "verified",
           "source": "#huong-dan",
           "qualifier": "trích từ chính hướng dẫn sử dụng"
@@ -133,11 +133,11 @@
         "“Dùng chung với BHA toàn mặt, da rát mấy ngày liền.”"
       ],
       "explainer": {
-        "heading": "Gel chấm điểm mạnh hơn kem toàn mặt — vì nó không được thiết kế cho cả mặt",
+        "heading": "Gel chấm điểm mạnh hơn kem toàn mặt, vì nó không được thiết kế cho cả mặt",
         "body": [
-          "Nồng độ trong một tuýp chấm điểm được tính cho một diện tích rất nhỏ và một khoảng thời gian ngắn. Đem nó bôi cả vùng là đưa vào da lượng hoạt chất gấp nhiều lần mức dự tính — và kết quả thường là khô ráp, bong tróc, rồi hàng rào bảo vệ da yếu đi.",
+          "Nồng độ trong một tuýp chấm điểm được tính cho một diện tích rất nhỏ và một khoảng thời gian ngắn. Đem nó bôi cả vùng là đưa vào da lượng hoạt chất gấp nhiều lần mức dự tính. Kết quả thường là khô ráp, bong tróc, rồi hàng rào bảo vệ da yếu đi.",
           "Hàng rào yếu đi thì nốt tiếp theo mọc dễ hơn. Đó là lý do một số người càng bôi nhiều càng thấy mụn dai dẳng hơn.",
-          "<strong>Chấm đúng nốt, để yên, và đợi theo ngày chứ không theo giờ.</strong> Nếu mụn lan ra cả vùng má hay cả trán thì đó không còn là việc của một tuýp chấm điểm — nên đi khám da liễu."
+          "<strong>Chấm đúng nốt, để yên, và đợi theo ngày chứ không theo giờ.</strong> Nếu mụn lan ra cả vùng má hay cả trán thì đó không còn là việc của một tuýp chấm điểm. Nên đi khám da liễu."
         ]
       }
     },
@@ -183,7 +183,7 @@
           "label": "Dùng được cùng lúc không",
           "values": [
             "Được — chấm ở nốt đang viêm",
-            "Được — thoa ở vùng đã lành, tránh chồng lên nốt đang viêm"
+            "Được: thoa ở vùng đã lành, tránh chồng lên nốt đang viêm"
           ]
         }
       ],
@@ -210,7 +210,7 @@
         },
         {
           "heading": "Nốt mụn đã lặn, chỉ còn vết thâm",
-          "body": "Thâm sau mụn là chuyện sắc tố, không còn là chuyện mụn. Tuýp này không phải thứ bạn cần — xem gel chấm thâm ở phần dưới.",
+          "body": "Thâm sau mụn là chuyện sắc tố, không còn là chuyện mụn. Tuýp này không phải thứ bạn cần. Xem gel chấm thâm ở phần dưới.",
           "meta": "Cần sản phẩm khác"
         }
       ]
@@ -305,7 +305,7 @@
             },
             {
               "label": "Lau thật khô",
-              "note": "Đây là bước hay bị bỏ, và là bước quyết định gel nằm đúng chỗ."
+              "note": "Bước hay bị bỏ, và là bước quyết định gel nằm đúng chỗ."
             },
             {
               "label": "Chấm lên từng nốt",
@@ -341,7 +341,7 @@
           "body": "Thoa chồng khi gel chưa thấm làm cả hai lớp đều kém tác dụng."
         }
       ],
-      "footnote": "Nhà sản xuất ghi rõ: <strong>dùng quá nhiều gây bí da, hoặc khô và bong tróc với da mỏng yếu</strong>. Đây là sản phẩm mà thêm liều không đổi lấy thêm kết quả."
+      "footnote": "Nhà sản xuất ghi rõ: <strong>dùng quá nhiều gây bí da, hoặc khô và bong tróc với da mỏng yếu</strong>. Với tuýp này, thêm liều không đổi lấy thêm kết quả."
     },
     {
       "type": "order",

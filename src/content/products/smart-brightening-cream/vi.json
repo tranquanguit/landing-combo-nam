@@ -25,7 +25,7 @@
   ],
   "seo": {
     "title": "Kem nám Mocha Smart Brightening Cream X3 30gr | Mocha Việt Nam",
-    "description": "Kem giảm sạm nám Tranexamic Acid, NIO-NAG, Bakuchiol, Ceramide — nồng độ in trên bao bì. Không corticoid. {{price}}, freeship, trả tiền khi nhận."
+    "description": "Kem giảm sạm nám Tranexamic Acid, NIO-NAG, Bakuchiol, Ceramide, nồng độ in trên bao bì. Không corticoid. {{price}}, freeship, trả tiền khi nhận."
   },
   "compliance": {
     "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
@@ -83,11 +83,11 @@
     {
       "type": "hero",
       "eyebrow": "Bước kem buổi tối, cho da nám",
-      "heading": "Nám mờ rồi lại đậm — vấn đề thường không nằm ở việc bạn thiếu kiên trì",
+      "heading": "Nám mờ rồi lại đậm: vấn đề thường không nằm ở việc bạn thiếu kiên trì",
       "lead": "Phần lớn kem làm sáng chỉ tác động lớp ngoài cùng. Ngưng dùng là sắc tố quay lại. Hũ kem 30gr này đi theo hướng khác, và <strong>in thẳng tỉ lệ từng hoạt chất lên vỏ hộp</strong> để bạn đem so với bất kỳ sản phẩm nào khác trước khi quyết định.",
       "usp": [
         {
-          "text": "<strong>Không corticoid, không hydroquinone</strong> — hai thứ khiến da mỏng đi sau vài tháng dùng kem trộn",
+          "text": "<strong>Không corticoid, không hydroquinone</strong>, hai thứ khiến da mỏng đi sau vài tháng dùng kem trộn",
           "evidence": "verified",
           "source": "#thanh-phan",
           "qualifier": "danh sách thành phần đầy đủ in trên bao bì"
@@ -132,9 +132,9 @@
       "explainer": {
         "heading": "Làm sáng lớp biểu bì không chạm tới nơi sắc tố được tạo ra",
         "body": [
-          "Melanin do tế bào hắc tố nằm sâu hơn sản sinh. Một sản phẩm chỉ làm sáng lớp ngoài sẽ cho kết quả thấy được trong vài tuần đầu, rồi dừng — vì bên dưới mọi thứ vẫn diễn ra như cũ.",
+          "Melanin do tế bào hắc tố nằm sâu hơn sản sinh. Một sản phẩm chỉ làm sáng lớp ngoài sẽ cho kết quả thấy được trong vài tuần đầu, rồi dừng, vì bên dưới mọi thứ vẫn diễn ra như cũ.",
           "Công thức của hũ kem này nhắm vào ba việc cùng lúc. Hạn chế tín hiệu tạo sắc tố. Hỗ trợ thay mới lớp tế bào đã sạm màu. Và củng cố hàng rào bảo vệ da, để sạm màu khó quay lại hơn.",
-          "Đổi lại, bạn cần kiên nhẫn theo tuần chứ không theo ngày. Và cần chống nắng. <strong>Bỏ bước chống nắng thì không sản phẩm nào giữ được kết quả</strong> — đây là điều kiện, không phải lời khuyên."
+          "Đổi lại, bạn cần kiên nhẫn theo tuần chứ không theo ngày. Và cần chống nắng. <strong>Bỏ bước chống nắng thì không sản phẩm nào giữ được kết quả</strong>. Đây là điều kiện, không phải lời khuyên."
         ]
       }
     },
@@ -184,7 +184,7 @@
           ]
         }
       ],
-      "footnote": "Không có lựa chọn nào <strong>sai</strong> ở đây. Khác nhau là ở tốc độ và ở số bước bạn sẵn sàng giữ đều mỗi ngày — một quy trình hai bước mà bỏ giữa chừng thì chậm hơn một quy trình một bước làm đủ.",
+      "footnote": "Không có lựa chọn nào <strong>sai</strong> ở đây. Khác nhau là ở tốc độ và ở số bước bạn sẵn sàng giữ đều mỗi ngày. Một quy trình hai bước mà bỏ giữa chừng thì chậm hơn một quy trình một bước làm đủ.",
       "transition": "Đi một bước trước cũng được. Sáu hoạt chất in trên vỏ hộp, và việc của từng cái."
     },
     {
@@ -324,7 +324,7 @@
           "body": "Thoa nhẹ từ trong ra ngoài, nâng cơ từ dưới lên, lên mặt và cổ, tránh vùng mắt. Massage vùng sạm màu khoảng 1–2 phút."
         }
       ],
-      "footnote": "Thử một lượng nhỏ ở vùng cổ và quan sát trong <strong>30–45 phút</strong> trước khi dùng toàn mặt. Buổi sáng cần kem chống nắng — bỏ bước này thì sắc tố sẽ quay lại bất kể dùng sản phẩm nào."
+      "footnote": "Thử một lượng nhỏ ở vùng cổ và quan sát trong <strong>30–45 phút</strong> trước khi dùng toàn mặt. Buổi sáng cần kem chống nắng. Bỏ bước này thì sắc tố sẽ quay lại bất kể dùng sản phẩm nào."
     },
     {
       "type": "order",
@@ -349,7 +349,7 @@
         },
         {
           "q": "Dùng kem một mình có đủ không?",
-          "a": "Kem là bước khoá ẩm và giữ hoạt chất ở lại trên da. Nếu bạn muốn cả bước thẩm thấu sâu thì cần thêm serum — đó là lý do có bản combo. Nói thẳng: dùng riêng kem vẫn là một liệu trình hợp lệ, nhưng chậm hơn so với dùng đủ hai bước."
+          "a": "Kem là bước khoá ẩm và giữ hoạt chất ở lại trên da. Nếu bạn muốn cả bước thẩm thấu sâu thì cần thêm serum. Đó là lý do có bản combo. Nói thẳng: dùng riêng kem vẫn là một liệu trình hợp lệ, nhưng chậm hơn so với dùng đủ hai bước."
         },
         {
           "q": "Da nhạy cảm dùng được không?",
