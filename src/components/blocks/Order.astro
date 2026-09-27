@@ -44,7 +44,7 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
 ---
 <section id="dat-hang" class="surface-navy defer" aria-labelledby="dat-hang-title">
   <div class="wrap order-grid">
-    <div>
+    <div class="order-why">
       {data.eyebrow && <p class="eyebrow">{data.eyebrow}</p>}
       <h2 id="dat-hang-title">{data.heading}</h2>
       <p class="lead" set:html={richText(data.body)} />
@@ -206,6 +206,27 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
 <style>
   .order-grid { display: grid; gap: var(--s-6); align-items: start; }
   @media (min-width: 940px) { .order-grid { grid-template-columns: 1fr 1.05fr; gap: var(--s-7); } }
+
+  /* Cột trái BÁM lại khi cuộn, thay vì kết thúc sớm rồi để trống.
+
+     Đo ở 1024/1280/1440/1920: cột trái cao 485px, biểu mẫu cao 1018px — chênh
+     533px, tức 52% cột cao nhất là một mảng nền đậm trống trơn. Ở khổ hẹp
+     không thấy vì hai cột xếp chồng; chỉ desktop mới lộ.
+
+     Không lấp bằng hình trang trí. Bốn dòng trong cột đó là những thứ làm dịu
+     nghi ngại đúng lúc người ta đang gõ địa chỉ: miễn phí vận chuyển, mở kiểm
+     tra rồi mới trả tiền, đổi trả 7 ngày, hotline. Cho chúng ở lại trong tầm
+     mắt là việc có ích; đẩy chúng ra khỏi màn hình đúng lúc đó mới là lãng phí.
+
+     Chỉ bám ở khổ có hai cột. Cột này luôn thấp hơn khung nhìn nên không có
+     nguy cơ kẹt nội dung. */
+  @media (min-width: 940px) {
+    .order-why {
+      position: sticky;
+      /* Trừ chiều cao thanh trên cùng để tiêu đề không chui xuống dưới nó. */
+      top: calc(var(--header-h) + var(--s-5));
+    }
+  }
 
   .points { list-style: none; padding: 0; margin: var(--s-5) 0; display: grid; gap: var(--s-3); }
   .points li { padding-left: var(--s-5); position: relative; color: rgba(255, 255, 255, .88); }
