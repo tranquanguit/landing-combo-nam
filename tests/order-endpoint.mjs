@@ -21,6 +21,11 @@ try {
   ({ chromium } = require('/opt/node22/lib/node_modules/playwright'));
 }
 
+import { requireOrderForm } from './_order-form-ready.mjs';
+/* Không có biểu mẫu thì mọi page.fill bên dưới đều hết giờ sau 30 giây rồi
+   báo sai nguyên nhân. Chặn ngay, và nói đúng thứ cần sửa. */
+requireOrderForm();
+
 /* Landing sản phẩm nằm ở /combo-nam/, không còn ở gốc: từ khi site có tầng
    trang chủ và tầng dòng sản phẩm, gốc là trang chủ thương hiệu. */
 const PAGE_PORT = 8131;

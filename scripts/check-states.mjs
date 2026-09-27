@@ -17,6 +17,11 @@ const { launchBrowser } = await import('../tests/_launch.mjs');
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 
+const { requireOrderForm } = await import('../tests/_order-form-ready.mjs');
+/* Ba trong mười sáu kịch bản dưới đây điền biểu mẫu đặt hàng. Không có biểu
+   mẫu thì chúng hết giờ sau 30 giây và báo sai nguyên nhân. */
+requireOrderForm();
+
 const PAGE_PORT = 8930, API_PORT = 8132;
 const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.avif': 'image/avif', '.woff2': 'font/woff2' };
 const pages = createServer((q, r) => {
