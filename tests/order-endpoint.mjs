@@ -12,6 +12,7 @@ import { extname, join, normalize } from 'node:path';
 
 /* Playwright là dependency dùng để kiểm thử, cài ở cấp hệ thống trong môi
    trường này. Resolve tường minh để chạy được ở cả hai nơi. */
+import { launchBrowser } from './_launch.mjs';
 const require = createRequire(import.meta.url);
 let chromium;
 try {
@@ -81,7 +82,7 @@ await new Promise((r) => api.listen(API_PORT, r));
 await new Promise((r) => setTimeout(r, 1200));
 
 const results = [];
-const browser = await chromium.launch();
+const browser = await launchBrowser(chromium);
 
 /* Dọn cổng khi bộ thử chết giữa đường.
    Kiểm định lần 11: một lần chạy bị ngắt để lại server chiếm cổng, lần sau chết

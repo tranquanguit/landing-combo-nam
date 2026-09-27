@@ -1,10 +1,11 @@
 ---
+import type { RhythmProps } from '../../lib/narrative';
 import Section from '../Section.astro';
 import Picture from '../Picture.astro';
-interface Props { data: any; id?: string; }
-const { data, id = 'chung-tu', surface = 'paper', space, sameSurface } = Astro.props;
+interface Props extends RhythmProps { data: any; id?: string; }
+const { data, id = 'chung-tu', surface = 'paper', space, sameSurface, role, transition } = Astro.props;
 ---
-<Section id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
+<Section role={role} transition={transition} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
   <ul class="docs" data-reveal-group>
     {data.items.map((doc: any) => (
       <li data-reveal>

@@ -113,18 +113,6 @@
       ]
     },
     {
-      "type": "offer",
-      "eyebrow": "Ưu đãi",
-      "heading": "Giá bán hiện tại thấp hơn giá niêm yết, và được tặng thêm hai sản phẩm",
-      "body": "Giá niêm yết của combo là {{compareAtPrice}}. Giá bán hiện tại là <strong>{{price}}</strong>, và được tặng thêm kem chống nắng SPF50 cùng sữa rửa mặt — hai bước bắt buộc để giữ kết quả.",
-      "validUntil": "2026-12-31",
-      "notes": [
-        "Miễn phí vận chuyển",
-        "Thanh toán khi nhận hàng",
-        "Nhận hàng sau 2–5 ngày"
-      ]
-    },
-    {
       "type": "problem",
       "eyebrow": "Vấn đề",
       "heading": "Vì sao nám cứ mờ đi rồi lại đậm lên?",
@@ -141,7 +129,8 @@
           "Combo Nám Mocha đi theo hướng khác: vừa hạn chế tín hiệu tạo sắc tố, vừa hỗ trợ thay mới tế bào sạm màu, đồng thời củng cố hàng rào bảo vệ da để hạn chế sạm màu quay lại.",
           "Điều này cũng có nghĩa là <strong>kết quả đến theo tuần chứ không theo ngày</strong> — và chúng tôi nói rõ mốc thời gian thực tế cho từng loại nám ở phần dưới."
         ]
-      }
+      },
+      "transition": "Nám không phải một loại. Trước khi bàn tới công thức, phải biết mảng sạm trên mặt bạn thuộc nhóm nào."
     },
     {
       "type": "cards",
@@ -288,7 +277,8 @@
           "role": "Chiết xuất nấm truffle đen, ở dạng kem lưu trên da qua đêm.",
           "suitedFor": "Da xỉn màu"
         }
-      ]
+      ],
+      "transition": "Bảng trên nói có những gì trong hộp. Phần dưới nói dùng chúng thế nào cho đúng thứ tự."
     },
     {
       "type": "steps",
@@ -461,6 +451,19 @@
           "body": "Nhóm phản ứng sớm nhất cũng cần khoảng bốn tuần. Nếu bạn đang cần kết quả cho một mốc gần hơn thế, đây không phải thứ phù hợp và chúng tôi không muốn bạn thất vọng.",
           "meta": "Nên cân nhắc lại"
         }
+      ],
+      "narrativeRole": "safety"
+    },
+    {
+      "type": "offer",
+      "eyebrow": "Ưu đãi",
+      "heading": "Giá bán hiện tại thấp hơn giá niêm yết, và được tặng thêm hai sản phẩm",
+      "body": "Giá niêm yết của combo là {{compareAtPrice}}. Giá bán hiện tại là <strong>{{price}}</strong>, và được tặng thêm kem chống nắng SPF50 cùng sữa rửa mặt — hai bước bắt buộc để giữ kết quả.",
+      "validUntil": "2026-12-31",
+      "notes": [
+        "Miễn phí vận chuyển",
+        "Thanh toán khi nhận hàng",
+        "Nhận hàng sau 2–5 ngày"
       ]
     },
     {
@@ -542,6 +545,31 @@
   },
   "line": "nam-tham",
   "primaryKeyword": "combo kem và serum cho da nám mocha",
+  "storyArchetype": "bundle",
+  "adContext": {
+    "primaryNeed": "Da nám đã thử nhiều thứ nhưng mờ rồi lại đậm, muốn một lộ trình hai bước làm sẵn",
+    "audienceSituations": [
+      "Đang cân nhắc giữa mua riêng từng món và mua cả bộ",
+      "Đã dùng kem dưỡng sáng da đơn lẻ vài tháng mà không giữ được kết quả",
+      "Mới thấy mảng sạm hai bên gò má sau sinh và chưa biết bắt đầu từ đâu"
+    ],
+    "contextHints": [
+      "người hỏi nên bắt đầu chăm sóc da nám từ bước nào",
+      "người so sánh mua bộ đôi với mua từng sản phẩm lẻ",
+      "người hỏi kem và serum thì dùng cái nào trước"
+    ],
+    "approvedAngles": [
+      "Kem và serum dùng cùng nhau, công khai tỉ lệ từng hoạt chất",
+      "Hai bước cho da nám, kèm lộ trình sáng và lộ trình tối riêng",
+      "Mua cả bộ thấp hơn giá niêm yết của hai món cộng lại"
+    ],
+    "riskyAngles": [
+      "hứa kết quả tuyệt đối trong một mốc thời gian cố định",
+      "so sánh mức hiệu quả với thủ thuật làm ở phòng khám",
+      "mượn danh nghĩa nhân viên y tế để tăng sức thuyết phục"
+    ],
+    "preferredDestination": "#thanh-phan"
+  },
   "relatedArticles": [
     "nam-noi-tiet-la-gi"
   ]

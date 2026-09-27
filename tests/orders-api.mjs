@@ -10,7 +10,7 @@
  *   node --experimental-strip-types --experimental-sqlite tests/orders-api.mjs
  */
 import { DatabaseSync } from 'node:sqlite';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { onRequest as ordersApi } from '../functions/api/orders.ts';
 import { onRequest as adminApi } from '../functions/api/admin/orders.ts';
 
@@ -36,7 +36,19 @@ function makeD1(db) {
 }
 
 const db = new DatabaseSync(':memory:');
-db.exec(readFileSync(new URL('../migrations/0001_orders.sql', import.meta.url), 'utf8'));
+/* Chạy MỌI migration theo thứ tự tên, không chỉ 0001.
+
+   Bản trước ghim cứng 0001_orders.sql, nên ngày thêm 0002 thì cổng đỏ với
+   thông báo "table orders has no column named utm_content" — một lỗi nói về
+   bộ kiểm thử chứ không phải về mã. Đọc cả thư mục thì lần sau không ai phải
+   nhớ sửa chỗ này.
+*/
+const MIGRATIONS = readdirSync(new URL('../migrations/', import.meta.url))
+  .filter((f) => f.endsWith('.sql'))
+  .sort();
+for (const m of MIGRATIONS) {
+  db.exec(readFileSync(new URL('../migrations/' + m, import.meta.url), 'utf8'));
+}
 const env = {
   DB: makeD1(db),
   IP_SALT: 'muoi-kiem-thu-khong-dung-cho-production',

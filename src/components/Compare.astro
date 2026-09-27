@@ -1,11 +1,12 @@
 ---
+import type { RhythmProps } from '../lib/narrative';
 import Section from './Section.astro';
 import { money } from '../lib/format';
 import { productPath } from '../lib/routes';
 import { richText } from '../lib/richtext';
 import { t, type Locale } from '../i18n/ui';
 
-interface Props {
+interface Props extends RhythmProps {
   data: {
     eyebrow?: string; heading: string; intro?: string;
     criteria: { label: string; values: string[] }[];
@@ -18,9 +19,9 @@ interface Props {
   space?: 'sm' | 'md' | 'lg';
   sameSurface?: boolean;
 }
-const { data, products, locale, id, surface = 'paper', space, sameSurface } = Astro.props;
+const { data, products, locale, id, surface = 'paper', space, sameSurface, role, transition } = Astro.props;
 ---
-<Section id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading}>
+<Section role={role} transition={transition} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading}>
   {data.intro && <p class="cmp-intro" set:html={richText(data.intro)} />}
 
   {/* Bảng thật, không phải lưới div: người dùng trình đọc màn hình điều hướng
@@ -76,6 +77,11 @@ const { data, products, locale, id, surface = 'paper', space, sameSurface } = As
   .cmp thead th a {
     display: block; font-weight: 600; color: var(--ink-navy);
     text-decoration: none; line-height: 1.25;
+    /* 16px x 1.25 = 20px, dưới ngưỡng 24px của WCAG 2.2 AA 2.5.8. Đây là tên
+       sản phẩm ở đầu cột — một trong những liên kết được bấm nhiều nhất trên
+       trang dòng, và trên màn hình cảm ứng nó là một dải cao 20px.
+       Cùng cách sửa đã dùng cho '.todo a' trong tokens.css. */
+    min-height: 24px;
   }
   .cmp thead th a:hover { color: var(--cobalt); text-decoration: underline; }
   .cmp-price {

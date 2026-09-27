@@ -27,6 +27,30 @@
   "name": "Mocha Ultra EGF Bio-Gel Mask – mặt nạ gel 100gr",
   "shortName": "Ultra EGF Bio-Gel Mask",
   "primaryKeyword": "mặt nạ gel phục hồi mocha egf",
+  "storyArchetype": "education-led",
+  "adContext": {
+    "primaryNeed": "Muốn thêm một bước phục hồi nhưng chưa chắc có cần hay không",
+    "audienceSituations": [
+      "Đang tìm mặt nạ để sửa một quy trình đang có vấn đề",
+      "Da vừa qua một giai đoạn kích ứng và cần được để yên",
+      "Chỉ đủ ngân sách cho một món trong giai đoạn phục hồi"
+    ],
+    "contextHints": [
+      "người hỏi mặt nạ phục hồi loại nào tốt",
+      "người hỏi một tuần nên đắp mặt nạ mấy lần",
+      "người hỏi nên ưu tiên bước nền hay bước thêm"
+    ],
+    "approvedAngles": [
+      "Bước thêm, không phải bước bắt buộc — nói rõ ngay ở màn hình đầu",
+      "Tám thành phần in trên vỏ tuýp",
+      "Một đến hai lần mỗi tuần, vào buổi tối"
+    ],
+    "riskyAngles": [
+      "trình bày mặt nạ như thứ sửa được một quy trình đang sai",
+      "hứa phục hồi da sau một số lần dùng cố định"
+    ],
+    "preferredDestination": "#so-sanh"
+  },
   "seo": {
     "title": "Mặt nạ gel Mocha Ultra EGF Bio-Gel Mask 100gr | Mocha",
     "description": "Mặt nạ gel với EGF, Epi-On, Copper Peptide, Exosome Cica và 3 loại Nano Ceramide bọc Liposome. Tuýp 100gr, khoảng 40 lần đắp. {{price}}."
@@ -113,7 +137,8 @@
           "Cảm giác căng mọng ngay sau khi đắp phần lớn đến từ lượng nước vừa được cấp vào lớp ngoài cùng. Nó có thật, nhưng nó <strong>không tồn tại lâu nếu bước dưỡng ẩm hằng ngày vẫn bỏ trống</strong>.",
           "Vậy khi nào nó đáng dùng? Khi ba bước nền đã đều, và bạn muốn thêm một bước cấp ẩm đậm hơn trong những tuần da cần được để yên. Đúng vai trò đó thì nó làm tốt; đặt vào vai trò khác thì không."
         ]
-      }
+      },
+      "transition": "Nếu quy trình nền đã ổn, phần dưới nói bước thêm này hợp với trường hợp nào."
     },
     {
       "type": "cards",

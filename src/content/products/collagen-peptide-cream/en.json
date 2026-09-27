@@ -27,6 +27,30 @@
   "name": "Mocha Collagen Peptide Cream – recovery moisturiser, 30g",
   "shortName": "Collagen Peptide Cream",
   "primaryKeyword": "mocha collagen peptide cream",
+  "storyArchetype": "comparison",
+  "adContext": {
+    "primaryNeed": "Skin is stinging and lightly flaking and needs a step that adds no strong actives",
+    "audienceSituations": [
+      "Following the instructions exactly and still red and stinging",
+      "Has just stopped a strong active and does not know what to use meanwhile",
+      "Choosing between two jars for two different phases"
+    ],
+    "contextHints": [
+      "someone asking what to use when skin is red and stinging",
+      "someone asking how long to pause a strong active",
+      "someone comparing two creams for a recovery phase"
+    ],
+    "approvedAngles": [
+      "A moisturiser for the phase where skin needs calm, adding no strong actives",
+      "Four ingredient groups, and what each group is doing",
+      "The last step of the routine, morning and evening"
+    ],
+    "riskyAngles": [
+      "describing the product as managing a condition that belongs to clinical care",
+      "promising barrier repair within a fixed timeframe"
+    ],
+    "preferredDestination": "#so-sanh"
+  },
   "seo": {
     "title": "Mocha Collagen Peptide Cream, 30g | Mocha Vietnam",
     "description": "Moisturiser with pro-vitamin B5, centella extract, hyaluronic acid and plant stem cells — as printed on the jar. {{price}}, free shipping."
@@ -114,6 +138,55 @@
           "It is a basic moisturising step. We call it that rather than a treatment, because putting treatment expectations on a moisturiser is the fastest way to be disappointed by one."
         ]
       }
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Two creams, where they differ",
+      "heading": "Which jar for which phase?",
+      "intro": "Both are 30gr moisturising steps. They differ in how many ingredients they carry, and in the phase of skin they suit.",
+      "items": [
+        "collagen-peptide-cream",
+        "biovector-brightening-cream"
+      ],
+      "criteria": [
+        {
+          "label": "Ingredients declared",
+          "values": [
+            "The four key groups printed on the jar",
+            "45, the full INCI list in order"
+          ]
+        },
+        {
+          "label": "Suits skin that is",
+          "values": [
+            "Recently irritated, and needs fewer things acting on it",
+            "Settled, and wants many actives in one step"
+          ]
+        },
+        {
+          "label": "Its particular strength",
+          "values": [
+            "Fewer ingredients, so fewer variables while skin is reactive",
+            "Every substance can be checked before use"
+          ]
+        },
+        {
+          "label": "Physical UV filters",
+          "values": [
+            "None",
+            "TiO2 and ZnO present, but no declared SPF, so not a sunscreen substitute"
+          ]
+        },
+        {
+          "label": "Just peeled, or just stopped retinol",
+          "values": [
+            "This is the jar for that phase",
+            "Wait until skin settles"
+          ]
+        }
+      ],
+      "footnote": "Fewer ingredients does not mean lesser. For reacting skin, <strong>fewer variables is precisely what you need</strong>, and that is this jar's job.",
+      "transition": "If yours is the phase that needs calm, below are the four ingredient groups in this jar."
     },
     {
       "type": "cards",
@@ -236,54 +309,6 @@
         }
       ],
       "footnote": "If you are running a routine with pigment-targeting actives, pick one cream rather than layering both — extra layers add congestion risk, not extra effect."
-    },
-    {
-      "type": "compare",
-      "eyebrow": "Two creams, where they differ",
-      "heading": "Which jar for which phase?",
-      "intro": "Both are 30gr moisturising steps. They differ in how many ingredients they carry, and in the phase of skin they suit.",
-      "items": [
-        "collagen-peptide-cream",
-        "biovector-brightening-cream"
-      ],
-      "criteria": [
-        {
-          "label": "Ingredients declared",
-          "values": [
-            "The four key groups printed on the jar",
-            "45, the full INCI list in order"
-          ]
-        },
-        {
-          "label": "Suits skin that is",
-          "values": [
-            "Recently irritated, and needs fewer things acting on it",
-            "Settled, and wants many actives in one step"
-          ]
-        },
-        {
-          "label": "Its particular strength",
-          "values": [
-            "Fewer ingredients, so fewer variables while skin is reactive",
-            "Every substance can be checked before use"
-          ]
-        },
-        {
-          "label": "Physical UV filters",
-          "values": [
-            "None",
-            "TiO2 and ZnO present, but no declared SPF, so not a sunscreen substitute"
-          ]
-        },
-        {
-          "label": "Just peeled, or just stopped retinol",
-          "values": [
-            "This is the jar for that phase",
-            "Wait until skin settles"
-          ]
-        }
-      ],
-      "footnote": "Fewer ingredients does not mean lesser. For reacting skin, <strong>fewer variables is precisely what you need</strong>, and that is this jar's job."
     },
     {
       "type": "order",

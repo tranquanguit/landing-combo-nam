@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { DEFAULT_ANCHOR } from '../lib/block-anchors';
+import { resolveRhythm } from '../lib/narrative';
 import BaseLayout from './BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -106,52 +107,25 @@ const jsonLd = productGraph({
 });
 
 /**
- * Nhịp thị giác của trang, tính theo VAI TRÒ của khối và VỊ TRÍ của nó.
+ * Nhịp thị giác của trang, tính theo VAI của khối và VỊ TRÍ của nó.
  *
- * Bản trước: màu nền là thuộc tính của LOẠI khối (`Ingredients` luôn paper,
- * `Steps` luôn mist…). Hệ quả là mọi trang sản phẩm có cùng một chuỗi màu nền,
- * bất kể chúng kể câu chuyện gì — và chỉ khối `cards` được xen kẽ. Trang đọc
- * đều tăm tắp; đó là thứ chủ site gọi là "quá tuyến tính".
+ * Bản trước: bảng `ACT` ngay tại file này ánh xạ LOẠI khối sang bề mặt —
+ * `ingredients` luôn paper, `steps` luôn mist. Nên mọi trang sản phẩm có cùng
+ * một chuỗi màu nền bất kể chúng kể chuyện gì, và đo được: 10 trên 12 sản phẩm
+ * đã xuất bản dùng ĐÚNG một chuỗi khối giống hệt nhau.
  *
- * Bản này gom khối thành bốn mạch. Mỗi mạch một bề mặt, nên khi mắt thấy nền
- * đổi là biết câu chuyện sang phần khác — đọc được cấu trúc trước khi đọc chữ.
+ * Nay vai là DỮ LIỆU (`narrativeRole` trong file nội dung) và bảng tra chuyển
+ * sang `src/lib/narrative.ts`. Hai hệ quả:
  *
- *   kể chuyện   problem, cards          -> bone
- *   dẫn chứng   ingredients, timeline,  -> paper
- *               documents
- *   hướng dẫn   routine, steps          -> mist
- *   quyết định  offer, order            -> tự lo phần nền của mình
- *   khép lại    faq                     -> paper
+ *  - cùng một component đóng được hai vai ở hai trang, và nhịp đi theo vai;
+ *  - luật nhịp kiểm được bằng unit test, vì nó là một hàm thuần chứ không còn
+ *    là một vòng lặp nằm giữa layout.
  *
- * Hai khối liền nhau cùng mạch thì bỏ đệm ở chỗ nối, thành MỘT cụm có chủ ý
- * thay vì hai khối dính nhau do trùng màu. Chỗ chuyển mạch thì giãn ra.
- *
- * File JSON vẫn đè được bằng `surface` và `space` của từng khối: quy tắc ở đây
- * là mặc định hợp lý, không phải luật.
+ * `surface`/`space` khai trong JSON vẫn thắng.
  */
-const ACT: Record<string, 'bone' | 'paper' | 'mist'> = {
-  problem: 'bone', cards: 'bone',
-  ingredients: 'paper', timeline: 'paper', documents: 'paper', faq: 'paper',
-  compare: 'paper',
-  routine: 'mist', steps: 'mist',
-  relatedProducts: 'bone',
-};
-
-const rhythm = new Map<number, { surface?: string; space?: string; sameSurface?: boolean }>();
-let prevSurface: string | undefined;
-p.blocks.forEach((block: any, i: number) => {
-  const surface = block.surface ?? ACT[block.type];
-  if (!surface) { prevSurface = undefined; return; }   // hero/offer/order: tự lo
-  const same = surface === prevSurface;
-  rhythm.set(i, {
-    surface,
-    /* Cùng mạch thì sát vào nhau; sang mạch mới thì giãn hẳn ra. */
-    space: block.space ?? (same ? 'sm' : 'lg'),
-    sameSurface: same,
-  });
-  prevSurface = surface;
-});
-const r = (i: number) => rhythm.get(i) ?? {};
+const rhythm = resolveRhythm(p.blocks as any[]);
+/** Nhịp + vai + câu nối của khối thứ i, spread thẳng vào component. */
+const r = (i: number, block: any) => ({ ...(rhythm.get(i) ?? {}), transition: block.transition });
 ---
 <BaseLayout siteName={b.tradingName}
   locale={locale}
@@ -173,26 +147,26 @@ const r = (i: number) => rhythm.get(i) ?? {};
       switch (block.type) {
         case 'hero':         return <Hero data={block} locale={locale} product={p} />;
         case 'offer':        return <Offer data={block} product={p} locale={locale} />;
-        case 'problem':      return <Problem data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
-        case 'cards':        return <Cards data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
-        case 'ingredients':  return <Ingredients data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} {...r(i)} />;
-        case 'steps':        return <Steps data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
+        case 'problem':      return <Problem data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i, block)} />;
+        case 'cards':        return <Cards data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i, block)} />;
+        case 'ingredients':  return <Ingredients data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} {...r(i, block)} />;
+        case 'steps':        return <Steps data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i, block)} />;
         case 'gallery':      return <Gallery data={block} id={block.id ?? DEFAULT_ANCHOR.gallery} locale={locale} />;
         case 'testimonials': return <Testimonials data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} />;
         case 'order':        return <Order data={block} product={p} brand={b} locale={locale} />;
         case 'feature':      return <Feature data={block} id={block.id} />;
-        case 'documents':    return <Documents data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
-        case 'timeline':     return <Timeline data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
-        case 'routine':      return <Routine data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
-        case 'faq':          return <Faq data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)} />;
+        case 'documents':    return <Documents data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i, block)} />;
+        case 'timeline':     return <Timeline data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i, block)} />;
+        case 'routine':      return <Routine data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i, block)} />;
+        case 'faq':          return <Faq data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i, block)} />;
         case 'compare':      return (
           <Compare data={block} locale={locale}
-            id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)}
+            id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i, block)}
             products={block.items.map((slug: string) => productCards.get(slug)).filter(Boolean)} />
         );
         case 'relatedProducts': return (
           <RelatedProducts data={block} locale={locale}
-            id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i)}
+            id={block.id ?? DEFAULT_ANCHOR[block.type]} {...r(i, block)}
             products={block.items
               .filter((slug: string) => slug !== p.slug)   /* tự trỏ về mình là một ngõ cụt khác */
               .map((slug: string) => productCards.get(slug))

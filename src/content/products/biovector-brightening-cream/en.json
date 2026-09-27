@@ -27,6 +27,30 @@
   "name": "Mocha Biovector Brightening Cream – 30g",
   "shortName": "Biovector Brightening Cream",
   "primaryKeyword": "mocha biovector brightening cream",
+  "storyArchetype": "comparison",
+  "adContext": {
+    "primaryNeed": "Wants to know exactly what is in the jar before paying for it",
+    "audienceSituations": [
+      "Has met too many labels saying \"proprietary extract\" without naming anything",
+      "Has reactive skin and needs the full list before trying something",
+      "Choosing between two jars from the same brand for two different phases"
+    ],
+    "contextHints": [
+      "someone asking how to read a cosmetic ingredient list",
+      "someone asking which moisturiser publishes its full ingredient list",
+      "someone comparing two jars within the same brand"
+    ],
+    "approvedAngles": [
+      "Publishes all 45 ingredients in INCI order",
+      "Twelve ingredients worth naming, placed inside the full list",
+      "The cream step, after serum and before sunscreen"
+    ],
+    "riskyAngles": [
+      "turning ingredient disclosure into a promise about results",
+      "asserting that other brands deliberately conceal information"
+    ],
+    "preferredDestination": "#so-sanh"
+  },
   "seo": {
     "title": "Mocha Biovector Brightening Cream, 30g | Mocha Vietnam",
     "description": "The one Mocha product with its complete INCI list published: niacinamide, the centella trio, turmeric, immortelle, tamanu oil. {{price}}."
@@ -116,6 +140,55 @@
           "This jar declares <strong>all 45 ingredients in INCI order</strong>. We are not claiming that makes the formula better — only that you have enough to judge it yourself, including against other brands."
         ]
       }
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Two creams, where they differ",
+      "heading": "Which jar for which phase?",
+      "intro": "Both are 30gr moisturising steps. They differ in how many ingredients they carry, and in the phase of skin they suit.",
+      "items": [
+        "biovector-brightening-cream",
+        "collagen-peptide-cream"
+      ],
+      "criteria": [
+        {
+          "label": "Ingredients declared",
+          "values": [
+            "45, the full INCI list in order",
+            "The four key groups printed on the jar"
+          ]
+        },
+        {
+          "label": "Suits skin that is",
+          "values": [
+            "Settled, and wants many actives in one step",
+            "Recently irritated, and needs fewer things acting on it"
+          ]
+        },
+        {
+          "label": "Its particular strength",
+          "values": [
+            "Every substance can be checked before use",
+            "Fewer ingredients, so fewer variables while skin is reactive"
+          ]
+        },
+        {
+          "label": "Physical UV filters",
+          "values": [
+            "TiO2 and ZnO present, but no declared SPF, so not a sunscreen substitute",
+            "None"
+          ]
+        },
+        {
+          "label": "Just peeled, or just stopped retinol",
+          "values": [
+            "Wait until skin settles",
+            "This is the better jar for that phase"
+          ]
+        }
+      ],
+      "footnote": "More ingredients does not mean more suitable. For settled skin it is a choice; for reacting skin, <strong>fewer variables is what you need</strong>.",
+      "transition": "Once you know which jar suits your phase, below are the twelve ingredients worth naming out of the full list."
     },
     {
       "type": "cards",
@@ -281,54 +354,6 @@
         }
       ],
       "footnote": "The formula contains small amounts of titanium dioxide and zinc oxide, but this is <strong>not a sunscreen</strong> and does not replace the morning sun protection step."
-    },
-    {
-      "type": "compare",
-      "eyebrow": "Two creams, where they differ",
-      "heading": "Which jar for which phase?",
-      "intro": "Both are 30gr moisturising steps. They differ in how many ingredients they carry, and in the phase of skin they suit.",
-      "items": [
-        "biovector-brightening-cream",
-        "collagen-peptide-cream"
-      ],
-      "criteria": [
-        {
-          "label": "Ingredients declared",
-          "values": [
-            "45, the full INCI list in order",
-            "The four key groups printed on the jar"
-          ]
-        },
-        {
-          "label": "Suits skin that is",
-          "values": [
-            "Settled, and wants many actives in one step",
-            "Recently irritated, and needs fewer things acting on it"
-          ]
-        },
-        {
-          "label": "Its particular strength",
-          "values": [
-            "Every substance can be checked before use",
-            "Fewer ingredients, so fewer variables while skin is reactive"
-          ]
-        },
-        {
-          "label": "Physical UV filters",
-          "values": [
-            "TiO2 and ZnO present, but no declared SPF, so not a sunscreen substitute",
-            "None"
-          ]
-        },
-        {
-          "label": "Just peeled, or just stopped retinol",
-          "values": [
-            "Wait until skin settles",
-            "This is the better jar for that phase"
-          ]
-        }
-      ],
-      "footnote": "More ingredients does not mean more suitable. For settled skin it is a choice; for reacting skin, <strong>fewer variables is what you need</strong>."
     },
     {
       "type": "order",

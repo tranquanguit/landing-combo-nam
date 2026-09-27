@@ -27,6 +27,30 @@
   "name": "Mocha Ultra EGF Bio-Gel Mask – 100g",
   "shortName": "Ultra EGF Bio-Gel Mask",
   "primaryKeyword": "mocha egf bio gel mask",
+  "storyArchetype": "education-led",
+  "adContext": {
+    "primaryNeed": "Wants to add a recovery step but is not sure it is needed",
+    "audienceSituations": [
+      "Looking for a mask to fix a routine that is already going wrong",
+      "Skin has just come through irritation and needs to be left alone",
+      "Has budget for only one item during a recovery phase"
+    ],
+    "contextHints": [
+      "someone asking which recovery mask is good",
+      "someone asking how often to use a mask in a week",
+      "someone asking whether to prioritise base steps or extras"
+    ],
+    "approvedAngles": [
+      "An extra step, not a required one — stated on the first screen",
+      "Eight ingredients printed on the tube",
+      "Once or twice a week, in the evening"
+    ],
+    "riskyAngles": [
+      "presenting a mask as something that fixes a routine that is wrong",
+      "promising recovery after a fixed number of uses"
+    ],
+    "preferredDestination": "#so-sanh"
+  },
   "seo": {
     "title": "Mocha Ultra EGF Bio-Gel Mask, 100g | Mocha Vietnam",
     "description": "A gel mask with EGF, Epi-On, copper peptide, exosome cica and three liposome nano ceramides. A 100g tube, around 40 uses. {{price}}."
@@ -114,7 +138,8 @@
           "The plump feeling straight after is mostly water just delivered into the outermost layer. It is real, but it <strong>does not last if the daily moisturising step is still missing</strong>.",
           "So when is it worth it? Once the three basics are steady and you want a heavier hydrating step during weeks when skin needs quiet. In that role it does its job well; in any other role it does not."
         ]
-      }
+      },
+      "transition": "If the base routine is already sound, the section below says which situations this extra step suits."
     },
     {
       "type": "cards",

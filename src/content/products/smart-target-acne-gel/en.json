@@ -27,6 +27,31 @@
   "name": "Mocha Smart Target – tamanu oil spot gel, 20g",
   "shortName": "Smart Target spot gel",
   "primaryKeyword": "mocha smart target acne gel",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Needs something to apply to individual spots rather than across the whole face",
+    "audienceSituations": [
+      "Has a few inflamed spots and does not want to change their whole routine",
+      "Has used a spot product before and got dryness and flaking around the area",
+      "Cannot tell apart a product for active spots and one for the marks left behind"
+    ],
+    "contextHints": [
+      "someone asking what to put on an individual spot",
+      "someone asking the difference between a spot product and one for leftover marks",
+      "someone asking where a spot product fits in the routine"
+    ],
+    "approvedAngles": [
+      "A spot gel, not a cream for the whole face",
+      "Seven published ingredients, with the reason it is not for all-over use",
+      "A comparison table separating active spots from the marks left behind"
+    ],
+    "riskyAngles": [
+      "describing the product as managing a skin condition that belongs to clinical care",
+      "promising spots disappear within a fixed timeframe",
+      "using two-point comparison photographs without stating the shooting conditions"
+    ],
+    "preferredDestination": "#so-sanh"
+  },
   "seo": {
     "title": "Mocha Smart Target spot gel, 20g | Mocha Vietnam",
     "description": "Spot gel with Vietnamese tamanu oil, 3% Acnebusters, BHA, sulfur, zinc PCA and Bioecolia. Concentrations printed on the pack. {{price}}."
@@ -116,6 +141,55 @@
           "<strong>Dot the spot, leave it alone, and judge it in days rather than hours.</strong> If breakouts cover a whole cheek or the whole forehead, that is no longer a job for a spot gel — see a dermatologist."
         ]
       }
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Do not mix these two up",
+      "heading": "Active breakout, or a mark left behind?",
+      "intro": "The two tubes look alike and are both 20gr, but they are for two different stages. Using the wrong one does no harm — it simply does nothing.",
+      "items": [
+        "smart-target-acne-gel",
+        "smart-whitening-turmergel"
+      ],
+      "criteria": [
+        {
+          "label": "When to use it",
+          "values": [
+            "While the spot is raised and inflamed",
+            "Once it has healed and only a darker mark remains"
+          ]
+        },
+        {
+          "label": "What it targets",
+          "values": [
+            "Skin with active breakouts",
+            "Pigment left behind after healing"
+          ]
+        },
+        {
+          "label": "Key actives printed on the pack",
+          "values": [
+            "Tamanu oil, Acnebusters 3%, BHA 0.5%, Sulfur, Zinc PCA",
+            "Sabiwhite® 0.3%, Niacinamide 3%, Tranexamic Acid 3%, Glutathione"
+          ]
+        },
+        {
+          "label": "How it goes on",
+          "values": [
+            "Dotted on each spot",
+            "Dotted, or spread thinly over the marked area"
+          ]
+        },
+        {
+          "label": "Can they be used together",
+          "values": [
+            "Yes — on the inflamed spots",
+            "Yes — on healed areas, not overlapping the inflamed ones"
+          ]
+        }
+      ],
+      "footnote": "Plenty of people have both at once on the same face. Using both then makes sense, but on different areas rather than on top of each other.",
+      "transition": "If this tube is the one you need, the section below explains why it is for spots only."
     },
     {
       "type": "cards",
@@ -264,54 +338,6 @@
         }
       ],
       "footnote": "The manufacturer states plainly: <strong>using too much congests the skin, or dries and flakes thinner skin</strong>. This is a product where more does not buy more."
-    },
-    {
-      "type": "compare",
-      "eyebrow": "Do not mix these two up",
-      "heading": "Active breakout, or a mark left behind?",
-      "intro": "The two tubes look alike and are both 20gr, but they are for two different stages. Using the wrong one does no harm — it simply does nothing.",
-      "items": [
-        "smart-target-acne-gel",
-        "smart-whitening-turmergel"
-      ],
-      "criteria": [
-        {
-          "label": "When to use it",
-          "values": [
-            "While the spot is raised and inflamed",
-            "Once it has healed and only a darker mark remains"
-          ]
-        },
-        {
-          "label": "What it targets",
-          "values": [
-            "Skin with active breakouts",
-            "Pigment left behind after healing"
-          ]
-        },
-        {
-          "label": "Key actives printed on the pack",
-          "values": [
-            "Tamanu oil, Acnebusters 3%, BHA 0.5%, Sulfur, Zinc PCA",
-            "Sabiwhite® 0.3%, Niacinamide 3%, Tranexamic Acid 3%, Glutathione"
-          ]
-        },
-        {
-          "label": "How it goes on",
-          "values": [
-            "Dotted on each spot",
-            "Dotted, or spread thinly over the marked area"
-          ]
-        },
-        {
-          "label": "Can they be used together",
-          "values": [
-            "Yes — on the inflamed spots",
-            "Yes — on healed areas, not overlapping the inflamed ones"
-          ]
-        }
-      ],
-      "footnote": "Plenty of people have both at once on the same face. Using both then makes sense, but on different areas rather than on top of each other."
     },
     {
       "type": "order",

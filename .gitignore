@@ -12,3 +12,6 @@ src/content/products/zz-*/
 # Ảnh và HTML cào về từ web của người khác để tham khảo bố cục.
 # Nội dung trong đây có bản quyền của họ — không bao giờ commit.
 refs/
+
+# Ảnh chụp của cổng đáp ứng — sinh lại được bằng `npm run docs:responsive`
+.responsive-shots/

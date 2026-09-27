@@ -1,16 +1,17 @@
 ---
+import type { RhythmProps } from '../../lib/narrative';
 import Section from '../Section.astro';
 import { richText } from '../../lib/richtext';
 
 interface Step { label: string; note?: string; essential?: boolean }
 interface Col { when: 'morning' | 'night'; label: string; steps: Step[] }
-interface Props {
+interface Props extends RhythmProps {
   data: { eyebrow?: string; heading: string; intro?: string; columns: Col[]; footnote?: string };
   id?: string;
 }
-const { data, id, surface = 'bone', space, sameSurface } = Astro.props;
+const { data, id, surface = 'bone', space, sameSurface, role, transition } = Astro.props;
 ---
-<Section id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading}>
+<Section role={role} transition={transition} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading}>
   {data.intro && <p class="rt-intro" set:html={richText(data.intro)} />}
 
   <div class="rt">

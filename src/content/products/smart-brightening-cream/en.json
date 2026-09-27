@@ -56,6 +56,30 @@
   },
   "line": "nam-tham",
   "primaryKeyword": "mocha smart brightening cream",
+  "storyArchetype": "comparison",
+  "adContext": {
+    "primaryNeed": "Deciding between the evening cream on its own and the full two-step routine",
+    "audienceSituations": [
+      "Wants to start with one product before committing to a whole routine",
+      "Already owns the serum step and only needs to add the cream",
+      "Comparing two products in the same line without seeing the difference"
+    ],
+    "contextHints": [
+      "someone asking whether to buy the cream or the serum first",
+      "someone asking whether one step is enough",
+      "someone comparing two products within the same range"
+    ],
+    "approvedAngles": [
+      "The evening cream step, with six actives printed on the carton",
+      "Works on its own, and pairs with the serum step when wanted",
+      "A comparison table saying who suits one step and who should take both"
+    ],
+    "riskyAngles": [
+      "promising an absolute outcome within a fixed timeframe",
+      "claiming superiority over every alternative"
+    ],
+    "preferredDestination": "#so-sanh"
+  },
   "blocks": [
     {
       "type": "hero",
@@ -114,6 +138,55 @@
           "In exchange, you need patience measured in weeks rather than days. And you need sun protection. <strong>Skip sunscreen and no product holds its result</strong> — that is a precondition, not advice."
         ]
       }
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Compare",
+      "heading": "The cream alone, or both steps?",
+      "intro": "Worth answering before you order, not after the first jar runs out. The table below states the difference plainly.",
+      "items": [
+        "smart-brightening-cream",
+        "combo-nam"
+      ],
+      "criteria": [
+        {
+          "label": "What you get",
+          "values": [
+            "One 30gr jar of cream",
+            "The 30gr jar plus the serum"
+          ]
+        },
+        {
+          "label": "What the step does",
+          "values": [
+            "Seals in moisture and holds actives on the skin overnight",
+            "Adds a deeper-absorbing step before the sealing step"
+          ]
+        },
+        {
+          "label": "Best suited to",
+          "values": [
+            "Patchy melasma, pigment still near the surface",
+            "Deep and mixed melasma, with soft edges"
+          ]
+        },
+        {
+          "label": "Steps added to your routine",
+          "values": [
+            "One",
+            "Two"
+          ]
+        },
+        {
+          "label": "If you have never used brightening actives",
+          "values": [
+            "The gentler place to start",
+            "Better split up — use the cream alone for a few weeks first"
+          ]
+        }
+      ],
+      "footnote": "Neither option is <strong>wrong</strong>. The difference is pace, and how many steps you will realistically keep up every day — a two-step routine abandoned halfway is slower than a one-step routine done properly.",
+      "transition": "If you would rather start with one step, below are the six actives in this jar and what each one does."
     },
     {
       "type": "cards",
@@ -248,54 +321,6 @@
         }
       ],
       "footnote": "Patch-test on the neck and watch for <strong>30–45 minutes</strong> before using it on the whole face. Sunscreen in the morning is not optional — without it pigmentation returns whatever product you use."
-    },
-    {
-      "type": "compare",
-      "eyebrow": "Compare",
-      "heading": "The cream alone, or both steps?",
-      "intro": "Worth answering before you order, not after the first jar runs out. The table below states the difference plainly.",
-      "items": [
-        "smart-brightening-cream",
-        "combo-nam"
-      ],
-      "criteria": [
-        {
-          "label": "What you get",
-          "values": [
-            "One 30gr jar of cream",
-            "The 30gr jar plus the serum"
-          ]
-        },
-        {
-          "label": "What the step does",
-          "values": [
-            "Seals in moisture and holds actives on the skin overnight",
-            "Adds a deeper-absorbing step before the sealing step"
-          ]
-        },
-        {
-          "label": "Best suited to",
-          "values": [
-            "Patchy melasma, pigment still near the surface",
-            "Deep and mixed melasma, with soft edges"
-          ]
-        },
-        {
-          "label": "Steps added to your routine",
-          "values": [
-            "One",
-            "Two"
-          ]
-        },
-        {
-          "label": "If you have never used brightening actives",
-          "values": [
-            "The gentler place to start",
-            "Better split up — use the cream alone for a few weeks first"
-          ]
-        }
-      ],
-      "footnote": "Neither option is <strong>wrong</strong>. The difference is pace, and how many steps you will realistically keep up every day — a two-step routine abandoned halfway is slower than a one-step routine done properly."
     },
     {
       "type": "order",

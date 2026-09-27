@@ -28,6 +28,30 @@
   "name": "Mocha UV-Block Plus – kem chống nắng lý hoá 7 màng lọc",
   "shortName": "Kem chống nắng UV-Block Plus",
   "primaryKeyword": "kem chống nắng mocha uv-block plus",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Cần một lọ chống nắng dùng được hằng ngày mà không gây bí da",
+    "audienceSituations": [
+      "Đang dùng hoạt chất làm sáng da và biết rằng thiếu chống nắng thì công cốc",
+      "Đã bỏ dở vài lọ chống nắng vì bết hoặc gây lên mụn",
+      "Đang phân vân giữa kem chống nắng riêng và kem dưỡng có sẵn màng lọc"
+    ],
+    "contextHints": [
+      "người hỏi chọn kem chống nắng nào cho da dầu",
+      "người hỏi có cần chống nắng riêng khi kem dưỡng đã có chỉ số",
+      "người hỏi bôi lại chống nắng giữa ngày thế nào khi đã trang điểm"
+    ],
+    "approvedAngles": [
+      "Bảy màng lọc gọi đúng tên, công khai trên bảng thành phần",
+      "Bước cuối buổi sáng, có hướng dẫn bôi lại giữa ngày",
+      "Kết cấu lý hoá dùng được hằng ngày cho da dầu"
+    ],
+    "riskyAngles": [
+      "hứa chặn hoàn toàn tác động của ánh nắng",
+      "hứa làm mờ sắc tố sẵn có chỉ nhờ bước chống nắng"
+    ],
+    "preferredDestination": "#thanh-phan"
+  },
   "seo": {
     "title": "Kem chống nắng Mocha UV-Block Plus 50gr | Mocha Việt Nam",
     "description": "Kem chống nắng lý hoá SPF 50, 7 màng lọc (5 hoá học + 2 vật lý nano), thêm Niacinamide và rau má. Không hương liệu, không paraben. {{price}}."
@@ -113,6 +137,55 @@
           "Ánh sáng qua cửa kính và ánh sáng xanh từ màn hình không mạnh bằng nắng trực tiếp, nhưng chúng có mặt suốt ngày làm việc. Khoảng thời gian tiếp xúc mới là thứ cộng dồn."
         ]
       }
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Hai cách che chắn",
+      "heading": "Kem chống nắng riêng, hay hũ kem dưỡng có màng lọc?",
+      "intro": "Biovector có Titanium Dioxide và Zinc Oxide trong bảng thành phần, nên câu hỏi này xuất hiện thường xuyên. Câu trả lời ngắn: không thay được.",
+      "items": [
+        "uv-block-sunscreen",
+        "biovector-brightening-cream"
+      ],
+      "criteria": [
+        {
+          "label": "Vai trò được khai trên bao bì",
+          "values": [
+            "Kem chống nắng",
+            "Kem dưỡng"
+          ]
+        },
+        {
+          "label": "Số màng lọc",
+          "values": [
+            "7 màng lọc, 5 hoá học và 2 vật lý nano",
+            "Có TiO2 và ZnO trong danh sách INCI"
+          ]
+        },
+        {
+          "label": "Có chỉ số chống nắng công bố không",
+          "values": [
+            "Có trên vỏ tuýp",
+            "Không công bố SPF hay PA"
+          ]
+        },
+        {
+          "label": "Dùng thay cho nhau được không",
+          "values": [
+            "Đây là bước chống nắng",
+            "Không — không có chỉ số thì không có cơ sở để thay"
+          ]
+        },
+        {
+          "label": "Bôi lại giữa ngày",
+          "values": [
+            "Có, khi ở ngoài trời",
+            "Không áp dụng"
+          ]
+        }
+      ],
+      "footnote": "Một thành phần có mặt trong công thức không đồng nghĩa với một mức bảo vệ đo được. Chỉ số chống nắng là kết quả của cả công thức và quy trình thử nghiệm, không suy ra được từ bảng thành phần.",
+      "transition": "Nếu bạn chọn một lọ chống nắng riêng, phần còn lại của trang nói về bảy màng lọc trong lọ này."
     },
     {
       "type": "cards",
@@ -296,54 +369,6 @@
         }
       ],
       "footnote": "Dùng lại sau mỗi vài giờ nếu bạn ở ngoài trời liên tục, đổ mồ hôi nhiều hoặc tiếp xúc với nước. Một lần thoa buổi sáng không giữ được suốt cả ngày ngoài nắng."
-    },
-    {
-      "type": "compare",
-      "eyebrow": "Hai cách che chắn",
-      "heading": "Kem chống nắng riêng, hay hũ kem dưỡng có màng lọc?",
-      "intro": "Biovector có Titanium Dioxide và Zinc Oxide trong bảng thành phần, nên câu hỏi này xuất hiện thường xuyên. Câu trả lời ngắn: không thay được.",
-      "items": [
-        "uv-block-sunscreen",
-        "biovector-brightening-cream"
-      ],
-      "criteria": [
-        {
-          "label": "Vai trò được khai trên bao bì",
-          "values": [
-            "Kem chống nắng",
-            "Kem dưỡng"
-          ]
-        },
-        {
-          "label": "Số màng lọc",
-          "values": [
-            "7 màng lọc, 5 hoá học và 2 vật lý nano",
-            "Có TiO2 và ZnO trong danh sách INCI"
-          ]
-        },
-        {
-          "label": "Có chỉ số chống nắng công bố không",
-          "values": [
-            "Có trên vỏ tuýp",
-            "Không công bố SPF hay PA"
-          ]
-        },
-        {
-          "label": "Dùng thay cho nhau được không",
-          "values": [
-            "Đây là bước chống nắng",
-            "Không — không có chỉ số thì không có cơ sở để thay"
-          ]
-        },
-        {
-          "label": "Bôi lại giữa ngày",
-          "values": [
-            "Có, khi ở ngoài trời",
-            "Không áp dụng"
-          ]
-        }
-      ],
-      "footnote": "Một thành phần có mặt trong công thức không đồng nghĩa với một mức bảo vệ đo được. Chỉ số chống nắng là kết quả của cả công thức và quy trình thử nghiệm, không suy ra được từ bảng thành phần."
     },
     {
       "type": "order",

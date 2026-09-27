@@ -27,6 +27,30 @@
   "name": "Mocha Bio-Deep Detox & Rebalance – nước tẩy trang micellar",
   "shortName": "Nước tẩy trang Bio-Deep Detox",
   "primaryKeyword": "nước tẩy trang mocha micellar",
+  "storyArchetype": "education-led",
+  "adContext": {
+    "primaryNeed": "Không trang điểm nên chưa rõ có cần bước tẩy trang hay không",
+    "audienceSituations": [
+      "Chỉ bôi kem chống nắng và nghĩ sữa rửa mặt là đủ",
+      "Đang bị mụn ẩn quanh vùng trán và cằm mà không rõ vì sao",
+      "Muốn rút gọn quy trình buổi tối xuống mức ít bước nhất có thể"
+    ],
+    "contextHints": [
+      "người hỏi không trang điểm thì có cần tẩy trang không",
+      "người hỏi nước tẩy trang và sữa rửa mặt khác nhau chỗ nào",
+      "người hỏi thứ tự các bước buổi tối"
+    ],
+    "approvedAngles": [
+      "Bước đầu tiên của buổi tối, trước cả sữa rửa mặt",
+      "Hai thành phần làm sạch, sáu thành phần dưỡng, công bố trên trang",
+      "Ba kiểu ngày, ba mức cần thiết khác nhau"
+    ],
+    "riskyAngles": [
+      "nói bước này thay được hoàn toàn bước rửa mặt",
+      "gán nguyên nhân mụn cho một bước duy nhất trong quy trình"
+    ],
+    "preferredDestination": "#so-sanh"
+  },
   "seo": {
     "title": "Nước tẩy trang Mocha Bio-Deep Detox & Rebalance | Mocha Việt Nam",
     "description": "Nước tẩy trang micellar pH 5.5 với Exosome Cica, Epi-On, dịch gạo Sake lên men, chiết xuất trà xanh và vitamin B5. {{price}}, freeship."
@@ -114,6 +138,55 @@
           "Nước micellar hoạt động theo cách khác sữa rửa mặt: các phân tử micelle bám vào dầu và kéo nó ra, nên nó lấy được thứ mà nước không lấy được. Chai này khai pH 5.5 và dùng được cho cả vùng mắt lẫn môi."
         ]
       }
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Câu hỏi hay gặp nhất",
+      "heading": "Nước tẩy trang có thay được sữa rửa mặt không?",
+      "intro": "Không. Hai bước lấy đi hai thứ khác nhau, và bước nào cũng để lại phần việc cho bước kia.",
+      "items": [
+        "bio-deep-detox-rebalance",
+        "bio-active-cleanser"
+      ],
+      "criteria": [
+        {
+          "label": "Lấy đi thứ gì",
+          "values": [
+            "Lớp trang điểm và kem chống nắng — những thứ không tan trong nước",
+            "Dầu thừa, mồ hôi, bụi bẩn tan trong nước"
+          ]
+        },
+        {
+          "label": "Dùng lúc nào",
+          "values": [
+            "Buổi tối, trước bước rửa mặt",
+            "Sáng và tối"
+          ]
+        },
+        {
+          "label": "Dùng được quanh mắt không",
+          "values": [
+            "Được, kể cả vùng mắt và môi",
+            "Tránh vùng mắt"
+          ]
+        },
+        {
+          "label": "Nếu chỉ dùng một thứ",
+          "values": [
+            "Không đủ — cần rửa lại để lấy phần cặn micelle",
+            "Đủ cho buổi sáng và cho ngày không ra nắng, không trang điểm"
+          ]
+        },
+        {
+          "label": "Dung tích",
+          "values": [
+            "Chai micellar, pH 5.5",
+            "300ml"
+          ]
+        }
+      ],
+      "footnote": "Bỏ bước rửa mặt sau khi tẩy trang thì phần cặn nằm lại trên da qua đêm. Đó là một cách khác để có đúng vấn đề mà bạn vừa bỏ tiền ra tránh.",
+      "transition": "Nếu bạn vẫn cần cả hai bước, phần dưới nói rõ bước này làm gì mà bước kia không làm."
     },
     {
       "type": "cards",
@@ -262,54 +335,6 @@
         }
       ],
       "footnote": "Thử một lượng nhỏ ở vùng cổ và quan sát trong <strong>30–45 phút</strong> trước khi dùng toàn mặt. Không chà xát mạnh: lực tay mạnh gây hại nhiều hơn bất kỳ thành phần nào trong chai."
-    },
-    {
-      "type": "compare",
-      "eyebrow": "Câu hỏi hay gặp nhất",
-      "heading": "Nước tẩy trang có thay được sữa rửa mặt không?",
-      "intro": "Không. Hai bước lấy đi hai thứ khác nhau, và bước nào cũng để lại phần việc cho bước kia.",
-      "items": [
-        "bio-deep-detox-rebalance",
-        "bio-active-cleanser"
-      ],
-      "criteria": [
-        {
-          "label": "Lấy đi thứ gì",
-          "values": [
-            "Lớp trang điểm và kem chống nắng — những thứ không tan trong nước",
-            "Dầu thừa, mồ hôi, bụi bẩn tan trong nước"
-          ]
-        },
-        {
-          "label": "Dùng lúc nào",
-          "values": [
-            "Buổi tối, trước bước rửa mặt",
-            "Sáng và tối"
-          ]
-        },
-        {
-          "label": "Dùng được quanh mắt không",
-          "values": [
-            "Được, kể cả vùng mắt và môi",
-            "Tránh vùng mắt"
-          ]
-        },
-        {
-          "label": "Nếu chỉ dùng một thứ",
-          "values": [
-            "Không đủ — cần rửa lại để lấy phần cặn micelle",
-            "Đủ cho buổi sáng và cho ngày không ra nắng, không trang điểm"
-          ]
-        },
-        {
-          "label": "Dung tích",
-          "values": [
-            "Chai micellar, pH 5.5",
-            "300ml"
-          ]
-        }
-      ],
-      "footnote": "Bỏ bước rửa mặt sau khi tẩy trang thì phần cặn nằm lại trên da qua đêm. Đó là một cách khác để có đúng vấn đề mà bạn vừa bỏ tiền ra tránh."
     },
     {
       "type": "order",

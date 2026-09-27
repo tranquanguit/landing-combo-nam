@@ -45,6 +45,31 @@
   "name": "Mocha Retinol mixPEEL Kit – bộ peel tại nhà 4 món",
   "shortName": "Retinol mixPEEL Kit",
   "primaryKeyword": "bộ peel da tại nhà mocha retinol",
+  "storyArchetype": "education-led",
+  "adContext": {
+    "primaryNeed": "Muốn peel tại nhà nhưng chưa biết mình có thuộc nhóm được làm hay không",
+    "audienceSituations": [
+      "Đã tìm hiểu peel ở phòng khám và đang cân nhắc bản làm tại nhà",
+      "Từng tự dùng hoạt chất mạnh và bị bong tróc quá mức",
+      "Chưa rõ sau liệu trình thì phải chăm sóc thế nào trong hai tuần kế tiếp"
+    ],
+    "contextHints": [
+      "người hỏi peel da tại nhà có an toàn không",
+      "người hỏi cần chuẩn bị gì trước khi peel",
+      "người hỏi sau peel thì kiêng những gì"
+    ],
+    "approvedAngles": [
+      "Bộ bốn món kèm lịch trình ba ngày và hướng dẫn hai tuần sau đó",
+      "Nói rõ năm trường hợp không nên dùng, ngay trước phần đặt hàng",
+      "Thành phần theo công bố của nhà sản xuất"
+    ],
+    "riskyAngles": [
+      "trình bày peel như một bước dưỡng da mạnh hơn bình thường",
+      "bỏ qua nhóm chống chỉ định để câu chuyện gọn hơn",
+      "hứa thay thế được thủ thuật làm ở phòng khám"
+    ],
+    "preferredDestination": "#ai-khong-nen-dung"
+  },
   "seo": {
     "title": "Bộ peel da tại nhà Mocha Retinol mixPEEL 4 món | Mocha",
     "description": "Bộ 4 món với Retinol 1% bọc liposome và 4 loại vi tảo. Liệu trình 3 ngày. KHÔNG dùng khi mang thai hoặc cho con bú. {{price}}."
@@ -132,7 +157,8 @@
           "Bộ này được nhà sản xuất thiết kế cho ba ngày, và ba ngày là ba ngày. Kéo dài thêm vì thấy chưa đủ bong là cách nhanh nhất để đi từ một liệu trình có kiểm soát sang một tổn thương.",
           "Và vì nó lấy đi một phần lớp bảo vệ bề mặt, khoảng thời gian ngay sau đó là lúc da dễ tổn thương nhất. Chống nắng trong giai đoạn này không phải lời khuyên mà là <strong>điều kiện</strong> — nếu bạn không thể tránh nắng trong hai tuần tới, hãy lùi lịch peel lại."
         ]
-      }
+      },
+      "transition": "Vì đây là loại việc khác, danh sách dưới đây quan trọng hơn phần giới thiệu sản phẩm."
     },
     {
       "type": "cards",
@@ -167,7 +193,8 @@
           "body": "Da sẽ khô, căng và có thể sẫm màu tạm thời trước khi bong. Đừng bắt đầu liệu trình ngay trước một dịp bạn cần da trông đẹp nhất.",
           "meta": "Nên hoãn lại"
         }
-      ]
+      ],
+      "narrativeRole": "safety"
     },
     {
       "type": "ingredients",
@@ -242,7 +269,8 @@
           "note": "Khi da hết nhạy và hết bong. Quay lại sớm hơn thì đưa hoạt chất vào một hàng rào chưa dựng xong."
         }
       ],
-      "footnote": "Các mốc trên lấy từ hướng dẫn của nhà sản xuất cho liệu trình ba ngày và từ nguyên tắc chăm sóc sau peel. <strong>Cơ địa mỗi người khác nhau</strong>, và nếu da rát kéo dài, đỏ đậm hoặc rỉ dịch thì dừng ngay và đi khám — đó không còn là biểu hiện bình thường."
+      "footnote": "Các mốc trên lấy từ hướng dẫn của nhà sản xuất cho liệu trình ba ngày và từ nguyên tắc chăm sóc sau peel. <strong>Cơ địa mỗi người khác nhau</strong>, và nếu da rát kéo dài, đỏ đậm hoặc rỉ dịch thì dừng ngay và đi khám — đó không còn là biểu hiện bình thường.",
+      "transition": "Lịch trình chỉ đúng nếu làm đúng thao tác. Phần dưới là ba ngày, từng bước một."
     },
     {
       "type": "steps",

@@ -28,6 +28,30 @@
   "name": "Mocha Bio-Active Cleanser – sữa rửa mặt Cera-B Complex 300ml",
   "shortName": "Sữa rửa mặt Bio-Active Cleanser",
   "primaryKeyword": "sữa rửa mặt mocha bio-active cleanser",
+  "storyArchetype": "education-led",
+  "adContext": {
+    "primaryNeed": "Muốn đổi sữa rửa mặt vì da căng rát sau khi rửa",
+    "audienceSituations": [
+      "Đang dùng sản phẩm tạo cảm giác sạch kin kít và nghĩ đó là dấu hiệu tốt",
+      "Da đổi trạng thái theo mùa và không biết chọn sữa rửa mặt theo tiêu chí nào",
+      "Các bước dưỡng phía sau không thấm, nghi bước làm sạch có vấn đề"
+    ],
+    "contextHints": [
+      "người hỏi vì sao rửa mặt xong da bị căng rát",
+      "người hỏi chọn sữa rửa mặt theo loại da thế nào",
+      "người hỏi rửa mặt mấy lần một ngày là đủ"
+    ],
+    "approvedAngles": [
+      "Bốn hoạt chất in trên vỏ, và bốn thứ không có trong công thức",
+      "Bước đầu tiên, và là bước quyết định các bước sau có thấm không",
+      "Ba loại da, ba cách dùng khác nhau, nói rõ ngay trên trang"
+    ],
+    "riskyAngles": [
+      "hứa làm sạch sâu tới mức thay được một bước chuyên biệt",
+      "mô tả cảm giác căng rát của sản phẩm khác như một tác hại đã được chứng minh"
+    ],
+    "preferredDestination": "#thanh-phan"
+  },
   "seo": {
     "title": "Sữa rửa mặt Mocha Bio-Active Cleanser 300ml | Mocha Việt Nam",
     "description": "Sữa rửa mặt pH 5.5 với Pro-vitamin B5, Nano-Ceramide, Lactobacillus ferment. Không sulfate, không cồn, không paraben, không silicone. {{price}}."
@@ -114,7 +138,8 @@
           "Da phản ứng bằng cách tiết bù nhiều dầu hơn. Đó là lý do <strong>rửa mặt nhiều lần vì da dầu thường làm da dầu hơn</strong>, chứ không bớt đi.",
           "Chai này khai bốn dấu không trên vỏ — không sulfate, không cồn, không paraben, không silicone — và bổ sung Ceramide cùng Pro-vitamin B5 vào chính bước lấy đi. Không có gì thần kỳ ở đây; chỉ là bước lặp lại nhiều nhất trong ngày thì đáng làm cho đúng."
         ]
-      }
+      },
+      "transition": "Nếu cảm giác sau khi rửa là thước đo sai, thì thước đo đúng nằm ở bảng thành phần bên dưới."
     },
     {
       "type": "cards",

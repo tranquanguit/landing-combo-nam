@@ -27,6 +27,30 @@
   "name": "Mocha Biovector Brightening Cream – kem dưỡng 30gr",
   "shortName": "Biovector Brightening Cream",
   "primaryKeyword": "kem dưỡng mocha biovector",
+  "storyArchetype": "comparison",
+  "adContext": {
+    "primaryNeed": "Muốn biết chính xác trong hũ kem có gì trước khi bỏ tiền",
+    "audienceSituations": [
+      "Đã gặp quá nhiều nhãn ghi “chiết xuất độc quyền” mà không nói rõ chất gì",
+      "Da nhạy cảm nên cần đọc đủ danh sách trước khi thử",
+      "Đang chọn giữa hai hũ kem của cùng thương hiệu cho hai giai đoạn khác nhau"
+    ],
+    "contextHints": [
+      "người hỏi làm sao đọc bảng thành phần mỹ phẩm",
+      "người hỏi kem dưỡng nào công bố đầy đủ thành phần",
+      "người so sánh hai hũ kem trong cùng một thương hiệu"
+    ],
+    "approvedAngles": [
+      "Công bố đủ cả 45 thành phần theo INCI",
+      "Mười hai thành phần đáng nói, đặt trong danh sách đầy đủ",
+      "Bước kem, sau serum và trước kem chống nắng"
+    ],
+    "riskyAngles": [
+      "biến việc công bố thành phần thành lời hứa về kết quả",
+      "khẳng định các thương hiệu khác cố tình giấu thông tin"
+    ],
+    "preferredDestination": "#so-sanh"
+  },
   "seo": {
     "title": "Kem dưỡng Mocha Biovector Brightening Cream 30gr | Mocha",
     "description": "Sản phẩm duy nhất của Mocha công bố trọn vẹn danh sách INCI: Niacinamide, bộ ba rau má, nghệ, cúc bất tử, dầu mù u. {{price}}."
@@ -115,6 +139,55 @@
           "Hũ này công bố <strong>toàn bộ 45 thành phần theo đúng thứ tự INCI</strong>. Chúng tôi không nói như vậy nghĩa là công thức tốt hơn — chỉ nói rằng bạn có đủ dữ kiện để tự đánh giá, kể cả khi so với sản phẩm của hãng khác."
         ]
       }
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Hai hũ kem, khác nhau ở đâu",
+      "heading": "Hũ nào cho giai đoạn nào?",
+      "intro": "Cả hai đều là bước kem dưỡng 30gr. Khác nhau ở số lượng thành phần và ở giai đoạn da phù hợp.",
+      "items": [
+        "biovector-brightening-cream",
+        "collagen-peptide-cream"
+      ],
+      "criteria": [
+        {
+          "label": "Số thành phần công bố",
+          "values": [
+            "45 chất, đủ danh sách INCI theo thứ tự",
+            "Bốn nhóm chính in trên hũ"
+          ]
+        },
+        {
+          "label": "Hợp với giai đoạn",
+          "values": [
+            "Da đang ổn, muốn nhiều hoạt chất trong một bước",
+            "Da vừa kích ứng, đang cần ít thứ tác động"
+          ]
+        },
+        {
+          "label": "Điểm mạnh riêng",
+          "values": [
+            "Tra được từng chất trước khi dùng",
+            "Ít thành phần nên ít biến số khi da đang nhạy"
+          ]
+        },
+        {
+          "label": "Có màng lọc vật lý không",
+          "values": [
+            "Có TiO2 và ZnO, nhưng không công bố SPF nên không dùng thay chống nắng",
+            "Không"
+          ]
+        },
+        {
+          "label": "Nếu bạn vừa peel hoặc vừa dùng retinol",
+          "values": [
+            "Đợi da ổn lại rồi hãy dùng",
+            "Đây là hũ hợp hơn cho giai đoạn đó"
+          ]
+        }
+      ],
+      "footnote": "Nhiều thành phần hơn không có nghĩa là phù hợp hơn. Với da đang yên thì đó là lựa chọn; với da đang phản ứng thì <strong>ít biến số lại là điều bạn cần</strong>.",
+      "transition": "Chọn xong hũ nào hợp giai đoạn của mình, phần dưới là mười hai thành phần đáng nói trong danh sách đầy đủ."
     },
     {
       "type": "cards",
@@ -280,54 +353,6 @@
         }
       ],
       "footnote": "Công thức có Titanium Dioxide và Zinc Oxide với lượng nhỏ, nhưng đây <strong>không phải kem chống nắng</strong> và không thay thế được bước chống nắng buổi sáng."
-    },
-    {
-      "type": "compare",
-      "eyebrow": "Hai hũ kem, khác nhau ở đâu",
-      "heading": "Hũ nào cho giai đoạn nào?",
-      "intro": "Cả hai đều là bước kem dưỡng 30gr. Khác nhau ở số lượng thành phần và ở giai đoạn da phù hợp.",
-      "items": [
-        "biovector-brightening-cream",
-        "collagen-peptide-cream"
-      ],
-      "criteria": [
-        {
-          "label": "Số thành phần công bố",
-          "values": [
-            "45 chất, đủ danh sách INCI theo thứ tự",
-            "Bốn nhóm chính in trên hũ"
-          ]
-        },
-        {
-          "label": "Hợp với giai đoạn",
-          "values": [
-            "Da đang ổn, muốn nhiều hoạt chất trong một bước",
-            "Da vừa kích ứng, đang cần ít thứ tác động"
-          ]
-        },
-        {
-          "label": "Điểm mạnh riêng",
-          "values": [
-            "Tra được từng chất trước khi dùng",
-            "Ít thành phần nên ít biến số khi da đang nhạy"
-          ]
-        },
-        {
-          "label": "Có màng lọc vật lý không",
-          "values": [
-            "Có TiO2 và ZnO, nhưng không công bố SPF nên không dùng thay chống nắng",
-            "Không"
-          ]
-        },
-        {
-          "label": "Nếu bạn vừa peel hoặc vừa dùng retinol",
-          "values": [
-            "Đợi da ổn lại rồi hãy dùng",
-            "Đây là hũ hợp hơn cho giai đoạn đó"
-          ]
-        }
-      ],
-      "footnote": "Nhiều thành phần hơn không có nghĩa là phù hợp hơn. Với da đang yên thì đó là lựa chọn; với da đang phản ứng thì <strong>ít biến số lại là điều bạn cần</strong>."
     },
     {
       "type": "order",

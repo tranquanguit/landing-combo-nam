@@ -429,7 +429,7 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
       /* Nguồn quảng cáo: đọc từ URL, không từ cookie. Đây là thông tin về chiến
          dịch, không phải về người — nên không cần đồng ý theo dõi. */
       const q = new URLSearchParams(location.search);
-      for (const k of ['Source', 'Medium', 'Campaign']) {
+      for (const k of ['Source', 'Medium', 'Campaign', 'Content', 'Term']) {
         const v = q.get(`utm_${k.toLowerCase()}`);
         if (v) payload[`utm${k}`] = v.slice(0, 120);
       }
@@ -477,6 +477,12 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
           // Chỉ phát thông tin phi định danh: pixel quảng cáo (GA4, Meta, TikTok) chạy
       // cùng trang và bất kỳ script nào cũng nghe được sự kiện này. Bản trước gửi
       // cả tên, số điện thoại và địa chỉ ra window.
+      /* CHỈ phát gói hàng. Đã thử gắn thêm `orderCode` làm id chống trùng và cổng
+         "mocha:lead chỉ mang gói hàng" chặn lại — đúng. Mã đơn là định danh của
+         một giao dịch, còn sự kiện này thì MỌI script trên trang đều nghe được;
+         phát nó ra là tự mở một đường nối người xem với một đơn hàng.
+         Chống trùng chuyển đổi làm ở PHÍA MÁY CHỦ, nơi `order_code` đã có sẵn
+         trong bảng orders và không phải đi qua trình duyệt. */
       window.dispatchEvent(new CustomEvent('mocha:lead', { detail: { pack: payload.pack } }));
         })
         .catch(() => {

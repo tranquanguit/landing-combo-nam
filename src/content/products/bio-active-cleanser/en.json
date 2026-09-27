@@ -28,6 +28,30 @@
   "name": "Mocha Bio-Active Cleanser – Cera-B Complex face wash, 300ml",
   "shortName": "Bio-Active Cleanser",
   "primaryKeyword": "mocha bio-active cleanser",
+  "storyArchetype": "education-led",
+  "adContext": {
+    "primaryNeed": "Wants to change cleanser because their skin feels tight afterwards",
+    "audienceSituations": [
+      "Uses something that leaves a squeaky-clean feel and reads that as a good sign",
+      "Skin shifts with the seasons and they do not know what to judge a cleanser on",
+      "Later steps are not absorbing and they suspect the cleansing step"
+    ],
+    "contextHints": [
+      "someone asking why their skin feels tight after washing",
+      "someone asking how to choose a cleanser for their skin type",
+      "someone asking how many times a day to cleanse"
+    ],
+    "approvedAngles": [
+      "Four actives printed on the bottle, and four things the formula leaves out",
+      "The first step, and the one that decides whether later steps absorb",
+      "Three skin types, three different ways to use it, stated on the page"
+    ],
+    "riskyAngles": [
+      "claiming a depth of cleansing that replaces a dedicated step",
+      "presenting the tight feeling from other products as a proven harm"
+    ],
+    "preferredDestination": "#thanh-phan"
+  },
   "seo": {
     "title": "Mocha Bio-Active Cleanser, 300ml | Mocha Vietnam",
     "description": "pH 5.5 face wash with pro-vitamin B5, nano-ceramide and lactobacillus ferment. Sulfate-free, alcohol-free, paraben-free, silicone-free. {{price}}."
@@ -115,7 +139,8 @@
           "Skin answers by producing more oil. Which is why <strong>washing more often because your skin is oily usually makes it oilier</strong>, not less.",
           "This bottle states four absences on the pack — no sulfates, no alcohol, no parabens, no silicones — and puts Ceramide and Pro-vitamin B5 into the step that takes things away. Nothing miraculous about it. The step you repeat most in a day is simply worth getting right."
         ]
-      }
+      },
+      "transition": "If how your skin feels afterwards is the wrong measure, the right one is in the ingredient table below."
     },
     {
       "type": "cards",

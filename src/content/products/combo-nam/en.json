@@ -113,19 +113,6 @@
       ]
     },
     {
-      "type": "offer",
-      "eyebrow": "The duo",
-      "heading": "Both steps together, cheaper than buying them apart",
-      "body": "The duo's list price is {{compareAtPrice}}. It currently sells at <strong>{{price}}</strong> and adds the SPF50 sunscreen and the cleanser on top.",
-      "validUntil": "2026-12-31",
-      "notes": [
-        "Sunscreen included",
-        "Cleanser included",
-        "Ships worldwide from Vietnam",
-        "Prices are shown in Vietnamese đồng (VND). International shipping is quoted per country before you pay — duties and import taxes are not included in the price above."
-      ]
-    },
-    {
       "type": "problem",
       "eyebrow": "The problem",
       "heading": "Why dark spots fade and then come straight back",
@@ -142,7 +129,8 @@
           "This routine takes a different route: it limits the signal that triggers pigment production, supports the turnover of discoloured cells, and rebuilds the skin barrier so the improvement holds.",
           "Which also means <strong>progress is measured in weeks, not days</strong>. The realistic timelines for each type of discolouration are further down this page, because setting the wrong expectation is how people end up disappointed."
         ]
-      }
+      },
+      "transition": "Melasma is not one condition. Before the formula matters, you need to know which kind you are looking at."
     },
     {
       "type": "cards",
@@ -289,7 +277,8 @@
           "role": "Black truffle extract, in a cream that stays on the skin overnight.",
           "suitedFor": "Dull skin"
         }
-      ]
+      ],
+      "transition": "The table above says what is in the box. What follows says how to use it, and in what order."
     },
     {
       "type": "steps",
@@ -400,6 +389,20 @@
           "body": "Even the fastest-responding group takes around four weeks. If you need results for a deadline sooner than that, this is not the right thing and we would rather you knew now.",
           "meta": "Think again"
         }
+      ],
+      "narrativeRole": "safety"
+    },
+    {
+      "type": "offer",
+      "eyebrow": "The duo",
+      "heading": "Both steps together, cheaper than buying them apart",
+      "body": "The duo's list price is {{compareAtPrice}}. It currently sells at <strong>{{price}}</strong> and adds the SPF50 sunscreen and the cleanser on top.",
+      "validUntil": "2026-12-31",
+      "notes": [
+        "Sunscreen included",
+        "Cleanser included",
+        "Ships worldwide from Vietnam",
+        "Prices are shown in Vietnamese đồng (VND). International shipping is quoted per country before you pay — duties and import taxes are not included in the price above."
       ]
     },
     {
@@ -509,6 +512,31 @@
   ],
   "line": "nam-tham",
   "primaryKeyword": "mocha dark spot cream and serum set",
+  "storyArchetype": "bundle",
+  "adContext": {
+    "primaryNeed": "Wants a ready-made two-step routine for melasma after single products kept losing ground",
+    "audienceSituations": [
+      "Weighing up buying the two products separately against buying them as a set",
+      "Has used a single brightening cream for months without holding the result",
+      "Noticed patches across both cheekbones after pregnancy and does not know where to start"
+    ],
+    "contextHints": [
+      "someone asking where to start with a melasma routine",
+      "someone comparing a bundle against buying each product on its own",
+      "someone asking whether the cream or the serum goes first"
+    ],
+    "approvedAngles": [
+      "A cream and a serum used together, with every active percentage published",
+      "Two steps for melasma-prone skin, with separate morning and evening routines",
+      "The set costs less than the two products bought separately"
+    ],
+    "riskyAngles": [
+      "promising an absolute outcome within a fixed timeframe",
+      "comparing the result to an in-clinic procedure",
+      "borrowing the authority of medical professionals"
+    ],
+    "preferredDestination": "#thanh-phan"
+  },
   "relatedArticles": [
     "nam-noi-tiet-la-gi"
   ]
