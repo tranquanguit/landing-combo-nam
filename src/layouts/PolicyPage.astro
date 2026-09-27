@@ -137,7 +137,7 @@ const sections = d.sections.map((s: any, i: number) => ({ ...s, id: s.id ?? `muc
   }
   .toc a:hover { color: var(--cobalt); }
 
-  .prose { max-width: 68ch; }
+  .prose { max-width: var(--measure-prose); }
   .prose section + section { margin-top: var(--s-6); }
   .prose h2 {
     font-size: var(--t-md); letter-spacing: -0.015em;

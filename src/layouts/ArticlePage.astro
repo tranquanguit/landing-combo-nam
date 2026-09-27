@@ -162,7 +162,7 @@ const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath
   }
   .toc a:hover { color: var(--cobalt); }
 
-  .prose { max-width: 68ch; }
+  .prose { max-width: var(--measure-prose); }
   .prose section + section { margin-top: var(--s-6); }
   .prose h2 {
     font-size: var(--t-lg); letter-spacing: -0.02em;

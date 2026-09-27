@@ -32,7 +32,13 @@ const { data, id = 'faq', surface = 'paper', space, sameSurface, role, transitio
     transform: rotate(45deg);
   }
   details[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
-  .answer { padding: 0 var(--s-4) var(--s-4); color: var(--ink-muted); font-size: var(--t-sm); }
+  /* Giới hạn bề rộng như văn xuôi: câu trả lời FAQ dài nhất ở đây là 97 ký tự
+     một dòng, đủ để mắt lạc khi quét về đầu dòng sau. Token tính bằng ch nên
+     tự co theo cỡ chữ nhỏ hơn của khối này, không cần con số riêng. */
+  .answer {
+    padding: 0 var(--s-4) var(--s-4); color: var(--ink-muted);
+    font-size: var(--t-sm); max-width: var(--measure-prose);
+  }
 
   /* Mở ra trượt xuống thay vì nhảy phựt.
      interpolate-size + calc-size là cách duy nhất hiện nay để chuyển động tới

@@ -92,6 +92,20 @@
 
   --wrap: 1200px;
   --measure: 58ch;
+
+  /* Bề rộng cột văn xuôi dài.
+
+     Đơn vị ch KHÔNG phải một ký tự. Nó là bề rộng chữ số 0, mà ở Be Vietnam
+     Pro chữ số rất rộng: đo ở 16px thì 1ch = 10,82px còn ký tự tiếng Việt
+     trung bình chỉ 7,96px. Tức là 1ch = 1,36 ký tự thật.
+
+     Vì thế .prose khai max-width: 68ch với ý "68 ký tự" lại cho ra một cột
+     735px = 92 ký tự thật, vượt xa mức 45-75 mà mắt đọc thoải mái. Chênh 35%
+     giữa điều viết ra và điều hiện lên.
+
+     Token này đặt theo ý định gốc: 51ch = 552px = khoảng 69 ký tự thật.
+     Đổi font chữ thì phải đo lại, vì tỉ lệ 1,36 là của riêng font này. */
+  --measure-prose: 51ch;
   --header-h: 60px;
 }
 

@@ -30,7 +30,7 @@ const links = section.links ?? [];
   /* Văn bản dài đọc bằng mắt, không quét bằng mắt: dòng ngắn hơn phần còn lại
      của trang, và khoảng cách dòng rộng hơn. 68 ký tự là mức dễ đọc nhất cho
      tiếng Việt có dấu, vốn chiếm chiều cao dòng lớn hơn tiếng Anh. */
-  .prose { max-width: 68ch; }
+  .prose { max-width: var(--measure-prose); }
   .prose p { margin: 0 0 var(--s-5); line-height: 1.72; font-size: var(--t-base); }
   .prose p:last-child { margin-bottom: 0; }
 
