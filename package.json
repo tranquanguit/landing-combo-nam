@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "check": "astro check --minimumFailingSeverity error",
     "test:order": "node tests/order-endpoint.mjs",
-    "test:guards": "node --experimental-strip-types tests/money-guard.mjs && node --experimental-strip-types tests/claims-guard.mjs && node --experimental-strip-types tests/richtext.mjs && node --experimental-strip-types tests/personal-data.mjs && node --experimental-strip-types tests/pattern-lint.mjs && npm run test:schema && node --experimental-strip-types tests/ui-strings.mjs && npm run test:contrast && npm run test:budget && npm run test:brand && npm run test:offer && npm run test:orders-api",
+    "test:guards": "node --experimental-strip-types tests/money-guard.mjs && node --experimental-strip-types tests/claims-guard.mjs && node --experimental-strip-types tests/richtext.mjs && node --experimental-strip-types tests/personal-data.mjs && node --experimental-strip-types tests/pattern-lint.mjs && npm run test:schema && node --experimental-strip-types tests/ui-strings.mjs && npm run test:contrast && npm run test:budget && npm run test:brand && npm run test:offer && npm run test:ads && npm run test:narrative && npm run test:orders-api",
     "docs:fields": "node --experimental-strip-types --import ./scripts/shim/register.mjs scripts/gen-field-docs.mjs",
     "test:schema": "node --experimental-strip-types --import ./scripts/shim/register.mjs tests/schema-gate.mjs",
     "test:budget": "node tests/budget-gate.mjs",
@@ -25,7 +25,15 @@
     "docs:assets": "node scripts/check-assets.mjs --md docs/anh-can-co.md",
     "test:contrast": "node scripts/check-contrast.mjs",
     "test:inp": "node tests/inp.mjs",
-    "check:rhythm": "node scripts/check-rhythm.mjs"
+    "check:rhythm": "node scripts/check-rhythm.mjs",
+    "check:ads": "node --experimental-strip-types scripts/check-ad-readiness.mjs",
+    "docs:ads": "node --experimental-strip-types scripts/check-ad-readiness.mjs --md docs/ad-readiness.md",
+    "test:ads": "node --experimental-strip-types tests/ad-safety.mjs && node --experimental-strip-types scripts/check-ad-readiness.mjs --strict",
+    "test:narrative": "node --experimental-strip-types tests/narrative.mjs",
+    "check:responsive": "node scripts/check-responsive.mjs",
+    "docs:responsive": "node scripts/check-responsive.mjs --md docs/responsive-qa.md --shots .responsive-shots",
+    "check:gaps": "node --experimental-strip-types scripts/check-content-gaps.mjs",
+    "docs:gaps": "node --experimental-strip-types scripts/check-content-gaps.mjs --md docs/content-gaps.md"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
