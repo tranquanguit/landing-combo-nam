@@ -77,7 +77,7 @@
       "type": "hero",
       "eyebrow": "Kem + serum dùng cùng nhau, cho da nám",
       "heading": "Hai bước chăm sóc da nám, công thức công khai từng tỉ lệ",
-      "lead": "Serum <strong>Smart First Care</strong> công bố 4-butylresorcinol 1000ppm, Niacinamide 4%, Bio-Placenta 1%; kem <strong>Smart Brightening X3</strong> mang Tranexamic Acid, NIO-NAG, Bakuchiol. Dành cho da đang gặp nám mảng, nám chân sâu và nám hỗn hợp.",
+      "lead": "Serum <strong>Smart First Care</strong> ghi rõ 4-butylresorcinol 1000ppm, Niacinamide 4%, Bio-Placenta 1%; kem <strong>Smart Brightening X3</strong> có Tranexamic Acid, NIO-NAG, Bakuchiol. Dùng cho da nám mảng, nám chân sâu và nám hỗn hợp.",
       "usp": [
         {
           "text": "<strong>Không corticoid, không hydroquinone, không cồn khô</strong>",
@@ -123,10 +123,10 @@
         "“Không biết mua online thế nào cho khỏi trúng hàng giả.”"
       ],
       "explainer": {
-        "heading": "Phần lớn sản phẩm chỉ tác động lớp ngoài cùng",
+        "heading": "Phần lớn sản phẩm chỉ chạm tới lớp da ngoài cùng",
         "body": [
-          "Khi chỉ làm sáng lớp biểu bì, tế bào hắc tố bên dưới vẫn tiếp tục sản sinh melanin. Ngừng dùng là sắc tố quay lại, đôi khi đậm hơn trước.",
-          "Combo Nám Mocha đi theo hướng khác: vừa hạn chế tín hiệu tạo sắc tố, vừa hỗ trợ thay mới tế bào sạm màu, đồng thời củng cố hàng rào bảo vệ da để hạn chế sạm màu quay lại.",
+          "Chỉ làm sáng được lớp da ngoài cùng thì lớp tế bào sinh sắc tố nằm bên dưới vẫn làm việc y như cũ. Ngưng dùng là sắc tố quay lại, có khi còn đậm hơn lúc đầu.",
+          "Combo Nám Mocha đi hướng khác: vừa ghìm bớt tín hiệu sinh sắc tố, vừa giúp da thay lớp tế bào đã sạm, vừa giữ cho hàng rào bảo vệ da khỏi yếu đi để sạm màu đỡ quay lại.",
           "Điều này cũng có nghĩa là <strong>kết quả đến theo tuần chứ không theo ngày</strong>. Mốc thời gian thực tế cho từng loại nám nằm ở phần dưới."
         ]
       },
@@ -136,12 +136,12 @@
       "type": "cards",
       "eyebrow": "Nhận diện",
       "heading": "Ba loại nám và mốc thời gian thực tế",
-      "intro": "Xác định đúng loại nám giúp bạn kỳ vọng đúng. Đây cũng là lý do chúng tôi không hứa một con số chung cho tất cả mọi người.",
+      "intro": "Biết đúng loại nám thì mới trông đợi đúng. Cũng vì thế chúng tôi không hứa một con số chung cho tất cả mọi người.",
       "columns": 3,
       "items": [
         {
           "heading": "Nám mảng (biểu bì)",
-          "body": "Mảng nâu nhạt đến nâu sẫm, bờ rõ, nằm ở lớp biểu bì. Thường liên quan tia UV, thay đổi nội tiết và mỹ phẩm chứa corticoid.",
+          "body": "Mảng nâu nhạt tới nâu sẫm, bờ rõ, nằm ở lớp da ngoài. Thường dính tới nắng, nội tiết thay đổi, và mỹ phẩm có corticoid — thứ hay gọi là kem trộn.",
           "meta": "Cải thiện tham khảo: 4–8 tuần",
           "image": {
             "src": "/images/nam_01.webp",
@@ -150,7 +150,7 @@
         },
         {
           "heading": "Nám chân sâu (trung bì)",
-          "body": "Nốt hoặc mảng nâu xám, bờ mờ, sắc tố nằm sâu ở trung bì. Liên quan di truyền, nội tiết, ánh nắng và căng thẳng kéo dài.",
+          "body": "Nốt hoặc mảng nâu xám, bờ nhoè, sắc tố nằm ở lớp da sâu hơn. Dính tới di truyền, nội tiết, nắng, và cả chuyện căng thẳng kéo dài.",
           "meta": "Cải thiện tham khảo: 8–12 tuần",
           "image": {
             "src": "/images/nam_02.webp",
@@ -159,7 +159,7 @@
         },
         {
           "heading": "Nám hỗn hợp",
-          "body": "Có cả vùng sẫm màu rõ ràng lẫn vùng loang lổ mờ nhạt. Cần kiên trì lâu hơn và chống nắng nghiêm ngặt hơn.",
+          "body": "Có cả vùng sẫm rõ lẫn vùng loang lổ mờ. Cần kiên trì lâu hơn và che nắng chặt tay hơn.",
           "meta": "Cải thiện tham khảo: 8–16 tuần",
           "image": {
             "src": "/images/nam_03.webp",
@@ -173,7 +173,7 @@
       "id": "moc-thoi-gian",
       "eyebrow": "Kỳ vọng đúng",
       "heading": "Ba nhóm, ba khoảng thời gian rất khác nhau",
-      "intro": "Đây là lý do chúng tôi không đưa một con số chung. Đặt kỳ vọng của nhóm đầu lên nhóm cuối là cách nhanh nhất để bỏ dở giữa chừng rồi kết luận rằng không sản phẩm nào có tác dụng.",
+      "intro": "Vì thế chúng tôi không đưa một con số chung. Lấy mốc của nhóm đầu áp lên nhóm cuối là cách nhanh nhất để bỏ dở giữa chừng, rồi kết luận rằng chẳng sản phẩm nào ăn thua.",
       "max": 16,
       "unitLabel": "tuần",
       "items": [
@@ -181,13 +181,13 @@
           "label": "Nám mảng (biểu bì)",
           "from": 4,
           "to": 8,
-          "note": "Sắc tố nằm ở lớp ngoài cùng nên phản ứng sớm nhất."
+          "note": "Sắc tố nằm ngay lớp ngoài nên chuyển sớm nhất."
         },
         {
           "label": "Nám chân sâu (trung bì)",
           "from": 8,
           "to": 12,
-          "note": "Sắc tố nằm sâu hơn, cần thêm thời gian cho quá trình thay mới tế bào."
+          "note": "Sắc tố nằm sâu hơn, phải chờ da thay xong lớp tế bào mới."
         },
         {
           "label": "Nám hỗn hợp",
@@ -351,7 +351,7 @@
             },
             {
               "label": "Sữa rửa mặt Bio-Active Cleanser",
-              "note": "Da còn ẩm hoặc còn cặn đều làm giảm mức thẩm thấu."
+              "note": "Da còn ướt hoặc còn cặn thì serum thấm kém."
             },
             {
               "label": "Serum Smart First Care",
@@ -359,7 +359,7 @@
             },
             {
               "label": "Kem Smart Brightening X3",
-              "note": "Bước khoá lại, giữ dưỡng chất ở trên da qua đêm."
+              "note": "Bước khoá lại, giữ dưỡng chất nằm trên da suốt đêm."
             }
           ]
         }

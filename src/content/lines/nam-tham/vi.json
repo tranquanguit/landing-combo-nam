@@ -13,7 +13,7 @@
   "heading": "Da nám và thâm sạm",
   "navLabel": "Nám & thâm sạm",
   "order": 1,
-  "lead": "Nám mảng, nám chân sâu và nám hỗn hợp phản ứng khác nhau với cùng một hoạt chất. Trang này giải thích cách phân biệt, rồi mới nói tới sản phẩm.",
+  "lead": "Nám mảng, nám chân sâu và nám hỗn hợp không giống nhau, nên cùng một lọ kem cho ra ba kết quả khác nhau. Trang này nói cách nhận ra loại của bạn trước, rồi mới nói tới sản phẩm.",
   "products": [
     "combo-nam",
     "smart-first-care-serum",
@@ -22,30 +22,30 @@
   "sections": [
     {
       "id": "ba-loai-nam",
-      "heading": "Ba loại nám, và vì sao chúng không giống nhau",
+      "heading": "Ba loại nám, và cách nhìn ra mình thuộc loại nào",
       "body": [
-        "Nám mảng nằm nông, thường thành từng vùng rộng ở hai gò má, màu nâu nhạt và ranh giới không rõ. Đây là loại phản ứng nhanh nhất với việc chống nắng nghiêm túc cộng hoạt chất làm sáng.",
-        "Nám chân sâu (thường gọi là nám đốm) nằm sâu hơn trong da, hiện thành những chấm tròn nhỏ, màu sẫm và ranh giới rõ. Loại này thay đổi chậm và gần như không cải thiện nếu chỉ dùng sản phẩm bôi mà bỏ chống nắng.",
-        "Nám hỗn hợp là hai loại trên xuất hiện cùng lúc trên một khuôn mặt, và đó cũng là trường hợp phổ biến nhất ở phụ nữ Việt Nam sau tuổi 30. Nhìn vào gương khó phân biệt; soi dưới ánh sáng chéo thì dễ hơn.",
-        "Điều đáng nói là phần lớn quảng cáo mỹ phẩm nói về “nám” như một thứ duy nhất, rồi đưa ra một mốc thời gian duy nhất. Ba loại da khác nhau mà chung một lời hứa thì ít nhất hai trong ba sẽ thất vọng."
+        "Nám mảng nằm nông, loang thành từng vùng rộng ở hai bên gò má, màu nâu nhạt, mép nhoè dần chứ không rõ viền. Trong ba loại thì nó chuyển biến sớm nhất, với điều kiện bạn che nắng cho đến nơi đến chốn.",
+        "Nám chân sâu, nhiều người quen gọi là nám đốm, nằm sâu hơn và hiện thành từng chấm tròn nhỏ, màu sẫm, viền rõ. Loại này đi chậm. Chỉ bôi mà bỏ chống nắng thì gần như giậm chân tại chỗ.",
+        "Nám hỗn hợp là hai loại trên cùng có mặt trên một khuôn mặt, và đây là trường hợp hay gặp nhất ở phụ nữ Việt sau tuổi 30. Soi gương thẳng dưới đèn nhà tắm thì khó thấy. Đứng chếch bên cửa sổ, để nắng hắt ngang mặt, ranh giới mới hiện ra.",
+        "Vậy mà phần lớn quảng cáo vẫn nói “nám” như thể chỉ có một loại, rồi hứa chung một mốc thời gian cho tất cả mọi người. Ba loại da mà chung một lời hứa thì ít nhất hai trong ba sẽ hụt hẫng."
       ]
     },
     {
       "id": "hoat-chat",
-      "heading": "Những hoạt chất có cơ sở nghiên cứu",
+      "heading": "Ba hoạt chất, và người ta đã nghiên cứu được gì",
       "body": [
-        "Tranexamic Acid được nghiên cứu nhiều trong nhóm làm mờ vùng da sẫm màu do tăng sắc tố, thường ở nồng độ 2–5% với dạng bôi ngoài da. Đây là hoạt chất chính trong dòng này.",
-        "Bakuchiol là dẫn xuất từ thực vật, được nghiên cứu như một lựa chọn thay thế retinol cho làn da dễ kích ứng, với ưu điểm là không làm tăng nhạy cảm ánh sáng.",
-        "Niacinamide hỗ trợ hàng rào bảo vệ da và thường đi kèm trong các công thức làm đều màu da. Nồng độ thấp vừa đủ để hạn chế cảm giác châm chích trên da mỏng.",
-        "Ba hoạt chất trên đều có mặt trong sản phẩm của dòng này, và tỉ lệ được in cụ thể trên trang sản phẩm chứ không gộp vào một tên gọi chung."
+        "Tranexamic Acid là cái tên được nghiên cứu nhiều nhất trong nhóm làm mờ vùng da sẫm, thường ở nồng độ 2–5% khi bôi ngoài da. Nó là hoạt chất chính của dòng này.",
+        "Bakuchiol lấy từ thực vật. Người ta nghiên cứu nó như một lối đi thay cho retinol với làn da dễ kích ứng, và nó không làm da bắt nắng hơn.",
+        "Niacinamide giữ cho hàng rào bảo vệ da đỡ yếu đi, và hay đi kèm trong các công thức làm đều màu. Ở đây để nồng độ vừa phải, cho da mỏng đỡ châm chích.",
+        "Cả ba đều có mặt trong sản phẩm của dòng này, và tỉ lệ được in ra từng con số trên trang sản phẩm, không gộp vào một cái tên chung chung."
       ]
     },
     {
       "id": "chong-nang",
       "heading": "Chống nắng không phải lời khuyên, mà là điều kiện",
       "body": [
-        "Không có sản phẩm bôi nào giữ được kết quả nếu da tiếp tục phơi nắng không che chắn. Tia UV kích hoạt lại quá trình sinh sắc tố nhanh hơn tốc độ mà bất kỳ hoạt chất làm sáng nào có thể bù lại.",
-        "Nghĩa là: kem chống nắng phổ rộng dùng hằng ngày, kể cả ngày âm u và kể cả khi ngồi trong nhà gần cửa sổ, là điều kiện cần. Sản phẩm chăm sóc chỉ có ý nghĩa khi điều kiện đó đã được đáp ứng.",
+        "Người Việt che nắng kỹ hơn phần lớn thế giới: áo khoác dài tay, khẩu trang, găng tay quá khuỷu. Nhưng khẩu trang che từ sống mũi trở xuống, còn nám lại hay đóng ở gò má và trán, tức ngay phía trên mép khẩu trang. Nên câu “tôi che kỹ lắm mà vẫn bị” không hề mâu thuẫn. Không lọ kem nào giữ nổi kết quả nếu chỗ đó vẫn phơi nắng mỗi ngày, vì tia UV bật lại guồng sinh sắc tố nhanh hơn mức mà hoạt chất làm sáng bù kịp.",
+        "Nên kem chống nắng phổ rộng phải bôi hằng ngày, kể cả hôm trời âm u, kể cả khi bạn chỉ ngồi trong nhà cạnh cửa sổ. Làm được việc đó rồi thì sản phẩm chăm sóc mới có chỗ mà phát huy.",
         "Chúng tôi nói điều này trước khi bạn mua, chứ không để trong phần ghi chú sau khi bạn đã trả tiền."
       ]
     }
@@ -53,7 +53,7 @@
   "faq": [
     {
       "q": "Bao lâu thì thấy khác biệt?",
-      "a": "Tuỳ loại nám. Nám mảng thường thay đổi sớm hơn nám chân sâu. Trang sản phẩm có bảng mốc thời gian theo từng loại, kèm điều kiện đi cùng là chống nắng hằng ngày. Chúng tôi không đưa một con số chung cho mọi người vì con số đó sẽ sai với phần lớn."
+      "a": "Tuỳ loại nám. Nám mảng thường chuyển sớm hơn nám chân sâu. Trang sản phẩm có bảng mốc thời gian cho từng loại, kèm điều kiện đi cùng là ngày nào cũng che nắng. Chúng tôi không đưa một con số chung cho mọi người, vì con số đó sẽ sai với phần đông."
     },
     {
       "q": "Sản phẩm có chứa corticoid hay hydroquinone không?",
@@ -61,7 +61,7 @@
     },
     {
       "q": "Đang mang thai hoặc cho con bú thì dùng được không?",
-      "a": "Hãy hỏi ý kiến nhân viên y tế trước khi dùng bất kỳ sản phẩm chăm sóc da nào trong giai đoạn này. Chúng tôi không đưa ra lời khuyên thay cho họ."
+      "a": "Giai đoạn này bạn nên hỏi bác sĩ sản khoa hoặc bác sĩ da liễu trước khi dùng bất kỳ sản phẩm chăm sóc da nào. Chúng tôi không nói thay phần việc của họ."
     }
   ],
   "articles": [
