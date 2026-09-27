@@ -36,7 +36,8 @@
     "docs:gaps": "node --experimental-strip-types scripts/check-content-gaps.mjs --md docs/content-gaps.md",
     "db:migrate:status": "wrangler d1 migrations list mocha-orders --remote",
     "test:states": "node scripts/check-states.mjs",
-    "docs:states": "node scripts/check-states.mjs --shots .responsive-shots/states"
+    "docs:states": "node scripts/check-states.mjs --shots .responsive-shots/states",
+    "test:perf": "node scripts/check-perf.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
