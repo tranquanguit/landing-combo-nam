@@ -27,6 +27,31 @@
   "name": "Mocha Smart Target – gel chấm mụn dầu mù u 20gr",
   "shortName": "Gel chấm mụn Smart Target",
   "primaryKeyword": "gel chấm mụn mocha smart target",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Cần một sản phẩm chấm lên từng nốt thay vì bôi khắp mặt",
+    "audienceSituations": [
+      "Đang có vài nốt viêm và không muốn đổi cả quy trình đang dùng",
+      "Đã dùng sản phẩm chấm nốt nhưng bị khô và bong quanh vùng chấm",
+      "Không phân biệt được sản phẩm cho nốt đang viêm và sản phẩm cho vết thâm còn lại"
+    ],
+    "contextHints": [
+      "người hỏi chấm nốt mụn bằng gì",
+      "người hỏi khác nhau giữa sản phẩm chấm nốt và sản phẩm làm mờ vết thâm",
+      "người hỏi dùng sản phẩm chấm nốt vào bước nào trong quy trình"
+    ],
+    "approvedAngles": [
+      "Gel chấm điểm, không phải kem bôi toàn mặt",
+      "Bảy thành phần công khai, kèm lý do không dùng khắp mặt",
+      "Bảng so sánh phân biệt nốt đang viêm và vết thâm còn lại"
+    ],
+    "riskyAngles": [
+      "mô tả sản phẩm như một cách xử lý tình trạng da thuộc phạm vi khám chữa",
+      "hứa nốt viêm biến mất sau một mốc thời gian cố định",
+      "dùng ảnh so sánh hai thời điểm mà không nêu điều kiện chụp"
+    ],
+    "preferredDestination": "#so-sanh"
+  },
   "seo": {
     "title": "Gel chấm mụn Mocha Smart Target 20gr | Mocha Việt Nam",
     "description": "Gel chấm mụn với dầu mù u Việt Nam, 3% Acnebusters, BHA, Sulfur, Zinc PCA và Bioecolia. Nồng độ in trên bao bì. {{price}}."
@@ -115,6 +140,55 @@
           "<strong>Chấm đúng nốt, để yên, và đợi theo ngày chứ không theo giờ.</strong> Nếu mụn lan ra cả vùng má hay cả trán thì đó không còn là việc của một tuýp chấm điểm — nên đi khám da liễu."
         ]
       }
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Đừng nhầm hai tuýp",
+      "heading": "Đang có mụn, hay đã hết mụn còn vết thâm?",
+      "intro": "Hai tuýp trông giống nhau và cùng cỡ 20gr, nhưng dùng cho hai giai đoạn khác nhau. Dùng nhầm thì không hại, chỉ là không có tác dụng gì.",
+      "items": [
+        "smart-target-acne-gel",
+        "smart-whitening-turmergel"
+      ],
+      "criteria": [
+        {
+          "label": "Dùng khi nào",
+          "values": [
+            "Nốt đang sưng, đang viêm",
+            "Nốt đã lặn, chỉ còn vết sẫm màu"
+          ]
+        },
+        {
+          "label": "Nhắm vào",
+          "values": [
+            "Vùng da đang có mụn",
+            "Sắc tố còn lại sau khi mụn lành"
+          ]
+        },
+        {
+          "label": "Hoạt chất chính in trên bao bì",
+          "values": [
+            "Dầu mù u, Acnebusters 3%, BHA 0,5%, Sulfur, Zinc PCA",
+            "Sabiwhite® 0,3%, Niacinamide 3%, Tranexamic Acid 3%, Glutathione"
+          ]
+        },
+        {
+          "label": "Cách dùng",
+          "values": [
+            "Chấm từng nốt",
+            "Chấm hoặc thoa mỏng cả vùng thâm"
+          ]
+        },
+        {
+          "label": "Dùng được cùng lúc không",
+          "values": [
+            "Được — chấm ở nốt đang viêm",
+            "Được — thoa ở vùng đã lành, tránh chồng lên nốt đang viêm"
+          ]
+        }
+      ],
+      "footnote": "Nhiều người có cả hai tình trạng cùng lúc trên cùng một khuôn mặt. Lúc đó dùng cả hai là hợp lý, nhưng ở hai vùng khác nhau chứ không chồng lên nhau.",
+      "transition": "Nếu tuýp này đúng là thứ bạn cần, phần dưới nói vì sao nó chỉ dành để chấm điểm."
     },
     {
       "type": "cards",
@@ -263,54 +337,6 @@
         }
       ],
       "footnote": "Nhà sản xuất ghi rõ: <strong>dùng quá nhiều gây bí da, hoặc khô và bong tróc với da mỏng yếu</strong>. Đây là sản phẩm mà thêm liều không đổi lấy thêm kết quả."
-    },
-    {
-      "type": "compare",
-      "eyebrow": "Đừng nhầm hai tuýp",
-      "heading": "Đang có mụn, hay đã hết mụn còn vết thâm?",
-      "intro": "Hai tuýp trông giống nhau và cùng cỡ 20gr, nhưng dùng cho hai giai đoạn khác nhau. Dùng nhầm thì không hại, chỉ là không có tác dụng gì.",
-      "items": [
-        "smart-target-acne-gel",
-        "smart-whitening-turmergel"
-      ],
-      "criteria": [
-        {
-          "label": "Dùng khi nào",
-          "values": [
-            "Nốt đang sưng, đang viêm",
-            "Nốt đã lặn, chỉ còn vết sẫm màu"
-          ]
-        },
-        {
-          "label": "Nhắm vào",
-          "values": [
-            "Vùng da đang có mụn",
-            "Sắc tố còn lại sau khi mụn lành"
-          ]
-        },
-        {
-          "label": "Hoạt chất chính in trên bao bì",
-          "values": [
-            "Dầu mù u, Acnebusters 3%, BHA 0,5%, Sulfur, Zinc PCA",
-            "Sabiwhite® 0,3%, Niacinamide 3%, Tranexamic Acid 3%, Glutathione"
-          ]
-        },
-        {
-          "label": "Cách dùng",
-          "values": [
-            "Chấm từng nốt",
-            "Chấm hoặc thoa mỏng cả vùng thâm"
-          ]
-        },
-        {
-          "label": "Dùng được cùng lúc không",
-          "values": [
-            "Được — chấm ở nốt đang viêm",
-            "Được — thoa ở vùng đã lành, tránh chồng lên nốt đang viêm"
-          ]
-        }
-      ],
-      "footnote": "Nhiều người có cả hai tình trạng cùng lúc trên cùng một khuôn mặt. Lúc đó dùng cả hai là hợp lý, nhưng ở hai vùng khác nhau chứ không chồng lên nhau."
     },
     {
       "type": "order",

@@ -25,6 +25,30 @@
   "name": "Mocha Smart First Care Serum – intensive dark-spot serum",
   "shortName": "Smart First Care Serum",
   "primaryKeyword": "mocha smart first care serum",
+  "storyArchetype": "comparison",
+  "adContext": {
+    "primaryNeed": "Applies it consistently and sees no change, suspects the actives are not getting anywhere",
+    "audienceSituations": [
+      "Has persisted for months with one product and seen no difference",
+      "Weighing up starting with a serum or with a cream",
+      "Already has the evening cream step and is considering adding a serum"
+    ],
+    "contextHints": [
+      "someone asking why consistent use is not changing anything",
+      "someone asking whether to start with a serum or a cream",
+      "someone asking where a serum sits in the routine"
+    ],
+    "approvedAngles": [
+      "Six actives printed on the bottle, and what each one does",
+      "The serum sits right after cleansing, morning and evening",
+      "A comparison table saying who suits one step and who should take both"
+    ],
+    "riskyAngles": [
+      "promising an absolute outcome within a fixed timeframe",
+      "explaining absorption in the language of a clinical procedure"
+    ],
+    "preferredDestination": "#so-sanh"
+  },
   "seo": {
     "title": "Mocha Smart First Care Serum, 30ml | Mocha Vietnam",
     "description": "Serum with 4-butylresorcinol 1000ppm, Niacinamide and Bio-Placenta — printed on the bottle. Airless pump. {{price}}, free shipping, pay on delivery."
@@ -114,6 +138,55 @@
           "Which makes order as important as the product itself: <strong>serum first, cream after</strong>. Reverse it and the cream has already closed the route, and the serum you just paid for stays outside."
         ]
       }
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Compare",
+      "heading": "The serum alone, or both steps?",
+      "intro": "Better answered before you order than after the first bottle runs out.",
+      "items": [
+        "smart-first-care-serum",
+        "combo-nam"
+      ],
+      "criteria": [
+        {
+          "label": "What you get",
+          "values": [
+            "One 30ml serum",
+            "The serum plus the 30gr cream"
+          ]
+        },
+        {
+          "label": "What the step does",
+          "values": [
+            "Gets actives in",
+            "Gets them in, then seals"
+          ]
+        },
+        {
+          "label": "Times per day",
+          "values": [
+            "Morning and night",
+            "Serum twice, cream at night"
+          ]
+        },
+        {
+          "label": "Best suited to",
+          "values": [
+            "Thin skin, recently treated skin",
+            "Marked pigmentation, wanting faster progress"
+          ]
+        },
+        {
+          "label": "If you already like your moisturiser",
+          "values": [
+            "Slots in without replacing it",
+            "Replaces the cream step too"
+          ]
+        }
+      ],
+      "footnote": "If you already have a moisturiser that works for you, the serum on its own is the more sensible buy — there is no reason to drop something that works in order to buy a set.",
+      "transition": "If you are starting with the serum step, below are the six actives printed on the bottle and what each does."
     },
     {
       "type": "cards",
@@ -257,54 +330,6 @@
         }
       ],
       "footnote": "Sunscreen in the morning is not optional. Serum on its own, with no sun protection, lets pigmentation return whatever product you use."
-    },
-    {
-      "type": "compare",
-      "eyebrow": "Compare",
-      "heading": "The serum alone, or both steps?",
-      "intro": "Better answered before you order than after the first bottle runs out.",
-      "items": [
-        "smart-first-care-serum",
-        "combo-nam"
-      ],
-      "criteria": [
-        {
-          "label": "What you get",
-          "values": [
-            "One 30ml serum",
-            "The serum plus the 30gr cream"
-          ]
-        },
-        {
-          "label": "What the step does",
-          "values": [
-            "Gets actives in",
-            "Gets them in, then seals"
-          ]
-        },
-        {
-          "label": "Times per day",
-          "values": [
-            "Morning and night",
-            "Serum twice, cream at night"
-          ]
-        },
-        {
-          "label": "Best suited to",
-          "values": [
-            "Thin skin, recently treated skin",
-            "Marked pigmentation, wanting faster progress"
-          ]
-        },
-        {
-          "label": "If you already like your moisturiser",
-          "values": [
-            "Slots in without replacing it",
-            "Replaces the cream step too"
-          ]
-        }
-      ],
-      "footnote": "If you already have a moisturiser that works for you, the serum on its own is the more sensible buy — there is no reason to drop something that works in order to buy a set."
     },
     {
       "type": "order",

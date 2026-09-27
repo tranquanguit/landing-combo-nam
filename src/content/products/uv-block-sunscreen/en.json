@@ -28,6 +28,30 @@
   "name": "Mocha UV-Block Plus – hybrid sunscreen with seven filters",
   "shortName": "UV-Block Plus sunscreen",
   "primaryKeyword": "mocha uv-block plus sunscreen",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Needs a sunscreen wearable every single day without a heavy finish",
+    "audienceSituations": [
+      "Uses brightening actives and knows they are wasted without daily sun protection",
+      "Has abandoned several sunscreens for feeling greasy or causing breakouts",
+      "Deciding between a dedicated sunscreen and a moisturiser that already has filters"
+    ],
+    "contextHints": [
+      "someone asking which sunscreen suits oily skin",
+      "someone asking whether a separate sunscreen is needed when the moisturiser has an SPF figure",
+      "someone asking how to reapply sunscreen over makeup during the day"
+    ],
+    "approvedAngles": [
+      "Seven filters, each named on the published ingredient table",
+      "The last step of the morning, with guidance on reapplying midday",
+      "A hybrid texture intended for daily wear on oily skin"
+    ],
+    "riskyAngles": [
+      "claiming complete protection from sun exposure",
+      "claiming the sunscreen step alone will fade existing pigmentation"
+    ],
+    "preferredDestination": "#thanh-phan"
+  },
   "seo": {
     "title": "Mocha UV-Block Plus sunscreen, 50g | Mocha Vietnam",
     "description": "Hybrid SPF 50 sunscreen with seven filters (five chemical, two physical nano), plus niacinamide and centella. No fragrance, no parabens. {{price}}."
@@ -114,6 +138,55 @@
           "Light through a window and blue light from a screen are weaker than direct sun, but they are present through the whole working day. It is the total exposure time that adds up."
         ]
       }
+    },
+    {
+      "type": "compare",
+      "eyebrow": "Two kinds of cover",
+      "heading": "A dedicated sunscreen, or a moisturiser containing filters?",
+      "intro": "Biovector lists Titanium Dioxide and Zinc Oxide, so this question comes up often. Short answer: one does not replace the other.",
+      "items": [
+        "uv-block-sunscreen",
+        "biovector-brightening-cream"
+      ],
+      "criteria": [
+        {
+          "label": "Category declared on the pack",
+          "values": [
+            "Sunscreen",
+            "Moisturiser"
+          ]
+        },
+        {
+          "label": "Filters",
+          "values": [
+            "7 filters, 5 chemical and 2 nano physical",
+            "TiO2 and ZnO appear in the INCI list"
+          ]
+        },
+        {
+          "label": "Declared sun protection rating",
+          "values": [
+            "On the tube",
+            "None declared"
+          ]
+        },
+        {
+          "label": "Can one replace the other",
+          "values": [
+            "This is the sun protection step",
+            "No — with no rating there is no basis for substituting"
+          ]
+        },
+        {
+          "label": "Reapplication during the day",
+          "values": [
+            "Yes, when outdoors",
+            "Not applicable"
+          ]
+        }
+      ],
+      "footnote": "An ingredient being present in a formula is not the same as a measured level of protection. A sun protection rating is the result of the whole formula plus a test procedure; it cannot be inferred from an ingredient list.",
+      "transition": "If a dedicated sunscreen is the right call, the rest of this page covers the seven filters in this one."
     },
     {
       "type": "cards",
@@ -297,54 +370,6 @@
         }
       ],
       "footnote": "Reapply every few hours if you are outdoors continuously, sweating heavily, or in water. One morning application does not last a full day in the sun."
-    },
-    {
-      "type": "compare",
-      "eyebrow": "Two kinds of cover",
-      "heading": "A dedicated sunscreen, or a moisturiser containing filters?",
-      "intro": "Biovector lists Titanium Dioxide and Zinc Oxide, so this question comes up often. Short answer: one does not replace the other.",
-      "items": [
-        "uv-block-sunscreen",
-        "biovector-brightening-cream"
-      ],
-      "criteria": [
-        {
-          "label": "Category declared on the pack",
-          "values": [
-            "Sunscreen",
-            "Moisturiser"
-          ]
-        },
-        {
-          "label": "Filters",
-          "values": [
-            "7 filters, 5 chemical and 2 nano physical",
-            "TiO2 and ZnO appear in the INCI list"
-          ]
-        },
-        {
-          "label": "Declared sun protection rating",
-          "values": [
-            "On the tube",
-            "None declared"
-          ]
-        },
-        {
-          "label": "Can one replace the other",
-          "values": [
-            "This is the sun protection step",
-            "No — with no rating there is no basis for substituting"
-          ]
-        },
-        {
-          "label": "Reapplication during the day",
-          "values": [
-            "Yes, when outdoors",
-            "Not applicable"
-          ]
-        }
-      ],
-      "footnote": "An ingredient being present in a formula is not the same as a measured level of protection. A sun protection rating is the result of the whole formula plus a test procedure; it cannot be inferred from an ingredient list."
     },
     {
       "type": "order",

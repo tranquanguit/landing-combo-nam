@@ -25,6 +25,30 @@
   "name": "Mocha Smart First Care Serum – tinh chất làm mờ thâm nám chuyên sâu",
   "shortName": "Serum Smart First Care",
   "primaryKeyword": "serum mocha smart first care",
+  "storyArchetype": "comparison",
+  "adContext": {
+    "primaryNeed": "Bôi đều đặn mà da không đổi, nghi hoạt chất chưa đi tới nơi cần tới",
+    "audienceSituations": [
+      "Đã kiên trì vài tháng với một sản phẩm mà không thấy khác biệt",
+      "Đang cân nhắc bắt đầu bằng serum hay bằng kem",
+      "Đã có bước kem buổi tối và đang tính bổ sung bước serum"
+    ],
+    "contextHints": [
+      "người hỏi vì sao dùng đều mà da không đổi",
+      "người hỏi nên bắt đầu bằng serum hay kem",
+      "người hỏi serum đứng ở bước nào trong quy trình"
+    ],
+    "approvedAngles": [
+      "Sáu hoạt chất in trên chai, và vai trò của từng cái",
+      "Serum đứng ngay sau bước rửa mặt, cả sáng lẫn tối",
+      "Bảng so sánh nói rõ ai hợp với một bước, ai nên đi cả hai"
+    ],
+    "riskyAngles": [
+      "hứa kết quả tuyệt đối trong một mốc thời gian cố định",
+      "giải thích cơ chế thấm bằng ngôn ngữ của một thủ thuật y khoa"
+    ],
+    "preferredDestination": "#so-sanh"
+  },
   "seo": {
     "title": "Serum Mocha Smart First Care 30ml | Mocha Việt Nam",
     "description": "Serum 4-butylresorcinol 1000ppm, Niacinamide, Bio-Placenta — nồng độ in trên chai. Chai chân không vòi nhấn. {{price}}, freeship, trả tiền khi nhận."
@@ -113,6 +137,55 @@
           "Thứ tự vì thế quan trọng không kém bản thân sản phẩm: <strong>serum trước, kem sau</strong>. Làm ngược lại thì lớp kem đã đóng đường, và chai serum bạn vừa mua chỉ nằm bên ngoài."
         ]
       }
+    },
+    {
+      "type": "compare",
+      "eyebrow": "So sánh",
+      "heading": "Serum một mình, hay cả hai bước?",
+      "intro": "Trả lời trước khi đặt thì hơn là sau khi dùng hết chai đầu.",
+      "items": [
+        "smart-first-care-serum",
+        "combo-nam"
+      ],
+      "criteria": [
+        {
+          "label": "Gồm những gì",
+          "values": [
+            "Một chai serum 30ml",
+            "Chai serum và hũ kem 30gr"
+          ]
+        },
+        {
+          "label": "Bước tác động",
+          "values": [
+            "Đưa hoạt chất vào",
+            "Đưa vào, rồi khoá lại"
+          ]
+        },
+        {
+          "label": "Dùng mấy lần mỗi ngày",
+          "values": [
+            "Sáng và tối",
+            "Serum sáng và tối, kem buổi tối"
+          ]
+        },
+        {
+          "label": "Hợp nhất với",
+          "values": [
+            "Da mỏng yếu, vừa qua treatment",
+            "Thâm sạm rõ, muốn đi nhanh hơn"
+          ]
+        },
+        {
+          "label": "Nếu đang dùng kem dưỡng bạn đã quen",
+          "values": [
+            "Ghép thêm được ngay, không phải bỏ kem cũ",
+            "Thay luôn cả bước kem"
+          ]
+        }
+      ],
+      "footnote": "Nếu bạn đã có một hũ kem dưỡng đang dùng tốt, chai serum riêng là lựa chọn hợp lý hơn — không có lý do gì phải bỏ thứ đang hiệu quả để mua trọn bộ.",
+      "transition": "Nếu bạn bắt đầu bằng bước serum, phần dưới là sáu hoạt chất in trên chai và vai trò của từng cái."
     },
     {
       "type": "cards",
@@ -256,54 +329,6 @@
         }
       ],
       "footnote": "Buổi sáng cần kem chống nắng. Serum dùng một mình, không kèm bước chống nắng, thì sắc tố sẽ quay lại bất kể sản phẩm nào."
-    },
-    {
-      "type": "compare",
-      "eyebrow": "So sánh",
-      "heading": "Serum một mình, hay cả hai bước?",
-      "intro": "Trả lời trước khi đặt thì hơn là sau khi dùng hết chai đầu.",
-      "items": [
-        "smart-first-care-serum",
-        "combo-nam"
-      ],
-      "criteria": [
-        {
-          "label": "Gồm những gì",
-          "values": [
-            "Một chai serum 30ml",
-            "Chai serum và hũ kem 30gr"
-          ]
-        },
-        {
-          "label": "Bước tác động",
-          "values": [
-            "Đưa hoạt chất vào",
-            "Đưa vào, rồi khoá lại"
-          ]
-        },
-        {
-          "label": "Dùng mấy lần mỗi ngày",
-          "values": [
-            "Sáng và tối",
-            "Serum sáng và tối, kem buổi tối"
-          ]
-        },
-        {
-          "label": "Hợp nhất với",
-          "values": [
-            "Da mỏng yếu, vừa qua treatment",
-            "Thâm sạm rõ, muốn đi nhanh hơn"
-          ]
-        },
-        {
-          "label": "Nếu đang dùng kem dưỡng bạn đã quen",
-          "values": [
-            "Ghép thêm được ngay, không phải bỏ kem cũ",
-            "Thay luôn cả bước kem"
-          ]
-        }
-      ],
-      "footnote": "Nếu bạn đã có một hũ kem dưỡng đang dùng tốt, chai serum riêng là lựa chọn hợp lý hơn — không có lý do gì phải bỏ thứ đang hiệu quả để mua trọn bộ."
     },
     {
       "type": "order",

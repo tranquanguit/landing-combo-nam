@@ -45,6 +45,31 @@
   "name": "Mocha Retinol mixPEEL Kit – four-piece at-home peel",
   "shortName": "Retinol mixPEEL Kit",
   "primaryKeyword": "mocha at home retinol peel kit",
+  "storyArchetype": "education-led",
+  "adContext": {
+    "primaryNeed": "Wants to peel at home but does not yet know whether they are in the group who can",
+    "audienceSituations": [
+      "Has researched in-clinic peels and is considering the at-home version",
+      "Has used strong actives unsupervised and over-exfoliated",
+      "Unclear what aftercare the following two weeks require"
+    ],
+    "contextHints": [
+      "someone asking whether at-home peeling is safe",
+      "someone asking what to prepare before peeling",
+      "someone asking what to avoid after a peel"
+    ],
+    "approvedAngles": [
+      "A four-piece kit with a three-day schedule and two weeks of aftercare",
+      "Five situations where it should not be used, stated before the order form",
+      "Ingredients as published by the manufacturer"
+    ],
+    "riskyAngles": [
+      "presenting a peel as merely a stronger skincare step",
+      "omitting the contraindicated group to keep the story tidy",
+      "claiming it replaces an in-clinic procedure"
+    ],
+    "preferredDestination": "#ai-khong-nen-dung"
+  },
   "seo": {
     "title": "Mocha Retinol mixPEEL Kit, four pieces | Mocha Vietnam",
     "description": "Four-piece kit with 1% liposome retinol and four microalgae. A three-day course. NOT for use in pregnancy or breastfeeding. {{price}}."
@@ -132,7 +157,8 @@
           "The manufacturer designed this kit for three days, and three days means three days. Extending it because the peeling looks incomplete is the fastest route from a controlled course to an injury.",
           "And because it removes part of the protective surface, the period straight afterwards is when skin is most vulnerable. Sun protection during that window is not advice but a <strong>precondition</strong> — if you cannot avoid sun over the next two weeks, postpone the peel."
         ]
-      }
+      },
+      "transition": "Because this is a different kind of task, the list below matters more than the product introduction."
     },
     {
       "type": "cards",
@@ -167,7 +193,8 @@
           "body": "Skin will be dry, tight and may darken temporarily before it flakes. Do not start a course right before an occasion where you want your skin at its best.",
           "meta": "Postpone"
         }
-      ]
+      ],
+      "narrativeRole": "safety"
     },
     {
       "type": "ingredients",
@@ -242,7 +269,8 @@
           "note": "Once sensitivity and flaking have ended. Going back sooner puts actives into a barrier that has not finished rebuilding."
         }
       ],
-      "footnote": "These markers come from the manufacturer's instructions for the three-day course and from standard post-peel care. <strong>Skin differs from person to person</strong>, and if stinging persists, redness deepens, or the skin weeps, stop and see a doctor — that is no longer a normal response."
+      "footnote": "These markers come from the manufacturer's instructions for the three-day course and from standard post-peel care. <strong>Skin differs from person to person</strong>, and if stinging persists, redness deepens, or the skin weeps, stop and see a doctor — that is no longer a normal response.",
+      "transition": "The schedule only holds if the technique is right. Below is the three-day course, step by step."
     },
     {
       "type": "steps",

@@ -27,6 +27,30 @@
   "name": "Mocha Bio-Deep Detox & Rebalance – micellar cleansing water",
   "shortName": "Bio-Deep Detox micellar water",
   "primaryKeyword": "mocha micellar cleansing water",
+  "storyArchetype": "education-led",
+  "adContext": {
+    "primaryNeed": "Does not wear makeup and is unsure whether a first-cleanse step is needed",
+    "audienceSituations": [
+      "Wears only sunscreen and assumes a face wash covers it",
+      "Has congestion around the forehead and chin without knowing why",
+      "Wants to cut the evening routine to the fewest possible steps"
+    ],
+    "contextHints": [
+      "someone asking whether cleansing oil or micellar water is needed without makeup",
+      "someone asking how micellar water differs from a face wash",
+      "someone asking what order the evening steps go in"
+    ],
+    "approvedAngles": [
+      "The first step of the evening, before the face wash",
+      "Two cleansing ingredients and six conditioning ones, published on the page",
+      "Three kinds of day, three different levels of need"
+    ],
+    "riskyAngles": [
+      "saying this step fully replaces washing the face",
+      "attributing breakouts to a single step in the routine"
+    ],
+    "preferredDestination": "#so-sanh"
+  },
   "seo": {
     "title": "Mocha Bio-Deep Detox & Rebalance micellar water | Mocha Vietnam",
     "description": "pH 5.5 micellar cleansing water with exosome cica, Epi-On, fermented sake rice, green tea extract and vitamin B5. {{price}}, free shipping."
@@ -115,6 +139,55 @@
           "Micellar water works differently from a cleanser: micelles bind to oil and carry it off, so it lifts what water cannot. This bottle states pH 5.5 and is usable on eyes and lips."
         ]
       }
+    },
+    {
+      "type": "compare",
+      "eyebrow": "The question we get most",
+      "heading": "Can micellar water replace a cleanser?",
+      "intro": "No. The two steps lift different things, and each leaves work for the other.",
+      "items": [
+        "bio-deep-detox-rebalance",
+        "bio-active-cleanser"
+      ],
+      "criteria": [
+        {
+          "label": "What it lifts",
+          "values": [
+            "Make-up and sunscreen — the things water cannot lift",
+            "Excess oil, sweat, water-soluble dirt"
+          ]
+        },
+        {
+          "label": "When",
+          "values": [
+            "At night, before the cleanser",
+            "Morning and night"
+          ]
+        },
+        {
+          "label": "Safe around the eyes",
+          "values": [
+            "Yes, including eyes and lips",
+            "Avoid the eye area"
+          ]
+        },
+        {
+          "label": "If you only use one",
+          "values": [
+            "Not enough — residue needs rinsing off",
+            "Enough for mornings, and for days with no sun exposure and no make-up"
+          ]
+        },
+        {
+          "label": "Size",
+          "values": [
+            "Micellar bottle, pH 5.5",
+            "300ml"
+          ]
+        }
+      ],
+      "footnote": "Skipping the cleanser afterwards leaves residue on the skin overnight. That is another route to the exact problem you just paid to avoid.",
+      "transition": "If you do need both steps, the section below says what this one does that the other does not."
     },
     {
       "type": "cards",
@@ -263,54 +336,6 @@
         }
       ],
       "footnote": "Patch-test on the neck and watch for <strong>30–45 minutes</strong> before using it on the whole face. Do not rub hard: hand pressure does more harm than any ingredient in the bottle."
-    },
-    {
-      "type": "compare",
-      "eyebrow": "The question we get most",
-      "heading": "Can micellar water replace a cleanser?",
-      "intro": "No. The two steps lift different things, and each leaves work for the other.",
-      "items": [
-        "bio-deep-detox-rebalance",
-        "bio-active-cleanser"
-      ],
-      "criteria": [
-        {
-          "label": "What it lifts",
-          "values": [
-            "Make-up and sunscreen — the things water cannot lift",
-            "Excess oil, sweat, water-soluble dirt"
-          ]
-        },
-        {
-          "label": "When",
-          "values": [
-            "At night, before the cleanser",
-            "Morning and night"
-          ]
-        },
-        {
-          "label": "Safe around the eyes",
-          "values": [
-            "Yes, including eyes and lips",
-            "Avoid the eye area"
-          ]
-        },
-        {
-          "label": "If you only use one",
-          "values": [
-            "Not enough — residue needs rinsing off",
-            "Enough for mornings, and for days with no sun exposure and no make-up"
-          ]
-        },
-        {
-          "label": "Size",
-          "values": [
-            "Micellar bottle, pH 5.5",
-            "300ml"
-          ]
-        }
-      ],
-      "footnote": "Skipping the cleanser afterwards leaves residue on the skin overnight. That is another route to the exact problem you just paid to avoid."
     },
     {
       "type": "order",
