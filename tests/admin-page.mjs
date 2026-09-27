@@ -10,7 +10,8 @@
  */
 import { createServer } from 'node:http';
 import { DatabaseSync } from 'node:sqlite';
-import { readFileSync } from 'node:fs';
+import { launchBrowser } from './_launch.mjs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { onRequest as adminPage } from '../functions/admin/index.ts';
 import { onRequest as adminApi } from '../functions/api/admin/orders.ts';
@@ -25,7 +26,19 @@ const PORT = 8141;
 const TOKEN = 'token-quan-tri-kiem-thu-du-32-ky-tu-tro-len';
 
 const db = new DatabaseSync(':memory:');
-db.exec(readFileSync(new URL('../migrations/0001_orders.sql', import.meta.url), 'utf8'));
+/* Chạy MỌI migration theo thứ tự tên, không chỉ 0001.
+
+   Bản trước ghim cứng 0001_orders.sql, nên ngày thêm 0002 thì cổng đỏ với
+   thông báo "table orders has no column named utm_content" — một lỗi nói về
+   bộ kiểm thử chứ không phải về mã. Đọc cả thư mục thì lần sau không ai phải
+   nhớ sửa chỗ này.
+*/
+const MIGRATIONS = readdirSync(new URL('../migrations/', import.meta.url))
+  .filter((f) => f.endsWith('.sql'))
+  .sort();
+for (const m of MIGRATIONS) {
+  db.exec(readFileSync(new URL('../migrations/' + m, import.meta.url), 'utf8'));
+}
 
 const d1 = {
   prepare(sql) {
@@ -76,7 +89,7 @@ const server = createServer(async (req, res) => {
 });
 await new Promise((r) => server.listen(PORT, r));
 
-const browser = await chromium.launch();
+const browser = await launchBrowser(chromium);
 const cleanup = () => { try { server.close(); } catch {} try { browser.close(); } catch {} };
 process.on('exit', cleanup);
 

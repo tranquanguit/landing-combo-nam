@@ -18,6 +18,7 @@ import { createRequire } from 'node:module';
 import { readFile } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
 
+import { launchBrowser } from './_launch.mjs';
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 
@@ -47,7 +48,7 @@ const server = createServer(async (req, res) => {
 });
 await new Promise((r) => server.listen(PORT, r));
 
-const browser = await chromium.launch();
+const browser = await launchBrowser(chromium);
 const results = [];
 let failed = 0;
 
