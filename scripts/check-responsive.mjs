@@ -162,15 +162,21 @@ for (const pg of PAGES) {
             if (t.length <= 3) continue;
             const ab = a.getBoundingClientRect();
             if (ab.height === 0) continue;
-            /* Liên kết có chữ mà chỉ rộng vài chục pixel nghĩa là chữ đang bị
-               ép xuống dòng theo từng ký tự. 80px là ngưỡng rộng rãi: tên sản
-               phẩm ngắn nhất trên site cũng vượt xa con số này. */
-            if (ab.width < 80) {
-              menu.push(`"${t.slice(0, 22)}" chỉ rộng ${Math.round(ab.width)}px`);
+            /* Dấu hiệu của "chữ bị xé thành cột dọc" là SỐ DÒNG, không phải
+               bề rộng. Hai ngưỡng theo bề rộng đã thử đều báo nhầm: 80px cứng
+               bắt nhầm nút gọn hai dòng, còn ngưỡng theo cỡ chữ bắt nhầm nhãn
+               ngắn như "Zalo" hay "EN". Cả hai đều hẹp mà không hỏng.
+
+               "Combo Nám Mocha" 15 ký tự render thành 15 dòng thì hỏng.
+               Một tên sản phẩm dài xuống 2–3 dòng thì bình thường. */
+            const cs2 = getComputedStyle(a);
+            const lh = parseFloat(cs2.lineHeight) || (parseFloat(cs2.fontSize) || 16) * 1.2;
+            const lines = Math.round(ab.height / lh);
+            if (lines >= 4 && lines > t.length / 4) {
+              menu.push(`"${t.slice(0, 22)}" bị xé thành ${lines} dòng cho ${t.length} ký tự`);
             }
             if (menu.length >= 4) break;
           }
-          if (menu.length >= 4) break;
         }
         /* Thanh CTA dính đáy không được che nút gửi đơn. */
         const sticky = document.querySelector('.sticky-cta, [data-sticky-cta]');
