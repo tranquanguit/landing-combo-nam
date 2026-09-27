@@ -8,11 +8,14 @@ interface Props {
   };
   surface?: 'bone' | 'paper';
   aboveFold?: boolean;
+  space?: 'sm' | 'md' | 'lg';
+  /** Khối ngay trên cùng bề mặt: bỏ đệm trên để hai khối thành MỘT cụm. */
+  sameSurface?: boolean;
 }
-const { section, surface = 'paper', aboveFold = false } = Astro.props;
+const { section, surface = 'paper', aboveFold = false, space, sameSurface = false } = Astro.props;
 const links = section.links ?? [];
 ---
-<Section id={section.id} surface={surface} heading={section.heading} aboveFold={aboveFold}>
+<Section id={section.id} surface={surface} space={space} sameSurface={sameSurface} heading={section.heading} aboveFold={aboveFold}>
   <div class="prose">
     {section.body.map((para) => <p set:html={richText(para)} />)}
     {links.length > 0 && (

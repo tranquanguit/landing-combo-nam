@@ -11,10 +11,18 @@ interface Props {
    * sẽ thành một nút chết trên ba phần tư số trang của site.
    */
   orderHref?: string;
+  /**
+   * Nhãn của nút hành động ở thanh đầu trang.
+   *
+   * Không phải tầng nào cũng "đặt mua". Trang dòng bày nhiều lựa chọn, nên ở
+   * đó nút phải nói CHỌN — một nút "Đặt mua" trên trang ba sản phẩm buộc phải
+   * đoán hộ người dùng xem họ muốn cái nào.
+   */
+  orderLabel?: string;
   /** Điều hướng chính. Sinh từ dữ liệu ở route, không viết cứng ở đây. */
   nav?: { label: string; href: string; children?: { label: string; href: string; note?: string }[] }[];
 }
-const { brand: b, locale, alternates = [], orderHref = '#dat-hang', nav = [] } = Astro.props;
+const { brand: b, locale, alternates = [], orderHref = '#dat-hang', orderLabel, nav = [] } = Astro.props;
 
 /** Danh sách phẳng -> từng nhóm có tiêu đề là tên dòng. */
 function groupChildren(children: { label: string; href: string; note?: string }[]) {
@@ -73,7 +81,7 @@ function groupChildren(children: { label: string; href: string; note?: string }[
     <div class="actions">
       <LocaleSwitcher current={locale} alternates={alternates} />
       <a class="tel" href={`tel:${b.phone}`} data-cta="header-call">{b.phoneDisplay}</a>
-      <a class="btn btn-primary compact" href={orderHref} data-cta="header-order">{t(locale, 'nav.order')}</a>
+      <a class="btn btn-primary compact" href={orderHref} data-cta="header-order">{orderLabel ?? t(locale, 'nav.order')}</a>
 
       {/* Ngăn kéo cho màn hình hẹp.
 

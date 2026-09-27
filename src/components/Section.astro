@@ -31,11 +31,22 @@ interface Props {
   transition?: string;
   /** Lời mời hành động ở cuối khối. Xem `cta` trong schema. */
   cta?: { note?: string; label: string; href: string };
+  /**
+   * Khối này là ĐÍCH của một liên kết neo.
+   *
+   * `tabindex="-1"` để trình duyệt tự chuyển focus vào đây khi người dùng nhảy
+   * tới neo — nếu không, bàn phím và trình đọc màn hình vẫn đứng ở chỗ cũ trong
+   * khi màn hình đã cuộn đi, và người dùng mất dấu mình đang ở đâu.
+   *
+   * Làm bằng thuộc tính chuẩn thay vì JS: ngân sách JS nội tuyến của trang chỉ
+   * còn hơn trăm byte, và đây là việc trình duyệt vốn đã làm đúng.
+   */
+  focusTarget?: boolean;
 }
 const {
   id, surface = 'bone', eyebrow, heading, intro,
   center = false, aboveFold = false, space, sameSurface = false,
-  role, transition, cta,
+  role, transition, cta, focusTarget = false,
 } = Astro.props;
 const surfaceClass = surface === 'bone' ? '' : `surface-${surface}`;
 const headingId = id ? `${id}-title` : undefined;
@@ -44,6 +55,7 @@ const headingId = id ? `${id}-title` : undefined;
   id={id}
   class:list={[surfaceClass, !aboveFold && 'defer', space && `space-${space}`, sameSurface && 'same-surface']}
   aria-labelledby={headingId}
+  tabindex={focusTarget ? -1 : undefined}
   data-narrative-role={role}
   data-reveal-group
 >
@@ -86,6 +98,10 @@ const headingId = id ? `${id}-title` : undefined;
      Hero là chỗ mời; ở đây là chỗ người đọc vừa tự kết luận, nên hình thái
      đúng là một câu nói có đường dẫn, đặt trong nhịp của tờ đặc tả — không
      phải một khối màu chen ngang mạch đọc. */
+  /* Đích cuộn nhận focus để không mất dấu, nhưng KHÔNG vẽ vòng focus:
+     nó là một vùng nội dung, không phải một control bấm được. */
+  section[tabindex="-1"]:focus { outline: none; }
+
   .sec-cta {
     margin-top: clamp(32px, 4vw, 56px);
     padding-top: var(--s-5);
