@@ -141,6 +141,37 @@ for (const pg of PAGES) {
           if (small.length >= 4) break;
         }
 
+        /* Bảng thả xuống của điều hướng — ĐO CẢ KHI MENU ĐANG ĐÓNG.
+
+           Bảng dùng visibility:hidden nên nó VẪN có hộp bố cục. Lần chẩn
+           đoán trước đo ra các liên kết rộng 12–18px và tôi loại chúng đi với
+           lý do "menu đang đóng thì số đo không nói gì về ngón tay". Lý do ấy
+           đúng cho phép đo VÙNG CHẠM, nhưng sai cho BỐ CỤC: cột teo lúc đóng
+           thì cũng teo lúc mở. Và đó đúng là lỗi đã lọt ra production — mỗi
+           tên sản phẩm rớt thành một cột chữ dọc, mỗi dòng một ký tự.
+
+           Một phần giao diện chỉ hiện sau tương tác vẫn là giao diện. */
+        const menu = [];
+        for (const panel of document.querySelectorAll('.panel-cols')) {
+          const pb = panel.getBoundingClientRect();
+          if (pb.width > 0 && pb.right > vw + 1) {
+            menu.push(`bảng tràn phải ${Math.round(pb.right - vw)}px`);
+          }
+          for (const a of panel.querySelectorAll('a')) {
+            const t = (a.textContent || '').trim();
+            if (t.length <= 3) continue;
+            const ab = a.getBoundingClientRect();
+            if (ab.height === 0) continue;
+            /* Liên kết có chữ mà chỉ rộng vài chục pixel nghĩa là chữ đang bị
+               ép xuống dòng theo từng ký tự. 80px là ngưỡng rộng rãi: tên sản
+               phẩm ngắn nhất trên site cũng vượt xa con số này. */
+            if (ab.width < 80) {
+              menu.push(`"${t.slice(0, 22)}" chỉ rộng ${Math.round(ab.width)}px`);
+            }
+            if (menu.length >= 4) break;
+          }
+          if (menu.length >= 4) break;
+        }
         /* Thanh CTA dính đáy không được che nút gửi đơn. */
         const sticky = document.querySelector('.sticky-cta, [data-sticky-cta]');
         let stickyCovers = false;
@@ -155,7 +186,7 @@ for (const pg of PAGES) {
         }
 
         return {
-          overflow, offenders, small, stickyCovers,
+          overflow, offenders, small, stickyCovers, menu,
           stickyVisible: !!sticky && getComputedStyle(sticky).display !== 'none',
           docWidth: document.documentElement.scrollWidth, vw,
         };
@@ -175,7 +206,7 @@ await browser.close();
 server.close();
 
 /* ---------------- báo cáo ---------------- */
-const bad = results.filter((r) => r.error || r.overflow > 0 || r.small?.length || r.stickyCovers);
+const bad = results.filter((r) => r.error || r.overflow > 0 || r.small?.length || r.stickyCovers || r.menu?.length);
 console.log(`\nQA đáp ứng — ${PAGES.length} trang × ${WIDTHS.length} bề ngang = ${results.length} phép đo\n`);
 for (const pg of PAGES) {
   const rows = results.filter((r) => r.page.path === pg.path);
@@ -189,6 +220,7 @@ for (const pg of PAGES) {
         r.offenders?.length ? `do: ${r.offenders.join(', ')}` : '',
         r.small?.length ? `vùng chạm nhỏ: ${r.small.join(', ')}` : '',
         r.stickyCovers ? 'thanh CTA che nút gửi đơn' : '',
+        r.menu?.length ? 'menu thả xuống: ' + r.menu.join('; ') : '',
       ].filter(Boolean).join(' | ');
     console.log(`         ${String(r.width).padStart(4)}px  ${what}`);
   }
@@ -218,6 +250,7 @@ if (mdPath) {
   L.push('| Phần tử gây tràn | không có | biết đúng phần tử nào, không chỉ biết là có |');
   L.push('| Vùng chạm | ≥ 24×24 CSS px | WCAG 2.2 AA 2.5.8; link trong câu văn được miễn trừ |');
   L.push('| Thanh CTA dính đáy | không đè nút gửi đơn | nó nổi trên nội dung nên phải kiểm, không suy luận |');
+  L.push('| Bảng thả xuống | không tràn; liên kết ≥ 80px | đo cả khi menu đóng — nó vẫn có hộp bố cục |');
   L.push('');
   L.push('Bảng có `overflow-x: auto` được loại khỏi phép đo tràn: chúng cuộn ngang');
   L.push('**có chủ ý**, và đó là cách đúng để một bảng nhiều cột sống trên màn hình hẹp.');

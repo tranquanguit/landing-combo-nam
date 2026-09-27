@@ -1,7 +1,7 @@
 # QA đáp ứng
 
 > Sinh tự động bằng `npm run check:responsive -- --md docs/responsive-qa.md`. Đừng sửa tay.
-> Chạy ngày 2026-09-26 trên Chromium (Chrome cài sẵn trên máy).
+> Chạy ngày 2026-09-27 trên Chromium (Chrome cài sẵn trên máy).
 
 ## Cách đo
 
@@ -19,6 +19,7 @@ Bốn phép đo, mỗi phép ứng với một lỗi từng xảy ra thật:
 | Phần tử gây tràn | không có | biết đúng phần tử nào, không chỉ biết là có |
 | Vùng chạm | ≥ 24×24 CSS px | WCAG 2.2 AA 2.5.8; link trong câu văn được miễn trừ |
 | Thanh CTA dính đáy | không đè nút gửi đơn | nó nổi trên nội dung nên phải kiểm, không suy luận |
+| Bảng thả xuống | không tràn; liên kết ≥ 80px | đo cả khi menu đóng — nó vẫn có hộp bố cục |
 
 Bảng có `overflow-x: auto` được loại khỏi phép đo tràn: chúng cuộn ngang
 **có chủ ý**, và đó là cách đúng để một bảng nhiều cột sống trên màn hình hẹp.

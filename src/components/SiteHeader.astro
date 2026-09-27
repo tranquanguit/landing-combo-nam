@@ -197,7 +197,12 @@ function groupChildren(children: { label: string; href: string; note?: string }[
     }
 
     .panel-cols {
-      display: grid; grid-template-columns: repeat(3, minmax(0, 13rem));
+      /* minmax(11rem, ...) — con số 11rem KHÔNG được hạ xuống 0.
+         Đã từng đổi thành minmax(0, 13rem) để chữa tràn ngang ở 912px. Hậu quả:
+         cột co được về 0 nên mỗi tên sản phẩm rớt thành một cột chữ dọc, mỗi
+         dòng một ký tự. Tràn ngang phải chữa bằng SỐ CỘT (breakpoint bên dưới),
+         không phải bằng cách cho cột teo lại. */
+      display: grid; grid-template-columns: repeat(3, minmax(11rem, 13rem));
       gap: var(--s-5) var(--s-6);
       /* Căn đỉnh: ba nhóm có số sản phẩm khác nhau, để `stretch` thì nhóm một
          sản phẩm bị kéo cao bằng nhóm ba sản phẩm và khoảng trắng dồn vào giữa. */
@@ -218,7 +223,7 @@ function groupChildren(children: { label: string; href: string; note?: string }[
        Hai cột ở khổ desktop hẹp là ART DIRECTION, không phải thu nhỏ: cùng số
        mục, xếp lại cho vừa chỗ thật sự có. */
     @media (max-width: 1023px) {
-      .panel-cols { grid-template-columns: repeat(2, minmax(0, 12rem)); }
+      .panel-cols { grid-template-columns: repeat(2, minmax(11rem, 12rem)); }
     }
 
     .panel-group { margin: 0; padding: 0; list-style: none; }
