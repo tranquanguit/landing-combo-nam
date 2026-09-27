@@ -234,7 +234,11 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
     const el = (e.target as HTMLElement).closest<HTMLElement>('[data-cta]');
     if (!el) return;
     const id = el.dataset.cta ?? '';
+    /* Bấm vào một thẻ sản phẩm trên trang dòng KHÔNG phải bắt đầu thanh toán —
+       đó là chọn một món trong danh sách. Gộp cả hai vào begin_checkout thì
+       con số đó mất nghĩa đúng lúc vừa có dữ liệu để đọc. */
     if (id.includes('call') || id.includes('zalo')) track('contact', { method: id, cta_id: id });
+    else if (el.dataset.ctaKind === 'select') track('select_item', { cta_id: id });
     else track('begin_checkout', { cta_id: id });
   });
 

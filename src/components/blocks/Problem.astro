@@ -3,9 +3,9 @@ import type { RhythmProps } from '../../lib/narrative';
 import Section from '../Section.astro';
 import { richText } from '../../lib/richtext';
 interface Props extends RhythmProps { data: any; id?: string; }
-const { data, id = 'van-de', surface = 'paper', space, sameSurface, role, transition } = Astro.props;
+const { data, id = 'van-de', surface = 'paper', space, sameSurface, role, transition, cta } = Astro.props;
 ---
-<Section role={role} transition={transition} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
+<Section role={role} transition={transition} cta={cta} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
   <div class="split">
     <ul class="quotes">
       {data.quotes.map((q: string) => <li>{q}</li>)}

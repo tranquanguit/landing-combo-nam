@@ -260,7 +260,12 @@
           "role": "Thành phần dưỡng ẩm, tạo lớp màng giữ nước.",
           "suitedFor": "Da khô"
         }
-      ]
+      ],
+      "cta": {
+        "note": "Đó là toàn bộ căn cứ chúng tôi có, kèm nguồn dẫn. Nếu vậy là đủ với bạn:",
+        "label": "Xem giá và đặt hàng",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "routine",
@@ -378,7 +383,12 @@
           "q": "Bảo quản thế nào?",
           "a": "Tránh nhiệt độ cao và ánh nắng trực tiếp, đóng nắp sau khi dùng, để xa tầm tay trẻ em."
         }
-      ]
+      ],
+      "cta": {
+        "note": "Không còn câu hỏi nào nữa?",
+        "label": "Quay lại phần đặt hàng",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "relatedProducts",

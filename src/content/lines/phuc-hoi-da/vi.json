@@ -45,7 +45,8 @@
           "Người muốn đối chiếu được từng thành phần trước khi mua",
           "Người cần một bước dưỡng nhẹ, không phải đọc bảng thành phần",
           "Người muốn thêm một bước cấp ẩm thỉnh thoảng"
-        ]
+        ],
+        "fit": true
       },
       {
         "label": "Có tác động lên sắc tố không",

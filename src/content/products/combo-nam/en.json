@@ -278,7 +278,12 @@
           "suitedFor": "Dull skin"
         }
       ],
-      "transition": "The table above says what is in the box. What follows says how to use it, and in what order."
+      "transition": "The table above says what is in the box. What follows says how to use it, and in what order.",
+      "cta": {
+        "note": "That is every piece of evidence we hold, with its sources. If that is enough for you:",
+        "label": "See the price and order",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "steps",
@@ -390,7 +395,12 @@
           "meta": "Think again"
         }
       ],
-      "narrativeRole": "safety"
+      "narrativeRole": "safety",
+      "cta": {
+        "note": "If none of the situations above apply to you:",
+        "label": "See the price and order",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "offer",
@@ -450,7 +460,12 @@
           "q": "Do you ship outside Vietnam?",
           "a": "Yes, from Ho Chi Minh City. Tell us your country in the order form and we will confirm shipping cost and delivery time before anything is charged."
         }
-      ]
+      ],
+      "cta": {
+        "note": "No questions left?",
+        "label": "Back to the order form",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "relatedProducts",

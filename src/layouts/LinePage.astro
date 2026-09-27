@@ -6,12 +6,13 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import Section from '../components/Section.astro';
 import Prose from '../components/blocks/Prose.astro';
 import ProductGrid from '../components/ProductGrid.astro';
+import { money } from '../lib/format';
+import { articlePath, homePath, linePath, productPath } from '../lib/routes';
 import Compare from '../components/Compare.astro';
 import Faq from '../components/blocks/Faq.astro';
 import Analytics from '../components/Analytics.astro';
 import { collectionGraph } from '../lib/schema';
 import { resolveAssetImage, resolveAssetUrl } from '../lib/images';
-import { articlePath, homePath, linePath, productPath } from '../lib/routes';
 import { assertTranslated, t, type Locale } from '../i18n/ui';
 import { richText } from '../lib/richtext';
 
@@ -31,6 +32,12 @@ interface Props {
 }
 
 const { line, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], fallbackOgImage, products, articles } = Astro.props;
+
+/* Tiêu chí trả lời "ai hợp với cái nào" — nguồn chữ cho khối chọn.
+   Không có thì khối chọn không render; thà thiếu một khối còn hơn dựng nó
+   bằng chữ tự nghĩ ra. */
+const fitCriterion = line.compare?.criteria?.find((c: any) => c.fit)
+  ?? null;
 const site = Astro.site?.origin ?? 'https://mochatrinam.com';
 assertTranslated(locale);
 
@@ -54,7 +61,39 @@ const jsonLd = collectionGraph({
 });
 
 /* Nút đặt mua trỏ tới sản phẩm đầu tiên của dòng — trang này không có biểu mẫu. */
-const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath(locale);
+/* Có khối chọn thì nút ở thanh đầu trang trỏ VÀO TRANG, không nhảy sang một
+   sản phẩm cụ thể: trang dòng chọn, trang sản phẩm mua. Không có khối chọn
+   thì giữ nguyên hành vi cũ. */
+const orderHref = fitCriterion && products.length > 1
+  ? '#chon'
+  : (products[0] ? productPath(products[0].slug, locale) : homePath(locale));
+const orderLabel = fitCriterion && products.length > 1 ? t(locale, 'nav.choose') : undefined;
+
+/**
+ * Nhịp của trang dòng — ba CHƯƠNG, không phải bảy khối ngang hàng.
+ *
+ * Đo được trước đây: trang cao 8.456px, sáu chỗ nối đều ĐÚNG 128px, không một
+ * class `space-*` nào. Mắt nhận được tín hiệu "bảy phần bằng nhau", trong khi
+ * chúng thuộc ba việc khác hẳn:
+ *
+ *   GIỚI THIỆU  san-pham                              — ở đây có cái gì
+ *   HIỂU        ba-loai-nam, hoat-chat, chong-nang    — dựa vào đâu mà chọn
+ *   CHỌN        so-sanh, chon                         — vậy chọn cái nào
+ *   ĐUÔI        cau-hoi, bai-viet                     — phần còn lại
+ *
+ * Dùng lại đúng cơ chế của trang sản phẩm thay vì phát minh cái mới: các khối
+ * trong cùng chương dùng CÙNG bề mặt, và chỗ nối giữa chúng bỏ đệm trên
+ * (`sameSurface`) nên đọc thành một cụm; sang chương khác thì đổi nền và giãn
+ * ra. Nhịp là dấu chấm câu, không phải khoảng trắng đều.
+ *
+ * Hệ quả phụ: việc này đóng luôn chỗ hở do lần đổi thứ tự trước tạo ra —
+ * `chong-nang` và `so-sanh` khi đó cùng nền paper mà không có ranh giới nào,
+ * nên đọc như một khối dài vô cớ. Nay `so-sanh` mở chương mới nên đổi nền.
+ */
+const proseSurface = 'paper';
+const chooseSurface = 'bone';
+/** Khối cuối của chương HIỂU, để biết chỗ nào là ranh giới chương. */
+const lastProse = line.sections.length - 1;
 ---
 <BaseLayout
   siteName={b.tradingName}
@@ -70,7 +109,7 @@ const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath
   alternates={alternates}
   jsonLd={jsonLd}
 >
-  <SiteHeader brand={b} locale={locale} alternates={alternates} nav={nav} orderHref={orderHref} />
+  <SiteHeader brand={b} locale={locale} alternates={alternates} nav={nav} orderHref={orderHref} orderLabel={orderLabel} />
   <Breadcrumb items={breadcrumb} locale={locale} />
 
   <main id="main">
@@ -84,24 +123,79 @@ const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath
 
     {products.length > 0 && (
       <Section id="san-pham" surface="bone" heading={t(locale, 'line.products')} aboveFold>
-        <ProductGrid products={products} locale={locale} priority />
+        <ProductGrid products={products} locale={locale} priority source="line-grid" />
       </Section>
     )}
 
-    {line.compare && products.length > 1 && (
-      <Compare data={line.compare} products={products} locale={locale} id="so-sanh" />
-    )}
-
+    {/*
+      * Bảng so sánh đứng SAU phần giải thích, không đứng trước.
+      *
+      * Đo được trên /nam-tham/ ở 390px: bảng so sánh bắt đầu ở y=1921, trong
+      * khi "ba loại nám" ở y=3415 và "những hoạt chất có cơ sở nghiên cứu" ở
+      * y=4355. Tức 2.942px đầu tiên — 3,5 màn hình điện thoại — là bán hàng
+      * thuần, đặt trước mọi thứ giúp người đọc hiểu.
+      *
+      * Tầng trang dòng tồn tại để bắt người gõ "kem trị nám loại nào tốt", tức
+      * người CHƯA có tiêu chí để so. Đưa bảng ba cột cho họ ở màn hình thứ hai
+      * không tạo ra quyết định, nó tạo ra tê liệt lựa chọn — và với đơn hàng
+      * quanh một triệu, tê liệt nghĩa là thoát.
+      *
+      * Lưới sản phẩm thì GIỮ ở đầu: người vừa gõ truy vấn cần thấy ngay "ở đây
+      * có cái gì". Cái phải dời là việc cần tiêu chí, không phải việc nhận
+      * diện. Neo #so-sanh không đổi, nên mọi liên kết cũ vẫn tới đúng chỗ.
+      */}
     {line.sections.map((section: any, i: number) => (
-      <Prose section={section} surface={i % 2 === 0 ? 'paper' : 'bone'} />
+      <Prose section={section}
+        surface={proseSurface}
+        space={i === 0 ? 'lg' : 'sm'}
+        sameSurface={i > 0} />
     ))}
 
+    {line.compare && products.length > 1 && (
+      <Compare data={line.compare} products={products} locale={locale} id="so-sanh" source="line-compare"
+        surface={chooseSurface} space="lg" />
+    )}
+
+    {/*
+      * Khối CHỌN — một điểm quyết định, đặt đúng chỗ người đọc đã có tiêu chí.
+      *
+      * Trước khối này, cả trang dòng 8.456px có ĐÚNG MỘT lời mời hành động
+      * (nút ở thanh đầu trang, trỏ cứng vào một sản phẩm). Liên kết trong lưới
+      * và trong bảng là ĐIỀU HƯỚNG, không phải lời mời: người đọc hết phần
+      * hoạt chất đang ở đỉnh tin tưởng cao nhất của cả phiên, và trang im lặng
+      * đúng lúc đó.
+      *
+      * Việc của tầng này là giao đúng một người vào đúng một landing, nên hành
+      * động ở đây là CHỌN, không phải MUA — và vì vậy trang dòng cố tình KHÔNG
+      * có thanh mua dính đáy như trang sản phẩm: một nút "Đặt mua" thường trực
+      * trên trang đang bày ba lựa chọn thì phải đoán hộ người dùng.
+      *
+      * Chữ mô tả lấy TỪ tiêu chí đã đánh dấu `fit` trong bảng so sánh, không
+      * viết lại — để hai chỗ không thể lệch nhau.
+      */}
+    {fitCriterion && products.length > 1 && (
+      <Section id="chon" surface={chooseSurface} space="sm" sameSurface focusTarget
+        heading={t(locale, 'line.choose')} intro={t(locale, 'line.chooseLead')}>
+        <ul class="choose">
+          {products.map((p: any, i: number) => (
+            <li>
+              <a href={productPath(p.slug, locale)} data-cta="line-choose-product" data-cta-kind="select">
+                <span class="choose-name">{p.shortName ?? p.name}</span>
+                <span class="choose-price figure">{money(p.price, p.currency, locale)}</span>
+              </a>
+              <p class="choose-fit">{fitCriterion.values[i]}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    )}
+
     {line.faq.length > 0 && (
-      <Faq data={{ heading: t(locale, 'faq.heading'), items: line.faq }} id="cau-hoi" />
+      <Faq data={{ heading: t(locale, 'faq.heading'), items: line.faq }} id="cau-hoi" space="lg" />
     )}
 
     {articles.length > 0 && (
-      <Section id="bai-viet" surface="bone" heading={t(locale, 'line.relatedArticles')}>
+      <Section id="bai-viet" surface="paper" space="sm" sameSurface heading={t(locale, 'line.relatedArticles')}>
         <ul class="reads">
           {articles.map((a) => (
             <li>
@@ -121,6 +215,39 @@ const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath
 </BaseLayout>
 
 <style>
+  /* Khối chọn: ba dòng, ngăn bằng gạch tóc — không hộp, không bo góc, không
+     đổ bóng. Giá dùng face chữ số, đúng luật "serif chỉ dành cho số". */
+  .choose { list-style: none; margin: 0; padding: 0; }
+  .choose li { border-top: 1px solid var(--line); }
+  .choose li:last-child { border-bottom: 1px solid var(--line); }
+  .choose a {
+    display: flex; align-items: baseline; gap: var(--s-4);
+    justify-content: space-between;
+    padding: var(--s-5) 0 var(--s-2);
+    min-height: 44px;
+    text-decoration: none; color: var(--ink-navy);
+    border-bottom: 0;
+  }
+  /* Tên sản phẩm phải TRÔNG như bấm được, không chỉ khi di chuột.
+
+     Nhìn ảnh chụp ở 390px mới thấy: ba dòng này là liên kết nhưng ở trạng
+     thái nghỉ không có dấu hiệu nào — mà trên điện thoại thì không có hover,
+     nên dấu hiệu chỉ-hiện-khi-hover là không có dấu hiệu. CTA inline trong
+     thân trang đã dùng gạch tóc 1px làm dấu hiệu; chỗ này phải giống, vì hai
+     loại liên kết đang làm cùng một việc: đưa người đọc sang bước quyết định. */
+  .choose-name {
+    font-size: var(--t-md); font-weight: 600; line-height: 1.25;
+    border-bottom: 1px solid var(--line-strong);
+    transition: color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+  }
+  .choose a:hover .choose-name { color: var(--cobalt); border-bottom-color: var(--cobalt); }
+  .choose-price { color: var(--ink-muted); font-size: var(--t-base); white-space: nowrap; }
+  .choose-fit {
+    margin: 0; padding-bottom: var(--s-5);
+    color: var(--ink-muted); font-size: var(--t-sm); line-height: 1.55;
+    max-width: 52ch;
+  }
+
   .head { background: var(--paper); padding-block: var(--s-7) var(--s-6); }
   .head h1 { margin: 0 0 var(--s-4); max-width: 18ch; }
   .head .lead { max-width: 62ch; margin: 0; }

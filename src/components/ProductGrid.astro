@@ -17,13 +17,28 @@ interface Props {
    * nó hoãn đúng phần tử có khả năng là LCP của trang.
    */
   priority?: boolean;
+  /**
+   * Lưới này nằm ở đâu — dùng làm giá trị `data-cta`.
+   *
+   * Đo được trên /nam-tham/: 59 liên kết nội bộ tới trang sản phẩm, đúng MỘT
+   * cái có `data-cta`. Tầng trang dòng là tầng gánh truy vấn phi-thương-hiệu
+   * lớn nhất, và nó đang là hộp đen: không biết người rời trang ở lưới hay ở
+   * bảng so sánh, nên không kiểm chứng được bất kỳ thay đổi nào ở tầng này.
+   *
+   * Giá trị phải phân biệt được VỊ TRÍ NGUỒN, vì đó là câu hỏi duy nhất đáng
+   * hỏi ở đây. Bỏ trống thì không gắn gì — liên kết trong thân bài viết không
+   * phải lời mời hành động.
+   */
+  source?: string;
 }
-const { products, locale, priority = false } = Astro.props;
+const { products, locale, priority = false, source } = Astro.props;
 ---
 <ul class="grid" data-reveal-group>
   {products.map((p, i) => (
     <li data-reveal>
-      <a href={productPath(p.slug, locale)}>
+      <a href={productPath(p.slug, locale)}
+         data-cta={source ? `${source}-product` : undefined}
+         data-cta-kind={source ? 'select' : undefined}>
         {p.image && (
           <span class="shot">
             {/* Khung 4:3 cho MỌI thẻ, và `contain` chứ không `cover`.

@@ -7,6 +7,8 @@ import { richText } from '../lib/richtext';
 import { t, type Locale } from '../i18n/ui';
 
 interface Props extends RhythmProps {
+  /** Vị trí nguồn cho `data-cta` của link tên sản phẩm ở đầu cột. */
+  source?: string;
   data: {
     eyebrow?: string; heading: string; intro?: string;
     criteria: { label: string; values: string[] }[];
@@ -19,9 +21,9 @@ interface Props extends RhythmProps {
   space?: 'sm' | 'md' | 'lg';
   sameSurface?: boolean;
 }
-const { data, products, locale, id, surface = 'paper', space, sameSurface, role, transition } = Astro.props;
+const { data, products, locale, id, surface = 'paper', space, sameSurface, role, transition, cta, source } = Astro.props;
 ---
-<Section role={role} transition={transition} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading}>
+<Section role={role} transition={transition} cta={cta} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading}>
   {data.intro && <p class="cmp-intro" set:html={richText(data.intro)} />}
 
   {/* Bảng thật, không phải lưới div: người dùng trình đọc màn hình điều hướng
@@ -38,7 +40,9 @@ const { data, products, locale, id, surface = 'paper', space, sameSurface, role,
           <td></td>
           {products.map((p) => (
             <th scope="col">
-              <a href={productPath(p.slug, locale)}>{p.shortName ?? p.name}</a>
+              <a href={productPath(p.slug, locale)}
+                 data-cta={source ? `${source}-product` : undefined}
+                 data-cta-kind={source ? 'select' : undefined}>{p.shortName ?? p.name}</a>
               <span class="cmp-price">{money(p.price, p.currency, locale)}</span>
             </th>
           ))}

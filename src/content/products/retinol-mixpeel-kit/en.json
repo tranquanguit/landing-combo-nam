@@ -194,7 +194,12 @@
           "meta": "Postpone"
         }
       ],
-      "narrativeRole": "safety"
+      "narrativeRole": "safety",
+      "cta": {
+        "note": "If none of the situations above apply to you:",
+        "label": "See the price and order",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "ingredients",
@@ -233,7 +238,12 @@
           "role": "The base moisturising step after peeling — see the Collagen Peptide Cream page.",
           "suitedFor": "Recovering skin"
         }
-      ]
+      ],
+      "cta": {
+        "note": "That is every piece of evidence we hold, with its sources. If that is enough for you:",
+        "label": "See the price and order",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "timeline",
@@ -383,7 +393,12 @@
           "q": "Can I use it alongside the pigmentation combo?",
           "a": "Not at the same time. Stacking a peel course on top of a pigment routine is the fastest way to break the skin barrier. Pick one, finish it, then consider the other."
         }
-      ]
+      ],
+      "cta": {
+        "note": "No questions left?",
+        "label": "Back to the order form",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "relatedProducts",

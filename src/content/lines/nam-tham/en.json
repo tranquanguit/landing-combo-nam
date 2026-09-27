@@ -86,7 +86,8 @@
           "Someone starting the full routine without buying extras",
           "Someone who already has a moisturiser and needs the deeper step",
           "Someone who already has a serum and needs the evening sealing step"
-        ]
+        ],
+        "fit": true
       },
       {
         "label": "Steps in the routine",

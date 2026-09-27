@@ -212,7 +212,12 @@
           "role": "Vitamin nhóm B, dùng như thành phần dưỡng.",
           "suitedFor": "Mọi loại da"
         }
-      ]
+      ],
+      "cta": {
+        "note": "Đó là toàn bộ căn cứ chúng tôi có, kèm nguồn dẫn. Nếu vậy là đủ với bạn:",
+        "label": "Xem giá và đặt hàng",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "routine",
@@ -369,7 +374,12 @@
           "q": "Bảo quản thế nào?",
           "a": "Nơi khô ráo thoáng mát, tránh ánh nắng trực tiếp và nhiệt độ cao. Đóng nắp sau khi dùng."
         }
-      ]
+      ],
+      "cta": {
+        "note": "Không còn câu hỏi nào nữa?",
+        "label": "Quay lại phần đặt hàng",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "relatedProducts",

@@ -261,7 +261,12 @@
           "role": "A moisturising ingredient forming a water-holding film.",
           "suitedFor": "Dry skin"
         }
-      ]
+      ],
+      "cta": {
+        "note": "That is every piece of evidence we hold, with its sources. If that is enough for you:",
+        "label": "See the price and order",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "routine",
@@ -379,7 +384,12 @@
           "q": "How should it be stored?",
           "a": "Keep away from heat and direct sunlight, close after use, keep out of reach of children."
         }
-      ]
+      ],
+      "cta": {
+        "note": "No questions left?",
+        "label": "Back to the order form",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "relatedProducts",

@@ -29,11 +29,24 @@ interface Props {
    * dung thật sự khai. Đặt ở mọi khối thì nó thành nhiễu.
    */
   transition?: string;
+  /** Lời mời hành động ở cuối khối. Xem `cta` trong schema. */
+  cta?: { note?: string; label: string; href: string };
+  /**
+   * Khối này là ĐÍCH của một liên kết neo.
+   *
+   * `tabindex="-1"` để trình duyệt tự chuyển focus vào đây khi người dùng nhảy
+   * tới neo — nếu không, bàn phím và trình đọc màn hình vẫn đứng ở chỗ cũ trong
+   * khi màn hình đã cuộn đi, và người dùng mất dấu mình đang ở đâu.
+   *
+   * Làm bằng thuộc tính chuẩn thay vì JS: ngân sách JS nội tuyến của trang chỉ
+   * còn hơn trăm byte, và đây là việc trình duyệt vốn đã làm đúng.
+   */
+  focusTarget?: boolean;
 }
 const {
   id, surface = 'bone', eyebrow, heading, intro,
   center = false, aboveFold = false, space, sameSurface = false,
-  role, transition,
+  role, transition, cta, focusTarget = false,
 } = Astro.props;
 const surfaceClass = surface === 'bone' ? '' : `surface-${surface}`;
 const headingId = id ? `${id}-title` : undefined;
@@ -42,6 +55,7 @@ const headingId = id ? `${id}-title` : undefined;
   id={id}
   class:list={[surfaceClass, !aboveFold && 'defer', space && `space-${space}`, sameSurface && 'same-surface']}
   aria-labelledby={headingId}
+  tabindex={focusTarget ? -1 : undefined}
   data-narrative-role={role}
   data-reveal-group
 >
@@ -56,6 +70,12 @@ const headingId = id ? `${id}-title` : undefined;
       </div>
     )}
     <div data-reveal><slot /></div>
+    {cta && (
+      <div class="sec-cta" data-reveal>
+        {cta.note && <p class="sec-cta-note">{cta.note}</p>}
+        <a class="sec-cta-link" href={cta.href} data-cta={`inline-${role ?? 'section'}`}>{cta.label}</a>
+      </div>
+    )}
     {transition && (
       <p class="transition" data-reveal>{transition}</p>
     )}
@@ -74,6 +94,54 @@ const headingId = id ? `${id}-title` : undefined;
     color: var(--ink-muted);
     text-wrap: pretty;
   }
+  /* CTA trong thân trang KHÔNG phải nút khối đặc như ở hero.
+     Hero là chỗ mời; ở đây là chỗ người đọc vừa tự kết luận, nên hình thái
+     đúng là một câu nói có đường dẫn, đặt trong nhịp của tờ đặc tả — không
+     phải một khối màu chen ngang mạch đọc. */
+  /* Đích cuộn nhận focus để không mất dấu, nhưng KHÔNG vẽ vòng focus:
+     nó là một vùng nội dung, không phải một control bấm được. */
+  section[tabindex="-1"]:focus { outline: none; }
+
+  .sec-cta {
+    margin-top: clamp(32px, 4vw, 56px);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line);
+    max-width: 46ch;
+  }
+  .sec-cta-note {
+    margin: 0 0 var(--s-3);
+    font-size: var(--t-base);
+    line-height: 1.55;
+    color: var(--ink-muted);
+    text-wrap: pretty;
+  }
+  .sec-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    /* 44px là ngưỡng vùng chạm thoải mái trên điện thoại; 24px của WCAG là
+       mức tối thiểu, không phải mức nên nhắm tới cho một đường chốt đơn. */
+    min-height: 44px;
+    font-weight: 600;
+    font-size: var(--t-base);
+    color: var(--ink-navy);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    transition: color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+  }
+  .sec-cta-link::after {
+    content: "\2193";           /* mũi tên xuống: đích nằm phía dưới trang */
+    font-size: .9em;
+    line-height: 1;
+  }
+  .sec-cta-link:hover {
+    color: var(--cobalt);
+    border-bottom-color: var(--cobalt);
+  }
+  /* Trên nền đậm (khối ưu đãi/đặt hàng) giữ đủ tương phản. */
+  .surface-navy .sec-cta-note:not(.on-light *) { color: rgba(255, 255, 255, .82); }
+  .surface-navy .sec-cta-link:not(.on-light *) { color: #fff; border-bottom-color: rgba(255, 255, 255, .5); }
+
   .transition::before {
     content: "";
     display: block;

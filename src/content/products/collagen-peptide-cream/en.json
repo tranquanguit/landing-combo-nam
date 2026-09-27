@@ -240,7 +240,12 @@
           "role": "Extract from cultured plant tissue, used as a conditioning ingredient.",
           "suitedFor": "Skin needing a light moisturising step"
         }
-      ]
+      ],
+      "cta": {
+        "note": "That is every piece of evidence we hold, with its sources. If that is enough for you:",
+        "label": "See the price and order",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "routine",
@@ -343,7 +348,12 @@
           "q": "How should it be stored?",
           "a": "Somewhere dry and cool, away from direct sunlight and heat. Close the lid tightly after use."
         }
-      ]
+      ],
+      "cta": {
+        "note": "No questions left?",
+        "label": "Back to the order form",
+        "href": "#dat-hang"
+      }
     },
     {
       "type": "relatedProducts",

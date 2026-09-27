@@ -8,9 +8,9 @@ interface Props extends RhythmProps {
   space?: 'sm' | 'md' | 'lg';
   sameSurface?: boolean;
 }
-const { data, id, surface = 'bone', space, sameSurface, role, transition } = Astro.props;
+const { data, id, surface = 'bone', space, sameSurface, role, transition, cta } = Astro.props;
 ---
-<Section role={role} transition={transition} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
+<Section role={role} transition={transition} cta={cta} id={id} surface={surface} space={space} sameSurface={sameSurface} eyebrow={data.eyebrow} heading={data.heading} intro={data.intro}>
   <ul class="grid" style={`--cols:${data.columns}`}>
     {data.items.map((item: any) => (
       <li class="card">

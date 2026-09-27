@@ -86,7 +86,8 @@
           "Người muốn làm đủ lộ trình ngay từ đầu, không phải mua thêm",
           "Người đã có kem dưỡng và chỉ cần thêm bước thẩm thấu sâu",
           "Người đã có serum và chỉ cần bước khoá ẩm buổi tối"
-        ]
+        ],
+        "fit": true
       },
       {
         "label": "Bước trong lộ trình",
