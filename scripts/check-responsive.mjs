@@ -178,6 +178,33 @@ for (const pg of PAGES) {
             if (menu.length >= 4) break;
           }
         }
+        /* Mảng trống do hai cột lệch chiều cao.
+
+           Đo được ở khối đặt hàng: cột trái 485px cạnh biểu mẫu 1018px —
+           chênh 533px nền đậm trống trơn, giống hệt ở mọi khổ desktop. Khổ
+           hẹp không thấy vì hai cột xếp chồng, nên tám vòng kiểm tra trước
+           đó đều bỏ sót: chúng chạy gần như toàn bộ ở 390px.
+
+           Quét cả site cho thấy mọi bố cục hai cột khác đã dùng `sticky`
+           (sidebar mục lục của trang chính sách, bài viết, liên hệ). Khối
+           đặt hàng là ngoại lệ duy nhất. Nên luật đúng không phải "cấm lệch"
+           mà là: lệch nhiều thì cột ngắn phải bám lại. */
+        const voids = [];
+        for (const el of document.querySelectorAll('main *')) {
+          const ecs = getComputedStyle(el);
+          if (ecs.display !== 'grid' && ecs.display !== 'flex') continue;
+          if (ecs.flexWrap === 'wrap') continue;
+          const kids = [...el.children].filter((k) => k.getBoundingClientRect().height > 0);
+          if (kids.length < 2 || kids.length > 3) continue;
+          const tops = kids.map((k) => Math.round(k.getBoundingClientRect().top));
+          if (new Set(tops).size !== 1) continue;
+          const hs = kids.map((k) => Math.round(k.getBoundingClientRect().height));
+          const gapPx = Math.max(...hs) - Math.min(...hs);
+          if (gapPx < window.innerHeight * 0.5) continue;
+          if (kids.some((k) => getComputedStyle(k).position === 'sticky')) continue;
+          voids.push(`${el.closest('section')?.id || el.tagName.toLowerCase()}: lệch ${gapPx}px (${hs.join('/')})`);
+          if (voids.length >= 2) break;
+        }
         /* Thanh CTA dính đáy không được che nút gửi đơn. */
         const sticky = document.querySelector('.sticky-cta, [data-sticky-cta]');
         let stickyCovers = false;
@@ -192,7 +219,7 @@ for (const pg of PAGES) {
         }
 
         return {
-          overflow, offenders, small, stickyCovers, menu,
+          overflow, offenders, small, stickyCovers, menu, voids,
           stickyVisible: !!sticky && getComputedStyle(sticky).display !== 'none',
           docWidth: document.documentElement.scrollWidth, vw,
         };
@@ -212,7 +239,7 @@ await browser.close();
 server.close();
 
 /* ---------------- báo cáo ---------------- */
-const bad = results.filter((r) => r.error || r.overflow > 0 || r.small?.length || r.stickyCovers || r.menu?.length);
+const bad = results.filter((r) => r.error || r.overflow > 0 || r.small?.length || r.stickyCovers || r.menu?.length || r.voids?.length);
 console.log(`\nQA đáp ứng — ${PAGES.length} trang × ${WIDTHS.length} bề ngang = ${results.length} phép đo\n`);
 for (const pg of PAGES) {
   const rows = results.filter((r) => r.page.path === pg.path);
@@ -227,6 +254,7 @@ for (const pg of PAGES) {
         r.small?.length ? `vùng chạm nhỏ: ${r.small.join(', ')}` : '',
         r.stickyCovers ? 'thanh CTA che nút gửi đơn' : '',
         r.menu?.length ? 'menu thả xuống: ' + r.menu.join('; ') : '',
+        r.voids?.length ? 'cột lệch không bám: ' + r.voids.join('; ') : '',
       ].filter(Boolean).join(' | ');
     console.log(`         ${String(r.width).padStart(4)}px  ${what}`);
   }
@@ -257,6 +285,7 @@ if (mdPath) {
   L.push('| Vùng chạm | ≥ 24×24 CSS px | WCAG 2.2 AA 2.5.8; link trong câu văn được miễn trừ |');
   L.push('| Thanh CTA dính đáy | không đè nút gửi đơn | nó nổi trên nội dung nên phải kiểm, không suy luận |');
   L.push('| Bảng thả xuống | không tràn; liên kết ≥ 80px | đo cả khi menu đóng — nó vẫn có hộp bố cục |');
+  L.push('| Cột lệch chiều cao | lệch > nửa khung nhìn thì cột ngắn phải `sticky` | khổ hẹp xếp chồng nên chỉ desktop mới lộ |');
   L.push('');
   L.push('Bảng có `overflow-x: auto` được loại khỏi phép đo tràn: chúng cuộn ngang');
   L.push('**có chủ ý**, và đó là cách đúng để một bảng nhiều cột sống trên màn hình hẹp.');

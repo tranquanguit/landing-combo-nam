@@ -20,6 +20,7 @@ Bốn phép đo, mỗi phép ứng với một lỗi từng xảy ra thật:
 | Vùng chạm | ≥ 24×24 CSS px | WCAG 2.2 AA 2.5.8; link trong câu văn được miễn trừ |
 | Thanh CTA dính đáy | không đè nút gửi đơn | nó nổi trên nội dung nên phải kiểm, không suy luận |
 | Bảng thả xuống | không tràn; liên kết ≥ 80px | đo cả khi menu đóng — nó vẫn có hộp bố cục |
+| Cột lệch chiều cao | lệch > nửa khung nhìn thì cột ngắn phải `sticky` | khổ hẹp xếp chồng nên chỉ desktop mới lộ |
 
 Bảng có `overflow-x: auto` được loại khỏi phép đo tràn: chúng cuộn ngang
 **có chủ ý**, và đó là cách đúng để một bảng nhiều cột sống trên màn hình hẹp.
