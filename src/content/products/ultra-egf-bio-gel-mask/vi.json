@@ -144,7 +144,7 @@
       "type": "cards",
       "id": "hop-voi-ai",
       "eyebrow": "Trước khi đặt",
-      "heading": "Ba trường hợp, và trường hợp nào nên để dành tiền",
+      "heading": "Khi nào nên mua, khi nào nên để dành tiền",
       "intro": "Đây là sản phẩm rẻ nhất trong danh mục, nhưng rẻ không có nghĩa là nên mua khi chưa cần.",
       "columns": 3,
       "items": [
@@ -168,7 +168,7 @@
     {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
-      "heading": "Tám thành phần in trên vỏ tuýp",
+      "heading": "Thành phần in trên vỏ tuýp",
       "intro": "Công thức thuộc nhóm cấp ẩm và làm dịu, không có hoạt chất tác động lên sắc tố.",
       "caption": "Bảng này liệt kê đúng những thành phần được IN TRÊN VỎ TUÝP 100gr. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
       "rows": [
@@ -222,7 +222,7 @@
       "type": "routine",
       "id": "dung-luc-nao",
       "eyebrow": "Đặt vào đâu trong tuần",
-      "heading": "Một đến hai lần mỗi tuần, vào buổi tối",
+      "heading": "Bao lâu đắp một lần",
       "intro": "Đây là bước thêm vào quy trình buổi tối, không phải bước thay thế.",
       "columns": [
         {
@@ -269,7 +269,7 @@
     {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
-      "heading": "Ba bước, mỗi lần 15–20 phút",
+      "heading": "Đắp thế nào, mỗi lần 15–20 phút",
       "totalTime": "PT20M",
       "intro": "Liều lượng và thời gian lấy nguyên từ hướng dẫn của nhà sản xuất.",
       "items": [
@@ -383,7 +383,7 @@
     {
       "type": "relatedProducts",
       "eyebrow": "Bước tiếp theo",
-      "heading": "Ba bước nền nên có trước",
+      "heading": "Những bước nền nên có trước",
       "intro": "Nếu một trong ba bước này còn trống, đó là chỗ đáng đầu tư trước tuýp mặt nạ.",
       "items": [
         "collagen-peptide-cream",

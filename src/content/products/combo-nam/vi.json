@@ -76,7 +76,7 @@
     {
       "type": "hero",
       "eyebrow": "Kem + serum dùng cùng nhau, cho da nám",
-      "heading": "Một bộ đôi đơn giản cho da nám: serum và kem dưỡng",
+      "heading": "Serum và kem dưỡng, dùng cùng nhau cho da nám",
       "lead": "Serum <strong>Smart First Care</strong> và kem <strong>Smart Brightening X3</strong> được làm để dùng cùng nhau trong một chu trình. Nồng độ các hoạt chất chính ghi rõ trên bao bì, và có đủ trong bảng thành phần bên dưới.",
       "usp": [
         {
@@ -135,7 +135,7 @@
     {
       "type": "cards",
       "eyebrow": "Nhận diện",
-      "heading": "Ba loại nám và mốc thời gian thực tế",
+      "heading": "Nhận ra loại nám trước khi chọn sản phẩm",
       "intro": "Biết đúng loại nám thì mới trông đợi đúng. Cũng vì thế chúng tôi không hứa một con số chung cho tất cả mọi người.",
       "columns": 3,
       "items": [
@@ -287,7 +287,7 @@
     {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
-      "heading": "Bốn bước, khoảng 5 phút mỗi lần",
+      "heading": "Dùng thế nào, mỗi lần khoảng 5 phút",
       "intro": "Dùng 1–2 lần mỗi ngày. Bước chống nắng buổi sáng là bắt buộc. Bỏ bước này thì hai bước kia gần như vô nghĩa.",
       "totalTime": "PT5M",
       "items": [
@@ -431,7 +431,7 @@
       "type": "cards",
       "id": "ai-khong-nen-dung",
       "eyebrow": "Trước khi đặt",
-      "heading": "Bốn trường hợp bạn nên cân nhắc lại, hoặc hỏi bác sĩ trước",
+      "heading": "Khi nào nên cân nhắc lại, hoặc hỏi bác sĩ",
       "intro": "Biết trước sản phẩm không hợp với mình thì tốt hơn nhiều so với biết sau khi đã nhận hàng.",
       "columns": 3,
       "items": [

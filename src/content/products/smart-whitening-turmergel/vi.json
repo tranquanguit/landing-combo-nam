@@ -192,7 +192,7 @@
       "type": "cards",
       "id": "hop-voi-ai",
       "eyebrow": "Trước khi đặt",
-      "heading": "Ba loại dấu vết sau mụn, và loại nào tuýp này xử lý được",
+      "heading": "Dấu vết nào tuýp này xử lý được",
       "intro": "Không phải dấu vết nào sau mụn cũng cùng một bản chất. Phân biệt trước thì đỡ mất tiền và mất thời gian.",
       "columns": 3,
       "items": [
@@ -216,7 +216,7 @@
     {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
-      "heading": "Tám thành phần, ba trong số đó công bố bằng số",
+      "heading": "Thành phần in trên tuýp",
       "intro": "Nhóm hoạt chất ở đây trùng phần lớn với kem nám, vì vết thâm sau mụn và nám đều là chuyện sắc tố, chỉ khác nguyên nhân khởi phát.",
       "caption": "Bảng này liệt kê các thành phần nhà sản xuất công bố; bốn hoạt chất chính cũng được IN TRÊN VỎ TUÝP. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
       "rows": [
@@ -326,7 +326,7 @@
     {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
-      "heading": "Ba bước, dùng buổi tối",
+      "heading": "Chấm vào buổi tối, sau khi làm sạch",
       "totalTime": "PT2M",
       "intro": "Thứ tự và liều lượng lấy từ hướng dẫn của nhà sản xuất.",
       "items": [

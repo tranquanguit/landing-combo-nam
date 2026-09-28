@@ -215,7 +215,7 @@
     {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
-      "heading": "Bảy màng lọc, gọi đúng tên từng cái",
+      "heading": "Màng lọc trong tuýp này",
       "intro": "Năm màng lọc hoá học hấp thụ tia UV, hai màng lọc vật lý phản xạ nó. Phần lớn kem chống nắng chỉ ghi “công nghệ chống nắng” và dừng ở đó.",
       "caption": "Bảng này liệt kê các màng lọc theo tên INCI mà nhà sản xuất công bố, cùng những hoạt chất dưỡng được IN TRÊN VỎ TUÝP 50gr. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
       "rows": [
@@ -355,7 +355,7 @@
     {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
-      "heading": "Hai bước buổi sáng, một bước buổi tối",
+      "heading": "Bôi lúc nào trong ngày",
       "intro": "Thứ tự lấy từ hướng dẫn sử dụng của nhà sản xuất.",
       "totalTime": "PT2M",
       "items": [
@@ -421,7 +421,7 @@
     {
       "type": "relatedProducts",
       "eyebrow": "Bước tiếp theo",
-      "heading": "Hai bước đi cùng với chống nắng",
+      "heading": "Những bước đi cùng chống nắng",
       "intro": "Bôi chống nắng thì phải tẩy trang buổi tối. Và nếu bạn đang chăm sóc sắc tố, đây là bước tiếp theo.",
       "items": [
         "bio-deep-detox-rebalance",

@@ -194,7 +194,7 @@
       "type": "cards",
       "id": "hop-voi-ai",
       "eyebrow": "Trước khi đặt",
-      "heading": "Ba tình huống, và lời khuyên cho từng tình huống",
+      "heading": "Bạn đang ở tình huống nào",
       "intro": "Chúng tôi là đại lý. Có những trường hợp tuýp này không giúp được.",
       "columns": 3,
       "items": [
@@ -218,7 +218,7 @@
     {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
-      "heading": "Bảy thành phần, và vì sao gel này không dùng khắp mặt",
+      "heading": "Trong tuýp có gì, và vì sao chỉ chấm",
       "intro": "Công thức tập trung nồng độ vào một diện tích nhỏ. Đó là lý do nó hiệu quả khi chấm đúng chỗ và là lý do nó không hợp để bôi toàn mặt.",
       "caption": "Bảng này liệt kê các thành phần nhà sản xuất công bố, trong đó nồng độ 3% Acnebusters và 0,5% BHA được IN TRÊN BAO BÌ. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
       "rows": [

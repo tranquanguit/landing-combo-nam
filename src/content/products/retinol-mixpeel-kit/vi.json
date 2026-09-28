@@ -164,7 +164,7 @@
       "type": "cards",
       "id": "ai-khong-nen-dung",
       "eyebrow": "Đọc trước khi đặt",
-      "heading": "Năm trường hợp không nên dùng bộ này",
+      "heading": "Ai không nên dùng bộ này",
       "intro": "Đây là sản phẩm mạnh nhất trên trang, nên phần này đặt ngay dưới màn hình đầu tiên chứ không giấu xuống cuối.",
       "columns": 3,
       "items": [
@@ -248,7 +248,7 @@
       "type": "timeline",
       "id": "lich-trinh",
       "eyebrow": "Lịch trình thật",
-      "heading": "Ba ngày liệu trình, và hai tuần sau đó mới là phần quyết định",
+      "heading": "Liệu trình ba ngày, và hai tuần sau đó",
       "intro": "Phần lớn người chỉ tính ba ngày peel mà quên giai đoạn sau. Giai đoạn sau dài hơn, và làm sai ở đó thì ba ngày kia thành công cốc.",
       "max": 21,
       "unitLabel": "ngày",
@@ -402,7 +402,7 @@
     {
       "type": "relatedProducts",
       "eyebrow": "Bước tiếp theo",
-      "heading": "Ba thứ cần có sẵn trước khi bắt đầu",
+      "heading": "Cần có sẵn gì trước khi bắt đầu",
       "intro": "Giai đoạn sau peel cần đúng ba bước này. Mua sau khi đã peel thì đã muộn vài ngày.",
       "items": [
         "uv-block-sunscreen",

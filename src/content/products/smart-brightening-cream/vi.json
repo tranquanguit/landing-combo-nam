@@ -191,7 +191,7 @@
       "type": "cards",
       "id": "hop-voi-ai",
       "eyebrow": "Trước khi đặt",
-      "heading": "Ba trường hợp, và lời khuyên thật lòng cho từng trường hợp",
+      "heading": "Hũ kem này hợp với ai",
       "intro": "Chúng tôi là đại lý, bán được hàng thì tốt. Nhưng bán nhầm thứ cho nhầm người thì bạn dùng vài tuần rồi bỏ, và đó là mất cả hai phía. Đọc xem bạn thuộc nhóm nào.",
       "columns": 3,
       "items": [
@@ -215,7 +215,7 @@
     {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
-      "heading": "Sáu hoạt chất in trên vỏ hộp, và vai trò của từng cái",
+      "heading": "Hoạt chất ghi trên vỏ hộp",
       "intro": "Không corticoid, không hydroquinone, không hương liệu tổng hợp gây kích ứng.",
       "caption": "Bảng này liệt kê đúng những hoạt chất được IN TRÊN BAO BÌ của hũ kem 30gr. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
       "rows": [
@@ -306,7 +306,7 @@
     {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
-      "heading": "Ba bước, dùng 1–2 lần mỗi ngày",
+      "heading": "Dùng thế nào mỗi ngày",
       "intro": "Thứ tự lấy từ hướng dẫn sử dụng in kèm sản phẩm.",
       "totalTime": "PT3M",
       "items": [

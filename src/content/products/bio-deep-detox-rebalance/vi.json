@@ -192,7 +192,7 @@
       "type": "cards",
       "id": "hop-voi-ai",
       "eyebrow": "Trước khi đặt",
-      "heading": "Ba kiểu ngày, ba mức cần thiết khác nhau",
+      "heading": "Hôm nào cần tẩy trang, hôm nào không",
       "intro": "Không phải ngày nào cũng cần bước này như nhau. Nói rõ để bạn không dùng thừa.",
       "columns": 3,
       "items": [
@@ -216,7 +216,7 @@
     {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
-      "heading": "Hai thành phần làm sạch, sáu thành phần dưỡng",
+      "heading": "Thành phần ghi trên vỏ chai",
       "intro": "Tẩy trang là bước tiếp xúc với da bằng ma sát nhiều nhất trong ngày, nên thứ đi kèm chất làm sạch quan trọng không kém chính chất làm sạch.",
       "caption": "Bảng này liệt kê các thành phần nhà sản xuất công bố, trong đó nhóm dưỡng được IN TRÊN VỎ CHAI. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
       "rows": [
@@ -325,7 +325,7 @@
     {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
-      "heading": "Hai bước, chỉ buổi tối",
+      "heading": "Dùng vào buổi tối",
       "totalTime": "PT3M",
       "intro": "Thứ tự và lưu ý lấy từ hướng dẫn sử dụng của nhà sản xuất.",
       "items": [
@@ -387,7 +387,7 @@
     {
       "type": "relatedProducts",
       "eyebrow": "Bước tiếp theo",
-      "heading": "Hai bước còn lại của một buổi tối đầy đủ",
+      "heading": "Những bước thường đi sau",
       "intro": "Tẩy trang là bước đầu. Đây là hai bước thường đi ngay sau nó.",
       "items": [
         "bio-active-cleanser",

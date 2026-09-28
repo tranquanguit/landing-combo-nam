@@ -191,7 +191,7 @@
       "type": "cards",
       "id": "hop-voi-ai",
       "eyebrow": "Trước khi đặt",
-      "heading": "Ba trường hợp, và lời khuyên thật lòng",
+      "heading": "Chai serum này hợp với ai",
       "intro": "Chúng tôi là đại lý. Bán được thì tốt, nhưng bán nhầm thứ cho nhầm người thì bạn dùng vài tuần rồi bỏ — mất cả hai phía.",
       "columns": 3,
       "items": [
@@ -215,7 +215,7 @@
     {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
-      "heading": "Sáu hoạt chất in trên chai, và vai trò của từng cái",
+      "heading": "Hoạt chất ghi trên chai",
       "intro": "Không corticoid, không hydroquinone, không hương liệu tổng hợp gây kích ứng.",
       "caption": "Bảng này liệt kê đúng những hoạt chất và nồng độ được IN TRÊN CHAI serum 30ml. Chúng tôi không tự điền con số nào không có trên bao bì. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
       "rows": [
@@ -315,7 +315,7 @@
     {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
-      "heading": "Ba bước, dùng sáng và tối",
+      "heading": "Dùng sáng và tối thế nào",
       "intro": "Thứ tự lấy từ hướng dẫn sử dụng in kèm sản phẩm.",
       "totalTime": "PT2M",
       "items": [

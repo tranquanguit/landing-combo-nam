@@ -105,6 +105,32 @@ const MAX_META_BODY = 1;
 /** Ô người đọc chắc chắn nhìn: ở đây không được phép có câu nào. */
 const SALIENT = /heading|title|eyebrow|lead|intro|cta|transition|footnote/i;
 
+/* ── Luật 4: tiêu đề mục mở đầu bằng con số ───────────────────────────────
+ *
+ * Lúc đo lần đầu: 41 trong 177 tiêu đề mục, tức 23%, và chúng rơi vào ĐÚNG BA
+ * Ô giống nhau trên hầu hết trang sản phẩm:
+ *
+ *     "Ba trường hợp, và lời khuyên thật lòng cho từng trường hợp"  ← ai nên mua
+ *     "Sáu hoạt chất in trên vỏ hộp, và vai trò của từng cái"       ← thành phần
+ *     "Ba bước, dùng 1–2 lần mỗi ngày"                              ← cách dùng
+ *
+ * Đọc một trang thì thấy gọn. Mở trang thứ hai là nhận ra đây là một tờ khai
+ * điền sẵn, chỉ thay con số. Người viết content gọi đúng tên: "mọi thứ đều
+ * được đóng thành block ba ý".
+ *
+ * Ngưỡng 1 chứ không phải 0. Đôi khi con số đúng là thứ đáng đưa lên đầu, ví
+ * dụ một tuýp chống nắng nói rõ có bao nhiêu màng lọc. Một lần trên một trang
+ * là lựa chọn; ba lần là khuôn.
+ *
+ * Chỉ soi tiêu đề MỤC, không soi nhãn thẻ hay tên bước. "Rửa sạch và thấm
+ * khô" hay "Da dầu, lỗ chân lông to" thì đáng là danh từ trần — bản dò đầu
+ * tiên của tôi gộp cả chúng vào và báo 216/267 tiêu đề có vấn đề, một con số
+ * vô nghĩa.
+ */
+const NUM_HEAD = /^(Một|Hai|Ba|Bốn|Năm|Sáu|Bảy|Tám|Chín|Mười|[0-9]+)\s+\p{L}/u;
+const HEAD_KEY = /^(blocks|sections)\[\d+\]\.heading$/;
+const MAX_NUM_HEAD = 1;
+
 const files = [];
 const walk = (d) => {
   for (const e of readdirSync(d, { withFileTypes: true })) {
@@ -131,6 +157,7 @@ const tack = {};
 const frames = {};
 const metaTop = {};
 const metaBody = {};
+const numHead = {};
 const visit = (node, path, file) => {
   if (typeof node === 'string') {
     for (const s0 of node.split(/(?<=[.!?])\s+/)) {
@@ -143,6 +170,9 @@ const visit = (node, path, file) => {
         (SALIENT.test(path) ? metaTop : metaBody)[file].push({ path, s, why });
         break;
       }
+    }
+    if (HEAD_KEY.test(path) && NUM_HEAD.test(node.trim())) {
+      (numHead[file] ??= []).push({ path, s: node.trim() });
     }
     return;
   }
@@ -187,6 +217,7 @@ const t = tally(tack, MAX_TACK_PER_FILE);
 const fr = tally(frames, MAX_FRAME_PER_FILE);
 const mt = tally(metaTop, 0);
 const mb = tally(metaBody, MAX_META_BODY);
+const nh = tally(numHead, MAX_NUM_HEAD);
 
 let bad = 0;
 bad += show(
@@ -206,5 +237,10 @@ bad += show(
   'Luật 3b: meta-copy trong thân bài',
   'nói một lần thì được, thành giọng thì không', mb, MAX_META_BODY,
   'Cách sửa: nói thẳng việc mình làm, đừng nói về việc mình đang nói.');
+
+bad += show(
+  'Luật 4: tiêu đề mục mở đầu bằng con số',
+  'một lần là lựa chọn, ba lần là tờ khai điền sẵn', nh, MAX_NUM_HEAD,
+  'Cách sửa: bỏ con số khỏi tiêu đề. Nội dung bên dưới vẫn đếm được.');
 
 process.exit(bad ? 1 : 0);

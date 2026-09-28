@@ -145,7 +145,7 @@
       "type": "cards",
       "id": "hop-voi-ai",
       "eyebrow": "Trước khi đặt",
-      "heading": "Ba loại da, ba cách dùng khác nhau",
+      "heading": "Da bạn thuộc loại nào, rửa ra sao",
       "intro": "Cùng một chai nhưng tần suất và nhiệt độ nước nên khác nhau. Đây là chỗ hay bị bỏ qua.",
       "columns": 3,
       "items": [
@@ -169,7 +169,7 @@
     {
       "type": "ingredients",
       "eyebrow": "Bảng thành phần",
-      "heading": "Bốn hoạt chất in trên vỏ, và bốn thứ không có trong công thức",
+      "heading": "Có gì trong chai, và không có những gì",
       "intro": "Một sữa rửa mặt tốt được đánh giá bằng thứ nó không làm: không kéo căng, không để lại cảm giác khô rát sau khi rửa.",
       "caption": "Bảng này liệt kê các hoạt chất được IN TRÊN VỎ CHAI 300ml. Bốn dấu “free” cũng in trên chính bao bì. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
       "rows": [
@@ -278,7 +278,7 @@
     {
       "type": "steps",
       "eyebrow": "Hướng dẫn",
-      "heading": "Ba bước, sáng và tối",
+      "heading": "Rửa mặt thế nào cho đúng",
       "totalTime": "PT2M",
       "intro": "Buổi tối, nếu có trang điểm hoặc kem chống nắng trên da thì tẩy trang trước rồi mới tới bước này.",
       "items": [
