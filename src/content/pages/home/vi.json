@@ -10,8 +10,8 @@
   },
   "hero": {
     "eyebrow": "Dược mỹ phẩm Mocha",
-    "heading": "Công thức công khai từng tỉ lệ",
-    "lead": "Phần lớn mỹ phẩm chăm sóc da chỉ liệt kê tên hoạt chất. Mocha công bố cả nồng độ, để bạn so sánh được với bất kỳ sản phẩm nào khác trước khi quyết định.",
+    "heading": "Biết rõ mình đang bôi gì lên da",
+    "lead": "Mocha ghi nồng độ các hoạt chất chính ngay trên bao bì. Bạn xem thành phần, đọc hướng dẫn, rồi tự so sánh trước khi quyết định mua.",
     "image": "/images/packshot-combo.jpg",
     "imageAlt": "Kem và serum Mocha đặt cạnh nhau trên nền sáng",
     "primaryCta": {
@@ -19,9 +19,9 @@
       "href": "/nam-tham/"
     },
     "proof": [
-      "Công khai tỉ lệ từng hoạt chất chính, không giấu trong cụm “chiết xuất độc quyền”",
+      "Công khai nồng độ hoạt chất chính",
       "Không corticoid, không hydroquinone",
-      "Nói rõ giới hạn: mỹ phẩm dùng ngoài da, không phải thuốc"
+      "Mỹ phẩm dùng ngoài da, không phải thuốc"
     ]
   },
   "lines": [
@@ -40,11 +40,11 @@
   ],
   "about": {
     "eyebrow": "Về Mocha",
-    "heading": "Vì sao chúng tôi in nồng độ lên bao bì",
+    "heading": "Bạn có quyền biết sản phẩm mình đang dùng có gì",
     "body": [
-      "Một hũ kem ghi “chiết xuất độc quyền” có thể chứa 0,01% hoạt chất, cũng có thể chứa 3%. Người mua không có cách nào biết, và đó là lý do thị trường chăm sóc da rất khó so sánh.",
-      "Mocha chọn cách ngược lại: mỗi sản phẩm công bố tỉ lệ từng hoạt chất chính, kèm nguồn tham khảo cho vai trò của hoạt chất đó. Bạn có thể mang con số ấy đi đối chiếu với bất kỳ sản phẩm nào khác, kể cả sản phẩm của người khác.",
-      "Đổi lại, chúng tôi không hứa những điều không đo được. Mọi sản phẩm của Mocha là mỹ phẩm dùng ngoài da, không phải thuốc, và kết quả phụ thuộc vào cơ địa cùng mức độ chống nắng hằng ngày."
+      "Nhiều sản phẩm chỉ ghi tên hoạt chất mà không cho biết nồng độ. Một hũ kem ghi “chiết xuất độc quyền” có thể chứa 0,01%, cũng có thể chứa 3%. Vì vậy rất khó để so sánh hai sản phẩm với nhau.",
+      "Mocha chọn cách đơn giản hơn: nồng độ các hoạt chất chính được ghi rõ trên bao bì và trên website, kèm nguồn tham khảo cho vai trò của từng chất. Bạn đọc, so sánh, rồi quyết định. Không cần tin chỉ vì chúng tôi nói.",
+      "Cũng vì vậy, Mocha không hứa những kết quả vượt quá giới hạn của một sản phẩm mỹ phẩm. Đây là mỹ phẩm dùng ngoài da, không phải thuốc. Tình trạng nám, cơ địa và việc chống nắng mỗi ngày đều ảnh hưởng tới kết quả."
     ]
   },
   "sections": [
@@ -52,9 +52,9 @@
       "id": "bat-dau-tu-dau",
       "heading": "Chưa biết bắt đầu từ đâu? Trả lời một câu này trước",
       "body": [
-        "Vùng da sẫm màu của bạn nằm ở tầng nào. Đó là câu hỏi quyết định bạn nên kỳ vọng bao lâu, chứ không phải câu hỏi nên mua nhãn nào.",
-        "Vết sạm nằm ngoài da và sắc tố nằm sâu bên dưới không chuyển biến giống nhau, dù bôi cùng một hoạt chất. Đặt kỳ vọng của nhóm này lên nhóm kia là lý do phổ biến nhất khiến người ta bỏ dở giữa chừng, rồi kết luận rằng không sản phẩm nào có tác dụng.",
-        "Trang Da nám và thâm sạm phân biệt ba nhóm kèm mốc thời gian tham khảo cho từng nhóm. Đọc phần đó trước khi xem tới giá."
+        "Vùng da sẫm màu của bạn nằm nông hay nằm sâu? Câu trả lời quyết định bạn nên chờ bao lâu.",
+        "Nám mảng và nám chân sâu không giống nhau. Thời gian thấy thay đổi cũng khác. Nếu trông đợi quá nhanh, bạn rất dễ bỏ cuộc giữa chừng.",
+        "Trang Da nám và thâm sạm phân biệt từng nhóm, kèm mốc thời gian tham khảo. Đọc phần đó trước khi xem giá."
       ],
       "links": [
         {
@@ -65,13 +65,13 @@
     },
     {
       "id": "van-de-nao",
-      "heading": "Bạn đang gặp chuyện gì? Đi thẳng tới đó",
+      "heading": "Bạn đang lo chuyện gì về da?",
       "body": [
-        "Phần trên nói về nám vì đó là nhóm đông nhất. Nhưng nếu bạn tới đây vì một chuyện khác, không cần đọc hết trang này để tìm lối đi.",
-        "<strong>Đang nổi mụn:</strong> nốt đang sưng và nốt đã lặn để lại vết thâm là hai việc khác nhau, cần hai sản phẩm khác nhau. Trang dòng da mụn phân biệt rõ hai giai đoạn đó.",
-        "<strong>Da rát, đỏ, bong nhẹ sau khi dùng hoạt chất:</strong> giai đoạn này cần ít thứ tác động hơn chứ không phải nhiều hơn. Dừng hoạt chất mạnh trước, rồi mới tính tiếp.",
-        "<strong>Chưa biết bắt đầu</strong> — bắt đầu bằng làm sạch và chống nắng. Hai bước này quyết định mọi bước sau có ý nghĩa hay không, và chúng rẻ hơn phần lớn thứ bạn sẽ mua sau đó.",
-        "<strong>Muốn đi nhanh, chấp nhận có giai đoạn bong:</strong> đọc kỹ trang peel trước khi đặt, kể cả phần nói ai không nên tự peel ở nhà."
+        "Không phải ai cũng bắt đầu từ nám. Nếu bạn tới đây vì chuyện khác, đi thẳng tới phần của mình.",
+        "<strong>Đang nổi mụn:</strong> xử lý nốt đang sưng trước. Vết thâm để lại sau đó là chuyện khác, cần sản phẩm khác.",
+        "<strong>Da đang rát, đỏ hoặc bong:</strong> đừng thêm sản phẩm mới. Lúc này da cần được giảm bớt tác động. Dừng hoạt chất mạnh trước, rồi mới tính tiếp.",
+        "<strong>Mới bắt đầu chăm sóc da:</strong> làm sạch và chống nắng trước. Hai bước này rẻ hơn phần lớn thứ bạn sẽ mua sau, và đáng làm cho đúng.",
+        "<strong>Muốn dùng peel hoặc retinol:</strong> đọc kỹ phần lưu ý trên trang peel trước khi đặt, nhất là phần nói ai không nên tự làm ở nhà."
       ],
       "links": [
         {
@@ -98,16 +98,16 @@
     },
     {
       "id": "con-so-tren-bao-bi",
-      "heading": "Đây là những con số đang được in trên bao bì",
+      "heading": "Nồng độ đang ghi trên bao bì",
       "body": [
-        "Nói rằng mình công khai nồng độ thì ai cũng nói được. Dưới đây là con số thật, lấy từ bao bì của từng sản phẩm, để bạn đối chiếu được ngay mà không phải bấm vào từng trang.",
+        "Gom về một chỗ để bạn khỏi phải bấm vào từng trang.",
         "<strong>Serum Smart First Care</strong> — 4-butylresorcinol 1000ppm, Niacinamide 4%, Bio-Placenta 1%.",
         "<strong>Kem nám Smart Brightening X3</strong> — Tranexamic Acid 3%, NIO-NAG 2%, Ceramide 1%.",
         "<strong>Gel chấm thâm Smart Whitening</strong> — Sabiwhite® 0,3%, Niacinamide 3%, Tranexamic Acid 3%.",
         "<strong>Gel chấm mụn Smart Target</strong> — Acnebusters 3%, BHA 0,5%.",
         "<strong>Bộ peel Retinol mixPEEL</strong> — Retinol 1% bọc liposome.",
-        "Vì sao điều này quan trọng: bạn biết trong một sản phẩm có Niacinamide, nhưng 1% và 5% không phải cùng một sản phẩm. Khi con số được in ra, bạn <strong>so sánh được với bất kỳ nhãn nào khác</strong>, kể cả nhãn chúng tôi không bán.",
-        "Chỗ nào không có số thì trang nói thẳng là không có, chứ không ước lượng hộ."
+        "Biết trong sản phẩm có Niacinamide vẫn chưa đủ: 1% và 5% là hai chuyện khác nhau. Có con số thì bạn <strong>so sánh được với bất kỳ nhãn nào khác</strong>.",
+        "Chỗ nào không có số thì trang ghi là không có."
       ],
       "links": [
         {
@@ -141,11 +141,11 @@
     },
     {
       "id": "nhung-dieu-khong-noi",
-      "heading": "Những điều chúng tôi không nói",
+      "heading": "Vài điều nên biết trước khi đặt",
       "body": [
-        "Không có con số kiểu “sau bao nhiêu ngày là xong”. Thời gian cải thiện khác nhau theo nhóm, theo cơ địa, và theo việc bạn có chống nắng mỗi sáng hay không. Ai đưa ra một con số chung cho tất cả mọi người là đang đoán.",
-        "Không có chuyện hoàn tiền vì dùng thấy không hợp. Mỹ phẩm đã mở nắp thì không bán lại được, và không ai đoán trước được da bạn phản ứng thế nào. Cửa sổ đổi trả 7 ngày chỉ áp dụng cho hàng lỗi, sai hàng hoặc chưa mở seal. Nói trước để bạn không bất ngờ.",
-        "Và không có tuyên bố chữa bệnh. Mọi sản phẩm ở đây là mỹ phẩm dùng ngoài da. Nếu tình trạng da của bạn cần can thiệp y khoa, hãy đến gặp bác sĩ da liễu."
+        "Không có mốc thời gian đúng cho tất cả mọi người. Thời gian cải thiện khác nhau theo nhóm nám, theo cơ địa, và theo việc bạn có chống nắng mỗi sáng hay không.",
+        "Mỹ phẩm đã mở nắp thì không đổi lại được chỉ vì bạn thấy không hợp. Đổi trả trong 7 ngày áp dụng cho hàng lỗi, sai hàng hoặc chưa mở seal.",
+        "Đây là mỹ phẩm dùng ngoài da, không phải thuốc. Nếu tình trạng da cần điều trị y khoa, bạn nên gặp bác sĩ da liễu."
       ]
     }
   ],
@@ -156,15 +156,15 @@
     },
     {
       "q": "Vì sao giá trên trang thấp hơn giá niêm yết?",
-      "a": "Giá niêm yết là giá in trên tài liệu chính hãng của từng sản phẩm. Giá trên trang là giá bán hiện tại. Cả hai đều hiện song song để bạn tự đối chiếu, không có con số nào bị giấu đi."
+      "a": "Giá niêm yết là giá in trên tài liệu chính hãng của từng sản phẩm. Giá trên trang là giá bán hiện tại. Cả hai hiện song song để bạn tự đối chiếu."
     },
     {
       "q": "Tôi không muốn để lại số điện thoại thì có mua được không?",
-      "a": "Trang này nhận đơn qua tư vấn nên cần số để gọi xác nhận. Nếu bạn chưa muốn để lại thông tin, cứ đọc phần thành phần và hướng dẫn trên trang sản phẩm. Chúng công khai đầy đủ và không cần đăng nhập."
+      "a": "Trang này nhận đơn qua tư vấn nên cần số để gọi xác nhận. Nếu bạn chưa muốn để lại thông tin, cứ đọc phần thành phần và hướng dẫn trên trang sản phẩm. Phần đó không cần đăng nhập."
     },
     {
       "q": "Sản phẩm có được công bố với cơ quan quản lý không?",
-      "a": "Có. Số tiếp nhận phiếu công bố sản phẩm mỹ phẩm in ở chân mỗi trang sản phẩm để bạn đối chiếu. Sản phẩm nào chưa có số ở bản hiện hành thì trang hiện một ô cảnh báo thay vì im lặng."
+      "a": "Có. Số tiếp nhận phiếu công bố sản phẩm mỹ phẩm in ở chân mỗi trang sản phẩm để bạn đối chiếu. Sản phẩm nào chưa có số thì trang hiện một ô cảnh báo."
     }
   ]
 }

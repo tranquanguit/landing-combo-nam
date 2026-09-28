@@ -76,8 +76,8 @@
     {
       "type": "hero",
       "eyebrow": "Kem + serum dùng cùng nhau, cho da nám",
-      "heading": "Hai bước chăm sóc da nám, công thức công khai từng tỉ lệ",
-      "lead": "Serum <strong>Smart First Care</strong> ghi rõ 4-butylresorcinol 1000ppm, Niacinamide 4%, Bio-Placenta 1%; kem <strong>Smart Brightening X3</strong> có Tranexamic Acid, NIO-NAG, Bakuchiol. Dùng cho da nám mảng, nám chân sâu và nám hỗn hợp.",
+      "heading": "Một bộ đôi đơn giản cho da nám: serum và kem dưỡng",
+      "lead": "Serum <strong>Smart First Care</strong> và kem <strong>Smart Brightening X3</strong> được làm để dùng cùng nhau trong một chu trình. Nồng độ các hoạt chất chính ghi rõ trên bao bì, và có đủ trong bảng thành phần bên dưới.",
       "usp": [
         {
           "text": "<strong>Không corticoid, không hydroquinone, không cồn khô</strong>",
@@ -86,13 +86,13 @@
           "qualifier": "danh sách thành phần đầy đủ in trên bao bì"
         },
         {
-          "text": "<strong>Công khai đúng những tỉ lệ in trên bao bì</strong>, không giấu trong cụm “thành phần độc quyền”",
+          "text": "<strong>Nồng độ hoạt chất chính ghi trên bao bì</strong>",
           "evidence": "verified",
           "source": "#thanh-phan",
           "qualifier": "xem bảng thành phần ngay trên trang này"
         },
         {
-          "text": "<strong>Nói rõ mốc thời gian theo từng loại nám</strong>, không hứa một con số chung cho tất cả",
+          "text": "<strong>Mốc thời gian nói riêng cho từng loại nám</strong>",
           "evidence": "ingredient",
           "qualifier": "bảng mốc thời gian ở phần dưới"
         }
@@ -123,11 +123,11 @@
         "“Không biết mua online thế nào cho khỏi trúng hàng giả.”"
       ],
       "explainer": {
-        "heading": "Phần lớn sản phẩm chỉ chạm tới lớp da ngoài cùng",
+        "heading": "Sắc tố không nằm hết ở ngoài mặt da",
         "body": [
           "Chỉ làm sáng được lớp da ngoài cùng thì lớp tế bào sinh sắc tố nằm bên dưới vẫn làm việc y như cũ. Ngưng dùng là sắc tố quay lại, có khi còn đậm hơn lúc đầu.",
-          "Combo Nám Mocha đi hướng khác: vừa ghìm bớt tín hiệu sinh sắc tố, vừa giúp da thay lớp tế bào đã sạm, vừa giữ cho hàng rào bảo vệ da khỏi yếu đi để sạm màu đỡ quay lại.",
-          "Điều này cũng có nghĩa là <strong>kết quả đến theo tuần chứ không theo ngày</strong>. Mốc thời gian thực tế cho từng loại nám nằm ở phần dưới."
+          "Combo Nám Mocha đi hướng khác: làm chậm quá trình hình thành sắc tố, giúp da thay lớp tế bào đã sạm, và giữ cho hàng rào bảo vệ da không yếu đi.",
+          "Vì vậy <strong>thay đổi đến theo tuần, không theo ngày</strong>. Mốc thời gian cho từng loại nám nằm ở phần dưới."
         ]
       },
       "transition": "Nám không phải một loại. Trước khi bàn tới công thức, phải biết mảng sạm trên mặt bạn thuộc nhóm nào."
@@ -172,8 +172,8 @@
       "type": "timeline",
       "id": "moc-thoi-gian",
       "eyebrow": "Kỳ vọng đúng",
-      "heading": "Ba nhóm, ba khoảng thời gian rất khác nhau",
-      "intro": "Vì thế chúng tôi không đưa một con số chung. Lấy mốc của nhóm đầu áp lên nhóm cuối là cách nhanh nhất để bỏ dở giữa chừng, rồi kết luận rằng chẳng sản phẩm nào ăn thua.",
+      "heading": "Đừng vội đánh giá da sau vài ngày",
+      "intro": "Nám mảng thường thấy thay đổi sớm hơn. Nám chân sâu và nám hỗn hợp cần nhiều thời gian hơn. Các mốc dưới đây chỉ để tham khảo, không phải lời hứa về kết quả.",
       "max": 16,
       "unitLabel": "tuần",
       "items": [
@@ -280,7 +280,6 @@
       ],
       "transition": "Biết trong hộp có gì rồi. Còn thứ tự dùng lại là chuyện khác. Sai thứ tự thì phí cả hai lọ.",
       "cta": {
-        "note": "Bằng chứng chúng tôi có chỉ tới đây. Nếu thế là đủ với bạn:",
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }
