@@ -203,7 +203,7 @@
       "eyebrow": "Bảng thành phần",
       "heading": "Từng hoạt chất, từng tỉ lệ, và vai trò của nó",
       "intro": "Không corticoid, không hydroquinone, không hương liệu tổng hợp gây kích ứng.",
-      "caption": "Bảng này liệt kê đúng những hoạt chất và nồng độ được IN TRÊN BAO BÌ của serum và kem. Chúng tôi không tự điền con số nào không có trên vỏ hộp. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
+      "caption": "Bảng này liệt kê đúng những hoạt chất và nồng độ được IN TRÊN BAO BÌ của serum và kem. Thành phần đầy đủ theo INCI in trên bao bì sản phẩm.",
       "rows": [
         {
           "name": "4-butylresorcinol 1000ppm",
@@ -430,9 +430,9 @@
     {
       "type": "cards",
       "id": "ai-khong-nen-dung",
-      "eyebrow": "Nói trước cho rõ",
+      "eyebrow": "Trước khi đặt",
       "heading": "Bốn trường hợp bạn nên cân nhắc lại, hoặc hỏi bác sĩ trước",
-      "intro": "Phần này nằm ngay trước biểu mẫu là có chủ ý. Biết trước sản phẩm không hợp với mình thì tốt hơn nhiều so với biết sau khi đã nhận hàng.",
+      "intro": "Biết trước sản phẩm không hợp với mình thì tốt hơn nhiều so với biết sau khi đã nhận hàng.",
       "columns": 3,
       "items": [
         {
@@ -447,7 +447,7 @@
         },
         {
           "heading": "Không dùng được kem chống nắng mỗi sáng",
-          "body": "Nói thẳng: nếu công việc hoặc thói quen khiến bạn không thể chống nắng đều đặn, kết quả sẽ kém hơn hẳn những gì trang này mô tả. Bước đó không phải tuỳ chọn.",
+          "body": "Nếu công việc hoặc thói quen khiến bạn không thể chống nắng đều đặn, kết quả sẽ kém hơn hẳn những gì trang này mô tả. Bước đó không phải tuỳ chọn.",
           "meta": "Nên cân nhắc lại"
         },
         {
@@ -502,7 +502,7 @@
         },
         {
           "q": "Dùng đủ 8 tuần mà không thấy khác biệt thì sao?",
-          "a": "Nói thẳng: chúng tôi <strong>không hoàn tiền vì lý do không hợp</strong>. Đổi trả trong 7 ngày chỉ áp dụng khi hàng lỗi, sai hàng hoặc chưa mở seal. Lý do là mỹ phẩm đã mở nắp không thể bán lại, và không ai đoán trước được da bạn phản ứng thế nào. Nếu sau 8 tuần chưa thấy khác biệt, gọi hotline. Chúng tôi sẽ xem lại cách dùng và mức chống nắng hằng ngày của bạn. Đó là hai nguyên nhân hay gặp nhất. Nếu vẫn không cải thiện, nám của bạn có thể cần can thiệp y khoa chứ không phải mỹ phẩm. Nếu nám của bạn cần can thiệp y khoa, hãy đến gặp bác sĩ da liễu."
+          "a": "Không. Đổi trả trong 7 ngày chỉ áp dụng khi hàng lỗi, sai hàng hoặc chưa mở seal, vì mỹ phẩm đã mở nắp thì không bán lại được. Nếu sau 8 tuần chưa thấy khác biệt, bạn gọi hotline để chuyên viên xem lại cách dùng và mức chống nắng hằng ngày. Nếu vẫn không cải thiện, tình trạng của bạn có thể cần can thiệp y khoa, và bạn nên gặp bác sĩ da liễu."
         },
         {
           "q": "Da nhạy cảm dùng được không?",

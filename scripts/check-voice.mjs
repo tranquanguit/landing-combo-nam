@@ -62,6 +62,49 @@ const MAX_TACK_PER_FILE = 2;
 const FRAME = /^(Đây là|Đây không|Đây chính là|Đó là lý do|Điều này)/;
 const MAX_FRAME_PER_FILE = 3;
 
+/* ── Luật 3: meta-copy và tư thế phòng thủ ────────────────────────────────
+ *
+ * Luật 1 và 2 đếm DẤU CÂU. Sửa xong thì hai con số ấy đẹp, nhưng người viết
+ * content đọc lại vẫn thấy văn AI — vì dấu vân tay thật không nằm ở dấu câu,
+ * nó nằm ở TƯ THẾ.
+ *
+ * Tư thế sai là khi trang nói về chính nó thay vì nói với khách:
+ *
+ *     "Bằng chứng chúng tôi có chỉ tới đây."
+ *     "Nói rằng mình công khai nồng độ thì ai cũng nói được."
+ *     "Phần này nằm ngay trước biểu mẫu là có chủ ý."
+ *     "Ai đưa ra một con số chung cho tất cả mọi người là đang đoán."
+ *
+ * Từng câu thì hợp lý. Cả trang thì thành một thương hiệu đang phòng thủ, và
+ * đang tranh luận với các website khác thay vì giúp khách quyết định. Đưa
+ * bằng chứng ra là đủ; không cần nói rằng mình đang đưa bằng chứng.
+ *
+ * NGƯỠNG CÓ HAI MỨC, vì cùng một câu không gây hại như nhau ở mọi chỗ:
+ *
+ *   - trong thân bài: tối đa 1 câu mỗi trang (đôi khi nói một lần là đúng)
+ *   - trong ô nổi bật — tiêu đề, mở đoạn, CTA, câu chuyển: KHÔNG câu nào
+ *
+ * Đo trên bản trước khi sửa cho thấy vì sao phải tách hai mức: meta-copy dày
+ * gấp đôi ở ô nổi bật so với thân bài (2,4% với 1,2%). Đó là chỗ người ta
+ * đọc chắc chắn, nên một câu ở tiêu đề nặng hơn nhiều một câu giữa đoạn.
+ */
+const META = [
+  [/bằng chứng (chúng tôi|mình)/i, 'nói về bằng chứng của chính mình'],
+  [/là có chủ ý/i, 'giải thích bố cục trang cho người đọc'],
+  [/\bnói (trước|thẳng)\b/i, 'tuyên bố mình đang thẳng thắn'],
+  [/ai cũng nói được/i, 'so mình với nhãn khác'],
+  [/kể cả điều bất lợi/i, 'tự khen trung thực'],
+  [/chúng tôi không (đoán|tự điền|bịa)/i, 'tự khen không đoán'],
+  [/là đang đoán/i, 'chê bên khác đoán'],
+  [/thì đang bán hàng/i, 'chê bên khác bán hàng'],
+  [/những điều chúng tôi không/i, 'tuyên ngôn'],
+  [/vì sao điều này quan trọng/i, 'giải thích vì sao mình viết câu này'],
+  [/không ước lượng hộ/i, 'tự khen không đoán'],
+];
+const MAX_META_BODY = 1;
+/** Ô người đọc chắc chắn nhìn: ở đây không được phép có câu nào. */
+const SALIENT = /heading|title|eyebrow|lead|intro|cta|transition|footnote/i;
+
 const files = [];
 const walk = (d) => {
   for (const e of readdirSync(d, { withFileTypes: true })) {
@@ -86,12 +129,20 @@ const tackOn = (s) => {
 
 const tack = {};
 const frames = {};
+const metaTop = {};
+const metaBody = {};
 const visit = (node, path, file) => {
   if (typeof node === 'string') {
     for (const s0 of node.split(/(?<=[.!?])\s+/)) {
       const s = s0.trim();
       if (tackOn(s)) (tack[file] ??= []).push({ path, s });
       if (FRAME.test(s)) (frames[file] ??= []).push({ path, s });
+      for (const [re, why] of META) {
+        if (!re.test(s)) continue;
+        (SALIENT.test(path) ? metaTop : metaBody)[file] ??= [];
+        (SALIENT.test(path) ? metaTop : metaBody)[file].push({ path, s, why });
+        break;
+      }
     }
     return;
   }
@@ -134,6 +185,8 @@ const show = (title, note, { total, over }, max, fix) => {
 
 const t = tally(tack, MAX_TACK_PER_FILE);
 const fr = tally(frames, MAX_FRAME_PER_FILE);
+const mt = tally(metaTop, 0);
+const mb = tally(metaBody, MAX_META_BODY);
 
 let bad = 0;
 bad += show(
@@ -144,5 +197,14 @@ bad += show(
   'Luật 2: mở câu bằng "Đây là" và họ hàng',
   'giữ cho việc sửa luật 1 không đẻ ra khuôn mới', fr, MAX_FRAME_PER_FILE,
   'Cách sửa: gọi thẳng chủ thể thay vì trỏ lại bằng "Đây là".');
+
+bad += show(
+  'Luật 3: meta-copy trong ô nổi bật (tiêu đề, mở đoạn, CTA)',
+  'ở đây không được phép có câu nào', mt, 0,
+  'Cách sửa: bỏ hẳn câu đó. Đưa bằng chứng ra là đủ.');
+bad += show(
+  'Luật 3b: meta-copy trong thân bài',
+  'nói một lần thì được, thành giọng thì không', mb, MAX_META_BODY,
+  'Cách sửa: nói thẳng việc mình làm, đừng nói về việc mình đang nói.');
 
 process.exit(bad ? 1 : 0);
