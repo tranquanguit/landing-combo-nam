@@ -146,7 +146,7 @@
       "id": "hop-voi-ai",
       "eyebrow": "Trước khi đặt",
       "heading": "Da bạn thuộc loại nào, rửa ra sao",
-      "intro": "Cùng một chai nhưng tần suất và nhiệt độ nước nên khác nhau. Đây là chỗ hay bị bỏ qua.",
+      "intro": "Cùng một chai nhưng tần suất và nhiệt độ nước nên khác nhau. Chỗ này hay bị bỏ qua.",
       "columns": 3,
       "items": [
         {
@@ -392,7 +392,7 @@
     {
       "type": "relatedProducts",
       "eyebrow": "Bước tiếp theo",
-      "heading": "Sau khi nền da đã ổn",
+      "heading": "Sau khi da đã ổn",
       "intro": "Làm sạch đúng cách là điều kiện, không phải đích đến. Dưới đây là bước kế tiếp tuỳ vấn đề bạn đang quan tâm.",
       "items": [
         "bio-deep-detox-rebalance",

@@ -232,7 +232,7 @@
         {
           "name": "Bioyoga 2%",
           "inProduct": "Serum",
-          "role": "Thành phần lên men, hỗ trợ làm dịu nền da.",
+          "role": "Thành phần lên men, hỗ trợ làm dịu da.",
           "suitedFor": "Da căng thẳng, dễ đỏ"
         },
         {
@@ -400,7 +400,7 @@
     },
     {
       "type": "testimonials",
-      "eyebrow": "Trải nghiệm thật",
+      "eyebrow": "Khách hàng nói gì",
       "heading": "Khách hàng nói gì sau khi dùng đủ chu kỳ",
       "items": [
         {

@@ -60,7 +60,7 @@ const MAX_TACK_PER_FILE = 2;
  * Ba lần trên một trang còn là trùng hợp; sáu lần là khuôn.
  */
 const FRAME = /^(Đây là|Đây không|Đây chính là|Đó là lý do|Điều này)/;
-const MAX_FRAME_PER_FILE = 3;
+const MAX_FRAME_PER_FILE = 2;
 
 /* ── Luật 3: meta-copy và tư thế phòng thủ ────────────────────────────────
  *

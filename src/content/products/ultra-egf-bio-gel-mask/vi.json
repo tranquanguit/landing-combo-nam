@@ -127,13 +127,13 @@
       "quotes": [
         "“Da xấu quá nên tôi đắp mặt nạ mỗi ngày cho nhanh hồi.”",
         "“Đắp xong da căng mọng, sáng hôm sau lại như cũ.”",
-        "“Mua cả chục loại mặt nạ mà nền da vẫn không khá lên.”",
+        "“Mua cả chục loại mặt nạ mà da vẫn chẳng khá lên.”",
         "“Không biết nên đắp trước hay sau serum.”"
       ],
       "explainer": {
-        "heading": "Đây là bước thêm, và chúng tôi ghi đúng như vậy ngay trên đầu trang",
+        "heading": "Một bước thêm vào, không phải bước phải có",
         "body": [
-          "Ba bước quyết định nền da là làm sạch đúng cách, dưỡng ẩm đều đặn và chống nắng hằng ngày. Một tuýp mặt nạ không thay được bước nào trong ba bước đó.",
+          "Da ổn hay không phụ thuộc vào ba việc: làm sạch đúng cách, dưỡng ẩm đều đặn và chống nắng hằng ngày. Một tuýp mặt nạ không thay được bước nào trong ba bước đó.",
           "Cảm giác căng mọng ngay sau khi đắp phần lớn đến từ lượng nước vừa được cấp vào lớp ngoài cùng. Nó có thật, nhưng nó <strong>không tồn tại lâu nếu bước dưỡng ẩm hằng ngày vẫn bỏ trống</strong>.",
           "Vậy khi nào nó đáng dùng? Khi ba bước nền đã đều, và bạn muốn thêm một bước cấp ẩm đậm hơn trong những tuần da cần được để yên. Đúng vai trò đó thì nó làm tốt; đặt vào vai trò khác thì không."
         ]
@@ -179,7 +179,7 @@
         },
         {
           "name": "Epi-On™",
-          "role": "Hoạt chất công nghệ sinh học, hướng tới làm dịu nền da.",
+          "role": "Hoạt chất công nghệ sinh học, làm dịu da.",
           "suitedFor": "Da dễ kích ứng"
         },
         {

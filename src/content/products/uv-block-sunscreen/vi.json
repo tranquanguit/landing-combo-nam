@@ -192,7 +192,7 @@
       "id": "hop-voi-ai",
       "eyebrow": "Trước khi đặt",
       "heading": "Trước khi đặt, bạn nên biết",
-      "intro": "Đây là bước quan trọng nhất trong cả quy trình, nên nó cũng là chỗ đáng nói thật nhất.",
+      "intro": "Bước này quan trọng nhất trong cả quy trình.",
       "columns": 3,
       "items": [
         {
@@ -282,7 +282,7 @@
         {
           "name": "Centella Asiatica Leaf Extract",
           "inProduct": "Chiết xuất",
-          "role": "Chiết xuất rau má, hướng tới làm dịu nền da.",
+          "role": "Chiết xuất rau má, làm dịu da.",
           "suitedFor": "Da dễ đỏ, da sau peel"
         },
         {
