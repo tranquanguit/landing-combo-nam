@@ -16,7 +16,9 @@ function lastmodFor(pathname) {
   const locale = /^\/(en|th|id)\//.test(pathname) ? pathname.split('/')[1] : 'vi';
   const file = `src/content/products/${name}/${locale}.json`;
   try {
-    const iso = execSync(`git log -1 --format=%cI -- ${file}`, { encoding: 'utf8' }).trim();
+    /* stderr bỏ đi: trong image Docker không có git (và không có .git) — lastmod
+       để trống là đúng, còn 50 dòng "git: not found" trong nhật ký xuất bản thì không. */
+    const iso = execSync(`git log -1 --format=%cI -- ${file}`, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
     return iso || undefined;
   } catch {
     return undefined;

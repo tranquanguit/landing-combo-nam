@@ -16,9 +16,10 @@ refs/
 # Ảnh chụp của cổng đáp ứng — sinh lại được bằng `npm run docs:responsive`
 .responsive-shots/
 
-# Máy chủ Docker: build vào dist-next rồi mới đổi sang dist; giữ dist-prev một bản.
-dist-next/
-dist-prev/
+# Máy chủ: mỗi lần xuất bản build vào builds/<số>; .site-current trỏ tới bản đang phục vụ.
+builds/
+.site-current
+.site-current.tmp
 # Thư mục tạm của bộ thử máy chủ
 .tmp/
 # CSDL PGlite chạy thử cục bộ

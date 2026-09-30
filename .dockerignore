@@ -1,7 +1,7 @@
 node_modules
 dist
-dist-next
-dist-prev
+builds
+.site-current
 .astro
 .git
 .github

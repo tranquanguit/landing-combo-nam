@@ -15,6 +15,7 @@ import type { Sql } from './lib/db.ts';
 import { d1 } from './lib/db.ts';
 import { createStatic } from './lib/static.ts';
 import { adminHandler } from './admin/app.ts';
+import { currentSite } from './lib/publish.ts';
 import { onRequest as ordersHandler } from '../functions/api/orders.ts';
 import { onRequest as adminOrdersHandler } from '../functions/api/admin/orders.ts';
 
@@ -26,7 +27,7 @@ export interface AppOptions {
 
 export function createApp({ sql, root, env = process.env }: AppOptions) {
   const DB = d1(sql);
-  const serveStatic = createStatic(() => join(root, 'dist'));
+  const serveStatic = createStatic(() => currentSite(root));
   const cfEnv = { DB, IP_SALT: env.IP_SALT, ALLOWED_ORIGIN: env.ALLOWED_ORIGIN, ADMIN_TOKEN: env.ADMIN_TOKEN };
   const ctx = (request: Request) => ({ request, env: cfEnv, params: {}, data: {}, next: async () => new Response(null, { status: 404 }), waitUntil: () => {} });
 

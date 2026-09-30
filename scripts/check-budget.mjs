@@ -49,7 +49,8 @@ const HEAVY_MEDIA = /\.(mp4|webm|mov|m4v|mp3|wav|ogg)$/i;
 const IMAGE = /\.(avif|webp|jpg|jpeg|png|gif|svg)$/i;
 const FONT = /\.(woff2|woff|ttf|otf|eot)$/i;
 
-const dist = 'dist';
+/* DIST_DIR: máy chủ Docker kiểm bản vừa xuất bản ở builds/<số> (server/lib/publish.ts). */
+const dist = process.env.DIST_DIR ?? 'dist';
 const SITE_ORIGIN = 'https://mochatrinam.com';
 const fail = [];
 const ok = [];

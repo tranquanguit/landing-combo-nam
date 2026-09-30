@@ -5,7 +5,9 @@ services:
   app:
     image: mocha-landing:verify
   verify:
+    # Cùng image với app (build ở trên), không tải từ registry.
     image: mocha-landing:verify
+    pull_policy: never
     depends_on:
       app:
         condition: service_healthy

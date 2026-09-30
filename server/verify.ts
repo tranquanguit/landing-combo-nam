@@ -52,6 +52,13 @@ if (cookie && process.env.PUBLISH_ON_BOOT !== '0') {
   }
   ok('xuất bản lúc khởi động (astro build trong container)', state === 'thành công',
     `${state} sau ${Math.round((Date.now() - t0) / 1000)}s`);
+  if (state !== 'thành công') {
+    /* In nhật ký của lần xuất bản để biết lý do ngay tại đây, không phải vào máy chủ đọc. */
+    const page = await (await get('/admin/publish', { headers: { cookie } })).text();
+    const log = page.match(/<pre class="log">([\s\S]*?)<\/pre>/)?.[1] ?? '(không đọc được nhật ký)';
+    console.log(log.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&')
+      .split('\n').slice(-25).map((l) => '        | ' + l).join('\n'));
+  }
 }
 if (cookie) {
   r = await get('/admin/content/products', { headers: { cookie } });
@@ -99,3 +106,6 @@ ok('API quản trị không có token -> 401', r.status === 401, String(r.status
 
 console.log(`\n${failed ? `${failed} bước TRƯỢT` : 'Sẵn sàng triển khai: mọi bước đạt.'}\n`);
 process.exit(failed ? 1 : 0);
+
+/* Module ES (await ở cấp trên cùng). */
+export {};
