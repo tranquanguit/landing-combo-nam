@@ -1,0 +1,75 @@
+---
+import FSection from './FSection.astro';
+import { richText } from '../../lib/richtext';
+import { t, type Locale } from '../../i18n/ui';
+interface Props { data: any; id?: string; locale: Locale; role?: string; transition?: string; cta?: any; }
+const { data, id, locale, role, transition, cta } = Astro.props;
+---
+<FSection id={id} tone="bone" role={role} transition={transition} cta={cta}
+  eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} head="split">
+  <div class="rt">
+    {data.columns.map((col: any) => (
+      <section class={`col ${col.when}`} aria-label={col.label} data-reveal>
+        <span class="orb" aria-hidden="true"></span>
+        <h3>{col.label}</h3>
+        <ol>
+          {col.steps.map((s: any, i: number) => (
+            <li class={s.essential ? 'key' : undefined}>
+              <span class="i figure" aria-hidden="true">{i + 1}</span>
+              <span class="tx">
+                <span class="lb">{s.label}{s.essential && <em>{t(locale, 'fx.essential')}</em>}</span>
+                {s.note && <span class="nt">{s.note}</span>}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+  </div>
+  {data.footnote && <p class="foot" data-reveal set:html={richText(data.footnote)} />}
+</FSection>
+
+<style>
+  .rt { display: grid; gap: var(--s-5); }
+  @media (min-width: 820px) { .rt { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-6); } }
+
+  .col {
+    position: relative; overflow: hidden;
+    padding: clamp(28px, 3.4vw, 48px);
+    border-radius: 28px;
+  }
+  /* Sáng và tối là hai KHÔNG KHÍ, không chỉ hai nhãn: người dùng nhận ra cột
+     nào trước khi đọc tiêu đề. */
+  .morning { background: linear-gradient(160deg, #fffaf0 0%, #fdeed4 100%); color: var(--ink); }
+  .night { background: linear-gradient(160deg, var(--night-2) 0%, var(--night) 100%); color: #fff; }
+  .orb { position: absolute; right: 0; top: -60px; width: 160px; height: 160px; border-radius: 50%; }
+  .morning .orb { background: radial-gradient(circle at 40% 60%, #ffd27a, #f6a93b 60%, transparent 62%); opacity: .55; }
+  .night .orb { background: radial-gradient(circle at 70% 30%, transparent 38%, #e8eaff 39% 58%, transparent 59%); opacity: .5; }
+
+  h3 { margin: 0 0 var(--s-6); font-size: clamp(1.6rem, 2.6vw, 2.1rem); letter-spacing: -0.025em; position: relative; }
+  .morning h3 { color: #7a4a06; }
+  .night h3 { color: #fff; }
+
+  ol { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-4); position: relative; }
+  li { display: grid; grid-template-columns: 40px 1fr; gap: var(--s-4); align-items: start; }
+  .i {
+    display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+    font-size: var(--t-base); font-weight: 600;
+  }
+  .morning .i { background: #fff; color: #7a4a06; box-shadow: 0 0 0 1px rgba(122, 74, 6, .18); }
+  .night .i { background: rgba(255, 255, 255, .08); color: #fff; box-shadow: 0 0 0 1px rgba(255, 255, 255, .16); }
+  .tx { display: grid; gap: 2px; padding-top: 7px; }
+  .lb { font-weight: 600; font-size: var(--t-base); }
+  .nt { font-size: var(--t-sm); line-height: 1.55; }
+  .morning .nt { color: #6b4e00; }
+  .night .nt { color: var(--on-night-muted); }
+  .lb em {
+    display: inline-block; margin-left: var(--s-2); vertical-align: 2px;
+    padding: 2px 9px; border-radius: 999px;
+    background: #7a4a06; color: #fff;
+    font-style: normal; font-size: var(--t-2xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  }
+  .morning .key .i { background: #7a4a06; color: #fff; box-shadow: none; }
+
+  .foot { margin: var(--s-6) 0 0; max-width: 64ch; font-size: var(--t-sm); line-height: 1.6; color: var(--ink-muted); }
+</style>

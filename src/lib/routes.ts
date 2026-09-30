@@ -1,5 +1,5 @@
 import { getCollection } from 'astro:content';
-import { ADVICE_SEGMENT, POLICY_SEGMENT, defaultLocale, localePath, type Locale } from '../i18n/ui.ts';
+import { ADVICE_SEGMENT, DOCS_SEGMENT, POLICY_SEGMENT, defaultLocale, localePath, type Locale } from '../i18n/ui.ts';
 
 /**
  * MỘT nơi duy nhất biết URL của mọi trang trên site.
@@ -46,7 +46,12 @@ export function policyPath(slug: string, locale: Locale, topLevel = false): stri
   return withSlash(localePath(locale, topLevel ? `/${slug}/` : `/${POLICY_SEGMENT[locale]}/${slug}/`));
 }
 
-export type RouteKind = 'home' | 'product' | 'line' | 'article' | 'advice-index' | 'policy';
+/** Trang tổng giấy tờ và chứng nhận. */
+export function docsPath(locale: Locale): string {
+  return withSlash(localePath(locale, `/${DOCS_SEGMENT[locale]}/`));
+}
+
+export type RouteKind = 'home' | 'product' | 'line' | 'article' | 'advice-index' | 'policy' | 'docs';
 
 export interface Route {
   kind: RouteKind;
@@ -69,12 +74,13 @@ const published = <T extends { data: { status?: string } }>(entries: T[]) =>
  * từ một tập khác.
  */
 export async function allRoutes(): Promise<Route[]> {
-  const [pages, products, lines, articles, policies] = await Promise.all([
+  const [pages, products, lines, articles, policies, documents] = await Promise.all([
     getCollection('pages'),
     getCollection('products'),
     getCollection('lines'),
     getCollection('articles'),
     getCollection('policies'),
+    getCollection('documents'),
   ]);
 
   const routes: Route[] = [];
@@ -125,6 +131,15 @@ export async function allRoutes(): Promise<Route[]> {
       kind: 'advice-index', path: adviceIndexPath(locale), locale,
       translationKey: 'advice-index', slug: 'advice-index',
     });
+  }
+
+  /* Trang chứng nhận chỉ tồn tại khi có ít nhất một giấy đã xuất bản, và ở
+     những ngôn ngữ có sản phẩm. Không giấy nào thì không sinh một trang rỗng. */
+  if (published(documents as any[]).length > 0) {
+    const productLocales = new Set(published(products as any[]).map((e: any) => e.data.locale as Locale));
+    for (const locale of productLocales) {
+      routes.push({ kind: 'docs', path: docsPath(locale), locale, translationKey: 'docs', slug: 'docs' });
+    }
   }
 
   return routes;

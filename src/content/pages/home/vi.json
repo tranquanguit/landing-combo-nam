@@ -6,13 +6,13 @@
   "seo": {
     "title": "Mocha Việt Nam – Dược mỹ phẩm chăm sóc da công khai nồng độ",
     "description": "Kem và serum chăm sóc da nám, thâm, da dầu mụn. Công khai tỉ lệ từng hoạt chất, không corticoid, không hydroquinone. Tư vấn trước khi mua.",
-    "ogImage": "/images/packshot-combo.jpg"
+    "ogImage": "/images/og-combo-nam.jpg"
   },
   "hero": {
     "eyebrow": "Dược mỹ phẩm Mocha",
     "heading": "Biết rõ mình đang bôi gì lên da",
     "lead": "Mocha ghi nồng độ các hoạt chất chính ngay trên bao bì. Bạn xem thành phần, đọc hướng dẫn, rồi tự so sánh trước khi quyết định mua.",
-    "image": "/images/packshot-combo.jpg",
+    "image": "/images/og-combo-nam.jpg",
     "imageAlt": "Kem và serum Mocha đặt cạnh nhau trên nền sáng",
     "primaryCta": {
       "label": "Xem dòng cho da nám",
@@ -33,7 +33,12 @@
     "treatment"
   ],
   "featured": [
-    "combo-nam"
+    "combo-nam",
+    "smart-brightening-cream",
+    "smart-first-care-serum",
+    "uv-block-sunscreen",
+    "smart-target-acne-gel",
+    "retinol-mixpeel-kit"
   ],
   "articles": [
     "nam-noi-tiet-la-gi"

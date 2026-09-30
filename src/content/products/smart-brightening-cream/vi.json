@@ -105,8 +105,8 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-brightening-cream.webp",
-        "alt": "Hộp và hũ kem Mocha Smart Brightening Cream X3 cùng tuýp sữa rửa mặt Bio-Active Cleanser"
+        "src": "/images/hero-smart-brightening-cream.webp",
+        "alt": "Hộp và hũ kem Mocha Smart Brightening Cream X3"
       },
       "primaryCta": "Đặt kem nám",
       "secondaryCta": {
@@ -254,6 +254,13 @@
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Giấy tờ",
+      "heading": "Giấy tờ đi kèm sản phẩm",
+      "intro": "Bản chụp giấy tờ gốc, đủ rõ để đọc số hiệu. Bấm vào từng giấy để xem bản đầy đủ."
     },
     {
       "type": "routine",

@@ -1,0 +1,173 @@
+---
+import FSection from './FSection.astro';
+import Picture from '../Picture.astro';
+import { getImage } from 'astro:assets';
+import { shortDate } from '../../lib/format';
+import { t, type Locale } from '../../i18n/ui';
+interface Props {
+  docs: any[]; locale: Locale; id?: string;
+  /** Số tiếp nhận phiếu công bố khai trong `compliance` — hiện kể cả khi chưa có bản scan. */
+  notificationNumber?: string;
+  heading?: string; intro?: string; eyebrow?: string;
+  role?: string; cta?: any; tone?: 'paper' | 'bone';
+}
+const {
+  docs, locale, id = 'chung-tu', notificationNumber, role = 'proof', cta, tone = 'bone',
+  heading = t(locale, 'docs.heading'), intro = t(locale, 'docs.intro'), eyebrow = t(locale, 'docs.eyebrow'),
+} = Astro.props;
+
+/* Số tiếp nhận đã có bản scan đi kèm thì không in lại thành dải riêng. */
+/* Bản cỡ đọc được (một biến thể WebP) cho khung xem đầy đủ. */
+const assets = import.meta.glob<{ default: ImageMetadata }>('/src/assets/documents/*.{webp,jpg,jpeg,png}', { eager: true });
+const full = new Map<string, { src: string; width: number; height: number }>();
+for (const d of docs) for (const pg of d.pages) {
+  const m = assets[`/src/assets${pg.src}`]?.default;
+  if (!m) throw new Error(`Không tìm thấy ảnh chứng từ "${pg.src}" (src/assets${pg.src}).`);
+  const img = await getImage({ src: m, width: Math.min(1200, m.width), format: 'webp' });
+  full.set(pg.src, { src: img.src, width: img.attributes.width ?? m.width, height: img.attributes.height ?? m.height });
+}
+const hasScan = docs.some((d) => d.kind === 'notification' && d.reference === notificationNumber);
+const kindLabel = (k: string) => t(locale, `docs.kind.${k}` as any);
+---
+{(docs.length > 0 || notificationNumber) && (
+<FSection id={id} tone={tone} role={role} cta={cta} eyebrow={eyebrow} heading={heading} intro={intro} head="split">
+  {notificationNumber && !hasScan && (
+    <p class="strip" data-reveal>
+      <span class="k">{t(locale, 'legal.notifNumber')}</span>
+      <span class="n figure">{notificationNumber}</span>
+    </p>
+  )}
+
+  {docs.length > 0 && (
+    <ul class="docs">
+      {docs.map((d, i) => {
+        const pid = `doc-${d.slug}`;
+        return (
+          <li data-reveal>
+            <button class="paper" type="button" popovertarget={pid} aria-label={`${t(locale, 'docs.view')}: ${d.title}`}>
+              <span class="sheet">
+                <Picture src={d.pages[0].src} alt={d.pages[0].alt} ratio="3/4" fit="cover" focus="center top"
+                  sizes="(min-width: 980px) 260px, 45vw" widths={[240, 360]} />
+                <span class="mark" aria-hidden="true" data-mark={t(locale, 'docs.watermark')}></span>
+              </span>
+              <span class="kind">{kindLabel(d.kind)}</span>
+            </button>
+            <div class="meta">
+              <p class="title">{d.title}</p>
+              {d.subject && <p class="subj">{d.subject}</p>}
+              {d.reference && <p class="ref figure">{d.reference}</p>}
+              <p class="by">{d.issuedBy} · {shortDate(d.issuedAt, locale)}{d.lot && <> · {t(locale, 'docs.lot')} {d.lot}</>}</p>
+              {d.findings.length > 0 && (
+                <ul class="finds">
+                  {d.findings.slice(0, 3).map((f: any) => <li><span>{f.label}</span> <b>{f.result}</b></li>)}
+                </ul>
+              )}
+            </div>
+
+            {/* Popover gốc của HTML: mở, đóng bằng Esc hay bấm ra ngoài đều do
+                trình duyệt lo, không một byte JS nào. */}
+            <div id={pid} popover class="viewer" aria-label={d.title}>
+              <div class="vhead">
+                <p><b>{d.title}</b>{d.subject && <> — {d.subject}</>}{d.reference && <> · <span class="figure">{d.reference}</span></>}</p>
+                <button type="button" popovertarget={pid} popovertargetaction="hide" class="close">{t(locale, 'docs.close')}</button>
+              </div>
+              <div class="pages">
+                {d.pages.map((pg: any) => (
+                  <figure>
+                    {/* Ảnh cỡ đọc được chỉ tải khi mở giấy: popover đang ẩn thì ảnh
+                        lazy bên trong không được tải. `data-on-demand` cho cổng
+                        ngân sách biết đừng tính nó vào lượt tải đầu. */}
+                    <img src={full.get(pg.src)!.src} width={full.get(pg.src)!.width} height={full.get(pg.src)!.height}
+                      alt={pg.alt} loading="lazy" decoding="async" data-on-demand />
+                    <span class="mark big" aria-hidden="true" data-mark={t(locale, 'docs.watermark')}></span>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  )}
+</FSection>
+)}
+
+<style>
+  .strip {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-2) var(--s-5);
+    margin: 0 0 var(--s-6); padding: var(--s-4) var(--s-5);
+    border-radius: 18px; background: #fff; border: 1px solid var(--line);
+  }
+  .strip .k { font-size: var(--t-sm); color: var(--ink-muted); }
+  .strip .n { font-size: var(--t-xl); font-weight: 600; color: var(--ink-navy); letter-spacing: -0.01em; }
+
+  .docs { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-6) var(--s-5); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 980px) { .docs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+  .paper {
+    all: unset; box-sizing: border-box; display: block; position: relative; width: 100%;
+    cursor: zoom-in; border-radius: 6px;
+  }
+  .paper:focus-visible { outline: 3px solid var(--cobalt-lift); outline-offset: 4px; }
+  .sheet {
+    display: block; position: relative; overflow: hidden;
+    border-radius: 6px; background: #fff;
+    box-shadow: 0 1px 0 rgba(26, 29, 82, .08), 0 24px 40px -24px rgba(26, 29, 82, .45);
+    transform: rotate(-.6deg);
+    transition: transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+  }
+  li:nth-child(even) .sheet { transform: rotate(.7deg); }
+  @media (hover: hover) {
+    .paper:hover .sheet { transform: translateY(-4px) rotate(0); box-shadow: 0 1px 0 rgba(26, 29, 82, .08), 0 36px 60px -28px rgba(26, 29, 82, .5); }
+  }
+  .kind {
+    position: absolute; left: 10px; bottom: 10px;
+    padding: 4px 10px; border-radius: 999px;
+    background: var(--ink-navy); color: #fff;
+    font-size: var(--t-2xs); font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  }
+  /* Dấu chìm: bản chụp màn hình giấy tờ khó bị đem đi dùng lại cho hàng giả. */
+  /* Chữ xoay nằm ở ::after: hộp của chính .mark không xoay nên không thò ra
+     khỏi khung (hộp xoay của một phần tử inset:0 lớn hơn khung chứa nó). */
+  .mark {
+    position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden;
+    pointer-events: none;
+    font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+    color: rgba(43, 52, 184, .22); white-space: nowrap;
+  }
+  .mark::after { content: attr(data-mark); transform: rotate(-24deg); }
+  .mark.big { font-size: clamp(16px, 3vw, 28px); color: rgba(43, 52, 184, .16); }
+
+  .docs > li { min-width: 0; }
+  .meta { padding-top: var(--s-4); display: grid; gap: 4px; overflow-wrap: anywhere; }
+  .title { margin: 0; font-weight: 600; font-size: var(--t-sm); line-height: 1.35; color: var(--ink-navy); }
+  .subj { margin: 0; font-size: var(--t-xs); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--slate); }
+  .ref { margin: 0; font-size: var(--t-md); font-weight: 600; color: var(--cobalt); }
+  .by { margin: 0; font-size: var(--t-xs); color: var(--ink-muted); line-height: 1.5; }
+  .finds { list-style: none; margin: var(--s-2) 0 0; padding: 0; display: grid; gap: 2px; font-size: var(--t-xs); color: var(--ink-muted); }
+  .finds b { color: var(--verify); font-weight: 600; }
+
+  .viewer {
+    width: min(960px, 100vw - 24px); max-height: calc(100vh - 24px);
+    margin: auto; padding: 0; border: 0; border-radius: 18px;
+    background: var(--bone); color: var(--ink);
+    overflow: auto; overscroll-behavior: contain;
+    box-shadow: 0 40px 120px -20px rgba(0, 0, 0, .6);
+  }
+  .viewer::backdrop { background: rgba(12, 14, 46, .72); }
+  .vhead {
+    position: sticky; top: 0; z-index: 1;
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s-4);
+    padding: var(--s-3) var(--s-4); background: #fff; border-bottom: 1px solid var(--line);
+  }
+  .vhead p { margin: 0; font-size: var(--t-sm); color: var(--ink-navy); }
+  .close {
+    flex: 0 0 auto; min-height: 44px; padding: 0 18px; border-radius: 999px;
+    border: 1px solid var(--line-strong); background: #fff; color: var(--ink-navy);
+    font: inherit; font-weight: 600; font-size: var(--t-sm); cursor: pointer;
+  }
+  .close:hover { background: var(--ink-navy); color: #fff; }
+  .pages { display: grid; gap: var(--s-4); padding: var(--s-4); }
+  .pages figure { position: relative; margin: 0; background: #fff; border-radius: 6px; overflow: hidden; }
+  .pages :global(img) { width: 100%; height: auto; }
+</style>

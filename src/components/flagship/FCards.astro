@@ -1,0 +1,109 @@
+---
+import FSection from './FSection.astro';
+import Picture from '../Picture.astro';
+interface Props { data: any; id?: string; role?: string; transition?: string; cta?: any; tone?: 'paper' | 'bone'; }
+const { data, id, role, transition, cta, tone = 'bone' } = Astro.props;
+
+/* Hai hình thái theo DỮ LIỆU, không theo id khối: thẻ có ảnh là một bộ nhận
+   diện (nhìn để so với da mình), thẻ không ảnh là một danh sách cân nhắc. */
+const visual = data.items.some((it: any) => it.image);
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+<FSection id={id} tone={tone} role={role} transition={transition} cta={cta}
+  eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} head="split">
+  {visual ? (
+    <ol class="types">
+      {data.items.map((it: any, i: number) => (
+        <li data-reveal>
+          {it.image && (
+            <div class="ph">
+              <Picture src={it.image.src} alt={it.image.alt} ratio="4/3" fit="cover" focus={it.image.focus}
+                sizes="(min-width: 980px) 33vw, (min-width: 640px) 50vw, 100vw" />
+              <span class="idx figure" aria-hidden="true">{pad(i + 1)}</span>
+            </div>
+          )}
+          <div class="bd">
+            <h3>{it.heading}</h3>
+            <p>{it.body}</p>
+            {it.meta && (
+              <p class="meta">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></svg>
+                {it.meta}
+              </p>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+  ) : (
+    <ol class="checks">
+      {data.items.map((it: any, i: number) => (
+        <li data-reveal>
+          <span class="n figure" aria-hidden="true">{pad(i + 1)}</span>
+          <div>
+            {it.meta && <p class="tag">{it.meta}</p>}
+            <h3>{it.heading}</h3>
+            <p>{it.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  )}
+</FSection>
+
+<style>
+  .types, .checks { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-5); }
+  @media (min-width: 640px) { .types { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 980px) { .types { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-6); } }
+
+  .types li {
+    display: flex; flex-direction: column;
+    background: var(--paper);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -44px rgba(26, 29, 82, .45), 0 0 0 1px rgba(26, 29, 82, .06);
+    transition: transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+  }
+  @media (hover: hover) {
+    .types li:hover { transform: translateY(-4px); box-shadow: 0 40px 70px -40px rgba(26, 29, 82, .5), 0 0 0 1px rgba(26, 29, 82, .08); }
+    .types li:hover .ph :global(img) { transform: scale(1.04); }
+  }
+  .ph { position: relative; }
+  .ph :global(img) { transition: transform 900ms var(--ease-out); }
+  .idx {
+    position: absolute; left: 16px; top: 14px;
+    padding: 2px 10px; border-radius: 999px;
+    background: rgba(255, 255, 255, .92);
+    font-size: var(--t-sm); font-weight: 600; color: var(--ink-navy);
+  }
+  .bd { padding: var(--s-5) var(--s-5) var(--s-6); display: flex; flex-direction: column; gap: var(--s-3); flex: 1; }
+  .bd h3 { margin: 0; font-size: var(--t-lg); letter-spacing: -0.02em; }
+  .bd p { margin: 0; font-size: var(--t-sm); line-height: 1.65; color: var(--ink-muted); }
+  .bd .meta {
+    margin-top: auto;
+    align-self: flex-start;
+    display: inline-flex; align-items: center; gap: var(--s-2);
+    padding: 6px 14px 6px 10px; border-radius: 999px;
+    background: var(--bone);
+    font-size: var(--t-xs); font-weight: 600; color: var(--ink-navy);
+  }
+  .meta svg { width: 18px; height: 18px; fill: none; stroke: var(--cobalt); stroke-width: 1.8; stroke-linecap: round; }
+
+  @media (min-width: 760px) { .checks { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5) var(--s-6); } }
+  .checks li {
+    display: grid; grid-template-columns: auto 1fr; gap: var(--s-5);
+    padding: var(--s-6) var(--s-5);
+    border-radius: 22px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+  }
+  .checks .n { font-size: 2.2rem; line-height: 1; color: var(--line-strong); font-weight: 600; }
+  .checks h3 { margin: 0 0 var(--s-2); font-size: var(--t-md); }
+  .checks p { margin: 0; font-size: var(--t-sm); line-height: 1.65; color: var(--ink-muted); }
+  .checks .tag {
+    display: inline-block; margin: 0 0 var(--s-3);
+    padding: 3px 10px; border-radius: 999px;
+    background: var(--amber-note); color: var(--amber-ink);
+    font-size: var(--t-2xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  }
+</style>

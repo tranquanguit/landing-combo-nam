@@ -65,7 +65,8 @@
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ]
+    ],
+    "productNotificationNumber": "800/25/CBMP-TN"
   },
   "variants": [
     {
@@ -107,8 +108,8 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-bio-active-cleanser.webp",
-        "alt": "Chai sữa rửa mặt Mocha Bio-Active Cleanser 300ml màu xanh, nhãn ghi Cera-B Complex"
+        "src": "/images/hero-bio-active-cleanser.webp",
+        "alt": "Chai sữa rửa mặt Mocha Bio-Active Cleanser 300ml, pH 5.5"
       },
       "primaryCta": "Đặt sữa rửa mặt",
       "secondaryCta": {
@@ -226,6 +227,13 @@
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Giấy tờ",
+      "heading": "Giấy tờ đi kèm sản phẩm",
+      "intro": "Bản chụp giấy tờ gốc, đủ rõ để đọc số hiệu. Bấm vào từng giấy để xem bản đầy đủ."
     },
     {
       "type": "routine",

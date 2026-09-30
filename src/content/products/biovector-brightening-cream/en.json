@@ -65,7 +65,8 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ]
+    ],
+    "productNotificationNumber": "1518/25/CBMP-LA"
   },
   "variants": [
     {
@@ -108,8 +109,8 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-biovector.webp",
-        "alt": "Bottle of Mocha Biovector Brightening Cream 30g labelled Aminovector Technology"
+        "src": "/images/hero-biovector.webp",
+        "alt": "Mocha Biovector Brightening Cream bottle"
       },
       "primaryCta": "Order the cream",
       "secondaryCta": {
@@ -287,6 +288,13 @@
         "label": "See the price and order",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Documents",
+      "heading": "The paperwork behind this product",
+      "intro": "Scans of the original documents, sharp enough to read the reference numbers. Tap any document to see it in full."
     },
     {
       "type": "routine",

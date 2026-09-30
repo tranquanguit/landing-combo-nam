@@ -1,0 +1,26 @@
+---
+/**
+ * Lớp da chung của bản flagship cho những khối DÙNG LẠI từ bản chuẩn
+ * (đặt hàng, hỏi đáp, gợi ý sản phẩm).
+ *
+ * Không chép hay sửa các component đó: biểu mẫu đặt hàng có bộ thử riêng
+ * (`test:order`) và là đường tiền duy nhất của trang. Thay vào đó đè TOKEN
+ * trong phạm vi `.fx-main` — chúng vốn đọc bán kính và bóng từ token, nên
+ * đổi token là đổi hình, còn hành vi và markup giữ nguyên từng byte.
+ */
+---
+<style is:global>
+  .fx-main #dat-hang {
+    position: relative;
+    background:
+      radial-gradient(45% 55% at 12% 10%, rgba(63, 74, 214, .38), transparent 70%),
+      radial-gradient(40% 50% at 95% 90%, rgba(143, 152, 255, .16), transparent 70%),
+      var(--night);
+  }
+  .fx-main #dat-hang .form-card {
+    border-radius: 28px;
+    padding: clamp(20px, 3vw, 36px);
+    box-shadow: 0 50px 100px -40px rgba(0, 0, 0, .6);
+  }
+  .fx-main #faq details { border-radius: 16px; }
+</style>

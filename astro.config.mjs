@@ -34,6 +34,15 @@ export const BASE_PATH = process.env.PUBLIC_BASE_PATH ?? '';
 
 export default defineConfig({
   site: SITE,
+  /* Phạm vi CSS của component bằng LỚP (`.astro-xxxxxxxx`) thay vì thuộc tính
+     (`[data-astro-cid-xxxxxxxx]`). Cùng độ đặc hiệu (0,1,0) nên thứ tự cascade
+     không đổi; chỉ ngắn hơn 10 byte ở MỖI phần tử và MỖI selector. Đo trên
+     /combo-nam/: thuộc tính phạm vi chiếm 23,6KB trong 105KB HTML, và mọi byte
+     trước lần vẽ đầu đều là thời gian thật trên 4G (xem scripts/check-perf.mjs). */
+  scopedStyleStrategy: 'class',
+  /* Máy chủ Docker build vào thư mục tạm rồi mới đổi sang bản mới (server/lib/publish.ts),
+     để một lần build hỏng không thay thế bản đang phục vụ. Mặc định vẫn là dist/. */
+  outDir: process.env.ASTRO_OUT_DIR ?? './dist',
   ...(BASE_PATH ? { base: BASE_PATH } : {}),
   // Một dạng URL duy nhất: canonical và sitemap phải khớp nhau tuyệt đối
   trailingSlash: 'always',

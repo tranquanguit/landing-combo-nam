@@ -1,0 +1,149 @@
+---
+import { money, shortDate } from '../../lib/format';
+import { t, type Locale } from '../../i18n/ui';
+import { richText } from '../../lib/richtext';
+import { isOfferExpired } from '../../lib/offer';
+import Picture from '../Picture.astro';
+interface Props { data: any; product: any; locale: Locale; }
+const { data, product: p, locale } = Astro.props;
+const save = p.compareAtPrice ? p.compareAtPrice - p.price : 0;
+
+/* Cùng luật với khối ưu đãi chuẩn: hạn đã qua lúc build thì ẩn dòng hạn và
+   cảnh báo, không dừng build. */
+const offerExpired = isOfferExpired(data.validUntil);
+if (offerExpired) {
+  console.warn(`\n⚠️  Hạn ưu đãi ${data.validUntil} của "${p.slug}/${locale}" ĐÃ QUA. Dòng hạn đã được ẩn.\n`);
+}
+
+const box = [
+  ...p.includes.map((i: any) => ({ ...i, gift: false })),
+  ...p.gifts.map((g: any) => ({ ...g, gift: true })),
+];
+---
+<section class="fx-offer" aria-labelledby="uu-dai-title" data-reveal-group>
+  <div class="wrap">
+    <div class="top">
+      <div data-reveal>
+        {data.eyebrow && <p class="eb">{data.eyebrow}</p>}
+        <h2 id="uu-dai-title">{data.heading}</h2>
+        <p class="body" set:html={richText(data.body)} />
+        {data.notes.length > 0 && (
+          <ul class="notes">{data.notes.map((n: string) => <li>{n}</li>)}</ul>
+        )}
+      </div>
+
+      <div class="card" data-reveal>
+        <p class="row">
+          <span class="now figure">{money(p.price, p.currency, locale)}</span>
+          {p.compareAtPrice && (
+            <s class="was figure"><span class="sr-only">{t(locale, 'price.from')} </span>{money(p.compareAtPrice, p.currency, locale)}</s>
+          )}
+        </p>
+        {save > 0 && <p class="save">{t(locale, 'price.save')} <span class="figure">{money(save, p.currency, locale)}</span></p>}
+        {data.validUntil && !offerExpired && (
+          <p class="valid">{t(locale, 'offer.validUntil')} <strong>{shortDate(data.validUntil, locale)}</strong></p>
+        )}
+        <a class="go" href="#dat-hang" data-cta="offer">{t(locale, 'cta.order')}<span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <h3 class="box-title" data-reveal>{t(locale, 'fx.inBox')}</h3>
+    <ul class="box" data-reveal>
+      {box.map((it: any) => (
+        <li class:list={[it.gift && 'gift']}>
+          <div class="ph">
+            {it.image
+              ? <Picture src={it.image.src} alt={it.image.alt} ratio="1/1" fit="contain"
+                  sizes="(min-width: 980px) 22vw, 45vw" widths={[360, 480, 720]} />
+              : <span class="ph-empty" aria-hidden="true"></span>}
+            {it.gift && <span class="tag">{t(locale, 'gift.tag')}</span>}
+          </div>
+          <p class="nm">{it.name}</p>
+          {it.note && <p class="nt">{it.note}</p>}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .fx-offer {
+    position: relative; overflow: clip;
+    padding-block: clamp(72px, 9vw, 128px);
+    background:
+      radial-gradient(50% 60% at 90% 0%, rgba(63, 74, 214, .14), transparent 70%),
+      linear-gradient(180deg, var(--stage-a), var(--stage-b));
+  }
+  .top { display: grid; gap: var(--s-6); align-items: center; }
+  @media (min-width: 980px) { .top { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(40px, 6vw, 112px); } }
+
+  .eb {
+    display: flex; align-items: center; gap: var(--s-3); margin: 0 0 var(--s-5);
+    font-size: var(--t-2xs); font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--cobalt);
+  }
+  .eb::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4px rgba(43, 52, 184, .14); }
+  h2 { margin: 0; font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.06; letter-spacing: -0.035em; max-width: 22ch; }
+  .body { margin: var(--s-5) 0 0; max-width: 54ch; color: var(--ink-muted); font-size: var(--t-md); line-height: 1.6; }
+  .body :global(strong) { color: var(--ink-navy); }
+  .notes { list-style: none; padding: 0; margin: var(--s-5) 0 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .notes li {
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(255, 255, 255, .8); border: 1px solid var(--line);
+    font-size: var(--t-xs); font-weight: 600; color: var(--ink-navy);
+  }
+
+  .card {
+    padding: clamp(24px, 3vw, 36px);
+    border-radius: 28px;
+    background: #fff;
+    box-shadow: 0 40px 80px -40px rgba(26, 29, 82, .45), 0 0 0 1px rgba(26, 29, 82, .06);
+  }
+  .row { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-2) var(--s-4); }
+  .now { font-size: clamp(2.4rem, 4.4vw, 3.4rem); font-weight: 600; line-height: 1; color: var(--ink-navy); letter-spacing: -0.02em; }
+  .was { color: var(--slate); font-size: var(--t-md); }
+  .save {
+    display: inline-flex; gap: 4px; margin: var(--s-4) 0 0;
+    padding: 4px 12px; border-radius: 999px;
+    background: rgba(31, 107, 77, .09); color: var(--verify);
+    font-weight: 600; font-size: var(--t-sm);
+  }
+  .valid { margin: var(--s-4) 0 0; font-size: var(--t-sm); color: var(--ink-muted); }
+  .go {
+    margin-top: var(--s-5);
+    display: flex; align-items: center; justify-content: center; gap: var(--s-3);
+    min-height: 58px; border-radius: 999px;
+    background: var(--ink-navy); color: #fff; text-decoration: none;
+    font-weight: 600; font-size: var(--t-base); letter-spacing: .02em;
+    box-shadow: 0 14px 30px -12px rgba(26, 29, 82, .55);
+    transition: background-color var(--dur-2) var(--ease), transform var(--dur-1) var(--ease);
+  }
+  .go:hover { background: var(--cobalt); color: #fff; }
+  @media (hover: hover) { .go:hover { transform: translateY(-1px); } }
+
+  .box-title {
+    margin: clamp(56px, 7vw, 96px) 0 var(--s-5);
+    font-size: var(--t-2xs); font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--slate);
+  }
+  .box { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 980px) { .box { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-5); } }
+  .box li { display: flex; flex-direction: column; gap: var(--s-2); }
+  .ph {
+    position: relative;
+    padding: 10%;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(26, 29, 82, .06);
+    margin-bottom: var(--s-3);
+    transition: transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+  }
+  @media (hover: hover) { .box li:hover .ph { transform: translateY(-4px); box-shadow: 0 30px 50px -30px rgba(26, 29, 82, .45), 0 0 0 1px rgba(26, 29, 82, .08); } }
+  .ph-empty { display: block; aspect-ratio: 1; }
+  .tag {
+    position: absolute; left: 12px; top: 12px;
+    padding: 3px 10px; border-radius: 999px;
+    background: var(--cobalt); color: #fff;
+    font-size: var(--t-2xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  }
+  .nm { margin: 0; font-weight: 600; font-size: var(--t-sm); line-height: 1.35; color: var(--ink-navy); }
+  .nt { margin: 0; font-size: var(--t-xs); line-height: 1.5; color: var(--ink-muted); }
+</style>

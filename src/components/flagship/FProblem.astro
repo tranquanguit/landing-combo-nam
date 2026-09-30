@@ -1,0 +1,135 @@
+---
+import FSection from './FSection.astro';
+import { richText } from '../../lib/richtext';
+import { t, type Locale } from '../../i18n/ui';
+interface Props { data: any; id?: string; locale: Locale; role?: string; transition?: string; cta?: any; }
+const { data, id = 'van-de', locale, role, transition, cta } = Astro.props;
+
+/* Nhãn sơ đồ là chuỗi giao diện, không phải nội dung sản phẩm: đây là giải
+   phẫu da, đúng cho mọi sản phẩm nám, và phải dịch theo ngôn ngữ trang. */
+const L = {
+  surface: t(locale, 'fx.skin.surface'),
+  epi: t(locale, 'fx.skin.epidermis'),
+  pig: t(locale, 'fx.skin.pigment'),
+  der: t(locale, 'fx.skin.dermis'),
+};
+/* Hạt sắc tố: một cụm ở biểu bì (gần mặt da), một cụm ở trung bì (sâu). Toạ
+   độ cố định để sơ đồ giống nhau ở mọi lần build. */
+const epiDots = [[58,78],[74,92],[90,70],[104,100],[120,84],[136,108],[82,112],[150,76],[164,96],[112,64],[96,120],[142,62]];
+const derDots = [[250,186],[268,204],[286,178],[300,214],[318,192],[276,230],[304,244],[330,222],[258,250],[322,172]];
+
+/* Mỗi nhóm hạt/nét gộp thành MỘT <path>. Astro gắn thuộc tính phạm vi CSS lên
+   từng phần tử của component, nên 40 <circle> riêng là 40 lần lặp lại thuộc
+   tính đó — đo được HTML nặng thêm vài KB, mà trên 4G mô phỏng mỗi KB trước
+   lần vẽ đầu là thời gian thật. */
+const dots = (pts: number[][], r: number) =>
+  pts.map(([x, y]) => `M${x - r} ${y}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0`).join('');
+const fibers = [0, 1, 2, 3, 4, 5].map((k) =>
+  `M${20 + k * 80 + (k % 2 ? -30 : 0)} ${200 + k * 18}q30 ${k % 2 ? 26 : -22} 60 0t60 0`).join('');
+const cells = [40, 120, 200, 280, 360];
+const dendrites = cells.map((x) => `M${x} 146l-14 -18M${x} 146l12 -20M${x} 146l2 -24`).join('');
+---
+<FSection id={id} tone="paper" role={role} transition={transition} cta={cta}
+  eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} head="split">
+  <ul class="quotes">
+    {data.quotes.map((q: string, i: number) => (
+      <li data-reveal style={`--i:${i}`}>
+        <span class="qm" aria-hidden="true">“</span>
+        <p>{q.replace(/^[“"]|[”"]$/g, '')}</p>
+      </li>
+    ))}
+  </ul>
+
+  <div class="explain" data-reveal>
+    <figure class="skin" role="img" aria-label={`${L.surface}, ${L.epi}, ${L.pig}, ${L.der}`}>
+      <svg viewBox="0 0 480 320" aria-hidden="true">
+        <defs>
+          <linearGradient id="fx-epi" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fbeadf" /><stop offset="1" stop-color="#f3d6c4" />
+          </linearGradient>
+          <linearGradient id="fx-der" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#eec5ae" /><stop offset="1" stop-color="#e2ad93" />
+          </linearGradient>
+        </defs>
+        <path d="M0 44 C60 30 120 56 180 42 S300 30 360 44 S440 52 480 40 V148 H0Z" fill="url(#fx-epi)" />
+        <path d="M0 148 C80 136 160 160 240 146 S400 138 480 150 V320 H0Z" fill="url(#fx-der)" />
+        <path d={fibers} fill="none" stroke="#d99c80" stroke-width="1.4" opacity=".55" />
+        <path d="M0 44 C60 30 120 56 180 42 S300 30 360 44 S440 52 480 40" fill="none" stroke="#1a1d52" stroke-width="1.5" />
+        <path d="M0 148 C80 136 160 160 240 146 S400 138 480 150" fill="none" stroke="#1a1d52" stroke-width="1" stroke-dasharray="3 5" opacity=".6" />
+        <path d={dendrites} stroke="#8a5238" stroke-width="1.6" stroke-linecap="round" />
+        <path d={dots(cells.map((x) => [x, 146]), 6.5)} fill="#8a5238" />
+        <path d={dots(epiDots, 4.2)} fill="#6e3c25" opacity=".85" />
+        <path d={dots(derDots, 5)} fill="#5a3020" opacity=".55" />
+      </svg>
+      <ul class="tags" aria-hidden="true">
+        <li style="top:12%">{L.surface}</li>
+        <li style="top:30%">{L.epi}</li>
+        <li style="top:47%" class="pig">{L.pig}</li>
+        <li style="top:72%">{L.der}</li>
+      </ul>
+    </figure>
+
+    <div class="text">
+      <h3>{data.explainer.heading}</h3>
+      {data.explainer.body.map((para: string) => <p set:html={richText(para)} />)}
+    </div>
+  </div>
+</FSection>
+
+<style>
+  .quotes {
+    list-style: none; padding: 0; margin: 0 0 clamp(56px, 7vw, 104px);
+    display: grid; gap: var(--s-4); align-items: start;
+  }
+  @media (min-width: 720px) { .quotes { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); } }
+  @media (min-width: 1100px) {
+    .quotes { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    /* Bậc so le: bốn câu nói của bốn người khác nhau, không phải một hàng ô đều. */
+    .quotes li:nth-child(even) { margin-top: 48px; }
+  }
+  .quotes li {
+    position: relative;
+    padding: var(--s-6) var(--s-5) var(--s-5);
+    background: var(--bone);
+    border-radius: 22px 22px 22px 6px;
+  }
+  .qm {
+    position: absolute; top: -6px; left: 18px;
+    font-family: var(--font-figure);
+    font-size: 72px; line-height: 1; color: var(--cobalt);
+  }
+  .quotes p {
+    margin: 0;
+    font-size: var(--t-md); line-height: 1.45; letter-spacing: -0.01em;
+    color: var(--ink-navy); text-wrap: pretty;
+  }
+
+  .explain {
+    display: grid; gap: clamp(32px, 5vw, 80px); align-items: center;
+  }
+  @media (min-width: 900px) { .explain { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); } }
+
+  .skin {
+    position: relative; margin: 0;
+    border-radius: 24px; overflow: hidden;
+    background: #fff8f3;
+    box-shadow: 0 30px 60px -40px rgba(110, 60, 37, .5), 0 0 0 1px rgba(110, 60, 37, .08);
+  }
+  .skin svg { width: 100%; height: auto; }
+  .tags { list-style: none; margin: 0; padding: 0; }
+  .tags li {
+    position: absolute; right: 12px; transform: translateY(-50%);
+    padding: 4px 10px; border-radius: 999px;
+    background: rgba(255, 255, 255, .9);
+    font-size: var(--t-2xs); font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-navy);
+  }
+  .tags li.pig { right: auto; left: 12px; color: #6e3c25; }
+
+  .text h3 {
+    font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.12; letter-spacing: -0.025em;
+    margin-bottom: var(--s-5);
+  }
+  .text p { color: var(--ink-muted); font-size: var(--t-base); line-height: 1.7; max-width: 52ch; }
+  .text :global(strong) { color: var(--ink-navy); background: linear-gradient(transparent 62%, rgba(63, 74, 214, .18) 0); }
+</style>

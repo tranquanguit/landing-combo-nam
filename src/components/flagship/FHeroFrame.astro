@@ -1,0 +1,94 @@
+---
+/**
+ * Khung hero của bản flagship: nền lưới + vầng sáng, bố cục hai cột (chữ trái,
+ * sân khấu phải; trên điện thoại sân khấu chen giữa tiêu đề và phần mua).
+ *
+ * Slot: `top` (eyebrow + h1), `stage` (thường là <FStage>), `bottom` (dẫn,
+ * giá, CTA), `foot` (dải tin cậy, cước chú).
+ */
+interface Props { labelledby?: string }
+const { labelledby = 'hero-title' } = Astro.props;
+---
+<section class="fx-hero" aria-labelledby={labelledby}>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="wrap grid">
+    <div class="top enter"><slot name="top" /></div>
+    <div class="stage-slot"><slot name="stage" /></div>
+    <div class="bottom enter"><slot name="bottom" /></div>
+  </div>
+  {Astro.slots.has('foot') && <div class="wrap foot"><slot name="foot" /></div>}
+</section>
+
+<style>
+<style>
+  /* `isolation` ở CHÍNH hero, không ở sân khấu: packshot phía trước hoà vào
+     nền bằng multiply, nên nhóm hoà trộn phải chứa nền gradient của hero.
+     Cô lập ở sân khấu (nền trong suốt) thì multiply không có gì để nhân và
+     packshot hiện thành một ô trắng — đã thấy đúng như vậy trên ảnh chụp. */
+  .fx-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    padding-block: clamp(28px, 4vw, 56px) 0;
+    background: linear-gradient(180deg, var(--paper) 0%, var(--stage-a) 55%, var(--stage-b) 100%);
+  }
+  /* Lưới mảnh của tờ đặc tả + một vầng sáng cobalt sau sân khấu. Thuần CSS,
+     không tải ảnh nào. */
+  .bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(42% 52% at 76% 42%, rgba(63, 74, 214, .20), transparent 70%),
+      linear-gradient(rgba(26, 29, 82, .045) 1px, transparent 1px) 0 0 / 56px 56px,
+      linear-gradient(90deg, rgba(26, 29, 82, .045) 1px, transparent 1px) 0 0 / 56px 56px;
+    mask-image: linear-gradient(180deg, #000 30%, transparent 95%);
+  }
+
+  .grid {
+    position: relative;
+    display: grid;
+    grid-template-areas: "top" "stage" "bottom";
+    gap: var(--s-5);
+  }
+  .top { grid-area: top; }
+  .stage-slot { grid-area: stage; display: grid; }
+  .bottom { grid-area: bottom; }
+  @media (min-width: 960px) {
+    .grid {
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+      grid-template-areas: "top stage" "bottom stage";
+      grid-template-rows: auto 1fr;
+      column-gap: clamp(40px, 5vw, 96px);
+      row-gap: var(--s-6);
+      align-items: start;
+    }
+    .top { align-self: end; padding-top: clamp(24px, 4vw, 64px); }
+  }
+
+  .top :global(.eyebrow-x) {
+    display: inline-flex; align-items: center; gap: var(--s-3);
+    margin: 0 0 var(--s-5);
+    padding: 7px 14px 7px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .8);
+    border: 1px solid var(--line);
+    font-size: var(--t-xs); font-weight: 600; letter-spacing: .02em;
+    color: var(--ink-navy);
+  }
+  .top :global(.eyebrow-x)::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cobalt); box-shadow: 0 0 0 4px rgba(43, 52, 184, .15);
+  }
+  .top :global(h1) {
+    font-size: clamp(2.35rem, 5.4vw, 4.6rem);
+    line-height: .98;
+    letter-spacing: -0.045em;
+    margin: 0;
+    max-width: 13ch;
+  }
+  .foot {
+    position: relative;
+    margin-top: clamp(40px, 5vw, 72px);
+    padding-block: var(--s-6) var(--s-7);
+    border-top: 1px solid rgba(26, 29, 82, .12);
+  }
+</style>

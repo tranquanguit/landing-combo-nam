@@ -1,0 +1,65 @@
+---
+import FSection from './FSection.astro';
+import { richText } from '../../lib/richtext';
+import { t, type Locale } from '../../i18n/ui';
+interface Props { data: any; id?: string; locale: Locale; role?: string; transition?: string; cta?: any; }
+const { data, id = 'huong-dan', locale, role, transition, cta } = Astro.props;
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+<FSection id={id} tone="paper" role={role} transition={transition} cta={cta}
+  eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} head="split">
+  <ol class="steps">
+    {data.items.map((s: any, i: number) => (
+      <li data-reveal>
+        <span class="n" aria-hidden="true"><span class="figure">{pad(i + 1)}</span></span>
+        <p class="k">{t(locale, 'fx.step')} {i + 1}</p>
+        <h3>{s.heading}</h3>
+        <p>{s.body}</p>
+      </li>
+    ))}
+  </ol>
+  {data.footnote && <p class="foot" data-reveal set:html={richText(data.footnote)} />}
+</FSection>
+
+<style>
+  .steps {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: var(--s-6);
+    counter-reset: s;
+  }
+  @media (min-width: 720px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1060px) {
+    .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-5); }
+    /* Một nét nối xuyên qua bốn vòng số: đây là MỘT quy trình, không phải
+       bốn mẹo rời. */
+    .steps { position: relative; }
+    .steps::before {
+      /* từ tâm vòng 1 tới tâm vòng 4: cột rộng (100% - 3 khe) / 4 */
+      content: ""; position: absolute; left: 32px; right: calc((100% - 3 * var(--s-5)) / 4 - 32px); top: 32px;
+      height: 1px; background: linear-gradient(90deg, var(--cobalt), var(--line));
+    }
+  }
+  .steps li { position: relative; }
+  .n {
+    position: relative;
+    display: grid; place-items: center;
+    width: 64px; height: 64px; margin-bottom: var(--s-5);
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1px solid var(--line-strong);
+    font-size: 1.35rem; font-weight: 600; color: var(--ink-navy);
+  }
+  .steps li:last-child .n { background: var(--ink-navy); border-color: var(--ink-navy); color: #fff; }
+  .k { margin: 0 0 var(--s-2); font-size: var(--t-2xs); font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--cobalt); }
+  .steps h3 { margin: 0 0 var(--s-2); font-size: var(--t-lg); letter-spacing: -0.02em; }
+  .steps p:last-child { margin: 0; font-size: var(--t-sm); line-height: 1.65; color: var(--ink-muted); max-width: 32ch; }
+
+  .foot {
+    margin: clamp(40px, 5vw, 64px) 0 0;
+    padding: var(--s-5) var(--s-6);
+    border-radius: 20px;
+    background: var(--ink-navy); color: rgba(255, 255, 255, .85);
+    font-size: var(--t-base); line-height: 1.6;
+  }
+  .foot :global(strong) { color: #fff; }
+</style>

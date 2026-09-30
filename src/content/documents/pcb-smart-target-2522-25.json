@@ -1,0 +1,22 @@
+{
+  "slug": "pcb-smart-target-2522-25",
+  "status": "published",
+  "kind": "notification",
+  "title": "Phiếu công bố sản phẩm mỹ phẩm",
+  "subject": "Smart Target",
+  "reference": "2522/25/CBMP-TN",
+  "issuedBy": "Sở Y tế tỉnh Tây Ninh",
+  "issuedAt": "2025-12-12",
+  "validUntil": "2030-12-12",
+  "appliesTo": [
+    "smart-target-acne-gel"
+  ],
+  "pages": [
+    {
+      "src": "/documents/pcb-smart-target-2522-25.webp",
+      "alt": "Trang 1 phiếu công bố sản phẩm mỹ phẩm Smart Target, số tiếp nhận 2522/25/CBMP-TN, ngày cấp 12/12/2025. Chữ ký và tên người ký đã được che."
+    }
+  ],
+  "redacted": true,
+  "note": "Số tiếp nhận và ngày cấp đọc từ chữ viết tay trên bản scan (Drive \"ĐẠI LÝ x MOCHA\" / GIẤY TỜ SẢN PHẨM). Đã che chữ ký và tên người ký. Đối chiếu bản gốc trước khi chạy quảng cáo."
+}

@@ -65,7 +65,8 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ]
+    ],
+    "productNotificationNumber": "1409/25/CBMP-LA"
   },
   "variants": [
     {
@@ -106,8 +107,8 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-collagen-peptide.webp",
-        "alt": "Box and jar of Mocha Collagen Peptide Cream 30g in mint green"
+        "src": "/images/hero-collagen-peptide.webp",
+        "alt": "Mocha Collagen Peptide Cream 30g box and jar"
       },
       "primaryCta": "Order the moisturiser",
       "secondaryCta": {
@@ -245,6 +246,13 @@
         "label": "See the price and order",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Documents",
+      "heading": "The paperwork behind this product",
+      "intro": "Scans of the original documents, sharp enough to read the reference numbers. Tap any document to see it in full."
     },
     {
       "type": "routine",

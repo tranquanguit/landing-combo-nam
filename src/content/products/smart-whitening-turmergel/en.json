@@ -65,7 +65,8 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ]
+    ],
+    "productNotificationNumber": "2626/25/CBMP-TN"
   },
   "variants": [
     {
@@ -107,8 +108,8 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-smart-white-plus.webp",
-        "alt": "Tube of Mocha Smart Whitening Quickly Turmergel 20g"
+        "src": "/images/hero-smart-whitening.webp",
+        "alt": "Mocha Smart Whitening Quickly Turmergel 20gr box and tube"
       },
       "primaryCta": "Order the mark gel",
       "secondaryCta": {
@@ -266,6 +267,13 @@
         "label": "See the price and order",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Documents",
+      "heading": "The paperwork behind this product",
+      "intro": "Scans of the original documents, sharp enough to read the reference numbers. Tap any document to see it in full."
     },
     {
       "type": "routine",

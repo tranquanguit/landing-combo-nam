@@ -2,13 +2,14 @@
 import { money } from '../../lib/format';
 import { t, type Locale } from '../../i18n/ui';
 import { richText } from '../../lib/richtext';
+import { orderEndpoint } from '../../lib/order-endpoint';
 interface Props { data: any; product: any; brand: any; locale: Locale; }
 const { data, product: p, brand: b, locale } = Astro.props;
 
 // Endpoint nhận đơn. Chưa cấu hình thì form KHÔNG giả vờ đã gửi thành công —
 // thay vào đó hiện lối liên hệ thật, vì một đơn hàng rơi vào hư không tệ hơn
 // nhiều so với một nút không hoạt động.
-const endpoint = import.meta.env.PUBLIC_ORDER_ENDPOINT || null;
+const endpoint = orderEndpoint();
 
 /**
  * Hết hàng thì KHÔNG nhận đơn.

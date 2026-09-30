@@ -15,14 +15,23 @@ interface Props {
 const { section, surface = 'paper', aboveFold = false, space, sameSurface = false } = Astro.props;
 const links = section.links ?? [];
 ---
-<Section id={section.id} surface={surface} space={space} sameSurface={sameSurface} heading={section.heading} aboveFold={aboveFold}>
-  <div class="prose">
-    {section.body.map((para) => <p set:html={richText(para)} />)}
-    {links.length > 0 && (
-      <ul class="prose-links">
-        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
-      </ul>
-    )}
+{/* Tiêu đề cột trái, thân bài cột phải (desktop).
+
+    Bản trước: tiêu đề và thân bài cùng dồn về mép trái, thân bài giới hạn 51ch
+    cho dễ đọc — đúng về độ dài dòng, nhưng trên màn hình rộng nửa phải trống
+    hẳn và trông như lỗi bố cục. Hai cột giữ nguyên độ dài dòng mà lấp được bề
+    ngang; tiêu đề bám khi cuộn nên đoạn dài vẫn biết mình đang đọc mục nào. */}
+<Section id={section.id} surface={surface} space={space} sameSurface={sameSurface} aboveFold={aboveFold}>
+  <div class="pr" data-reveal>
+    <h2 class="pr-h" id={section.id ? `${section.id}-title` : undefined}>{section.heading}</h2>
+    <div class="prose">
+      {section.body.map((para) => <p set:html={richText(para)} />)}
+      {links.length > 0 && (
+        <ul class="prose-links">
+          {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      )}
+    </div>
   </div>
 </Section>
 
@@ -31,6 +40,15 @@ const links = section.links ?? [];
      của trang, và khoảng cách dòng rộng hơn. 68 ký tự là mức dễ đọc nhất cho
      tiếng Việt có dấu, vốn chiếm chiều cao dòng lớn hơn tiếng Anh. */
   .prose { max-width: var(--measure-prose); }
+  .pr-h { margin: 0 0 var(--s-5); max-width: 18ch; }
+  @media (min-width: 960px) {
+    .pr {
+      display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: clamp(40px, 6vw, 112px); align-items: start;
+    }
+    .pr-h { position: sticky; top: calc(var(--header-h) + 32px); margin: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); }
+    .prose { padding-top: .4em; }
+  }
   .prose p { margin: 0 0 var(--s-5); line-height: 1.72; font-size: var(--t-base); }
   .prose p:last-child { margin-bottom: 0; }
 

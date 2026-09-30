@@ -17,15 +17,37 @@ Dấu `*` = bắt buộc.
 | `relatedArticles` | danh sách chữ | không (có sẵn mặc định) |
 | `primaryKeyword` | chữ | không |
 | `canonicalOf` | chữ | không |
+| `storyArchetype` | một trong: `single-product`, `routine`, `bundle`, `education-led`, `comparison` | không |
+| `adContext` | nhóm trường | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;`adContext.primaryNeed` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`adContext.audienceSituations` | danh sách chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`adContext.contextHints` | danh sách chữ | không (có sẵn mặc định) |
+| &nbsp;&nbsp;&nbsp;&nbsp;`adContext.approvedAngles` | danh sách chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`adContext.riskyAngles` | danh sách chữ | không (có sẵn mặc định) |
+| &nbsp;&nbsp;&nbsp;&nbsp;`adContext.preferredDestination` | chữ | không |
 | `name` | chữ | **có** |
 | `shortName` | chữ | không |
 | `sku` | chữ | **có** |
 | `includes` | danh sách nhóm trường | không (có sẵn mặc định) |
 | &nbsp;&nbsp;&nbsp;&nbsp;`includes[].name` | chữ | **có** |
 | &nbsp;&nbsp;&nbsp;&nbsp;`includes[].note` | chữ | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;`includes[].image` | nhóm trường | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`includes[].image.src` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`includes[].image.alt` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`includes[].image.width` | số | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`includes[].image.height` | số | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`includes[].image.caption` | chữ | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`includes[].image.focus` | chữ | không |
 | `gifts` | danh sách nhóm trường | không (có sẵn mặc định) |
 | &nbsp;&nbsp;&nbsp;&nbsp;`gifts[].name` | chữ | **có** |
 | &nbsp;&nbsp;&nbsp;&nbsp;`gifts[].note` | chữ | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;`gifts[].image` | nhóm trường | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`gifts[].image.src` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`gifts[].image.alt` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`gifts[].image.width` | số | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`gifts[].image.height` | số | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`gifts[].image.caption` | chữ | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`gifts[].image.focus` | chữ | không |
 | `price` | số | **có** |
 | `compareAtPrice` | số | không |
 | `currency` | chữ | không (có sẵn mặc định) |
@@ -81,6 +103,9 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 - `surface`
 - `space`
+- `narrativeRole`
+- `transition`
+- `cta`
 - `id`
 - `eyebrow`
 - `heading *`
@@ -92,6 +117,9 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 - `surface`
 - `space`
+- `narrativeRole`
+- `transition`
+- `cta`
 - `id`
 - `eyebrow`
 - `heading *`
@@ -103,6 +131,9 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 - `surface`
 - `space`
+- `narrativeRole`
+- `transition`
+- `cta`
 - `id`
 - `eyebrow`
 - `heading *`
@@ -114,6 +145,9 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 - `surface`
 - `space`
+- `narrativeRole`
+- `transition`
+- `cta`
 - `id`
 - `eyebrow`
 - `heading *`
@@ -153,6 +187,9 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 - `id`
 - `surface`
 - `space`
+- `narrativeRole`
+- `transition`
+- `cta`
 - `eyebrow`
 - `heading *`
 - `intro`
@@ -165,6 +202,9 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 - `id`
 - `surface`
 - `space`
+- `narrativeRole`
+- `transition`
+- `cta`
 - `eyebrow`
 - `heading *`
 - `intro`
@@ -174,6 +214,9 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 - `surface`
 - `space`
+- `narrativeRole`
+- `transition`
+- `cta`
 - `id`
 - `eyebrow`
 - `heading *`
@@ -189,17 +232,23 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 - `surface`
 - `space`
+- `narrativeRole`
+- `transition`
+- `cta`
 - `id`
 - `eyebrow`
 - `heading *`
 - `intro`
-- `items *`
+- `items`
 - `footnote`
 
 ### `timeline`
 
 - `surface`
 - `space`
+- `narrativeRole`
+- `transition`
+- `cta`
 - `id`
 - `eyebrow`
 - `heading *`
@@ -213,6 +262,9 @@ hiển thị trên trang. Mỗi khối phải có `"type"`.
 
 - `surface`
 - `space`
+- `narrativeRole`
+- `transition`
+- `cta`
 - `id`
 - `eyebrow`
 - `heading *`

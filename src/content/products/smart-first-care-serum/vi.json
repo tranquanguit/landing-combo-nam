@@ -62,7 +62,8 @@
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ]
+    ],
+    "productNotificationNumber": "1458/24/CBMP-LA"
   },
   "variants": [
     {
@@ -105,8 +106,8 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-first-care-serum.webp",
-        "alt": "Chai serum Mocha Smart First Care Serum 30ml mở nắp, giọt serum chảy xuống nền trắng"
+        "src": "/images/hero-smart-first-care-serum.webp",
+        "alt": "Hộp và chai serum Mocha Smart First Care Serum 30ml"
       },
       "primaryCta": "Đặt serum",
       "secondaryCta": {
@@ -254,6 +255,13 @@
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Giấy tờ",
+      "heading": "Giấy tờ đi kèm sản phẩm",
+      "intro": "Bản chụp giấy tờ gốc, đủ rõ để đọc số hiệu. Bấm vào từng giấy để xem bản đầy đủ."
     },
     {
       "type": "routine",

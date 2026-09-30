@@ -5,10 +5,14 @@ import SiteFooter from '../components/SiteFooter.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Section from '../components/Section.astro';
 import Prose from '../components/blocks/Prose.astro';
+import FHeroFrame from '../components/flagship/FHeroFrame.astro';
+import FStage from '../components/flagship/FStage.astro';
+import FSkin from '../components/flagship/FSkin.astro';
+import FCompare from '../components/flagship/FCompare.astro';
+import { splitDose } from '../lib/flagship';
 import ProductGrid from '../components/ProductGrid.astro';
 import { money } from '../lib/format';
 import { articlePath, homePath, linePath, productPath } from '../lib/routes';
-import Compare from '../components/Compare.astro';
 import Faq from '../components/blocks/Faq.astro';
 import Analytics from '../components/Analytics.astro';
 import { collectionGraph } from '../lib/schema';
@@ -90,6 +94,17 @@ const orderLabel = fitCriterion && products.length > 1 ? t(locale, 'nav.choose')
  * `chong-nang` và `so-sanh` khi đó cùng nền paper mà không có ranh giới nào,
  * nên đọc như một khối dài vô cớ. Nay `so-sanh` mở chương mới nên đổi nền.
  */
+/* Sân khấu của dòng: ảnh hero của hai sản phẩm đầu dòng. Chip đếm từ dữ liệu. */
+const stageImage = products.find((x: any) => x.heroImage)?.heroImage;
+const printedInLine = products.reduce((n: number, x: any) => {
+  const ing = x.blocks?.find((bl: any) => bl.type === 'ingredients');
+  return n + (ing ? ing.rows.filter((r: any) => splitDose(r.name).value).length : 0);
+}, 0);
+const stageDoses = [
+  ...(printedInLine > 0 ? [{ value: String(printedInLine), unit: '', name: t(locale, 'fx.statDoses') }] : []),
+  /* "1 sản phẩm, cùng một cách ghi nhãn" không nói lên điều gì — chỉ đếm khi có từ hai. */
+  ...(products.length > 1 ? [{ value: String(products.length), unit: '', name: t(locale, 'fx.statProducts') }] : []),
+];
 const proseSurface = 'paper';
 const chooseSurface = 'bone';
 /** Khối cuối của chương HIỂU, để biết chỗ nào là ranh giới chương. */
@@ -112,14 +127,25 @@ const lastProse = line.sections.length - 1;
   <SiteHeader brand={b} locale={locale} alternates={alternates} nav={nav} orderHref={orderHref} orderLabel={orderLabel} />
   <Breadcrumb items={breadcrumb} locale={locale} />
 
-  <main id="main">
-    <div class="head">
-      <div class="wrap enter">
-        {line.eyebrow && <p class="eyebrow">{line.eyebrow}</p>}
-        <h1>{line.heading}</h1>
-        <p class="lead" set:html={richText(line.lead)} />
-      </div>
-    </div>
+  <FSkin />
+  <main id="main" class="fx-main">
+    <FHeroFrame>
+      <Fragment slot="top">
+        {line.eyebrow && <p class="eyebrow-x">{line.eyebrow}</p>}
+        <h1 id="hero-title">{line.heading}</h1>
+      </Fragment>
+      {stageImage && (
+        <FStage slot="stage" image={stageImage} doses={stageDoses}
+          motto={`${t(locale, 'fx.motto')} · ${line.navLabel ?? line.heading} · `}
+          chipsLabel={t(locale, 'fx.printed')} />
+      )}
+      <Fragment slot="bottom">
+        <p class="lead fx-lead" set:html={richText(line.lead)} />
+        {products.length > 0 && (
+          <a class="fx-go" href="#san-pham" data-cta="line-hero">{products.length} {t(locale, 'nav.products').toLowerCase()} <span aria-hidden="true">↓</span></a>
+        )}
+      </Fragment>
+    </FHeroFrame>
 
     {products.length > 0 && (
       <Section id="san-pham" surface="bone" heading={t(locale, 'line.products')} aboveFold>
@@ -152,8 +178,7 @@ const lastProse = line.sections.length - 1;
     ))}
 
     {line.compare && products.length > 1 && (
-      <Compare data={line.compare} products={products} locale={locale} id="so-sanh" source="line-compare"
-        surface={chooseSurface} space="lg" />
+      <FCompare data={line.compare} products={products} locale={locale} id="so-sanh" />
     )}
 
     {/*
@@ -215,6 +240,13 @@ const lastProse = line.sections.length - 1;
 </BaseLayout>
 
 <style>
+  .fx-lead { max-width: 50ch; margin: 0 0 var(--s-6); }
+  .fx-go {
+    display: inline-flex; align-items: center; gap: var(--s-3); min-height: 52px; padding: 0 28px; margin-bottom: var(--s-7);
+    border-radius: 999px; background: var(--ink-navy); color: #fff; text-decoration: none; font-weight: 600;
+  }
+  .fx-go:hover { background: var(--cobalt); color: #fff; }
+
   /* Khối chọn: ba dòng, ngăn bằng gạch tóc — không hộp, không bo góc, không
      đổ bóng. Giá dùng face chữ số, đúng luật "serif chỉ dành cho số". */
   .choose { list-style: none; margin: 0; padding: 0; }
