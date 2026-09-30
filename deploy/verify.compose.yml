@@ -1,0 +1,20 @@
+# Lớp phủ cho `npm run verify:docker`: dựng db + app đúng như docker-compose.yml,
+# rồi container `verify` đi qua bản triển khai như khách và nhân viên dùng
+# (server/verify.ts). Thoát mã của `verify` = kết quả kiểm tra.
+services:
+  app:
+    image: mocha-landing:verify
+  verify:
+    image: mocha-landing:verify
+    depends_on:
+      app:
+        condition: service_healthy
+    environment:
+      BASE: http://app:8080
+      ALLOWED_ORIGIN: ${PUBLIC_SITE_URL}
+      ADMIN_TOKEN: ${ADMIN_TOKEN}
+      ADMIN_BOOTSTRAP_USER: ${ADMIN_BOOTSTRAP_USER}
+      ADMIN_BOOTSTRAP_PASSWORD: ${ADMIN_BOOTSTRAP_PASSWORD}
+      PUBLISH_ON_BOOT: ${PUBLISH_ON_BOOT}
+    command: ["node", "server/verify.ts"]
+    restart: "no"

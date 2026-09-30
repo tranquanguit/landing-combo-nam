@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-next
+dist-prev
+.astro
+.git
+.github
+.env
+.data
+.tmp
+refs
+.responsive-shots
+.claude
+**/*.log
