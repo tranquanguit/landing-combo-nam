@@ -45,55 +45,28 @@ Mỗi dòng dưới đây hiện đang hiện một ô cảnh báo vàng trên c
 
 ### B1. Tên miền
 
-Site đang khai `site: 'https://mochatrinam.com'` trong `astro.config.mjs`. Đổi
-tên miền thì phải sửa **ba** chỗ, nếu không canonical và sitemap sẽ trỏ sai:
+Tên miền đặt trong `.env` trên máy chủ (`PUBLIC_SITE_URL`, `SITE_DOMAIN`) — canonical,
+sitemap và kiểm tra Origin của API đặt hàng đều đọc từ đó. Nếu đổi hẳn tên miền mặc
+định thì sửa thêm `astro.config.mjs` (`SITE`) và dòng `Sitemap:` trong
+`public/robots.txt`; `npm run test:seo` đỏ nếu còn sót chỗ nào.
 
-```
-astro.config.mjs        → export const SITE
-wrangler.toml           → [vars] ALLOWED_ORIGIN
-public/robots.txt       → dòng Sitemap:
-```
+### B2. Máy chủ, cơ sở dữ liệu, build
 
-Sau khi đổi, `npm run test:seo` sẽ đỏ nếu còn sót chỗ nào.
+Toàn bộ nằm trong [`trien-khai-docker.md`](trien-khai-docker.md): Ubuntu + Docker, một
+lệnh `docker compose --profile https up -d --build`. Postgres, migration, tài khoản
+quản trị đầu tiên và bản build đầu tiên đều tự làm lúc khởi động.
 
-### B2. Cơ sở dữ liệu đơn hàng
-
-> **Chạy migration bằng `npm run db:migrate`, đừng chạy tay từng tệp.**
->
-> Lệnh này trước đây ghim cứng `migrations/0001_orders.sql`. Từ khi có tệp
-> `0002` (thêm cột `utm_content` và `utm_term`), ghim cứng như vậy nghĩa là
-> deploy mã mới lên một cơ sở dữ liệu chưa có hai cột đó — và MỌI đơn hàng sẽ
-> lỗi `table orders has no column named utm_content`. Đường đặt hàng là thứ
-> đắt nhất để hỏng.
->
-> Nay lệnh dùng `wrangler d1 migrations apply`: nó chạy đủ các tệp theo thứ tự
-> tên và GHI LẠI tệp nào đã chạy, nên chạy lại không hỏng. `npm run
-> db:migrate:status` cho biết cơ sở dữ liệu đang ở đâu.
->
-> Thứ tự đúng khi deploy: **chạy migration TRƯỚC, rồi mới đẩy mã lên.**
-> Ngược lại thì có một khoảng thời gian mã mới gặp bảng cũ.
-
+Kiểm cả chuỗi triển khai trên máy bất kỳ có Docker, bằng một lệnh:
 
 ```bash
-npx wrangler d1 create mocha-orders          # dán database_id vào wrangler.toml
-npm run db:migrate                            # tạo bảng orders + rate_limit
-npx wrangler pages secret put ADMIN_TOKEN     # >= 32 ký tự ngẫu nhiên
-npx wrangler pages secret put IP_SALT         # ngẫu nhiên, đặt MỘT LẦN rồi thôi
+npm run verify:docker
 ```
 
-Chi tiết vận hành: `docs/co-so-du-lieu.md`.
+### B3. Biểu mẫu đặt hàng
 
-### B3. Build và deploy
-
-```bash
-npm ci
-PUBLIC_ORDER_ENDPOINT=/api/orders npm run build
-npx wrangler pages deploy dist
-```
-
-`PUBLIC_ORDER_ENDPOINT` **bắt buộc** phải đặt. Không đặt thì biểu mẫu đặt hàng
-không render thẻ `<form>` và chỉ hiện hotline — chủ ý như vậy, vì một đơn hàng
-rơi vào hư không tệ hơn một nút không hoạt động.
+Biểu mẫu mặc định gửi về `/api/orders` cùng tên miền (xem `src/lib/order-endpoint.ts`),
+nên không cần khai gì. Chỉ bản xem thử ở đường dẫn con (GitHub Pages) mới ẩn biểu mẫu
+và hiện hotline — vì ở đó không có máy chủ nhận đơn.
 
 ### B4. Kiểm trước khi bật quảng cáo
 
@@ -102,7 +75,7 @@ npm run check          # 0 lỗi kiểu
 npm run test:guards    # 549 ca hàng rào
 npm run test:seo       # 299 phép đo SEO trên chính bản build
 npm run test:orders-api # 20 kịch bản API đơn hàng
-npm run test:admin     # 9 kịch bản trang quản trị
+npm run test:server    # máy chủ Docker trên Postgres (nội dung, /admin, file tĩnh)
 npm run check:assets   # ảnh khớp đặc tả
 node scripts/check-budget.mjs
 ```
@@ -144,14 +117,13 @@ tiếp tục hiện ưu đãi cũ cho tới lần deploy kế tiếp, nên
 `scripts/check-offer-window.mjs` làm CI đỏ khi hạn đã qua. Đặt lịch nhắc trước
 ngày đó.
 
-### C5. Sao lưu đơn hàng
+### C5. Sao lưu
 
 ```bash
-npx wrangler d1 export mocha-orders --remote --output=sao-luu-$(date +%F).sql
+docker compose exec -T db pg_dump -U mocha -Fc mocha > sao-luu-$(date +%F).dump
 ```
 
-Hằng tuần. D1 có bản sao của Cloudflare, nhưng một lệnh `DELETE` gõ nhầm thì bản
-sao đó cũng chép theo.
+Hằng đêm, chép ra ngoài máy chủ. Một bản sao lưu gồm cả đơn hàng, nội dung lẫn ảnh.
 
 ### C6. Khi có bộ ảnh đúng đặc tả
 
