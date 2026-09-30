@@ -6,13 +6,13 @@
   "seo": {
     "title": "Mocha Vietnam – Skincare that publishes its concentrations",
     "description": "Creams and serums for dark spots, uneven tone and oily skin. Every active ingredient listed with its percentage. No corticosteroids, no hydroquinone.",
-    "ogImage": "/images/packshot-combo.jpg"
+    "ogImage": "/images/og-combo-nam.jpg"
   },
   "hero": {
     "eyebrow": "Mocha skincare",
     "heading": "Every percentage, in writing",
     "lead": "Most skincare lists ingredient names and stops there. Mocha publishes the concentration of each active, so you can compare our products against anyone else's before you buy.",
-    "image": "/images/packshot-combo.jpg",
+    "image": "/images/og-combo-nam.jpg",
     "imageAlt": "Mocha cream and serum side by side on a light background",
     "primaryCta": {
       "label": "See the dark spot line",
@@ -33,7 +33,12 @@
     "treatment"
   ],
   "featured": [
-    "combo-nam"
+    "combo-nam",
+    "smart-brightening-cream",
+    "smart-first-care-serum",
+    "uv-block-sunscreen",
+    "smart-target-acne-gel",
+    "retinol-mixpeel-kit"
   ],
   "articles": [
     "nam-noi-tiet-la-gi"

@@ -75,7 +75,7 @@
 <div class="wrap">
 
 <h1>Kiến trúc repo</h1>
-<p class="sub">Mocha landing platform — Astro tĩnh + Cloudflare Pages Functions + D1.</p>
+<p class="sub">Mocha landing platform — Astro tĩnh + máy chủ Node (Docker) + PostgreSQL.</p>
 
 <h2>1. Cây thư mục</h2>
 
@@ -103,25 +103,23 @@
 │   ├── assets/images/ 17 tệp   ẢNH — build sinh AVIF/WebP nhiều cỡ
 │   └── media-gated/    4 tệp   ảnh khách CHƯA có đồng ý → bị chặn khỏi dist
 │
-├── functions/          5 tệp   MÁY CHỦ (Cloudflare Pages Functions)
+├── functions/          5 tệp   handler đơn hàng (chạy trong server/)
 │   ├── api/orders.ts           nhận đơn hàng
 │   ├── api/admin/orders.ts     API đọc/sửa đơn, xuất CSV
 │   ├── admin/index.ts          trang /admin
 │   └── _lib/orders.ts          kiểm dữ liệu, sinh mã đơn, chống trùng
 │
-├── migrations/         2 tệp   cấu trúc cơ sở dữ liệu D1
 ├── scripts/           19 tệp   cổng kiểm tra (chạy qua npm run)
 ├── tests/             17 tệp   kiểm thử
 ├── docs/              21 tệp   tài liệu
 ├── public/            10 tệp   copy nguyên xi: font, favicon, robots.txt
 │
 ├── astro.config.mjs            tên miền, đa ngôn ngữ, sitemap
-├── wrangler.toml               binding D1, biến môi trường
 └── package.json                lệnh npm</code></pre>
 
 <h2>2. Cơ sở dữ liệu</h2>
 
-<p>Cloudflare D1 (SQLite). Binding <code>DB</code>, tên <code>mocha-orders</code>. Hai bảng, không có quan hệ khoá ngoại.</p>
+<p>PostgreSQL 17 (container <code>db</code>). Lược đồ <code>db/pg/*.sql</code>: đơn hàng, chống spam, nội dung, ảnh, tài khoản quản trị.</p>
 
 <h3>Bảng <code>orders</code></h3>
 <div class="tw">
@@ -203,14 +201,14 @@ src/layouts/ + src/components/
       ↓  astro build
 dist/  — 51 trang HTML tĩnh + sitemap + ảnh đã tối ưu
       ↓
-Cloudflare Pages</code></pre>
+Docker: app + db (+ caddy)</code></pre>
 
 <h3>Khách đặt hàng (lúc chạy)</h3>
 <pre><code>Biểu mẫu trong khối "order"
       ↓  fetch POST → PUBLIC_ORDER_ENDPOINT
 functions/api/orders.ts
       ↓  kiểm dữ liệu · chống spam (IP băm) · gộp đơn trùng trong 2 phút
-D1: orders + rate_limit
+Postgres: orders + rate_limit + nội dung
       ↓  đọc qua ADMIN_TOKEN
 /admin  — lọc, đổi trạng thái, xuất CSV</code></pre>
 
@@ -232,7 +230,7 @@ D1: orders + rate_limit
 <tr><td>Nhãn nút, chữ giao diện</td><td><code>src/i18n/ui.ts</code></td></tr>
 <tr><td>Màu, cỡ chữ, nhịp giãn cách</td><td><code>src/styles/tokens.css</code></td></tr>
 <tr><td>Ảnh</td><td>bỏ tệp mới vào <code>src/assets/images/</code>, <b>giữ nguyên tên cũ</b></td></tr>
-<tr><td>Tên miền</td><td>3 chỗ: <code>astro.config.mjs</code>, <code>wrangler.toml</code>, <code>public/robots.txt</code></td></tr>
+<tr><td>Tên miền</td><td><code>.env</code> trên máy chủ; mặc định ở <code>astro.config.mjs</code>, <code>public/robots.txt</code></td></tr>
 </tbody>
 </table>
 </div>

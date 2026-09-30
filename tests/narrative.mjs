@@ -113,10 +113,24 @@ for (const { slug, locale, p, roles } of pages) {
 }
 
 /* ---------- 7. Khối bằng chứng không được khai dữ liệu chưa có ---------- */
+/* Khối không khai `items` lấy giấy tờ từ collection src/content/documents theo
+   `appliesTo` — đếm cả những giấy đó. Dải "số tiếp nhận phiếu công bố" khai
+   trong compliance cũng là một mục thật (nó hiện kể cả khi chưa có bản scan). */
+const DOC_DIR = 'src/content/documents';
+const collectionDocs = existsSync(DOC_DIR)
+  ? readdirSync(DOC_DIR).filter((f) => f.endsWith('.json'))
+    .map((f) => JSON.parse(readFileSync(`${DOC_DIR}/${f}`, 'utf8')))
+    .filter((d) => d.status === 'published')
+  : [];
 for (const { slug, locale, p } of pages) {
   for (const b of p.blocks) {
     if (b.type === 'documents') {
-      ok(`${slug}/${locale}: khối chứng từ có mục thật`, (b.items?.length ?? 0) > 0, `${b.items?.length ?? 0} mục`);
+      const fromCollection = b.items ? 0
+        : collectionDocs.filter((d) => d.appliesTo === 'all' || d.appliesTo.includes(slug)).length
+          + (p.compliance?.productNotificationNumber ? 1 : 0);
+      const n = (b.items?.length ?? 0) + fromCollection;
+      ok(`${slug}/${locale}: khối chứng từ có mục thật`, n > 0,
+        b.items ? `${n} mục khai trong trang` : `${n} mục từ collection + số công bố`);
     }
     if ((b.type === 'gallery' || b.type === 'testimonials') && b.consent?.obtained !== true) {
       note(`${slug}/${locale}: khối "${b.type}" bị ẩn`, 'consent.obtained = false — không render');

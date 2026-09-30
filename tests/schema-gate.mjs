@@ -36,7 +36,7 @@ const base = () => ({
       heading: 'Hai bước chăm sóc da sạm màu',
       lead: 'Kem và serum dùng cùng nhau.',
       usp: [{ text: 'Công thức công khai tỉ lệ', evidence: 'ingredient' }],
-      image: { src: '/images/packshot-combo.webp', alt: 'Ảnh sản phẩm' },
+      image: { src: '/images/hero-combo-nam.webp', alt: 'Ảnh sản phẩm' },
       primaryCta: 'Đặt mua',
     },
     { type: 'order', heading: 'Đặt hàng', body: 'Gọi hotline để đặt.', points: ['Miễn phí vận chuyển'] },
@@ -131,7 +131,7 @@ const CASES = [
       d.blocks.push({
         type: 'gallery', heading: 'Trước và sau',
         consent: { obtained: false, statement: 'Chưa thu thập được văn bản đồng ý.' },
-        images: [{ src: '/images/packshot-combo.webp', alt: 'Ảnh' }],
+        images: [{ src: '/images/hero-combo-nam.webp', alt: 'Ảnh' }],
       });
     }),
     expect: 'fail',
@@ -190,7 +190,7 @@ const CASES = [
       d.blocks.push({
         type: 'gallery', heading: 'Trước và sau',
         consent: { obtained: true, statement: 'Đã có văn bản đồng ý.', obtaind: true },
-        images: [{ src: '/images/packshot-combo.webp', alt: 'Ảnh' }],
+        images: [{ src: '/images/hero-combo-nam.webp', alt: 'Ảnh' }],
       });
     }),
     expect: 'fail', expectCode: 'unrecognized_keys',
@@ -300,7 +300,7 @@ const CASES = [
   {
     name: 'feature thiếu alt bị chặn',
     doc: withDoc((d) => {
-      d.blocks.push({ type: 'feature', image: { src: '/images/packshot-combo.webp', alt: '' } });
+      d.blocks.push({ type: 'feature', image: { src: '/images/hero-combo-nam.webp', alt: '' } });
     }),
     expect: 'fail',
     expectMessage: /alt/,
@@ -310,7 +310,7 @@ const CASES = [
     doc: withDoc((d) => {
       d.blocks.push({
         type: 'feature',
-        image: { src: '/images/packshot-combo.webp', alt: 'Chất kem cận cảnh' },
+        image: { src: '/images/hero-combo-nam.webp', alt: 'Chất kem cận cảnh' },
         caption: 'Chụp ở ánh sáng tự nhiên.',
       });
     }),
@@ -321,7 +321,7 @@ const CASES = [
     doc: withDoc((d) => {
       d.blocks.push({
         type: 'feature',
-        image: { src: '/images/packshot-combo.webp', alt: 'Ảnh' },
+        image: { src: '/images/hero-combo-nam.webp', alt: 'Ảnh' },
         overlayText: 'chữ đè lên ảnh',
       });
     }),
@@ -342,7 +342,7 @@ const CASES = [
         type: 'documents',
         heading: 'Chứng từ của sản phẩm',
         items: [{
-          image: { src: '/images/packshot-combo.webp', alt: 'Phiếu công bố sản phẩm mỹ phẩm' },
+          image: { src: '/images/hero-combo-nam.webp', alt: 'Phiếu công bố sản phẩm mỹ phẩm' },
           label: 'Phiếu công bố sản phẩm mỹ phẩm',
           reference: '1459/24/CBMP-LA',
           issuedBy: 'Sở Y tế Long An',
@@ -358,7 +358,7 @@ const CASES = [
         type: 'documents',
         heading: 'Giấy tờ chứng minh kem trị nám tận gốc',
         items: [{
-          image: { src: '/images/packshot-combo.webp', alt: 'Phiếu công bố' },
+          image: { src: '/images/hero-combo-nam.webp', alt: 'Phiếu công bố' },
           label: 'Phiếu công bố',
         }],
       });
@@ -371,7 +371,7 @@ const CASES = [
       d.blocks.push({
         type: 'documents',
         heading: 'Chứng từ',
-        items: [{ image: { src: '/images/packshot-combo.webp', alt: 'Phiếu' }, label: 'Phiếu' }],
+        items: [{ image: { src: '/images/hero-combo-nam.webp', alt: 'Phiếu' }, label: 'Phiếu' }],
       });
       d.blocks[0].secondaryCta = { label: 'Xem chứng từ', href: '#chung-tu' };
     }),

@@ -1,0 +1,31 @@
+{
+  "slug": "spf-uv-block-plus-irdop-2025",
+  "status": "published",
+  "kind": "test-report",
+  "title": "Phiếu kết quả thử nghiệm / Certificate of Analysis",
+  "subject": "UV-Block Plus",
+  "reference": "PPTx2443180702-550GD7",
+  "issuedBy": "Viện nghiên cứu và phát triển Sản phẩm thiên nhiên (IRDOP) — Phòng Phân tích - Kiểm nghiệm, VILAS 997",
+  "issuedAt": "2025-01-15",
+  "appliesTo": [
+    "uv-block-sunscreen"
+  ],
+  "findings": [
+    {
+      "label": "SPF",
+      "result": "50+"
+    },
+    {
+      "label": "PA",
+      "result": "++++"
+    }
+  ],
+  "pages": [
+    {
+      "src": "/documents/spf-uv-block-plus-irdop-2025.webp",
+      "alt": "Phiếu kết quả thử nghiệm của IRDOP cho mẫu UV-Block Plus: SPF 50+, PA ++++. Chữ ký và tên người ký đã được che."
+    }
+  ],
+  "redacted": true,
+  "note": "Phiếu không ghi số lô (\"Số lô: --\"); thông tin mẫu do khách hàng cung cấp. Kết quả chỉ có giá trị với mẫu thử. Đã che chữ ký và tên hai người ký."
+}

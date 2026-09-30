@@ -3,7 +3,7 @@
  *
  * Vì sao có tệp này: Playwright tải bản Chromium riêng lúc `npm install`. Trên
  * máy có chính sách chặn node.exe đi ra mạng, bước tải đó thất bại lặng lẽ và
- * BA cổng (`test:inp`, `test:admin`, `test:order`) cùng đỏ với một thông báo
+ * HAI cổng (`test:inp`, `test:order`) cùng đỏ với một thông báo
  * nói về Playwright chứ không nói về mã — dễ bị đọc nhầm thành lỗi của bản sửa
  * vừa rồi.
  *

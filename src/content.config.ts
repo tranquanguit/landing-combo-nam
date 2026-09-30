@@ -474,7 +474,10 @@ const blocks = z.discriminatedUnion('type', [
       /** Số hiệu in trên chính chứng từ, để người đọc đối chiếu được. */
       reference: z.string().optional(),
       issuedBy: z.string().optional(),
-    }).strict()).min(1),
+    /* Bỏ trống `items` = lấy giấy tờ từ collection `documents` theo `appliesTo`
+       (cách nên dùng: giấy tờ khai một lần, dùng lại ở mọi trang). Khai `items`
+       chỉ khi cần một bộ giấy riêng cho đúng trang này. */
+    }).strict()).min(1).optional(),
     footnote: z.string().optional(),
   }).strict(),
   /**
@@ -651,8 +654,12 @@ const products = defineCollection({
     shortName: z.string().optional(),
     sku: z.string(),
     /** Tên từng sản phẩm con trong combo, dùng cho schema và phần quà tặng. */
-    includes: z.array(z.object({ name: z.string(), note: z.string().optional() }).strict()).default([]),
-    gifts: z.array(z.object({ name: z.string(), note: z.string().optional() }).strict()).default([]),
+    /* `image` là packshot RIÊNG của món đó. Không bắt buộc: bản trình bày
+       chuẩn không dùng tới. Bản `flagship` dựng sân khấu hero và khối "trong
+       hộp có gì" từ chính các ảnh này — khai một lần ở đây thay vì bắt người
+       biên tập khai lại ảnh trong từng khối. */
+    includes: z.array(z.object({ name: z.string(), note: z.string().optional(), image: image.optional() }).strict()).default([]),
+    gifts: z.array(z.object({ name: z.string(), note: z.string().optional(), image: image.optional() }).strict()).default([]),
 
     price: money,
     compareAtPrice: money.optional(),
@@ -1312,4 +1319,71 @@ const brand = defineCollection({
   }),
 });
 
-export const collections = { pages, products, lines, articles, policies, guides, brand };
+/**
+ * Chứng từ: phiếu công bố, phiếu kiểm nghiệm, chứng nhận nhà máy, giấy tờ pháp
+ * nhân, bằng sáng chế hoạt chất.
+ *
+ * MỘT file cho MỘT giấy tờ, không khai theo từng trang: giấy chứng nhận nhà
+ * máy áp dụng cho mọi sản phẩm, khai trong từng trang là 12 bản sao để lệch
+ * nhau. Trang sản phẩm tự gom giấy tờ theo `appliesTo` (xem `docsFor` trong
+ * src/lib/documents.ts).
+ *
+ * Tên giấy, số hiệu, cơ quan cấp là DỮ KIỆN PHÁP LÝ: ghi đúng như in trên
+ * giấy, không dịch theo ngôn ngữ trang. Nhãn loại giấy mới là chuỗi giao diện.
+ */
+export const DOCUMENT_KINDS = ['notification', 'test-report', 'gmp', 'business', 'trademark', 'patent', 'other'] as const;
+const documents = defineCollection({
+  loader: glob({
+    pattern: '**/*.json',
+    base: './src/content/documents',
+    generateId: ({ entry }) => entry.replace(/\.json$/, ''),
+  }),
+  schema: z.object({
+    slug: slugField,
+    status: z.enum(['draft', 'published']).default('draft'),
+    kind: z.enum(DOCUMENT_KINDS),
+    /** Tên giấy đúng như in, ví dụ "Phiếu công bố sản phẩm mỹ phẩm". */
+    title: z.string().min(3),
+    /** Sản phẩm/mẫu mà giấy nói tới, đúng như in — "A Perfect Skin Peel". Một bộ có nhiều giấy cùng tên. */
+    subject: z.string().min(2).optional(),
+    /** Số hiệu in trên giấy. Phiếu công bố: số tiếp nhận, ví dụ 1517/25/CBMP-LA. */
+    reference: z.string().min(2).optional(),
+    issuedBy: z.string().min(2),
+    issuedAt: z.string().date(),
+    /** Giấy có hạn thì khai; quá hạn lúc build thì giấy tự ẩn và build cảnh báo. */
+    validUntil: z.string().date().optional(),
+    /** Lô sản xuất được kiểm nghiệm — phiếu kiểm nghiệm chỉ đúng cho lô đó. */
+    lot: z.string().optional(),
+    /** `"all"` hoặc danh sách slug sản phẩm (dùng chung giữa các ngôn ngữ). */
+    appliesTo: z.union([z.literal('all'), z.array(slugField).min(1)]),
+    /** Chỉ tiêu và kết quả, chép ĐÚNG như in. Không tóm tắt, không suy diễn. */
+    findings: z.array(z.object({ label: z.string(), result: z.string() }).strict()).default([]),
+    /** Ảnh từng trang của giấy, đủ độ phân giải để đọc được số hiệu. */
+    pages: z.array(z.object({ src: z.string(), alt: z.string().min(1) }).strict()).min(1),
+    /** Trang tra cứu công khai của cơ quan cấp, nếu có. */
+    lookupUrl: safeUrl.optional(),
+    /**
+     * Xác nhận đã che thông tin cá nhân (chữ ký, số giấy tờ tuỳ thân, số điện
+     * thoại cá nhân) trên ảnh — Nghị định 13/2023. Chưa che thì không đăng.
+     */
+    redacted: z.literal(true, {
+      message: 'Giấy tờ phải được che thông tin cá nhân trước khi đăng: đặt redacted: true SAU KHI đã che.',
+    }),
+    /** Ghi chú nội bộ, không hiển thị. */
+    note: z.string().optional(),
+  }).strict().superRefine((d, ctx) => {
+    if (d.kind === 'notification' && !d.reference) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['reference'],
+        message: 'Phiếu công bố phải có số tiếp nhận — đó là thứ người mua đem đi tra cứu.' });
+    }
+    if (d.kind === 'test-report' && !d.lot && !d.reference) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['lot'],
+        message: 'Phiếu kiểm nghiệm cần số phiếu hoặc số lô: không có thì không ai đối chiếu được nó với hàng trên tay.' });
+    }
+    if (d.validUntil && d.validUntil < d.issuedAt) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['validUntil'], message: 'Hạn hiệu lực đứng trước ngày cấp.' });
+    }
+  }),
+});
+
+export const collections = { pages, products, lines, articles, policies, guides, brand, documents };

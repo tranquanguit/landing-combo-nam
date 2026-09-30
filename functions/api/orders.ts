@@ -68,8 +68,10 @@ async function handlePost(request: Request, env: Env): Promise<Response> {
     await env.DB.prepare(
       `INSERT INTO rate_limit (key, count, window_at) VALUES (?, 1, ?)
        ON CONFLICT(key) DO UPDATE SET
-         count = CASE WHEN ? THEN rate_limit.count + 1 ELSE 1 END,
-         window_at = CASE WHEN ? THEN rate_limit.window_at ELSE ? END`,
+         count = CASE WHEN ? = 1 THEN rate_limit.count + 1 ELSE 1 END,
+         window_at = CASE WHEN ? = 1 THEN rate_limit.window_at ELSE ? END`,
+      /* `? = 1` chứ không phải `?` trần: SQLite chấp nhận số làm điều kiện,
+         Postgres đòi boolean. So sánh với 1 đúng trên cả hai. */
     ).bind(key, new Date(now).toISOString(), fresh ? 1 : 0, fresh ? 1 : 0, new Date(now).toISOString())
       .run();
   }

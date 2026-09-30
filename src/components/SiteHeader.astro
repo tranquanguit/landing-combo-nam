@@ -79,7 +79,7 @@ function groupChildren(children: { label: string; href: string; note?: string }[
       </nav>
     )}
     <div class="actions">
-      <LocaleSwitcher current={locale} alternates={alternates} />
+      <div class="bar-lang"><LocaleSwitcher current={locale} alternates={alternates} /></div>
       <a class="tel" href={`tel:${b.phone}`} data-cta="header-call">{b.phoneDisplay}</a>
       <a class="btn btn-primary compact" href={orderHref} data-cta="header-order">{orderLabel ?? t(locale, 'nav.order')}</a>
 
@@ -127,6 +127,8 @@ function groupChildren(children: { label: string; href: string; note?: string }[
               ))}
             </nav>
             <a class="dcall" href={`tel:${b.phone}`} data-cta="drawer-call">{b.phoneDisplay}</a>
+            {/* Ở khổ rất hẹp bộ chuyển ngôn ngữ rời thanh trên vào đây. */}
+            <div class="dlang"><LocaleSwitcher current={locale} alternates={alternates} /></div>
           </div>
         </details>
       )}
@@ -148,7 +150,11 @@ function groupChildren(children: { label: string; href: string; note?: string }[
        khi font tải xong, nếu không cả trang bị đẩy xuống. */
     height: var(--header-h);
   }
+  /* Logo không được co: ở 320px nút "Đặt mua" không xuống dòng nữa và từng ép
+     logo còn 9px bề ngang — vùng chạm hỏng, thương hiệu biến mất. */
+  .brand { flex: 0 0 auto; }
   .brand :global(img) { height: 30px; width: auto; object-fit: contain; }
+  @media (max-width: 360px) { .brand :global(img) { height: 24px; } }
 
   /* Điều hướng ẩn dưới 860px: trên điện thoại, thanh trên cùng ưu tiên hotline
      và nút đặt mua. Các đường dẫn này vẫn có trong chân trang và trong nội dung
@@ -250,14 +256,23 @@ function groupChildren(children: { label: string; href: string; note?: string }[
   @media (prefers-reduced-motion: reduce) {
     .panel, .caret { transition: none; }
   }
-  .actions { display: flex; align-items: center; gap: var(--s-4); }
+  .actions { display: flex; align-items: center; gap: var(--s-4); min-width: 0; }
+  @media (max-width: 360px) { .actions { gap: var(--s-2); } }
+  /* ≤420px: logo + ngôn ngữ + "Đặt mua" + menu không vừa một hàng (đo được
+     tràn 39px). Ngôn ngữ chuyển vào ngăn menu; trên khổ rộng hơn ngăn menu
+     không cần bản thứ hai. */
+  .dlang { display: none; margin-top: var(--s-4); }
+  @media (max-width: 420px) { .bar-lang { display: none; } .dlang { display: block; } }
   .tel {
     display: none; font-weight: 600; font-size: var(--t-sm);
     color: var(--ink-navy); text-decoration: none;
     min-height: 24px; align-items: center;
   }
   @media (min-width: 620px) { .tel { display: inline-flex; } }
-  .compact { padding: 9px 18px; font-size: var(--t-sm); }
+  /* Không xuống dòng: ở 390px nút "Đặt mua" từng vỡ thành hai dòng và đẩy
+     cao cả thanh trên cùng. */
+  .compact { padding: 9px 18px; font-size: var(--t-sm); white-space: nowrap; }
+  @media (max-width: 420px) { .compact { padding: 9px 14px; } }
 
   /* ===================== NGĂN KÉO DI ĐỘNG ===================== */
   .drawer { position: relative; }

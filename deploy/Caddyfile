@@ -1,0 +1,12 @@
+# HTTPS tự động (Let's Encrypt) trước container app.
+# Caddy v2 mặc định BỎ QUA X-Forwarded-* do client tự gửi (không có trusted_proxies),
+# nên hop đầu của X-Forwarded-For mà app nhận được là IP thật — chống spam đơn hàng
+# dựa vào đó.
+{$SITE_DOMAIN} {
+	reverse_proxy app:8080
+	header -Server
+}
+
+www.{$SITE_DOMAIN} {
+	redir https://{$SITE_DOMAIN}{uri} permanent
+}

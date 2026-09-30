@@ -1,56 +1,25 @@
 /**
- * Kiểm thử API đặt hàng trên SQLite THẬT với lược đồ THẬT.
+ * Kiểm thử API đặt hàng trên POSTGRES THẬT với lược đồ THẬT.
  *
  * Không mô phỏng cơ sở dữ liệu bằng mảng trong bộ nhớ: phần lớn lỗi của một
  * API ghi dữ liệu nằm ở chỗ giáp ranh với cơ sở dữ liệu — ràng buộc UNIQUE,
- * CHECK, cột NOT NULL, thứ tự tham số bind. Một bản giả bằng mảng sẽ cho qua
- * hết những lỗi đó. Ở đây migrations/0001_orders.sql được chạy nguyên văn, và
- * handler chạy là chính file sẽ deploy lên Cloudflare.
+ * CHECK, cột NOT NULL, thứ tự tham số bind. Ở đây db/pg/*.sql được chạy nguyên
+ * văn trên PGlite (Postgres biên dịch sang WASM), và handler chạy là chính file
+ * mà máy chủ Docker dùng (qua bộ chuyển d1() trong server/lib/db.ts).
  *
- *   node --experimental-strip-types --experimental-sqlite tests/orders-api.mjs
+ *   node --import ./scripts/shim/register.mjs tests/orders-api.mjs
  */
-import { DatabaseSync } from 'node:sqlite';
-import { readFileSync, readdirSync } from 'node:fs';
 import { onRequest as ordersApi } from '../functions/api/orders.ts';
 import { onRequest as adminApi } from '../functions/api/admin/orders.ts';
+import { connect, migrate, d1, toDollar } from '../server/lib/db.ts';
 
-/* ---------- D1 giả lập trên node:sqlite ----------
-   Chỉ năm hàm, đúng bằng những gì functions/_lib/cloudflare.d.ts khai báo. */
-function makeD1(db) {
-  return {
-    prepare(sql) {
-      const stmt = db.prepare(sql);
-      let params = [];
-      const api = {
-        bind(...values) { params = values.map((v) => (v === undefined ? null : v)); return api; },
-        async first() { return stmt.get(...params) ?? null; },
-        async all() { return { results: stmt.all(...params), success: true }; },
-        async run() {
-          const r = stmt.run(...params);
-          return { success: true, meta: { changes: Number(r.changes) } };
-        },
-      };
-      return api;
-    },
-  };
-}
-
-const db = new DatabaseSync(':memory:');
-/* Chạy MỌI migration theo thứ tự tên, không chỉ 0001.
-
-   Bản trước ghim cứng 0001_orders.sql, nên ngày thêm 0002 thì cổng đỏ với
-   thông báo "table orders has no column named utm_content" — một lỗi nói về
-   bộ kiểm thử chứ không phải về mã. Đọc cả thư mục thì lần sau không ai phải
-   nhớ sửa chỗ này.
-*/
-const MIGRATIONS = readdirSync(new URL('../migrations/', import.meta.url))
-  .filter((f) => f.endsWith('.sql'))
-  .sort();
-for (const m of MIGRATIONS) {
-  db.exec(readFileSync(new URL('../migrations/' + m, import.meta.url), 'utf8'));
-}
+const sql = await connect('pglite:memory');
+await migrate(sql, new URL('../db/pg/', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
+/** Truy vấn kiểm tra trực tiếp CSDL; tham số dạng `?` như handler. */
+const one = async (q, ...args) => (await sql.query(toDollar(q), args)).rows[0];
+const all = async (q, ...args) => (await sql.query(toDollar(q), args)).rows;
 const env = {
-  DB: makeD1(db),
+  DB: d1(sql),
   IP_SALT: 'muoi-kiem-thu-khong-dung-cho-production',
   ADMIN_TOKEN: 'token-kiem-thu-du-dai-de-vuot-nguong-24',
   ALLOWED_ORIGIN: 'https://mochatrinam.com',
@@ -102,13 +71,13 @@ const admin = (path, init = {}) => {
 
 const results = [];
 const check = (name, ok, detail) => results.push([name, ok, detail]);
-const countRows = () => db.prepare('SELECT COUNT(*) AS n FROM orders').get().n;
+const countRows = async () => (await one('SELECT COUNT(*)::int AS n FROM orders')).n;
 
 /* ================= 1. Đơn hợp lệ được ghi đúng ================= */
 {
   const res = await post(GOOD);
   const body = await res.json();
-  const row = db.prepare('SELECT * FROM orders WHERE order_code = ?').get(body.orderCode);
+  const row = (await one('SELECT * FROM orders WHERE order_code = ?', body.orderCode));
   check('đơn hợp lệ được ghi',
     res.status === 200 && body.ok === true
     && /^MC-\d{6}-[A-Z0-9]{4}$/.test(body.orderCode)
@@ -120,25 +89,25 @@ const countRows = () => db.prepare('SELECT COUNT(*) AS n FROM orders').get().n;
 
 /* ================= 2. Số điện thoại các dạng đều gộp về một ================= */
 {
-  const before = countRows();
+  const before = (await countRows());
   for (const phone of ['+84 912 345 679', '84912345679', '0912.345.679']) {
     await post({ ...GOOD, phone, pack: `p-${phone.length}` });
   }
-  const rows = db.prepare("SELECT DISTINCT phone FROM orders WHERE phone = '0912345679'").all();
+  const rows = (await all("SELECT DISTINCT phone FROM orders WHERE phone = '0912345679'"));
   check('chuẩn hoá +84 / 84 / có dấu chấm',
-    rows.length === 1 && countRows() === before + 3,
+    rows.length === 1 && (await countRows()) === before + 3,
     `${rows.length} dạng lưu trong CSDL`);
 }
 
 /* ================= 3. Không đồng ý dữ liệu thì không ghi ================= */
 {
-  const before = countRows();
+  const before = (await countRows());
   const res = await post({ ...GOOD, dataConsent: false, phone: '0900000001' });
   const body = await res.json();
   check('không tick đồng ý thì không ghi',
-    res.status === 422 && countRows() === before
+    res.status === 422 && (await countRows()) === before
     && body.fields?.some((f) => f.field === 'dataConsent'),
-    `HTTP ${res.status}, số dòng không đổi: ${countRows() === before}`);
+    `HTTP ${res.status}, số dòng không đổi: ${(await countRows()) === before}`);
 }
 
 /* ================= 4. Phản hồi lỗi không mang dữ liệu cá nhân ================= */
@@ -156,7 +125,7 @@ const countRows = () => db.prepare('SELECT COUNT(*) AS n FROM orders').get().n;
   const payload = { ...GOOD, phone: '0987654321', pack: 'combo-doi' };
   const a = await (await post(payload)).json();
   const b = await (await post(payload)).json();
-  const n = db.prepare('SELECT COUNT(*) AS n FROM orders WHERE phone = ?').get('0987654321').n;
+  const n = (await one('SELECT COUNT(*)::int AS n FROM orders WHERE phone = ?', '0987654321')).n;
   check('bấm hai lần chỉ thành một đơn',
     a.orderCode === b.orderCode && b.deduped === true && n === 1,
     `${n} dòng, mã ${a.orderCode}`);
@@ -166,7 +135,7 @@ const countRows = () => db.prepare('SELECT COUNT(*) AS n FROM orders').get().n;
 {
   const res = await post({ ...GOOD, packPrice: '', address: '', phone: '0911111111', pack: 'tu-van' });
   const body = await res.json();
-  const row = db.prepare('SELECT * FROM orders WHERE order_code = ?').get(body.orderCode);
+  const row = (await one('SELECT * FROM orders WHERE order_code = ?', body.orderCode));
   check('gói tư vấn không bắt địa chỉ',
     res.status === 200 && row?.address === null && row.pack_price === null,
     `HTTP ${res.status}, address=${row?.address}`);
@@ -180,10 +149,10 @@ const countRows = () => db.prepare('SELECT COUNT(*) AS n FROM orders').get().n;
 
 /* ================= 7. Bẫy bot ================= */
 {
-  const before = countRows();
+  const before = (await countRows());
   const res = await post({ ...GOOD, website: 'http://spam.example', phone: '0922222222' });
   check('ô bẫy có nội dung thì chặn',
-    res.status === 422 && countRows() === before, `HTTP ${res.status}`);
+    res.status === 422 && (await countRows()) === before, `HTTP ${res.status}`);
 }
 
 /* ================= 8. Thân yêu cầu quá lớn và JSON hỏng ================= */
@@ -208,9 +177,8 @@ const countRows = () => db.prepare('SELECT COUNT(*) AS n FROM orders').get().n;
   const evil = "Nguyễn'); DROP TABLE orders; --";
   const res = await post({ ...GOOD, name: evil, phone: '0944444444' });
   const body = await res.json();
-  const row = db.prepare('SELECT name FROM orders WHERE order_code = ?').get(body.orderCode);
-  const tableAlive = db.prepare(
-    "SELECT COUNT(*) AS n FROM sqlite_master WHERE type='table' AND name='orders'").get().n;
+  const row = (await one('SELECT name FROM orders WHERE order_code = ?', body.orderCode));
+  const tableAlive = (await one("SELECT COUNT(*)::int AS n FROM information_schema.tables WHERE table_name = 'orders'")).n;
   check('chèn SQL chỉ là một chuỗi',
     res.status === 200 && row?.name === evil && tableAlive === 1,
     `bảng còn sống: ${tableAlive === 1}`);
@@ -236,8 +204,8 @@ const countRows = () => db.prepare('SELECT COUNT(*) AS n FROM orders').get().n;
 
 /* ================= 12. IP không bao giờ nằm trong CSDL ================= */
 {
-  const dump = JSON.stringify(db.prepare('SELECT * FROM orders').all())
-    + JSON.stringify(db.prepare('SELECT * FROM rate_limit').all());
+  const dump = JSON.stringify((await all('SELECT * FROM orders')))
+    + JSON.stringify((await all('SELECT * FROM rate_limit')));
   check('không lưu IP thô ở bất cứ đâu',
     !dump.includes('203.0.113.9') && !dump.includes('10.0.0.'),
     'đã quét cả bảng orders lẫn rate_limit');
@@ -302,13 +270,13 @@ const countRows = () => db.prepare('SELECT COUNT(*) AS n FROM orders').get().n;
 
 /* ================= 17. Quản trị: cập nhật trạng thái ================= */
 {
-  const code = db.prepare('SELECT order_code FROM orders ORDER BY id LIMIT 1').get().order_code;
+  const code = (await one('SELECT order_code FROM orders ORDER BY id LIMIT 1')).order_code;
   const ok = await admin('', {
     method: 'PATCH',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ orderCode: code, status: 'contacted', staffNote: 'Đã gọi, hẹn mai' }),
   });
-  const row = db.prepare('SELECT status, staff_note, updated_at FROM orders WHERE order_code = ?').get(code);
+  const row = (await one('SELECT status, staff_note, updated_at FROM orders WHERE order_code = ?', code));
   const badStatus = await admin('', {
     method: 'PATCH',
     headers: { 'content-type': 'application/json' },
@@ -331,9 +299,9 @@ const countRows = () => db.prepare('SELECT COUNT(*) AS n FROM orders').get().n;
   // có ai ghi thẳng vào bảng thì ràng buộc vẫn còn đứng đó.
   let blocked = false;
   try {
-    db.prepare(`INSERT INTO orders (order_code, created_at, product_slug, locale, pack,
+    await sql.query(`INSERT INTO orders (order_code, created_at, product_slug, locale, pack,
       currency, name, phone, data_consent, consent_text)
-      VALUES ('MC-260101-AAAA','2026-01-01T00:00:00Z','x','vi','p','VND','A','0900000000',0,'t')`).run();
+      VALUES ('MC-260101-AAAA','2026-01-01T00:00:00Z','x','vi','p','VND','A','0900000000',0,'t')`);
   } catch { blocked = true; }
   check('CSDL tự chặn đơn không có đồng ý', blocked, 'ràng buộc CHECK còn hiệu lực');
 }
@@ -355,4 +323,5 @@ for (const [name, ok, detail] of results) {
   console.log(`  ${ok ? 'ĐẠT ' : 'LỖI '} ${name.padEnd(38)} ${detail}`);
 }
 console.log(`\n${results.length - failed}/${results.length} kịch bản đúng.`);
+await sql.close();
 process.exit(failed ? 1 : 0);

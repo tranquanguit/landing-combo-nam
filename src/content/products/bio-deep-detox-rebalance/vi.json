@@ -64,7 +64,8 @@
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ]
+    ],
+    "productNotificationNumber": "2410/25/CBMP-TN"
   },
   "variants": [
     {
@@ -106,8 +107,8 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-bio-deep-detox.webp",
-        "alt": "Chai nước tẩy trang Mocha Bio-Deep Detox & Rebalance Micellar Water"
+        "src": "/images/hero-bio-deep-detox.webp",
+        "alt": "Chai nước tẩy trang Mocha Bio-Deep Detox & Rebalance"
       },
       "primaryCta": "Đặt nước tẩy trang",
       "secondaryCta": {
@@ -273,6 +274,13 @@
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Giấy tờ",
+      "heading": "Giấy tờ đi kèm sản phẩm",
+      "intro": "Bản chụp giấy tờ gốc, đủ rõ để đọc số hiệu. Bấm vào từng giấy để xem bản đầy đủ."
     },
     {
       "type": "routine",

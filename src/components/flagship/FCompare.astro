@@ -1,0 +1,115 @@
+---
+import FSection from './FSection.astro';
+import Picture from '../Picture.astro';
+import { money } from '../../lib/format';
+import { productPath } from '../../lib/routes';
+import { richText } from '../../lib/richtext';
+import { t, type Locale } from '../../i18n/ui';
+interface Props {
+  data: any; products: any[]; locale: Locale; id?: string; current?: string;
+  role?: string; transition?: string; cta?: any;
+}
+const { data, products, locale, id, current, role, transition, cta } = Astro.props;
+
+/**
+ * So sánh dạng THẺ theo sản phẩm, không phải bảng.
+ *
+ * Bảng chuẩn có hàng tiêu chí × cột sản phẩm, nên trên 390px phải cuộn ngang —
+ * mà mục tiêu của site ghi rõ "một bảng tràn ngang trên điện thoại là lỗi
+ * nặng". Ở đây mỗi sản phẩm là một thẻ, mỗi tiêu chí là một dòng trong thẻ:
+ * cùng dữ liệu, cùng thứ tự, xếp chồng được ở mọi bề rộng. Trên desktop các
+ * thẻ đứng cạnh nhau và dòng tiêu chí thẳng hàng nhờ subgrid.
+ *
+ * Cột thứ i của mọi tiêu chí thuộc về sản phẩm thứ i — schema đã chặn lệch cột.
+ */
+const cols = products.map((p, i) => ({
+  p,
+  here: p.slug === current,
+  values: data.criteria.map((c: any) => ({ label: c.label, value: c.values[i] })),
+}));
+---
+<FSection id={id} tone="paper" role={role} transition={transition} cta={cta}
+  eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} head="split">
+  <ul class="cmp" style={`--n:${cols.length};--rows:${data.criteria.length}`}>
+    {cols.map(({ p, here, values }) => (
+      <li class:list={['col', here && 'here']} data-reveal>
+        <div class="top">
+          {p.image && (
+            <div class="ph">
+              <Picture src={p.image} alt={p.imageAlt ?? p.name} ratio="1/1" fit="contain"
+                sizes="(min-width: 900px) 160px, 120px" widths={[240, 360]} />
+            </div>
+          )}
+          <div class="id">
+            {here && <p class="flag">{t(locale, 'fx.thisProduct')}</p>}
+            <h3>
+              {here
+                ? (p.shortName ?? p.name)
+                : <a href={productPath(p.slug, locale)} data-cta="compare-product" data-cta-kind="select">{p.shortName ?? p.name}</a>}
+            </h3>
+            <p class="price figure">{money(p.price, p.currency, locale)}</p>
+          </div>
+        </div>
+        <dl>
+          {values.map((v: any) => (
+            <div>
+              <dt>{v.label}</dt>
+              <dd>{v.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </li>
+    ))}
+  </ul>
+  {data.footnote && <p class="foot" set:html={richText(data.footnote)} />}
+</FSection>
+
+<style>
+  .cmp { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-5); }
+  @media (min-width: 760px) {
+    .cmp {
+      grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+      /* hàng 1 = đầu thẻ, các hàng sau = từng tiêu chí; subgrid giữ chúng thẳng hàng giữa các thẻ */
+      grid-template-rows: auto repeat(var(--rows), auto);
+      gap: 0 var(--s-5);
+    }
+    .col { display: grid; grid-row: span calc(var(--rows) + 1); grid-template-rows: subgrid; }
+    .col dl { display: contents; }
+  }
+  .col {
+    border-radius: 24px;
+    background: var(--bone);
+    padding: var(--s-5);
+    border: 1px solid transparent;
+  }
+  .col.here {
+    background: #fff;
+    border-color: var(--ink-navy);
+    box-shadow: 0 30px 60px -40px rgba(26, 29, 82, .5);
+  }
+  .top { display: flex; gap: var(--s-4); align-items: center; padding-bottom: var(--s-4); }
+  .ph { flex: 0 0 96px; border-radius: 16px; background: #fff; padding: 6px; }
+  .here .ph { background: var(--bone); }
+  .ph :global(img) { mix-blend-mode: multiply; }
+  .flag {
+    display: inline-block; margin: 0 0 var(--s-2);
+    padding: 2px 10px; border-radius: 999px;
+    background: var(--ink-navy); color: #fff;
+    font-size: var(--t-2xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  }
+  h3 { margin: 0; font-size: var(--t-md); letter-spacing: -0.015em; }
+  h3 a { color: inherit; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 4px; }
+  h3 a:hover { color: var(--cobalt); text-decoration-color: currentColor; }
+  .price { margin: var(--s-1) 0 0; font-size: var(--t-lg); font-weight: 600; color: var(--cobalt); }
+
+  dl { margin: 0; }
+  dl > div { padding: var(--s-3) 0; border-top: 1px solid var(--line); }
+  dt { font-size: var(--t-2xs); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--slate); margin-bottom: 4px; }
+  dd { margin: 0; font-size: var(--t-sm); line-height: 1.55; color: var(--ink-navy); }
+
+  .foot {
+    margin: var(--s-6) 0 0; max-width: 64ch;
+    padding-left: var(--s-4); border-left: 2px solid var(--cobalt);
+    color: var(--ink-muted); font-size: var(--t-sm); line-height: 1.6;
+  }
+</style>

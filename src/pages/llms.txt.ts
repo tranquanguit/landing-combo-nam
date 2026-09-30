@@ -2,7 +2,9 @@ import type { APIRoute } from 'astro';
 import { getCollection, getEntry } from 'astro:content';
 import { money } from '../lib/format';
 import { expandProductTokens } from '../lib/money-text';
-import { adviceIndexPath, articlePath, homePath, linePath, policyPath, productPath } from '../lib/routes';
+import { adviceIndexPath, articlePath, docsPath, homePath, linePath, policyPath, productPath } from '../lib/routes';
+import { docsFor } from '../lib/documents';
+import { orderEndpoint } from '../lib/order-endpoint';
 import { plainText } from '../lib/richtext';
 import type { Locale } from '../i18n/ui';
 
@@ -161,6 +163,21 @@ export const GET: APIRoute = async ({ site }) => {
   for (const loc of homeLocales) lines.push(`- ${origin}${homePath(loc)} (${loc})`);
   lines.push('');
 
+  /* Giấy tờ: số hiệu, cơ quan cấp, ngày cấp ở dạng CHỮ — thứ trợ lý AI trích
+     dẫn được, không chỉ nằm trong ảnh scan. Chỉ giấy đã xuất bản và còn hạn. */
+  const docs = docsFor(await getCollection('documents') as any[]);
+  if (docs.length) {
+    lines.push('## Giấy tờ và chứng nhận / Documents', '');
+    for (const loc of homeLocales) lines.push(`- ${origin}${docsPath(loc)} (${loc})`);
+    for (const d of docs) {
+      lines.push(`- ${d.title}${d.subject ? ` — ${d.subject}` : ''}${d.reference ? `: ${d.reference}` : ''}; ` +
+        `${d.issuedBy}; ${d.issuedAt}` +
+        (d.findings.length ? `; ${d.findings.map((f: any) => `${f.label} ${f.result}`).join(', ')}` : '') +
+        `; áp dụng cho: ${d.appliesTo === 'all' ? 'mọi sản phẩm' : d.appliesTo.join(', ')}`);
+    }
+    lines.push('');
+  }
+
   for (const entry of lineEntries) {
     const d = entry.data;
     const locale = d.locale as Locale;
@@ -245,7 +262,7 @@ export const GET: APIRoute = async ({ site }) => {
   // Nói thẳng những gì trang chưa có. Một file dành cho máy đọc mà im lặng về
   // các khoảng trống sẽ khiến trợ lý AI giới thiệu sai năng lực của website.
   const gaps: string[] = [];
-  if (!import.meta.env.PUBLIC_ORDER_ENDPOINT) {
+  if (!orderEndpoint()) {
     gaps.push('Website hiện KHÔNG nhận đơn hàng trực tuyến. Biểu mẫu đặt hàng chưa được kết nối. ' +
       `Cách đặt hàng duy nhất là gọi ${b.phoneDisplay}.`);
   }

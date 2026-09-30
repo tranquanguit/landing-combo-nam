@@ -1,0 +1,67 @@
+# Triển khai trên Ubuntu:  cp .env.example .env  (điền giá trị)  &&  docker compose up -d --build
+#
+#   db     Postgres 17 — đơn hàng + nội dung + ảnh + tài khoản quản trị (một volume, một pg_dump là đủ sao lưu)
+#   app    website + /api/orders + /admin (nhập liệu, đơn hàng, xuất bản)
+#   caddy  HTTPS tự động (Let's Encrypt) — bật bằng:  docker compose --profile https up -d
+#
+# Chi tiết vận hành: docs/trien-khai-docker.md
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mocha
+      POSTGRES_USER: mocha
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Đặt POSTGRES_PASSWORD trong .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mocha -d mocha"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    # Không mở cổng Postgres ra ngoài: chỉ container app nói chuyện với nó.
+
+  app:
+    build:
+      context: .
+      args:
+        PUBLIC_SITE_URL: ${PUBLIC_SITE_URL:-https://mochatrinam.com}
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://mocha:${POSTGRES_PASSWORD}@db:5432/mocha
+      PUBLIC_SITE_URL: ${PUBLIC_SITE_URL:-https://mochatrinam.com}
+      ALLOWED_ORIGIN: ${PUBLIC_SITE_URL:-https://mochatrinam.com}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:?Đặt ADMIN_TOKEN (>= 24 ký tự) trong .env}
+      IP_SALT: ${IP_SALT:?Đặt IP_SALT trong .env}
+      ADMIN_BOOTSTRAP_USER: ${ADMIN_BOOTSTRAP_USER:-admin}
+      ADMIN_BOOTSTRAP_PASSWORD: ${ADMIN_BOOTSTRAP_PASSWORD:-}
+      TRUST_PROXY: "1"
+      COOKIE_SECURE: ${COOKIE_SECURE:-1}
+      PUBLISH_ON_BOOT: ${PUBLISH_ON_BOOT:-1}
+    # Chỉ nghe trên localhost của máy chủ: đi ra Internet qua Caddy (hoặc nginx có sẵn).
+    ports:
+      - "127.0.0.1:${APP_PORT:-8080}:8080"
+
+  caddy:
+    image: caddy:2-alpine
+    profiles: ["https"]
+    restart: unless-stopped
+    depends_on: [app]
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN:-mochatrinam.com}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:

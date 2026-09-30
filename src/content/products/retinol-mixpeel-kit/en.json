@@ -26,19 +26,35 @@
   "includes": [
     {
       "name": "Peel ampoule",
-      "note": "1% liposome retinol, four microalgae"
+      "note": "1% liposome retinol, four microalgae",
+      "image": {
+        "src": "/images/packshot-a-perfect-skin-peel.webp",
+        "alt": "Mocha A Perfect Skin Peel ampoule"
+      }
     },
     {
       "name": "Recovery ampoule",
-      "note": "Used after each peel session"
+      "note": "Used after each peel session",
+      "image": {
+        "src": "/images/packshot-pro-vitamin-b5-serum.webp",
+        "alt": "Mocha Pro Vitamin B5 Perfection Serum ampoule"
+      }
     },
     {
       "name": "Pro-vitamin B5 cleanser",
-      "note": "The cleansing step throughout the course"
+      "note": "The cleansing step throughout the course",
+      "image": {
+        "src": "/images/hero-bio-active-cleanser-tube.webp",
+        "alt": "Tube of Mocha Bio-Active Cleanser"
+      }
     },
     {
       "name": "Collagen recovery cream",
-      "note": "The moisturising step after peeling"
+      "note": "The moisturising step after peeling",
+      "image": {
+        "src": "/images/hero-collagen-peptide.webp",
+        "alt": "Mocha Collagen Peptide Cream box and jar"
+      }
     }
   ],
   "locale": "en",
@@ -84,7 +100,8 @@
       "After use the skin is more sensitive to sunlight. Daily sun protection is mandatory during and after the course.",
       "Stop use if stinging persists, or if there is swelling, blistering or pain. Avoid direct contact with the eyes.",
       "Results vary by individual, skin type and daily sun protection."
-    ]
+    ],
+    "productNotificationNumber": "2521/25/CBMP-TN"
   },
   "variants": [
     {
@@ -126,8 +143,8 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-retinol-mixpeel.webp",
-        "alt": "Mocha Retinol mixPEEL four-piece kit: box, two ampoules, cleanser and moisturiser"
+        "src": "/images/hero-retinol-mixpeel.webp",
+        "alt": "Mocha Retinol mixPEEL Kit: box, two ampoules, cleanser tube and Collagen cream jar"
       },
       "primaryCta": "Order the kit",
       "secondaryCta": {
@@ -243,6 +260,13 @@
         "label": "See the price and order",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Documents",
+      "heading": "The paperwork behind this product",
+      "intro": "Scans of the original documents, sharp enough to read the reference numbers. Tap any document to see it in full."
     },
     {
       "type": "timeline",

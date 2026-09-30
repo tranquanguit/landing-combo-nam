@@ -1,0 +1,209 @@
+---
+import { t, type Locale } from '../../i18n/ui';
+import { money } from '../../lib/format';
+import { richText } from '../../lib/richtext';
+import { heroDoses, splitDose } from '../../lib/flagship';
+import FHeroFrame from './FHeroFrame.astro';
+import FStage from './FStage.astro';
+interface Props { data: any; locale: Locale; product: any; }
+const { data, locale, product: p } = Astro.props;
+
+const isLink = (v?: string): v is string => !!v && /^(#|\/|https?:\/\/)/.test(v);
+const evidenceLabel: Record<string, string> = {
+  verified: t(locale, 'evidence.verified'),
+  study: t(locale, 'evidence.study'),
+  survey: t(locale, 'evidence.survey'),
+  ingredient: t(locale, 'evidence.ingredient'),
+};
+const notes = data.usp.map((u: any, i: number) => ({
+  n: i + 1, label: evidenceLabel[u.evidence],
+  source: u.source as string | undefined, qualifier: u.qualifier as string | undefined,
+}));
+
+
+/* Con số trên sân khấu: hoạt chất có nồng độ đầu tiên của mỗi sản phẩm trong
+   bộ; sản phẩm đơn thì hai hoạt chất có nồng độ đầu tiên. Không in nồng độ
+   nào thì chip chỉ nêu tên hoạt chất chủ lực — không bao giờ điền số. */
+const ing = p.blocks.find((b: any) => b.type === 'ingredients');
+const multi = new Set((ing?.rows ?? []).map((r: any) => r.inProduct ?? '')).size > 1;
+let doses: any[] = heroDoses(p, multi ? 1 : 2).slice(0, 2);
+const numbered = doses.length > 0;
+if (!numbered && ing) {
+  doses = ing.rows.slice(0, 2).map((r: any) => ({ ...splitDose(r.name), product: r.inProduct }));
+}
+const motto = numbered
+  ? `${t(locale, 'fx.motto')} · ${t(locale, 'fx.printed')} · `
+  : `${t(locale, 'fx.motto')} · ${p.shortName ?? p.name} · `;
+---
+<FHeroFrame>
+  <Fragment slot="top">
+    {data.eyebrow && <p class="eyebrow-x">{data.eyebrow}</p>}
+    <h1 id="hero-title">{data.heading}</h1>
+  </Fragment>
+  <FStage slot="stage" image={data.image} doses={doses} motto={motto}
+    chipsLabel={numbered ? t(locale, 'fx.printed') : t(locale, 'fx.keyActive')}
+    keyLabel={t(locale, 'fx.keyActive')} />
+  <Fragment slot="bottom">
+      <p class="lead-x" set:html={richText(data.lead)} />
+
+      <div class="buy">
+        <p class="price">
+          <span class="now figure">{money(p.price, p.currency, locale)}</span>
+          {p.compareAtPrice && p.compareAtPrice > p.price && (
+            <span class="was">
+              <s class="figure"><span class="sr-only">{t(locale, 'price.from')} </span>{money(p.compareAtPrice, p.currency, locale)}</s>
+              <span class="save">{t(locale, 'price.save')} <span class="figure">{money(p.compareAtPrice - p.price, p.currency, locale)}</span></span>
+            </span>
+          )}
+        </p>
+        <div class="actions">
+          <a class="go" href="#dat-hang" data-cta="hero-primary">{data.primaryCta}<span aria-hidden="true">→</span></a>
+          {data.secondaryCta && (
+            <a class="alt" href={data.secondaryCta.href} data-cta="hero-secondary">{data.secondaryCta.label}</a>
+          )}
+        </div>
+      </div>
+
+      <ul class="usp">
+        {data.usp.map((u: any, i: number) => (
+          <li><Fragment set:html={richText(u.text)} /><a
+            class="fn" href={`#co-so-${i + 1}`}
+            aria-label={`Cơ sở của tuyên bố ${i + 1}`}>{i + 1}</a></li>
+        ))}
+      </ul>
+  </Fragment>
+  <Fragment slot="foot">
+    {data.trustBadges.length > 0 && (
+      <ul class="trust">
+        {data.trustBadges.map((b: string, i: number) => (
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              {i === 0 && <path d="M3 7h11v9H3zM14 10h4l3 3v3h-7M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />}
+              {i === 1 && <path d="M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8M8.5 13.5l2 2 3.5-3.5" />}
+              {i >= 2 && <path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4" />}
+            </svg>
+            {b}
+          </li>
+        ))}
+      </ul>
+    )}
+    <ol class="notes" aria-label="Cơ sở của các tuyên bố ở trên">
+      {notes.map((nt: any) => (
+        <li id={`co-so-${nt.n}`}>
+          <span class="n figure">{nt.n}</span>
+          <span>
+            {isLink(nt.source)
+              ? <a href={nt.source} {...(nt.source.startsWith('#') ? {} : { rel: 'noopener nofollow' })}>{nt.label}</a>
+              : <>{nt.label}{nt.source ? <> · {nt.source}</> : null}</>}
+            {nt.qualifier && <> · {nt.qualifier}</>}
+          </span>
+        </li>
+      ))}
+    </ol>
+  </Fragment>
+</FHeroFrame>
+
+<style>
+  /* ---------------- chữ + mua ---------------- */
+  .lead-x {
+    font-size: clamp(1rem, 1.3vw, 1.125rem);
+    line-height: 1.65;
+    color: var(--ink-muted);
+    max-width: 50ch;
+    margin: 0 0 var(--s-6);
+  }
+  .lead-x :global(strong) { color: var(--ink-navy); }
+
+  .buy {
+    display: grid; gap: var(--s-5);
+    padding: var(--s-5);
+    /* Không dùng backdrop-filter: nó tốn GPU trên điện thoại tầm trung — đúng
+       nhóm máy phần lớn khách dùng — trong khi nền sau thẻ gần như phẳng. */
+    background: rgba(255, 255, 255, .88);
+    border: 1px solid rgba(26, 29, 82, .08);
+    border-radius: 20px;
+    box-shadow: 0 30px 60px -36px rgba(26, 29, 82, .35);
+    max-width: 34rem;
+  }
+  .price { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-2) var(--s-4); margin: 0; }
+  .now {
+    font-size: clamp(2.1rem, 3.8vw, 2.9rem);
+    font-weight: 600; line-height: 1; color: var(--ink-navy); letter-spacing: -0.02em;
+  }
+  .was { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-3); font-size: var(--t-sm); color: var(--slate); }
+  .save {
+    display: inline-flex; align-items: baseline; gap: 4px;
+    padding: 3px 10px; border-radius: 999px;
+    background: rgba(31, 107, 77, .09);
+    color: var(--verify); font-weight: 600;
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+  .go {
+    flex: 1 1 auto;
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--s-3);
+    min-height: 56px; padding: 0 30px;
+    border-radius: 999px;
+    background: var(--ink-navy); color: #fff;
+    font-weight: 600; font-size: var(--t-base); letter-spacing: .02em;
+    text-decoration: none;
+    box-shadow: 0 14px 30px -12px rgba(26, 29, 82, .55);
+    transition: background-color var(--dur-2) var(--ease), transform var(--dur-1) var(--ease), box-shadow var(--dur-2) var(--ease);
+  }
+  .go span { transition: transform var(--dur-2) var(--ease); }
+  .go:hover { background: var(--cobalt); color: #fff; box-shadow: 0 18px 36px -12px rgba(43, 52, 184, .6); }
+  .go:hover span { transform: translateX(4px); }
+  @media (hover: hover) { .go:hover { transform: translateY(-1px); } }
+  .alt {
+    display: inline-flex; align-items: center; min-height: 48px; padding: 0 6px;
+    font-weight: 600; font-size: var(--t-sm); color: var(--ink-navy);
+    text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 5px;
+  }
+  .alt:hover { color: var(--cobalt); text-decoration-color: currentColor; }
+
+  .usp {
+    list-style: none; padding: 0; margin: var(--s-6) 0 0;
+    display: grid; gap: var(--s-3);
+    font-size: var(--t-sm); line-height: 1.5; color: var(--ink-muted);
+    max-width: 50ch;
+  }
+  .usp li { position: relative; padding-left: 30px; }
+  .usp li::before {
+    content: ""; position: absolute; left: 0; top: 1px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.2l3 3 6-6.4' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat,
+      var(--cobalt);
+  }
+  .usp :global(strong) { color: var(--ink-navy); }
+  .fn {
+    position: relative;
+    font-family: var(--font-figure); font-size: .72em;
+    vertical-align: super; line-height: 0; margin-left: 2px;
+    color: var(--cobalt); text-decoration: none;
+  }
+  .fn::after { content: ""; position: absolute; left: 50%; top: 50%; width: 24px; height: 24px; transform: translate(-50%, -50%); }
+
+  /* ---------------- chân hero ---------------- */
+  .trust { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--s-4) clamp(24px, 4vw, 56px); }
+  .trust li { display: flex; align-items: center; gap: var(--s-3); font-size: var(--t-sm); font-weight: 600; color: var(--ink-navy); }
+  .trust svg {
+    width: 34px; height: 34px; flex: 0 0 34px; padding: 7px;
+    border-radius: 50%; background: #fff; border: 1px solid var(--line);
+    fill: none; stroke: var(--cobalt); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .notes {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: var(--s-2) var(--s-6);
+    font-size: var(--t-xs); color: var(--ink-muted); line-height: 1.5;
+  }
+  @media (min-width: 960px) { .notes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .notes li { display: flex; gap: var(--s-3); }
+  .notes .n { color: var(--cobalt); flex: 0 0 1.2em; }
+  .notes a {
+    color: var(--ink-muted); text-decoration: underline; text-decoration-color: var(--line-strong);
+    display: inline-block; min-height: 24px; line-height: 24px;
+  }
+  .notes a:hover { color: var(--cobalt); }
+  .notes li:target { color: var(--ink); }
+  .trust + .notes { margin-top: var(--s-6); }
+</style>

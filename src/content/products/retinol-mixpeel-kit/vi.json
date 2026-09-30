@@ -26,19 +26,35 @@
   "includes": [
     {
       "name": "Ống tinh chất Peel",
-      "note": "Retinol 1% bọc liposome, 4 loại vi tảo"
+      "note": "Retinol 1% bọc liposome, 4 loại vi tảo",
+      "image": {
+        "src": "/images/packshot-a-perfect-skin-peel.webp",
+        "alt": "Ống tinh chất Mocha A Perfect Skin Peel"
+      }
     },
     {
       "name": "Ống tinh chất siêu phục hồi",
-      "note": "Dùng sau mỗi lần peel"
+      "note": "Dùng sau mỗi lần peel",
+      "image": {
+        "src": "/images/packshot-pro-vitamin-b5-serum.webp",
+        "alt": "Ống tinh chất Mocha Pro Vitamin B5 Perfection Serum"
+      }
     },
     {
       "name": "Sữa rửa mặt Pro-vitamin B5",
-      "note": "Bước làm sạch trong suốt liệu trình"
+      "note": "Bước làm sạch trong suốt liệu trình",
+      "image": {
+        "src": "/images/hero-bio-active-cleanser-tube.webp",
+        "alt": "Tuýp sữa rửa mặt Mocha Bio-Active Cleanser"
+      }
     },
     {
       "name": "Kem dưỡng phục hồi Collagen",
-      "note": "Bước dưỡng sau peel"
+      "note": "Bước dưỡng sau peel",
+      "image": {
+        "src": "/images/hero-collagen-peptide.webp",
+        "alt": "Hộp và hũ kem Mocha Collagen Peptide Cream"
+      }
     }
   ],
   "locale": "vi",
@@ -84,7 +100,8 @@
       "Sau khi dùng, da nhạy cảm hơn với ánh nắng. Chống nắng mỗi ngày là bắt buộc trong và sau liệu trình.",
       "Ngưng sử dụng nếu da rát kéo dài, sưng, phồng rộp hoặc đau. Tránh tiếp xúc trực tiếp với mắt.",
       "Kết quả khác nhau tùy cơ địa, loại da và mức độ chống nắng hằng ngày."
-    ]
+    ],
+    "productNotificationNumber": "2521/25/CBMP-TN"
   },
   "variants": [
     {
@@ -126,8 +143,8 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-retinol-mixpeel.webp",
-        "alt": "Bộ peel Mocha Retinol mixPEEL 4 món gồm hộp, hai ống tinh chất, sữa rửa mặt và kem dưỡng"
+        "src": "/images/hero-retinol-mixpeel.webp",
+        "alt": "Bộ Mocha Retinol mixPEEL Kit: hộp, hai ống tinh chất, tuýp sữa rửa mặt và hũ kem Collagen"
       },
       "primaryCta": "Đặt bộ peel",
       "secondaryCta": {
@@ -243,6 +260,13 @@
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Giấy tờ",
+      "heading": "Giấy tờ đi kèm sản phẩm",
+      "intro": "Bản chụp giấy tờ gốc, đủ rõ để đọc số hiệu. Bấm vào từng giấy để xem bản đầy đủ."
     },
     {
       "type": "timeline",

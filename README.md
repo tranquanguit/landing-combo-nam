@@ -7,6 +7,11 @@ chính file đó quyết định, không phải sửa code.
 > — mục tiêu, định vị, kỳ vọng và những điều không đánh đổi. Đọc trước khi
 > quyết định bất cứ thứ gì mà hai phương án đều chạy được.
 >
+> **Nhập liệu:** [`docs/nhap-lieu.md`](docs/nhap-lieu.md) — sửa nội dung ở `/admin`
+> (Postgres), kiểm bằng đúng schema của build, bấm Xuất bản mới lên trang thật.
+> **Triển khai Ubuntu + Docker:** [`docs/trien-khai-docker.md`](docs/trien-khai-docker.md)
+> (`docker compose up -d --build`). Giấy tờ chờ duyệt: [`docs/chung-tu-cho-duyet.md`](docs/chung-tu-cho-duyet.md).
+>
 > **Sắp deploy?** [`docs/deploy.md`](docs/deploy.md) — danh sách làm theo từ trên
 > xuống, gồm cả bảng "còn thiếu gì, ai cung cấp".
 > **Cần gửi ảnh?** [`docs/anh-can-co.md`](docs/anh-can-co.md) — từng vị trí, tỉ lệ,
@@ -27,8 +32,12 @@ src/
   data/mocha.json            thông tin pháp nhân, hotline, kênh bán
   i18n/ui.ts                 chuỗi giao diện + quy tắc đường dẫn theo ngôn ngữ
   layouts/                   BaseLayout (head, font, schema) + ProductLanding (ghép khối)
-  components/blocks/         Hero, Offer, Problem, Cards, Ingredients, Steps,
-                             Gallery, Testimonials, Order, Faq
+  components/flagship/       bản trình bày của mọi trang sản phẩm: FHero, FStage (sân
+                             khấu dùng chung trang chủ/dòng), FIngredients, FDocuments…
+  components/blocks/         khối dùng chung: Order, Faq, Gallery, Testimonials, Documents…
+  content/documents/         giấy tờ (phiếu công bố, kiểm nghiệm) — một file một giấy
+server/                      máy chủ Docker: /api/orders, /admin (nhập liệu), xuất bản
+db/pg/                       lược đồ Postgres (đơn hàng + nội dung + ảnh + tài khoản)
   lib/                       định dạng tiền/ngày, sinh JSON-LD
   styles/tokens.css          design tokens
 src/assets/images/           ảnh nguồn, được astro:assets xử lý thành AVIF/WebP nhiều kích thước
@@ -37,10 +46,8 @@ scripts/check-budget.mjs     cổng ngân sách trọng lượng, chạy trong C
 scripts/seo-report.mjs       223 phép đo SEO trên dist/, chạy trong CI
 scripts/check-assets.mjs     kiểm ảnh khớp đặc tả + sinh docs/anh-can-co.md
 src/data/_anh-can-co.json    đặc tả từng vị trí ảnh
-functions/api/orders.ts      nhận đơn, ghi vào Cloudflare D1
+functions/api/orders.ts      nhận đơn (handler chạy trong máy chủ Docker, ghi vào Postgres)
 functions/api/admin/orders.ts  đọc/cập nhật đơn, cần Bearer token
-functions/admin/index.ts     trang xem đơn cho nhân viên (/admin)
-migrations/0001_orders.sql   lược đồ cơ sở dữ liệu đơn hàng
 ```
 
 ## Thêm một sản phẩm mới

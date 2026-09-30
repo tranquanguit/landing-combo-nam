@@ -9,21 +9,37 @@
   "includes": [
     {
       "name": "Mocha Smart Brightening Cream X3",
-      "note": "night cream"
+      "note": "night cream",
+      "image": {
+        "src": "/images/hero-smart-brightening-cream.webp",
+        "alt": "Mocha Smart Brightening Cream X3 box and jar, with a Bio-Active Cleanser tube"
+      }
     },
     {
       "name": "Mocha Smart First Care Serum",
-      "note": "dark-spot serum, morning and night"
+      "note": "dark-spot serum, morning and night",
+      "image": {
+        "src": "/images/hero-smart-first-care-serum.webp",
+        "alt": "Open bottle of Mocha Smart First Care Serum with blue serum pouring out"
+      }
     }
   ],
   "gifts": [
     {
       "name": "Mocha UV-Block SPF50 sunscreen",
-      "note": "the step that protects your progress"
+      "note": "the step that protects your progress",
+      "image": {
+        "src": "/images/hero-uv-block-plus.webp",
+        "alt": "Tube of Mocha UV-Block Plus sunscreen, 2025 packaging marked SPF 50 PA++++"
+      }
     },
     {
       "name": "Mocha Bio-Active Cleanser",
-      "note": "gentle, pH 5.5"
+      "note": "gentle, pH 5.5",
+      "image": {
+        "src": "/images/hero-bio-active-cleanser-tube.webp",
+        "alt": "Bottle of Mocha Bio-Active Cleanser, pH 5.5"
+      }
     }
   ],
   "price": 1050000,
@@ -58,7 +74,7 @@
   "seo": {
     "title": "Mocha Dark Spot Duo – 4-butylresorcinol 1000ppm + Niacinamide 4%",
     "description": "Serum with 4-butylresorcinol 1000ppm and Niacinamide 4%, plus a cream with Tranexamic Acid and Bakuchiol. Only the percentages printed on the pack. {{price}}.",
-    "ogImage": "/images/packshot-combo.jpg"
+    "ogImage": "/images/og-combo-nam.jpg"
   },
   "compliance": {
     "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
@@ -99,8 +115,8 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-combo.webp",
-        "alt": "Mocha Smart Brightening Cream X3 jar beside the Smart First Care Serum bottle"
+        "src": "/images/hero-combo-nam.webp",
+        "alt": "Mocha Smart First Care Serum bottle and box beside Smart Brightening Cream X3 jar and box"
       },
       "primaryCta": "Order the duo",
       "secondaryCta": {
@@ -283,6 +299,13 @@
         "label": "See the price and order",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Documents",
+      "heading": "The paperwork behind this product",
+      "intro": "Scans of the original documents, sharp enough to read the reference numbers. Tap any document to see it in full."
     },
     {
       "type": "steps",

@@ -25,8 +25,26 @@ const pages=createServer((q,r)=>{let rel=decodeURIComponent(new URL(q.url,'http:
 await new Promise(r=>pages.listen(PORT,r));
 const b=await launchBrowser(chromium,{headless:true});
 console.log('\n══ Hiệu năng khung nhìn đầu — 390x844, mạng 4G mô phỏng ══\n');
+/* Mọi trang sản phẩm (tất cả dùng bản flagship từ 2026-09) + trang dòng nám +
+   trang chủ. Bản đầu chỉ đo 3 route, nên 11 trang sản phẩm còn lại không có
+   cổng nào gác LCP. Mỗi route đo RUNS lần, lấy TRUNG VỊ: một lần đo lạnh trên
+   4G mô phỏng dao động ±250ms (đo được khi dựng bản flagship), đủ để một cổng
+   một-lần-đo đổi màu mà mã không đổi gì. */
+const RUNS = Number(process.env.PERF_RUNS ?? 3);
+const productRoutes = readdirSync(join(ROOT, 'dist'), { withFileTypes: true })
+  .filter((d) => d.isDirectory() && existsSync(join(ROOT, 'dist', d.name, 'index.html'))
+    && readFileSync(join(ROOT, 'dist', d.name, 'index.html'), 'utf8').includes('id="dat-hang"'))
+  .map((d) => `/${d.name}/`).sort();
+const ROUTES = [...productRoutes, '/nam-tham/', '/'];
+const median = (xs) => { const a = [...xs].sort((x, y) => x - y); return a[Math.floor(a.length / 2)]; };
+/* Một lượt khởi động trình duyệt không tính: lượt đầu tiên của mọi phiên chậm
+   hơn hẳn các lượt sau vì bộ đệm biên dịch của trình duyệt còn trống. */
+{ const ctx = await b.newContext(); const pg = await ctx.newPage();
+  await pg.goto(`http://localhost:${PORT}/`, { waitUntil: 'load' }); await ctx.close(); }
 const results = [];
-for(const route of ['/combo-nam/','/nam-tham/','/']){
+for (const route of ROUTES) {
+  const samples = [];
+  for (let run = 0; run < RUNS; run++) {
   const ctx=await b.newContext({viewport:{width:390,height:844},deviceScaleFactor:2});
   const page=await ctx.newPage();
   const cdp=await ctx.newCDPSession(page);
@@ -47,9 +65,12 @@ for(const route of ['/combo-nam/','/nam-tham/','/']){
         docH:document.documentElement.scrollHeight});
     },900);
   }));
-  results.push({route, ...m});
-  console.log(`${route.padEnd(14)} LCP ${String(m.lcp+'ms').padStart(7)} · CLS ${String(m.cls).padStart(6)} · FCP ${String(m.fcp+'ms').padStart(6)} · ${m.imgs} ảnh · trang cao ${m.docH}px`);
+  samples.push(m);
   await ctx.close();
+  }
+  const m = { ...samples[0], lcp: median(samples.map((x) => x.lcp)), cls: Math.max(...samples.map((x) => x.cls)), fcp: median(samples.map((x) => x.fcp)) };
+  results.push({ route, ...m });
+  console.log(`${route.padEnd(30)} LCP ${String(m.lcp+'ms').padStart(7)} (${samples.map((x) => x.lcp).join('/')}) · CLS ${String(m.cls).padStart(6)} · FCP ${String(m.fcp+'ms').padStart(6)} · trang cao ${m.docH}px`);
 }
 
 await b.close(); pages.close();

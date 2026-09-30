@@ -9,21 +9,37 @@
   "includes": [
     {
       "name": "Mocha Smart Brightening Cream X3",
-      "note": "kem dưỡng sáng, dùng buổi tối"
+      "note": "kem dưỡng sáng, dùng buổi tối",
+      "image": {
+        "src": "/images/hero-smart-brightening-cream.webp",
+        "alt": "Hộp và hũ kem Mocha Smart Brightening Cream X3, kèm tuýp sữa rửa mặt Bio-Active Cleanser"
+      }
     },
     {
       "name": "Mocha Smart First Care Serum",
-      "note": "serum dark-spot control, dùng sáng và tối"
+      "note": "serum dark-spot control, dùng sáng và tối",
+      "image": {
+        "src": "/images/hero-smart-first-care-serum.webp",
+        "alt": "Chai serum Mocha Smart First Care Serum mở nắp, dòng serum xanh chảy xuống"
+      }
     }
   ],
   "gifts": [
     {
       "name": "Kem chống nắng Mocha UV-Block SPF50",
-      "note": "bước giữ kết quả, dùng mỗi sáng"
+      "note": "bước giữ kết quả, dùng mỗi sáng",
+      "image": {
+        "src": "/images/hero-uv-block-plus.webp",
+        "alt": "Tuýp kem chống nắng Mocha UV-Block Plus, bao bì 2025 in SPF 50 PA++++"
+      }
     },
     {
       "name": "Sữa rửa mặt Mocha Bio-Active Cleanser",
-      "note": "làm sạch dịu nhẹ, pH 5.5"
+      "note": "làm sạch dịu nhẹ, pH 5.5",
+      "image": {
+        "src": "/images/hero-bio-active-cleanser-tube.webp",
+        "alt": "Chai sữa rửa mặt Mocha Bio-Active Cleanser pH 5.5"
+      }
     }
   ],
   "price": 1050000,
@@ -58,7 +74,7 @@
   "seo": {
     "title": "Combo Nám Mocha – Kem & Serum chăm sóc da nám | Mocha Việt Nam",
     "description": "Serum 4-butylresorcinol 1000ppm, Niacinamide 4% + kem Tranexamic Acid, Bakuchiol. Nồng độ in trên bao bì. Không corticoid. {{price}}, freeship.",
-    "ogImage": "/images/packshot-combo.jpg"
+    "ogImage": "/images/og-combo-nam.jpg"
   },
   "compliance": {
     "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
@@ -98,8 +114,8 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-combo.webp",
-        "alt": "Hũ kem Mocha Smart Brightening Cream X3 và chai serum Mocha Smart First Care Serum"
+        "src": "/images/hero-combo-nam.webp",
+        "alt": "Hộp và chai serum Mocha Smart First Care Serum cạnh hộp và hũ kem Smart Brightening Cream X3"
       },
       "primaryCta": "Đặt combo",
       "secondaryCta": {
@@ -283,6 +299,13 @@
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Giấy tờ",
+      "heading": "Giấy tờ đi kèm sản phẩm",
+      "intro": "Bản chụp giấy tờ gốc, đủ rõ để đọc số hiệu. Bấm vào từng giấy để xem bản đầy đủ."
     },
     {
       "type": "steps",

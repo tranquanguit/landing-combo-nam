@@ -87,6 +87,16 @@ const PAIRS = [
   ['amber-edge', 'amber-note', 4.5, 'chữ trong ô cảnh báo vàng'],
   ['amber-ink', 'amber-note', 4.5, 'chữ đậm trong ô cảnh báo vàng'],
   ['verify', 'paper', 4.5, 'chấm xác minh trên nền giấy'],
+
+  // --- bản trình bày flagship ---
+  [WHITE, 'night', 4.5, 'flagship: chữ trên nền đêm'],
+  ['on-night-muted', 'night', 4.5, 'flagship: chữ phụ trên nền đêm'],
+  ['on-night-muted', 'night-2', 4.5, 'flagship: chữ phụ trên thẻ nền đêm'],
+  ['glow', 'night', 4.5, 'flagship: con số nồng độ trên nền đêm'],
+  ['glow', 'night-2', 4.5, 'flagship: con số nồng độ trên thẻ nền đêm'],
+  ['ink-navy', 'stage-b', 4.5, 'flagship: tiêu đề trên sân khấu, chỗ đậm nhất'],
+  ['ink-muted', 'stage-b', 4.5, 'flagship: chữ phụ trên sân khấu, chỗ đậm nhất'],
+  ['cobalt', 'stage-b', 4.5, 'flagship: con số trên sân khấu'],
 ];
 
 const fails = [];

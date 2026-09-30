@@ -1,0 +1,127 @@
+---
+/**
+ * Trang tổng giấy tờ và chứng nhận: /chung-nhan/, /en/certificates/.
+ *
+ * Mọi giấy đã xuất bản, nhóm theo sản phẩm áp dụng. Không nội dung biên tập
+ * nào ở đây ngoài hai câu giao diện — bản thân giấy tờ là nội dung.
+ */
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Analytics from '../components/Analytics.astro';
+import FDocuments from '../components/flagship/FDocuments.astro';
+import FSkin from '../components/flagship/FSkin.astro';
+import { breadcrumbNode, organizationNode } from '../lib/schema';
+import { resolveAssetImage, resolveAssetUrl } from '../lib/images';
+import { docsPath, homePath, productPath } from '../lib/routes';
+import { assertTranslated, htmlLang, t, type Locale } from '../i18n/ui';
+
+interface Props {
+  docs: any[];
+  products: Map<string, any>;
+  brand: any;
+  locale: Locale;
+  canonical: string;
+  alternates?: { locale: Locale; url: string }[];
+  nav?: { label: string; href: string }[];
+  policies?: { label: string; href: string }[];
+  pages?: { label: string; href: string }[];
+  fallbackOgImage?: string;
+}
+const { docs, products, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], fallbackOgImage } = Astro.props;
+const site = Astro.site?.origin ?? 'https://mochatrinam.com';
+assertTranslated(locale);
+
+const title = t(locale, 'docs.pageTitle');
+const lead = t(locale, 'docs.pageLead');
+const breadcrumb = [
+  { name: t(locale, 'nav.home'), url: new URL(homePath(locale), site).href },
+  { name: title, url: new URL(docsPath(locale), site).href },
+];
+const og = await resolveAssetImage(fallbackOgImage, site, 1200);
+const logoUrl = await resolveAssetUrl(b.logo, site, 512);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    organizationNode(b, site, locale, logoUrl),
+    { '@type': 'CollectionPage', '@id': `${canonical}#webpage`, url: canonical, name: title,
+      description: lead, inLanguage: htmlLang[locale], publisher: { '@id': `${site}/#organization` } },
+    breadcrumbNode(canonical, breadcrumb),
+    /* Trang danh mục khai ItemList khớp đúng số mục hiện trên trang. */
+    {
+      '@type': 'ItemList',
+      '@id': `${canonical}#list`,
+      numberOfItems: docs.length,
+      itemListElement: docs.map((d, i) => ({
+        '@type': 'ListItem', position: i + 1,
+        name: [d.title, d.subject, d.reference].filter(Boolean).join(' — '),
+      })),
+    },
+  ],
+};
+
+/* Nhóm theo tập sản phẩm áp dụng. Giấy dùng chung cho mọi sản phẩm đứng đầu. */
+const groups = new Map<string, { key: string; slugs: string[] | 'all'; docs: any[] }>();
+for (const d of docs) {
+  const key = d.appliesTo === 'all' ? 'all' : [...d.appliesTo].sort().join(',');
+  if (!groups.has(key)) groups.set(key, { key, slugs: d.appliesTo, docs: [] });
+  groups.get(key)!.docs.push(d);
+}
+const ordered = [...groups.values()].sort((a, b) => (a.key === 'all' ? -1 : b.key === 'all' ? 1 : a.key.localeCompare(b.key)));
+const nameOf = (slug: string) => products.get(slug)?.shortName ?? products.get(slug)?.name ?? slug;
+---
+<BaseLayout siteName={b.tradingName} locale={locale} title={`${title} | ${b.tradingName}`} description={lead}
+  canonical={canonical} ogImage={og?.url} ogImageWidth={og?.width} ogImageHeight={og?.height} ogImageAlt={title}
+  ogType="website" alternates={alternates} jsonLd={jsonLd}>
+  <SiteHeader brand={b} locale={locale} alternates={alternates} nav={nav} orderHref={homePath(locale)} />
+  <Breadcrumb items={breadcrumb} locale={locale} />
+  <FSkin />
+  <main id="main" class="fx-main">
+    <section class="head" aria-labelledby="docs-title">
+      <div class="wrap enter">
+        <p class="eb">{t(locale, 'docs.eyebrow')}</p>
+        <h1 id="docs-title">{title}</h1>
+        <p class="lead">{lead}</p>
+      </div>
+    </section>
+
+    {ordered.map((g, i) => (
+      <FDocuments docs={g.docs} locale={locale} id={`nhom-${i + 1}`} tone={i % 2 ? 'paper' : 'bone'}
+        eyebrow={t(locale, 'docs.forProduct')}
+        heading={g.slugs === 'all' ? t(locale, 'docs.allProducts') : g.slugs.map(nameOf).join(' · ')}
+        intro="" />
+    ))}
+
+    {ordered.some((g) => g.slugs !== 'all') && (
+      <section class="links" aria-label={t(locale, 'nav.products')}>
+        <div class="wrap">
+          <ul>
+            {[...new Set(ordered.flatMap((g) => (g.slugs === 'all' ? [] : g.slugs)))].filter((s) => products.has(s)).map((s) => (
+              <li><a href={productPath(s, locale)}>{nameOf(s)} →</a></li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )}
+  </main>
+  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} pages={pages} />
+  <Analytics locale={locale} />
+</BaseLayout>
+
+<style>
+  .head {
+    padding-block: clamp(48px, 7vw, 104px) clamp(32px, 4vw, 56px);
+    background: linear-gradient(180deg, var(--paper), var(--stage-a));
+  }
+  .eb { margin: 0 0 var(--s-4); font-size: var(--t-2xs); font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--cobalt); }
+  h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1; letter-spacing: -0.04em; margin: 0; max-width: 16ch; }
+  .lead { margin: var(--s-5) 0 0; max-width: 60ch; font-size: var(--t-md); line-height: 1.6; color: var(--ink-muted); }
+  .links { padding-block: var(--s-7); background: var(--paper); }
+  .links ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s-3); }
+  .links a {
+    display: inline-flex; min-height: 44px; align-items: center; padding: 0 18px; border-radius: 999px;
+    border: 1px solid var(--line-strong); color: var(--ink-navy); font-weight: 600; font-size: var(--t-sm); text-decoration: none;
+  }
+  .links a:hover { background: var(--ink-navy); color: #fff; border-color: var(--ink-navy); }
+</style>

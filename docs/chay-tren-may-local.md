@@ -25,7 +25,7 @@ npm ci
 ```
 
 `npm ci` **không** tải sẵn trình duyệt cho Playwright — package.json không có
-`postinstall`. Hai bộ thử chạy trong trình duyệt thật (`test:order`, `test:admin`)
+`postinstall`. Các bộ thử chạy trong trình duyệt thật (`test:order`, `test:inp`)
 và công cụ chụp màn hình cần thêm một lần:
 
 ```bash
@@ -56,9 +56,9 @@ Trên Windows PowerShell:
 $env:PUBLIC_ORDER_ENDPOINT="/api/orders"; npm run dev
 ```
 
-Biểu mẫu sẽ hiện nhưng bấm gửi sẽ lỗi — endpoint thật chỉ sống trên Cloudflare
-Pages. Muốn thử cả đường gửi đơn ngay trên máy, xem `docs/co-so-du-lieu.md`
-(`npx wrangler pages dev dist --d1 DB=mocha-orders`).
+Biểu mẫu sẽ hiện nhưng bấm gửi sẽ lỗi — `astro dev` không có máy chủ nhận đơn.
+Muốn thử cả đường gửi đơn và trang `/admin` trên máy (không cần cài Postgres),
+chạy máy chủ thật với PGlite — xem [`nhap-lieu.md`](nhap-lieu.md), mục cuối.
 
 ## 4. Bộ kiểm trước khi commit
 
@@ -67,7 +67,7 @@ npm run check           # 0 lỗi kiểu
 npm run test:guards     # hàng rào nội dung: tiền, tuyên bố cấm, dữ liệu cá nhân…
 PUBLIC_ORDER_ENDPOINT=/api/orders npm run build
 npm run test:seo        # 299 phép đo SEO trên chính bản build
-npm run test:orders-api # 20 kịch bản API đơn hàng (SQLite thật)
+npm run test:orders-api # 20 kịch bản API đơn hàng (Postgres/PGlite)
 npm run check:assets    # ảnh có khớp đặc tả không
 ```
 

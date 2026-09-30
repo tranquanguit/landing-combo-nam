@@ -1,0 +1,122 @@
+---
+import FSection from './FSection.astro';
+import { richText } from '../../lib/richtext';
+interface Props { data: any; id?: string; role?: string; transition?: string; cta?: any; }
+const { data, id, role, transition, cta } = Astro.props;
+const { max, items } = data;
+const ticks = [...new Set([0, Math.round(max / 4), Math.round(max / 2), Math.round((max * 3) / 4), max])];
+const pct = (n: number) => (n / max) * 100;
+const shades = ['var(--cobalt)', 'var(--cobalt-lift)', 'var(--bar-late)'];
+---
+<FSection id={id} tone="paper" role={role} transition={transition} cta={cta}
+  eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} head="split">
+  <figure class="tl" data-reveal>
+    {/* Lớp nhìn, trình đọc màn hình bỏ qua: mọi con số có ở danh sách bên dưới. */}
+    <div class="chart" aria-hidden="true">
+      <div class="axis">
+        {ticks.map((tk) => (
+          <span style={`left:${pct(tk)}%`} data-edge={tk === 0 ? 'start' : tk === max ? 'end' : undefined}>
+            <b class="figure">{tk}</b>
+          </span>
+        ))}
+      </div>
+      {items.map((it: any, i: number) => (
+        <div class="row">
+          <span class="name">{it.label}</span>
+          <span class="track">
+            {ticks.slice(1, -1).map((tk) => <i style={`left:${pct(tk)}%`}></i>)}
+            <span class="bar" style={`left:${pct(it.from)}%;width:${pct(it.to - it.from)}%;--c:${shades[i % shades.length]};--d:${i * 140}ms`}>
+              <em class="figure">{it.from}–{it.to}</em>
+            </span>
+          </span>
+        </div>
+      ))}
+      <p class="unit">{data.unitLabel} →</p>
+    </div>
+
+    <figcaption>
+      <dl class="data">
+        {items.map((it: any) => (
+          <div>
+            <dt>{it.label}</dt>
+            <dd>
+              <b class="figure">{it.from}–{it.to} <small>{data.unitLabel}</small></b>
+              {it.note && <span>{it.note}</span>}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </figcaption>
+  </figure>
+
+  {data.footnote && <p class="foot" set:html={richText(data.footnote)} />}
+</FSection>
+
+<style>
+  .tl { margin: 0; }
+  .chart {
+    padding: clamp(24px, 3vw, 40px);
+    border-radius: 24px;
+    background: linear-gradient(180deg, var(--stage-a), #fff);
+    border: 1px solid var(--line);
+  }
+  .axis { position: relative; height: 28px; margin-left: var(--name-w); }
+  .axis span { position: absolute; top: 0; transform: translateX(-50%); }
+  .axis span[data-edge="start"] { transform: none; }
+  .axis span[data-edge="end"] { transform: translateX(-100%); }
+  .axis b { font-size: var(--t-sm); font-weight: 600; color: var(--slate); }
+
+  .chart { --name-w: 0px; }
+  @media (min-width: 760px) { .chart { --name-w: 220px; } }
+  .row { display: grid; gap: var(--s-2); margin-top: var(--s-4); }
+  @media (min-width: 760px) { .row { grid-template-columns: var(--name-w) 1fr; align-items: center; gap: 0; } }
+  .name { font-weight: 600; font-size: var(--t-sm); color: var(--ink-navy); }
+  .track {
+    position: relative; height: 48px;
+    border-radius: 999px;
+    background: var(--bone);
+  }
+  .track i { position: absolute; top: 8px; bottom: 8px; width: 1px; background: var(--line-strong); opacity: .6; }
+  .bar {
+    position: absolute; top: 0; bottom: 0;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 999px;
+    background: var(--c);
+    box-shadow: 0 10px 24px -10px rgba(43, 52, 184, .7);
+    transform-origin: left center;
+  }
+  .bar em { font-style: normal; font-weight: 600; font-size: var(--t-sm); color: #fff; white-space: nowrap; }
+  .unit { margin: var(--s-3) 0 0; text-align: right; font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--slate); }
+
+  /* Dải chạy từ mốc bắt đầu ra mốc kết thúc khi khối vào khung nhìn. Chỉ
+     `transform`, và chỉ khi JS đã gắn lớp reveal — không JS thì dải đứng yên
+     ở đúng vị trí. */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(html.reveal-ready) .tl .bar { transform: scaleX(0); }
+    :global(html.reveal-ready) .tl:global(.is-in) .bar {
+      transform: none;
+      transition: transform 1100ms var(--ease-out) calc(var(--d) + 200ms);
+    }
+    :global(html.reveal-ready) .tl .bar em { opacity: 0; }
+    :global(html.reveal-ready) .tl:global(.is-in) .bar em { opacity: 1; transition: opacity 400ms var(--ease) calc(var(--d) + 900ms); }
+  }
+
+  .data { margin: clamp(32px, 4vw, 48px) 0 0; display: grid; gap: var(--s-5); }
+  @media (min-width: 760px) { .data { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-6); } }
+  .data > div { padding-top: var(--s-4); border-top: 2px solid var(--ink-navy); }
+  .data dt { font-weight: 600; font-size: var(--t-sm); color: var(--ink-navy); }
+  .data dd { margin: var(--s-2) 0 0; display: grid; gap: var(--s-2); }
+  .data b { font-size: clamp(2rem, 3.4vw, 2.75rem); line-height: 1; color: var(--cobalt); font-weight: 600; letter-spacing: -0.02em; }
+  .data b small { font-family: var(--font-body); font-size: var(--t-sm); color: var(--ink-muted); letter-spacing: 0; }
+  .data span { font-size: var(--t-sm); color: var(--ink-muted); line-height: 1.6; }
+
+  .foot {
+    margin: clamp(32px, 4vw, 48px) 0 0;
+    padding: var(--s-4) var(--s-5);
+    border-radius: 16px;
+    background: var(--amber-note);
+    color: var(--amber-ink);
+    font-size: var(--t-sm); line-height: 1.6;
+    max-width: 72ch;
+  }
+</style>

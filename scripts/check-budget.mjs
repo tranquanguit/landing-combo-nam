@@ -49,7 +49,8 @@ const HEAVY_MEDIA = /\.(mp4|webm|mov|m4v|mp3|wav|ogg)$/i;
 const IMAGE = /\.(avif|webp|jpg|jpeg|png|gif|svg)$/i;
 const FONT = /\.(woff2|woff|ttf|otf|eot)$/i;
 
-const dist = 'dist';
+/* DIST_DIR: máy chủ Docker kiểm bản vừa xuất bản ở builds/<số> (server/lib/publish.ts). */
+const dist = process.env.DIST_DIR ?? 'dist';
 const SITE_ORIGIN = 'https://mochatrinam.com';
 const fail = [];
 const ok = [];
@@ -119,7 +120,11 @@ const sizeOf = (f) => statSync(f).size;
 const byName = new Map();
 for (const f of files) byName.set(f.split('/').pop(), f);
 for (const f of htmls) {
-  const html = readFileSync(f, 'utf8');
+  /* Ảnh `data-on-demand` nằm trong khung xem giấy tờ (popover đang ẩn): trình
+     duyệt không tải ảnh lazy trong phần tử bị ẩn, nên nó KHÔNG thuộc lượt tải
+     đầu — chỉ tải khi người đọc bấm mở giấy. Bỏ các thẻ đó trước khi đếm. Chỉ
+     áp cho thẻ <img> mang đúng thuộc tính này; mọi ảnh khác vẫn bị tính. */
+  const html = readFileSync(f, 'utf8').replace(/<img\b[^>]*\bdata-on-demand\b[^>]*>/gi, '');
   // Mọi tên file asset xuất hiện trong HTML (src, srcset, href, url()).
   const referenced = new Set(
     [...html.matchAll(/[\w./-]*\/_astro\/([\w.-]+\.(?:avif|webp|jpg|jpeg|png|gif|svg|woff2|woff|css))/g)]

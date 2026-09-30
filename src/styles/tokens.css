@@ -80,11 +80,14 @@
   --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
   --s-9: 96px; --s-10: 144px;
 
-  /* Bo góc gần như phẳng: tờ đặc tả không có góc tròn. */
-  --r-input: 2px;
-  --r-card: 3px;
-  --r-media: 2px;
-  --r-btn: 2px;
+  /* Bo góc. Bản đầu gần như phẳng (2–3px) theo ý "tờ đặc tả không có góc
+     tròn"; bản flagship (2026-09) chuyển sang nút tròn và thẻ bo mềm — đo bằng
+     mắt trên ảnh chụp, đó là thứ tách trang khỏi cảm giác "biểu mẫu hành chính".
+     Áp cho toàn site để trang chủ, trang dòng và trang sản phẩm cùng một ngôn ngữ. */
+  --r-input: 12px;
+  --r-card: 18px;
+  --r-media: 18px;
+  --r-btn: 999px;
 
   /* Một cấp bóng duy nhất, chỉ dùng cho thẻ nổi thật sự (form đặt hàng). */
   --shadow-1: none;
@@ -107,6 +110,17 @@
      Đổi font chữ thì phải đo lại, vì tỉ lệ 1,36 là của riêng font này. */
   --measure-prose: 51ch;
   --header-h: 60px;
+
+  /* --- bản trình bày flagship (`presentation: "flagship"`) ---
+     Nền đêm sâu hơn --ink-navy một bậc: bảng hoạt chất là khối duy nhất nằm
+     trên nó, nên nó phải đọc là "một căn phòng khác", không phải một dải
+     navy nữa bên cạnh khối đặt hàng. Tương phản do check-contrast.mjs canh. */
+  --night: #0c0e2e;
+  --night-2: #161a4d;        /* thẻ nổi trên nền đêm */
+  --on-night-muted: #b4b9e2; /* chữ phụ trên nền đêm */
+  --glow: #8f98ff;           /* con số nồng độ trên nền đêm */
+  --stage-a: #f2f3fd;        /* sân khấu sản phẩm: sáng -> */
+  --stage-b: #dfe3fa;        /* -> xanh bao bì rất nhạt */
 }
 
 *, *::before, *::after { box-sizing: border-box; }

@@ -106,8 +106,8 @@
         }
       ],
       "image": {
-        "src": "/images/packshot-brightening-cream.webp",
-        "alt": "Box and jar of Mocha Smart Brightening Cream X3 next to a tube of Bio-Active Cleanser"
+        "src": "/images/hero-smart-brightening-cream.webp",
+        "alt": "Mocha Smart Brightening Cream X3 box and jar"
       },
       "primaryCta": "Order the cream",
       "secondaryCta": {
@@ -255,6 +255,13 @@
         "label": "See the price and order",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Documents",
+      "heading": "The paperwork behind this product",
+      "intro": "Scans of the original documents, sharp enough to read the reference numbers. Tap any document to see it in full."
     },
     {
       "type": "routine",

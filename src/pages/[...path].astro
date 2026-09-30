@@ -7,7 +7,9 @@ import LinePage from '../layouts/LinePage.astro';
 import ArticlePage from '../layouts/ArticlePage.astro';
 import AdviceIndex from '../layouts/AdviceIndex.astro';
 import PolicyPage from '../layouts/PolicyPage.astro';
-import { allRoutes, alternatesFor, policyPath, siteNav, type Route } from '../lib/routes';
+import DocsPage from '../layouts/DocsPage.astro';
+import { docsFor } from '../lib/documents';
+import { allRoutes, alternatesFor, docsPath, policyPath, siteNav, type Route } from '../lib/routes';
 import { t, type Locale } from '../i18n/ui';
 
 /**
@@ -115,12 +117,15 @@ const data = entry?.data;
 /* Gom dữ liệu liên quan tại đây, không để từng layout tự đi hỏi collection:
    liên kết nội bộ là thứ quyết định phần lớn giá trị SEO của một site nhiều
    trang, nên nó phải sinh từ quan hệ dữ liệu ở một chỗ duy nhất. */
-const [allProducts, allLines, allArticles, allPolicies] = await Promise.all([
+const [allProducts, allLines, allArticles, allPolicies, allDocuments] = await Promise.all([
   getCollection('products', ({ data: d }) => d.status === 'published' && d.locale === locale),
   getCollection('lines', ({ data: d }) => d.status === 'published' && d.locale === locale),
   getCollection('articles', ({ data: d }) => d.status === 'published' && d.locale === locale),
   getCollection('policies', ({ data: d }) => d.status === 'published' && d.locale === locale),
+  getCollection('documents'),
 ]);
+/* Giấy tờ không theo ngôn ngữ: số hiệu và tên giấy là dữ kiện pháp lý. */
+const publishedDocs = docsFor(allDocuments as any[]);
 
 /* Thẻ sản phẩm cần ảnh và một dòng mô tả ngắn. Cả hai đã có sẵn trong khối hero
    của chính sản phẩm — lấy từ đó thay vì bắt người biên tập khai lại, vì khai
@@ -129,8 +134,12 @@ const cardOf = (d: any) => {
   const hero = d.blocks.find((x: any) => x.type === 'hero');
   return {
     ...d,
-    image: d.seo.ogImage ?? hero?.image?.src,
+    /* Ảnh nền trắng của hero trước, ảnh chia sẻ sau: og:image là JPG khổ ngang
+       dành cho Zalo/Facebook, đặt vào thẻ vuông thì bị cắt. */
+    image: hero?.image?.src ?? d.seo.ogImage,
     imageAlt: hero?.image?.alt ?? d.name,
+    /* Ảnh hero dạng đối tượng (src + alt), cho sân khấu của trang chủ/trang dòng. */
+    heroImage: hero?.image,
     tagline: hero?.eyebrow,
   };
 };
@@ -189,9 +198,13 @@ const policies = allPolicies
   .map((x) => ({ label: x.data.title, href: policyPath(x.data.slug, locale) }));
 
 /** Trang đứng ở gốc. Chúng đi vào một cột riêng ở chân trang, không lẫn vào chính sách. */
-const topPages = allPolicies
-  .filter((x) => x.data.topLevel)
-  .map((x) => ({ label: x.data.title, href: policyPath(x.data.slug, locale, true) }));
+const topPages = [
+  ...allPolicies
+    .filter((x) => x.data.topLevel)
+    .map((x) => ({ label: x.data.title, href: policyPath(x.data.slug, locale, true) })),
+  /* Trang chứng nhận chỉ có khi có giấy đã xuất bản — cùng điều kiện với allRoutes(). */
+  ...(publishedDocs.length ? [{ label: t(locale, 'nav.docs'), href: docsPath(locale) }] : []),
+];
 
 const articlesSorted = allArticles
   .map((a) => a.data)
@@ -209,6 +222,8 @@ const articlesSorted = allArticles
     alternates={alternates}
     lines={pick<any>(data.lines, lineBySlug)}
     featured={pick<any>(data.featured, productBySlug)}
+    products={[...productBySlug.values()]}
+    docs={publishedDocs}
     articles={pick<any>(data.articles, articleBySlug)}
   />
 )}
@@ -241,6 +256,7 @@ const articlesSorted = allArticles
     alternates={alternates}
     articles={pick<any>(data.relatedArticles, articleBySlug)}
     productCards={productBySlug}
+    documents={docsFor(allDocuments as any[], data.slug)}
   />
 )}
 
@@ -273,6 +289,21 @@ const articlesSorted = allArticles
     articles={articlesSorted}
     sections={guideEntry?.data.sections ?? []}
     faq={guideEntry?.data.faq ?? []}
+  />
+)}
+
+{route.kind === 'docs' && (
+  <DocsPage
+    nav={nav}
+    policies={policies}
+    pages={topPages}
+    fallbackOgImage={fallbackOgImage}
+    docs={publishedDocs}
+    products={productBySlug}
+    brand={brand.data}
+    locale={locale}
+    canonical={canonical}
+    alternates={alternates}
   />
 )}
 

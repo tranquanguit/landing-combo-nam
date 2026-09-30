@@ -211,8 +211,8 @@ fail được thì không phải là cổng.
 
 ## 3. Dữ liệu đi về đâu
 
-Trang là file tĩnh trên CDN. Nhưng đơn hàng thì phải nằm ở đâu đó — và nó nằm
-trong **Cloudflare D1**, một cơ sở dữ liệu SQLite chạy ngay cạnh trang.
+Trang là file tĩnh. Đơn hàng, nội dung và ảnh nằm trong **PostgreSQL** trên
+cùng máy chủ Docker (xem [`trien-khai-docker.md`](trien-khai-docker.md)).
 
 ```
 Biểu mẫu #order-form
@@ -221,10 +221,10 @@ Biểu mẫu #order-form
 POST /api/orders            functions/api/orders.ts
    │  kiểm tra → chống bấm hai lần → ghi
    ▼
-D1 (SQLite)  bảng orders    migrations/0001_orders.sql
+Postgres  bảng orders       db/pg/0001_orders.sql
    ▲
    │  Bearer token
-/admin  ←  GET/PATCH /api/admin/orders
+/admin/orders (đăng nhập)  ·  /api/admin/orders (Bearer token, CSV)
 ```
 
 ### 3.1 Vì sao cùng tên miền, không phải dịch vụ ngoài
@@ -260,10 +260,10 @@ Mỗi dòng dưới đây là một phép thử chạy trong CI, không phải m
 
 - Không tick ô đồng ý → **không có dòng nào vào cơ sở dữ liệu** (và `CHECK
   (data_consent = 1)` chặn lần thứ hai ngay ở cấp bảng, kể cả khi có ai ghi
-  thẳng vào D1 sau này)
+  thẳng vào CSDL sau này)
 - Bấm nút hai lần → **một đơn**, trả lại cùng mã đơn
 - Phản hồi lỗi **không mang tên, số điện thoại hay địa chỉ** khách vừa gõ — log
-  của Cloudflare không phải nơi dữ liệu cá nhân đi qua
+  của máy chủ không phải nơi dữ liệu cá nhân đi qua
 - Website khác POST vào `/api/orders` → **403**
 - Chèn SQL trong tên khách → lưu nguyên văn thành một chuỗi, bảng còn nguyên
 - Gửi dồn dập từ một IP → **429**
@@ -311,7 +311,7 @@ file sang `src/assets/` và bật khối.
   sau khi giao xong (đề xuất 24 tháng cho nghĩa vụ kế toán), rồi thêm một
   Routine xoá theo lịch.
 - **Quyền xoá của khách.** Câu đồng ý đã hứa "có thể yêu cầu xoá bất cứ lúc
-  nào". Hiện phải xoá tay bằng `wrangler d1 execute`; nên có nút trên `/admin`.
+  nào". Hiện xoá bằng `psql` (xem `co-so-du-lieu.md`); nên có nút trên `/admin`.
 
 ## 4. Cổng lúc build: điều gì không thể lọt qua
 
@@ -361,33 +361,15 @@ hoàn toàn **không có hàng rào nào** suốt mười hai vòng đọc mã �
 
 ## 5. Triển khai
 
-Trang là file tĩnh; `functions/` chạy trên Cloudflare Pages Functions và cần D1.
+Ubuntu + Docker: container `app` (Node — file tĩnh, `/api/orders`, `/admin`) và `db`
+(Postgres 17), tuỳ chọn `caddy` cho HTTPS. Handler đơn hàng là CHÍNH các file trong
+`functions/api/`, chạy qua bộ chuyển `d1()` trong `server/lib/db.ts`. Hướng dẫn đầy
+đủ: [`trien-khai-docker.md`](trien-khai-docker.md). Kiểm cả chuỗi bằng một lệnh:
+`npm run verify:docker`.
 
-```bash
-# một lần, lúc dựng
-npx wrangler d1 create mocha-orders           # dán database_id vào wrangler.toml
-npm run db:migrate                            # tạo bảng orders + rate_limit
-npx wrangler pages secret put ADMIN_TOKEN     # chuỗi ngẫu nhiên >= 32 ký tự
-npx wrangler pages secret put IP_SALT         # chuỗi ngẫu nhiên, không đổi về sau
-
-# mỗi lần deploy
-PUBLIC_ORDER_ENDPOINT=/api/orders npm run build
-npx wrangler pages deploy dist
-```
-
-Chưa đặt `PUBLIC_ORDER_ENDPOINT` thì biểu mẫu **không render thẻ `<form>`** và
-hiện hotline thay thế — một đơn hàng rơi vào hư không tệ hơn nhiều so với một
-nút không hoạt động.
-
-`public/_headers` đi kèm bản build và **là file trong repo** — CSP, HSTS,
-`Permissions-Policy`, `X-Content-Type-Options`, cache bất biến cho tài nguyên
-có hash. Bảy vòng kiểm định trước ghi "nên bật CSP ở phía hosting" mà không ai
-bật được, vì không ai biết nó nằm ở đâu. Nay nó nằm ở đây.
-
-**Chưa chạy thử trên Cloudflare thật.** Toàn bộ phần máy chủ được kiểm bằng
-SQLite thật và trình duyệt thật trong Node, nhưng lần deploy đầu tiên lên
-Cloudflare vẫn cần đi lại một lượt đặt thử đơn — cấu hình binding và secret là
-thứ chỉ sai được ở đúng nơi đó.
+`public/_headers` là nơi DUY NHẤT khai CSP, HSTS, `Permissions-Policy`,
+`X-Content-Type-Options`, cache bất biến cho tài nguyên có hash — máy chủ Docker đọc
+lại đúng file này (`server/lib/static.ts`).
 
 ## 6. Chạy lại mọi con số trong tài liệu này
 
@@ -402,7 +384,7 @@ npm run test:seo       # 299 phép đo SEO trên bản build
 # không dựng lại kèm biến này thì mọi ô nhập đều disabled và bộ thử treo.
 PUBLIC_ORDER_ENDPOINT=http://localhost:8132/orders npm run build
 npm run test:order     # 9 kịch bản đặt hàng trong trình duyệt thật
-npm run test:orders-api # 20 kịch bản API đơn hàng trên SQLite thật
-npm run test:admin     # 9 kịch bản trang quản trị trong trình duyệt thật
+npm run test:orders-api # 20 kịch bản API đơn hàng trên Postgres (PGlite)
+npm run test:server    # máy chủ Docker: nội dung, /admin, file tĩnh, trên Postgres
 node scripts/check-budget.mjs
 ```

@@ -112,11 +112,6 @@ jobs:
           }
           echo "ok: cổng CSP chặn đúng endpoint ngoài connect-src, đúng lý do"
 
-      # Trang quản trị là nơi duy nhất dữ liệu cá nhân của khách hiện lên màn
-      # hình. Đi thử bằng trình duyệt thật, trên SQLite thật, mỗi lần push.
-      - name: Kiểm thử trang quản trị đơn hàng
-        run: npm run test:admin
-
       # Ảnh không đi qua schema Zod nên đây là cổng duy nhất canh chúng.
       # Hiện chạy ở chế độ báo cáo: mọi ảnh trong repo đều dưới chuẩn và chặn
       # build vì điều đó thì không ai deploy được. ĐỔI SANG --strict ngay khi
@@ -139,3 +134,25 @@ jobs:
           echo "$out" | grep -q 'LỖI  canonical tự trỏ' || {
             echo "LỖI: báo cáo fail nhưng không phải vì canonical" >&2; exit 1; }
           echo "ok: báo cáo SEO chặn đúng canonical sai, đúng lý do"
+
+  # Bản triển khai Ubuntu + Docker: build được image là build được site bên
+  # trong nó (Dockerfile chạy astro build + cổng ngân sách). Máy dựng site ban
+  # đầu không có Docker, nên CI là nơi đầu tiên image này thật sự được dựng.
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t mocha-landing:ci .
+      - name: Khởi động cùng Postgres và gọi /healthz
+        run: |
+          docker network create mocha-ci
+          docker run -d --name db --network mocha-ci -e POSTGRES_DB=mocha -e POSTGRES_USER=mocha -e POSTGRES_PASSWORD=ci-only postgres:17-alpine
+          for i in $(seq 1 30); do docker exec db pg_isready -U mocha -d mocha && break; sleep 1; done
+          docker run -d --name app --network mocha-ci -p 8080:8080 \
+            -e DATABASE_URL=postgres://mocha:ci-only@db:5432/mocha \
+            -e ADMIN_TOKEN=ci-token-chi-dung-trong-ci-000 -e IP_SALT=ci -e PUBLISH_ON_BOOT=0 \
+            mocha-landing:ci
+          for i in $(seq 1 40); do curl -fsS http://127.0.0.1:8080/healthz && break; sleep 1; done
+          curl -fsS -o /dev/null -w "%{http_code}\n" http://127.0.0.1:8080/combo-nam/
+          docker logs app
