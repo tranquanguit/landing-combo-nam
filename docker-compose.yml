@@ -42,6 +42,13 @@ services:
       TRUST_PROXY: "1"
       COOKIE_SECURE: ${COOKIE_SECURE:-1}
       PUBLISH_ON_BOOT: ${PUBLISH_ON_BOOT:-1}
+      # Chat: webhook n8n nhận JSON theo docs/chat/request.schema.json. Bỏ trống = chat
+      # trả lời "tạm nghỉ" kèm hotline/Zalo. CHAT_MOCK=1 = trả lời mẫu (xem giao diện).
+      N8N_WEBHOOK_URL: ${N8N_WEBHOOK_URL:-}
+      N8N_SHARED_SECRET: ${N8N_SHARED_SECRET:-}
+      N8N_TIMEOUT_MS: ${N8N_TIMEOUT_MS:-25000}
+      CHAT_MOCK: ${CHAT_MOCK:-0}
+      CHAT_RETENTION_DAYS: ${CHAT_RETENTION_DAYS:-90}
     # Chỉ nghe trên localhost của máy chủ: đi ra Internet qua Caddy (hoặc nginx có sẵn).
     ports:
       - "127.0.0.1:${APP_PORT:-8080}:8080"

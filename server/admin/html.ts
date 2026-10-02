@@ -31,6 +31,7 @@ export function page(title: string, body: string, user: User | null, status = 20
       <a href="/admin/content/articles">Bài viết</a>
       <a href="/admin/media">Ảnh</a>
       <a href="/admin/orders">Đơn hàng</a>
+      <a href="/admin/chats">Chat</a>
       <a href="/admin/publish">Xuất bản</a>
       ${user.role === 'admin' ? '<a href="/admin/users">Tài khoản</a>' : ''}
       <form method="post" action="/admin/logout" class="out"><span>${esc(user.username)}</span><button>Đăng xuất</button></form>
