@@ -88,6 +88,7 @@ export async function adminHandler(request: Request, ctx: AdminCtx): Promise<Res
   if (path === '/admin/media/raw') return mediaRaw(ctx, url);
   if (path === '/admin/media/delete' && request.method === 'POST') return deleteMedia(ctx, user, request);
   if (path === '/admin/publish') return request.method === 'POST' ? startPublish(ctx, user) : publishPage(ctx, user, url);
+  if (path === '/admin/chats') return chatsPage(ctx, user, url);
   if (path === '/admin/orders') return request.method === 'POST' ? updateOrder(ctx, request) : ordersPage(ctx, user, url);
   if (path === '/admin/users' && user.role === 'admin') return request.method === 'POST' ? saveUser(ctx, request) : usersPage(ctx, user, url);
   return page('Không có trang này', notice('err', 'Không có trang này.'), user, 404);
@@ -363,6 +364,42 @@ async function startPublish(ctx: AdminCtx, user: User) {
   if (!isPublishing()) publish(ctx.sql, ctx.root, user.username).catch(() => {});
   await new Promise((r) => setTimeout(r, 300));
   return redirect('/admin/publish');
+}
+
+// ---------------------------------------------------------------- chat
+/** Danh sách cuộc trò chuyện + xem lại từng cuộc. Chỉ chữ: ảnh khách gửi không được lưu. */
+async function chatsPage({ sql }: AdminCtx, user: User, url: URL) {
+  const sid = url.searchParams.get('s');
+  if (sid) {
+    const rows = (await sql.query<any>('SELECT role, text, payload, created_at, page_path, visitor_id FROM chat_messages WHERE session_id = $1 ORDER BY id', [sid])).rows;
+    return page('Chat', `
+      <h1>Cuộc trò chuyện <code>${esc(sid.slice(0, 8))}</code></h1>
+      <p class="muted">Khách ${esc(rows[0]?.visitor_id ?? '')} · <a href="/admin/chats">← tất cả</a></p>
+      ${rows.map((r) => {
+        const extra = r.role === 'user'
+          ? [r.payload?.images ? `${r.payload.images} ảnh (không lưu)` : '', r.payload?.event === 'quick_reply' ? 'nút gợi ý' : ''].filter(Boolean).join(' · ')
+          /* Mọi mẩu chữ đến từ n8n (nhãn nút, tên…) đều escape — trang quản trị không tin phản hồi của bot. */
+          : esc((r.payload?.messages ?? []).filter((m: any) => m.type !== 'text').map((m: any) =>
+              m.type === 'product' ? `thẻ: ${m.product?.name}` : m.type === 'products' ? `dải thẻ: ${(m.products ?? []).map((p: any) => p.name).join(', ')}` : m.type === 'link' ? `nút: ${m.label}` : m.type).join(' · '))
+            + (r.payload?.degraded ? ` · <b>${esc(r.payload.degraded)}</b>` : '');
+        return `<div class="card" style="margin-left:${r.role === 'user' ? '15%' : '0'};margin-right:${r.role === 'user' ? '0' : '15%'};background:${r.role === 'user' ? '#eef0fb' : '#fff'}">
+          <div class="muted">${r.role === 'user' ? 'Khách' : 'Bot'} · ${esc(fmt(r.created_at))} · ${esc(r.page_path ?? '')}</div>
+          <div style="white-space:pre-wrap">${esc(r.text ?? '')}</div>${extra ? `<div class="muted">${r.role === 'bot' ? extra /* đã escape ở trên */ : esc(extra)}</div>` : ''}</div>`;
+      }).join('') || notice('warn', 'Không có tin nào (có thể đã quá hạn lưu và bị xoá).')}`, user);
+  }
+  const rows = (await sql.query<any>(
+    `SELECT session_id, min(visitor_id) AS visitor_id, count(*)::int AS n, max(created_at) AS last_at, min(created_at) AS first_at,
+            (array_agg(text ORDER BY id) FILTER (WHERE role = 'user' AND text IS NOT NULL))[1] AS first_text,
+            bool_or(payload->>'degraded' IS NOT NULL) AS degraded
+       FROM chat_messages GROUP BY session_id ORDER BY max(created_at) DESC LIMIT 200`)).rows;
+  return page('Chat', `
+    <h1>Chat <span class="muted">(${rows.length} cuộc gần nhất)</span></h1>
+    <p class="muted">Lưu chữ ${esc(process.env.CHAT_RETENTION_DAYS ?? '90')} ngày, không lưu ảnh. Cột "Khách" là mã ẩn danh của trình duyệt (cookie), không phải danh tính.</p>
+    <table><tr><th>Lần cuối</th><th>Khách</th><th>Câu đầu tiên</th><th>Lượt</th><th></th></tr>
+    ${rows.map((r) => `<tr><td>${esc(fmt(r.last_at))}</td><td><code>${esc(String(r.visitor_id).slice(0, 10))}</code></td>
+      <td>${esc((r.first_text ?? '').slice(0, 120))}${r.degraded ? ' <span class="pill draft">có lỗi n8n</span>' : ''}</td><td>${r.n}</td>
+      <td><a href="/admin/chats?s=${encodeURIComponent(r.session_id)}">Xem</a></td></tr>`).join('')}
+    </table>`, user);
 }
 
 // ---------------------------------------------------------------- đơn hàng

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mochatrinam.com/schemas/chat/request-1.json",
+  "title": "Mocha chat — yêu cầu gửi tới n8n (v1)",
+  "description": "Máy chủ Mocha (POST /api/chat) gửi đúng JSON này tới N8N_WEBHOOK_URL cho MỖI tin nhắn của khách. Header kèm theo: X-Mocha-Token (khớp Header Auth của n8n), X-Mocha-Timestamp, X-Mocha-Signature = sha256=HMAC-SHA256(N8N_SHARED_SECRET, timestamp + '.' + body).",
+  "type": "object",
+  "required": ["version", "event", "messageId", "sessionId", "visitorId", "locale", "sentAt", "page", "message"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "const": "1.0" },
+    "event": {
+      "enum": ["message", "quick_reply"],
+      "description": "message = khách gõ/gửi ảnh; quick_reply = khách bấm một nút gợi ý (message.payload mang giá trị của nút)."
+    },
+    "messageId": { "type": "string", "format": "uuid", "description": "Do trình duyệt sinh. Gửi lại cùng messageId = cùng một tin (chống trùng khi mạng chập chờn)." },
+    "sessionId": { "type": "string", "format": "uuid", "description": "Một cuộc trò chuyện. Khách bấm 'Cuộc trò chuyện mới' thì đổi. Dùng làm khoá bộ nhớ hội thoại trong n8n." },
+    "visitorId": { "type": "string", "pattern": "^v_[A-Za-z0-9_-]{22}$", "description": "Khách ẩn danh, ổn định ~1 năm: cookie HttpOnly mocha_vid do máy chủ cấp. Cùng visitorId = cùng một trình duyệt/thiết bị." },
+    "ipHash": { "type": ["string", "null"], "pattern": "^[0-9a-f]{16}$", "description": "SHA-256(IP_SALT + IP) cắt 16 ký tự. Tín hiệu phụ (nhiều khách 4G có chung một IP). Không bao giờ có IP thô." },
+    "locale": { "enum": ["vi", "en"] },
+    "sentAt": { "type": "string", "format": "date-time" },
+    "page": {
+      "type": "object",
+      "required": ["path"],
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string", "description": "Trang khách đang xem, ví dụ /combo-nam/" },
+        "title": { "type": ["string", "null"] },
+        "product": {
+          "description": "Có khi khách đang ở trang một sản phẩm — máy chủ tự tra từ path.",
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/product" }]
+        },
+        "utm": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "source": { "type": "string" }, "medium": { "type": "string" }, "campaign": { "type": "string" },
+            "content": { "type": "string" }, "term": { "type": "string" }
+          }
+        }
+      }
+    },
+    "message": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "text": { "type": "string", "maxLength": 2000 },
+        "payload": { "type": "string", "maxLength": 200, "description": "Giá trị của nút gợi ý (event = quick_reply)." },
+        "images": {
+          "type": "array",
+          "maxItems": 3,
+          "description": "Ảnh khách gửi (ví dụ ảnh vùng da). Trình duyệt đã thu nhỏ (cạnh dài ≤ 1280px, JPEG). Máy chủ Mocha KHÔNG lưu ảnh — chỉ chuyển tiếp.",
+          "items": {
+            "type": "object",
+            "required": ["mime", "base64", "bytes"],
+            "additionalProperties": false,
+            "properties": {
+              "mime": { "enum": ["image/jpeg", "image/png", "image/webp"] },
+              "base64": { "type": "string", "description": "Nội dung ảnh, base64 (không có tiền tố data:)." },
+              "bytes": { "type": "integer", "maximum": 2097152 },
+              "width": { "type": "integer" },
+              "height": { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    "history": {
+      "type": "array",
+      "maxItems": 20,
+      "description": "Tối đa 20 lượt gần nhất của cuộc trò chuyện (chỉ chữ), để n8n không cần bộ nhớ riêng nếu chưa có.",
+      "items": {
+        "type": "object",
+        "required": ["role", "text"],
+        "additionalProperties": false,
+        "properties": { "role": { "enum": ["user", "bot"] }, "text": { "type": "string" } }
+      }
+    }
+  },
+  "$defs": {
+    "product": {
+      "type": "object",
+      "required": ["slug", "name", "price", "url"],
+      "properties": {
+        "slug": { "type": "string" }, "name": { "type": "string" }, "price": { "type": "integer" },
+        "priceText": { "type": "string" }, "url": { "type": "string" }
+      }
+    }
+  }
+}

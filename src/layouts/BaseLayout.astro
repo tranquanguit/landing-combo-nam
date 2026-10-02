@@ -2,6 +2,7 @@
 import '../styles/fonts.css';
 import '../styles/tokens.css';
 import { htmlLang, type Locale, localePath, t } from '../i18n/ui';
+import ChatWidget from '../components/ChatWidget.astro';
 import { withBase } from '../lib/base';
 import { safeJsonLd } from '../lib/richtext';
 
@@ -145,5 +146,6 @@ const {
     </script>
     <a class="sr-only skip-link" href="#main">{t(locale, 'nav.skip')}</a>
     <slot />
+    <ChatWidget locale={locale} />
   </body>
 </html>

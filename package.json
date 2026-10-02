@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "check": "astro check --minimumFailingSeverity error",
     "test:order": "node tests/order-endpoint.mjs",
-    "test:guards": "node --experimental-strip-types tests/money-guard.mjs && node --experimental-strip-types tests/claims-guard.mjs && node --experimental-strip-types tests/richtext.mjs && node --experimental-strip-types tests/personal-data.mjs && node --experimental-strip-types tests/pattern-lint.mjs && npm run test:schema && node --experimental-strip-types tests/ui-strings.mjs && npm run test:contrast && npm run test:budget && npm run test:brand && npm run test:offer && npm run test:ads && npm run test:narrative && npm run test:orders-api && npm run test:server",
+    "test:guards": "node --experimental-strip-types tests/money-guard.mjs && node --experimental-strip-types tests/claims-guard.mjs && node --experimental-strip-types tests/richtext.mjs && node --experimental-strip-types tests/personal-data.mjs && node --experimental-strip-types tests/pattern-lint.mjs && npm run test:schema && node --experimental-strip-types tests/ui-strings.mjs && npm run test:contrast && npm run test:budget && npm run test:brand && npm run test:offer && npm run test:ads && npm run test:narrative && npm run test:orders-api && npm run test:server && npm run test:chat",
     "docs:fields": "node --experimental-strip-types --import ./scripts/shim/register.mjs scripts/gen-field-docs.mjs",
     "test:schema": "node --experimental-strip-types --import ./scripts/shim/register.mjs tests/schema-gate.mjs",
     "test:budget": "node tests/budget-gate.mjs",
@@ -40,7 +40,8 @@
     "db": "node --experimental-strip-types --import ./scripts/shim/register.mjs server/cli.ts",
     "test:server": "node --experimental-strip-types --import ./scripts/shim/register.mjs tests/server-pg.mjs",
     "verify:docker": "docker compose -p mocha-verify --env-file deploy/verify.env -f docker-compose.yml -f deploy/verify.compose.yml up --build --abort-on-container-exit --exit-code-from verify",
-    "verify:docker:clean": "docker compose -p mocha-verify --env-file deploy/verify.env -f docker-compose.yml -f deploy/verify.compose.yml down -v"
+    "verify:docker:clean": "docker compose -p mocha-verify --env-file deploy/verify.env -f docker-compose.yml -f deploy/verify.compose.yml down -v",
+    "test:chat": "node --experimental-strip-types --import ./scripts/shim/register.mjs tests/chat.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

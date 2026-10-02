@@ -80,7 +80,7 @@ tiếng, KOC khi chưa có văn bản đồng ý cho **chính website này**.
 # PGlite: Postgres thật chạy trong tiến trình Node, lưu vào thư mục .data/
 DATABASE_URL=pglite:./.data/pg COOKIE_SECURE=0 PUBLISH_ON_BOOT=0 \
 ADMIN_BOOTSTRAP_USER=admin ADMIN_BOOTSTRAP_PASSWORD=mat-khau-thu-dai \
-ADMIN_TOKEN=token-thu-nghiem-dai-hon-24-ky-tu IP_SALT=thu npm run server
+ADMIN_TOKEN=token-thu-nghiem-dai-hon-24-ky-tu IP_SALT=thu CHAT_MOCK=1 npm run server
 # mở http://localhost:8080/admin/
 ```
 

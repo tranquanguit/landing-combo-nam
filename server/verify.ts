@@ -101,6 +101,20 @@ if (TOKEN) {
   const found = (list.orders ?? list.results ?? []).some((o: any) => o.order_code === order.orderCode);
   ok('đơn vừa đặt có trong Postgres', r.status === 200 && found, `${r.status}`);
 }
+// ---- chat (verify.env bật CHAT_MOCK=1; production có N8N_WEBHOOK_URL thì gọi n8n thật)
+r = await get('/chat-catalog.json');
+const cat = await r.json().catch(() => ({}));
+ok('GET /chat-catalog.json', r.status === 200 && (cat.products?.length ?? 0) >= 20, `${cat.products?.length ?? 0} sản phẩm`);
+r = await get('/api/chat', {
+  method: 'POST', headers: { 'content-type': 'application/json', origin: ORIGIN },
+  body: JSON.stringify({ messageId: crypto.randomUUID(), sessionId: crypto.randomUUID(), locale: 'vi', text: 'Giá combo nám bao nhiêu?', page: { path: '/combo-nam/' } }),
+});
+const reply = await r.json().catch(() => ({}));
+ok('POST /api/chat trả lời theo chuẩn JSON', r.status === 200 && Array.isArray(reply.messages) && reply.messages.length > 0,
+  `${r.status} ${reply.degraded ?? (reply.messages ?? []).map((m: any) => m.type).join(',')}`);
+ok('chat cấp mã khách ẩn danh (cookie HttpOnly)', /mocha_vid=v_[^;]+;.*HttpOnly/.test(r.headers.get('set-cookie') ?? ''));
+ok('bong bóng chat có trên trang', /class="mchat-fab"/.test(html));
+
 r = await get('/api/admin/orders');
 ok('API quản trị không có token -> 401', r.status === 401, String(r.status));
 

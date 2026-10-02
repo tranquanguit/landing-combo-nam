@@ -16,3 +16,15 @@ export function orderEndpoint(): string | null {
   if (import.meta.env.PUBLIC_BASE_PATH) return null;
   return '/api/orders';
 }
+
+/**
+ * Endpoint chat (server/lib/chat.ts). Cùng quy tắc với đơn hàng: mặc định
+ * `/api/chat` cùng miền; tắt khi khai `PUBLIC_CHAT_ENDPOINT=` hoặc ở bản xem thử
+ * đường dẫn con (không có máy chủ). Tắt thì bong bóng chat không render.
+ */
+export function chatEndpoint(): string | null {
+  const v = import.meta.env.PUBLIC_CHAT_ENDPOINT;
+  if (v !== undefined) return v || null;
+  if (import.meta.env.PUBLIC_BASE_PATH) return null;
+  return '/api/chat';
+}
