@@ -1,6 +1,17 @@
 # Chat ↔ n8n
 
-Bong bóng chat ở góc phải mọi trang. Mỗi tin khách gửi đi theo đường:
+Bong bóng chat ở góc phải mọi trang. Ai trả lời khách được chọn ở **`/admin/settings/chat`**
+(quyền admin), áp dụng ngay, không cần sửa `.env` hay khởi động lại:
+
+| Chế độ | Ai trả lời |
+|---|---|
+| **Kịch bản tư vấn** (mặc định khi chưa có n8n) | bộ kịch bản ở **`/admin/chat-rules`** — 39 kịch bản mẫu nạp sẵn, sửa/thêm/xoá trên trang quản trị |
+| **n8n** | webhook n8n; n8n lỗi/chậm/trả rỗng thì kịch bản trả lời thay (tắt được) |
+| **Tạm nghỉ** | mời khách gọi / nhắn Zalo |
+
+Số liệu và lịch sử chat để phân tích: [`chat-analytics.md`](chat-analytics.md).
+
+Ở chế độ n8n, mỗi tin khách gửi đi theo đường:
 
 ```
 Trình duyệt ── POST /api/chat ──▶ máy chủ Mocha ── POST N8N_WEBHOOK_URL ──▶ n8n
@@ -20,19 +31,44 @@ chủ → n8n) và [`chat/response.schema.json`](chat/response.schema.json) (n8n
 
 ## 1. Cấu hình
 
-Trong `.env` trên máy chủ:
+**Trên trang quản trị** — `/admin/settings/chat`: chế độ, Webhook URL, khoá chung (chỉ
+nhập, không bao giờ hiện lại đầy đủ; để trống = giữ khoá cũ), thời gian chờ, giới hạn
+nhịp, thời hạn lưu. Nút **"Thử kết nối n8n"** gửi một tin mẫu (có `"test": true`) và
+hiện thời gian phản hồi + kết quả đã chuẩn hoá — kiểm workflow trước khi bật cho khách.
+Cấu hình lưu ở bảng `app_settings` (khoá `chat`).
+
+**Biến môi trường** chỉ là giá trị khởi đầu cho máy chủ mới (trang quản trị được ưu tiên
+khi đã lưu):
 
 | Biến | Ý nghĩa |
 |---|---|
+| `CHAT_MODE` | `rules` \| `n8n` \| `off`; trống = `n8n` nếu có webhook, ngược lại `rules` |
 | `N8N_WEBHOOK_URL` | "Production URL" của node Webhook trong n8n |
 | `N8N_SHARED_SECRET` | khoá chung — `openssl rand -hex 32` |
 | `N8N_TIMEOUT_MS` | chờ n8n tối đa (mặc định 25000) |
-| `CHAT_MOCK` | `1` = chưa có n8n, máy chủ trả lời mẫu để xem giao diện |
 | `CHAT_RATE_MAX` | số tin tối đa / 10 phút, theo khách và theo IP (mặc định 30) |
 | `CHAT_RETENTION_DAYS` | số ngày giữ chữ hội thoại (mặc định 90) |
+| `CHAT_SESSION_RETENTION_DAYS` | số ngày giữ số liệu phiên, không chữ (mặc định 400) |
 
-Chưa đặt `N8N_WEBHOOK_URL` (và `CHAT_MOCK` ≠ 1): chat vẫn mở được, trả lời "tạm nghỉ"
-kèm nút gọi hotline / nhắn Zalo — khách không bao giờ bị bỏ lơ.
+Webhook phải là `https://` — riêng `http://` được nhận cho máy nội bộ (ví dụ
+`http://n8n:5678/...` khi n8n chạy cùng Docker network).
+
+## 1b. Kịch bản tư vấn
+
+`/admin/chat-rules` (biên tập viên dùng được): mỗi kịch bản gồm **cụm từ** khách hay gõ
+(so khớp **không dấu**, theo ranh giới từ), **giá trị nút gợi ý** nhận vào, điều kiện
+(ngôn ngữ, trang đang xem, khách gửi ảnh), **ưu tiên**, và **câu trả lời** viết đúng
+`response.schema.json` — nên kịch bản và n8n đi qua cùng một bộ kiểm tra. Ô **"Thử một
+câu"** cho biết câu đó khớp kịch bản nào và xem trước câu trả lời.
+
+Bộ mẫu (`db/seed/chat-rules.json`, nạp lần đầu máy chủ chạy) viết theo cách một chuyên
+viên chăm sóc khách hàng giỏi làm: **hỏi để phân loại trước khi gợi ý** (nám mảng / chân
+sâu / hỗn hợp; mụn đang sưng / thâm), nói thật mốc thời gian và giới hạn của mỹ phẩm,
+**an toàn đi trước bán hàng** (mang thai, kích ứng, sau laser, mụn nang → bác sĩ; ưu tiên
+cao hơn mọi kịch bản bán hàng), khách bức xúc → chuyển người ngay, và giá luôn đi bằng
+thẻ sản phẩm (lấy từ website). Trang quản trị **không cho lưu** kịch bản có từ cấm theo
+Nghị định 342/2025, số tiền viết tay, slug sản phẩm không có thật, hoặc JSON sai chuẩn;
+danh sách cảnh báo nút gợi ý chưa có kịch bản nào nhận.
 
 ## 2. Dựng workflow trong n8n
 
@@ -54,8 +90,12 @@ kèm nút gọi hotline / nhắn Zalo — khách không bao giờ bị bỏ lơ.
      can thiệp y khoa thì khuyên gặp bác sĩ da liễu (Nghị định 342/2025).
 4. **Respond to Webhook** — Respond With *JSON*, body đúng `response.schema.json`.
 
-Thời gian trả lời nên dưới 20 giây; quá `N8N_TIMEOUT_MS` thì khách nhận lời xin lỗi kèm
-hotline, và lượt đó được đánh dấu "có lỗi n8n" trong `/admin/chats`.
+Thời gian trả lời nên dưới 20 giây. Quá thời gian chờ, lỗi HTTP, hoặc toàn khối sai chuẩn:
+kịch bản trả lời thay (nếu bật "dự phòng"), không thì khách nhận lời xin lỗi kèm hotline;
+cả hai trường hợp đều được ghi là sự cố trong `/admin/chats`.
+
+Câu n8n không hiểu: trả thêm `"matched": false` trong phản hồi — lượt đó vào danh sách
+**"Câu chưa trả lời được"** ở `/admin/chats`, cùng chỗ với câu không kịch bản nào khớp.
 
 ## 3. Ví dụ
 
@@ -141,7 +181,8 @@ với một người cụ thể — việc đó nằm ở phía n8n/CRM, website
 ## 5. Dữ liệu và quyền riêng tư
 
 - Máy chủ lưu **chữ** của từng lượt (bảng `chat_messages`) để nhân viên xem ở
-  **`/admin/chats`**, tự xoá sau `CHAT_RETENTION_DAYS` ngày.
+  **`/admin/chats`**, tự xoá sau số ngày đặt ở `/admin/settings/chat` (mặc định 90). Mô
+  hình dữ liệu đầy đủ: [`chat-analytics.md`](chat-analytics.md).
 - **Ảnh khách gửi không được lưu** trên website — chỉ chuyển tiếp sang n8n; bảng chỉ ghi
   số ảnh. n8n giữ ảnh hay không là cấu hình phía n8n.
 - Khung chat ghi rõ: không gửi số CCCD, mật khẩu, số thẻ; ảnh chỉ dùng để tư vấn; kèm link
@@ -150,8 +191,10 @@ với một người cụ thể — việc đó nằm ở phía n8n/CRM, website
 ## 6. Kiểm thử
 
 ```bash
-npm run test:chat        # 34 phép thử: chuẩn JSON 2 chiều, chữ ký, định danh, chặn phản hồi độc, giới hạn nhịp
-npm run verify:docker    # có bước gọi /api/chat (CHAT_MOCK=1)
+npm run test:chat        # 93 phép thử: chuẩn JSON 2 chiều, chữ ký, định danh, chặn phản hồi độc, giới hạn nhịp,
+                         #   kịch bản mẫu (hàng rào + khớp), cấu hình admin > env, dự phòng, trang quản trị, phân tích, xuất dữ liệu
+npm run verify:docker    # có bước gọi /api/chat (CHAT_MODE=rules — kịch bản trả lời)
 ```
 
-Xem giao diện khi chưa có n8n: chạy máy chủ với `CHAT_MOCK=1` (xem `nhap-lieu.md`, mục cuối).
+Xem giao diện khi chưa có n8n: chạy máy chủ như `nhap-lieu.md` (mục cuối) — chế độ mặc
+định là kịch bản tư vấn.

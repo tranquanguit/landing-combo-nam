@@ -136,6 +136,17 @@ if (existsSync(join(ROOT, 'dist/combo-nam/index.html'))) {
   ok('không đi ra ngoài dist/ (path traversal)', r.status === 404 || r.status === 308, String(r.status));
 } else console.log('  (bỏ qua phần file tĩnh — chưa build)');
 
+// Driver `postgres` JSON.stringify lại tham số kiểu jsonb: `$1::jsonb` + chuỗi JSON = lưu thành chuỗi.
+// PGlite không mắc, nên bộ thử này không tự thấy — chặn bằng cách đọc mã (xem server/lib/db.ts).
+{
+  const { readdirSync, readFileSync: rf } = await import('node:fs');
+  const walk = (d) => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(join(d, e.name)) : e.name.endsWith('.ts') ? [join(d, e.name)] : []));
+  const hits = ['server', 'functions'].flatMap((d) => walk(join(ROOT, d)))
+    .flatMap((f) => rf(f, 'utf8').split('\n').map((l, i) => [f, i + 1, l]))
+    .filter(([, , l]) => /\$\d+::jsonb/.test(l)).map(([f, n]) => `${f.slice(ROOT.length + 1)}:${n}`);
+  ok('tham số jsonb luôn viết $n::text::jsonb', !hits.length, hits.join(', '));
+}
+
 await sql.close();
 console.log(`\n${pass}/${pass + fail.length} phép thử đạt.`);
 if (fail.length) process.exit(1);

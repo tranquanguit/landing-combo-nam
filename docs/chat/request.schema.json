@@ -64,6 +64,10 @@
         }
       }
     },
+    "test": {
+      "type": "boolean",
+      "description": "Chỉ có khi bấm \"Thử kết nối n8n\" ở /admin/settings/chat. Workflow nên trả lời như bình thường nhưng không ghi CRM / không gửi thông báo."
+    },
     "history": {
       "type": "array",
       "maxItems": 20,

@@ -7,7 +7,12 @@
  *
  * Cả hai trả về cùng một giao diện `query(text, params)` với tham số `$1..$n`.
  * PGlite là Postgres thật biên dịch sang WASM (cùng parser, cùng kiểu dữ liệu,
- * cùng ràng buộc), nên SQL qua được bộ thử là SQL chạy được trên máy chủ.
+ * cùng ràng buộc), nên SQL qua được bộ thử là SQL chạy được trên máy chủ — NHƯNG
+ * hai DRIVER chuyển tham số khác nhau. Bẫy đã gặp: driver `postgres` thấy tham số
+ * kiểu jsonb thì tự JSON.stringify thêm lần nữa, nên ép thẳng `::jsonb` một chuỗi JSON
+ * bị lưu thành chuỗi chứ không phải object (PGlite thì không). Luôn viết
+ * `$1::text::jsonb` (tests/server-pg.mjs chặn dạng kia); `npm run verify:docker`
+ * là bước chạy trên Postgres thật.
  */
 export interface Sql {
   query<T = Record<string, any>>(text: string, params?: unknown[]): Promise<{ rows: T[]; count: number }>;

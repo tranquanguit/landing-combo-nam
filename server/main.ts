@@ -15,6 +15,7 @@ import { join } from 'node:path';
 import { Readable } from 'node:stream';
 import { connect, migrate } from './lib/db.ts';
 import { bootstrapAdmin } from './lib/auth.ts';
+import { seedRules } from './lib/chat-rules.ts';
 import { importFromFiles } from './lib/content.ts';
 import { publish } from './lib/publish.ts';
 import { createApp } from './app.ts';
@@ -28,6 +29,7 @@ const log = (s: string) => console.log(`[mocha] ${s}`);
 const sql = await connect();
 await migrate(sql, join(ROOT, 'db/pg'), log);
 await bootstrapAdmin(sql, log);
+await seedRules(sql, ROOT, log);
 const n = (await sql.query<{ n: number }>('SELECT count(*)::int AS n FROM content_entries')).rows[0].n;
 if (n === 0) {
   const r = await importFromFiles(sql, ROOT, 'seed');

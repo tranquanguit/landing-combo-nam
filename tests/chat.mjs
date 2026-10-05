@@ -105,11 +105,11 @@ ok('n8n trả 500 -> cùng cách xử lý', j.degraded === 'upstream');
 n8nMode = 'ok'; n8nReply = { version: '1.0', messages: [{ type: 'link', label: 'x', url: 'javascript:void(0)' }] };
 ({ j } = await chat({ text: 'alo' }));
 ok('n8n trả toàn khối hỏng -> không để khách trống tay', j.degraded === 'empty_reply' && j.messages.length > 0);
-const off = createApp({ sql, root: ROOT, env: { IP_SALT: 'muoi' } });
+const off = createApp({ sql, root: ROOT, env: { IP_SALT: 'muoi', CHAT_MODE: 'off' } });
 const ro = await off(new Request(`${H}/api/chat`, { method: 'POST', headers: { 'content-type': 'application/json' },
   body: JSON.stringify({ messageId: uuid(), sessionId: uuid(), locale: 'vi', text: 'hi', page: { path: '/' } }) }));
 const jo = await ro.json();
-ok('chưa cấu hình N8N_WEBHOOK_URL -> "tạm nghỉ" + liên hệ', ro.status === 200 && jo.degraded === 'not_configured');
+ok('chế độ "tạm nghỉ" -> mời gọi / Zalo', ro.status === 200 && jo.degraded === 'off' && jo.messages.some((m) => /^tel:/.test(m.url ?? '')));
 
 // ---------------------------------------------------------------- 4. kiểm tra đầu vào
 const bad = async (body) => (await chat(body)).r.status;
@@ -128,6 +128,8 @@ ok('KHÔNG lưu IP thô', !JSON.stringify((await sql.query('SELECT * FROM chat_m
 let limited = 0;
 for (let i = 0; i < 25; i++) { const x = await chat({ text: `spam ${i}` }, { ip: '198.51.100.20', cookie: '' }); if (x.r.status === 429) limited++; }
 ok('gửi dồn dập theo IP bị chặn (429, kèm hotline)', limited > 0, `${limited}/25`);
+
+await import("./chat-rules.mjs").then((m) => m.run({ sql, ROOT, ok, catalog }));
 
 await sql.close();
 console.log(`\n${pass}/${pass + fail.length} phép thử đạt.`);

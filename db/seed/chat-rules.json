@@ -1,0 +1,1339 @@
+{
+  "_doc": "Bộ kịch bản tư vấn mẫu, nạp vào bảng chat_rules lần đầu máy chủ chạy (bảng trống). Sửa/thêm/xoá ở /admin/chat-rules. Nguyên tắc viết: hỏi để hiểu trước khi bán; nói thật giới hạn của mỹ phẩm; không hứa kết quả, không chẩn đoán; giá luôn đi bằng thẻ sản phẩm (lấy từ website), không viết số tiền; chuyển cho người khi khách bức xúc hoặc tình huống y khoa. Dữ kiện lấy từ FAQ trên trang sản phẩm.",
+  "rules": [
+    {
+      "name": "Chào hỏi",
+      "topic": "mo-dau",
+      "priority": 10,
+      "keywords": [
+        "chao",
+        "xin chao",
+        "hello",
+        "hi",
+        "alo",
+        "shop oi",
+        "ad oi",
+        "co ai khong",
+        "chao shop",
+        "tu van giup"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Chào bạn, mình là trợ lý tư vấn của Mocha. Để gợi ý đúng, bạn cho mình biết **bạn đang muốn chăm sóc vấn đề gì** của da nhé?"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Nám, sạm màu",
+            "payload": "issue_melasma"
+          },
+          {
+            "label": "Mụn, thâm sau mụn",
+            "payload": "issue_acne"
+          },
+          {
+            "label": "Da yếu, cần phục hồi",
+            "payload": "issue_recovery"
+          },
+          {
+            "label": "Chống nắng, làm sạch",
+            "payload": "issue_basics"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Nám — hỏi để phân loại",
+      "topic": "nam",
+      "priority": 60,
+      "keywords": [
+        "bi nam",
+        "da nam",
+        "nam da",
+        "da toi bi nam",
+        "nam ma",
+        "nam mang",
+        "vet nam",
+        "sam da",
+        "da sam",
+        "sam mau",
+        "bi sam",
+        "dom nau",
+        "tan nhang",
+        "nam sau sinh",
+        "melasma",
+        "nen bat dau tu dau"
+      ],
+      "payloads": [
+        "issue_melasma"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Mình hiểu, sạm nám là chuyện nhiều chị em gặp, nhất là sau sinh hoặc khi ra nắng nhiều. Nám không phải một loại, nên trước khi gợi ý sản phẩm mình hỏi bạn một câu:\n\n**Vùng sạm của bạn trông thế nào?**"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Mảng loang hai bên má, bờ rõ",
+            "payload": "melasma_epidermal"
+          },
+          {
+            "label": "Chấm nhỏ nâu xám, bờ nhoè",
+            "payload": "melasma_dermal"
+          },
+          {
+            "label": "Có cả hai",
+            "payload": "melasma_mixed"
+          },
+          {
+            "label": "Gửi ảnh để chuyên viên xem",
+            "payload": "send_photo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Nám mảng (biểu bì)",
+      "topic": "nam",
+      "priority": 70,
+      "payloads": [
+        "melasma_epidermal"
+      ],
+      "keywords": [
+        "nam mang bo ro",
+        "mang loang"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Mảng loang bờ rõ thường là **nám mảng** — sắc tố nằm ở lớp da ngoài, nên đây là nhóm chuyển biến sớm nhất. Mốc tham khảo là **4–8 tuần** dùng đều, với điều kiện chống nắng mỗi sáng. Đây là khoảng tham khảo, không phải cam kết: kết quả khác nhau tuỳ cơ địa."
+          },
+          {
+            "type": "text",
+            "text": "Nhiều khách bắt đầu bằng bộ kem + serum, vì serum đưa hoạt chất vào, kem khoá lại. Bộ có tặng kèm kem chống nắng và sữa rửa mặt:"
+          },
+          {
+            "type": "product",
+            "slug": "combo-nam",
+            "note": "Kem + serum, nồng độ hoạt chất in trên bao bì"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Cách dùng thế nào?",
+            "payload": "how_to_use"
+          },
+          {
+            "label": "Chỉ mua kem hoặc serum",
+            "payload": "compare"
+          },
+          {
+            "label": "Da tôi nhạy cảm",
+            "payload": "sensitive"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Nám chân sâu (trung bì)",
+      "topic": "nam",
+      "priority": 70,
+      "payloads": [
+        "melasma_dermal"
+      ],
+      "keywords": [
+        "nam chan sau",
+        "nam dom",
+        "cham nau xam"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Chấm nâu xám, bờ nhoè thường là **nám chân sâu** — sắc tố nằm sâu hơn nên cần kiên trì hơn: mốc tham khảo **8–12 tuần**, và chống nắng phải đều đặn. Mình nói thật để bạn không thất vọng giữa chừng: đây là nhóm đi chậm."
+          },
+          {
+            "type": "text",
+            "text": "Nếu vùng sạm lan nhanh, thay đổi hình dạng hoặc kèm ngứa, rát, bạn nên đi khám bác sĩ da liễu trước — đó là việc mỹ phẩm không thay được."
+          },
+          {
+            "type": "product",
+            "slug": "combo-nam",
+            "note": "Liệu trình hai bước, dùng sáng và tối"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Bao lâu thì thấy khác?",
+            "payload": "timeline"
+          },
+          {
+            "label": "Cách dùng thế nào?",
+            "payload": "how_to_use"
+          },
+          {
+            "label": "Gặp chuyên viên",
+            "payload": "handoff"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Nám hỗn hợp",
+      "topic": "nam",
+      "priority": 70,
+      "payloads": [
+        "melasma_mixed"
+      ],
+      "keywords": [
+        "nam hon hop"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Có cả vùng sẫm rõ lẫn vùng loang mờ thường là **nám hỗn hợp** — trường hợp hay gặp nhất ở phụ nữ sau 30 tuổi. Khoảng thời gian rộng nhất: **8–16 tuần**, và che nắng chặt tay hơn các nhóm khác."
+          },
+          {
+            "type": "product",
+            "slug": "combo-nam",
+            "note": "Kem + serum, kèm kem chống nắng SPF50 tặng"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Cách dùng thế nào?",
+            "payload": "how_to_use"
+          },
+          {
+            "label": "Gửi ảnh để chuyên viên xem",
+            "payload": "send_photo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Giá — đang ở trang sản phẩm",
+      "topic": "gia",
+      "priority": 55,
+      "keywords": [
+        "gia",
+        "bao nhieu",
+        "bao nhieu tien",
+        "gia bao nhieu",
+        "gia sao",
+        "nhieu tien",
+        "price",
+        "gia combo",
+        "bang gia"
+      ],
+      "payloads": [
+        "price"
+      ],
+      "path_prefix": "/",
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Giá trên website đã gồm **giao hàng miễn phí toàn quốc**, bạn thanh toán khi nhận hàng và được mở kiểm tra trước khi trả tiền."
+          },
+          {
+            "type": "product",
+            "slug": "{{page}}"
+          },
+          {
+            "type": "products",
+            "slugs": [
+              "combo-nam",
+              "smart-brightening-cream",
+              "smart-first-care-serum"
+            ]
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Khác nhau thế nào?",
+            "payload": "compare"
+          },
+          {
+            "label": "Đặt hàng ra sao?",
+            "payload": "order"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Combo hay mua lẻ",
+      "topic": "tu-van-chon",
+      "priority": 60,
+      "keywords": [
+        "khac nhau",
+        "khac gi",
+        "nen mua combo",
+        "mua le",
+        "chi mua kem",
+        "chi mua serum",
+        "kem hay serum",
+        "so sanh",
+        "dung kem mot minh"
+      ],
+      "payloads": [
+        "compare"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Nói ngắn gọn: **serum** là bước đưa hoạt chất vào, **kem** là bước khoá lại và giữ trên da suốt đêm.\n\n• Nếu bạn đã có một hũ kem dưỡng đang dùng tốt: thêm riêng serum là hợp lý, không cần bỏ thứ đang hiệu quả.\n• Dùng riêng kem vẫn là liệu trình hợp lệ, chỉ chậm hơn dùng đủ hai bước.\n• Bộ combo gồm cả hai, tặng thêm kem chống nắng và sữa rửa mặt — hai bước giữ kết quả."
+          },
+          {
+            "type": "products",
+            "slugs": [
+              "combo-nam",
+              "smart-first-care-serum",
+              "smart-brightening-cream"
+            ]
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Cách dùng thế nào?",
+            "payload": "how_to_use"
+          },
+          {
+            "label": "Đặt hàng ra sao?",
+            "payload": "order"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Cách dùng / thứ tự",
+      "topic": "cach-dung",
+      "priority": 55,
+      "keywords": [
+        "cach dung",
+        "dung the nao",
+        "dung sao",
+        "thu tu",
+        "buoc nao truoc",
+        "serum truoc",
+        "kem truoc",
+        "sang toi",
+        "lo trinh",
+        "how to use",
+        "huong dan su dung"
+      ],
+      "payloads": [
+        "how_to_use"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "**Buổi sáng:** sữa rửa mặt → serum (1–2 nhấn cho cả mặt) → kem (khoảng một đốt ngón tay trỏ, tránh vùng mắt) → **kem chống nắng — bắt buộc**.\n\n**Buổi tối:** tẩy trang (nếu có trang điểm/kem chống nắng) → sữa rửa mặt → serum → kem.\n\nSerum trước, kem sau: làm ngược thì lớp kem cản serum. Chu kỳ khuyến nghị **8–12 tuần liên tục**."
+          },
+          {
+            "type": "link",
+            "label": "Xem lộ trình sáng/tối chi tiết",
+            "url": "/combo-nam/#lo-trinh"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Da tôi nhạy cảm",
+            "payload": "sensitive"
+          },
+          {
+            "label": "Đặt hàng ra sao?",
+            "payload": "order"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Bao lâu thấy khác biệt",
+      "topic": "ky-vong",
+      "priority": 55,
+      "keywords": [
+        "bao lau",
+        "may tuan",
+        "bao lau thi",
+        "khi nao thay",
+        "co nhanh khong",
+        "bao lau het",
+        "hieu qua sau"
+      ],
+      "payloads": [
+        "timeline"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Tuỳ loại nám — đây là mốc **tham khảo**, không phải lời hứa:\n\n• Nám mảng: **4–8 tuần**\n• Nám chân sâu: **8–12 tuần**\n• Nám hỗn hợp: **8–16 tuần**\n\nThay đổi đến theo tuần, không theo ngày. Bỏ bước chống nắng buổi sáng thì mọi mốc trên đều không còn đúng."
+          },
+          {
+            "type": "link",
+            "label": "Xem bảng mốc thời gian",
+            "url": "/combo-nam/#moc-thoi-gian"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Nám của tôi thuộc loại nào?",
+            "payload": "issue_melasma"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Da nhạy cảm",
+      "topic": "an-toan",
+      "priority": 60,
+      "keywords": [
+        "da nhay cam",
+        "nhay cam",
+        "de kich ung",
+        "da mong",
+        "da yeu",
+        "co rat khong",
+        "chamm chich",
+        "cham chich",
+        "sensitive"
+      ],
+      "payloads": [
+        "sensitive"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Công thức kem nám dùng **Bakuchiol thay cho retinol**, không chứa corticoid, hydroquinone hay cồn khô. Dù vậy mình vẫn khuyên bạn **thử trước**: thoa một lượng nhỏ ở vùng cằm hoặc cổ, chờ 24 giờ. Không đỏ, không rát thì mới dùng toàn mặt."
+          },
+          {
+            "type": "text",
+            "text": "Da đang châm chích thì việc nên làm là **rút bớt bước**, không phải thêm bước."
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Cách dùng thế nào?",
+            "payload": "how_to_use"
+          },
+          {
+            "label": "Gặp chuyên viên",
+            "payload": "handoff"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Mang thai, cho con bú",
+      "topic": "an-toan",
+      "priority": 90,
+      "keywords": [
+        "mang thai",
+        "co thai",
+        "co bau",
+        "bau bi",
+        "dang bau",
+        "cho con bu",
+        "cho bu",
+        "sau sinh dung duoc",
+        "pregnant",
+        "breastfeeding"
+      ],
+      "payloads": [
+        "pregnancy"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Cảm ơn bạn đã hỏi trước — đây là câu hỏi đúng lúc. Kem nám không chứa retinoid, nhưng **khi đang mang thai hoặc cho con bú, bạn nên hỏi ý kiến bác sĩ trước khi dùng bất kỳ sản phẩm chăm sóc da nào**. Mình không muốn bạn tự quyết chỉ dựa trên một trang web."
+          },
+          {
+            "type": "text",
+            "text": "Riêng **bộ peel Retinol** thì không phù hợp trong giai đoạn này."
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Gặp chuyên viên",
+            "payload": "handoff"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Kích ứng, đỏ rát khi dùng",
+      "topic": "an-toan",
+      "priority": 95,
+      "keywords": [
+        "bi do",
+        "do rat",
+        "rat da",
+        "ngua",
+        "noi man",
+        "bi kich ung",
+        "kich ung",
+        "sung",
+        "bong troc",
+        "di ung",
+        "noi mun sau khi dung",
+        "bi rat"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Mình rất tiếc khi nghe vậy. Việc cần làm ngay: **ngưng dùng sản phẩm**, rửa mặt nhẹ bằng nước mát, không thoa thêm hoạt chất nào khác. Nếu rát kéo dài, sưng hoặc đau, bạn nên **đi khám bác sĩ da liễu**."
+          },
+          {
+            "type": "text",
+            "text": "Chuyên viên Mocha sẽ gọi lại để hỏi kỹ bạn đã dùng thế nào và hỗ trợ tiếp. Bạn gọi hoặc nhắn Zalo giúp mình nhé."
+          }
+        ],
+        "handoff": true
+      }
+    },
+    {
+      "name": "Dùng đủ chu kỳ mà chưa thấy khác",
+      "topic": "khieu-nai",
+      "priority": 80,
+      "keywords": [
+        "khong thay hieu qua",
+        "khong hieu qua",
+        "dung roi khong",
+        "chua thay gi",
+        "khong thay khac",
+        "dung mai khong",
+        "vo dung"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Mình hiểu cảm giác đó — bỏ thời gian và tiền mà chưa thấy khác thì ai cũng sốt ruột. Có ba điều mình muốn cùng bạn kiểm lại: **đã dùng đủ bao nhiêu tuần**, **thứ tự serum → kem có đúng không**, và **chống nắng có đều mỗi sáng không**."
+          },
+          {
+            "type": "text",
+            "text": "Nếu sau 8 tuần dùng đúng mà vẫn không cải thiện, tình trạng của bạn có thể cần can thiệp y khoa — gặp bác sĩ da liễu là lời khuyên thật lòng. Chuyên viên sẽ xem lại cùng bạn:"
+          }
+        ],
+        "handoff": true
+      }
+    },
+    {
+      "name": "Bức xúc, phàn nàn",
+      "topic": "khieu-nai",
+      "priority": 99,
+      "keywords": [
+        "lua dao",
+        "that vong",
+        "te qua",
+        "buc minh",
+        "phan nan",
+        "khieu nai",
+        "tra lai tien",
+        "hoan tien",
+        "hang gia",
+        "do lua",
+        "boc phot"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Mình xin lỗi vì trải nghiệm chưa tốt của bạn. Chuyện này cần một người thật xử lý ngay, không phải trợ lý tự động — chuyên viên Mocha sẽ nghe bạn kể và giải quyết trực tiếp. Bạn gọi hoặc nhắn Zalo giúp mình nhé."
+          }
+        ],
+        "handoff": true
+      }
+    },
+    {
+      "name": "Gặp chuyên viên",
+      "topic": "chuyen-tiep",
+      "priority": 98,
+      "keywords": [
+        "gap nguoi",
+        "nhan vien",
+        "chuyen vien",
+        "tu van vien",
+        "goi lai",
+        "goi cho toi",
+        "noi chuyen voi nguoi",
+        "so dien thoai",
+        "hotline",
+        "zalo"
+      ],
+      "payloads": [
+        "handoff"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Dạ, mình chuyển bạn sang chuyên viên tư vấn của Mocha. Bạn gọi hoặc nhắn Zalo **{{brand.phoneDisplay}}** — giờ làm việc chuyên viên trả lời ngay. Nếu muốn được gọi lại, bạn để lại số ở phần đặt hàng, chọn gói **\"Tôi cần tư vấn trước\"**."
+          }
+        ],
+        "handoff": true
+      }
+    },
+    {
+      "name": "Giao hàng, thanh toán",
+      "topic": "mua-hang",
+      "priority": 55,
+      "keywords": [
+        "giao hang",
+        "ship",
+        "phi ship",
+        "van chuyen",
+        "bao lau nhan",
+        "nhan hang",
+        "cod",
+        "thanh toan",
+        "tra tien",
+        "chuyen khoan",
+        "giao toi",
+        "freeship"
+      ],
+      "payloads": [
+        "shipping"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "• **Miễn phí vận chuyển toàn quốc**, nhận hàng sau **2–5 ngày** tuỳ khu vực.\n• **Thanh toán khi nhận hàng** (COD), được **mở kiểm tra** sản phẩm trước khi trả tiền.\n• Sau khi đặt, chuyên viên gọi xác nhận trong vòng 2 giờ làm việc."
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Đặt hàng ra sao?",
+            "payload": "order"
+          },
+          {
+            "label": "Chính sách đổi trả",
+            "payload": "returns"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Đổi trả",
+      "topic": "mua-hang",
+      "priority": 55,
+      "keywords": [
+        "doi tra",
+        "doi hang",
+        "tra hang",
+        "bao hanh",
+        "hang loi",
+        "sai hang",
+        "bi vo",
+        "mo seal"
+      ],
+      "payloads": [
+        "returns"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Mocha **đổi trả trong 7 ngày** nếu sản phẩm **lỗi, sai hàng hoặc chưa mở seal**. Mỹ phẩm đã mở nắp thì không bán lại được, nên không áp dụng đổi trả vì lý do không hợp. Bạn được mở kiểm tra lúc nhận hàng — có gì chưa đúng thì từ chối nhận ngay tại chỗ."
+          },
+          {
+            "type": "link",
+            "label": "Xem chính sách đổi trả",
+            "url": "/chinh-sach/chinh-sach-doi-tra/"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Hàng chính hãng, giấy tờ",
+      "topic": "tin-cay",
+      "priority": 60,
+      "keywords": [
+        "chinh hang",
+        "hang that",
+        "hang gia khong",
+        "co giay to",
+        "cong bo",
+        "kiem nghiem",
+        "giay phep",
+        "chung nhan",
+        "nguon goc",
+        "o dau san xuat",
+        "co an toan khong",
+        "corticoid",
+        "hydroquinone",
+        "kem tron"
+      ],
+      "payloads": [
+        "authentic"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Sản phẩm Mocha có **tem chống giả kèm mã QR** tra cứu. Mỗi sản phẩm có **phiếu công bố mỹ phẩm** do Sở Y tế cấp — bản chụp và số tiếp nhận đều công khai trên website. Công thức kem nám **không chứa corticoid, không hydroquinone**."
+          },
+          {
+            "type": "text",
+            "text": "Hiện Mocha chỉ bán qua website chính thức này và hotline {{brand.phoneDisplay}}. Mocha chưa có gian hàng trên sàn thương mại điện tử, nên hàng rao bán ở nơi khác không do Mocha phân phối."
+          },
+          {
+            "type": "link",
+            "label": "Xem giấy tờ và chứng nhận",
+            "url": "/chung-nhan/"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Đặt hàng",
+      "topic": "mua-hang",
+      "priority": 55,
+      "keywords": [
+        "dat hang",
+        "mua",
+        "dat mua",
+        "muon mua",
+        "lay 1",
+        "chot don",
+        "len don",
+        "order",
+        "dat nhu the nao",
+        "mua o dau"
+      ],
+      "payloads": [
+        "order"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Bạn bấm **Đặt hàng** trên thẻ sản phẩm, điền họ tên, số điện thoại, địa chỉ — chuyên viên sẽ gọi xác nhận trong vòng 2 giờ làm việc. Chưa trừ tiền ở bước này: bạn thanh toán khi nhận hàng."
+          },
+          {
+            "type": "product",
+            "slug": "{{page}}"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Giao hàng bao lâu?",
+            "payload": "shipping"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Khách gửi ảnh",
+      "topic": "gui-anh",
+      "priority": 85,
+      "requires_images": true,
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Mình đã nhận ảnh của bạn, cảm ơn bạn đã tin tưởng. Trợ lý tự động **không đánh giá tình trạng da qua ảnh** — việc đó cần chuyên viên xem trực tiếp. Chuyên viên Mocha sẽ xem ảnh và tư vấn khi bạn gọi hoặc nhắn Zalo."
+          },
+          {
+            "type": "text",
+            "text": "Trong lúc chờ, bạn mô tả giúp mình: vùng sạm là **mảng loang** hay **chấm nhỏ**?"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Mảng loang hai bên má, bờ rõ",
+            "payload": "melasma_epidermal"
+          },
+          {
+            "label": "Chấm nhỏ nâu xám, bờ nhoè",
+            "payload": "melasma_dermal"
+          },
+          {
+            "label": "Có cả hai",
+            "payload": "melasma_mixed"
+          }
+        ],
+        "handoff": true
+      }
+    },
+    {
+      "name": "Muốn gửi ảnh",
+      "topic": "gui-anh",
+      "priority": 70,
+      "payloads": [
+        "send_photo"
+      ],
+      "keywords": [
+        "gui anh",
+        "gui hinh",
+        "chup anh",
+        "xem anh giup"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Bạn bấm biểu tượng **ảnh** cạnh ô nhập để gửi (tối đa 3 ảnh). Mẹo để ảnh dễ xem: chụp **ánh sáng ban ngày** gần cửa sổ, không trang điểm, không bật làm đẹp. Ảnh chỉ dùng để tư vấn, không lưu trên website."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Mụn — hỏi giai đoạn",
+      "topic": "mun",
+      "priority": 60,
+      "keywords": [
+        "bi mun",
+        "mun",
+        "noi mun",
+        "mun viem",
+        "mun dau den",
+        "mun an",
+        "tham mun",
+        "vet tham",
+        "tham sau mun",
+        "seo mun"
+      ],
+      "payloads": [
+        "issue_acne"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Mụn có hai giai đoạn cần hai cách khác nhau. **Bạn đang ở giai đoạn nào?**"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Nốt mụn đang sưng",
+            "payload": "acne_active"
+          },
+          {
+            "label": "Mụn lặn rồi, còn vết thâm",
+            "payload": "acne_marks"
+          },
+          {
+            "label": "Mụn nang, mụn rất nhiều",
+            "payload": "acne_severe"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Mụn đang sưng",
+      "topic": "mun",
+      "priority": 70,
+      "payloads": [
+        "acne_active"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Với nốt mụn đang sưng, gel **chấm điểm** phù hợp hơn kem bôi toàn mặt: chấm đúng vào nốt, chờ thấm. Không nên bôi khắp mặt — vừa lãng phí vừa dễ khô bong."
+          },
+          {
+            "type": "product",
+            "slug": "smart-target-acne-gel"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Mụn lặn rồi, còn vết thâm",
+            "payload": "acne_marks"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Thâm sau mụn",
+      "topic": "mun",
+      "priority": 70,
+      "payloads": [
+        "acne_marks"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Vết thâm sau mụn là chuyện sắc tố, không còn là chuyện mụn nữa — nên dùng sau khi nốt mụn đã lặn. Gel chấm thâm có Tranexamic Acid và Niacinamide. Và nhớ: **không chống nắng thì vùng thâm sẫm lại nhanh hơn**."
+          },
+          {
+            "type": "product",
+            "slug": "smart-whitening-turmergel"
+          },
+          {
+            "type": "product",
+            "slug": "uv-block-sunscreen",
+            "note": "Bước giữ kết quả"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Mụn nặng, mụn nang",
+      "topic": "mun",
+      "priority": 90,
+      "payloads": [
+        "acne_severe"
+      ],
+      "keywords": [
+        "mun nang",
+        "mun boc",
+        "mun rat nhieu",
+        "mun nang qua"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Mụn nang hoặc mụn nhiều, viêm lan là **tình huống cần bác sĩ da liễu**, không phải một sản phẩm chấm điểm. Mình nói thẳng để bạn không mất thời gian: hãy đi khám trước, rồi chuyên viên Mocha có thể tư vấn bước chăm sóc hằng ngày đi kèm phác đồ của bác sĩ."
+          }
+        ],
+        "handoff": true
+      }
+    },
+    {
+      "name": "Nam giới dùng được không",
+      "topic": "tu-van-chon",
+      "priority": 62,
+      "keywords": [
+        "nam gioi",
+        "dan ong",
+        "con trai dung",
+        "chong toi",
+        "cho chong",
+        "men"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Dùng được bạn nhé — nám và thâm không phân biệt giới tính, công thức cũng không dành riêng cho nữ. Da nam thường dầu hơn nên lấy lượng kem vừa đủ, và vẫn cần **chống nắng mỗi sáng** như mọi người."
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Nám, sạm màu",
+            "payload": "issue_melasma"
+          },
+          {
+            "label": "Mụn, thâm sau mụn",
+            "payload": "issue_acne"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Phục hồi da",
+      "topic": "phuc-hoi",
+      "priority": 55,
+      "payloads": [
+        "issue_recovery"
+      ],
+      "keywords": [
+        "phuc hoi",
+        "da hu ton",
+        "da mat nuoc",
+        "cang da",
+        "kho da",
+        "da kho",
+        "duong am",
+        "lam diu"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Da đang cần nghỉ thì nên **rút gọn về các bước cơ bản**: làm sạch dịu, dưỡng ẩm, chống nắng — chưa nên thêm hoạt chất tác động sắc tố. Kem Collagen là bước dưỡng nền, giữ ẩm và làm dịu; mặt nạ gel cấp ẩm dùng thêm khi da khô căng."
+          },
+          {
+            "type": "products",
+            "slugs": [
+              "collagen-peptide-cream",
+              "ultra-egf-bio-gel-mask",
+              "biovector-brightening-cream"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Chống nắng, làm sạch",
+      "topic": "co-ban",
+      "priority": 55,
+      "payloads": [
+        "issue_basics"
+      ],
+      "keywords": [
+        "chong nang",
+        "kem chong nang",
+        "spf",
+        "sua rua mat",
+        "rua mat",
+        "tay trang",
+        "nuoc tay trang",
+        "lam sach"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Ba bước nền tảng dùng mỗi ngày: **tẩy trang** (khi có trang điểm/kem chống nắng) → **sữa rửa mặt** → **chống nắng mỗi sáng**. Với da nám, chống nắng là bước không được bỏ — bỏ bước này thì các bước khác gần như vô nghĩa."
+          },
+          {
+            "type": "products",
+            "slugs": [
+              "uv-block-sunscreen",
+              "bio-active-cleanser",
+              "bio-deep-detox-rebalance"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Peel tại nhà",
+      "topic": "peel",
+      "priority": 65,
+      "keywords": [
+        "peel",
+        "tay da chet",
+        "retinol",
+        "thay da",
+        "bong da",
+        "mixpeel"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Bộ peel Retinol là liệu trình **3 ngày** có điểm dừng, mạnh hơn liệu trình dùng hằng ngày. Mình muốn bạn biết trước: **không dùng cùng lúc với combo nám**, không dùng khi đang mang thai/cho con bú, và da sẫm nhẹ khi bong là bình thường — nhưng rát kéo dài, sưng hoặc đau thì phải dừng ngay."
+          },
+          {
+            "type": "product",
+            "slug": "retinol-mixpeel-kit"
+          },
+          {
+            "type": "link",
+            "label": "Đọc phần ai không nên dùng",
+            "url": "/retinol-mixpeel-kit/"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Gặp chuyên viên",
+            "payload": "handoff"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Da vừa laser, lăn kim, thủ thuật",
+      "topic": "an-toan",
+      "priority": 92,
+      "keywords": [
+        "laser",
+        "lan kim",
+        "vua peel",
+        "sau tham my",
+        "tiem",
+        "dieu tri o spa",
+        "tham my vien",
+        "phi kim",
+        "sau thu thuat"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Da sau laser, lăn kim, peel hay thủ thuật thẩm mỹ là **tình huống y khoa**. Người trả lời đúng nhất là **bác sĩ đã thực hiện thủ thuật cho bạn** — hãy hỏi họ trước khi thêm bất kỳ sản phẩm nào, kể cả của Mocha."
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Gặp chuyên viên",
+            "payload": "handoff"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Giảm giá, khuyến mãi",
+      "topic": "gia",
+      "priority": 58,
+      "keywords": [
+        "giam gia",
+        "khuyen mai",
+        "sale",
+        "voucher",
+        "ma giam",
+        "uu dai",
+        "re hon",
+        "bot gia",
+        "dat qua",
+        "mac qua"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Ưu đãi đang áp dụng được ghi ngay trên trang sản phẩm, kèm **ngày hết hạn** — Mocha không dùng đồng hồ đếm ngược giả. Bộ combo đang có giá thấp hơn mua lẻ và **tặng thêm kem chống nắng + sữa rửa mặt**:"
+          },
+          {
+            "type": "product",
+            "slug": "combo-nam"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Cảm ơn, kết thúc",
+      "topic": "ket-thuc",
+      "priority": 20,
+      "keywords": [
+        "cam on",
+        "thanks",
+        "thank you",
+        "ok",
+        "oke",
+        "duoc roi",
+        "hieu roi",
+        "tam biet",
+        "bye"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Cảm ơn bạn đã ghé Mocha. Cần gì thêm bạn cứ nhắn mình, hoặc gọi {{brand.phoneDisplay}} nhé. Chúc bạn một làn da khoẻ!"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Dự phòng — chưa hiểu câu hỏi",
+      "topic": "du-phong",
+      "priority": 0,
+      "is_fallback": true,
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Mình chưa chắc đã hiểu đúng ý bạn. Bạn chọn một chủ đề bên dưới, hoặc nhắn rõ hơn giúp mình — còn nếu muốn trao đổi trực tiếp, chuyên viên Mocha luôn sẵn lòng."
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Nám, sạm màu",
+            "payload": "issue_melasma"
+          },
+          {
+            "label": "Mụn, thâm sau mụn",
+            "payload": "issue_acne"
+          },
+          {
+            "label": "Giá và đặt hàng",
+            "payload": "price"
+          },
+          {
+            "label": "Gặp chuyên viên",
+            "payload": "handoff"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Greeting (EN)",
+      "topic": "mo-dau",
+      "locale": "en",
+      "priority": 10,
+      "keywords": [
+        "hi",
+        "hello",
+        "hey",
+        "good morning",
+        "anyone there"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Hi, I'm Mocha's advice assistant. What would you like to take care of?"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Dark spots, melasma",
+            "payload": "issue_melasma"
+          },
+          {
+            "label": "Delivery & payment",
+            "payload": "shipping"
+          },
+          {
+            "label": "Talk to a person",
+            "payload": "handoff"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Melasma (EN)",
+      "topic": "nam",
+      "locale": "en",
+      "priority": 60,
+      "keywords": [
+        "melasma",
+        "dark spots",
+        "pigmentation",
+        "dark patches",
+        "hyperpigmentation"
+      ],
+      "payloads": [
+        "issue_melasma"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Melasma comes in different types, and the timeline differs: surface patches usually change within **4–8 weeks**, deeper spots take **8–12 weeks**, mixed **8–16 weeks** — reference ranges, not promises, and only with daily sunscreen. Many customers start with the cream + serum set:"
+          },
+          {
+            "type": "product",
+            "slug": "combo-nam"
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "How do I use it?",
+            "payload": "how_to_use"
+          },
+          {
+            "label": "Talk to a person",
+            "payload": "handoff"
+          }
+        ]
+      }
+    },
+    {
+      "name": "How to use (EN)",
+      "topic": "cach-dung",
+      "locale": "en",
+      "priority": 55,
+      "keywords": [
+        "how to use",
+        "how do i use",
+        "routine",
+        "morning",
+        "evening",
+        "which first"
+      ],
+      "payloads": [
+        "how_to_use"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "**Morning:** cleanser → serum (1–2 pumps) → cream → **sunscreen, every day**.\n**Evening:** remove make-up/sunscreen → cleanser → serum → cream.\n\nSerum before cream. The recommended cycle is **8–12 weeks**."
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Talk to a person",
+            "payload": "handoff"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Shipping & payment (EN)",
+      "topic": "mua-hang",
+      "locale": "en",
+      "priority": 55,
+      "keywords": [
+        "shipping",
+        "delivery",
+        "cash on delivery",
+        "payment",
+        "how long"
+      ],
+      "payloads": [
+        "shipping"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Free delivery across Vietnam in **2–5 days**. You pay on delivery and can open the parcel to check before paying."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Talk to a person (EN)",
+      "topic": "chuyen-tiep",
+      "locale": "en",
+      "priority": 98,
+      "keywords": [
+        "talk to a person",
+        "human",
+        "agent",
+        "call me",
+        "phone number"
+      ],
+      "payloads": [
+        "handoff"
+      ],
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "Of course — please call or message us on Zalo at **{{brand.phoneDisplay}}**."
+          }
+        ],
+        "handoff": true
+      }
+    },
+    {
+      "name": "Fallback (EN)",
+      "topic": "du-phong",
+      "locale": "en",
+      "priority": 0,
+      "is_fallback": true,
+      "response": {
+        "messages": [
+          {
+            "type": "text",
+            "text": "I'm not sure I understood. Pick a topic below, or our team is happy to help directly."
+          }
+        ],
+        "quickReplies": [
+          {
+            "label": "Dark spots, melasma",
+            "payload": "issue_melasma"
+          },
+          {
+            "label": "Talk to a person",
+            "payload": "handoff"
+          }
+        ]
+      }
+    }
+  ]
+}

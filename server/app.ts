@@ -3,7 +3,9 @@
  *
  *   /api/orders          nhận đơn — ĐÚNG handler của Cloudflare (functions/api/orders.ts)
  *   /api/admin/orders    đọc/sửa đơn bằng Bearer ADMIN_TOKEN (xuất CSV, tự động hoá)
- *   /api/chat            chat — chuyển tới webhook n8n (server/lib/chat.ts)
+ *   /api/chat            chat — kịch bản hoặc webhook n8n (server/lib/chat.ts)
+ *   /api/chat/event      sự kiện trong khung chat (mở, bấm thẻ, bấm đặt hàng) cho phân tích
+ *   /api/admin/chats     xuất lịch sử chat (NDJSON) bằng Bearer ADMIN_TOKEN
  *   /admin/*             trang nhập liệu + đơn hàng + xuất bản (đăng nhập bằng tài khoản)
  *   /healthz             kiểm tra sống + CSDL
  *   mọi đường dẫn khác   file tĩnh trong dist/ với header bảo mật của public/_headers
@@ -17,7 +19,8 @@ import { d1 } from './lib/db.ts';
 import { createStatic } from './lib/static.ts';
 import { adminHandler } from './admin/app.ts';
 import { currentSite } from './lib/publish.ts';
-import { chatHandler } from './lib/chat.ts';
+import { chatHandler, chatEventHandler, linkOrderToChat } from './lib/chat.ts';
+import { chatExportHandler } from './lib/chat-analytics.ts';
 import { onRequest as ordersHandler } from '../functions/api/orders.ts';
 import { onRequest as adminOrdersHandler } from '../functions/api/admin/orders.ts';
 
@@ -39,10 +42,20 @@ export function createApp(opts: AppOptions) {
   return async function handle(request: Request): Promise<Response> {
     const { pathname } = new URL(request.url);
     try {
-      if (pathname === '/api/orders') return await ordersHandler(ctx(request) as any);
+      if (pathname === '/api/orders') {
+        const res = await ordersHandler(ctx(request) as any);
+        /* Đơn đặt sau khi chat (cùng visitorId) = chuyển đổi của chat. Không bao giờ làm hỏng đơn. */
+        if (res.ok && request.method === 'POST') {
+          const body = await res.clone().json().catch(() => null) as { orderCode?: string; deduped?: boolean } | null;
+          if (body?.orderCode && !body.deduped) await linkOrderToChat(sql, request, body.orderCode).catch((e) => console.error('chat_link_order_failed', (e as Error).message.slice(0, 120)));
+        }
+        return res;
+      }
       if (pathname === '/api/admin/orders') return await adminOrdersHandler(ctx(request) as any);
       if (pathname === '/api/chat') return await chatHandler(request, sql, root, env as any, opts.fetch);
-      if (pathname === '/admin' || pathname.startsWith('/admin/')) return await adminHandler(request, { sql, root });
+      if (pathname === '/api/chat/event') return await chatEventHandler(request, sql, env as any);
+      if (pathname === '/api/admin/chats') return await chatExportHandler(request, sql, env as any);
+      if (pathname === '/admin' || pathname.startsWith('/admin/')) return await adminHandler(request, { sql, root, env: env as any, fetch: opts.fetch });
       if (pathname === '/healthz') {
         await sql.query('SELECT 1');
         return new Response('ok', { headers: { 'content-type': 'text/plain', 'cache-control': 'no-store' } });

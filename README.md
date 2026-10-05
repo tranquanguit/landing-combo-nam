@@ -9,8 +9,10 @@ chính file đó quyết định, không phải sửa code.
 >
 > **Nhập liệu:** [`docs/nhap-lieu.md`](docs/nhap-lieu.md) — sửa nội dung ở `/admin`
 > (Postgres), kiểm bằng đúng schema của build, bấm Xuất bản mới lên trang thật.
-> **Chat (n8n):** [`docs/chat-n8n.md`](docs/chat-n8n.md) — bong bóng chat, chuẩn JSON
-> gửi/nhận với webhook n8n (`docs/chat/*.schema.json`), phân biệt khách.
+> **Chat:** [`docs/chat-n8n.md`](docs/chat-n8n.md) — bong bóng chat; trả lời bằng kịch bản
+> tư vấn (`/admin/chat-rules`) hoặc webhook n8n (cấu hình ở `/admin/settings/chat`), chuẩn
+> JSON gửi/nhận (`docs/chat/*.schema.json`), phân biệt khách. Lịch sử + số liệu để phân
+> tích: [`docs/chat-analytics.md`](docs/chat-analytics.md).
 > **Triển khai Ubuntu + Docker:** [`docs/trien-khai-docker.md`](docs/trien-khai-docker.md)
 > (`docker compose up -d --build`). Giấy tờ chờ duyệt: [`docs/chung-tu-cho-duyet.md`](docs/chung-tu-cho-duyet.md).
 >
