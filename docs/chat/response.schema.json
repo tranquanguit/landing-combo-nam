@@ -81,6 +81,10 @@
     "handoff": {
       "type": "boolean",
       "description": "true = bot đề nghị chuyển cho nhân viên: giao diện hiện nút gọi hotline / Zalo."
+    },
+    "matched": {
+      "type": "boolean",
+      "description": "Không bắt buộc. false = n8n không hiểu câu hỏi (trả lời chung chung): lượt này vào danh sách \"Câu chưa trả lời được\" ở /admin/chats. Bỏ trống = đã trả lời được."
     }
   }
 }

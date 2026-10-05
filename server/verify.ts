@@ -101,7 +101,7 @@ if (TOKEN) {
   const found = (list.orders ?? list.results ?? []).some((o: any) => o.order_code === order.orderCode);
   ok('đơn vừa đặt có trong Postgres', r.status === 200 && found, `${r.status}`);
 }
-// ---- chat (verify.env bật CHAT_MOCK=1; production có N8N_WEBHOOK_URL thì gọi n8n thật)
+// ---- chat (verify.env: CHAT_MODE=rules — trả lời bằng kịch bản; cấu hình thật đặt ở /admin/settings/chat)
 r = await get('/chat-catalog.json');
 const cat = await r.json().catch(() => ({}));
 ok('GET /chat-catalog.json', r.status === 200 && (cat.products?.length ?? 0) >= 20, `${cat.products?.length ?? 0} sản phẩm`);
@@ -112,7 +112,17 @@ r = await get('/api/chat', {
 const reply = await r.json().catch(() => ({}));
 ok('POST /api/chat trả lời theo chuẩn JSON', r.status === 200 && Array.isArray(reply.messages) && reply.messages.length > 0,
   `${r.status} ${reply.degraded ?? (reply.messages ?? []).map((m: any) => m.type).join(',')}`);
+ok('kịch bản tư vấn trả lời câu hỏi giá bằng thẻ sản phẩm', (reply.messages ?? []).some((m: any) => m.type === 'product' || m.type === 'products'));
 ok('chat cấp mã khách ẩn danh (cookie HttpOnly)', /mocha_vid=v_[^;]+;.*HttpOnly/.test(r.headers.get('set-cookie') ?? ''));
+if (TOKEN) {
+  /* Chỉ Postgres thật bắt được: driver `postgres` mã hoá jsonb hai lần nếu SQL ép sai (xem server/lib/db.ts). */
+  r = await get('/api/admin/chats?type=messages', { headers: { authorization: `Bearer ${TOKEN}` } });
+  const rows = (await r.text()).trim().split('\n').filter(Boolean).map((l) => JSON.parse(l));
+  const botRow = rows.reverse().find((x: any) => x.role === 'bot');
+  ok('lịch sử chat lưu đúng kiểu trong Postgres (jsonb là object, có nguồn + kịch bản)',
+    r.status === 200 && typeof botRow?.payload === 'object' && Array.isArray(botRow.payload.messages) && botRow.source === 'rules' && !!botRow.rule_id,
+    `${r.status} payload=${typeof botRow?.payload} source=${botRow?.source}`);
+}
 ok('bong bóng chat có trên trang', /class="mchat-fab"/.test(html));
 
 r = await get('/api/admin/orders');

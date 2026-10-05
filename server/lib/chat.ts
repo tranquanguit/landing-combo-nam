@@ -1,8 +1,13 @@
 /**
- * POST /api/chat — cầu nối trình duyệt <-> webhook n8n.
+ * POST /api/chat — trả lời khách trong bong bóng chat.
+ *
+ * Ba chế độ, chọn ở /admin/settings/chat (server/lib/chat-settings.ts):
+ *   off    tạm nghỉ — mời gọi/nhắn Zalo;
+ *   rules  kịch bản tư vấn (server/lib/chat-rules.ts, CRUD ở /admin/chat-rules);
+ *   n8n    chuyển tới webhook n8n; n8n lỗi/chậm/trả rỗng thì kịch bản trả lời thay (nếu bật).
  *
  * Trình duyệt không gọi thẳng n8n:
- *   - địa chỉ webhook + khoá bí mật ở lại máy chủ (N8N_WEBHOOK_URL, N8N_SHARED_SECRET);
+ *   - địa chỉ webhook + khoá bí mật ở lại máy chủ (cấu hình trên trang quản trị);
  *   - không phải nới CSP connect-src của site;
  *   - máy chủ gắn định danh khách (visitorId cookie HttpOnly + ipHash) mà trang không đọc được;
  *   - phản hồi của n8n được KIỂM và CHUẨN HOÁ trước khi tới trang: khối lạ bị bỏ,
@@ -10,7 +15,7 @@
  *     từ /chat-catalog.json theo slug — giá trên thẻ không thể lệch giá trên trang.
  *
  * Chuẩn JSON hai chiều: docs/chat/request.schema.json, docs/chat/response.schema.json.
- * Hướng dẫn nối n8n: docs/chat-n8n.md.
+ * Hướng dẫn nối n8n: docs/chat-n8n.md. Dữ liệu phân tích: docs/chat-analytics.md.
  */
 import { createHash, createHmac, randomBytes, randomUUID } from 'node:crypto';
 import { existsSync, readFileSync, statSync } from 'node:fs';
@@ -18,6 +23,8 @@ import { join } from 'node:path';
 import type { Sql } from './db.ts';
 import { cookie } from './auth.ts';
 import { currentSite } from './publish.ts';
+import { getChatSettings, type ChatSettings, type ChatSettingsEnv } from './chat-settings.ts';
+import { loadRules, pickRule, recordHit, renderResponse } from './chat-rules.ts';
 
 export const CHAT_VERSION = '1.0';
 const VID_COOKIE = 'mocha_vid';
@@ -26,12 +33,9 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-
 export const LIMITS = { body: 7 * 1024 * 1024, text: 2000, images: 3, imageBytes: 2 * 1024 * 1024, history: 20, historyText: 1000 };
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 
-export interface ChatEnv {
-  N8N_WEBHOOK_URL?: string; N8N_SHARED_SECRET?: string; N8N_TIMEOUT_MS?: string;
-  CHAT_MOCK?: string; IP_SALT?: string; ALLOWED_ORIGIN?: string; PUBLIC_SITE_URL?: string;
-  COOKIE_SECURE?: string; CHAT_RETENTION_DAYS?: string;
-  /** Số tin tối đa mỗi 10 phút, theo visitorId và theo ipHash. Mặc định 30. */
-  CHAT_RATE_MAX?: string;
+/** N8N_* / CHAT_* chỉ là giá trị khởi đầu — trang quản trị ghi đè (chat-settings.ts). */
+export interface ChatEnv extends ChatSettingsEnv {
+  IP_SALT?: string; ALLOWED_ORIGIN?: string; PUBLIC_SITE_URL?: string; COOKIE_SECURE?: string;
 }
 
 // ----------------------------------------------------------------- danh mục
@@ -40,7 +44,7 @@ interface CatalogProduct {
   price: number; priceText: string; compareAtPriceText: string | null; availability: string;
   url: string; orderUrl: string; image: string | null; imageAlt: string;
 }
-interface Catalog { brand: { phone: string; phoneDisplay: string; zalo: string | null; name: string }; products: CatalogProduct[] }
+export interface Catalog { brand: { phone: string; phoneDisplay: string; zalo: string | null; name: string }; products: CatalogProduct[] }
 let cache: { file: string; mtime: number; data: Catalog } | null = null;
 export function loadCatalog(root: string): Catalog {
   const file = join(currentSite(root), 'chat-catalog.json');
@@ -200,38 +204,53 @@ export function normalizeResponse(raw: any, catalog: Catalog, locale: string, ow
   return { messages: out, quickReplies, handoff: raw?.handoff === true, dropped };
 }
 
-// ----------------------------------------------------------------- chế độ thử (không có n8n)
-/** CHAT_MOCK=1: trả lời mẫu để xem giao diện (chữ, thẻ sản phẩm, dải thẻ, ảnh, nút gợi ý). */
-function mockReply(msg: ClientMessage, catalog: Catalog) {
-  const loc = msg.locale;
-  const here = catalog.products.find((p) => p.url === msg.page.path);
-  const pick = (slugs: string[]) => slugs.filter((s) => findProduct(catalog, s, loc));
-  const q = (msg.payload || msg.text).toLowerCase();
-  if (msg.images.length) {
-    return { version: CHAT_VERSION, messages: [
-      { type: 'text', text: loc === 'vi'
-        ? `Mình đã nhận **${msg.images.length} ảnh**. (Chế độ thử: chưa nối n8n nên chưa phân tích ảnh.) Với vùng sạm hai bên gò má, nhiều khách bắt đầu bằng combo kem + serum:`
-        : `Got **${msg.images.length} photo(s)**. (Demo mode: n8n is not connected, so the photo is not analysed.) For patches on both cheeks, many customers start with the cream + serum set:` },
-      { type: 'product', slug: 'combo-nam', note: loc === 'vi' ? 'Kem + serum, nồng độ in trên bao bì' : 'Cream + serum, concentrations printed on the pack' },
-    ], quickReplies: [{ label: loc === 'vi' ? 'Cách dùng thế nào?' : 'How do I use it?', payload: 'how_to_use' }] };
+// ----------------------------------------------------------------- nguồn trả lời
+/** Gọi webhook n8n với chữ ký HMAC. Ném lỗi khi HTTP lỗi / quá giờ / không phải JSON. */
+export async function callN8n(s: ChatSettings, req: unknown, fetchImpl: typeof fetch = fetch): Promise<any> {
+  const bodyOut = JSON.stringify(req);
+  const ts = String(Math.floor(Date.now() / 1000));
+  const headers: Record<string, string> = { 'content-type': 'application/json', 'x-mocha-chat-version': CHAT_VERSION, 'x-mocha-timestamp': ts };
+  if (s.sharedSecret) {
+    headers['x-mocha-token'] = s.sharedSecret;
+    headers['x-mocha-signature'] = 'sha256=' + createHmac('sha256', s.sharedSecret).update(`${ts}.${bodyOut}`).digest('hex');
   }
-  if (/giá|price|bao nhiêu|combo/.test(q)) {
-    return { version: CHAT_VERSION, messages: [
-      { type: 'text', text: loc === 'vi' ? 'Các lựa chọn cho da nám, giá đã gồm giao hàng miễn phí:' : 'Options for melasma-prone skin, free delivery included:' },
-      { type: 'products', slugs: pick(['combo-nam', 'smart-brightening-cream', 'smart-first-care-serum']) },
-    ], quickReplies: [{ label: loc === 'vi' ? 'Khác nhau thế nào?' : 'What is the difference?', payload: 'compare' }] };
+  const r = await fetchImpl(s.webhookUrl, { method: 'POST', headers, body: bodyOut, signal: AbortSignal.timeout(s.timeoutMs) });
+  if (!r.ok) throw new Error(`n8n HTTP ${r.status}`);
+  const raw = await r.json();
+  /* n8n "Respond to Webhook" đôi khi bọc kết quả trong mảng [ {...} ] */
+  return Array.isArray(raw) ? raw[0] : raw;
+}
+
+const pageProduct = (c: Catalog, path: string) => c.products.find((p) => p.url === path) ?? null;
+
+/** Trả lời bằng kịch bản. null = không có kịch bản nào (kể cả dự phòng). */
+export async function answerByRules(sql: Sql, msg: Pick<ClientMessage, 'text' | 'payload' | 'locale' | 'page' | 'images'>, catalog: Catalog) {
+  const rules = await loadRules(sql);
+  const m = pickRule(rules, { text: msg.text, payload: msg.payload, locale: msg.locale, path: msg.page.path, images: msg.images.length });
+  if (!m) return null;
+  const p = pageProduct(catalog, msg.page.path);
+  const raw = renderResponse(m.rule.response, {
+    product: p ? { slug: p.slug, name: p.shortName, priceText: p.priceText, url: p.url } : null,
+    brand: { phoneDisplay: catalog.brand.phoneDisplay, zalo: catalog.brand.zalo },
+  });
+  return { raw, rule: m.rule, hits: m.hits, fallback: m.fallback };
+}
+
+/** Nút "Thử kết nối" trên /admin/settings/chat: gửi một tin mẫu, đo thời gian, chuẩn hoá kết quả. */
+export async function testN8n(s: ChatSettings, root: string, fetchImpl: typeof fetch = fetch) {
+  const catalog = loadCatalog(root);
+  const msg: ClientMessage = {
+    messageId: randomUUID(), sessionId: randomUUID(), locale: 'vi', event: 'message', text: 'Tin thử kết nối từ trang quản trị', payload: '',
+    images: [], page: { path: '/combo-nam/', title: 'Thử kết nối', utm: {} }, history: [],
+  };
+  const t0 = Date.now();
+  try {
+    const raw = await callN8n(s, { ...n8nRequest(msg, 'v_admin-connection-test0000', null, catalog), test: true }, fetchImpl);
+    const n = normalizeResponse(raw, catalog, 'vi', []);
+    return { ok: n.messages.length > 0, ms: Date.now() - t0, blocks: n.messages.length, dropped: n.dropped, normalized: n, error: n.messages.length ? null : 'Phản hồi không có khối hợp lệ nào' };
+  } catch (e) {
+    return { ok: false, ms: Date.now() - t0, blocks: 0, dropped: 0, normalized: null, error: (e as Error).message.slice(0, 200) };
   }
-  return { version: CHAT_VERSION, messages: [
-    { type: 'text', text: loc === 'vi'
-      ? `Chào bạn! Đây là **chế độ thử** (chưa nối n8n). Bạn vừa nhắn: "${msg.text.slice(0, 200)}".`
-      : `Hi! This is **demo mode** (n8n not connected). You wrote: "${msg.text.slice(0, 200)}".` },
-    ...(here ? [{ type: 'product', slug: here.slug, note: loc === 'vi' ? 'Sản phẩm trên trang bạn đang xem' : 'The product on this page' }] : []),
-    ...(here?.image ? [{ type: 'image', url: here.image, alt: here.imageAlt, caption: loc === 'vi' ? 'Ảnh sản phẩm' : 'Product photo' }] : []),
-    { type: 'link', label: loc === 'vi' ? 'Xem giấy tờ công bố' : 'See product documents', url: loc === 'vi' ? '/chung-nhan/' : '/en/certificates/' },
-  ], quickReplies: [
-    { label: loc === 'vi' ? 'Giá combo nám' : 'Melasma set price', payload: 'price' },
-    { label: loc === 'vi' ? 'Gặp chuyên viên' : 'Talk to a person', payload: 'handoff' },
-  ], handoff: q.includes('handoff') };
 }
 
 // ----------------------------------------------------------------- lưu + giới hạn nhịp
@@ -247,21 +266,78 @@ async function rateLimited(sql: Sql, key: string, max: number) {
     [key, new Date(now).toISOString(), fresh ? 1 : 0]);
   return false;
 }
+
+/** Nguồn của câu trả lời — cột chat_messages.source.
+ *  rules: kịch bản · n8n · fallback: kịch bản thay n8n đang lỗi · off · rate_limited · error: không ai trả lời được */
+export type Source = 'rules' | 'n8n' | 'fallback' | 'off' | 'rate_limited' | 'error';
+interface Turn {
+  msg: ClientMessage; visitorId: string; ipHash: string | null; n: Normalized;
+  source: Source; ruleId: number | null; matched: boolean; latencyMs: number;
+  /** gửi về trang */ degraded?: string;
+  /** chỉ ghi lại: n8n lỗi nhưng kịch bản đã trả lời thay */ upstream?: string;
+}
+const slugsOf = (messages: any[]) => [...new Set(messages.flatMap((m) =>
+  m.type === 'product' ? [m.product.slug] : m.type === 'products' ? m.products.map((p: any) => p.slug) : []))];
+
 let lastPurge = 0;
-async function store(sql: Sql, env: ChatEnv, rows: { sessionId: string; visitorId: string; ipHash: string | null; role: string; text: string; payload: unknown; locale: string; path: string }[]) {
-  for (const r of rows) {
-    await sql.query(
-      `INSERT INTO chat_messages (session_id, visitor_id, ip_hash, role, text, payload, locale, page_path)
-       VALUES ($1, $2, $3, $4, $5, $6::jsonb, $7, $8)`,
-      [r.sessionId, r.visitorId, r.ipHash, r.role, r.text || null, JSON.stringify(r.payload ?? {}), r.locale, r.path]);
-  }
+async function store(sql: Sql, s: ChatSettings, t: Turn) {
+  const { msg } = t;
+  const common = [msg.sessionId, t.visitorId, t.ipHash, msg.locale, msg.page.path, msg.messageId];
+  const ins = `INSERT INTO chat_messages (session_id, visitor_id, ip_hash, locale, page_path, message_id, role, text, payload, source, rule_id, latency_ms, products, matched)
+               VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9::text::jsonb, $10, $11, $12, $13, $14)`;
+  /* KHÔNG lưu ảnh — chỉ số ảnh. */
+  await sql.query(ins, [...common, 'user', msg.text || null,
+    JSON.stringify({ event: msg.event, payload: msg.payload || undefined, images: msg.images.length }), null, null, null, [], null]);
+  await sql.query(ins, [...common, 'bot', t.n.messages.filter((m) => m.type === 'text').map((m) => m.text).join('\n') || null,
+    JSON.stringify({ messages: t.n.messages, quickReplies: t.n.quickReplies, handoff: t.n.handoff, degraded: t.degraded, upstream: t.upstream }),
+    t.source, t.ruleId, t.latencyMs, slugsOf(t.n.messages), t.matched]);
+
+  const utm = msg.page.utm;
+  const answeredRules = t.matched && (t.source === 'rules' || t.source === 'fallback') ? 1 : 0;
+  const answeredN8n = t.matched && t.source === 'n8n' ? 1 : 0;
+  const unmatched = !t.matched && (t.source === 'rules' || t.source === 'fallback' || t.source === 'n8n') ? 1 : 0;
+  const degraded = t.degraded || t.upstream ? 1 : 0;
+  await sql.query(
+    `INSERT INTO chat_sessions (session_id, visitor_id, locale, entry_path, last_path, utm_source, utm_medium, utm_campaign,
+       user_messages, bot_messages, images, answered_rules, answered_n8n, unmatched, degraded, handoff)
+     VALUES ($1, $2, $3, $4, $4, $5, $6, $7, 1, 1, $8, $9, $10, $11, $12, $13)
+     ON CONFLICT (session_id) DO UPDATE SET
+       last_at = now(), last_path = EXCLUDED.last_path,
+       utm_source = COALESCE(chat_sessions.utm_source, EXCLUDED.utm_source),
+       utm_medium = COALESCE(chat_sessions.utm_medium, EXCLUDED.utm_medium),
+       utm_campaign = COALESCE(chat_sessions.utm_campaign, EXCLUDED.utm_campaign),
+       user_messages = chat_sessions.user_messages + 1, bot_messages = chat_sessions.bot_messages + 1,
+       images = chat_sessions.images + EXCLUDED.images,
+       answered_rules = chat_sessions.answered_rules + EXCLUDED.answered_rules,
+       answered_n8n = chat_sessions.answered_n8n + EXCLUDED.answered_n8n,
+       unmatched = chat_sessions.unmatched + EXCLUDED.unmatched,
+       degraded = chat_sessions.degraded + EXCLUDED.degraded,
+       handoff = chat_sessions.handoff OR EXCLUDED.handoff
+     WHERE chat_sessions.visitor_id = EXCLUDED.visitor_id`,
+    [msg.sessionId, t.visitorId, msg.locale, msg.page.path, utm.source ?? null, utm.medium ?? null, utm.campaign ?? null,
+      msg.images.length, answeredRules, answeredN8n, unmatched, degraded, t.n.handoff]);
+
   if (Date.now() - lastPurge > 3600_000) {
     lastPurge = Date.now();
-    await sql.query(`DELETE FROM chat_messages WHERE created_at < now() - ($1 || ' days')::interval`, [String(Number(env.CHAT_RETENTION_DAYS ?? 90))]);
+    /* Chữ hội thoại: giữ retentionDays (mặc định 90). Phiên + sự kiện không chứa chữ: giữ lâu hơn. */
+    await sql.query(`DELETE FROM chat_messages WHERE created_at < now() - ($1 || ' days')::interval`, [String(s.retentionDays)]);
+    await sql.query(`DELETE FROM chat_sessions WHERE last_at < now() - ($1 || ' days')::interval`, [String(s.sessionRetentionDays)]);
+    await sql.query(`DELETE FROM chat_events WHERE created_at < now() - ($1 || ' days')::interval`, [String(s.sessionRetentionDays)]);
   }
 }
+export const _resetPurge = () => { lastPurge = 0; };
 
 // ----------------------------------------------------------------- handler
+function visitor(request: Request, env: ChatEnv) {
+  let visitorId = cookie(request, VID_COOKIE) ?? '';
+  const setCookie: Record<string, string> = {};
+  if (!VID.test(visitorId)) {
+    visitorId = newVisitorId();
+    setCookie['set-cookie'] = `${VID_COOKIE}=${visitorId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000${env.COOKIE_SECURE === '0' ? '' : '; Secure'}`;
+  }
+  return { visitorId, setCookie };
+}
+
 export async function chatHandler(request: Request, sql: Sql, root: string, env: ChatEnv, fetchImpl: typeof fetch = fetch): Promise<Response> {
   if (request.method !== 'POST') return json({ ok: false, error: 'method' }, 405, { allow: 'POST' });
   const origin = request.headers.get('origin');
@@ -273,70 +349,88 @@ export async function chatHandler(request: Request, sql: Sql, root: string, env:
   const parsed = parseClient(body);
   if (!parsed.ok) return json({ ok: false, error: parsed.error }, 422);
   const msg = parsed.msg;
+  const t0 = Date.now();
 
   /* Định danh khách: cookie HttpOnly do máy chủ cấp (trang không đọc được, không
      ai giả được bằng JS); ipHash chỉ là tín hiệu phụ — một IP 4G có thể là hàng
      nghìn khách (CGNAT), một khách đổi IP liên tục giữa 4G và wifi. */
-  let visitorId = cookie(request, VID_COOKIE) ?? '';
-  const setCookie: Record<string, string> = {};
-  if (!VID.test(visitorId)) {
-    visitorId = newVisitorId();
-    setCookie['set-cookie'] = `${VID_COOKIE}=${visitorId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000${env.COOKIE_SECURE === '0' ? '' : '; Secure'}`;
-  }
+  const { visitorId, setCookie } = visitor(request, env);
   const ip = request.headers.get('cf-connecting-ip');
   const ipHash = ip && env.IP_SALT ? hashIp(ip, env.IP_SALT) : null;
+  const s = await getChatSettings(sql, env);
   const catalog = loadCatalog(root);
-  const reply = (n: Normalized, extra: Record<string, unknown> = {}, status = 200) =>
-    json({ ok: true, version: CHAT_VERSION, sessionId: msg.sessionId, ...n, dropped: undefined, ...extra }, status, setCookie);
-
-  const rateMax = Number(env.CHAT_RATE_MAX ?? 30);
-  if (await rateLimited(sql, `chat:v:${visitorId}`, rateMax) || (ipHash && await rateLimited(sql, `chat:ip:${ipHash}`, rateMax))) {
-    return reply({ messages: [{ type: 'text', text: T[msg.locale].limited }, ...contactLinks(catalog, msg.locale)], quickReplies: [], handoff: true, dropped: 0 }, { degraded: 'rate_limited' }, 429);
-  }
-
-  const req = n8nRequest(msg, visitorId, ipHash, catalog);
   const ownHosts = [new URL(request.url).host, ...(env.PUBLIC_SITE_URL ? [new URL(env.PUBLIC_SITE_URL).host] : [])];
-  let rawReply: any; let degraded: string | undefined;
-  if (env.N8N_WEBHOOK_URL) {
-    const bodyOut = JSON.stringify(req);
-    const ts = String(Math.floor(Date.now() / 1000));
-    const headers: Record<string, string> = { 'content-type': 'application/json', 'x-mocha-chat-version': CHAT_VERSION, 'x-mocha-timestamp': ts };
-    if (env.N8N_SHARED_SECRET) {
-      headers['x-mocha-token'] = env.N8N_SHARED_SECRET;
-      headers['x-mocha-signature'] = 'sha256=' + createHmac('sha256', env.N8N_SHARED_SECRET).update(`${ts}.${bodyOut}`).digest('hex');
-    }
+  const finish = async (t: Omit<Turn, 'msg' | 'visitorId' | 'ipHash' | 'latencyMs'>, status = 200) => {
+    if (t.n.handoff && !t.n.messages.some((m) => m.type === 'link' && /^tel:/.test(m.url))) t.n.messages.push(...contactLinks(catalog, msg.locale));
+    if (t.n.dropped) console.warn('chat_reply_dropped_blocks', t.n.dropped);
+    await store(sql, s, { ...t, msg, visitorId, ipHash, latencyMs: Date.now() - t0 })
+      .catch((e) => console.error('chat_store_failed', (e as Error).message.slice(0, 160)));
+    return json({ ok: true, version: CHAT_VERSION, sessionId: msg.sessionId, messages: t.n.messages, quickReplies: t.n.quickReplies,
+      handoff: t.n.handoff, ...(t.degraded ? { degraded: t.degraded } : {}) }, status, setCookie);
+  };
+  const canned = (text: string): Normalized => ({ messages: [{ type: 'text', text }, ...contactLinks(catalog, msg.locale)], quickReplies: [], handoff: true, dropped: 0 });
+
+  if (await rateLimited(sql, `chat:v:${visitorId}`, s.rateMax) || (ipHash && await rateLimited(sql, `chat:ip:${ipHash}`, s.rateMax))) {
+    return finish({ n: canned(T[msg.locale].limited), source: 'rate_limited', ruleId: null, matched: false, degraded: 'rate_limited' }, 429);
+  }
+  if (s.mode === 'off') return finish({ n: canned(T[msg.locale].off), source: 'off', ruleId: null, matched: false, degraded: 'off' });
+
+  let degraded: string | undefined;
+  if (s.mode === 'n8n') {
     try {
-      const r = await fetchImpl(env.N8N_WEBHOOK_URL, { method: 'POST', headers, body: bodyOut, signal: AbortSignal.timeout(Number(env.N8N_TIMEOUT_MS ?? 25000)) });
-      if (!r.ok) throw new Error(`n8n HTTP ${r.status}`);
-      rawReply = await r.json();
-      /* n8n "Respond to Webhook" đôi khi bọc kết quả trong mảng [ {...} ] */
-      if (Array.isArray(rawReply)) rawReply = rawReply[0];
+      const rawReply = await callN8n(s, n8nRequest(msg, visitorId, ipHash, catalog), fetchImpl);
+      const n = normalizeResponse(rawReply, catalog, msg.locale, ownHosts);
+      /* n8n tự báo "không hiểu câu này" bằng "matched": false — để lọc câu hỏi chưa trả lời được. */
+      if (n.messages.length) return finish({ n, source: 'n8n', ruleId: null, matched: rawReply?.matched !== false });
+      degraded = 'empty_reply';
     } catch (e) {
       console.error('chat_upstream_failed', (e as Error).message.slice(0, 160));
       degraded = 'upstream';
     }
-  } else if (env.CHAT_MOCK === '1') {
-    rawReply = mockReply(msg, catalog);
-  } else {
-    degraded = 'not_configured';
+    if (!s.rulesFallback) return finish({ n: canned(T[msg.locale].busy), source: 'error', ruleId: null, matched: false, degraded });
   }
 
-  let n = rawReply ? normalizeResponse(rawReply, catalog, msg.locale, ownHosts) : null;
-  if (!n || !n.messages.length) {
-    if (n && !degraded) degraded = 'empty_reply';
-    n = { messages: [{ type: 'text', text: degraded === 'not_configured' ? T[msg.locale].off : T[msg.locale].busy }, ...contactLinks(catalog, msg.locale)],
-      quickReplies: [], handoff: true, dropped: n?.dropped ?? 0 };
+  const ans = await answerByRules(sql, msg, catalog).catch((e) => { console.error('chat_rules_failed', (e as Error).message.slice(0, 160)); return null; });
+  const n = ans ? normalizeResponse(ans.raw, catalog, msg.locale, ownHosts) : null;
+  if (!ans || !n?.messages.length) {
+    return finish({ n: canned(T[msg.locale].busy), source: 'error', ruleId: null, matched: false, degraded: degraded ?? 'no_rule' });
   }
-  if (n.handoff && !n.messages.some((m) => m.type === 'link' && /^tel:/.test(m.url))) n.messages.push(...contactLinks(catalog, msg.locale));
-  if (n.dropped) console.warn('chat_reply_dropped_blocks', n.dropped);
+  recordHit(sql, ans.rule.id).catch(() => {});
+  /* Khách vẫn nhận câu trả lời thật nên không gửi "degraded" về trang; lý do n8n lỗi
+     vẫn được ghi (chat_messages.payload.upstream + chat_sessions.degraded). */
+  return finish({ n, source: s.mode === 'n8n' ? 'fallback' : 'rules', ruleId: ans.rule.id, matched: !ans.fallback, upstream: degraded });
+}
 
-  /* Lưu chữ để nhân viên xem lại (/admin/chats). KHÔNG lưu ảnh — chỉ số ảnh. */
-  await store(sql, env, [
-    { sessionId: msg.sessionId, visitorId, ipHash, role: 'user', text: msg.text, locale: msg.locale, path: msg.page.path,
-      payload: { messageId: msg.messageId, event: msg.event, payload: msg.payload || undefined, images: msg.images.length } },
-    { sessionId: msg.sessionId, visitorId, ipHash, role: 'bot', text: n.messages.filter((m) => m.type === 'text').map((m) => m.text).join('\n'),
-      locale: msg.locale, path: msg.page.path, payload: { messages: n.messages, quickReplies: n.quickReplies, handoff: n.handoff, degraded } },
-  ]).catch((e) => console.error('chat_store_failed', (e as Error).message.slice(0, 160)));
+// ----------------------------------------------------------------- sự kiện trong khung chat
+const EVENT_TYPES = new Set(['open', 'product_click', 'order_click', 'link_click']);
+/** POST /api/chat/event — navigator.sendBeacon (text/plain JSON). Luôn trả 204: đo lường không được làm phiền khách. */
+export async function chatEventHandler(request: Request, sql: Sql, env: ChatEnv): Promise<Response> {
+  const none = new Response(null, { status: 204, headers: { 'cache-control': 'no-store' } });
+  if (request.method !== 'POST') return json({ ok: false, error: 'method' }, 405, { allow: 'POST' });
+  const origin = request.headers.get('origin');
+  if (env.ALLOWED_ORIGIN && origin && origin !== env.ALLOWED_ORIGIN) return none;
+  const visitorId = cookie(request, VID_COOKIE) ?? '';
+  if (!VID.test(visitorId)) return none;  /* chưa từng nhắn = chưa có cookie: không có gì để gắn vào */
+  const raw = await request.text();
+  if (raw.length > 2048) return none;
+  let b: any; try { b = JSON.parse(raw); } catch { return none; }
+  if (!EVENT_TYPES.has(b?.type) || !UUID.test(String(b?.sessionId ?? ''))) return none;
+  if (await rateLimited(sql, `chatev:v:${visitorId}`, 200)) return none;
+  const slug = /^[a-z0-9-]{1,80}$/.test(String(b.slug ?? '')) ? b.slug : null;
+  await sql.query('INSERT INTO chat_events (session_id, visitor_id, type, slug, value) VALUES ($1, $2, $3, $4, $5)',
+    [b.sessionId, visitorId, b.type, slug, str(b.value, 300) || null]);
+  const col = b.type === 'product_click' ? 'product_clicks' : b.type === 'order_click' ? 'order_clicks' : null;
+  if (col) await sql.query(`UPDATE chat_sessions SET ${col} = ${col} + 1 WHERE session_id = $1 AND visitor_id = $2`, [b.sessionId, visitorId]);
+  return none;
+}
 
-  return reply(n, degraded ? { degraded } : {});
+/** Sau khi /api/orders nhận đơn: khách này có chat trong 7 ngày qua thì ghi chuyển đổi. */
+export async function linkOrderToChat(sql: Sql, request: Request, orderCode: string) {
+  const visitorId = cookie(request, VID_COOKIE) ?? '';
+  if (!VID.test(visitorId) || !orderCode) return;
+  const s = (await sql.query<{ session_id: string }>(
+    `SELECT session_id FROM chat_sessions WHERE visitor_id = $1 AND last_at > now() - interval '7 days' ORDER BY last_at DESC LIMIT 1`, [visitorId])).rows[0];
+  if (!s) return;
+  await sql.query('INSERT INTO chat_events (session_id, visitor_id, type, value) VALUES ($1, $2, $3, $4)', [s.session_id, visitorId, 'order_placed', orderCode]);
+  await sql.query('UPDATE chat_sessions SET order_code = COALESCE(order_code, $2) WHERE session_id = $1', [s.session_id, orderCode]);
 }

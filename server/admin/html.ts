@@ -32,12 +32,13 @@ export function page(title: string, body: string, user: User | null, status = 20
       <a href="/admin/media">Ảnh</a>
       <a href="/admin/orders">Đơn hàng</a>
       <a href="/admin/chats">Chat</a>
+      <a href="/admin/chat-rules">Kịch bản chat</a>
       <a href="/admin/publish">Xuất bản</a>
-      ${user.role === 'admin' ? '<a href="/admin/users">Tài khoản</a>' : ''}
+      ${user.role === 'admin' ? '<a href="/admin/settings/chat">Cấu hình chat</a><a href="/admin/users">Tài khoản</a>' : ''}
       <form method="post" action="/admin/logout" class="out"><span>${esc(user.username)}</span><button>Đăng xuất</button></form>
     </nav>` : '';
   return new Response(`<!doctype html><html lang="vi"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:,">
 <title>${esc(title)} · Mocha nhập liệu</title><style>${CSS}</style></head>
 <body>${nav}<main>${body}</main></body></html>`, { status, headers: { ...SECURITY_HEADERS, ...extra } });
 }
@@ -60,7 +61,7 @@ table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;ove
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--paper);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
 .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
-label{display:grid;gap:4px;font-size:13px;font-weight:600;color:var(--navy)}
+label{display:grid;gap:4px;align-content:start;font-size:13px;font-weight:600;color:var(--navy)}
 input,select,textarea{font:inherit;padding:8px 10px;border:1px solid #8b90a2;border-radius:10px;background:#fff;color:var(--ink);width:100%}
 textarea.json{font:13px/1.5 ui-monospace,Consolas,monospace;min-height:520px;tab-size:2;white-space:pre}
 button,.btn{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;border:0;border-radius:999px;padding:9px 18px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
@@ -73,5 +74,6 @@ button.ghost,.btn.ghost{background:#fff;color:var(--navy);border:1px solid var(-
 .pill.published{background:#e6f3ec;color:var(--ok)}.pill.draft{background:#fdf6e3;color:var(--warn)}
 .muted{color:var(--muted);font-size:13px}pre.log{background:#0c0e2e;color:#d6d9ff;padding:12px;border-radius:12px;overflow:auto;max-height:480px;font-size:12px}
 .thumbs{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.thumbs figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px}
-.thumbs img{width:100%;height:120px;object-fit:contain}.thumbs figcaption{font-size:12px;word-break:break-all}
+.thumbs img{width:100%;height:120px;object-fit:contain}
+@media (max-width:720px){table{display:block;overflow-x:auto}main{padding:16px 16px 60px}}.thumbs figcaption{font-size:12px;word-break:break-all}
 `;

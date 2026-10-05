@@ -125,7 +125,7 @@ export async function importFromFiles(sql: Sql, root: string, by = 'import') {
       const source = readFileSync(file, 'utf8');
       await sql.query(
         `INSERT INTO content_entries (collection, entry_id, data, source, updated_by)
-         VALUES ($1, $2, $3::jsonb, $4, $5)
+         VALUES ($1, $2, $3::text::jsonb, $4, $5)
          ON CONFLICT (collection, entry_id) DO UPDATE
            SET data = EXCLUDED.data, source = EXCLUDED.source, updated_at = now(), updated_by = EXCLUDED.updated_by`,
         [c, id, source, source, by]);

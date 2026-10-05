@@ -108,7 +108,7 @@ export function mount(root: HTMLElement) {
   function card(c: Card, note?: string) {
     const img = safeSrc(c.image);
     const view = safeHref(c.url) ?? '#';
-    return el('article', { class: 'mchat-card' },
+    return el('article', { class: 'mchat-card', 'data-slug': c.slug },
       img ? el('a', { class: 'mchat-card-img', href: view, tabindex: '-1', 'aria-hidden': 'true' }, el('img', { src: img, alt: '', loading: 'lazy', decoding: 'async' })) : null,
       el('div', { class: 'mchat-card-body' },
         el('a', { class: 'mchat-card-name', href: view, 'data-cta': 'chat-product' }, c.name),
@@ -116,7 +116,7 @@ export function mount(root: HTMLElement) {
         el('span', { class: 'mchat-card-price' }, c.priceText, c.compareAtPriceText ? el('s', {}, c.compareAtPriceText) : null),
         note ? el('span', { class: 'mchat-card-note' }, note) : null,
         el('div', { class: 'mchat-card-actions' },
-          el('a', { class: 'view', href: view }, s.viewProduct),
+          el('a', { class: 'view', href: view, 'data-cta': 'chat-product' }, s.viewProduct),
           c.available ? el('a', { class: 'order', href: safeHref(c.orderUrl) ?? view, 'data-cta': 'chat-order' }, s.orderProduct)
             : el('span', { class: 'mchat-note' }, s.outOfStock))));
   }
@@ -265,8 +265,25 @@ export function mount(root: HTMLElement) {
   btnClose.addEventListener('click', () => close());
   panel.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 
+  /* Đo lường (docs/chat-analytics.md): bấm thẻ / bấm đặt / bấm nút link. sendBeacon
+     không chặn chuyển trang; máy chủ chỉ ghi khi khách đã có mã ẩn danh (đã nhắn). */
+  const beacon = (type: string, slug?: string, value?: string) => {
+    if (!state.turns.length) return;
+    try { navigator.sendBeacon?.(cfg.endpoint + '/event', JSON.stringify({ sessionId: state.sessionId, type, slug, value })); } catch { /* chặn */ }
+  };
+  log.addEventListener('click', (e) => {
+    const a = (e.target as Element).closest?.('a');
+    if (!a) return;
+    const slug = a.closest<HTMLElement>('.mchat-card')?.dataset.slug;
+    const cta = a.dataset.cta;
+    if (cta === 'chat-order') beacon('order_click', slug);
+    else if (cta === 'chat-product' || a.classList.contains('mchat-card-img')) beacon('product_click', slug);
+    else if (a.classList.contains('mchat-link')) beacon('link_click', undefined, a.getAttribute('href') ?? '');
+  });
+
   function open() {
     panel.hidden = false; root.classList.add('is-open', 'seen'); fab.setAttribute('aria-expanded', 'true');
+    beacon('open');
     renderAll(); setTimeout(() => input.focus(), 30);
   }
   function close() {
