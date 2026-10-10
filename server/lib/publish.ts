@@ -97,6 +97,7 @@ export function publish(sql: Sql, root: string, by: string): Promise<PublishResu
     await sql.query('UPDATE publish_runs SET finished_at = now(), ok = $2, log = $3 WHERE id = $1', [id, ok, text]);
     return { id, ok, log: text };
   })();
-  running = job.finally(() => { running = null; });
+  /* .catch: lỗi CSDL trong lúc ghi nhật ký không được thành unhandled rejection (Node 24 dừng tiến trình). */
+  running = job.catch(() => {}).finally(() => { running = null; });
   return job;
 }

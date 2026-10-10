@@ -1,12 +1,15 @@
 # Triển khai trên Ubuntu bằng Docker
 
+> Đưa lên máy chủ thật lần đầu (DNS, `.env`, HTTPS, sao lưu, Google Search Console): làm theo
+> [`dua-len-production.md`](dua-len-production.md). Tài liệu này là phần vận hành hằng ngày.
+
 Một máy chủ Ubuntu chạy ba container:
 
 | Container | Việc |
 |---|---|
 | `db` | Postgres 17 — đơn hàng, **nội dung**, **ảnh**, tài khoản quản trị, lịch sử sửa, lịch sử xuất bản |
-| `app` | Node 24 — phục vụ website (file tĩnh đã build), nhận đơn `/api/orders`, trang nhập liệu `/admin` |
-| `caddy` | (tuỳ chọn) HTTPS tự động bằng Let's Encrypt, đứng trước `app` |
+| `app` | Node 24 — phục vụ website (file tĩnh đã build), nhận đơn `/api/orders`, chat `/api/chat`, trang quản trị `/admin` |
+| `caddy` | HTTPS tự động bằng Let's Encrypt cho tên miền chính, `www` và tên miền con quản trị (`ADMIN_HOST`) |
 
 Nội dung **nhập ở Postgres**, website **vẫn là trang tĩnh** được build từ nội dung
 đó. Bấm "Xuất bản" trong `/admin` thì `app` ghi nội dung ra file, chạy `astro
@@ -47,7 +50,8 @@ Lần chạy đầu `app` tự:
 3. nạp toàn bộ nội dung + ảnh đang có trong image vào Postgres;
 4. build lại site từ Postgres (ở nền; trong lúc đó vẫn phục vụ bản có sẵn trong image).
 
-Kiểm tra: `curl -s https://<tên-miền>/healthz` → `ok`. Vào `https://<tên-miền>/admin/`,
+Kiểm tra: `curl -s https://<tên-miền>/healthz` → `ok`. Vào `https://<ADMIN_HOST>/admin/`
+(ví dụ `https://admin.mochatrinam.com/admin/`; chưa đặt `ADMIN_HOST` thì `https://<tên-miền>/admin/`),
 đăng nhập, rồi **xoá `ADMIN_BOOTSTRAP_PASSWORD` khỏi `.env`** và đặt mật khẩu mới ở
 **Tài khoản**.
 
@@ -80,11 +84,17 @@ docker compose up -d app
 ## 5. Cập nhật mã nguồn
 
 ```bash
-git pull && docker compose up -d --build app
+deploy/backup.sh && git pull && docker compose --profile https up -d --build
 ```
 
 Nội dung trong Postgres **không** bị ghi đè khi cập nhật image: bước "nạp nội dung
-từ image" chỉ chạy khi CSDL còn trống.
+từ image" chỉ chạy khi CSDL còn trống. Bản mới có thêm sản phẩm/bài trong `src/`
+thì nạp riêng các mục **mới** (mục đã có — kể cả giá đã sửa trên trang quản trị — giữ
+nguyên), rồi Xuất bản:
+
+```bash
+docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts import --only-new
+```
 
 Muốn đưa nội dung đang chạy thật về repo (để commit, để review diff):
 
@@ -100,14 +110,23 @@ git diff src/content
 docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts <lệnh>
 #   validate        kiểm mọi nội dung trong CSDL bằng schema
 #   publish         xuất bản một lần
-#   import          nạp lại nội dung từ file trong image (ghi đè bản trùng mã)
+#   import --only-new  chỉ nạp nội dung/ảnh chưa có trong CSDL (dùng khi cập nhật bản mới)
+#   import          nạp lại TOÀN BỘ nội dung từ file trong image (GHI ĐÈ bản trùng mã — cẩn thận)
 #   user <tên> admin   (mật khẩu trong biến ADMIN_PASSWORD)
 docker compose logs -f app
 ```
 
 ## 7. Bảo mật đã có sẵn
 
-- Postgres không mở cổng ra ngoài; `app` chỉ nghe trên `127.0.0.1`.
+- Postgres không mở cổng ra ngoài; `app` chỉ nghe trên `127.0.0.1`. Log Docker xoay vòng (10 MB × 5 mỗi dịch vụ).
+- Trang quản trị ở tên miền con riêng (`ADMIN_HOST`): script GTM/Facebook/TikTok của website không
+  chạm được vào nó; thêm nữa, mọi `fetch()` từ script trong trình duyệt tới `/admin` bị từ chối
+  (chỉ nhận điều hướng thật của trình duyệt), header `Cross-Origin-Opener-Policy: same-origin`.
+- Đăng nhập: tối đa 10 lần / 15 phút mỗi IP và 20 lần mỗi tên đăng nhập; đổi mật khẩu thì mọi
+  phiên cũ phải đăng nhập lại.
+- Giới hạn kích thước yêu cầu theo đường dẫn (đơn hàng 64 KB, chat 8 MB, ảnh 30 MB) áp trước
+  khi đọc; chat và sự kiện chat giới hạn nhịp theo IP (IPv6 theo khối /64); yêu cầu bị chặn không
+  ghi gì vào CSDL; bảng giới hạn nhịp tự dọn mỗi giờ.
 - Header bảo mật (CSP, HSTS, nosniff…) đọc từ chính `public/_headers`.
 - `/admin`: mật khẩu băm scrypt, phiên lưu dạng băm, cookie `HttpOnly; Secure; SameSite=Strict`,
   mọi POST phải cùng Origin, không cache, `noindex`.

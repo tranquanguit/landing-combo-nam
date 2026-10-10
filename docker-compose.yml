@@ -1,14 +1,23 @@
-# Triển khai trên Ubuntu:  cp .env.example .env  (điền giá trị)  &&  docker compose up -d --build
+# Triển khai trên Ubuntu:  cp .env.example .env  (điền giá trị)  &&  docker compose --profile https up -d --build
 #
-#   db     Postgres 17 — đơn hàng + nội dung + ảnh + tài khoản quản trị (một volume, một pg_dump là đủ sao lưu)
-#   app    website + /api/orders + /admin (nhập liệu, đơn hàng, xuất bản)
-#   caddy  HTTPS tự động (Let's Encrypt) — bật bằng:  docker compose --profile https up -d
+#   db     Postgres 17 — đơn hàng + nội dung + ảnh + tài khoản + chat (một volume, một pg_dump là đủ sao lưu)
+#   app    website + /api/orders + /api/chat + /admin (nhập liệu, đơn hàng, chat, xuất bản)
+#   caddy  HTTPS tự động (Let's Encrypt) cho SITE_DOMAIN, www.SITE_DOMAIN và ADMIN_HOST
 #
-# Chi tiết vận hành: docs/trien-khai-docker.md
+# Các bước đưa lên máy chủ: docs/dua-len-production.md · vận hành: docs/trien-khai-docker.md
+
+# Log của Docker mặc định không giới hạn — một đợt spam là đầy ổ đĩa. 10MB × 5 tệp mỗi dịch vụ.
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
 services:
   db:
     image: postgres:17-alpine
     restart: unless-stopped
+    logging: *logging
     environment:
       POSTGRES_DB: mocha
       POSTGRES_USER: mocha
@@ -27,14 +36,25 @@ services:
       context: .
       args:
         PUBLIC_SITE_URL: ${PUBLIC_SITE_URL:-https://mochatrinam.com}
+        PUBLIC_GA4_ID: ${PUBLIC_GA4_ID:-}
+        PUBLIC_META_PIXEL_ID: ${PUBLIC_META_PIXEL_ID:-}
+        PUBLIC_TIKTOK_PIXEL_ID: ${PUBLIC_TIKTOK_PIXEL_ID:-}
     restart: unless-stopped
+    logging: *logging
     depends_on:
       db:
         condition: service_healthy
     environment:
       DATABASE_URL: postgres://mocha:${POSTGRES_PASSWORD}@db:5432/mocha
       PUBLIC_SITE_URL: ${PUBLIC_SITE_URL:-https://mochatrinam.com}
+      # Mã đo lường: đọc LÚC BUILD, nên phải có cả ở đây (nút Xuất bản build lại trong container)
+      # lẫn ở build args phía trên. Trống = không gắn mã nào. Khách vẫn phải bấm đồng ý trước.
+      PUBLIC_GA4_ID: ${PUBLIC_GA4_ID:-}
+      PUBLIC_META_PIXEL_ID: ${PUBLIC_META_PIXEL_ID:-}
+      PUBLIC_TIKTOK_PIXEL_ID: ${PUBLIC_TIKTOK_PIXEL_ID:-}
       ALLOWED_ORIGIN: ${PUBLIC_SITE_URL:-https://mochatrinam.com}
+      # Tên miền con riêng cho trang quản trị (khuyên dùng). Trống = /admin chạy chung tên miền.
+      ADMIN_HOST: ${ADMIN_HOST:-}
       ADMIN_TOKEN: ${ADMIN_TOKEN:?Đặt ADMIN_TOKEN (>= 24 ký tự) trong .env}
       IP_SALT: ${IP_SALT:?Đặt IP_SALT trong .env}
       ADMIN_BOOTSTRAP_USER: ${ADMIN_BOOTSTRAP_USER:-admin}
@@ -59,12 +79,15 @@ services:
     image: caddy:2-alpine
     profiles: ["https"]
     restart: unless-stopped
+    logging: *logging
     depends_on: [app]
     ports:
       - "80:80"
       - "443:443"
     environment:
       SITE_DOMAIN: ${SITE_DOMAIN:-mochatrinam.com}
+      # Chưa đặt ADMIN_HOST thì khối admin trong Caddyfile trỏ vào admin.localhost (vô hại).
+      ADMIN_HOST: ${ADMIN_HOST:-admin.localhost}
     volumes:
       - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data

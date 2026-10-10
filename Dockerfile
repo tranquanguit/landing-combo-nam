@@ -22,8 +22,16 @@ COPY . .
 # Tên miền thật của site (canonical, sitemap, og:image). Biểu mẫu đặt hàng gửi về
 # /api/orders của chính container này nên không cần nới CSP connect-src.
 ARG PUBLIC_SITE_URL=https://mochatrinam.com
+# Mã đo lường (đọc lúc build). Container cũng nhận các biến này qua docker-compose để
+# nút "Xuất bản" build lại vẫn giữ mã. Trống = không gắn mã nào.
+ARG PUBLIC_GA4_ID=
+ARG PUBLIC_META_PIXEL_ID=
+ARG PUBLIC_TIKTOK_PIXEL_ID=
 ENV PUBLIC_SITE_URL=${PUBLIC_SITE_URL} \
-    PUBLIC_ORDER_ENDPOINT=/api/orders
+    PUBLIC_ORDER_ENDPOINT=/api/orders \
+    PUBLIC_GA4_ID=${PUBLIC_GA4_ID} \
+    PUBLIC_META_PIXEL_ID=${PUBLIC_META_PIXEL_ID} \
+    PUBLIC_TIKTOK_PIXEL_ID=${PUBLIC_TIKTOK_PIXEL_ID}
 RUN node node_modules/astro/bin/astro.mjs build \
  && node scripts/check-budget.mjs \
  && chown -R node:node /app

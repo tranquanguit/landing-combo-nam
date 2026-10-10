@@ -39,9 +39,24 @@ export function createApp(opts: AppOptions) {
   const cfEnv = { DB, IP_SALT: env.IP_SALT, ALLOWED_ORIGIN: env.ALLOWED_ORIGIN, ADMIN_TOKEN: env.ADMIN_TOKEN };
   const ctx = (request: Request) => ({ request, env: cfEnv, params: {}, data: {}, next: async () => new Response(null, { status: 404 }), waitUntil: () => {} });
 
+  /* ADMIN_HOST (khuyên dùng khi chạy thật, ví dụ admin.mochatrinam.com): trang quản trị chỉ
+     mở ở tên miền con riêng. Website chạy script bên thứ ba (GTM, Facebook, TikTok); khác
+     origin thì các script đó không đọc được trang quản trị và không gửi được biểu mẫu
+     (kiểm tra Origin). Không đặt thì /admin chạy cùng tên miền như trước. */
+  const adminHost = env.ADMIN_HOST?.trim().toLowerCase() || '';
+
   return async function handle(request: Request): Promise<Response> {
-    const { pathname } = new URL(request.url);
+    const url = new URL(request.url);
+    const { pathname } = url;
+    const isAdmin = pathname === '/admin' || pathname.startsWith('/admin/');
     try {
+      if (adminHost) {
+        if (url.hostname.toLowerCase() === adminHost) {
+          if (!isAdmin && pathname !== '/healthz') return new Response(null, { status: 302, headers: { location: '/admin/', 'cache-control': 'no-store' } });
+        } else if (isAdmin) {
+          return await serveStatic(new Request(new URL('/__khong-co__/', url)));
+        }
+      }
       if (pathname === '/api/orders') {
         const res = await ordersHandler(ctx(request) as any);
         /* Đơn đặt sau khi chat (cùng visitorId) = chuyển đổi của chat. Không bao giờ làm hỏng đơn. */
@@ -55,13 +70,17 @@ export function createApp(opts: AppOptions) {
       if (pathname === '/api/chat') return await chatHandler(request, sql, root, env as any, opts.fetch);
       if (pathname === '/api/chat/event') return await chatEventHandler(request, sql, env as any);
       if (pathname === '/api/admin/chats') return await chatExportHandler(request, sql, env as any);
-      if (pathname === '/admin' || pathname.startsWith('/admin/')) return await adminHandler(request, { sql, root, env: env as any, fetch: opts.fetch });
+      if (isAdmin) return await adminHandler(request, { sql, root, env: env as any, fetch: opts.fetch });
       if (pathname === '/healthz') {
         await sql.query('SELECT 1');
         return new Response('ok', { headers: { 'content-type': 'text/plain', 'cache-control': 'no-store' } });
       }
       return await serveStatic(request);
     } catch (e) {
+      /* Thân yêu cầu vượt giới hạn của đường dẫn (server/main.ts cắt luồng giữa chừng). */
+      if (/body_too_large/.test(String((e as Error)?.message) + String((e as any)?.cause?.message))) {
+        return new Response('Yêu cầu quá lớn', { status: 413, headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store' } });
+      }
       /* Không in nội dung yêu cầu ra log: thân yêu cầu đặt hàng là dữ liệu cá nhân. */
       console.error('request_failed', pathname, (e as Error).message?.slice(0, 200));
       return new Response('Lỗi máy chủ', { status: 500, headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store' } });

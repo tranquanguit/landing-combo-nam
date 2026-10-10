@@ -9,6 +9,10 @@ chính file đó quyết định, không phải sửa code.
 >
 > **Nhập liệu:** [`docs/nhap-lieu.md`](docs/nhap-lieu.md) — sửa nội dung ở `/admin`
 > (Postgres), kiểm bằng đúng schema của build, bấm Xuất bản mới lên trang thật.
+> **Đưa lên production:** [`docs/dua-len-production.md`](docs/dua-len-production.md) — từng bước
+> trên Ubuntu + tên miền (DNS, `.env`, HTTPS, sao lưu) và đăng ký Google Search Console / Bing /
+> Merchant Center.
+>
 > **Chat:** [`docs/chat-n8n.md`](docs/chat-n8n.md) — bong bóng chat; trả lời bằng kịch bản
 > tư vấn (`/admin/chat-rules`) hoặc webhook n8n (cấu hình ở `/admin/settings/chat`), chuẩn
 > JSON gửi/nhận (`docs/chat/*.schema.json`), phân biệt khách. Lịch sử + số liệu để phân

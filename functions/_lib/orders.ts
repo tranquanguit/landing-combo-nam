@@ -73,7 +73,9 @@ const LOCALES = new Set(['vi', 'en', 'th', 'id']);
  */
 const CODE_ALPHABET = '23456789ABCDEFGHJKMNPQRTUVWXYZ';
 export function makeOrderCode(now: Date, random: () => number = Math.random): string {
-  const d = now.toISOString().slice(2, 10).replace(/-/g, '');
+  /* Ngày theo giờ Việt Nam (UTC+7, không đổi giờ mùa hè): đơn lúc 01:00 sáng ngày 5 phải
+     mang ngày 5, không phải ngày 4 như khi lấy theo UTC. */
+  const d = new Date(now.getTime() + 7 * 3600_000).toISOString().slice(2, 10).replace(/-/g, '');
   let tail = '';
   for (let i = 0; i < 4; i++) tail += CODE_ALPHABET[Math.floor(random() * CODE_ALPHABET.length)];
   return `MC-${d}-${tail}`;

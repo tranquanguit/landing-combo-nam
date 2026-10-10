@@ -23,6 +23,7 @@ import { join } from 'node:path';
 import type { Sql } from './db.ts';
 import { cookie } from './auth.ts';
 import { currentSite } from './publish.ts';
+import { limited } from './rate-limit.ts';
 import { getChatSettings, type ChatSettings, type ChatSettingsEnv } from './chat-settings.ts';
 import { loadRules, pickRule, recordHit, renderResponse } from './chat-rules.ts';
 
@@ -214,7 +215,10 @@ export async function callN8n(s: ChatSettings, req: unknown, fetchImpl: typeof f
     headers['x-mocha-token'] = s.sharedSecret;
     headers['x-mocha-signature'] = 'sha256=' + createHmac('sha256', s.sharedSecret).update(`${ts}.${bodyOut}`).digest('hex');
   }
-  const r = await fetchImpl(s.webhookUrl, { method: 'POST', headers, body: bodyOut, signal: AbortSignal.timeout(s.timeoutMs) });
+  /* redirect: 'manual' — webhook n8n không chuyển hướng; theo chuyển hướng thì một URL
+     https bên ngoài có thể dẫn máy chủ gọi vào địa chỉ nội bộ (SSRF). */
+  const r = await fetchImpl(s.webhookUrl, { method: 'POST', headers, body: bodyOut, redirect: 'manual', signal: AbortSignal.timeout(s.timeoutMs) });
+  if (r.status >= 300 && r.status < 400) throw new Error(`n8n chuyển hướng (HTTP ${r.status}) — dùng đúng "Production URL" của webhook`);
   if (!r.ok) throw new Error(`n8n HTTP ${r.status}`);
   const raw = await r.json();
   /* n8n "Respond to Webhook" đôi khi bọc kết quả trong mảng [ {...} ] */
@@ -254,19 +258,6 @@ export async function testN8n(s: ChatSettings, root: string, fetchImpl: typeof f
 }
 
 // ----------------------------------------------------------------- lưu + giới hạn nhịp
-async function rateLimited(sql: Sql, key: string, max: number) {
-  const now = Date.now();
-  const row = (await sql.query<{ count: number; window_at: string }>('SELECT count, window_at FROM rate_limit WHERE key = $1', [key])).rows[0];
-  const fresh = !!row && now - Date.parse(row.window_at) < RATE_WINDOW_MS;
-  if (fresh && row.count >= max) return true;
-  await sql.query(
-    `INSERT INTO rate_limit (key, count, window_at) VALUES ($1, 1, $2)
-     ON CONFLICT (key) DO UPDATE SET count = CASE WHEN $3 = 1 THEN rate_limit.count + 1 ELSE 1 END,
-       window_at = CASE WHEN $3 = 1 THEN rate_limit.window_at ELSE $2 END`,
-    [key, new Date(now).toISOString(), fresh ? 1 : 0]);
-  return false;
-}
-
 /** Nguồn của câu trả lời — cột chat_messages.source.
  *  rules: kịch bản · n8n · fallback: kịch bản thay n8n đang lỗi · off · rate_limited · error: không ai trả lời được */
 export type Source = 'rules' | 'n8n' | 'fallback' | 'off' | 'rate_limited' | 'error';
@@ -370,8 +361,12 @@ export async function chatHandler(request: Request, sql: Sql, root: string, env:
   };
   const canned = (text: string): Normalized => ({ messages: [{ type: 'text', text }, ...contactLinks(catalog, msg.locale)], quickReplies: [], handoff: true, dropped: 0 });
 
-  if (await rateLimited(sql, `chat:v:${visitorId}`, s.rateMax) || (ipHash && await rateLimited(sql, `chat:ip:${ipHash}`, s.rateMax))) {
-    return finish({ n: canned(T[msg.locale].limited), source: 'rate_limited', ruleId: null, matched: false, degraded: 'rate_limited' }, 429);
+  /* Gửi quá nhanh: trả lời ngay, KHÔNG ghi gì vào chat_messages/chat_sessions — nếu không,
+     chính các yêu cầu bị chặn lại thành đường lấp đầy ổ đĩa. Xét IP trước: khách không gửi
+     cookie thì mỗi yêu cầu có visitorId mới, chỉ giới hạn theo IP mới chặn được. */
+  if ((ipHash && await limited(sql, `chat:ip:${ipHash}`, s.rateMax, RATE_WINDOW_MS)) || await limited(sql, `chat:v:${visitorId}`, s.rateMax, RATE_WINDOW_MS)) {
+    const n = canned(T[msg.locale].limited);
+    return json({ ok: true, version: CHAT_VERSION, sessionId: msg.sessionId, messages: n.messages, quickReplies: [], handoff: true, degraded: 'rate_limited' }, 429, setCookie);
   }
   if (s.mode === 'off') return finish({ n: canned(T[msg.locale].off), source: 'off', ruleId: null, matched: false, degraded: 'off' });
 
@@ -411,11 +406,14 @@ export async function chatEventHandler(request: Request, sql: Sql, env: ChatEnv)
   if (env.ALLOWED_ORIGIN && origin && origin !== env.ALLOWED_ORIGIN) return none;
   const visitorId = cookie(request, VID_COOKIE) ?? '';
   if (!VID.test(visitorId)) return none;  /* chưa từng nhắn = chưa có cookie: không có gì để gắn vào */
+  /* Cookie tự đặt được (không ký), nên giới hạn theo IP trước rồi mới theo khách. */
+  const ip = request.headers.get('cf-connecting-ip');
+  if (ip && env.IP_SALT && await limited(sql, `chatev:ip:${hashIp(ip, env.IP_SALT)}`, 300, RATE_WINDOW_MS)) return none;
   const raw = await request.text();
   if (raw.length > 2048) return none;
   let b: any; try { b = JSON.parse(raw); } catch { return none; }
   if (!EVENT_TYPES.has(b?.type) || !UUID.test(String(b?.sessionId ?? ''))) return none;
-  if (await rateLimited(sql, `chatev:v:${visitorId}`, 200)) return none;
+  if (await limited(sql, `chatev:v:${visitorId}`, 200, RATE_WINDOW_MS)) return none;
   const slug = /^[a-z0-9-]{1,80}$/.test(String(b.slug ?? '')) ? b.slug : null;
   await sql.query('INSERT INTO chat_events (session_id, visitor_id, type, slug, value) VALUES ($1, $2, $3, $4, $5)',
     [b.sessionId, visitorId, b.type, slug, str(b.value, 300) || null]);

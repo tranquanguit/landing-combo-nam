@@ -39,6 +39,8 @@ export async function createUser(sql: Sql, username: string, password: string, r
     `INSERT INTO admin_users (username, password, role) VALUES ($1, $2, $3)
      ON CONFLICT (username) DO UPDATE SET password = EXCLUDED.password, role = EXCLUDED.role`,
     [username, await hashPassword(password), role]);
+  /* Đổi mật khẩu / đổi quyền: mọi phiên đang đăng nhập của tài khoản này phải đăng nhập lại. */
+  await sql.query('DELETE FROM admin_sessions WHERE username = $1', [username]);
 }
 
 /** Lần chạy đầu: chưa có tài khoản nào thì tạo từ ADMIN_BOOTSTRAP_USER / _PASSWORD. */
