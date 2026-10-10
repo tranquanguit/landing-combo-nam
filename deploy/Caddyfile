@@ -1,7 +1,13 @@
 # HTTPS tự động (Let's Encrypt) trước container app.
-# Caddy v2 mặc định BỎ QUA X-Forwarded-* do client tự gửi (không có trusted_proxies),
-# nên hop đầu của X-Forwarded-For mà app nhận được là IP thật — chống spam đơn hàng
-# dựa vào đó.
+#
+# IP khách: Caddy v2 bỏ X-Forwarded-For do client tự gửi (không khai trusted_proxies) và
+# tự ghi IP thật; app lấy MỤC CUỐI của X-Forwarded-For (server/main.ts) — đúng cả khi
+# sau này đặt thêm một proxy khác phía trước.
+#
+# Trang quản trị chạy ở tên miền con riêng (ADMIN_HOST, ví dụ admin.mochatrinam.com):
+# website có script quảng cáo/đo lường bên thứ ba, khác origin thì các script đó không
+# chạm được vào trang quản trị. App tự trả 404 cho /admin trên tên miền chính.
+
 {$SITE_DOMAIN} {
 	reverse_proxy app:8080
 	header -Server
@@ -9,4 +15,9 @@
 
 www.{$SITE_DOMAIN} {
 	redir https://{$SITE_DOMAIN}{uri} permanent
+}
+
+{$ADMIN_HOST} {
+	reverse_proxy app:8080
+	header -Server
 }

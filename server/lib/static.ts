@@ -71,14 +71,21 @@ export function createStatic(distDir: () => string) {
     return existsSync(f) && statSync(f).isFile() ? f : null;
   }
 
+  let cacheFor = '';
   return async function serve(request: Request): Promise<Response> {
     const url = new URL(request.url);
+    /* Mỗi lần xuất bản là một thư mục builds/<số> mới: bỏ bộ đệm của bản cũ, không thì RAM
+       tăng theo số lần xuất bản. */
+    const dir = distDir();
+    if (dir !== cacheFor) { cache.clear(); cacheFor = dir; }
     if (request.method !== 'GET' && request.method !== 'HEAD') {
       return new Response('Method Not Allowed', { status: 405, headers: { allow: 'GET, HEAD' } });
     }
     /* trailingSlash: 'always' trong astro.config — một dạng URL duy nhất. */
     if (!extname(url.pathname) && !url.pathname.endsWith('/')) {
-      return new Response(null, { status: 308, headers: { location: url.pathname + '/' + url.search } });
+      /* "//evil.com/x" là URL tương đối theo giao thức — chuyển hướng nguyên văn sẽ đưa khách
+         sang tên miền khác (open redirect). Gộp các dấu "/" đầu thành một. */
+      return new Response(null, { status: 308, headers: { location: '/' + url.pathname.replace(/^\/+/, '') + '/' + url.search } });
     }
     let file = resolve(url.pathname);
     let status = 200;

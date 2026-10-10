@@ -10,7 +10,7 @@
  */
 import type { User } from '../lib/auth.ts';
 import type { AdminCtx } from './app.ts';
-import { page, redirect, esc, notice } from './html.ts';
+import { page, redirect, esc, notice, pageHead } from './html.ts';
 import { getChatSettings, saveChatSettings, defaults, validate, maskSecret, type ChatSettings } from '../lib/chat-settings.ts';
 import { guardRule, invalidateRules, unaccent, type Rule } from '../lib/chat-rules.ts';
 import { answerByRules, loadCatalog, normalizeResponse, testN8n, type Normalized } from '../lib/chat.ts';
@@ -47,7 +47,7 @@ async function settingsPage(ctx: AdminCtx, user: User, url: URL, opts: { errors?
     <label style="display:flex;gap:10px;align-items:flex-start;font-weight:400"><input type="radio" name="mode" value="${v}" ${s.mode === v ? 'checked' : ''} style="width:auto;margin-top:4px">
       <span><b>${title}</b><br><span class="muted">${help}</span></span></label>`;
   return page('Cấu hình chat', `
-    <h1>Cấu hình chat</h1>
+    ${pageHead('Cấu hình chat', { sub: 'Ai trả lời khách trong bong bóng chat, kết nối n8n và thời hạn lưu dữ liệu. Áp dụng ngay, không cần khởi động lại.' })}
     ${url.searchParams.get('ok') ? notice('ok', 'Đã lưu. Áp dụng ngay cho tin nhắn kế tiếp (không cần khởi động lại).') : ''}
     ${opts.errors?.length ? notice('err', `Chưa lưu:<ul>${opts.errors.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>`) : ''}
     ${t ? notice(t.ok ? 'ok' : 'err', t.ok
@@ -153,7 +153,7 @@ async function rulesPage(ctx: AdminCtx, user: User, url: URL) {
   const handled = new Set(rules.filter((r) => r.enabled).flatMap((r) => r.payloads.map((p) => `${r.locale}:${p}`)));
   const dead = (r: Rule) => (r.response?.quickReplies ?? []).filter((x: any) => x.payload && !handled.has(`${r.locale}:${x.payload}`) && !handled.has(`*:${x.payload}`)).map((x: any) => x.payload);
   return page('Kịch bản chat', `
-    <h1>Kịch bản tư vấn <span class="muted">(${rules.length})</span></h1>
+    ${pageHead(`Kịch bản tư vấn <span class="muted">(${rules.length})</span>`, { actions: '<a class="btn" href="/admin/chat-rules/edit?new=1">+ Kịch bản mới</a>' })}
     <p class="muted">Chế độ đang chạy: <b>${esc(MODE_VI[s.mode])}</b>${s.mode === 'n8n' ? (s.rulesFallback ? ' — kịch bản trả lời thay khi n8n lỗi' : ' — kịch bản không được dùng') : ''}.
       ${user.role === 'admin' ? '<a href="/admin/settings/chat">Đổi</a>' : ''}
       Kịch bản so khớp <b>không dấu</b> ("da toi bi nam" = "da tôi bị nám"), nên dùng cụm 2–3 từ thay vì một từ trần ("nam" cũng là "nam giới").</p>
@@ -164,7 +164,6 @@ async function rulesPage(ctx: AdminCtx, user: User, url: URL) {
       <button>Thử</button>
     </form>
     ${tested}
-    <div class="row"><a class="btn" href="/admin/chat-rules/edit?new=1">+ Kịch bản mới</a></div>
     <table><tr><th>Kịch bản</th><th>Khi nào</th><th>Ưu tiên</th><th>Đã dùng</th><th></th></tr>
     ${rules.map((r) => {
       const d = dead(r);
@@ -214,8 +213,7 @@ async function editRulePage(ctx: AdminCtx, user: User, url: URL, opts: { form?: 
   const payloads = (await ctx.sql.query<{ p: string }>('SELECT DISTINCT unnest(payloads) AS p FROM chat_rules ORDER BY 1')).rows.map((r) => r.p);
   const check = (name: string, on: boolean, label: string) => `<label style="display:flex;gap:8px;font-weight:400"><input type="checkbox" name="${name}" value="1" ${on ? 'checked' : ''} style="width:auto"> <span>${label}</span></label>`;
   return page(f.id ? 'Sửa kịch bản' : 'Kịch bản mới', `
-    <h1>${f.id ? 'Sửa kịch bản' : 'Kịch bản mới'}</h1>
-    <p><a href="/admin/chat-rules">← tất cả kịch bản</a></p>
+    ${pageHead(f.id ? esc(f.name) : 'Kịch bản mới', { back: ['/admin/chat-rules', 'Kịch bản tư vấn'] })}
     ${url.searchParams.get('ok') ? notice('ok', 'Đã lưu — áp dụng cho tin nhắn kế tiếp.') : ''}
     ${opts.errors?.length ? notice('err', `Chưa lưu:<ul>${opts.errors.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>`) : ''}
     <form method="post" action="/admin/chat-rules/edit">
@@ -322,7 +320,7 @@ async function chatsPage(ctx: AdminCtx, user: User, url: URL) {
   const s = await getChatSettings(sql, envOf(ctx));
   const k = a.kpis;
   const replies = a.sources.reduce((x, y) => x + y.n, 0);
-  const kpi = (label: string, value: string | number, sub = '') => `<div class="card" style="margin:0"><div class="muted">${label}</div><div style="font-size:26px;font-weight:700;color:var(--navy)">${value}</div>${sub ? `<div class="muted">${sub}</div>` : ''}</div>`;
+  const kpi = (label: string, value: string | number, sub = '') => `<div class="stat"><span class="muted">${label}</span><b>${value}</b>${sub ? `<span class="muted">${sub}</span>` : ''}</div>`;
   const maxDay = Math.max(1, ...a.daily.map((d) => d.sessions));
   const filter = url.searchParams.get('f') ?? '';
   const FILTERS: Record<string, string> = { unmatched: 's.unmatched > 0', handoff: 's.handoff', order: 's.order_code IS NOT NULL', degraded: 's.degraded > 0' };
@@ -330,11 +328,9 @@ async function chatsPage(ctx: AdminCtx, user: User, url: URL) {
     `SELECT s.*, (SELECT text FROM chat_messages m WHERE m.session_id = s.session_id AND m.role = 'user' AND m.text IS NOT NULL ORDER BY id LIMIT 1) AS first_text
        FROM chat_sessions s ${FILTERS[filter] ? `WHERE ${FILTERS[filter]}` : ''} ORDER BY s.last_at DESC LIMIT 150`)).rows;
   return page('Chat', `
-    <h1>Chat <span class="muted">— ${days} ngày qua</span></h1>
-    <div class="row">${[7, 30, 90].map((d) => `<a class="btn ${d === days ? '' : 'ghost'}" href="/admin/chats?days=${d}">${d} ngày</a>`).join('')}
-      <span class="muted">Chế độ: <b>${esc(MODE_VI[s.mode])}</b> · lưu chữ ${s.retentionDays} ngày, số liệu phiên ${s.sessionRetentionDays} ngày, không lưu ảnh ·
-      xuất dữ liệu: <code>/api/admin/chats?type=messages&amp;from=YYYY-MM-DD</code> (Bearer ADMIN_TOKEN, NDJSON)</span></div>
-    <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(min(150px,45%),1fr))">
+    ${pageHead('Hội thoại &amp; số liệu chat', { sub: `Chế độ: <b>${esc(MODE_VI[s.mode])}</b> · lưu chữ ${s.retentionDays} ngày, số liệu phiên ${s.sessionRetentionDays} ngày, không lưu ảnh · xuất dữ liệu: <code>/api/admin/chats?type=messages&amp;from=YYYY-MM-DD</code> (Bearer ADMIN_TOKEN, NDJSON)` })}
+    <div class="chips">${[7, 30, 90].map((d) => `<a href="/admin/chats?days=${d}"${d === days ? ' aria-current="page"' : ''}>${d} ngày</a>`).join('')}</div>
+    <div class="stats">
       ${kpi('Cuộc trò chuyện', k.sessions, `${k.visitors} khách`)}
       ${kpi('Tin khách gửi', k.userMessages, k.images ? `${k.images} ảnh` : '')}
       ${kpi('Trả lời được', pct(k.answeredRules + k.answeredN8n, k.userMessages), `kịch bản ${k.answeredRules} · n8n ${k.answeredN8n}`)}
@@ -342,9 +338,9 @@ async function chatsPage(ctx: AdminCtx, user: User, url: URL) {
       ${kpi('Chuyển chuyên viên', k.handoffs, pct(k.handoffs, k.sessions) + ' số cuộc')}
       ${kpi('Bấm thẻ sản phẩm', k.productClicks, `bấm đặt hàng ${k.orderClicks}`)}
       ${kpi('Đơn sau khi chat', k.orders, pct(k.orders, k.sessions) + ' số cuộc · ≤7 ngày')}
-      ${kpi('Sự cố', k.degraded, 'n8n lỗi / chat tắt / gửi nhanh')}
+      ${kpi('Sự cố', k.degraded, 'n8n lỗi, chậm hoặc chat tắt')}
     </div>
-    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));margin-top:12px">
+    <div class="split">
       <div class="card"><h2 style="margin-top:0">Câu chưa trả lời được</h2>
         <p class="muted">Không kịch bản nào khớp (hoặc n8n báo <code>"matched": false</code>). Đây là danh sách kịch bản nên viết thêm.</p>
         ${a.unanswered.length ? `<table>${a.unanswered.map((u) => `<tr><td>${esc(u.text.slice(0, 160))}<br><span class="muted">${u.n} lần · ${esc(fmt(u.last_at))} · ${esc(u.locale)}</span></td>
@@ -361,8 +357,8 @@ async function chatsPage(ctx: AdminCtx, user: User, url: URL) {
           <span style="display:inline-block;height:10px;border-radius:5px;background:var(--cobalt);width:${Math.max(2, Math.round((d.sessions / maxDay) * 220))}px"></span>${d.sessions}${d.orders ? ` · <b>${d.orders} đơn</b>` : ''}</div>`).join('') || '<p class="muted">Chưa có.</p>'}</div>
     </div>
     <h2>Cuộc trò chuyện</h2>
-    <div class="row">${[['', 'Tất cả'], ['unmatched', 'Có câu chưa hiểu'], ['handoff', 'Chuyển chuyên viên'], ['order', 'Có đơn'], ['degraded', 'Có sự cố']]
-      .map(([v, l]) => `<a class="btn ${v === filter ? '' : 'ghost'}" href="/admin/chats?days=${days}${v ? `&f=${v}` : ''}">${l}</a>`).join('')}</div>
+    <div class="chips">${[['', 'Tất cả'], ['unmatched', 'Có câu chưa hiểu'], ['handoff', 'Chuyển chuyên viên'], ['order', 'Có đơn'], ['degraded', 'Có sự cố']]
+      .map(([v, l]) => `<a href="/admin/chats?days=${days}${v ? `&f=${v}` : ''}"${v === filter ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</div>
     <p class="muted">"Khách" là mã ẩn danh của trình duyệt (cookie), không phải danh tính.</p>
     <table><tr><th>Lần cuối</th><th>Khách</th><th>Câu đầu tiên</th><th>Lượt</th><th>Kết quả</th><th></th></tr>
     ${sessions.map((r) => `<tr><td>${esc(fmt(r.last_at))}</td><td><code>${esc(String(r.visitor_id).slice(0, 10))}</code><br><span class="muted">${esc(r.entry_path ?? '')}${r.utm_source ? ` · ${esc(r.utm_source)}` : ''}</span></td>
@@ -381,9 +377,8 @@ async function transcript({ sql }: AdminCtx, user: User, sid: string) {
   const sess = (await sql.query<any>('SELECT * FROM chat_sessions WHERE session_id = $1', [sid])).rows[0];
   const events = (await sql.query<any>('SELECT type, slug, value, created_at FROM chat_events WHERE session_id = $1 ORDER BY id', [sid])).rows;
   return page('Chat', `
-    <h1>Cuộc trò chuyện <code>${esc(sid.slice(0, 8))}</code></h1>
-    <p class="muted">Khách ${esc(rows[0]?.visitor_id ?? sess?.visitor_id ?? '')} · <a href="/admin/chats">← tất cả</a>
-      ${sess ? ` · vào từ ${esc(sess.entry_path ?? '')}${sess.utm_source ? ` (${esc(sess.utm_source)}/${esc(sess.utm_campaign ?? '')})` : ''}${sess.order_code ? ` · <b>đặt đơn ${esc(sess.order_code)}</b>` : ''}` : ''}</p>
+    ${pageHead(`Cuộc trò chuyện <code>${esc(sid.slice(0, 8))}</code>`, { back: ['/admin/chats', 'Hội thoại & số liệu'],
+      sub: `Khách ${esc(rows[0]?.visitor_id ?? sess?.visitor_id ?? '')}${sess ? ` · vào từ ${esc(sess.entry_path ?? '')}${sess.utm_source ? ` (${esc(sess.utm_source)}/${esc(sess.utm_campaign ?? '')})` : ''}${sess.order_code ? ` · <b>đặt đơn ${esc(sess.order_code)}</b>` : ''}` : ''}` })}
     ${rows.map((r) => {
       const extra = r.role === 'user'
         ? esc([r.payload?.images ? `${r.payload.images} ảnh (không lưu)` : '', r.payload?.event === 'quick_reply' ? `nút gợi ý: ${r.payload?.payload ?? ''}` : ''].filter(Boolean).join(' · '))

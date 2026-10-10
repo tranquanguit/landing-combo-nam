@@ -19,11 +19,19 @@ import { seedRules } from './lib/chat-rules.ts';
 import { importFromFiles } from './lib/content.ts';
 import { publish } from './lib/publish.ts';
 import { createApp } from './app.ts';
+import { clientKey, purgeRateLimit } from './lib/rate-limit.ts';
 
 const ROOT = process.cwd();
 const PORT = Number(process.env.PORT ?? 8080);
 const TRUST_PROXY = process.env.TRUST_PROXY === '1';
-const MAX_BODY = 30 * 1024 * 1024;   // ảnh tải lên; API đơn hàng tự giới hạn chặt hơn nhiều
+/* Giới hạn thân yêu cầu theo đường dẫn, áp TRƯỚC khi handler đọc: một yêu cầu
+   chunked không khai Content-Length không được đọc hết 30MB vào RAM rồi mới bị từ chối. */
+function maxBody(path: string) {
+  if (path === '/admin/media') return 30 * 1024 * 1024;     // ảnh gốc trước khi nén
+  if (path === '/api/chat') return 8 * 1024 * 1024;         // tối đa 3 ảnh đã thu nhỏ
+  if (path.startsWith('/admin')) return 2 * 1024 * 1024;    // biểu mẫu nội dung JSON
+  return 64 * 1024;                                         // đơn hàng, sự kiện chat
+}
 
 const log = (s: string) => console.log(`[mocha] ${s}`);
 const sql = await connect();
@@ -51,15 +59,18 @@ function toRequest(req: IncomingMessage): Request {
     if (v === undefined || k === 'cf-connecting-ip') continue;   // không tin header này từ bên ngoài
     for (const x of Array.isArray(v) ? v : [v]) headers.append(k, x);
   }
-  /* Handler đơn hàng đọc IP ở cf-connecting-ip (chuẩn Cloudflare) để chống spam.
-     Sau reverse proxy thì lấy hop đầu của X-Forwarded-For; không thì lấy IP socket. */
-  const ip = (TRUST_PROXY && first(req.headers['x-forwarded-for'])) || req.socket.remoteAddress;
-  if (ip) headers.set('cf-connecting-ip', ip);
+  /* Handler đơn hàng + chat đọc IP ở cf-connecting-ip (chuẩn Cloudflare) để chống spam.
+     Sau reverse proxy lấy mục CUỐI của X-Forwarded-For — mục do chính proxy của mình
+     thêm vào; các mục trước do client tự khai, giả được. IPv6 gom theo khối /64. */
+  const xff = TRUST_PROXY ? [req.headers['x-forwarded-for']].flat().join(',').split(',').map((x) => x.trim()).filter(Boolean) : [];
+  const ip = xff.at(-1) || req.socket.remoteAddress;
+  if (ip) headers.set('cf-connecting-ip', clientKey(ip));
   const hasBody = req.method !== 'GET' && req.method !== 'HEAD';
+  const limit = maxBody((req.url ?? '/').split('?')[0]);
   let size = 0;
   const body = hasBody ? Readable.toWeb(req.on('data', (c: Buffer) => {
     size += c.length;
-    if (size > MAX_BODY) req.destroy(new Error('body_too_large'));
+    if (size > limit) req.destroy(new Error('body_too_large'));
   })) as ReadableStream : undefined;
   return new Request(`${proto}://${host}${req.url}`, { method: req.method, headers, body, duplex: 'half' } as RequestInit);
 }
@@ -75,6 +86,13 @@ async function send(res: ServerResponse, r: Response) {
 }
 
 const server = createServer(async (req, res) => {
+  const declared = Number(req.headers['content-length'] ?? 0);
+  if (declared > maxBody((req.url ?? '/').split('?')[0])) {
+    res.writeHead(413, { 'content-type': 'text/plain; charset=utf-8', connection: 'close' });
+    res.end('Yêu cầu quá lớn');
+    req.destroy();
+    return;
+  }
   try { await send(res, await app(toRequest(req))); }
   catch (e) {
     if (!res.headersSent) res.writeHead(500, { 'content-type': 'text/plain; charset=utf-8' });
@@ -83,6 +101,8 @@ const server = createServer(async (req, res) => {
   }
 });
 server.listen(PORT, () => log(`đang chạy ở cổng ${PORT}`));
+/* Bảng rate_limit có một dòng cho mỗi IP / khách từng ghé — dọn mỗi giờ. */
+setInterval(() => { purgeRateLimit(sql).catch((e) => console.error('purge_rate_limit_failed', e.message)); }, 3600_000).unref();
 
 const stop = async () => { log('dừng…'); server.close(); await sql.close(); process.exit(0); };
 process.on('SIGTERM', stop);

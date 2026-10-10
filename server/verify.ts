@@ -44,10 +44,10 @@ if (cookie && process.env.PUBLISH_ON_BOOT !== '0') {
   const t0 = Date.now(); let state = 'chưa xong';
   while (Date.now() - t0 < PUBLISH_WAIT_MS) {
     const page = await (await get('/admin/publish', { headers: { cookie } })).text();
-    /* Dòng đầu của bảng "Các lần gần đây" là lần xuất bản mới nhất. */
-    const latest = page.split('<h2>Các lần gần đây</h2>')[1]?.split('</tr>')[1] ?? '';
-    if (/thành công/.test(latest)) { state = 'thành công'; break; }
-    if (/>lỗi</.test(latest)) { state = 'LỖI — xem /admin/publish'; break; }
+    /* Hàng đầu của bảng "Các lần gần đây" (thuộc tính data-status) là lần xuất bản mới nhất. */
+    const latest = page.match(/data-status="(\w+)"/)?.[1];
+    if (latest === 'ok') { state = 'thành công'; break; }
+    if (latest === 'error') { state = 'LỖI — xem /admin/publish'; break; }
     await sleep(3000);
   }
   ok('xuất bản lúc khởi động (astro build trong container)', state === 'thành công',
@@ -127,6 +127,12 @@ ok('bong bóng chat có trên trang', /class="mchat-fab"/.test(html));
 
 r = await get('/api/admin/orders');
 ok('API quản trị không có token -> 401', r.status === 401, String(r.status));
+
+/* Chỉ kiểm được trên tiến trình máy chủ thật (server/main.ts), không qua createApp. */
+r = await get('/api/orders', { method: 'POST', headers: { 'content-type': 'application/json', origin: ORIGIN }, body: 'x'.repeat(200 * 1024) });
+ok('thân yêu cầu quá giới hạn của đường dẫn -> 413', r.status === 413, String(r.status));
+r = await get('//evil.example/x');
+ok('không chuyển hướng sang tên miền khác ("//evil.example")', !/^\/\//.test(r.headers.get('location') ?? ''), r.headers.get('location') ?? '');
 
 console.log(`\n${failed ? `${failed} bước TRƯỢT` : 'Sẵn sàng triển khai: mọi bước đạt.'}\n`);
 process.exit(failed ? 1 : 0);

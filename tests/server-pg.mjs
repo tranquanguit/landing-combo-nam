@@ -114,7 +114,7 @@ const now = (await sql.query("SELECT data->>'price' AS p FROM content_entries WH
 const rev = (await sql.query("SELECT count(*)::int AS n FROM content_revisions WHERE entry_id = 'combo-nam/vi' AND saved_by = 'bien-tap'")).rows[0].n;
 ok('lưu hợp lệ qua ô nhanh + ghi lịch sử', now === '1040000' && rev === 1, `giá ${now}, ${rev} bản lịch sử`);
 r = await admin('/admin/users');
-ok('biên tập viên không vào được trang tài khoản', r.status === 404, String(r.status));
+ok('biên tập viên không vào được trang tài khoản', r.status === 403, String(r.status));
 
 // ---------------------------------------------------------------- file tĩnh
 if (existsSync(join(ROOT, 'dist/combo-nam/index.html'))) {

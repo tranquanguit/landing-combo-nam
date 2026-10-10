@@ -36,7 +36,7 @@ hết hạn theo chữ).
 | `message_id` | nối dòng khách với dòng bot trả lời nó |
 | `role` | `user` \| `bot` |
 | `text`, `payload` | chữ; `payload` (JSON) giữ khối đã hiện, nút gợi ý, `degraded`, `upstream` |
-| `source` | dòng bot: `rules` · `n8n` · `fallback` (kịch bản thay n8n lỗi) · `off` · `rate_limited` · `error` |
+| `source` | dòng bot: `rules` · `n8n` · `fallback` (kịch bản thay n8n lỗi) · `off` · `error`. Tin bị chặn vì gửi quá nhanh **không** được lưu (chống lấp đầy ổ đĩa) |
 | `rule_id` | kịch bản đã trả lời (không khoá ngoại — xoá kịch bản không xoá lịch sử) |
 | `matched` | dòng bot: `false` = rơi vào câu dự phòng, hoặc n8n trả `"matched": false` |
 | `products` | slug các thẻ sản phẩm đã hiện |
@@ -74,7 +74,7 @@ hạn 200 sự kiện / 10 phút / khách; slug không đúng dạng bị bỏ.
 | Chuyển chuyên viên | cuộc có ít nhất một câu trả lời `handoff` |
 | Bấm thẻ / bấm đặt | `product_clicks` / `order_clicks` |
 | Đơn sau khi chat | cuộc có `order_code` (≤ 7 ngày) |
-| Sự cố | n8n lỗi/chậm/trả rỗng (kể cả khi kịch bản đã trả lời thay), chat tắt, gửi quá nhanh |
+| Sự cố | n8n lỗi/chậm/trả rỗng (kể cả khi kịch bản đã trả lời thay), chat tắt |
 
 Kèm: **Câu chưa trả lời được** (gom theo chữ, đếm số lần, nút "Tạo kịch bản" điền sẵn câu
 đó), kịch bản dùng nhiều, ai trả lời (kịch bản / n8n / dự phòng), sản phẩm được hiện →

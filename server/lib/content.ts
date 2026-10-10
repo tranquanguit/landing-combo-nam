@@ -118,11 +118,17 @@ function vietnamese(i: any): string {
 
 // --------------------------------------------------------------- nhập / xuất
 
-export async function importFromFiles(sql: Sql, root: string, by = 'import') {
+/**
+ * `onlyNew`: chỉ thêm nội dung/ảnh CHƯA có trong CSDL, không đụng bản đã có — dùng khi
+ * phát hành bản code mới có thêm sản phẩm/bài trong git mà không muốn ghi đè những gì
+ * người biên tập đã sửa trên trang quản trị (giá, câu chữ…).
+ */
+export async function importFromFiles(sql: Sql, root: string, by = 'import', onlyNew = false) {
   let entries = 0, media = 0;
   for (const c of Object.keys(COLLECTIONS)) {
     for (const { file, id } of entryFiles(root, c)) {
       const source = readFileSync(file, 'utf8');
+      if (onlyNew && (await sql.query('SELECT 1 FROM content_entries WHERE collection = $1 AND entry_id = $2', [c, id])).rows.length) continue;
       await sql.query(
         `INSERT INTO content_entries (collection, entry_id, data, source, updated_by)
          VALUES ($1, $2, $3::text::jsonb, $4, $5)
@@ -137,6 +143,7 @@ export async function importFromFiles(sql: Sql, root: string, by = 'import') {
     for (const f of walk(base).filter((x) => IMAGE.test(x))) {
       const bytes = readFileSync(f);
       const path = `/${d}/${posix(relative(base, f))}`;
+      if (onlyNew && (await sql.query('SELECT 1 FROM media WHERE path = $1', [path])).rows.length) continue;
       await putMedia(sql, path, bytes, by);
       media++;
     }
