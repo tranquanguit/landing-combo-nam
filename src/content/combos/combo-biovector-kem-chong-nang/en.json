@@ -1,0 +1,27 @@
+{
+  "slug": "combo-biovector-kem-chong-nang",
+  "locale": "en",
+  "translationKey": "combo:combo-biovector-kem-chong-nang",
+  "status": "published",
+  "name": "Biovector + Sunscreen Combo",
+  "shortName": "Biovector + Sunscreen",
+  "group": "duong",
+  "order": 10,
+  "items": [
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    }
+  ],
+  "price": 600000,
+  "currency": "VND",
+  "purpose": "Moisturiser and sunscreen for skin that wants gentle brightening care without strong actives.",
+  "seo": {
+    "title": "Biovector + Sunscreen Combo | Mỹ Phẩm Mocha",
+    "description": "Moisturiser and sunscreen for skin that wants gentle brightening care without strong actives. Delivered to your door; inspect before you pay."
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "slug": "bo-premium-10-mon",
+  "locale": "en",
+  "translationKey": "combo:bo-premium-10-mon",
+  "status": "published",
+  "name": "Mocha Premium 10-Piece Set",
+  "shortName": "Premium 10-piece",
+  "group": "toan-dien",
+  "order": 30,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    },
+    {
+      "product": "ultra-egf-bio-gel-mask",
+      "qty": 1
+    },
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    }
+  ],
+  "price": 3115000,
+  "currency": "VND",
+  "purpose": "All ten Mocha skincare products in one set: cleansing, peel, pigmentation, blemishes, marks, moisturising and sunscreen.",
+  "seo": {
+    "title": "Mocha Premium 10-Piece Set | Mỹ Phẩm Mocha",
+    "description": "All ten Mocha skincare products in one set: cleansing, peel, pigmentation, blemishes, marks, moisturising and sunscreen."
+  }
+}

@@ -57,8 +57,8 @@
     "description": "pH 5.5 face wash with pro-vitamin B5, nano-ceramide and lactobacillus ferment. Sulfate-free, alcohol-free, paraben-free, silicone-free. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "800/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "helps cleanse the face and maintain moisture after washing",
     "warnings": [
       "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
@@ -66,8 +66,7 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ],
-    "productNotificationNumber": "800/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -75,6 +74,24 @@
       "note": "You save {{save}} off the list price",
       "price": 285000,
       "recommended": true
+    },
+    {
+      "label": "Combo of 2 bottles, 300ml",
+      "price": 520000,
+      "recommended": false,
+      "qty": 2
+    },
+    {
+      "label": "Combo of 3 bottles, 300ml",
+      "price": 765000,
+      "recommended": false,
+      "qty": 3
+    },
+    {
+      "label": "Mini tube, 25g",
+      "price": 140000,
+      "recommended": false,
+      "note": "Handy for travel"
     },
     {
       "label": "I would like advice first",
@@ -86,9 +103,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "The first step of both routines",
+      "eyebrow": "Gentle face wash · 300ml bottle",
       "heading": "Washing is the easiest step to damage your skin with, because it repeats twice a day",
-      "lead": "A 300ml bottle with <strong>Cera-B Complex</strong> — pro-vitamin B5, nano-ceramide, lactobacillus ferment and hydroxyethyl urea, exactly as printed on the bottle. Four marks on the label: no sulfates, no alcohol, no parabens, no silicones.",
+      "lead": "A face wash for morning and evening, the cleansing step in both routines on this site. pH 5.5, with ceramide and pro-vitamin B5; no sulfates, no alcohol, no parabens, no silicones.",
       "usp": [
         {
           "text": "<strong>No sulfates, alcohol, parabens or silicones</strong> — printed as four marks on the bottle",
@@ -121,6 +138,32 @@
         "Free delivery nationwide",
         "Inspect before you pay",
         "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Size",
+          "value": "300ml bottle; 25g mini tube also available"
+        },
+        {
+          "label": "pH",
+          "value": "5.5"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "Cera-B Complex: pro-vitamin B5, nano-ceramide, lactobacillus ferment, hydroxyethyl urea"
+        },
+        {
+          "label": "Free from",
+          "value": "Sulfates, alcohol, parabens, silicones (four marks on the bottle)"
+        },
+        {
+          "label": "How to use",
+          "value": "Morning and evening; in the evening, after removing make-up"
+        },
+        {
+          "label": "Notification no.",
+          "value": "800/25/CBMP-TN"
+        }
       ]
     },
     {
@@ -144,29 +187,107 @@
       "transition": "If how your skin feels afterwards is the wrong measure, the right one is in the ingredient table below."
     },
     {
-      "type": "cards",
+      "type": "conditions",
       "id": "hop-voi-ai",
-      "eyebrow": "Before you order",
-      "heading": "Three skin types, three different ways to use it",
-      "intro": "Same bottle, but frequency and water temperature should differ. This is the part most often skipped.",
-      "columns": 3,
+      "eyebrow": "Look at the photos, then at your skin",
+      "heading": "Where your skin is now, and how far a cleanser can help",
+      "intro": "A cleanser is a cleansing step, nothing more. Some situations suit it, in some it is only one part of the routine, and sometimes it is not yet the time. Better said up front.",
       "items": [
         {
-          "heading": "Oily skin, visible pores",
-          "body": "Twice a day, no more. A third wash starts taking away more than the skin can replace, and the oil-rebound cycle begins there.",
-          "meta": "Morning and night"
+          "label": "Oily skin, visible pores",
+          "image": {
+            "src": "/images/da-can-phuc-hoi.webp",
+            "alt": "Close-up of skin with large, visible pores"
+          },
+          "body": "Twice a day, morning and night, no more. A third wash takes away more than your skin can replace, and it answers with more oil.",
+          "fit": "yes",
+          "fitNote": "Morning and night, no more"
         },
         {
-          "heading": "Dry or thin skin",
-          "body": "Cleanser at night, cool water alone in the morning. Your skin does not collect enough overnight to justify another round of surfactant.",
-          "meta": "Once a day is enough"
+          "label": "Dry or thin skin",
+          "image": {
+            "src": "/images/da-yeu-nhay-cam.webp",
+            "alt": "Close-up of thin, fragile skin with slight redness"
+          },
+          "body": "Cleanser at night; in the morning, cool water alone is often enough. No sulfates, no alcohol, and ceramide plus pro-vitamin B5 in the wash itself.",
+          "fit": "yes",
+          "fitNote": "Once a day is enough"
         },
         {
-          "heading": "Skin that is flaking badly or stinging",
-          "body": "With a damaged barrier, every cleansing step makes it worse. Stop strong actives, use cool water for a few days, and see a doctor if it does not settle.",
-          "meta": "Not yet"
+          "label": "Tiny bumps, clogged pores",
+          "image": {
+            "src": "/images/da-mun-an.webp",
+            "alt": "Close-up of skin with many small closed comedones"
+          },
+          "body": "Leftover sunscreen building up is a common cause of clogging. At night, remove it first, then cleanse. This is the cleansing step, not an acne product.",
+          "fit": "partial",
+          "fitNote": "A cleansing step only"
+        },
+        {
+          "label": "Dull patches, pigment routine underway",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Close-up of a cheekbone with diffuse sun-related darkening"
+          },
+          "body": "This is the cleansing step of that routine: first in the morning, second at night. A cleanser does not fade dark patches. Other products do that work, and sunscreen is the step you never skip.",
+          "fit": "partial",
+          "fitNote": "The routine's cleansing step"
+        },
+        {
+          "label": "Inflamed, swollen spots",
+          "image": {
+            "src": "/images/da-mun-viem.webp",
+            "alt": "Close-up of a red, swollen spot with a white head"
+          },
+          "body": "An inflamed spot needs a product applied to the spot itself, such as a spot gel. The cleanser only keeps the skin around it clean: wash gently, blot dry, never scrub over it.",
+          "fit": "no",
+          "fitNote": "This needs a spot gel"
+        },
+        {
+          "label": "Badly flaking or stinging skin",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Close-up of irritated skin with red patches"
+          },
+          "body": "With a damaged barrier, every cleansing step makes things worse. Stop strong actives, use cool water for a few days, and see a doctor if it does not settle.",
+          "fit": "no",
+          "fitNote": "Not yet. See a doctor"
         }
-      ]
+      ],
+      "caption": "Close-ups illustrating each skin condition (the brand's image material), <strong>not before-and-after photos of the product</strong>. A cleanser helps here only as the cleansing step; it does not address spots or pigment. Stop using it if your skin shows signs of irritation."
+    },
+    {
+      "type": "infographic",
+      "id": "mot-ngay-lam-sach",
+      "kind": "stages",
+      "eyebrow": "Twice a day",
+      "heading": "A day of cleansing, and where this bottle comes in",
+      "intro": "In the morning it is the first step. At night it is the second, after make-up removal, because there are things it cannot lift on its own.",
+      "items": [
+        {
+          "label": "Morning: wash",
+          "highlight": true,
+          "body": "Cool water; lather in your palms before it touches your face. Dry skin may need cool water only."
+        },
+        {
+          "label": "During the day: what builds up",
+          "body": "Sunscreen, make-up, excess oil, sweat and dust. Sunscreen and make-up do not dissolve in water."
+        },
+        {
+          "label": "Night, step 1: remove make-up",
+          "body": "Lifts the sunscreen and make-up, the part a cleanser alone will not fully take off."
+        },
+        {
+          "label": "Night, step 2: cleanser",
+          "highlight": true,
+          "body": "Takes the rest, plus the day's excess oil. Blot with a soft towel; do not rub."
+        },
+        {
+          "label": "Moisturise",
+          "body": "Apply while your skin is still slightly damp rather than waiting for it to dry."
+        }
+      ],
+      "footnote": "Twice a day suits most people. Washing more does not get skin any cleaner; it only thins the protective barrier."
     },
     {
       "type": "ingredients",

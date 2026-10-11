@@ -56,16 +56,15 @@
     "description": "Sabiwhite 0,3%, Niacinamide 3%, Tranexamic Acid 3%, Glutathione, TECA, EGF — nồng độ công bố. Dùng buổi tối. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "2626/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "hỗ trợ làm mờ vùng da sẫm màu sau mụn và cải thiện độ đều màu da",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ],
-    "productNotificationNumber": "2626/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -84,9 +83,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Bước sau khi nốt mụn đã lặn",
+      "eyebrow": "Gel cho vết thâm sau mụn · tuýp 20gr",
       "heading": "Vết thâm sau mụn là chuyện sắc tố, không còn là chuyện mụn nữa",
-      "lead": "Gel chấm vết thâm sau mụn, tuýp 20gr. Ba nồng độ do nhà sản xuất công bố, ghi trên vỏ.",
+      "lead": "Gel thoa lên vết thâm còn lại sau khi nốt mụn đã lặn, không dùng lên nốt đang viêm. Có Sabiwhite 0,3%, Niacinamide 3% và Tranexamic Acid 3%.",
       "usp": [
         {
           "text": "<strong>Ba nồng độ công bố bằng số</strong>: Sabiwhite 0,3%, Niacinamide 3%, Tranexamic Acid 3%",
@@ -119,6 +118,32 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Khối lượng",
+          "value": "Tuýp gel 20gr"
+        },
+        {
+          "label": "Dùng cho",
+          "value": "Vết thâm sau mụn trên vùng da đã lành, không dùng lên nốt đang viêm"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Sabiwhite® 0,3%, Niacinamide 3%, Tranexamic Acid 3%, Glutathione, TECA, EGF"
+        },
+        {
+          "label": "Không chứa",
+          "value": "Cồn, paraben, hương liệu tổng hợp, dầu khoáng"
+        },
+        {
+          "label": "Xuất xứ",
+          "value": "Việt Nam"
+        },
+        {
+          "label": "Số công bố",
+          "value": "2626/25/CBMP-TN"
+        }
       ]
     },
     {
@@ -139,6 +164,88 @@
           "Và vì đây là sắc tố, nắng làm nó đậm lại y như với nám. Một vết thâm được che nắng tử tế mờ nhanh hơn hẳn cùng vết đó phơi nắng mỗi ngày."
         ]
       }
+    },
+    {
+      "type": "conditions",
+      "id": "hop-voi-ai",
+      "eyebrow": "Nhìn ảnh, đối chiếu da của bạn",
+      "heading": "Dấu vết nào sau mụn là việc của tuýp này, và dấu vết nào thì không",
+      "intro": "Không phải dấu vết nào sau mụn cũng cùng một bản chất. Phân biệt trước thì đỡ mất tiền và mất thời gian.",
+      "items": [
+        {
+          "label": "Vết nâu, phẳng sau khi nốt mụn đã lặn",
+          "aka": "tăng sắc tố sau viêm",
+          "image": {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Cận cảnh vùng da có nhiều vết thâm nâu sau mụn"
+          },
+          "body": "Sắc tố ở lại sau viêm, bề mặt da vẫn phẳng. Đúng loại tuýp này được làm ra để xử lý: thoa lên vùng đã lành hẳn, và <strong>chống nắng mỗi ngày</strong>.",
+          "fit": "yes",
+          "fitNote": "Đúng việc của gel chấm thâm"
+        },
+        {
+          "label": "Vết thâm cũ lẫn mụn ẩn, da sần",
+          "image": {
+            "src": "/images/da-san-mun-an.webp",
+            "alt": "Cận cảnh vùng da sần có mụn ẩn và vài vết thâm sạm"
+          },
+          "body": "Vết thâm cũ và nốt mới thường cùng tồn tại. Thoa gel lên phần thâm đã lành; nốt còn nổi là việc của bước làm sạch và gel chấm mụn, ở vùng khác, không chồng lên nhau.",
+          "fit": "partial",
+          "fitNote": "Chỉ phần thâm đã lành"
+        },
+        {
+          "label": "Nốt mụn đang sưng viêm",
+          "image": {
+            "src": "/images/da-mun-viem.webp",
+            "alt": "Cận cảnh nốt mụn viêm sưng đỏ có đầu trắng ở giữa"
+          },
+          "body": "Chưa tới lượt tuýp này. Vùng đang sưng viêm cần sản phẩm khác — gel chấm mụn, chấm từng nốt. Và đừng nặn: nặn làm vết thâm sau đó sâu hơn và lâu hơn.",
+          "fit": "no",
+          "fitNote": "Cần gel chấm mụn trước"
+        },
+        {
+          "label": "Vết đỏ hoặc hồng, phẳng",
+          "body": "Mạch máu giãn còn lại sau viêm, không phải melanin. Thường tự nhạt dần; sản phẩm làm sáng tác động ít. Giữ ẩm và chống nắng là việc chính.",
+          "fit": "no",
+          "fitNote": "Tuýp này tác động ít"
+        },
+        {
+          "label": "Sẹo lõm hoặc sẹo lồi",
+          "body": "Sẹo là thay đổi cấu trúc da, không phải sắc tố. Không một sản phẩm bôi ngoài nào làm đầy được sẹo lõm. Việc đó cần can thiệp ở cơ sở chuyên khoa.",
+          "fit": "no",
+          "fitNote": "Không phải thứ bạn cần"
+        }
+      ],
+      "caption": "Ảnh cận vùng da minh hoạ từng tình trạng (tư liệu hình ảnh của hãng), <strong>không phải ảnh trước/sau khi dùng sản phẩm</strong>. Đang mang thai hoặc cho con bú thì hỏi ý kiến bác sĩ trước khi dùng. Chưa chắc da mình thuộc nhóm nào? Gửi ảnh qua Zalo, chuyên viên xem giúp trước khi bạn đặt."
+    },
+    {
+      "type": "infographic",
+      "id": "tu-not-mun-toi-vet-tham",
+      "kind": "stages",
+      "eyebrow": "Từ nốt mụn tới vết thâm",
+      "heading": "Tuýp này bắt đầu làm việc khi nốt mụn đã lặn",
+      "intro": "Mụn và vết thâm là hai giai đoạn khác nhau. Thoa lên nốt đang sưng thì không đúng chỗ; thoa lên vết thâm mà bỏ chống nắng thì công cốc.",
+      "items": [
+        {
+          "label": "Sưng đỏ",
+          "body": "Nốt đang viêm: sưng, đỏ, đau khi chạm. Lúc này là việc của gel chấm mụn, chưa phải của tuýp này."
+        },
+        {
+          "label": "Có nhân trắng",
+          "body": "Đừng nặn. Nặn đẩy tổn thương xuống sâu và kéo dài phản ứng viêm, nên vết thâm để lại sâu hơn và lâu hơn."
+        },
+        {
+          "label": "Nốt lặn, vết nâu ở lại",
+          "body": "Khi viêm, da tăng sản sinh melanin ở vùng đó. Nốt lặn rồi nhưng sắc tố vẫn còn. Đây là lúc thoa gel lên vùng đã lành hẳn.",
+          "highlight": true
+        },
+        {
+          "label": "Dùng đều, che nắng mỗi ngày",
+          "body": "Sắc tố đi theo chu kỳ thay mới của da, tính bằng tuần và tháng. Nắng làm vết thâm sẫm lại, nên kem chống nắng ban ngày là điều kiện, không phải tuỳ chọn.",
+          "highlight": true
+        }
+      ],
+      "footnote": "Thời gian của mỗi giai đoạn khác nhau theo từng người, nên chúng tôi không ghi số ngày. Sẹo lõm, sẹo lồi là thay đổi cấu trúc da, không nằm trên vòng này."
     },
     {
       "type": "compare",
@@ -188,31 +295,6 @@
       ],
       "footnote": "Nhiều người có cả hai tình trạng cùng lúc trên cùng một khuôn mặt. Lúc đó dùng cả hai là hợp lý, nhưng ở hai vùng khác nhau chứ không chồng lên nhau.",
       "transition": "Nốt lặn hẳn thì mới tới lượt tuýp này. Tám thành phần, ba trong số đó công bố bằng số."
-    },
-    {
-      "type": "cards",
-      "id": "hop-voi-ai",
-      "eyebrow": "Trước khi đặt",
-      "heading": "Dấu vết nào tuýp này xử lý được",
-      "intro": "Không phải dấu vết nào sau mụn cũng cùng một bản chất. Phân biệt trước thì đỡ mất tiền và mất thời gian.",
-      "columns": 3,
-      "items": [
-        {
-          "heading": "Vết nâu, phẳng",
-          "body": "Sắc tố ở lại sau viêm, bề mặt da vẫn phẳng. Đúng loại tuýp này được làm ra để xử lý.",
-          "meta": "Hợp nhất"
-        },
-        {
-          "heading": "Vết đỏ hoặc hồng, phẳng",
-          "body": "Mạch máu giãn còn lại sau viêm, không phải melanin. Thường tự nhạt dần; sản phẩm làm sáng tác động ít. Giữ ẩm và chống nắng là việc chính.",
-          "meta": "Cần kiên nhẫn hơn"
-        },
-        {
-          "heading": "Sẹo lõm hoặc sẹo lồi",
-          "body": "Đây là thay đổi cấu trúc da, không phải sắc tố. Không một sản phẩm bôi ngoài nào làm đầy được sẹo lõm. Việc đó cần can thiệp ở cơ sở chuyên khoa.",
-          "meta": "Không phải thứ bạn cần"
-        }
-      ]
     },
     {
       "type": "ingredients",

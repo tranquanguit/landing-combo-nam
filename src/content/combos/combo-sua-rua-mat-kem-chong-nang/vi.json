@@ -1,0 +1,27 @@
+{
+  "slug": "combo-sua-rua-mat-kem-chong-nang",
+  "locale": "vi",
+  "translationKey": "combo:combo-sua-rua-mat-kem-chong-nang",
+  "status": "published",
+  "name": "Combo Sữa rửa mặt + Kem chống nắng",
+  "shortName": "Rửa mặt + Chống nắng",
+  "group": "lam-sach",
+  "order": 10,
+  "items": [
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    }
+  ],
+  "price": 558000,
+  "currency": "VND",
+  "purpose": "Hai bước cơ bản nhất mỗi ngày: rửa mặt sáng tối và chống nắng buổi sáng.",
+  "seo": {
+    "title": "Combo Sữa rửa mặt + Kem chống nắng | Mỹ Phẩm Mocha",
+    "description": "Hai bước cơ bản nhất mỗi ngày: rửa mặt sáng tối và chống nắng buổi sáng. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

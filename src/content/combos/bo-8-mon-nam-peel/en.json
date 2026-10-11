@@ -1,0 +1,51 @@
+{
+  "slug": "bo-8-mon-nam-peel",
+  "locale": "en",
+  "translationKey": "combo:bo-8-mon-nam-peel",
+  "status": "published",
+  "name": "8-Piece Pigmentation Set with Peel",
+  "shortName": "8-piece pigmentation + peel",
+  "group": "toan-dien",
+  "order": 20,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    },
+    {
+      "product": "ultra-egf-bio-gel-mask",
+      "qty": 1
+    },
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    }
+  ],
+  "price": 2455000,
+  "currency": "VND",
+  "purpose": "The 7-piece pigmentation set plus the peel kit to renew the skin surface before the pigmentation routine.",
+  "seo": {
+    "title": "8-Piece Pigmentation Set with Peel | Mỹ Phẩm Mocha",
+    "description": "The 7-piece pigmentation set plus the peel kit to renew the skin surface before the pigmentation routine. Delivered to your door; inspect before you pay."
+  }
+}

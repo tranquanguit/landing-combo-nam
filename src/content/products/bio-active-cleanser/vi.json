@@ -57,16 +57,15 @@
     "description": "Sữa rửa mặt pH 5.5 với Pro-vitamin B5, Nano-Ceramide, Lactobacillus ferment. Không sulfate, không cồn, không paraben, không silicone. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "800/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "hỗ trợ làm sạch da mặt và duy trì độ ẩm sau khi rửa",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ],
-    "productNotificationNumber": "800/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -74,6 +73,24 @@
       "note": "Tiết kiệm {{save}} so với giá niêm yết",
       "price": 285000,
       "recommended": true
+    },
+    {
+      "label": "Combo 2 chai 300ml",
+      "price": 520000,
+      "recommended": false,
+      "qty": 2
+    },
+    {
+      "label": "Combo 3 chai 300ml",
+      "price": 765000,
+      "recommended": false,
+      "qty": 3
+    },
+    {
+      "label": "Tuýp mini 25gr",
+      "price": 140000,
+      "recommended": false,
+      "note": "Tiện mang theo khi đi xa"
     },
     {
       "label": "Tôi cần tư vấn trước",
@@ -85,9 +102,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Bước đầu của cả hai lộ trình",
+      "eyebrow": "Sữa rửa mặt dịu nhẹ · chai 300ml",
       "heading": "Bước rửa mặt làm mỗi ngày hai lần, nên sai một chút cũng cộng dồn",
-      "lead": "Sữa rửa mặt dịu cho dùng hằng ngày, chai 300ml, pH 5.5. Bốn dấu trên chai: không sulfate, không cồn, không paraben, không silicone.",
+      "lead": "Sữa rửa mặt dùng sáng và tối, là bước làm sạch của cả hai lộ trình trên trang. pH 5.5, có Ceramide và Pro-vitamin B5; không sulfate, không cồn, không paraben, không silicone.",
       "usp": [
         {
           "text": "<strong>Không sulfate, không cồn, không paraben, không silicone</strong>, in thành bốn dấu trên vỏ chai",
@@ -120,6 +137,32 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Dung tích",
+          "value": "Chai 300ml; có tuýp mini 25gr"
+        },
+        {
+          "label": "Độ pH",
+          "value": "5.5"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Cera-B Complex: Pro-vitamin B5, Nano-Ceramide, Lactobacillus ferment, Hydroxyethyl Urea"
+        },
+        {
+          "label": "Không chứa",
+          "value": "Sulfate, cồn, paraben, silicone (bốn dấu in trên vỏ chai)"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Sáng và tối; buổi tối rửa sau bước tẩy trang"
+        },
+        {
+          "label": "Số công bố",
+          "value": "800/25/CBMP-TN"
+        }
       ]
     },
     {
@@ -143,29 +186,107 @@
       "transition": "Vậy đo bằng gì? Bằng thứ nằm trong công thức. Bốn hoạt chất in trên vỏ, và bốn thứ cố tình không cho vào."
     },
     {
-      "type": "cards",
+      "type": "conditions",
       "id": "hop-voi-ai",
-      "eyebrow": "Trước khi đặt",
-      "heading": "Da bạn thuộc loại nào, rửa ra sao",
-      "intro": "Cùng một chai nhưng tần suất và nhiệt độ nước nên khác nhau. Chỗ này hay bị bỏ qua.",
-      "columns": 3,
+      "eyebrow": "Nhìn ảnh, đối chiếu da của bạn",
+      "heading": "Da bạn đang thế nào, và sữa rửa mặt giúp được tới đâu",
+      "intro": "Sữa rửa mặt là bước làm sạch, không hơn. Có tình trạng nó hợp, có tình trạng nó chỉ là một phần, và có lúc chưa nên dùng. Chúng tôi nói rõ từ đầu.",
       "items": [
         {
-          "heading": "Da dầu, lỗ chân lông to",
-          "body": "Hai lần mỗi ngày, không hơn. Thêm lần thứ ba là bắt đầu lấy đi nhiều hơn mức da kịp bù, và vòng lặp tiết dầu bù bắt đầu từ đó.",
-          "meta": "Sáng và tối"
+          "label": "Da dầu, lỗ chân lông rõ",
+          "image": {
+            "src": "/images/da-can-phuc-hoi.webp",
+            "alt": "Cận cảnh vùng da có lỗ chân lông to, rõ"
+          },
+          "body": "Hai lần mỗi ngày, sáng và tối, không hơn. Rửa thêm lần thứ ba là lấy đi nhiều hơn mức da kịp bù, và da đáp lại bằng cách tiết dầu bù nhiều hơn.",
+          "fit": "yes",
+          "fitNote": "Sáng và tối, không hơn"
         },
         {
-          "heading": "Da khô, da mỏng yếu",
-          "body": "Buổi tối rửa bằng sữa rửa mặt, buổi sáng có thể chỉ cần nước mát. Nền da của bạn không tích đủ bụi bẩn qua một đêm để cần thêm một lần tẩy rửa.",
-          "meta": "Một lần mỗi ngày là đủ"
+          "label": "Da khô, da mỏng yếu",
+          "image": {
+            "src": "/images/da-yeu-nhay-cam.webp",
+            "alt": "Cận cảnh vùng da mỏng yếu, hơi ửng đỏ"
+          },
+          "body": "Tối rửa bằng sữa rửa mặt, sáng có thể chỉ cần nước mát. Công thức không sulfate, không cồn, và có Ceramide cùng Pro-vitamin B5 ngay trong bước rửa.",
+          "fit": "yes",
+          "fitNote": "Một lần mỗi ngày là đủ"
         },
         {
-          "heading": "Da đang bong tróc nặng, đang rát",
-          "body": "Hàng rào đang hỏng thì mọi bước tẩy rửa đều làm nặng thêm. Dừng hoạt chất mạnh, rửa bằng nước mát vài ngày, và nếu không đỡ thì đi khám.",
-          "meta": "Chưa phải lúc"
+          "label": "Mụn ẩn li ti, lỗ chân lông bít",
+          "image": {
+            "src": "/images/da-mun-an.webp",
+            "alt": "Cận cảnh vùng da có nhiều nốt mụn ẩn nhỏ li ti"
+          },
+          "body": "Kem chống nắng còn sót lại tích tụ là nguyên nhân phổ biến gây bít tắc. Buổi tối tẩy trang trước rồi mới rửa bằng sữa rửa mặt. Sữa rửa mặt này là bước làm sạch, không phải sản phẩm dành cho mụn.",
+          "fit": "partial",
+          "fitNote": "Chỉ là bước làm sạch"
+        },
+        {
+          "label": "Da sạm, đang chăm sóc nám hoặc thâm",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Cận cảnh vùng gò má sạm màu lan tỏa do nắng"
+          },
+          "body": "Chai này là bước làm sạch của lộ trình đó: bước 1 buổi sáng, bước 2 buổi tối. Sữa rửa mặt không làm mờ vết sạm; việc đó thuộc các sản phẩm khác, và chống nắng là bước không được bỏ.",
+          "fit": "partial",
+          "fitNote": "Bước làm sạch của lộ trình"
+        },
+        {
+          "label": "Mụn viêm, nốt sưng đỏ",
+          "image": {
+            "src": "/images/da-mun-viem.webp",
+            "alt": "Cận cảnh nốt mụn viêm sưng đỏ có đầu trắng ở giữa"
+          },
+          "body": "Nốt đang viêm cần một sản phẩm chấm riêng lên nốt, như gel chấm mụn. Sữa rửa mặt chỉ giữ vùng da quanh nốt sạch: rửa nhẹ, thấm khô, không chà lên nốt.",
+          "fit": "no",
+          "fitNote": "Cần gel chấm mụn"
+        },
+        {
+          "label": "Da đang bong tróc nặng, đang rát",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Cận cảnh vùng da kích ứng, mẩn đỏ"
+          },
+          "body": "Hàng rào da đang hỏng thì bước tẩy rửa nào cũng làm nặng thêm. Dừng hoạt chất mạnh, rửa bằng nước mát vài ngày, và nếu không đỡ thì đi khám.",
+          "fit": "no",
+          "fitNote": "Chưa phải lúc, nên đi khám"
         }
-      ]
+      ],
+      "caption": "Ảnh cận vùng da minh hoạ từng tình trạng (tư liệu hình ảnh của hãng), <strong>không phải ảnh trước/sau khi dùng sản phẩm</strong>. Sữa rửa mặt giúp ở đây với vai trò bước làm sạch; nó không xử lý mụn hay vết sạm. Da có dấu hiệu kích ứng thì ngưng dùng."
+    },
+    {
+      "type": "infographic",
+      "id": "mot-ngay-lam-sach",
+      "kind": "stages",
+      "eyebrow": "Hai lần mỗi ngày",
+      "heading": "Một ngày làm sạch, và sữa rửa mặt đứng ở đâu",
+      "intro": "Buổi sáng nó là bước đầu tiên. Buổi tối nó là bước thứ hai, sau tẩy trang, vì có những thứ nó không lấy hết được một mình.",
+      "items": [
+        {
+          "label": "Sáng: rửa mặt",
+          "highlight": true,
+          "body": "Nước mát, tạo bọt trong lòng bàn tay rồi mới đưa lên mặt. Da khô có thể chỉ cần nước mát."
+        },
+        {
+          "label": "Ban ngày: thứ bám lại trên da",
+          "body": "Kem chống nắng, lớp trang điểm, dầu thừa, mồ hôi và bụi. Kem chống nắng và trang điểm không tan trong nước."
+        },
+        {
+          "label": "Tối, bước 1: tẩy trang",
+          "body": "Lấy đi lớp kem chống nắng và trang điểm, phần mà sữa rửa mặt một mình không lấy hết."
+        },
+        {
+          "label": "Tối, bước 2: sữa rửa mặt",
+          "highlight": true,
+          "body": "Lấy phần còn lại và dầu thừa trong ngày. Thấm khô bằng khăn mềm, không chà."
+        },
+        {
+          "label": "Bước dưỡng",
+          "body": "Bôi khi da còn hơi ẩm, đừng đợi da khô hẳn."
+        }
+      ],
+      "footnote": "Hai lần mỗi ngày là đủ cho phần lớn người. Rửa nhiều hơn không làm da sạch hơn, chỉ làm hàng rào bảo vệ mỏng đi."
     },
     {
       "type": "ingredients",

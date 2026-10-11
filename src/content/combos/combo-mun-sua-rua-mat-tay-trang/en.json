@@ -1,0 +1,31 @@
+{
+  "slug": "combo-mun-sua-rua-mat-tay-trang",
+  "locale": "en",
+  "translationKey": "combo:combo-mun-sua-rua-mat-tay-trang",
+  "status": "published",
+  "name": "Spot Gel + Two-Step Cleansing Combo",
+  "shortName": "Spot + 2-step cleanse",
+  "group": "mun",
+  "order": 50,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    }
+  ],
+  "price": 660000,
+  "currency": "VND",
+  "purpose": "Micellar water and cleanser so leftover sunscreen does not clog pores, plus the spot gel.",
+  "seo": {
+    "title": "Spot Gel + Two-Step Cleansing Combo | Mỹ Phẩm Mocha",
+    "description": "Micellar water and cleanser so leftover sunscreen does not clog pores, plus the spot gel. Delivered to your door; inspect before you pay."
+  }
+}

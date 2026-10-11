@@ -54,16 +54,15 @@
     "description": "Serum 4-butylresorcinol 1000ppm, Niacinamide, Bio-Placenta — nồng độ in trên chai. Chai chân không vòi nhấn. {{price}}, freeship, trả tiền khi nhận."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "1458/24/CBMP-LA",
+    "declarant": "mocha",
     "functions": "hỗ trợ làm mờ vùng da thâm sạm, dưỡng ẩm và cải thiện độ đều màu da",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ],
-    "productNotificationNumber": "1458/24/CBMP-LA"
+    ]
   },
   "variants": [
     {
@@ -82,9 +81,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Bước serum, dùng sáng và tối",
+      "eyebrow": "Serum cho da sạm nám · chai vòi nhấn 30ml",
       "heading": "Bôi đều đặn mà da vẫn không đổi? Có thể hoạt chất chưa đi được tới đâu",
-      "lead": "Kem là bước giữ, serum là bước đưa vào. Chai 30ml này <strong>ghi thẳng 4-butylresorcinol 1000ppm lên vỏ</strong>, nên bạn đem so với sản phẩm khác được.",
+      "lead": "Serum dùng sáng và tối, sau rửa mặt và trước kem dưỡng. Chai 30ml ghi rõ 4-butylresorcinol 1000ppm và Niacinamide 4%; không corticoid, không hydroquinone.",
       "usp": [
         {
           "text": "<strong>4-butylresorcinol 1000ppm ghi thẳng trên chai</strong>, không giấu trong cụm “thành phần độc quyền”",
@@ -118,6 +117,28 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Dung tích",
+          "value": "Chai chân không vòi nhấn 30ml"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "4-butylresorcinol 1000ppm, Niacinamide 4%, Bio-Placenta 1%, Vietnam Bio-white Complex 3%, Bioyoga 2%"
+        },
+        {
+          "label": "Không chứa",
+          "value": "Corticoid, hydroquinone"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Sáng và tối, ngay sau rửa mặt, trước kem dưỡng"
+        },
+        {
+          "label": "Số công bố",
+          "value": "1458/24/CBMP-LA"
+        }
       ]
     },
     {
@@ -138,6 +159,116 @@
           "Thứ tự vì thế quan trọng không kém bản thân sản phẩm: <strong>serum trước, kem sau</strong>. Làm ngược lại thì lớp kem đã đóng đường, và chai serum bạn vừa mua chỉ nằm bên ngoài."
         ]
       }
+    },
+    {
+      "type": "conditions",
+      "id": "hop-voi-ai",
+      "eyebrow": "Nhìn ảnh, đối chiếu da của bạn",
+      "heading": "Chai serum này hợp với ai, và khi nào thì không",
+      "intro": "Chúng tôi là đại lý. Bán nhầm thứ cho nhầm người thì bạn dùng vài tuần rồi bỏ — mất cả hai phía. Nên những trường hợp chai serum không giúp được, chúng tôi nói luôn từ đầu.",
+      "items": [
+        {
+          "label": "Da mỏng yếu, từng bong tróc vì retinol",
+          "aka": "da nhạy cảm, dễ đỏ",
+          "image": {
+            "src": "/images/da-yeu-nhay-cam.webp",
+            "alt": "Cận cảnh vùng da mỏng, nhạy cảm, hơi ửng đỏ"
+          },
+          "body": "Đây là nhóm chai serum được thiết kế cho: không retinoid, không cồn khô, nên không có giai đoạn bong tróc phải chịu đựng. Vẫn thử ở vùng cổ và quan sát 30–45 phút trước lần dùng đầu tiên.",
+          "fit": "yes",
+          "fitNote": "Hợp nhất"
+        },
+        {
+          "label": "Nám mảng, nám hỗn hợp",
+          "aka": "sắc tố tập trung thành mảng",
+          "image": {
+            "src": "/images/da-nam-hon-hop.webp",
+            "alt": "Cận cảnh vùng nám hỗn hợp, mảng nâu đậm nhạt xen nhau trên gò má"
+          },
+          "body": "Nhóm mà 4-butylresorcinol 1000ppm hướng tới. Serum là bước đưa hoạt chất vào; sau nó phải có kem khoá lại. Thâm sạm rõ và muốn đi nhanh hơn thì xem bản combo, có sẵn bước kem.",
+          "fit": "yes",
+          "fitNote": "Hợp, nhớ khoá lại bằng kem"
+        },
+        {
+          "label": "Da đã qua laser hoặc lăn kim",
+          "image": {
+            "src": "/images/da-sau-tham-my.webp",
+            "alt": "Cận cảnh vùng da đang hồi lại sau thủ thuật thẩm mỹ"
+          },
+          "body": "Nhà sản xuất định vị sản phẩm cho cả nhóm da này. Nhưng da sau thủ thuật là tình huống y khoa: hỏi chính bác sĩ đã làm thủ thuật cho bạn trước khi thêm bất kỳ sản phẩm nào.",
+          "fit": "partial",
+          "fitNote": "Hỏi nơi đã làm thủ thuật trước"
+        },
+        {
+          "label": "Thâm sau mụn",
+          "aka": "tăng sắc tố sau viêm",
+          "image": {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Cận cảnh vùng da có nhiều vết thâm nâu sau mụn"
+          },
+          "body": "Serum thoa cả mặt, hỗ trợ làm mờ vùng da thâm sạm nói chung. Nếu chủ yếu là từng vết thâm sau mụn riêng lẻ, gel chấm thâm của Mocha là thứ đúng việc hơn.",
+          "fit": "partial",
+          "fitNote": "Gel chấm thâm đúng việc hơn"
+        },
+        {
+          "label": "Da đang kích ứng, đỏ rát, hoặc vừa peel",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Cận cảnh vùng da đang đỏ và kích ứng"
+          },
+          "body": "Chờ hàng rào bảo vệ da ổn định lại đã. Đưa thêm hoạt chất vào lúc này là cách chắc chắn để da phản ứng mạnh hơn. Đang dùng mà da kích ứng thì ngưng ngay.",
+          "fit": "no",
+          "fitNote": "Chưa phải lúc"
+        },
+        {
+          "label": "Mảng sẫm lan nhanh, đổi màu, đổi hình dạng",
+          "body": "Vùng sẫm màu thay đổi nhanh, gồ lên, ngứa hoặc chảy máu thì đi khám da liễu trước. Đang mang thai hoặc cho con bú cũng nên hỏi ý kiến bác sĩ trước khi dùng serum.",
+          "fit": "no",
+          "fitNote": "Nên gặp bác sĩ trước"
+        }
+      ],
+      "caption": "Ảnh cận vùng da minh hoạ từng tình trạng (tư liệu hình ảnh của hãng), <strong>không phải ảnh trước/sau khi dùng sản phẩm</strong>. Chưa chắc da mình thuộc nhóm nào? Gửi ảnh qua Zalo, chuyên viên xem giúp trước khi bạn đặt."
+    },
+    {
+      "type": "infographic",
+      "id": "con-so-tren-chai",
+      "kind": "facts",
+      "eyebrow": "Con số kiểm tra được",
+      "heading": "Năm con số trên chai và trong hướng dẫn dùng",
+      "intro": "Chỉ những con số in trên bao bì hoặc trong hướng dẫn sử dụng đi kèm. Không con số nào ở đây là lời hứa về kết quả.",
+      "items": [
+        {
+          "label": "4-butylresorcinol",
+          "value": "1000",
+          "unit": "ppm",
+          "body": "Nồng độ ghi thẳng trên chai, không giấu trong một cụm “thành phần độc quyền”. Hoạt chất được nghiên cứu về khả năng ức chế tyrosinase."
+        },
+        {
+          "label": "Niacinamide",
+          "value": "4",
+          "unit": "%",
+          "body": "Mức vừa phải để hạn chế châm chích; hỗ trợ hàng rào bảo vệ da và làm đều màu da."
+        },
+        {
+          "label": "Sáng và tối",
+          "value": "2",
+          "unit": "lần mỗi ngày",
+          "body": "Ngay sau bước rửa mặt, trước kem dưỡng. Buổi sáng luôn kết thúc bằng kem chống nắng."
+        },
+        {
+          "label": "Thử ở vùng cổ trước",
+          "value": "30–45",
+          "unit": "phút",
+          "body": "Thoa một lượng nhỏ ở vùng cổ và quan sát chừng ấy thời gian trước lần dùng đầu tiên trên cả mặt."
+        },
+        {
+          "label": "Chai chân không vòi nhấn",
+          "value": "30",
+          "unit": "ml",
+          "body": "Không khí không vào được, mỗi lần nhấn ra đúng một lượng — không cần ước lượng bằng mắt."
+        }
+      ],
+      "footnote": "Chúng tôi không ghi mốc thời gian thấy kết quả: kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
     },
     {
       "type": "compare",
@@ -187,31 +318,6 @@
       ],
       "footnote": "Nếu bạn đã có một hũ kem dưỡng đang dùng tốt, chai serum riêng là lựa chọn hợp lý hơn. Không có lý do gì phải bỏ thứ đang hiệu quả để mua trọn bộ.",
       "transition": "Bắt đầu bằng serum thì đây là thứ bạn đang bôi lên mặt. Sáu hoạt chất, in thẳng trên chai."
-    },
-    {
-      "type": "cards",
-      "id": "hop-voi-ai",
-      "eyebrow": "Trước khi đặt",
-      "heading": "Chai serum này hợp với ai",
-      "intro": "Chúng tôi là đại lý. Bán được thì tốt, nhưng bán nhầm thứ cho nhầm người thì bạn dùng vài tuần rồi bỏ — mất cả hai phía.",
-      "columns": 3,
-      "items": [
-        {
-          "heading": "Da mỏng yếu, từng bong tróc vì retinol",
-          "body": "Đây là nhóm chai serum này được thiết kế cho. Công thức không có retinoid và không có cồn khô, nên không có giai đoạn bong tróc phải chịu đựng.",
-          "meta": "Hợp nhất"
-        },
-        {
-          "heading": "Thâm sạm rõ, muốn đi nhanh hơn",
-          "body": "Serum làm tốt bước đưa vào, nhưng nếu không có bước khoá lại thì hoạt chất bay hơi cùng độ ẩm. Nhóm này nên có cả kem — đó là lý do có bản combo.",
-          "meta": "Nên xem bản combo"
-        },
-        {
-          "heading": "Da đang kích ứng, đỏ rát, hoặc vừa peel",
-          "body": "Chờ hàng rào bảo vệ da ổn định lại đã. Đưa thêm hoạt chất vào lúc này là cách chắc chắn để da phản ứng mạnh hơn, và bạn sẽ đổ lỗi cho sản phẩm.",
-          "meta": "Chưa phải lúc"
-        }
-      ]
     },
     {
       "type": "ingredients",

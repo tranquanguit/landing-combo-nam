@@ -1,0 +1,27 @@
+{
+  "slug": "combo-hairborn-goi-peel-ion",
+  "locale": "vi",
+  "translationKey": "combo:combo-hairborn-goi-peel-ion",
+  "status": "published",
+  "name": "Combo Hairborn: Dầu gội + Peel Ion",
+  "shortName": "Dầu gội + Peel Ion",
+  "group": "toc",
+  "order": 10,
+  "items": [
+    {
+      "product": "hairborn-hair-boost-shampoo",
+      "qty": 1
+    },
+    {
+      "product": "hairborn-peel-ion",
+      "qty": 1
+    }
+  ],
+  "price": 615000,
+  "currency": "VND",
+  "purpose": "Dầu gội Hair Boost làm sạch da đầu, tinh chất Peel Ion dưỡng da đầu và chân tóc sau khi gội.",
+  "seo": {
+    "title": "Combo Hairborn: Dầu gội + Peel Ion | Mỹ Phẩm Mocha",
+    "description": "Dầu gội Hair Boost làm sạch da đầu, tinh chất Peel Ion dưỡng da đầu và chân tóc sau khi gội. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

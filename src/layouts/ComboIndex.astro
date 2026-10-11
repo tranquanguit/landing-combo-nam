@@ -1,0 +1,113 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Analytics from '../components/Analytics.astro';
+import ComboGrid from '../components/ComboGrid.astro';
+import { collectionGraph } from '../lib/schema';
+import { COMBO_GROUPS } from '../lib/combos';
+import { resolveAssetImage, resolveAssetUrl } from '../lib/images';
+import { comboIndexPath, comboPath, homePath, productPath } from '../lib/routes';
+import { assertTranslated, t, type Locale } from '../i18n/ui';
+
+/**
+ * Danh sách mọi combo, xếp theo nhu cầu. Một trang, không phân trang: khoảng ba mươi
+ * thẻ chia theo nhóm vẫn quét được bằng mắt, và chia nhiều trang thì người tìm
+ * "combo mụn" phải bấm qua hai trang mới thấy hết.
+ */
+interface Props {
+  cards: any[];
+  brand: any;
+  locale: Locale;
+  canonical: string;
+  alternates?: { locale: Locale; url: string }[];
+  nav?: any[];
+  policies?: { label: string; href: string }[];
+  pages?: { label: string; href: string }[];
+  fallbackOgImage?: string;
+}
+const { cards, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], fallbackOgImage } = Astro.props;
+assertTranslated(locale);
+const site = Astro.site?.origin ?? 'https://mochatrinam.com';
+
+const groups = COMBO_GROUPS
+  .map((g) => ({ g, label: t(locale, `combo.group.${g}` as any), cards: cards.filter((c) => c.group === g).sort((a, b) => a.order - b.order) }))
+  .filter((x) => x.cards.length);
+
+const title = t(locale, 'combo.indexTitle');
+const description = t(locale, 'combo.indexLead');
+const breadcrumb = [
+  { name: t(locale, 'nav.home'), url: new URL(homePath(locale), site).href },
+  { name: t(locale, 'combo.nav'), url: new URL(comboIndexPath(locale), site).href },
+];
+const firstImage = groups[0]?.cards[0]?.image;
+const og = await resolveAssetImage(firstImage ?? fallbackOgImage, site, 1200);
+const logoUrl = await resolveAssetUrl(b.logo, site, 512);
+const jsonLd = collectionGraph({
+  brand: b, site, url: canonical, locale, logoUrl, title, description, breadcrumb,
+  items: groups.flatMap((x) => x.cards).map((c) => ({
+    name: c.name, url: new URL(c.product ? productPath(c.slug, locale) : comboPath(c.slug, locale), site).href,
+  })),
+});
+---
+<BaseLayout
+  siteName={b.tradingName}
+  locale={locale}
+  title={`${title} | ${b.tradingName}`}
+  description={description}
+  canonical={canonical}
+  ogImage={og?.url}
+  ogImageWidth={og?.width}
+  ogImageHeight={og?.height}
+  ogImageAlt={title}
+  ogType="website"
+  alternates={alternates}
+  jsonLd={jsonLd}
+>
+  <SiteHeader brand={b} locale={locale} alternates={alternates} nav={nav} orderHref={groups[0] ? `#${groups[0].g}` : comboIndexPath(locale)} />
+  <Breadcrumb items={breadcrumb} locale={locale} />
+
+  <main id="main">
+    <div class="head">
+      <div class="wrap">
+        <p class="eyebrow">{t(locale, 'combo.eyebrow')}</p>
+        <h1>{title}</h1>
+        <p class="lead">{description}</p>
+        {/* Nhảy thẳng tới nhóm: trên điện thoại danh sách dài sáu bảy màn hình. */}
+        <nav class="jump" aria-label={t(locale, 'combo.nav')}>
+          {groups.map((x) => <a href={`#${x.g}`}>{x.label} <span class="n">{x.cards.length}</span></a>)}
+        </nav>
+      </div>
+    </div>
+
+    {groups.map((x, gi) => (
+      <section id={x.g} class:list={['grp', gi % 2 ? 'alt' : null]} aria-labelledby={`${x.g}-title`} tabindex="-1">
+        <div class="wrap">
+          <h2 id={`${x.g}-title`}>{x.label}</h2>
+          <ComboGrid cards={x.cards} locale={locale} source="combo-index" priority={gi === 0} />
+        </div>
+      </section>
+    ))}
+  </main>
+
+  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} pages={pages} />
+  <Analytics locale={locale} />
+</BaseLayout>
+
+<style>
+  .head { background: linear-gradient(180deg, var(--stage-a), var(--paper)); padding-block: clamp(28px, 4vw, 56px) clamp(24px, 3vw, 40px); }
+  h1 { margin: var(--s-2) 0 var(--s-3); font-size: clamp(1.9rem, 3.6vw, 2.8rem); letter-spacing: -0.02em; color: var(--ink-navy); }
+  .head .lead { max-width: 62ch; margin: 0 0 var(--s-5); }
+  .jump { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .jump a {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px;
+    border: 1px solid var(--line-strong); border-radius: 999px; background: #fff;
+    color: var(--ink-navy); font-size: var(--t-sm); font-weight: 600; text-decoration: none;
+  }
+  .jump a:hover { border-color: var(--cobalt); color: var(--cobalt); }
+  .jump .n { font-family: var(--font-figure); color: var(--slate); font-weight: 500; }
+  .grp { padding-block: clamp(36px, 5vw, 64px); background: var(--paper); scroll-margin-top: calc(var(--header-h) + 12px); }
+  .grp.alt { background: var(--bone); }
+  .grp h2 { margin: 0 0 var(--s-5); font-size: clamp(1.4rem, 2.4vw, 1.9rem); color: var(--ink-navy); }
+</style>

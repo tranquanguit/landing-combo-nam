@@ -69,8 +69,9 @@ Dấu `*` = bắt buộc.
 | &nbsp;&nbsp;&nbsp;&nbsp;`seo.ogImage` | chữ | không |
 | `compliance` | nhóm trường | **có** |
 | &nbsp;&nbsp;&nbsp;&nbsp;`compliance.productNotificationNumber` | chữ | không |
-| &nbsp;&nbsp;&nbsp;&nbsp;`compliance.declaringOrganization` | chữ | **có** |
-| &nbsp;&nbsp;&nbsp;&nbsp;`compliance.declaringAddress` | chữ | **có** |
+| &nbsp;&nbsp;&nbsp;&nbsp;`compliance.declarant` | mã | **có** | mã tổ chức công bố trong Thông tin cửa hàng (`mocha`, `hairborn`…); tên và địa chỉ pháp nhân lấy từ đó |
+| &nbsp;&nbsp;&nbsp;&nbsp;`compliance.declaringOrganization` | chữ | không |
+| &nbsp;&nbsp;&nbsp;&nbsp;`compliance.declaringAddress` | chữ | không |
 | &nbsp;&nbsp;&nbsp;&nbsp;`compliance.functions` | chữ | **có** |
 | &nbsp;&nbsp;&nbsp;&nbsp;`compliance.warnings` | danh sách chữ | **có** |
 | `blocks` | danh sách khối — xem mục "Các loại khối" bên dưới | **có** |

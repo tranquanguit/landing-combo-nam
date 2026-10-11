@@ -1,0 +1,47 @@
+{
+  "slug": "bo-7-mon-da-mun-peel",
+  "locale": "vi",
+  "translationKey": "combo:bo-7-mon-da-mun-peel",
+  "status": "published",
+  "name": "Bộ 7 món da mụn có Peel",
+  "shortName": "Bộ 7 món mụn + peel",
+  "group": "mun",
+  "order": 90,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    },
+    {
+      "product": "ultra-egf-bio-gel-mask",
+      "qty": 1
+    },
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    }
+  ],
+  "price": 1750000,
+  "currency": "VND",
+  "purpose": "Bộ da mụn 5 món, thêm bộ peel làm mới bề mặt da sần và mặt nạ gel làm dịu sau peel.",
+  "seo": {
+    "title": "Bộ 7 món da mụn có Peel | Mỹ Phẩm Mocha",
+    "description": "Bộ da mụn 5 món, thêm bộ peel làm mới bề mặt da sần và mặt nạ gel làm dịu sau peel. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

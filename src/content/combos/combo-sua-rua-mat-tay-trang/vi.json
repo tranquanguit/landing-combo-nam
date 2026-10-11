@@ -1,0 +1,27 @@
+{
+  "slug": "combo-sua-rua-mat-tay-trang",
+  "locale": "vi",
+  "translationKey": "combo:combo-sua-rua-mat-tay-trang",
+  "status": "published",
+  "name": "Combo Tẩy trang + Sữa rửa mặt",
+  "shortName": "Tẩy trang + Rửa mặt",
+  "group": "lam-sach",
+  "order": 20,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    }
+  ],
+  "price": 425000,
+  "currency": "VND",
+  "purpose": "Làm sạch hai bước buổi tối: tẩy trang lấy đi kem chống nắng và trang điểm, sữa rửa mặt lấy phần còn lại.",
+  "seo": {
+    "title": "Combo Tẩy trang + Sữa rửa mặt | Mỹ Phẩm Mocha",
+    "description": "Làm sạch hai bước buổi tối: tẩy trang lấy đi kem chống nắng và trang điểm, sữa rửa mặt lấy phần còn lại. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

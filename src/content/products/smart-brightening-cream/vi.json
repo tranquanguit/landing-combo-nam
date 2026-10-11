@@ -28,16 +28,15 @@
     "description": "Kem giảm sạm nám Tranexamic Acid, NIO-NAG, Bakuchiol, Ceramide, nồng độ in trên bao bì. Không corticoid. {{price}}, freeship, trả tiền khi nhận."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "1517/25/CBMP-LA",
+    "declarant": "mocha",
     "functions": "hỗ trợ làm mờ vùng da sạm nám, dưỡng sáng và cải thiện độ đều màu da",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ],
-    "productNotificationNumber": "1517/25/CBMP-LA"
+    ]
   },
   "availability": "InStock",
   "shipping": {
@@ -82,9 +81,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Bước kem buổi tối, cho da nám",
+      "eyebrow": "Kem dưỡng buổi tối cho da sạm nám · hũ 30gr",
       "heading": "Nám mờ rồi lại đậm: vấn đề thường không nằm ở việc bạn thiếu kiên trì",
-      "lead": "Hũ kem 30gr dùng buổi tối cho da nám. <strong>Nồng độ từng hoạt chất in thẳng lên vỏ hộp</strong>, nên bạn đem so với sản phẩm khác được trước khi quyết định.",
+      "lead": "Kem dùng buổi tối cho da sạm nám, có Tranexamic Acid 3%, NIO-NAG 2% và Bakuchiol 2%. Nồng độ từng hoạt chất in trên vỏ hộp; không corticoid, không hydroquinone.",
       "usp": [
         {
           "text": "<strong>Không corticoid, không hydroquinone</strong>, hai thứ khiến da mỏng đi sau vài tháng dùng kem trộn",
@@ -117,6 +116,32 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Khối lượng",
+          "value": "Hũ 30gr"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Tranexamic Acid 3%, NIO-NAG 2%, Bakuchiol 2%, Vietnam Bio-white Complex 3%, Black Truffle 2%, Ceramide 1%"
+        },
+        {
+          "label": "Không chứa",
+          "value": "Corticoid, hydroquinone"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Buổi tối, sau khi làm sạch và lau khô; lượng khoảng một đốt ngón tay"
+        },
+        {
+          "label": "Thử trước",
+          "value": "Một lượng nhỏ ở vùng cổ, quan sát 30–45 phút"
+        },
+        {
+          "label": "Số công bố",
+          "value": "1517/25/CBMP-LA"
+        }
       ]
     },
     {
@@ -137,6 +162,107 @@
           "Đổi lại, bạn cần kiên nhẫn theo tuần chứ không theo ngày. Và cần chống nắng. <strong>Bỏ bước chống nắng thì không sản phẩm nào giữ được kết quả</strong>. Đây là điều kiện, không phải lời khuyên."
         ]
       }
+    },
+    {
+      "type": "conditions",
+      "id": "hop-voi-ai",
+      "eyebrow": "Nhìn ảnh, đối chiếu da của bạn",
+      "heading": "Hũ kem này hợp với loại nám nào, và khi nào thì không",
+      "intro": "Chúng tôi là đại lý. Bán nhầm thứ cho nhầm người thì bạn dùng vài tuần rồi bỏ, mất cả hai phía. Vì vậy những trường hợp hũ kem này không hợp, chúng tôi nói luôn từ đầu.",
+      "items": [
+        {
+          "label": "Nám mảng, mới vài năm",
+          "aka": "epidermal melasma — sắc tố còn nằm nông",
+          "image": {
+            "src": "/images/da-nam-mang.webp",
+            "alt": "Cận cảnh mảng nám nâu nhạt, bờ rõ trên gò má"
+          },
+          "body": "Mảng nâu bờ rõ, sắc tố còn nằm nông. Đây là nhóm hợp nhất với việc dùng riêng kem: bước khoá ẩm giữ hoạt chất ở lại trên da qua đêm. Buổi sáng vẫn phải có kem chống nắng.",
+          "fit": "yes",
+          "fitNote": "Dùng riêng kem là đủ"
+        },
+        {
+          "label": "Nám chân sâu, nám hỗn hợp",
+          "aka": "sắc tố nằm sâu hơn, bờ mảng mờ",
+          "image": {
+            "src": "/images/da-nam-chan-sau.webp",
+            "alt": "Cận cảnh vùng nám chân sâu, màu sẫm và bờ mảng mờ trên gò má"
+          },
+          "body": "Kem vẫn dùng được, nhưng nếu chỉ có bước kem thì phần thẩm thấu sâu bị bỏ trống, nên chậm hơn hẳn. Nhóm này nên cân nhắc thêm serum, vì vậy mới có bản combo.",
+          "fit": "partial",
+          "fitNote": "Dùng được, nên xem bản combo"
+        },
+        {
+          "label": "Nám nổi lên khi mang thai hoặc sau sinh",
+          "aka": "thường gọi là nám nội tiết",
+          "image": {
+            "src": "/images/da-nam-noi-tiet.webp",
+            "alt": "Cận cảnh vùng nám trên gò má, kiểu hay gặp khi nội tiết thay đổi"
+          },
+          "body": "Đang mang thai hoặc cho con bú thì hỏi ý kiến bác sĩ trước khi dùng. Lời khuyến cáo này in trên bao bì. Qua giai đoạn đó, chọn kem riêng hay combo theo độ nông sâu của nám như hai ô trên.",
+          "fit": "partial",
+          "fitNote": "Mang thai, cho con bú: hỏi bác sĩ trước"
+        },
+        {
+          "label": "Thâm sau mụn",
+          "aka": "tăng sắc tố sau viêm",
+          "image": {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Cận cảnh vùng da có nhiều vết thâm nâu sau mụn"
+          },
+          "body": "NIO-NAG trong hũ kem có hướng tới tăng sắc tố sau viêm, nhưng kem thoa cả mặt. Nếu chủ yếu là từng vết thâm sau mụn riêng lẻ, gel chấm thâm của Mocha là thứ đúng việc hơn.",
+          "fit": "partial",
+          "fitNote": "Gel chấm thâm đúng việc hơn"
+        },
+        {
+          "label": "Da đang kích ứng, bong tróc, hoặc vừa peel",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Cận cảnh vùng da đang đỏ và kích ứng"
+          },
+          "body": "Chờ da ổn định lại trước đã. Đưa thêm hoạt chất vào một hàng rào bảo vệ đang hỏng là cách chắc chắn để da phản ứng mạnh hơn. Đang dùng mà da kích ứng thì ngưng ngay.",
+          "fit": "no",
+          "fitNote": "Chưa phải lúc"
+        },
+        {
+          "label": "Mảng sẫm lan nhanh, đổi màu, đổi hình dạng",
+          "body": "Một vùng sẫm màu thay đổi nhanh, gồ lên, ngứa hoặc chảy máu không phải chuyện của một hũ kem. Hãy đi khám da liễu trước — chúng tôi không bán cho bạn kỳ vọng đó.",
+          "fit": "no",
+          "fitNote": "Nên gặp bác sĩ da liễu"
+        }
+      ],
+      "caption": "Ảnh cận vùng da minh hoạ từng tình trạng (tư liệu hình ảnh của hãng), <strong>không phải ảnh trước/sau khi dùng sản phẩm</strong>. Chưa chắc nám của mình nông hay sâu? Gửi ảnh qua Zalo, chuyên viên xem giúp trước khi bạn đặt."
+    },
+    {
+      "type": "infographic",
+      "id": "nam-nam-o-dau",
+      "kind": "layers",
+      "eyebrow": "Sắc tố nằm ở đâu",
+      "heading": "Nám nông hay nám sâu quyết định bạn cần một bước hay hai",
+      "intro": "Hũ kem làm việc trên mặt da suốt đêm. Nám càng nằm sâu, càng cần thêm một bước đưa hoạt chất vào trước bước kem.",
+      "items": [
+        {
+          "label": "Lớp kem buổi tối",
+          "depth": "surface",
+          "body": "Bước cuối buổi tối: khoá ẩm và giữ hoạt chất ở lại trên da qua đêm. Buổi sáng, thứ nằm trên mặt da phải là <strong>kem chống nắng</strong>."
+        },
+        {
+          "label": "Nám mảng",
+          "depth": "epidermis",
+          "body": "Sắc tố nằm nông ở lớp biểu bì, bờ mảng rõ. Dùng riêng hũ kem là hợp nhất."
+        },
+        {
+          "label": "Nám chân sâu",
+          "depth": "dermis",
+          "body": "Sắc tố xuống tới lớp trung bì, bờ mảng mờ. Kem một mình chậm hơn hẳn; thêm serum trước bước kem thì đủ cả hai bước."
+        },
+        {
+          "label": "Nám hỗn hợp",
+          "depth": "dermis",
+          "body": "Có cả phần nông lẫn phần sâu, nên tính như nám chân sâu: bản combo hai bước hợp hơn dùng riêng kem."
+        }
+      ],
+      "footnote": "Sơ đồ minh hoạ, không theo tỉ lệ. Nhìn bằng mắt không phải lúc nào cũng phân biệt được nám nông hay sâu. Chưa chắc thì gửi ảnh cho chuyên viên trước khi chọn."
     },
     {
       "type": "compare",
@@ -186,31 +312,6 @@
       ],
       "footnote": "Không có lựa chọn nào <strong>sai</strong> ở đây. Khác nhau là ở tốc độ và ở số bước bạn sẵn sàng giữ đều mỗi ngày. Một quy trình hai bước mà bỏ giữa chừng thì chậm hơn một quy trình một bước làm đủ.",
       "transition": "Đi một bước trước cũng được. Sáu hoạt chất in trên vỏ hộp, và việc của từng cái."
-    },
-    {
-      "type": "cards",
-      "id": "hop-voi-ai",
-      "eyebrow": "Trước khi đặt",
-      "heading": "Hũ kem này hợp với ai",
-      "intro": "Chúng tôi là đại lý, bán được hàng thì tốt. Nhưng bán nhầm thứ cho nhầm người thì bạn dùng vài tuần rồi bỏ, và đó là mất cả hai phía. Đọc xem bạn thuộc nhóm nào.",
-      "columns": 3,
-      "items": [
-        {
-          "heading": "Nám mảng, mới vài năm",
-          "body": "Sắc tố còn nằm nông, bờ mảng rõ. Đây là nhóm hợp nhất với việc dùng riêng kem: bước khoá ẩm giữ hoạt chất ở lại trên da đủ lâu qua đêm.",
-          "meta": "Dùng riêng kem là đủ"
-        },
-        {
-          "heading": "Nám chân sâu hoặc nám hỗn hợp",
-          "body": "Sắc tố nằm sâu hơn và bờ mờ. Kem vẫn dùng được, nhưng nếu chỉ có bước kem thì phần thẩm thấu sâu bị bỏ trống — chậm hơn hẳn. Nên cân nhắc thêm serum.",
-          "meta": "Nên xem bản combo"
-        },
-        {
-          "heading": "Da đang kích ứng, bong tróc, hoặc vừa peel",
-          "body": "Chờ da ổn định lại trước đã. Đưa thêm hoạt chất vào một hàng rào bảo vệ đang hỏng là cách chắc chắn để da phản ứng mạnh hơn.",
-          "meta": "Chưa phải lúc"
-        }
-      ]
     },
     {
       "type": "ingredients",

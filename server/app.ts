@@ -21,6 +21,7 @@ import { adminHandler } from './admin/app.ts';
 import { currentSite } from './lib/publish.ts';
 import { chatHandler, chatEventHandler, linkOrderToChat } from './lib/chat.ts';
 import { chatExportHandler } from './lib/chat-analytics.ts';
+import { annotatePromoOrder } from './lib/promo-server.ts';
 import { onRequest as ordersHandler } from '../functions/api/orders.ts';
 import { onRequest as adminOrdersHandler } from '../functions/api/admin/orders.ts';
 
@@ -58,11 +59,17 @@ export function createApp(opts: AppOptions) {
         }
       }
       if (pathname === '/api/orders') {
+        /* Bản sao thân yêu cầu để đối chiếu gói khuyến mãi SAU khi đơn đã vào CSDL. */
+        const raw = request.method === 'POST' ? await request.clone().text().catch(() => '') : '';
         const res = await ordersHandler(ctx(request) as any);
         /* Đơn đặt sau khi chat (cùng visitorId) = chuyển đổi của chat. Không bao giờ làm hỏng đơn. */
         if (res.ok && request.method === 'POST') {
           const body = await res.clone().json().catch(() => null) as { orderCode?: string; deduped?: boolean } | null;
-          if (body?.orderCode && !body.deduped) await linkOrderToChat(sql, request, body.orderCode).catch((e) => console.error('chat_link_order_failed', (e as Error).message.slice(0, 120)));
+          if (body?.orderCode && !body.deduped) {
+            await linkOrderToChat(sql, request, body.orderCode).catch((e) => console.error('chat_link_order_failed', (e as Error).message.slice(0, 120)));
+            let sent: any = null; try { sent = JSON.parse(raw); } catch { /* biểu mẫu luôn gửi JSON */ }
+            if (sent) await annotatePromoOrder(sql, body.orderCode, sent).catch((e) => console.error('promo_annotate_failed', (e as Error).message.slice(0, 120)));
+          }
         }
         return res;
       }

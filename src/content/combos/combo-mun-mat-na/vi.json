@@ -1,0 +1,27 @@
+{
+  "slug": "combo-mun-mat-na",
+  "locale": "vi",
+  "translationKey": "combo:combo-mun-mat-na",
+  "status": "published",
+  "name": "Combo Gel chấm mụn + Mặt nạ Gel EGF",
+  "shortName": "Mụn + Mặt nạ",
+  "group": "mun",
+  "order": 20,
+  "items": [
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "ultra-egf-bio-gel-mask",
+      "qty": 1
+    }
+  ],
+  "price": 405000,
+  "currency": "VND",
+  "purpose": "Gel chấm mụn đi cùng mặt nạ gel làm dịu, cấp ẩm cho vùng da khô căng quanh nốt mụn.",
+  "seo": {
+    "title": "Combo Gel chấm mụn + Mặt nạ Gel EGF | Mỹ Phẩm Mocha",
+    "description": "Gel chấm mụn đi cùng mặt nạ gel làm dịu, cấp ẩm cho vùng da khô căng quanh nốt mụn. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

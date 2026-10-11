@@ -30,7 +30,22 @@
           "label": "See the morning and evening routines",
           "href": "/en/combo-nam/#lo-trinh"
         }
-      ]
+      ],
+      "figure": {
+        "items": [
+          {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Close-up of skin with uneven, sun-dulled tone",
+            "label": "Sun-dulled skin"
+          },
+          {
+            "src": "/images/da-nam-mang.webp",
+            "alt": "Close-up of a cheek with a light-brown patch",
+            "label": "Patchy melasma"
+          }
+        ],
+        "caption": "Close-up skin images to illustrate each condition. They are not before/after photos and are not a way to self-diagnose. If you are unsure which case is yours, ask a dermatologist."
+      }
     },
     {
       "id": "hoa-hoc-hay-vat-ly",

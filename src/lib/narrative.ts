@@ -92,6 +92,9 @@ export const DEFAULT_ROLE: Record<string, NarrativeRole> = {
   order: 'decision',
   faq: 'faq',
   relatedProducts: 'next-step',
+  conditions: 'fit',
+  infographic: 'mechanism',
+  voices: 'proof',
 };
 
 /** Bề mặt nền. Trùng với `rhythmFields.surface` trong schema. */

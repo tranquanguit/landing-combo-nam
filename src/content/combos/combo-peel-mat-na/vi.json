@@ -1,0 +1,27 @@
+{
+  "slug": "combo-peel-mat-na",
+  "locale": "vi",
+  "translationKey": "combo:combo-peel-mat-na",
+  "status": "published",
+  "name": "Combo Peel + Mặt nạ Gel EGF",
+  "shortName": "Peel + Mặt nạ",
+  "group": "peel",
+  "order": 10,
+  "items": [
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "ultra-egf-bio-gel-mask",
+      "qty": 1
+    }
+  ],
+  "price": 705000,
+  "currency": "VND",
+  "purpose": "Bộ peel đi cùng mặt nạ gel làm dịu và cấp ẩm, cho những ngày da khô căng sau peel.",
+  "seo": {
+    "title": "Combo Peel + Mặt nạ Gel EGF | Mỹ Phẩm Mocha",
+    "description": "Bộ peel đi cùng mặt nạ gel làm dịu và cấp ẩm, cho những ngày da khô căng sau peel. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

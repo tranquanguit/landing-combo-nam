@@ -113,6 +113,40 @@ r = await admin('/admin/edit', { method: 'POST', headers: { 'content-type': 'app
 const now = (await sql.query("SELECT data->>'price' AS p FROM content_entries WHERE collection = 'products' AND entry_id = 'combo-nam/vi'")).rows[0].p;
 const rev = (await sql.query("SELECT count(*)::int AS n FROM content_revisions WHERE entry_id = 'combo-nam/vi' AND saved_by = 'bien-tap'")).rows[0].n;
 ok('lưu hợp lệ qua ô nhanh + ghi lịch sử', now === '1040000' && rev === 1, `giá ${now}, ${rev} bản lịch sử`);
+/* Thông tin cửa hàng: một biểu mẫu cho tên/địa chỉ/MST/hotline/…, tổ chức công bố và số công bố. */
+const brandFile = JSON.parse(readFileSync(join(ROOT, 'src/data/mocha.json'), 'utf8'));
+r = await admin('/admin/store');
+const storeHtml = await r.text();
+ok('trang Thông tin cửa hàng mở được, hiện giá trị đang dùng', r.status === 200 && storeHtml.includes(brandFile.phoneDisplay) && storeHtml.includes(brandFile.email));
+const storeForm = (over = {}) => {
+  const f = {
+    tradingName: brandFile.tradingName, address: brandFile.address, taxId: brandFile.taxId ?? '', hours: '',
+    phoneDisplay: brandFile.phoneDisplay, zalo: brandFile.zalo ?? '', email: brandFile.email, moitNoticeUrl: '',
+    'social:Facebook': 'https://www.facebook.com/vi-du', 'social:Instagram': '', 'social:TikTok': '', 'social:YouTube': '',
+  };
+  brandFile.declarants.forEach((d, i) => Object.assign(f, { [`d:${i}:id`]: d.id, [`d:${i}:label`]: d.label, [`d:${i}:brand`]: d.brand, [`d:${i}:name`]: d.name, [`d:${i}:address`]: d.address }));
+  return form({ ...f, ...over });
+};
+const postStore = (body) => admin('/admin/store', { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body });
+r = await postStore(storeForm({ email: 'khong-phai-email' }));
+const brandNow = async () => (await sql.query("SELECT data FROM content_entries WHERE collection = 'brand' AND entry_id = 'mocha'")).rows[0].data;
+ok('Thông tin cửa hàng: email sai -> 422, không ghi', r.status === 422 && (await brandNow()).email === brandFile.email, String(r.status));
+const hbIdx = brandFile.declarants.findIndex((d) => d.id === 'hairborn');
+r = await postStore(storeForm({
+  phoneDisplay: '0900 111 222', [`d:${hbIdx}:name`]: 'Công ty Ví Dụ', [`d:${hbIdx}:address`]: '1 Đường Thử, TP HCM',
+  'p:hairborn-peel-ion:declarant': 'hairborn', 'p:hairborn-peel-ion:number': '9999/26/CBMP-TH', note: 'thử',
+}));
+const bn = await brandNow();
+const nums = (await sql.query("SELECT data->'compliance'->>'productNotificationNumber' AS n FROM content_entries WHERE collection = 'products' AND entry_id LIKE 'hairborn-peel-ion/%'")).rows.map((x) => x.n);
+ok('Thông tin cửa hàng: lưu hotline (tự suy số +84), tổ chức công bố, số công bố cho cả vi + en',
+  r.status === 200 && bn.phone === '+84900111222' && bn.phoneDisplay === '0900 111 222'
+  && bn.declarants.find((d) => d.id === 'hairborn').name === 'Công ty Ví Dụ'
+  && bn.profiles.some((p) => p.name === 'Facebook' && p.url === 'https://www.facebook.com/vi-du')
+  && nums.length === 2 && nums.every((n) => n === '9999/26/CBMP-TH'),
+  `${bn.phone} · ${nums.join(', ')}`);
+r = await postStore(storeForm({ [`d:${hbIdx}:id`]: '', [`d:${hbIdx}:label`]: '', [`d:${hbIdx}:brand`]: '', [`d:${hbIdx}:name`]: '', [`d:${hbIdx}:address`]: '' }));
+ok('Thông tin cửa hàng: không xoá được tổ chức công bố còn sản phẩm dùng', r.status === 422 && /hairborn/.test(await r.text()), String(r.status));
+
 r = await admin('/admin/users');
 ok('biên tập viên không vào được trang tài khoản', r.status === 403, String(r.status));
 

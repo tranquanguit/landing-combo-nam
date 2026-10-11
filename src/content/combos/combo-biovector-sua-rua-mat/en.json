@@ -1,0 +1,27 @@
+{
+  "slug": "combo-biovector-sua-rua-mat",
+  "locale": "en",
+  "translationKey": "combo:combo-biovector-sua-rua-mat",
+  "status": "published",
+  "name": "Biovector + Cleanser Combo",
+  "shortName": "Biovector + Cleanser",
+  "group": "duong",
+  "order": 20,
+  "items": [
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    }
+  ],
+  "price": 558000,
+  "currency": "VND",
+  "purpose": "A gentle cleanser and Biovector moisturiser: a simple base routine for oily or sensitive skin.",
+  "seo": {
+    "title": "Biovector + Cleanser Combo | Mỹ Phẩm Mocha",
+    "description": "A gentle cleanser and Biovector moisturiser: a simple base routine for oily or sensitive skin. Delivered to your door; inspect before you pay."
+  }
+}

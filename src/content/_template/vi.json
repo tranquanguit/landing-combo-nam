@@ -11,8 +11,8 @@
     "description": "Tối đa 170 ký tự, nói thật sản phẩm làm gì cho ai"
   },
   "compliance": {
-    "declaringOrganization": "Công ty Dược Mỹ Phẩm Mocha Việt Nam",
-    "declaringAddress": "Địa chỉ ghi trên phiếu công bố",
+    "productNotificationNumber": "",
+    "declarant": "mocha",
     "functions": "Công dụng ĐÃ CÔNG BỐ với cơ quan quản lý — không phải lời quảng cáo",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải thuốc và không có tác dụng thay thế thuốc chữa bệnh.",

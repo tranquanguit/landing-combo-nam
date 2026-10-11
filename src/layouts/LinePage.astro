@@ -11,8 +11,9 @@ import FSkin from '../components/flagship/FSkin.astro';
 import FCompare from '../components/flagship/FCompare.astro';
 import { splitDose } from '../lib/flagship';
 import ProductGrid from '../components/ProductGrid.astro';
+import ComboGrid from '../components/ComboGrid.astro';
 import { money } from '../lib/format';
-import { articlePath, homePath, linePath, productPath } from '../lib/routes';
+import { comboIndexPath, articlePath, homePath, linePath, productPath } from '../lib/routes';
 import Faq from '../components/blocks/Faq.astro';
 import Analytics from '../components/Analytics.astro';
 import { collectionGraph } from '../lib/schema';
@@ -33,9 +34,11 @@ interface Props {
   fallbackOgImage?: string;
   products: any[];
   articles: any[];
+  /** Combo có chứa sản phẩm của dòng này (đã tính giá). */
+  combos?: any[];
 }
 
-const { line, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], fallbackOgImage, products, articles } = Astro.props;
+const { line, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], fallbackOgImage, products, articles, combos = [] } = Astro.props;
 
 /* Tiêu chí trả lời "ai hợp với cái nào" — nguồn chữ cho khối chọn.
    Không có thì khối chọn không render; thà thiếu một khối còn hơn dựng nó
@@ -150,6 +153,13 @@ const lastProse = line.sections.length - 1;
     {products.length > 0 && (
       <Section id="san-pham" surface="bone" heading={t(locale, 'line.products')} aboveFold>
         <ProductGrid products={products} locale={locale} priority source="line-grid" />
+      </Section>
+    )}
+
+    {combos.length > 0 && (
+      <Section id="combo" surface="paper" space="sm" eyebrow={t(locale, 'combo.nav')} heading={t(locale, 'combo.lineHeading')}>
+        <ComboGrid cards={combos} locale={locale} source="line-combos" />
+        <p class="combo-all"><a href={comboIndexPath(locale)} data-cta="line-combo-all">{t(locale, 'combo.all')} →</a></p>
       </Section>
     )}
 
@@ -296,4 +306,6 @@ const lastProse = line.sections.length - 1;
   }
   .reads a:hover .read-title { color: var(--cobalt); }
   .read-lead { color: var(--slate); max-width: 68ch; line-height: 1.6; }
+  .combo-all { margin: var(--s-6) 0 0; }
+  .combo-all a { font-weight: 600; color: var(--cobalt); display: inline-block; min-height: 24px; line-height: 24px; }
 </style>

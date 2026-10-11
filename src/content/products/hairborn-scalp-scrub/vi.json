@@ -1,0 +1,316 @@
+{
+  "slug": "hairborn-scalp-scrub",
+  "translationKey": "hairborn-scalp-scrub",
+  "status": "published",
+  "sku": "HAIRBORN-SP062",
+  "price": 140000,
+  "compareAtPrice": 200000,
+  "currency": "VND",
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "cham-soc-toc",
+  "locale": "vi",
+  "name": "HAIRBORN Scalp Exfoliating Cream – tẩy tế bào chết da đầu",
+  "shortName": "Tẩy tế bào chết da đầu",
+  "primaryKeyword": "tẩy tế bào chết da đầu hairborn",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Muốn làm sạch sâu da đầu khi da đầu nhanh bết, nhiều cặn và gàu nhẹ",
+    "audienceSituations": [
+      "Hay dùng keo xịt, sáp vuốt tóc và thấy gội một lần không sạch",
+      "Da đầu bết lại nhanh, ngứa nhẹ, có vảy gàu nhỏ",
+      "Muốn da đầu sạch trước khi dùng tinh chất dưỡng"
+    ],
+    "contextHints": [
+      "người hỏi có nên tẩy tế bào chết da đầu không",
+      "người hỏi tẩy tế bào chết da đầu dùng thế nào"
+    ],
+    "approvedAngles": [
+      "Kem tẩy tế bào chết da đầu có muối, mật ong lên men, tinh dầu gừng",
+      "Làm sạch da đầu, giúp da đầu thông thoáng, giảm bết tóc"
+    ],
+    "riskyAngles": [
+      "gọi sản phẩm là cách chữa gàu hoặc bệnh da đầu",
+      "khuyên dùng hằng ngày"
+    ],
+    "preferredDestination": "#huong-dan"
+  },
+  "seo": {
+    "title": "Tẩy tế bào chết da đầu HAIRBORN 50g | Mocha Việt Nam",
+    "description": "Kem tẩy tế bào chết da đầu, tuýp 50g. Trên tuýp in muối (sodium chloride), mật ong lên men, tinh dầu gừng. Dùng trước khi gội, không dùng hằng ngày. {{price}}."
+  },
+  "compliance": {
+    "declarant": "hairborn",
+    "functions": "làm sạch da đầu, giúp da đầu thông thoáng, giảm bết tóc",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da đầu có dấu hiệu kích ứng. Tránh tiếp xúc với mắt; nếu dính vào mắt, rửa ngay bằng nước sạch.",
+      "Rụng tóc thành mảng, rụng nhiều đột ngột, hoặc da đầu đỏ, ngứa, đóng vảy dày: nên đi khám bác sĩ da liễu.",
+      "Kết quả khác nhau tùy cơ địa và tình trạng tóc. Để xa tầm tay trẻ em.",
+      "Không dùng khi da đầu bị trầy xước hoặc kích ứng."
+    ]
+  },
+  "variants": [
+    {
+      "label": "1 tuýp 50g",
+      "note": "Tiết kiệm {{save}} so với giá niêm yết",
+      "price": 140000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, hỏi về tình trạng tóc và da đầu trước khi chốt đơn",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước làm sạch sâu",
+      "heading": "Làm sạch da đầu bết, nhiều cặn trước khi gội",
+      "lead": "Kem tẩy tế bào chết dạng tuýp 50g. Trên tuýp in <strong>muối, mật ong lên men và tinh dầu gừng</strong>, cùng ba chữ: làm sạch, da đầu thông thoáng, giảm bết tóc.",
+      "usp": [
+        {
+          "text": "<strong>Muối, mật ong lên men, tinh dầu gừng</strong> in trên tuýp trong khung Hairroot Boost Complex",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "chép từ mặt trước tuýp 50g"
+        },
+        {
+          "text": "<strong>Làm sạch, giúp da đầu thông thoáng, giảm bết tóc</strong>",
+          "evidence": "ingredient",
+          "qualifier": "ba công dụng in trên tuýp"
+        },
+        {
+          "text": "<strong>Không phải bước hằng ngày</strong>, dùng trước khi gội",
+          "evidence": "ingredient",
+          "qualifier": "theo hướng dẫn bán hàng của hãng"
+        }
+      ],
+      "image": {
+        "src": "/images/hero-hairborn-scalp-scrub.webp",
+        "alt": "Tuýp kem tẩy tế bào chết da đầu HAIRBORN Scalp Exfoliating Cream 50g màu xanh navy"
+      },
+      "primaryCta": "Đặt tẩy tế bào chết da đầu",
+      "secondaryCta": {
+        "label": "Xem cách dùng",
+        "href": "#huong-dan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Khối lượng tịnh",
+          "value": "50g, dạng tuýp"
+        },
+        {
+          "label": "Loại",
+          "value": "Kem tẩy tế bào chết da đầu (Scalp Exfoliating Cream)"
+        },
+        {
+          "label": "Dùng cho",
+          "value": "Mọi loại tóc"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Muối (sodium chloride), mật ong lên men (Gluconobacter/Honey Ferment Filtrate), tinh dầu gừng"
+        },
+        {
+          "label": "Công dụng in trên tuýp",
+          "value": "Làm sạch, giúp da đầu thông thoáng, giảm bết tóc"
+        },
+        {
+          "label": "Thương hiệu",
+          "value": "HAIRBORN"
+        }
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Vì sao da đầu bết",
+      "heading": "Da đầu bết, ngứa, có vảy gàu dù đã gội",
+      "quotes": [
+        "“Dùng keo xịt mỗi ngày, gội một lần không thấy sạch.”",
+        "“Gội tối, sáng ra da đầu đã bết.”",
+        "“Da đầu ngứa, gãi ra vảy trắng nhỏ.”"
+      ],
+      "explainer": {
+        "heading": "Gội thường không lấy hết lớp tế bào chết và cặn sản phẩm",
+        "body": [
+          "Dầu thừa, mồ hôi, cặn keo xịt và dầu gội tích lại thành lớp bám trên da đầu. Da đầu bết lại nhanh và dễ ngứa.",
+          "Kem tẩy tế bào chết có hạt muối, massage trên da đầu ướt trước khi gội để làm sạch lớp bám đó. Dòng mô tả trên tuýp ghi: giúp tẩy tế bào chết, làm sạch gàu, dầu thừa và bụi bẩn, để da đầu sạch, thoáng và bớt nhờn."
+        ],
+        "diagram": "none"
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Hợp với ai, ai không nên dùng",
+      "columns": 2,
+      "items": [
+        {
+          "heading": "Da đầu nhanh bết, nhiều cặn keo xịt",
+          "body": "Dùng trước bước gội để làm sạch lớp bám, rồi gội như bình thường.",
+          "meta": "Phù hợp"
+        },
+        {
+          "heading": "Có vảy gàu nhỏ, khô",
+          "body": "Massage nhẹ giúp làm sạch vảy bám. Gàu dày, đóng mảng, đỏ ngứa nhiều thì nên đi khám.",
+          "meta": "Phù hợp nếu gàu nhẹ"
+        },
+        {
+          "heading": "Da đầu mỏng, dễ nhạy cảm",
+          "body": "Massage thật nhẹ và giãn số lần dùng. Thấy rát thì ngưng.",
+          "meta": "Cân nhắc"
+        },
+        {
+          "heading": "Da đầu trầy xước hoặc đang kích ứng",
+          "body": "Hãng ghi không dùng trong trường hợp này. Hạt muối sẽ làm vùng da tổn thương rát hơn.",
+          "meta": "Không dùng"
+        }
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Thành phần",
+      "heading": "Thành phần chính",
+      "intro": "Ba tên đầu in trên mặt trước tuýp. Glycerin và vitamin E nằm trong bảng thành phần đầy đủ mà nơi bán đăng.",
+      "caption": "Bảng thành phần đầy đủ nơi bán đăng còn có sodium laureth sulfate (chất tạo bọt), hương liệu và chất tạo màu. Nhãn không in nồng độ. Đối chiếu bảng INCI ở bao bì nếu bạn dễ kích ứng.",
+      "rows": [
+        {
+          "name": "Sodium Chloride (muối)",
+          "inProduct": "Mặt trước tuýp",
+          "role": "Hạt muối tạo ma sát nhẹ khi massage, giúp làm sạch tế bào chết và dầu thừa.",
+          "suitedFor": "Da đầu dầu, nhiều cặn"
+        },
+        {
+          "name": "Gluconobacter/Honey Ferment Filtrate (mật ong lên men)",
+          "inProduct": "Mặt trước tuýp",
+          "role": "Dịch lên men từ mật ong, hỗ trợ làm bong lớp tế bào sừng cũ một cách dịu nhẹ.",
+          "suitedFor": "Da đầu có vảy gàu nhỏ"
+        },
+        {
+          "name": "Zingiber Officinale Root Oil (tinh dầu gừng)",
+          "inProduct": "Mặt trước tuýp",
+          "role": "Cho cảm giác ấm nhẹ, dễ chịu khi massage.",
+          "suitedFor": "Người thích cảm giác ấm"
+        },
+        {
+          "name": "Glycerin",
+          "inProduct": "Bảng thành phần nơi bán",
+          "role": "Giữ ẩm, giúp da đầu không khô căng sau khi làm sạch.",
+          "suitedFor": "Da đầu dễ khô"
+        },
+        {
+          "name": "Tocopheryl Acetate (vitamin E)",
+          "inProduct": "Bảng thành phần nơi bán",
+          "role": "Chống oxy hoá, hỗ trợ làm dịu.",
+          "suitedFor": "Mọi loại da đầu"
+        }
+      ],
+      "cta": {
+        "label": "Xem giá và đặt hàng",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Cách dùng",
+      "intro": "Theo hướng dẫn bán hàng của hãng. Tuýp không in hướng dẫn trên mặt trước.",
+      "totalTime": "PT8M",
+      "items": [
+        {
+          "heading": "Làm ướt tóc và da đầu",
+          "body": "Dùng nước ấm."
+        },
+        {
+          "heading": "Thoa lên da đầu",
+          "body": "Lấy khoảng 1–2 muỗng cà phê sản phẩm, thoa đều lên da đầu, không cần thoa lên thân tóc."
+        },
+        {
+          "heading": "Massage nhẹ 3–5 phút",
+          "body": "Dùng đầu ngón tay, xoay tròn nhẹ. Không chà mạnh, không dùng móng."
+        },
+        {
+          "heading": "Xả sạch rồi gội như bình thường",
+          "body": "Xả hết hạt muối, sau đó gội bằng dầu gội quen dùng."
+        }
+      ],
+      "footnote": "Tần suất hãng gợi ý: 1–2 lần mỗi tuần. Tránh để dính vào mắt."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng hợp với tóc và da đầu của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt thời gian dùng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Tẩy tế bào chết da đầu giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho một tuýp 50g. Giá niêm yết là {{compareAtPrice}}. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Dùng mấy lần một tuần?",
+          "a": "Hãng gợi ý 1–2 lần mỗi tuần. Tuýp không in tần suất trên mặt trước. Da đầu nhạy cảm thì bắt đầu một lần mỗi tuần."
+        },
+        {
+          "q": "Dùng trước hay sau khi gội?",
+          "a": "Trước. Massage trên da đầu ướt, xả sạch, rồi gội như bình thường."
+        },
+        {
+          "q": "Người có gàu dùng được không?",
+          "a": "Sản phẩm làm sạch vảy gàu bám trên da đầu khi massage. Gàu dày, đóng mảng hoặc kèm đỏ ngứa nhiều là việc của bác sĩ da liễu."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Đậy nắp sau khi dùng, để nơi khô mát, tránh nắng trực tiếp, xa tầm tay trẻ em."
+        }
+      ],
+      "cta": {
+        "note": "Không còn câu hỏi nào nữa?",
+        "label": "Quay lại phần đặt hàng",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Sau khi làm sạch da đầu",
+      "intro": "Gội, rồi lăn dưỡng da đầu khi tóc còn hơi ẩm.",
+      "items": [
+        "hairborn-hair-boost-shampoo",
+        "hairborn-peel-ion",
+        "hairborn-collagen-deep-shot"
+      ]
+    }
+  ]
+}

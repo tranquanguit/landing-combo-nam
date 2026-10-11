@@ -8,6 +8,12 @@ import ArticlePage from '../layouts/ArticlePage.astro';
 import AdviceIndex from '../layouts/AdviceIndex.astro';
 import PolicyPage from '../layouts/PolicyPage.astro';
 import DocsPage from '../layouts/DocsPage.astro';
+import ComboPage from '../layouts/ComboPage.astro';
+import ComboIndex from '../layouts/ComboIndex.astro';
+import { comboPricing } from '../lib/combos';
+import { expandBrandTokens, productBrand, resolveCompliance } from '../lib/brand';
+import { packsFor, promoNow } from '../lib/promotions';
+import { isDemoBuild } from '../lib/testimonials';
 import { docsFor } from '../lib/documents';
 import { allRoutes, alternatesFor, docsPath, policyPath, siteNav, type Route } from '../lib/routes';
 import { t, type Locale } from '../i18n/ui';
@@ -112,17 +118,23 @@ const canonical = new URL(route.path, Astro.site).href;
 const alternates = await alternatesFor(route.translationKey, Astro.site);
 
 const entry = route.entry as any;
-const data = entry?.data;
+/* Mã thông tin cửa hàng ({{phone}}, {{email}}…) thay bằng giá trị trong Thông tin cửa hàng, và
+   tổ chức công bố của sản phẩm tra từ danh sách tổ chức — ngay tại đây, một lần cho mọi layout. */
+const data = entry?.data
+  ? expandBrandTokens(route.kind === 'product' ? resolveCompliance(entry.data, brand.data) : entry.data, brand.data)
+  : undefined;
 
 /* Gom dữ liệu liên quan tại đây, không để từng layout tự đi hỏi collection:
    liên kết nội bộ là thứ quyết định phần lớn giá trị SEO của một site nhiều
    trang, nên nó phải sinh từ quan hệ dữ liệu ở một chỗ duy nhất. */
-const [allProducts, allLines, allArticles, allPolicies, allDocuments] = await Promise.all([
+const [allProducts, allLines, allArticles, allPolicies, allDocuments, allCombos, allPromos] = await Promise.all([
   getCollection('products', ({ data: d }) => d.status === 'published' && d.locale === locale),
   getCollection('lines', ({ data: d }) => d.status === 'published' && d.locale === locale),
   getCollection('articles', ({ data: d }) => d.status === 'published' && d.locale === locale),
   getCollection('policies', ({ data: d }) => d.status === 'published' && d.locale === locale),
   getCollection('documents'),
+  getCollection('combos', ({ data: d }) => d.status === 'published' && d.locale === locale),
+  getCollection('promotions'),
 ]);
 /* Giấy tờ không theo ngôn ngữ: số hiệu và tên giấy là dữ kiện pháp lý. */
 const publishedDocs = docsFor(allDocuments as any[]);
@@ -130,7 +142,8 @@ const publishedDocs = docsFor(allDocuments as any[]);
 /* Thẻ sản phẩm cần ảnh và một dòng mô tả ngắn. Cả hai đã có sẵn trong khối hero
    của chính sản phẩm — lấy từ đó thay vì bắt người biên tập khai lại, vì khai
    hai lần là hai chỗ để lệch nhau. */
-const cardOf = (d: any) => {
+const cardOf = (raw: any) => {
+  const d = expandBrandTokens(raw, brand.data);
   const hero = d.blocks.find((x: any) => x.type === 'hero');
   return {
     ...d,
@@ -141,10 +154,34 @@ const cardOf = (d: any) => {
     /* Ảnh hero dạng đối tượng (src + alt), cho sân khấu của trang chủ/trang dòng. */
     heroImage: hero?.image,
     tagline: hero?.eyebrow,
+    brandName: productBrand(d, brand.data),
   };
 };
 
 const productBySlug = new Map(allProducts.map((p) => [p.data.slug, cardOf(p.data)]));
+
+/* ---- Combo -------------------------------------------------------------------
+   Giá mua lẻ, mức tiết kiệm và ảnh bìa tính một lần ở đây cho mọi nơi in thẻ combo
+   (trang danh sách, trang combo, trang sản phẩm) — một chỗ tính, không ba chỗ lệch. */
+const priceBook = new Map(allProducts.map((p) => [p.data.slug, { price: p.data.price, name: p.data.shortName ?? p.data.name, shortName: p.data.shortName }]));
+const comboCards = allCombos.map(({ data: c }) => {
+  const pr = comboPricing(c, priceBook);
+  return {
+    ...c, ...pr,
+    image: c.image?.src ?? `/images/combo-${c.slug}.webp`,
+    imageAlt: c.image?.alt ?? `${c.name}: ${c.items.map((it) => `${it.qty > 1 ? `${it.qty} ` : ''}${priceBook.get(it.product)?.name}`).join(', ')}`,
+    count: c.items.reduce((s, it) => s + it.qty, 0),
+    products: new Set([...c.items.map((it) => it.product), ...c.gifts.map((g) => g.product).filter(Boolean)]),
+  };
+});
+/* Sản phẩm vốn LÀ một bộ (Combo Nám, bộ peel) cũng đứng trong danh sách combo — thẻ trỏ về trang sản phẩm. */
+const BUNDLE_PRODUCTS: Record<string, string> = { 'combo-nam': 'nam', 'retinol-mixpeel-kit': 'peel' };
+const bundleCards = Object.entries(BUNDLE_PRODUCTS)
+  .map(([slug, group]) => productBySlug.get(slug) && { ...productBySlug.get(slug), group, order: 0, product: true, regular: 0, pct: 0,
+    count: (productBySlug.get(slug).includes?.length ?? 0) + (productBySlug.get(slug).gifts?.length ?? 0) })
+  .filter(Boolean);
+const promoEntries = allPromos.map((e) => ({ id: e.id, data: e.data }));
+const demoBuild = isDemoBuild(import.meta.env);
 const lineBySlug = new Map(allLines.map((l) => [l.data.slug, l.data]));
 const articleBySlug = new Map(allArticles.map((a) => [a.data.slug, a.data]));
 
@@ -186,6 +223,7 @@ const nav = siteNav(
   { advice: t(locale, 'nav.advice'), products: t(locale, 'nav.products'), contact: t(locale, 'nav.contact') },
   (slug) => productBySlug.get(slug)?.shortName ?? productBySlug.get(slug)?.name,
   allPolicies.find((x) => x.data.topLevel && x.data.translationKey === 'lien-he')?.data.slug,
+  comboCards.length ? t(locale, 'combo.nav') : undefined,
 );
 
 /* Chính sách chỉ trỏ từ chân trang — không đưa lên điều hướng chính vì nó
@@ -225,6 +263,7 @@ const articlesSorted = allArticles
     products={[...productBySlug.values()]}
     docs={publishedDocs}
     articles={pick<any>(data.articles, articleBySlug)}
+    combos={['nam', 'mun', 'peel', 'duong'].map((g) => comboCards.filter((c) => c.group === g).sort((a, b) => a.order - b.order)[0]).filter(Boolean)}
   />
 )}
 
@@ -241,6 +280,8 @@ const articlesSorted = allArticles
     alternates={alternates}
     products={productsOfLine(data)}
     articles={pick<any>(data.articles, articleBySlug)}
+    combos={(() => { const own = new Set(productsOfLine(data).map((p: any) => p.slug));
+      return comboCards.filter((c) => c.items.some((it) => own.has(it.product))).sort((a, b) => a.count - b.count || b.pct - a.pct).slice(0, 4); })()}
   />
 )}
 
@@ -257,6 +298,7 @@ const articlesSorted = allArticles
     articles={pick<any>(data.relatedArticles, articleBySlug)}
     productCards={productBySlug}
     documents={docsFor(allDocuments as any[], data.slug)}
+    combos={comboCards.filter((c) => c.products.has(data.slug)).sort((a, b) => a.count - b.count || b.pct - a.pct).slice(0, 6)}
   />
 )}
 
@@ -318,5 +360,43 @@ const articlesSorted = allArticles
     locale={locale}
     canonical={canonical}
     alternates={alternates}
+  />
+)}
+
+{route.kind === 'combo' && (() => {
+  const card = comboCards.find((c) => c.slug === data.slug)!;
+  const packs = packsFor(data.slug, locale, promoEntries, priceBook, promoNow(), demoBuild);
+  const ids = [...new Set(packs.map((x) => x.promoId))];
+  return (
+    <ComboPage
+      nav={nav}
+      policies={policies}
+      pages={topPages}
+      combo={data}
+      pricing={{ regular: card.regular, save: card.save, pct: card.pct }}
+      image={{ src: card.image, alt: card.imageAlt }}
+      productCards={productBySlug}
+      related={comboCards.filter((c) => c.group === data.group && c.slug !== data.slug).sort((a, b) => a.order - b.order).slice(0, 4)}
+      promoPacks={packs}
+      promoTerms={[...new Set(promoEntries.filter((e) => ids.includes(e.id)).flatMap((e) => e.data.terms))]}
+      brand={brand.data}
+      locale={locale}
+      canonical={canonical}
+      alternates={alternates}
+    />
+  );
+})()}
+
+{route.kind === 'combo-index' && (
+  <ComboIndex
+    nav={nav}
+    policies={policies}
+    pages={topPages}
+    cards={[...bundleCards, ...comboCards]}
+    brand={brand.data}
+    locale={locale}
+    canonical={canonical}
+    alternates={alternates}
+    fallbackOgImage={fallbackOgImage}
   />
 )}

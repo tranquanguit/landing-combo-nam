@@ -216,6 +216,15 @@ const blocks = z.discriminatedUnion('type', [
       href: z.string().regex(/^#[a-z0-9-]+$/, 'neo dạng #ten-khoi'),
     }).strict().optional(),
     trustBadges: z.array(z.string()).max(5).default([]),
+    /**
+     * Thông tin sản phẩm dạng nhãn — giá trị, đọc lướt trong 5 giây (dung tích, kết cấu,
+     * dùng cho, thành phần chính, xuất xứ…). Học từ cách các trang bán hàng của hãng trình
+     * bày: người mua quét nhãn trước, đọc văn sau. Chỉ ghi dữ kiện in trên bao bì / hồ sơ.
+     */
+    facts: z.array(z.object({
+      label: z.string().min(2).max(24),
+      value: z.string().min(1).max(110),
+    }).strict()).max(6).default([]),
   }).strict(),
   z.object({
     type: z.literal('offer'),
@@ -258,7 +267,11 @@ const blocks = z.discriminatedUnion('type', [
         });
       }
     })),
-    explainer: z.object({ heading: z.string(), body: z.array(z.string()) }).strict(),
+    explainer: z.object({
+      heading: z.string(), body: z.array(z.string()),
+      /** Sơ đồ lớp da + sắc tố bên cạnh đoạn giải thích. 'none' cho sản phẩm không phải chăm da (tóc). */
+      diagram: z.enum(['skin', 'none']).default('skin'),
+    }).strict(),
   }).strict(),
   z.object({
     type: z.literal('cards'),
@@ -556,6 +569,100 @@ const blocks = z.discriminatedUnion('type', [
         message: 'Hai cột phải là một "morning" và một "night"; hai cột cùng loại thì bố cục mất nghĩa.' });
     }
   }),
+
+  /**
+   * Ảnh thật của TÌNH TRẠNG DA, kèm câu trả lời thẳng "sản phẩm này có phải việc
+   * của nó không".
+   *
+   * Ảnh ở đây là ảnh minh hoạ tình trạng (cận vùng da, không thấy mặt người), KHÔNG
+   * phải ảnh kết quả sau khi dùng. `caption` bắt buộc để nói đúng điều đó ngay
+   * dưới ảnh — một ảnh mụn viêm đặt cạnh tuýp gel mà không có chú thích thì người
+   * xem tự hiểu thành "trước khi dùng", và trang chưa từng chứng minh "sau".
+   *
+   * `fit` không phải trang trí: mỗi ô phải nói sản phẩm hợp tới đâu, kể cả "không".
+   * Trang không có ô "no" nào là trang chỉ kể nửa câu chuyện.
+   */
+  z.object({
+    type: z.literal('conditions'),
+    ...rhythmFields,
+    id: anchorId,
+    eyebrow: z.string().optional(),
+    heading: z.string(),
+    intro: z.string().optional(),
+    items: z.array(z.object({
+      label: z.string().min(2).max(48),
+      /** Tên chuyên môn, in nhỏ dưới tên thường gọi. */
+      aka: z.string().max(60).optional(),
+      image: z.object({ src: z.string(), alt: z.string().min(8) }).strict().optional(),
+      body: z.string().min(12).max(280),
+      fit: z.enum(['yes', 'partial', 'no']),
+      /** Một câu ngắn trên nhãn: "Đúng việc của gel chấm", "Nên gặp bác sĩ". */
+      fitNote: z.string().min(4).max(48),
+    }).strict()).min(2).max(8),
+    caption: z.string().min(20, 'Ghi rõ ảnh là ảnh minh hoạ tình trạng da, không phải kết quả sau khi dùng.'),
+  }).strict(),
+
+  /**
+   * Thông tin dạng hình: vẽ từ DỮ LIỆU, không phải ảnh chụp một tấm poster.
+   *
+   * Ba kiểu:
+   *  - `stages` — các giai đoạn nối tiếp (vòng đời một nốt mụn); `highlight` đánh
+   *    dấu giai đoạn sản phẩm làm việc.
+   *  - `layers` — mặt cắt da; mỗi mục khai nó đi tới lớp nào (`depth`).
+   *  - `facts`  — ô số lớn: chỉ dùng con số IN TRÊN BAO BÌ hoặc hướng dẫn dùng.
+   *
+   * Chữ nằm ở HTML, không nằm trong ảnh: trình đọc màn hình, máy tìm kiếm và trợ
+   * lý AI đọc được, hàng rào claims quét được, và đổi một câu không phải thuê
+   * người vẽ lại.
+   */
+  z.object({
+    type: z.literal('infographic'),
+    ...rhythmFields,
+    id: anchorId,
+    eyebrow: z.string().optional(),
+    heading: z.string(),
+    intro: z.string().optional(),
+    kind: z.enum(['stages', 'layers', 'facts']),
+    items: z.array(z.object({
+      label: z.string().min(2).max(48),
+      value: z.string().max(10).optional(),
+      unit: z.string().max(24).optional(),
+      body: z.string().min(8).max(260),
+      depth: z.enum(['surface', 'epidermis', 'dermis']).optional(),
+      highlight: z.boolean().default(false),
+    }).strict()).min(2).max(6),
+    footnote: z.string().optional(),
+  }).strict().superRefine((b, ctx) => {
+    b.items.forEach((it, i) => {
+      if (b.kind === 'layers' && !it.depth) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['items', i, 'depth'],
+          message: `Kiểu "layers": "${it.label}" phải khai "depth" (surface, epidermis hoặc dermis) — không thì không vẽ được nó tới lớp nào.` });
+      }
+      if (b.kind === 'facts' && !it.value) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['items', i, 'value'],
+          message: `Kiểu "facts": "${it.label}" cần "value" — ô số mà không có số thì nên là một câu bình thường.` });
+      }
+    });
+  }),
+
+  /**
+   * Phản hồi nổi bật của khách — LẤY TỪ collection `testimonials`, không khai ở đây.
+   *
+   * Lời chứng là dữ liệu cá nhân và cần văn bản đồng ý của từng người (Luật Quảng
+   * cáo, Điều 8 khoản 11). Đặt chúng ở một collection riêng, mỗi lời một hồ sơ
+   * đồng ý, thì một người rút lại đồng ý chỉ cần đổi MỘT file — lời đó biến khỏi
+   * mọi trang đang dùng nó. Khối này chỉ nói "đặt phần phản hồi ở đây".
+   * Không có lời nào đủ điều kiện thì khối không hiện gì cả.
+   */
+  z.object({
+    type: z.literal('voices'),
+    ...rhythmFields,
+    id: anchorId,
+    eyebrow: z.string().optional(),
+    heading: z.string(),
+    intro: z.string().optional(),
+    limit: z.number().int().min(1).max(12).default(6),
+  }).strict(),
 ]);
 
 const products = defineCollection({
@@ -694,6 +801,8 @@ const products = defineCollection({
       note: z.string().optional(),
       price: money.nullable(),
       recommended: z.boolean().default(false),
+      /** Gói mua nhiều cùng một món (2 tuýp, 3 chai): biểu mẫu gạch giá lẻ × qty cạnh giá gói. */
+      qty: z.number().int().min(2).max(5).optional(),
     }).strict()).default([])
       .refine((vs) => vs.filter((v) => v.recommended).length <= 1,
         'Chỉ một gói được đặt recommended: true — hai gói sẽ sinh hai radio cùng checked.'),
@@ -707,12 +816,20 @@ const products = defineCollection({
     /** Thông tin bắt buộc theo Nghị định 342/2025/NĐ-CP. Thiếu thì build cảnh báo. */
     compliance: z.object({
       productNotificationNumber: z.string().optional(),
-      declaringOrganization: z.string(),
-      declaringAddress: z.string(),
+      /**
+       * Mã tổ chức công bố, khai MỘT lần trong Thông tin cửa hàng (`brand.declarants`).
+       * Tên và địa chỉ pháp nhân lấy từ đó lúc build: đổi một chỗ, mọi sản phẩm của
+       * tổ chức đó đổi theo, và không thể có hai bản ghi lệch nhau giữa vi và en.
+       */
+      declarant: slugField.optional(),
+      /** Chỉ dùng khi KHÔNG khai `declarant` (cách cũ, ghi thẳng tên trong sản phẩm). */
+      declaringOrganization: z.string().optional(),
+      declaringAddress: z.string().optional(),
       functions: z.string(),
       warnings: z.array(z.string()).min(1),
 
-    }).strict(),
+    }).strict().refine((c) => c.declarant || c.declaringOrganization,
+      'Cần `declarant` (mã tổ chức công bố trong Thông tin cửa hàng) hoặc `declaringOrganization`.'),
 
     blocks: z.array(blocks).min(1),
   }).strict().superRefine((p, ctx) => {
@@ -955,6 +1072,21 @@ const proseSection = z.object({
     label: z.string().min(1),
     href: safeUrl,
   }).strict()).default([]),
+  /**
+   * Dải ảnh tình trạng da đặt ngay dưới thân bài của mục.
+   *
+   * Cùng bộ ảnh cận da với khối `conditions` của trang sản phẩm: ảnh để NHẬN RA
+   * tình trạng, không phải ảnh kết quả. `caption` bắt buộc vì người xem cần
+   * biết ngay đó là ảnh minh hoạ, không phải ảnh trước/sau.
+   */
+  figure: z.object({
+    items: z.array(z.object({
+      src: z.string().startsWith('/images/'),
+      alt: z.string().min(8),
+      label: z.string().min(2).max(48),
+    }).strict()).min(1).max(6),
+    caption: z.string().min(20).max(240),
+  }).strict().optional(),
 }).strict();
 
 const faqField = z.array(z.object({
@@ -1207,12 +1339,22 @@ const policies = defineCollection({
      * nhất, và nói sai với máy tìm kiếm về vai trò của trang.
      */
     topLevel: z.boolean().default(false),
-    sections: z.array(proseSection).min(1),
+    /**
+     * Trang liên hệ: chỉ thông tin liên lạc + biểu mẫu nhận tư vấn (chính là biểu mẫu đặt
+     * hàng với lựa chọn "tư vấn"). Khi bật, `sections` có thể bỏ trống.
+     */
+    contactForm: z.boolean().default(false),
+    sections: z.array(proseSection).default([]),
     /* Những chỗ doanh nghiệp còn phải tự điền (thời hạn lưu, điều kiện đổi
        trả). Khai ra để trang tự hiện cảnh báo thay vì im lặng phát hành một
        chính sách còn lỗ hổng. */
     pending: z.array(z.string()).default([]),
-  }).strict().superRefine((d, ctx) => scanEditorial(d, ctx)),
+  }).strict().superRefine((d, ctx) => {
+    if (!d.contactForm && d.sections.length === 0) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sections'], message: 'Trang chính sách cần ít nhất một mục.' });
+    }
+    scanEditorial(d, ctx);
+  }),
 });
 
 /**
@@ -1245,7 +1387,9 @@ const brand = defineCollection({
      mọi trường bắt buộc và build dừng với thông báo khó hiểu. */
   loader: glob({ pattern: ['**/*.json', '!_*.json'], base: './src/data' }),
   schema: z.object({
-    legalName: z.string(),
+    /* Bỏ trống khi người bán là đại lý / hộ kinh doanh, không phải công ty:
+       tên hiển thị khi ấy là `tradingName`. */
+    legalName: z.string().optional(),
     tradingName: z.string(),
     taxId: z.string().optional(),
     address: z.string(),
@@ -1253,7 +1397,8 @@ const brand = defineCollection({
     phoneDisplay: z.string(),
     zalo: safeUrl.optional(),
     email: z.string().email(),
-    hours: z.string(),
+    /* Bỏ trống = phục vụ 24/7, không in giờ làm việc. */
+    hours: z.string().optional(),
     logo: z.string(),
     /**
      * Hồ sơ chính thức của thương hiệu trên nền tảng khác, phát ra `sameAs`.
@@ -1270,6 +1415,22 @@ const brand = defineCollection({
       url: safeUrl,
     }).strict()).default([]),
     marketplaces: z.array(z.object({ name: z.string(), url: safeUrl.optional() }).strict()).default([]),
+    /**
+     * Tổ chức công bố sản phẩm (tổ chức chịu trách nhiệm đưa sản phẩm ra thị trường),
+     * mỗi dòng/hãng một bản ghi. Sản phẩm trỏ tới bằng `compliance.declarant`.
+     * `name`/`address` để trống = chưa có thông tin: trang sản phẩm hiện cảnh báo
+     * "cần bổ sung" thay vì in một tên đoán.
+     */
+    declarants: z.array(z.object({
+      id: slugField,
+      label: z.string().min(2).max(60),
+      /** Tên thương hiệu in trên bao bì (Mocha, Hairborn) — khai `brand` trong dữ liệu cho Google. */
+      brand: z.string().max(40).default(''),
+      name: z.string().max(200).default(''),
+      address: z.string().max(240).default(''),
+    }).strict()).default([]),
+    /** Đường dẫn xác nhận website đã thông báo với Bộ Công Thương (online.gov.vn). Có thì hiện ở chân trang. */
+    moitNoticeUrl: safeUrl.optional(),
   }).strict().superRefine((b, ctx) => {
     /*
      * Dữ liệu thương hiệu phải qua ĐÚNG những hàng rào mà sản phẩm phải qua.
@@ -1386,4 +1547,181 @@ const documents = defineCollection({
   }),
 });
 
-export const collections = { pages, products, lines, articles, policies, guides, brand, documents };
+/* ------------------------------------------------------------------
+   Phản hồi của khách: MỖI LỜI MỘT HỒ SƠ ĐỒNG Ý.
+-------------------------------------------------------------------*/
+/** "Chị T.", "Anh H.", "Bạn V." — xưng hô + chữ cái đầu. Không tên đầy đủ, không tài khoản. */
+const INITIALS = /^(?:(?:Chị|Anh|Cô|Chú|Bác|Bạn|Em|Ms\.?|Mr\.?)\s)?[A-ZĐÀ-Ỹ]\.$/u;
+const isoInstant = z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?([+-]\d{2}:\d{2}|Z)$/,
+  'Thời điểm ghi đủ ngày giờ VÀ múi giờ, ví dụ 2026-10-08T00:00:00+07:00 — thiếu múi giờ thì máy chủ ở nước khác sẽ bật chương trình lệch 7 tiếng.');
+
+const testimonials = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/testimonials' }),
+  schema: z.object({
+    status: z.enum(['draft', 'published']).default('draft'),
+    locale: z.enum(['vi', 'en', 'th', 'id']).default('vi'),
+    /** Sản phẩm mà lời này nói về. Hiện ở khối `voices` của các trang này. */
+    products: z.array(slugField).min(1),
+    /**
+     * Phiên bản / bao bì khách đã dùng, nếu khác bản đang bán.
+     * Lời khen cho bản cũ đặt trên trang bản mới mà không nói gì là gây hiểu nhầm.
+     */
+    productVersion: z.string().max(90).optional(),
+    /** Trích NGUYÊN VĂN, giữ cả cách viết tắt của khách. Bỏ bớt đoạn thì đánh dấu […]. */
+    quote: z.string().min(8).max(400),
+    person: z.object({
+      display: z.string().regex(INITIALS, 'Chỉ ghi xưng hô + chữ cái đầu, ví dụ "Chị T." — không tên đầy đủ, không tên tài khoản.'),
+      /** Thông tin không định danh: "da dầu", "dùng 1 tuần". Không tuổi + nơi ở cùng lúc. */
+      detail: z.string().max(40).optional(),
+    }).strict(),
+    channel: z.enum(['messenger', 'zalo', 'facebook', 'tiktok', 'instagram', 'phone', 'email', 'form']),
+    receivedAt: z.string().date().optional(),
+    /** Có nhận quà / tiền / sản phẩm miễn phí để nói thì PHẢI ghi. */
+    sponsored: z.boolean().default(false),
+    /**
+     * Đồng ý của chính người đó cho việc dùng lời của họ trong quảng cáo
+     * (Luật Quảng cáo 2012, Điều 8 khoản 11; Nghị định 13/2023 về dữ liệu cá nhân).
+     * `evidence` là chỗ lưu bằng chứng — nội bộ, không bao giờ in ra trang.
+     */
+    consent: z.object({
+      status: z.enum(['written', 'pending', 'refused']),
+      date: z.string().date().optional(),
+      method: z.string().max(80).optional(),
+      scope: z.array(z.enum(['website', 'ads', 'social'])).default([]),
+      evidence: z.string().max(200).optional(),
+    }).strict(),
+    /** Ghi chú nội bộ: tệp gốc ở đâu. Không in ra trang. */
+    sourceNote: z.string().max(240).optional(),
+  }).strict().superRefine((d, ctx) => {
+    const c = d.consent;
+    if (c.status === 'written') {
+      const miss = [!c.date && 'date', !c.method && 'method', !c.evidence && 'evidence', !c.scope.includes('website') && 'scope có "website"'].filter(Boolean);
+      if (miss.length) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['consent'],
+        message: `consent.status = "written" nhưng thiếu ${miss.join(', ')}. Đồng ý bằng văn bản phải chỉ ra được: ngày, cách lấy, phạm vi, và bằng chứng nằm ở đâu.` });
+    }
+    for (const h of findForbiddenClaims(d.quote)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['quote'],
+      message: `Lời khách có "${h.match}" — ${h.why}. Khách được nói, nhưng khi DOANH NGHIỆP đăng lại thì đó là quảng cáo: chọn đoạn khác.` });
+    for (const h of findHandwrittenMoney(d.quote)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['quote'],
+      message: `Lời khách có số tiền "${h}" — giá đổi theo thời gian, lời trích thì không: bỏ đoạn đó.` });
+    for (const h of findPersonalData(d.quote, BRAND_NUMBERS, { testimonyContext: true })) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['quote'],
+      message: `Lời trích chứa dữ liệu định danh "${h.match}" (${h.kind}).` });
+  }),
+});
+
+/* -----------------------------------------------------------------
+   Combo — bộ nhiều sản phẩm bán chung một giá.
+
+   Trang combo KHÔNG lặp lại nội dung của từng món: thành phần, cách dùng, giấy
+   tờ đã nằm ở trang sản phẩm. Combo chỉ khai thứ của riêng nó — gồm những món
+   nào, giá bộ, vì sao ghép như vậy. Giá mua lẻ và mức tiết kiệm tính lúc build
+   từ giá đang bán của từng món, nên đổi giá một sản phẩm là mọi combo chứa nó
+   tự đúng theo. Mua NHIỀU CÙNG MỘT MÓN (2 tuýp kem chống nắng…) không phải
+   combo: đó là một lựa chọn trong biểu mẫu của chính sản phẩm đó.
+-------------------------------------------------------------------*/
+const combos = defineCollection({
+  loader: glob({
+    pattern: '**/*.json',
+    base: './src/content/combos',
+    generateId: ({ entry }) => entry.replace(/\.json$/, ''),
+  }),
+  schema: z.object({
+    slug: slugField,
+    locale: z.enum(['vi', 'en', 'th', 'id']),
+    translationKey: z.string(),
+    status: z.enum(['draft', 'published']).default('draft'),
+    /** Tên đầy đủ, in làm H1 và tên gói trong đơn hàng. */
+    name: z.string().min(6).max(80),
+    /** Tên ngắn cho thẻ và menu. */
+    shortName: z.string().min(4).max(44),
+    /** Nhóm nhu cầu: quyết định combo đứng ở mục nào của trang danh sách. */
+    group: z.enum(['nam', 'peel', 'mun', 'lam-sach', 'duong', 'toan-dien', 'toc']),
+    /** Thứ tự trong nhóm (nhỏ đứng trước). */
+    order: z.number().int().default(50),
+    items: z.array(z.object({
+      product: slugField,
+      qty: z.number().int().min(1).max(3).default(1),
+    }).strict()).min(2).max(12),
+    /** Quà kèm: sản phẩm trong danh mục (`product`) hoặc vật phẩm khác (`name`). */
+    gifts: z.array(z.object({
+      product: slugField.optional(),
+      name: z.string().min(2).max(60).optional(),
+      qty: z.number().int().min(1).max(5).default(1),
+    }).strict().refine((g) => g.product || g.name, 'quà cần `product` hoặc `name`')).default([]),
+    /** Giá bộ (VND). Giá mua lẻ KHÔNG khai — máy cộng từ giá từng món. */
+    price: z.number().int().positive(),
+    currency: z.literal('VND').default('VND'),
+    /** Một–hai câu: bộ này để làm gì, hợp với ai. In dưới tên. */
+    purpose: z.string().min(20).max(240),
+    /** Lưu ý riêng của bộ (ví dụ thứ tự dùng peel trước hoạt chất khác). */
+    note: z.string().min(10).max(320).optional(),
+    /** Ảnh bìa. Bỏ trống = /images/combo-<slug>.webp (ảnh ghép từ ảnh tách nền). */
+    image: image.optional(),
+    seo: z.object({
+      title: z.string().min(10).max(70),
+      description: z.string().min(50).max(170),
+    }).strict(),
+  }).strict().superRefine((c, ctx) => scanEditorial(c, ctx)),
+});
+
+/* ------------------------------------------------------------------
+   Chương trình khuyến mãi — mỗi đợt một file, không sửa trang sản phẩm.
+-------------------------------------------------------------------*/
+const promotions = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/promotions' }),
+  schema: z.object({
+    status: z.enum(['draft', 'published']).default('draft'),
+    name: z.string().min(4).max(60),
+    /** Bắt đầu / kết thúc, giờ Việt Nam ghi kèm +07:00. Hết `endsAt` là trang tự gỡ. */
+    startsAt: isoInstant,
+    endsAt: isoInstant,
+    locales: z.array(z.enum(['vi', 'en', 'th', 'id'])).min(1).default(['vi']),
+    /** Nhãn ngắn trên thẻ giá: "10.10", "Sale 15.10". */
+    badge: z.string().min(2).max(14).optional(),
+    /** Dải thông báo đầu trang. Không khai = không có dải. */
+    banner: z.object({
+      text: z.string().min(6).max(90),
+      href: z.string().regex(/^\/[a-z0-9/#-]*$/, 'Đường dẫn nội bộ, ví dụ /uv-block-sunscreen/#uu-dai'),
+    }).strict().optional(),
+    packs: z.array(z.object({
+      id: z.string().regex(/^[a-z0-9-]+$/).max(40),
+      /** Trang sản phẩm hiện gói này. Một gói combo có thể hiện ở nhiều trang. */
+      showOn: z.array(slugField).min(1),
+      /** Đúng chữ sẽ lưu vào đơn hàng — tối đa 40 ký tự (giới hạn cột pack). */
+      label: z.string().min(4).max(40),
+      note: z.string().max(90).optional(),
+      /** Gồm những gì. Giá mua lẻ tự tính từ giá đang bán của từng sản phẩm. */
+      items: z.array(z.object({ product: slugField, qty: z.number().int().min(1).max(10) }).strict()).min(1),
+      price: money,
+      gifts: z.array(z.object({
+        name: z.string().min(2).max(60),
+        qty: z.number().int().min(1).max(10).default(1),
+        /** Giá trị một món quà theo giá bán lẻ. Có thì mới in "trị giá …". */
+        value: money.optional(),
+      }).strict()).default([]),
+      recommended: z.boolean().default(false),
+    }).strict()).min(1),
+    terms: z.array(z.string().min(6).max(200)).default([]),
+    /** Thông báo thực hiện khuyến mại đã gửi Sở Công Thương (nếu thuộc diện phải thông báo). */
+    registration: z.object({
+      authority: z.string().min(4),
+      reference: z.string().min(2),
+      date: z.string().date(),
+    }).strict().optional(),
+  }).strict().superRefine((d, ctx) => {
+    if (Date.parse(d.endsAt) <= Date.parse(d.startsAt)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['endsAt'],
+      message: 'Thời điểm kết thúc phải sau thời điểm bắt đầu.' });
+    const ids = d.packs.map((p) => p.id);
+    const dup = ids.find((x, i) => ids.indexOf(x) !== i);
+    if (dup) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['packs'], message: `Hai gói trùng id "${dup}".` });
+    const texts = [d.name, d.badge, d.banner?.text, ...d.terms, ...d.packs.flatMap((p) => [p.label, p.note, ...p.gifts.map((g) => g.name)])]
+      .filter((x): x is string => typeof x === 'string');
+    for (const t of texts) {
+      for (const h of findHandwrittenMoney(t)) ctx.addIssue({ code: z.ZodIssueCode.custom,
+        message: `Không gõ số tiền vào chữ ("${h}") — giá, giá mua lẻ và giá trị quà tự tính và tự in từ dữ liệu.` });
+      for (const h of findForbiddenClaims(t)) ctx.addIssue({ code: z.ZodIssueCode.custom,
+        message: `Chữ của chương trình có "${h.match}" — ${h.why}.` });
+    }
+  }),
+});
+
+export const collections = { pages, products, lines, articles, policies, guides, brand, documents, testimonials, promotions, combos };

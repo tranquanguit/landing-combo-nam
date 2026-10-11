@@ -1,0 +1,371 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "phuc-hoi-da",
+  "slug": "pro-vitamin-b5-serum",
+  "translationKey": "pro-vitamin-b5-serum",
+  "sku": "8938552914013",
+  "price": 200000,
+  "locale": "vi",
+  "name": "Mocha Pro-Vitamin B5 Perfection Serum – tinh chất phục hồi 10ml",
+  "shortName": "Tinh chất phục hồi B5",
+  "primaryKeyword": "tinh chất phục hồi b5 mocha",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Cần một bước cấp ẩm, làm dịu cho da khô hoặc da đang trong liệu trình peel",
+    "audienceSituations": [
+      "Đang dùng bộ peel Mocha và muốn mua thêm ống phục hồi",
+      "Da khô, căng, hay ửng đỏ vì khô",
+      "Muốn một bước cấp ẩm nhẹ đứng trước kem dưỡng"
+    ],
+    "contextHints": [
+      "người hỏi sau peel nên thoa gì",
+      "người hỏi ống phục hồi trong bộ peel có bán lẻ không",
+      "người hỏi serum B5 dùng trước hay sau kem dưỡng"
+    ],
+    "approvedAngles": [
+      "Ống phục hồi trong bộ peel Retinol mixPEEL, bán lẻ ống 10ml",
+      "Panthenol (pro-vitamin B5) đứng thứ 6 trong 47 thành phần theo phiếu công bố",
+      "Có hương liệu, ghi rõ ngay trên màn hình đầu"
+    ],
+    "riskyAngles": [
+      "trình bày ống tinh chất như thứ sửa được làn da đã tổn thương",
+      "hứa da hết đỏ hoặc hết bong sau một số lần dùng cố định",
+      "nói sản phẩm không có hương liệu"
+    ],
+    "preferredDestination": "#hop-voi-ai"
+  },
+  "seo": {
+    "title": "Tinh chất phục hồi B5 Mocha ống 10ml | Mocha",
+    "description": "Ống 10ml với Panthenol (pro-vitamin B5), HA, rau má và năm peptide. Cũng là ống phục hồi trong bộ peel Retinol mixPEEL. Có hương liệu. {{price}}."
+  },
+  "compliance": {
+    "productNotificationNumber": "0718/25/CBMP-LA",
+    "declarant": "mocha",
+    "functions": "hỗ trợ làm dịu làn da, giảm đỏ do tình trạng da khô; cấp ẩm, duy trì độ ẩm cho làn da mềm mại và mịn màng; cải thiện độ đàn hồi, giúp da săn chắc hơn",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
+      "Sản phẩm có chứa hương liệu. Da nhạy cảm với mùi nên thử ở một vùng da nhỏ trước.",
+      "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
+      "Để xa tầm tay trẻ em. Kết quả khác nhau tùy cơ địa và loại da."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Ống 10ml",
+      "note": "Cùng loại ống phục hồi có trong bộ peel",
+      "price": 200000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, xem tình trạng da qua hình ảnh",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Tinh chất phục hồi B5 · ống 10ml",
+      "heading": "Tinh chất B5 cho những ngày da khô và sau peel",
+      "lead": "Ống tinh chất 10ml, cũng là ống phục hồi nằm trong bộ peel Retinol mixPEEL. Phiếu công bố ghi: hỗ trợ làm dịu, giảm đỏ do da khô; cấp ẩm và giữ ẩm cho da mềm mịn; cải thiện độ đàn hồi.",
+      "usp": [
+        {
+          "text": "<strong>Panthenol (pro-vitamin B5) đứng thứ 6</strong> trong danh sách 47 thành phần",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "theo phiếu công bố sản phẩm"
+        },
+        {
+          "text": "<strong>Cùng ống phục hồi trong bộ peel</strong>, bán lẻ khi bạn cần thêm",
+          "evidence": "verified",
+          "source": "#chung-tu",
+          "qualifier": "cùng số tiếp nhận phiếu công bố với ống trong bộ"
+        },
+        {
+          "text": "<strong>Có hương liệu</strong> (Fragrance, thứ 46): da nhạy cảm với mùi nên thử trước",
+          "evidence": "ingredient",
+          "qualifier": "xem bảng thành phần"
+        }
+      ],
+      "image": {
+        "src": "/images/hero-pro-vitamin-b5-serum.webp",
+        "alt": "Ống tinh chất Mocha Pro Vitamin B5 Perfection Serum 10ml dạng xi-lanh"
+      },
+      "primaryCta": "Đặt tinh chất B5",
+      "secondaryCta": {
+        "label": "Xem bảng thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Dung tích",
+          "value": "10ml mỗi ống"
+        },
+        {
+          "label": "Bao bì",
+          "value": "Ống dạng xi-lanh, có nắp đậy"
+        },
+        {
+          "label": "Dùng cho",
+          "value": "Da khô, da ửng đỏ vì khô, da trong và sau liệu trình peel"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Panthenol (pro-vitamin B5), Glycerin, Hyaluronic Acid, chiết xuất rau má, năm peptide"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Sau khi rửa mặt, thoa đều khắp mặt, massage nhẹ, rồi dùng kem dưỡng"
+        },
+        {
+          "label": "Xuất xứ",
+          "value": "Việt Nam, sản xuất tại nhà máy Asialab (Long An)"
+        }
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Cần biết trước",
+      "heading": "Da khô và đỏ cần ít bước hơn, nhưng phải đúng bước",
+      "quotes": [
+        "“Peel xong da căng rát, không biết thoa gì cho đỡ.”",
+        "“Ống phục hồi trong bộ peel hết rồi, có mua lẻ được không?”",
+        "“Da khô bong vảy, bôi kem nào cũng thấy châm chích.”",
+        "“Serum với kem dưỡng, cái nào trước cái nào sau?”"
+      ],
+      "explainer": {
+        "heading": "Một bước cấp ẩm nhẹ, đứng trước kem dưỡng",
+        "body": [
+          "Sau peel, hoặc vào những ngày da khô, lớp ngoài cùng của da giữ nước kém. Lúc này da cần một bước cấp ẩm và làm dịu, rồi một lớp kem dưỡng để giữ lại.",
+          "Ống B5 làm bước cấp ẩm đó. Glycerin, Panthenol và Hyaluronic Acid đều là chất giữ ẩm quen thuộc, và cả ba nằm trong nhóm tám chất đầu danh sách.",
+          "Ống này <strong>không thay kem dưỡng và không thay kem chống nắng</strong>. Nhà sản xuất hướng dẫn dùng tiếp kem dưỡng Collagen sau nó."
+        ]
+      },
+      "transition": "Đối chiếu da của bạn ở phần dưới, kể cả những trường hợp chưa nên dùng."
+    },
+    {
+      "type": "conditions",
+      "id": "hop-voi-ai",
+      "eyebrow": "Nhìn ảnh, đối chiếu da của bạn",
+      "heading": "Da nào hợp, da nào nên chờ",
+      "intro": "Đối chiếu tình trạng da với mục đích ghi trong phiếu công bố: làm dịu, cấp ẩm, giữ ẩm.",
+      "items": [
+        {
+          "label": "Da khô, căng, thiếu ẩm",
+          "image": {
+            "src": "/images/da-can-phuc-hoi.webp",
+            "alt": "Cận cảnh vùng da thiếu ẩm, bề mặt thô, lỗ chân lông lộ rõ"
+          },
+          "body": "Phiếu công bố ghi cấp ẩm và giữ ẩm cho da mềm mịn. Thoa sau bước rửa mặt, rồi dùng kem dưỡng để giữ lại độ ẩm.",
+          "fit": "yes",
+          "fitNote": "Đúng mục đích công bố"
+        },
+        {
+          "label": "Da ửng đỏ vì khô",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Cận cảnh vùng má ửng đỏ, có mẩn nhỏ"
+          },
+          "body": "Phiếu công bố ghi hỗ trợ làm dịu, giảm đỏ do da khô. Nếu da châm chích, nổi mẩn hoặc đỏ lan rộng thì đó là kích ứng. Lúc đó bớt bước trước, chưa thêm bước nào.",
+          "fit": "partial",
+          "fitNote": "Hợp khi đỏ vì khô, không vì kích ứng"
+        },
+        {
+          "label": "Đang dùng bộ peel Mocha",
+          "body": "Ống tinh chất siêu phục hồi trong bộ Retinol mixPEEL chính là sản phẩm này. Dùng theo lịch trình kèm bộ, mua lẻ khi cần thêm ống.",
+          "fit": "yes",
+          "fitNote": "Ống phục hồi của bộ peel"
+        },
+        {
+          "label": "Da vừa qua thủ thuật thẩm mỹ",
+          "image": {
+            "src": "/images/da-sau-tham-my.webp",
+            "alt": "Cận cảnh vùng da ửng đỏ sau thủ thuật thẩm mỹ"
+          },
+          "body": "Hỏi người đã làm thủ thuật cho bạn trước khi thoa bất cứ thứ gì. Khi họ đồng ý, ống này là một bước cấp ẩm, không thay kem dưỡng.",
+          "fit": "partial",
+          "fitNote": "Hỏi người thực hiện trước"
+        },
+        {
+          "label": "Da nám, thâm, sạm màu",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Cận cảnh vùng gò má sạm màu lan tỏa do nắng"
+          },
+          "body": "Mục đích ghi trong phiếu công bố không nói tới sắc tố. Muốn làm mờ vết thâm, vết sạm thì cần sản phẩm khác trong danh mục.",
+          "fit": "no",
+          "fitNote": "Không phải mục đích công bố"
+        },
+        {
+          "label": "Da trầy xước, rỉ dịch hoặc bỏng",
+          "body": "Không thoa lên vùng da hở hoặc đang tổn thương. Trường hợp này cần gặp bác sĩ.",
+          "fit": "no",
+          "fitNote": "Nên gặp bác sĩ"
+        }
+      ],
+      "caption": "Ảnh cận vùng da minh hoạ từng tình trạng (tư liệu hình ảnh của hãng), <strong>không phải ảnh trước/sau khi dùng sản phẩm</strong>. Chưa chắc da mình thuộc nhóm nào? Gửi ảnh qua Zalo, chuyên viên xem giúp trước khi bạn đặt."
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Thành phần",
+      "heading": "Thành phần theo phiếu công bố",
+      "intro": "Phiếu công bố liệt kê đủ 47 thành phần theo tên INCI. Bảng dưới giải thích những chất đáng chú ý.",
+      "caption": "Danh sách đầy đủ theo phiếu công bố: Aqua, Glycerin, Propanediol, PEG-40 Hydrogenated Castor Oil, Cetearyl Alcohol, Panthenol, Tocopheryl Acetate, Hyaluronic Acid, Lecithin, Acetyl Glutamine, Sh-Oligopeptide-1, Sh-Oligopeptide-2, Sh-Polypeptide-1, Sh-Polypeptide-9, Sh-Polypeptide-11, Bacillus/Folic Acid Ferment Filtrate Extract, Sodium Hyaluronate, Centella Asiatica Extract, Sea Water, Laminaria Digitata Extract, Chlorella Vulgaris Extract, Saccharide Isomerate, Dipotassium Glycyrrhizate, Acrylates/C10-30 Alkyl Acrylate Crosspolymer, Glyceryl Stearate, Cyclopentasiloxane, Ethylhexylglycerin, Phenoxyethanol, Ascorbic Acid, Biotin, Thiamine HCl, Cyanocobalamin, Glutathione, Ceteareth-20, Ceteareth-12, Caprylyl Glycol, Butylene Glycol, Riboflavin, Pyridoxine, Folic Acid, Menadione, Bioflavonoids, 1,2-Hexanediol, Cetyl Palmitate, Disodium EDTA, Fragrance, Triethanolamine. Phiếu chỉ ghi tỉ lệ cho hai chất có giới hạn nồng độ: Phenoxyethanol 0,5% và Triethanolamine 0,1%.",
+      "rows": [
+        {
+          "name": "Panthenol (pro-vitamin B5)",
+          "role": "Giữ ẩm, giảm cảm giác căng khô. Đứng thứ 6 trong danh sách.",
+          "suitedFor": "Da khô, da căng"
+        },
+        {
+          "name": "Glycerin",
+          "role": "Chất giữ ẩm, đứng thứ 2, ngay sau nước.",
+          "suitedFor": "Mọi loại da"
+        },
+        {
+          "name": "Hyaluronic Acid, Sodium Hyaluronate",
+          "role": "Giữ nước ở lớp ngoài cùng của da. Có mặt ở vị trí 8 và 17.",
+          "suitedFor": "Da thiếu ẩm"
+        },
+        {
+          "name": "Centella Asiatica Extract, Dipotassium Glycyrrhizate",
+          "role": "Chiết xuất rau má và một dẫn xuất từ cam thảo, thuộc nhóm làm dịu.",
+          "suitedFor": "Da dễ ửng đỏ"
+        },
+        {
+          "name": "Sh-Oligopeptide-1, Sh-Oligopeptide-2, Sh-Polypeptide-1, Sh-Polypeptide-9, Sh-Polypeptide-11",
+          "role": "Năm peptide tổng hợp, dùng như thành phần dưỡng.",
+          "suitedFor": "Da trong giai đoạn phục hồi"
+        },
+        {
+          "name": "Tocopheryl Acetate, Ascorbic Acid và nhóm vitamin B",
+          "role": "Vitamin E, vitamin C và các vitamin B1, B2, B6, B7, B9, B12, dùng như thành phần dưỡng. Phần lớn đứng ở nửa sau danh sách.",
+          "suitedFor": "Mọi loại da"
+        },
+        {
+          "name": "Sea Water, Laminaria Digitata Extract, Chlorella Vulgaris Extract",
+          "role": "Nước biển, chiết xuất tảo bẹ và tảo lục.",
+          "suitedFor": "Mọi loại da"
+        },
+        {
+          "name": "Fragrance",
+          "role": "Hương liệu, đứng thứ 46. Da nhạy cảm với mùi nên thử ở vùng da nhỏ trước.",
+          "suitedFor": "Cần lưu ý với da nhạy cảm"
+        }
+      ],
+      "cta": {
+        "label": "Xem giá và đặt hàng",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Giấy tờ",
+      "heading": "Giấy tờ đi kèm sản phẩm",
+      "intro": "Bản chụp giấy tờ gốc, đủ rõ để đọc số hiệu. Bấm vào từng giấy để xem bản đầy đủ."
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Cách dùng",
+      "heading": "Dùng sau bước làm sạch, trước kem dưỡng",
+      "intro": "Các bước lấy theo hướng dẫn của nhà sản xuất.",
+      "items": [
+        {
+          "heading": "Làm sạch da",
+          "body": "Rửa mặt và lau khô. Trong liệu trình peel, rửa sạch lớp peel bằng nước trước."
+        },
+        {
+          "heading": "Lấy một lượng vừa đủ",
+          "body": "Thoa đều khắp mặt."
+        },
+        {
+          "heading": "Massage nhẹ",
+          "body": "Dùng tay massage nhẹ nhàng để tinh chất thấm đều."
+        },
+        {
+          "heading": "Tiếp theo là kem dưỡng",
+          "body": "Nhà sản xuất hướng dẫn dùng tiếp kem dưỡng Collagen. Ban ngày, thoa kem chống nắng sau cùng."
+        }
+      ],
+      "footnote": "Đang dùng bộ Retinol mixPEEL thì làm theo lịch trình kèm bộ. Da rát kéo dài, sưng, phồng rộp hoặc đau thì dừng mọi bước và đi khám."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng phù hợp với tình trạng da của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt chu kỳ sử dụng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Tinh chất B5 giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho một ống 10ml. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Có giống ống phục hồi trong bộ peel không?",
+          "a": "Có. Bộ Retinol mixPEEL Kit có một ống tinh chất siêu phục hồi, chính là sản phẩm này, cùng số tiếp nhận phiếu công bố 0718/25/CBMP-LA. Mua lẻ khi bạn cần thêm ống."
+        },
+        {
+          "q": "Có hương liệu không?",
+          "a": "Có. Fragrance đứng thứ 46 trong 47 thành phần. Da nhạy cảm với mùi thì thử ở một vùng da nhỏ trước khi thoa cả mặt."
+        },
+        {
+          "q": "Dùng buổi sáng hay buổi tối?",
+          "a": "Nhà sản xuất không ghi buổi. Ống dùng sau bước làm sạch và trước kem dưỡng. Nếu dùng ban ngày thì thoa kem chống nắng sau cùng."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Để nơi thoáng mát, tránh nhiệt độ cao và ánh nắng trực tiếp, để xa tầm tay trẻ em. Ngày sản xuất và hạn sử dụng in trên vỏ hộp."
+        }
+      ],
+      "cta": {
+        "note": "Không còn câu hỏi nào nữa?",
+        "label": "Quay lại phần đặt hàng",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Dùng cùng với",
+      "intro": "Bộ peel có sẵn một ống này. Kem dưỡng và kem chống nắng là hai bước đi sau nó.",
+      "items": [
+        "retinol-mixpeel-kit",
+        "collagen-peptide-cream",
+        "uv-block-sunscreen"
+      ]
+    }
+  ]
+}

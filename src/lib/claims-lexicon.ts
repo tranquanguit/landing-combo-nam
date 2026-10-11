@@ -131,6 +131,18 @@ export const FORBIDDEN: ForbiddenPattern[] = [
     instead: 'chăm sóc da nám, hỗ trợ làm mờ',
   },
   {
+    /* Dòng chăm sóc tóc (HAIRBORN): làm tóc mọc và trị rụng/hói là công dụng của thuốc, không phải của dầu gội hay tinh chất dưỡng. */
+    pattern: /(?<![\p{L}])(?:kích thích\s+)?mọc\s+tóc(?![\p{L}])|(?<![\p{L}])(?:trị|điều trị|chữa|đặc trị)\s+(?:bệnh\s+)?(?:rụng\s+tóc|hói(?:\s+đầu)?)(?![\p{L}])/iu,
+    why: 'biến mỹ phẩm chăm sóc tóc thành thuốc trị rụng tóc, hói',
+    instead: 'dưỡng da đầu và chân tóc, giảm gãy rụng do chải gội, giúp tóc trông dày hơn',
+  },
+  {
+    /* Cùng nhóm, bản tiếng Anh. */
+    pattern: /\b(?:re)?grows?\s+hair\b|\bhair\s+(?:re)?growth\b|\b(?:treat|treats|cure|cures|stop|stops|prevent|prevents|reverse|reverses)\s+(?:hair\s+loss|baldness|alopecia)\b|\banti[\s-]?hair[\s-]?loss\b/i,
+    why: 'hair growth / hair-loss treatment is a drug claim, not a cosmetic one',
+    instead: 'nourishes the scalp, reduces breakage from brushing and washing, helps hair look thicker',
+  },
+  {
     /* Thêm dạng ĐẢO thứ tự ("nám biến mất hoàn toàn") — kiểm định lần 12. */
     pattern: /(hết|xoá|xóa|đánh bay|triệt tiêu|loại bỏ|chấm dứt|biến mất|tạm biệt)\s*(hoàn toàn\s*)?(nám|thâm|sạm|đốm nâu)|(nám|thâm|sạm|đốm nâu)\s+(biến mất|hết hẳn|sạch)\s*(hoàn toàn)?|(sạch|khỏi|dứt điểm)\s+(nám|thâm)|không\s+tái\s+phát|vĩnh viễn/iu,
     why: 'tuyên bố kết quả tuyệt đối, không chứng minh được',

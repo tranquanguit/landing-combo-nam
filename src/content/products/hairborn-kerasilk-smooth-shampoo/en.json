@@ -1,0 +1,328 @@
+{
+  "slug": "hairborn-kerasilk-smooth-shampoo",
+  "translationKey": "hairborn-kerasilk-smooth-shampoo",
+  "status": "published",
+  "sku": "HAIRBORN-SP041",
+  "price": 169000,
+  "compareAtPrice": 250000,
+  "currency": "VND",
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "cham-soc-toc",
+  "locale": "en",
+  "name": "HAIRBORN Kerasilk Smooth Shampoo – smoothing shampoo, 200g",
+  "shortName": "Kerasilk Smooth shampoo",
+  "primaryKeyword": "hairborn kerasilk smooth shampoo",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Wants hair that is less dry and frizzy, easier to comb and to style after washing",
+    "audienceSituations": [
+      "Permed, coloured or often blow-dried hair that always feels frizzy",
+      "Hair tangles after washing and snaps when detangled",
+      "Wants a mid-size tube of shampoo to try"
+    ],
+    "contextHints": [
+      "someone asking which shampoo suits dry, frizzy hair with split ends",
+      "someone asking what to do about hair that tangles after washing"
+    ],
+    "approvedAngles": [
+      "A smoothing shampoo in a 200g tube for dry, frizzy, tangled hair",
+      "Glycerin, soap pod, soapberry, holy basil, dimethiconol and guar for smoother hair that combs easily"
+    ],
+    "riskyAngles": [
+      "promising to fully restore damaged hair",
+      "attributing ingredients to the product that are not printed on the packaging"
+    ],
+    "preferredDestination": "#thanh-phan"
+  },
+  "seo": {
+    "title": "HAIRBORN Kerasilk Smooth Shampoo, 200g | Mocha Vietnam",
+    "description": "Shampoo for dry, frizzy, tangled hair. 200g tube with glycerin, soap pod, soapberry and holy basil for smoother-feeling hair. {{price}}."
+  },
+  "compliance": {
+    "declarant": "hairborn",
+    "functions": "cleanses the scalp and hair, leaves hair soft and smooth, reduces frizz and tangles",
+    "warnings": [
+      "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
+      "Discontinue use if the scalp becomes irritated. Avoid contact with the eyes; if it gets in, rinse immediately with clean water.",
+      "Hair falling out in patches, sudden heavy shedding, or a red, itchy or thickly flaking scalp: see a dermatologist.",
+      "Results vary between individuals and hair conditions. Keep out of reach of children.",
+      "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
+    ]
+  },
+  "variants": [
+    {
+      "label": "1 tube, 200g",
+      "note": "You save {{save}} off the list price",
+      "price": 169000,
+      "recommended": true
+    },
+    {
+      "label": "Set of 2 tubes",
+      "note": "Two 200g tubes in one order",
+      "price": 299000,
+      "recommended": false,
+      "qty": 2
+    },
+    {
+      "label": "I would like advice first",
+      "note": "An adviser calls you back and asks about your hair and scalp before confirming",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Washing dry hair",
+      "heading": "A shampoo for dry, frizzy hair that tangles and will not sit right",
+      "lead": "A 200g tube, labelled for all hair types. The formula has <strong>dimethiconol and guar</strong> to lightly coat the strand, plus <strong>soap pod, soapberry and holy basil</strong> extracts.",
+      "usp": [
+        {
+          "text": "<strong>Soap pod, soapberry, holy basil</strong> printed on the tube as the Hair Nourishing Complex",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "copied from the front of the 200g tube"
+        },
+        {
+          "text": "<strong>Dimethiconol and guar hydroxypropyltrimonium chloride</strong> for shine, fewer tangles and easier combing",
+          "evidence": "ingredient",
+          "qualifier": "per the brand's ingredient image"
+        },
+        {
+          "text": "<strong>Glycerin</strong> to keep strands moisturised",
+          "evidence": "ingredient",
+          "qualifier": "per the brand's ingredient image"
+        }
+      ],
+      "image": {
+        "src": "/images/hero-hairborn-kerasilk-smooth-shampoo.webp",
+        "alt": "Navy 200g HAIRBORN Kerasilk Smooth Shampoo tube with a black cap"
+      },
+      "primaryCta": "Order Kerasilk shampoo",
+      "secondaryCta": {
+        "label": "See the ingredients",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Free delivery nationwide",
+        "Inspect before you pay",
+        "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Net weight",
+          "value": "200g tube"
+        },
+        {
+          "label": "Type",
+          "value": "Scalp care shampoo, smoothing"
+        },
+        {
+          "label": "For",
+          "value": "All hair types; aimed at dry, frizzy, tangled hair with split ends"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "Glycerin, soap pod, soapberry, holy basil, dimethiconol, guar hydroxypropyltrimonium chloride"
+        },
+        {
+          "label": "How to use",
+          "value": "Lather, massage the scalp for 2–3 minutes, rinse thoroughly"
+        },
+        {
+          "label": "Brand",
+          "value": "HAIRBORN"
+        }
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Why hair gets frizzy",
+      "heading": "Tangled, dry hair that snaps when you comb it after washing",
+      "quotes": [
+        "“After washing my hair is like straw and snaps when I comb it.”",
+        "“My hair is permed and coloured, so it is always frizzy.”",
+        "“I avoid conditioner because I worry it will make my hair greasy.”"
+      ],
+      "explainer": {
+        "heading": "When hair is dry, strands rub against each other and break when combed",
+        "body": [
+          "The outer layer of the hair wears down with heat, perms, colour and hard brushing. Hair turns rough and tangles easily, and most breakage happens while detangling wet hair.",
+          "Kerasilk Smooth contains dimethiconol and guar hydroxypropyltrimonium chloride. Both lightly coat the strand, so hair feels slippery and combs easily right after washing."
+        ],
+        "diagram": "none"
+      }
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Ingredients",
+      "heading": "Key ingredients",
+      "intro": "Three plant extracts are printed on the tube. Glycerin, dimethiconol and guar come from the brand's ingredient image.",
+      "caption": "Neither keratin nor silk appears among the key ingredients on the tube or the brand's image, despite the Kerasilk name. No concentrations are printed. The full INCI list is printed on the product packaging.",
+      "rows": [
+        {
+          "name": "Gleditsia Australis Fruit Extract (soap pod)",
+          "inProduct": "Front of tube",
+          "role": "Gentle cleansing. The brand says it nourishes hair to feel strong and smooth.",
+          "suitedFor": "All hair types"
+        },
+        {
+          "name": "Sapindus Saponaria Fruit Extract (soapberry)",
+          "inProduct": "Front of tube",
+          "role": "A plant-derived cleanser.",
+          "suitedFor": "All hair types"
+        },
+        {
+          "name": "Ocimum Tenuiflorum Extract (holy basil)",
+          "inProduct": "Front of tube",
+          "role": "The brand says it helps cleanse the scalp and ease discomfort.",
+          "suitedFor": "Mildly itchy scalp"
+        },
+        {
+          "name": "Glycerin",
+          "inProduct": "Brand's image",
+          "role": "Humectant; keeps hair softer and more elastic.",
+          "suitedFor": "Dry hair"
+        },
+        {
+          "name": "Dimethiconol",
+          "inProduct": "Brand's image",
+          "role": "A silicone that forms a thin coating for shine and easier combing.",
+          "suitedFor": "Dry, frizzy, tangled hair"
+        },
+        {
+          "name": "Guar Hydroxypropyltrimonium Chloride",
+          "inProduct": "Brand's image",
+          "role": "A guar-based conditioner that reduces tangles and static.",
+          "suitedFor": "Tangle-prone, frizzy hair"
+        }
+      ],
+      "cta": {
+        "label": "See price and order",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Before you order",
+      "heading": "Who it suits",
+      "columns": 2,
+      "items": [
+        {
+          "heading": "Dry, frizzy, tangled hair with split ends",
+          "body": "Exactly the group the brand has in mind. Hair is slippier and easier to detangle after washing.",
+          "meta": "Suitable"
+        },
+        {
+          "heading": "Permed, coloured or often blow-dried hair",
+          "body": "The light coating makes strands feel less rough. You can add Collagen Deep Shot to the lengths and ends.",
+          "meta": "Suitable"
+        },
+        {
+          "heading": "Oily scalp, fine hair that falls flat",
+          "body": "Hair may feel heavier. Hair Boost suits a scalp that gets oily fast.",
+          "meta": "Consider another option"
+        },
+        {
+          "heading": "An irritated or scratched scalp",
+          "body": "Wait until the scalp has settled. Stop if it stings or turns red.",
+          "meta": "Not yet"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use",
+      "heading": "How to wash",
+      "intro": "Following the brand's directions.",
+      "totalTime": "PT5M",
+      "items": [
+        {
+          "heading": "Wet all of the hair and scalp",
+          "body": "Use warm or cool water."
+        },
+        {
+          "heading": "Lather and spread",
+          "body": "Take enough into your palm, add a little water to lather, and spread evenly through the hair."
+        },
+        {
+          "heading": "Massage the scalp for 2–3 minutes",
+          "body": "Use the fingertips, not the nails."
+        },
+        {
+          "heading": "Rinse thoroughly",
+          "body": "Rinse with clean water until no foam is left."
+        }
+      ]
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City. Tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support while you use it</strong> by email."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "FAQ",
+      "heading": "Common questions",
+      "items": [
+        {
+          "q": "How much is Kerasilk Smooth?",
+          "a": "<strong>{{price}}</strong> for one 200g tube. The list price is {{compareAtPrice}}. Two tubes have their own price in the order form. Free delivery, pay on delivery."
+        },
+        {
+          "q": "Does the Kerasilk name mean it contains keratin and silk?",
+          "a": "Neither keratin nor silk is listed on the tube or in the brand's ingredient image. The key ingredients listed are glycerin, soap pod, soapberry and holy basil extracts, plus dimethiconol and guar for smoother, easier-to-comb hair."
+        },
+        {
+          "q": "How is it different from Hair Boost?",
+          "a": "Kerasilk Smooth is aimed at dry, frizzy, tangled hair that needs smoothing. Hair Boost is aimed at a scalp that gets oily fast and fine hair that breaks easily; its label lists Kopexil, Redensyl™ and caffeine."
+        },
+        {
+          "q": "Does it contain silicone?",
+          "a": "Yes. Dimethiconol is a silicone; it forms a thin coating that makes hair smoother. If you need to avoid silicone, this one is not for you."
+        },
+        {
+          "q": "How should it be stored?",
+          "a": "Close the cap after use, keep in a cool, dry place away from direct sunlight and out of reach of children."
+        }
+      ],
+      "cta": {
+        "note": "No questions left?",
+        "label": "Back to the order form",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Next step",
+      "heading": "Goes with the smoothing shampoo",
+      "intro": "Mask the lengths and ends after washing, then care for the scalp as the last step.",
+      "items": [
+        "hairborn-collagen-deep-shot",
+        "hairborn-peel-ion",
+        "hairborn-hair-boost-shampoo"
+      ]
+    }
+  ]
+}

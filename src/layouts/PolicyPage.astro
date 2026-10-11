@@ -10,6 +10,7 @@ import { resolveAssetImage, resolveAssetUrl } from '../lib/images';
 import { homePath, policyPath } from '../lib/routes';
 import { assertTranslated, htmlLang, t, type Locale } from '../i18n/ui';
 import { richText } from '../lib/richtext';
+import Order from '../components/blocks/Order.astro';
 
 interface Props {
   policy: any;
@@ -55,6 +56,30 @@ const jsonLd = {
 };
 
 const sections = d.sections.map((s: any, i: number) => ({ ...s, id: s.id ?? `muc-${i + 1}` }));
+
+/* ---- Trang liên hệ: thông tin liên lạc + biểu mẫu nhận tư vấn ---------------------
+   Biểu mẫu là ĐÚNG biểu mẫu đặt hàng, chỉ có lựa chọn "tư vấn": cùng một đường gửi,
+   cùng một chỗ nhân viên nhận, không thêm hộp thư thứ hai để ai đó quên kiểm. */
+const contact = d.contactForm;
+const facebook = b.profiles?.find((x: any) => /facebook/i.test(x.name));
+const channels = contact ? [
+  { k: 'phone', label: t(locale, 'contact.phone'), value: b.phoneDisplay, href: `tel:${b.phone}`, note: b.hours ? `${t(locale, 'footer.hours')}: ${b.hours}` : t(locale, 'contact.always') },
+  ...(b.zalo ? [{ k: 'zalo', label: 'Zalo', value: b.phoneDisplay, href: b.zalo, note: t(locale, 'contact.zaloNote'), ext: true }] : []),
+  ...(facebook ? [{ k: 'facebook', label: 'Facebook', value: t(locale, 'contact.fbValue'), href: facebook.url, note: t(locale, 'contact.fbNote'), ext: true }] : []),
+  { k: 'email', label: 'Email', value: b.email, href: `mailto:${b.email}`, note: t(locale, 'contact.emailNote') },
+  { k: 'address', label: t(locale, 'footer.address'), value: b.address },
+  ...(b.taxId ? [{ k: 'tax', label: t(locale, 'legal.taxId'), value: b.taxId }] : []),
+] : [];
+const consultProduct = {
+  slug: d.slug, currency: 'VND', price: 0,
+  variants: [{ label: t(locale, 'contact.consultPack'), price: null, recommended: true }],
+};
+const consultData = {
+  eyebrow: t(locale, 'contact.formEyebrow'),
+  heading: t(locale, 'contact.formHeading'),
+  body: t(locale, 'contact.formBody'),
+  points: [t(locale, 'contact.point1'), t(locale, 'contact.point2'), t(locale, 'contact.point3')],
+};
 ---
 <BaseLayout
   siteName={b.tradingName}
@@ -76,15 +101,35 @@ const sections = d.sections.map((s: any, i: number) => ({ ...s, id: s.id ?? `muc
   <main id="main">
     <div class="head">
       <div class="wrap enter">
-        <p class="eyebrow">{t(locale, 'policy.heading')}</p>
+        <p class="eyebrow">{contact ? t(locale, 'nav.contact') : t(locale, 'policy.heading')}</p>
         <h1>{d.title}</h1>
         <p class="lead" set:html={richText(d.lead)} />
-        <p class="meta">
-          <time datetime={d.updatedAt}>{t(locale, 'policy.updated')} {shortDate(d.updatedAt, locale)}</time>
-        </p>
+        {!contact && (
+          <p class="meta">
+            <time datetime={d.updatedAt}>{t(locale, 'policy.updated')} {shortDate(d.updatedAt, locale)}</time>
+          </p>
+        )}
       </div>
     </div>
 
+    {contact && (
+      <div class="wrap">
+        <ul class="ch">
+          {channels.map((c: any) => (
+            <li class={`ch-${c.k}`}>
+              <span class="ch-l">{c.label}</span>
+              {c.href
+                ? <a class="ch-v" href={c.href} {...(c.ext ? { target: '_blank', rel: 'noopener' } : {})} data-cta={`contact-${c.k}`}>{c.value}</a>
+                : <span class="ch-v">{c.value}</span>}
+              {c.note && <span class="ch-n">{c.note}</span>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+    {contact && <Order data={consultData} product={consultProduct} brand={b} locale={locale} mode="consult" />}
+
+    {sections.length > 0 && (
     <div class="wrap body">
       <nav class="toc" aria-label={t(locale, 'article.toc')}>
         <h2>{t(locale, 'article.toc')}</h2>
@@ -109,6 +154,7 @@ const sections = d.sections.map((s: any, i: number) => ({ ...s, id: s.id ?? `muc
         )}
       </div>
     </div>
+    )}
   </main>
 
   <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} pages={pages} />
@@ -116,6 +162,20 @@ const sections = d.sections.map((s: any, i: number) => ({ ...s, id: s.id ?? `muc
 </BaseLayout>
 
 <style>
+  .ch {
+    list-style: none; padding: 0; margin: 0 0 var(--s-7);
+    display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  }
+  .ch li {
+    display: grid; gap: 4px; align-content: start; padding: var(--s-4) var(--s-5);
+    background: #fff; border: 1px solid var(--line); border-radius: var(--r-card);
+  }
+  .ch-l { font-size: var(--t-xs); letter-spacing: .08em; text-transform: uppercase; color: var(--slate); }
+  .ch-v { font-size: var(--t-base); font-weight: 600; color: var(--ink-navy); line-height: 1.35; overflow-wrap: anywhere; }
+  a.ch-v { color: var(--cobalt); text-decoration: none; display: inline-block; min-height: 24px; }
+  a.ch-v:hover { text-decoration: underline; }
+  .ch-n { font-size: var(--t-sm); color: var(--ink-muted); }
+  .ch-phone, .ch-zalo { border-color: var(--line-strong); }
   .head { background: var(--paper); padding-block: var(--s-7) var(--s-5); }
   .head h1 { margin: 0 0 var(--s-4); max-width: 20ch; }
   .head .lead { max-width: 62ch; margin: 0 0 var(--s-4); }

@@ -54,19 +54,18 @@
   },
   "seo": {
     "title": "Kem chống nắng Mocha UV-Block Plus 50gr | Mocha Việt Nam",
-    "description": "Kem chống nắng lý hoá SPF 50, 7 màng lọc (5 hoá học + 2 vật lý nano), thêm Niacinamide và rau má. Không hương liệu, không paraben. {{price}}."
+    "description": "Kem chống nắng lý hoá 7 màng lọc (5 hoá học + 2 vật lý nano), thêm Niacinamide và rau má. Không hương liệu, không paraben. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "353/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "hỗ trợ bảo vệ da khỏi tác động của tia UVA và UVB",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ],
-    "productNotificationNumber": "353/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -74,6 +73,13 @@
       "note": "Tiết kiệm {{save}} so với giá niêm yết",
       "price": 335000,
       "recommended": true
+    },
+    {
+      "label": "Combo 2 tuýp UV-Block Plus",
+      "price": 600000,
+      "recommended": false,
+      "note": "Dùng mỗi sáng, đủ lâu hơn",
+      "qty": 2
     },
     {
       "label": "Tôi cần tư vấn trước",
@@ -85,9 +91,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Bước không được bỏ",
+      "eyebrow": "Kem chống nắng lý hoá 7 màng lọc · tuýp 50gr",
       "heading": "Bỏ chống nắng thì các bước còn lại khó giữ được kết quả",
-      "lead": "Kem chống nắng tuýp 50gr, <strong>7 màng lọc</strong>, không hương liệu. Tên từng màng lọc và thành phần in trên vỏ. Không hương liệu, không paraben.",
+      "lead": "Kem chống nắng cho bước cuối buổi sáng, kết cấu mỏng, hãng định vị cho da dầu và da sau peel. Bảy màng lọc ghi đúng tên; không hương liệu, không paraben.",
       "usp": [
         {
           "text": "<strong>Bảy màng lọc gọi đúng tên INCI</strong>, không gói trong cụm “công nghệ chống nắng”",
@@ -109,7 +115,7 @@
       ],
       "image": {
         "src": "/images/hero-uv-block-plus.webp",
-        "alt": "Tuýp kem chống nắng Mocha UV-Block Plus, bao bì 2025 in SPF 50 PA++++"
+        "alt": "Tuýp kem chống nắng Mocha UV-Block Plus 50gr, 7 màng lọc"
       },
       "primaryCta": "Đặt kem chống nắng",
       "secondaryCta": {
@@ -120,6 +126,32 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Khối lượng",
+          "value": "Tuýp 50gr"
+        },
+        {
+          "label": "Màng lọc",
+          "value": "7 màng lọc: 5 hoá học, 2 vật lý (Zinc Oxide, Titanium Dioxide)"
+        },
+        {
+          "label": "Kết cấu",
+          "value": "Mỏng; hãng định vị cho da dầu, da hỗn hợp và da sau peel"
+        },
+        {
+          "label": "Không chứa",
+          "value": "Hương liệu, paraben"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Bước cuối buổi sáng; bôi lại sau 2–3 giờ nếu ở ngoài trời"
+        },
+        {
+          "label": "Số công bố",
+          "value": "353/25/CBMP-TN"
+        }
       ]
     },
     {
@@ -138,6 +170,81 @@
           "Ánh sáng qua cửa kính và ánh sáng xanh từ màn hình không mạnh bằng nắng trực tiếp, nhưng chúng có mặt suốt ngày làm việc. Khoảng thời gian tiếp xúc mới là thứ cộng dồn."
         ]
       }
+    },
+    {
+      "type": "infographic",
+      "id": "tia-uv",
+      "kind": "layers",
+      "eyebrow": "Tia nắng đi tới đâu",
+      "heading": "Hai loại tia UV, hai độ sâu — và lớp kem nằm ở đâu",
+      "intro": "Đỏ rát là chuyện của UVB, nhưng sạm màu và lão hoá do nắng phần lớn là chuyện của UVA: tia có mặt suốt ngày, kể cả sau cửa kính.",
+      "items": [
+        {
+          "label": "Lớp kem chống nắng",
+          "depth": "surface",
+          "body": "Năm màng lọc hoá học hấp thụ tia UV, hai màng lọc vật lý phản xạ nó. Tất cả làm việc trong lớp kem trên mặt da, nên <strong>lượng bôi</strong> quyết định mức bảo vệ."
+        },
+        {
+          "label": "UVB",
+          "depth": "epidermis",
+          "body": "Dừng ở lớp biểu bì. Là tia gây đỏ rát, cháy nắng khi ra nắng gắt. Kính cửa sổ chặn được phần lớn."
+        },
+        {
+          "label": "UVA",
+          "depth": "dermis",
+          "body": "Đi sâu tới lớp trung bì và xuyên được qua kính cửa sổ. Liên quan tới sạm màu và lão hoá do nắng, nên ngồi trong phòng cạnh cửa kính vẫn cần chống nắng."
+        }
+      ],
+      "footnote": "Sơ đồ minh hoạ, không theo tỉ lệ. Tên từng màng lọc ở bảng thành phần bên dưới."
+    },
+    {
+      "type": "conditions",
+      "id": "nang-lam-nang-them",
+      "eyebrow": "Nắng làm nặng thêm",
+      "heading": "Những tình trạng da mà bỏ chống nắng là đi lùi",
+      "intro": "Kem chống nắng không xoá được các vết này. Việc của nó là không để tia UV làm chúng sẫm thêm trong lúc các sản phẩm khác đang làm việc.",
+      "items": [
+        {
+          "label": "Sạm da do nắng",
+          "aka": "tăng sắc tố do môi trường và ánh nắng",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Cận cảnh vùng gò má sạm màu lan tỏa do nắng"
+          },
+          "body": "Vùng sạm lan tỏa ở gò má, sống mũi, nơi hứng nắng nhiều nhất. Chống nắng đều không xoá vùng đã sạm, nhưng giữ cho nó không đậm thêm.",
+          "fit": "yes",
+          "fitNote": "Bước phòng ngừa chính"
+        },
+        {
+          "label": "Nám mảng",
+          "aka": "epidermal melasma",
+          "image": {
+            "src": "/images/da-nam-mang.webp",
+            "alt": "Cận cảnh mảng nám nâu nhạt bờ rõ trên gò má"
+          },
+          "body": "Nắng là một trong những yếu tố làm nám đậm lên. Kem chống nắng không làm mờ nám. Nó giữ cho phần việc của kem nám không bị kéo ngược.",
+          "fit": "partial",
+          "fitNote": "Bắt buộc đi kèm sản phẩm nám"
+        },
+        {
+          "label": "Thâm sau mụn",
+          "aka": "tăng sắc tố sau viêm",
+          "image": {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Cận cảnh vùng da có nhiều vết thâm nâu sau mụn"
+          },
+          "body": "Vết thâm mới sau mụn sẫm nhanh dưới nắng. Đi cùng sản phẩm chấm thâm, kem chống nắng giúp vết thâm không đậm thêm.",
+          "fit": "partial",
+          "fitNote": "Giữ vết thâm không sẫm lại"
+        },
+        {
+          "label": "Da đỏ rát, phồng rộp sau khi phơi nắng",
+          "body": "Đó là bỏng nắng. Làm mát, tránh nắng, và đi khám nếu phồng rộp hoặc đau nhiều. Đừng bôi thêm sản phẩm lên vùng da đang tổn thương.",
+          "fit": "no",
+          "fitNote": "Nên gặp bác sĩ"
+        }
+      ],
+      "caption": "Ảnh cận vùng da minh hoạ từng tình trạng (tư liệu hình ảnh của hãng), <strong>không phải ảnh trước/sau khi dùng sản phẩm</strong>. Kem chống nắng không điều trị các tình trạng này; vai trò của nó là ngăn tia UV làm chúng nặng thêm."
     },
     {
       "type": "compare",
@@ -303,6 +410,13 @@
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "voices",
+      "eyebrow": "Phản hồi của khách",
+      "heading": "Khách nói gì về cảm giác trên da",
+      "intro": "Chúng tôi chỉ chọn những đoạn khách tả kết cấu và cảm giác khi bôi, thứ bạn tự kiểm được ngay lần đầu dùng. Không chọn những câu hứa kết quả.",
+      "limit": 6
     },
     {
       "type": "documents",

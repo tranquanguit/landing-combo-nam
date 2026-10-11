@@ -1,0 +1,152 @@
+---
+/**
+ * Thông tin dạng hình, vẽ từ dữ liệu của khối `infographic`.
+ *
+ *  - stages: dải giai đoạn nối nhau; giai đoạn `highlight` là chỗ sản phẩm làm việc.
+ *  - layers: mặt cắt da, mỗi mục là một tia/mũi tên dừng ở đúng lớp nó tới.
+ *  - facts:  ô số lớn (chỉ số in trên bao bì / hướng dẫn dùng).
+ *
+ * Hình là lớp nhìn (aria-hidden); toàn bộ chữ nằm ở danh sách HTML ngay cạnh, có số
+ * thứ tự khớp với số trên hình. Trình đọc màn hình và máy tìm kiếm đọc danh sách.
+ */
+import FSection from './FSection.astro';
+import { richText } from '../../lib/richtext';
+import { t, type Locale } from '../../i18n/ui';
+interface Props { data: any; id?: string; locale: Locale; role?: string; transition?: string; cta?: any; }
+const { data, id = 'giai-thich', locale, role, transition, cta } = Astro.props;
+const items = data.items as any[];
+
+/* layers: toạ độ cố định để hình giống nhau ở mọi lần build. */
+const W = 640, SURF = 70, EPI = 160, H = 300;
+const stop = { surface: SURF, epidermis: SURF + (EPI - SURF) * 0.62, dermis: EPI + (H - EPI) * 0.62 } as const;
+/* Cột của từng tia: chỉ đếm mục là tia (mục ở mặt da vẽ thành lớp phủ, không chiếm cột). */
+const rayIdx = items.map((it, i) => i).filter((i) => items[i].depth !== 'surface');
+const colX = (i: number) => Math.round((W / (rayIdx.length + 1)) * (rayIdx.indexOf(i) + 1));
+const ray = (x: number, y: number) => {
+  let d = `M${x} 6`; const step = 14;
+  for (let yy = 6, k = 0; yy < y - 16; yy += step, k++) d += ` q${k % 2 ? -9 : 9} ${step / 2} 0 ${step}`;
+  return d;
+};
+const TONE = ['#3f4ad6', '#c98a0b', '#1f6b4d', '#b3261e', '#6b4fd8', '#0e7490'];
+---
+<FSection id={id} tone={data.kind === 'facts' ? 'paper' : 'stage'} role={role} transition={transition} cta={cta}
+  eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} head="split">
+
+  {data.kind === 'stages' && (
+    <ol class="stages" style={`--n:${items.length}`}>
+      {items.map((it, i) => (
+        <li class:list={['st', it.highlight && 'hl']} data-reveal style={`--i:${i}`}>
+          <span class="node" aria-hidden="true">{i + 1}</span>
+          <div class="st-body">
+            {it.highlight && <span class="here">{t(locale, 'fx.info.here')}</span>}
+            <h3>{it.label}</h3>
+            <p set:html={richText(it.body)} />
+          </div>
+        </li>
+      ))}
+    </ol>
+  )}
+
+  {data.kind === 'layers' && (
+    <div class="layers" data-reveal>
+      <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true" class="cut">
+        <defs>
+          <linearGradient id={`${id}-epi`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbeadf" /><stop offset="1" stop-color="#f3d6c4" /></linearGradient>
+          <linearGradient id={`${id}-der`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eec5ae" /><stop offset="1" stop-color="#e2ad93" /></linearGradient>
+        </defs>
+        <path d={`M0 ${SURF} C110 ${SURF - 12} 220 ${SURF + 10} 330 ${SURF - 4} S520 ${SURF - 10} ${W} ${SURF + 2} V${EPI} H0Z`} fill={`url(#${id}-epi)`} />
+        <path d={`M0 ${EPI} C140 ${EPI - 10} 300 ${EPI + 12} 460 ${EPI - 2} S600 ${EPI + 6} ${W} ${EPI} V${H} H0Z`} fill={`url(#${id}-der)`} />
+        <path d={`M0 ${SURF} C110 ${SURF - 12} 220 ${SURF + 10} 330 ${SURF - 4} S520 ${SURF - 10} ${W} ${SURF + 2}`} fill="none" stroke="#1a1d52" stroke-width="1.6" />
+        <path d={`M0 ${EPI} C140 ${EPI - 10} 300 ${EPI + 12} 460 ${EPI - 2} S600 ${EPI + 6} ${W} ${EPI}`} fill="none" stroke="#1a1d52" stroke-width="1" stroke-dasharray="3 5" opacity=".55" />
+        <text x="12" y={SURF + 22} class="lyr">{t(locale, 'fx.skin.epidermis')}</text>
+        <text x="12" y={EPI + 26} class="lyr">{t(locale, 'fx.skin.dermis')}</text>
+        {/* Mục ở mặt da (lớp kem chống nắng): một lớp phủ dọc theo bề mặt, không phải một tia. */}
+        {items.map((it, i) => it.depth === 'surface' && (
+          <g style={`--c:${TONE[i % TONE.length]}`}>
+            <path d={`M0 ${SURF - 9} C110 ${SURF - 21} 220 ${SURF + 1} 330 ${SURF - 13} S520 ${SURF - 19} ${W} ${SURF - 7} V${SURF + 2} C520 ${SURF - 10} 440 ${SURF - 4} 330 ${SURF - 4} S110 ${SURF - 12} 0 ${SURF} Z`}
+              fill="var(--c)" opacity=".28" />
+            <circle cx={W - 34} cy={SURF - 30} r="13" fill="var(--c)" />
+            <text x={W - 34} y={SURF - 25} class="num">{i + 1}</text>
+          </g>
+        ))}
+        {items.map((it, i) => {
+          if (it.depth === 'surface') return null;
+          const x = colX(i), y = stop[it.depth as keyof typeof stop];
+          return (
+            <g style={`--c:${TONE[i % TONE.length]}`} class="ray">
+              <path d={ray(x, y)} fill="none" stroke="var(--c)" stroke-width="3" stroke-linecap="round" />
+              <path d={`M${x - 8} ${y - 14} L${x} ${y} L${x + 8} ${y - 14}`} fill="none" stroke="var(--c)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx={x} cy={y + 18} r="13" fill="var(--c)" />
+              <text x={x} y={y + 23} class="num">{i + 1}</text>
+            </g>
+          );
+        })}
+      </svg>
+      <ol class="legend">
+        {items.map((it, i) => (
+          <li style={`--c:${TONE[i % TONE.length]}`}>
+            <span class="lnum" aria-hidden="true">{i + 1}</span>
+            <div><h3>{it.label}</h3><p set:html={richText(it.body)} /></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )}
+
+  {data.kind === 'facts' && (
+    <ul class="facts">
+      {items.map((it, i) => (
+        <li data-reveal style={`--i:${i}`}>
+          <p class="fv"><span class="figure">{it.value}</span>{it.unit && <span class="fu">{it.unit}</span>}</p>
+          <h3>{it.label}</h3>
+          <p class="fb" set:html={richText(it.body)} />
+        </li>
+      ))}
+    </ul>
+  )}
+
+  {data.footnote && <p class="foot" data-reveal set:html={richText(data.footnote)} />}
+</FSection>
+
+<style>
+  /* ---------- stages */
+  .stages { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-5); position: relative; }
+  @media (min-width: 980px) {
+    .stages { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: var(--s-4); }
+    .stages::before { content: ""; position: absolute; left: 24px; right: 24px; top: 23px; height: 2px; background: linear-gradient(90deg, rgba(26, 29, 82, .18), rgba(26, 29, 82, .18)); }
+  }
+  .st { position: relative; display: grid; grid-template-columns: 48px 1fr; gap: var(--s-4); align-items: start; }
+  @media (min-width: 980px) { .st { grid-template-columns: 1fr; } }
+  .node {
+    position: relative; z-index: 1; width: 48px; height: 48px; border-radius: 50%;
+    display: grid; place-items: center; font-weight: 700; font-size: var(--t-md);
+    background: #fff; color: var(--ink-navy); box-shadow: 0 0 0 2px rgba(26, 29, 82, .14);
+  }
+  .hl .node { background: var(--cobalt); color: #fff; box-shadow: 0 0 0 6px rgba(43, 52, 184, .16); }
+  @media (min-width: 980px) { .st { grid-template-rows: auto 1fr; } .st-body { height: 100%; } }
+  .st-body { padding: var(--s-4) var(--s-4) var(--s-5); border-radius: 20px; background: rgba(255, 255, 255, .72); box-shadow: 0 0 0 1px rgba(26, 29, 82, .06); }
+  .hl .st-body { background: #fff; box-shadow: 0 30px 60px -36px rgba(26, 29, 82, .5), 0 0 0 1.5px var(--cobalt); }
+  .here { display: inline-block; margin-bottom: var(--s-2); padding: 3px 10px; border-radius: 999px; background: rgba(43, 52, 184, .1); color: var(--cobalt); font-size: var(--t-2xs); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  h3 { margin: 0; font-size: var(--t-md); line-height: 1.25; color: var(--ink-navy); }
+  .st-body p, .legend p, .fb { margin: var(--s-2) 0 0; font-size: var(--t-sm); line-height: 1.55; color: var(--ink-muted); }
+
+  /* ---------- layers */
+  .layers { display: grid; gap: var(--s-6); align-items: center; }
+  @media (min-width: 980px) { .layers { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } }
+  .cut { width: 100%; height: auto; border-radius: 24px; background: linear-gradient(180deg, #fff8e8, #fff 40%); box-shadow: 0 0 0 1px rgba(26, 29, 82, .06); }
+  .lyr { font: 600 13px/1 var(--font-body, system-ui); fill: #7a4b36; letter-spacing: .08em; text-transform: uppercase; }
+  .num { font: 700 14px/1 var(--font-body, system-ui); fill: #fff; text-anchor: middle; }
+  .legend { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-4); }
+  .legend li { display: grid; grid-template-columns: 34px 1fr; gap: var(--s-3); align-items: start; }
+  .lnum { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #fff; font-weight: 700; font-size: var(--t-sm); }
+
+  /* ---------- facts */
+  .facts { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 980px) { .facts { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); } }
+  .facts li { padding: var(--s-5); border-radius: 24px; background: var(--bone); box-shadow: 0 0 0 1px rgba(26, 29, 82, .05); }
+  .fv { margin: 0 0 var(--s-3); display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; color: var(--ink-navy); }
+  .fv .figure { font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 600; line-height: 1; letter-spacing: -0.02em; }
+  .fu { font-size: var(--t-sm); font-weight: 600; color: var(--cobalt); }
+
+  .foot { margin: clamp(28px, 4vw, 44px) 0 0; max-width: 72ch; font-size: var(--t-xs); line-height: 1.55; color: var(--ink-muted); }
+</style>

@@ -30,7 +30,8 @@
     "phuc-hoi-da",
     "lam-sach",
     "bao-ve-da",
-    "treatment"
+    "treatment",
+    "cham-soc-toc"
   ],
   "featured": [
     "combo-nam",
@@ -157,7 +158,7 @@
   "faq": [
     {
       "q": "Is this the official Mocha site?",
-      "a": "The site is operated under Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha — the legal name, tax number and registered address appear in the footer of every page. The same company is the one that filed the cosmetic product notifications, and each product page prints its notification number."
+      "a": "The site is run by Mỹ Phẩm Mocha, a reseller of Mocha products. The tax ID, address and phone number are in the footer of every page. The organisation responsible for notifying each product, and its notification number, are printed on that product’s page."
     },
     {
       "q": "Why is the price lower than the list price?",

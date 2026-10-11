@@ -1,0 +1,77 @@
+{
+  "status": "published",
+  "name": "Ưu đãi ngày đôi 10.10",
+  "startsAt": "2026-10-08T00:00:00+07:00",
+  "endsAt": "2026-10-12T00:00:00+07:00",
+  "locales": [
+    "vi"
+  ],
+  "badge": "10.10",
+  "banner": {
+    "text": "Ưu đãi ngày đôi 10.10 — combo kem chống nắng tặng sữa rửa mặt mini",
+    "href": "/uv-block-sunscreen/#uu-dai"
+  },
+  "packs": [
+    {
+      "id": "kcn-x2-1010",
+      "showOn": [
+        "uv-block-sunscreen"
+      ],
+      "label": "Combo 2 kem chống nắng + 2 SRM mini",
+      "note": "Hai tuýp 50gr — đủ dùng mỗi sáng trong khoảng hai tháng.",
+      "items": [
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 2
+        }
+      ],
+      "price": 525000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini",
+          "qty": 2,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "mun-tham-kcn-1010",
+      "showOn": [
+        "smart-target-acne-gel",
+        "smart-whitening-turmergel",
+        "uv-block-sunscreen"
+      ],
+      "label": "Combo mụn + thâm + chống nắng",
+      "note": "Chấm mụn cho nốt đang viêm, chấm thâm cho vết đã lành, chống nắng để thâm không sẫm lại.",
+      "items": [
+        {
+          "product": "smart-target-acne-gel",
+          "qty": 1
+        },
+        {
+          "product": "smart-whitening-turmergel",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        }
+      ],
+      "price": 570000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": false
+    }
+  ],
+  "terms": [
+    "Áp dụng cho đơn đặt trên website và qua hotline trong thời gian chương trình.",
+    "Quà tặng không quy đổi thành tiền; hết quà thì chuyên viên gọi báo trước khi giao.",
+    "Mỗi đơn chọn một gói, không cộng dồn với ưu đãi khác."
+  ]
+}

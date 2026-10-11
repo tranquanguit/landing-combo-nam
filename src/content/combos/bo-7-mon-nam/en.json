@@ -1,0 +1,47 @@
+{
+  "slug": "bo-7-mon-nam",
+  "locale": "en",
+  "translationKey": "combo:bo-7-mon-nam",
+  "status": "published",
+  "name": "7-Piece Pigmentation Set",
+  "shortName": "7-piece pigmentation",
+  "group": "toan-dien",
+  "order": 10,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    },
+    {
+      "product": "ultra-egf-bio-gel-mask",
+      "qty": 1
+    },
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    }
+  ],
+  "price": 2225000,
+  "currency": "VND",
+  "purpose": "The pigmentation combo with every base step: micellar water, cleanser, sunscreen, gel mask and Biovector cream.",
+  "seo": {
+    "title": "7-Piece Pigmentation Set | Mỹ Phẩm Mocha",
+    "description": "The pigmentation combo with every base step: micellar water, cleanser, sunscreen, gel mask and Biovector cream. Delivered to your door; inspect before you pay."
+  }
+}

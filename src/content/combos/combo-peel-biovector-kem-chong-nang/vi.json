@@ -1,0 +1,31 @@
+{
+  "slug": "combo-peel-biovector-kem-chong-nang",
+  "locale": "vi",
+  "translationKey": "combo:combo-peel-biovector-kem-chong-nang",
+  "status": "published",
+  "name": "Combo Peel + Biovector + Kem chống nắng",
+  "shortName": "Peel + Biovector + Chống nắng",
+  "group": "peel",
+  "order": 50,
+  "items": [
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    }
+  ],
+  "price": 1115000,
+  "currency": "VND",
+  "purpose": "Peel, kem dưỡng và kem chống nắng: đủ ba việc cho da sau peel là làm mới, dưỡng lại và che nắng.",
+  "seo": {
+    "title": "Combo Peel + Biovector + Kem chống nắng | Mỹ Phẩm Mocha",
+    "description": "Peel, kem dưỡng và kem chống nắng: đủ ba việc cho da sau peel là làm mới, dưỡng lại và che nắng. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

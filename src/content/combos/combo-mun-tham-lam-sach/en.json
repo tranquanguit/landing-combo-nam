@@ -1,0 +1,35 @@
+{
+  "slug": "combo-mun-tham-lam-sach",
+  "locale": "en",
+  "translationKey": "combo:combo-mun-tham-lam-sach",
+  "status": "published",
+  "name": "Spot + Mark + Two-Step Cleansing Combo",
+  "shortName": "Spot + Mark + Cleanse",
+  "group": "mun",
+  "order": 70,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    }
+  ],
+  "price": 760000,
+  "currency": "VND",
+  "purpose": "Micellar water, cleanser, spot gel and mark gel. A full set for blemish-prone skin that wears make-up or daily sunscreen.",
+  "seo": {
+    "title": "Spot + Mark + Two-Step Cleansing Combo | Mỹ Phẩm Mocha",
+    "description": "Micellar water, cleanser, spot gel and mark gel. A full set for blemish-prone skin that wears make-up or daily sunscreen."
+  }
+}

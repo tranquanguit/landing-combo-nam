@@ -1,0 +1,27 @@
+{
+  "slug": "combo-hairborn-goi-2-peel-ion",
+  "locale": "en",
+  "translationKey": "combo:combo-hairborn-goi-2-peel-ion",
+  "status": "published",
+  "name": "Hairborn Combo: Shampoo + 2 Peel Ion",
+  "shortName": "Shampoo + 2 Peel Ion",
+  "group": "toc",
+  "order": 20,
+  "items": [
+    {
+      "product": "hairborn-hair-boost-shampoo",
+      "qty": 1
+    },
+    {
+      "product": "hairborn-peel-ion",
+      "qty": 2
+    }
+  ],
+  "price": 860000,
+  "currency": "VND",
+  "purpose": "One Hair Boost shampoo and two Peel Ion tubes, a longer supply for regular scalp care.",
+  "seo": {
+    "title": "Hairborn Combo: Shampoo + 2 Peel Ion | Mỹ Phẩm Mocha",
+    "description": "One Hair Boost shampoo and two Peel Ion tubes, a longer supply for regular scalp care. Delivered to your door; inspect before you pay."
+  }
+}

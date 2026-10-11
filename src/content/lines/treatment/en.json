@@ -52,7 +52,22 @@
           "label": "See the recovery line",
           "href": "/en/phuc-hoi-da/"
         }
-      ]
+      ],
+      "figure": {
+        "items": [
+          {
+            "src": "/images/da-yeu-nhay-cam.webp",
+            "alt": "Close-up of thin, slightly flushed skin",
+            "label": "Thin, weakened skin"
+          },
+          {
+            "src": "/images/da-sau-tham-my.webp",
+            "alt": "Close-up of skin still red after a procedure",
+            "label": "Just after laser or microneedling"
+          }
+        ],
+        "caption": "Close-up skin images to illustrate each condition. They are not before/after photos and are not a way to self-diagnose. If you are unsure which case is yours, ask a dermatologist."
+      }
     }
   ],
   "faq": [

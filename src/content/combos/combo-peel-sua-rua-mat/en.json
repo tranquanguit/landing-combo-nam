@@ -1,0 +1,27 @@
+{
+  "slug": "combo-peel-sua-rua-mat",
+  "locale": "en",
+  "translationKey": "combo:combo-peel-sua-rua-mat",
+  "status": "published",
+  "name": "Peel Kit + Bio-Active Cleanser Combo",
+  "shortName": "Peel + Cleanser",
+  "group": "peel",
+  "order": 40,
+  "items": [
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    }
+  ],
+  "price": 750000,
+  "currency": "VND",
+  "purpose": "The peel kit with a gentle pH 5.5 cleanser for washing during and after the course.",
+  "seo": {
+    "title": "Peel Kit + Bio-Active Cleanser Combo | Mỹ Phẩm Mocha",
+    "description": "The peel kit with a gentle pH 5.5 cleanser for washing during and after the course. Delivered to your door; inspect before you pay."
+  }
+}

@@ -56,8 +56,8 @@
     "description": "A gel mask with EGF, Epi-On, copper peptide, exosome cica and three liposome nano ceramides. A 100g tube, around 40 uses. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "2524/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "helps hydrate and calm the skin",
     "warnings": [
       "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
@@ -65,8 +65,7 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ],
-    "productNotificationNumber": "2524/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -85,9 +84,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "An optional step, not a required one",
+      "eyebrow": "Hydrating, soothing gel mask · 100g tube",
       "heading": "A gel mask for the weeks when skin should be left alone",
-      "lead": "A 100g tube with <strong>EGF, Epi-On™, copper peptide and exosome cica</strong>, plus sodium hyaluronate, three liposome-encapsulated nano ceramides, panthenol and folic acid — exactly the list printed on the tube.",
+      "lead": "A hydrating, soothing gel mask for the evening: leave it on for 15–20 minutes, then rinse. A 100g tube, about 40 masks, with EGF, Epi-On™ and exosome cica.",
       "usp": [
         {
           "text": "<strong>Eight ingredients printed on the tube</strong>, readable before you open it",
@@ -120,6 +119,32 @@
         "Free delivery nationwide",
         "Inspect before you pay",
         "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Size",
+          "value": "100g tube, about 40 masks (printed on the tube)"
+        },
+        {
+          "label": "Texture",
+          "value": "Gel mask, rinsed off after use"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "EGF, Epi-On™, copper peptide, exosome cica, sodium hyaluronate, three nano ceramides"
+        },
+        {
+          "label": "How to use",
+          "value": "Evening, on clean skin; leave 15–20 min, rinse with water, then moisturise"
+        },
+        {
+          "label": "Amount",
+          "value": "5–10g per use, about three index-finger joints"
+        },
+        {
+          "label": "Notification no.",
+          "value": "2524/25/CBMP-TN"
+        }
       ]
     },
     {
@@ -143,29 +168,101 @@
       "transition": "If the base routine is already sound, the section below says which situations this extra step suits."
     },
     {
-      "type": "cards",
+      "type": "conditions",
       "id": "hop-voi-ai",
-      "eyebrow": "Before you order",
-      "heading": "Three situations, including one where you should keep your money",
+      "eyebrow": "Look at the photos, then at your own skin",
+      "heading": "When this mask fits, and when to keep your money",
       "intro": "This is the cheapest product in the range, but cheap is not a reason to buy before you need it.",
-      "columns": 3,
       "items": [
         {
-          "heading": "Basics are steady, you want a heavier hydrating step",
-          "body": "The role this tube was made for. Once or twice a week, during drier stretches or after a treatment.",
-          "meta": "Best fit"
+          "label": "Dry, tight, short of moisture",
+          "image": {
+            "src": "/images/da-can-phuc-hoi.webp",
+            "alt": "Close-up of dehydrated skin with visible pores"
+          },
+          "body": "Your basics are steady but skin still goes through drier spells. That is this tube’s role: a heavier hydrating step in the evening.",
+          "fit": "yes",
+          "fitNote": "The role this tube was made for"
         },
         {
-          "heading": "No sunscreen yet, or moisturising is not consistent",
-          "body": "Spend on those two first. Adding a mask to a routine missing its base is investing in the part that changes least.",
-          "meta": "Not yet"
+          "label": "Coming out of a spell of irritation",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Close-up of a flushed cheek on easily irritated skin"
+          },
+          "body": "Skin has calmed down and needs to be left alone. The formula is hydrating and soothing, with nothing acting on pigment. If it still stings, remove steps first rather than adding one.",
+          "fit": "partial",
+          "fitNote": "Once the stinging has stopped"
         },
         {
-          "heading": "A lot of active, inflamed breakouts",
-          "body": "A thick gel left sitting on inflamed skin is not a good idea. Deal with the breakout first, then come back to this step.",
-          "meta": "Worth waiting"
+          "label": "Just had a cosmetic procedure",
+          "image": {
+            "src": "/images/da-sau-tham-my.webp",
+            "alt": "Close-up of reddened skin after a cosmetic procedure"
+          },
+          "body": "Ask the practitioner who did the procedure before you mask. With their go-ahead, this is an extra hydrating step — it does not replace your moisturiser.",
+          "fit": "partial",
+          "fitNote": "Ask your practitioner first"
+        },
+        {
+          "label": "Lots of active, inflamed breakouts",
+          "image": {
+            "src": "/images/da-mun-viem.webp",
+            "alt": "Close-up of a red, swollen spot with a white head in the centre"
+          },
+          "body": "A thick gel left sitting on inflamed skin is not a good idea. Get through the breakout first, then come back to this step.",
+          "fit": "no",
+          "fitNote": "Wait until the breakout settles"
+        },
+        {
+          "label": "No sunscreen yet, or moisturising is patchy",
+          "body": "That is not a skin condition but a routine missing its base. Spend on those two steps first; a mask now is money on the part that changes least.",
+          "fit": "no",
+          "fitNote": "Not yet"
+        },
+        {
+          "label": "Broken, weeping or burnt skin",
+          "body": "Do not put a mask on open or damaged skin. That is a job for a doctor, not for a tube of mask.",
+          "fit": "no",
+          "fitNote": "See a doctor"
         }
-      ]
+      ],
+      "caption": "Close-ups illustrating each skin condition (brand image material), <strong>not before-and-after photos of the product in use</strong>. Not sure which case is yours? Send us a photo and an adviser will take a look before you order."
+    },
+    {
+      "type": "infographic",
+      "id": "con-so-tren-tuyp",
+      "kind": "facts",
+      "eyebrow": "Numbers on the tube",
+      "heading": "Four numbers, all from the tube and the maker’s instructions",
+      "intro": "We add no numbers about results. Everything below is something you can check with the tube in your hand.",
+      "items": [
+        {
+          "label": "Tube size",
+          "value": "100",
+          "unit": "g",
+          "body": "A gel mask in a tube, used in the evening as an extra step."
+        },
+        {
+          "label": "Estimated number of masks",
+          "value": "40",
+          "unit": "uses",
+          "body": "The tube says “EQUAL TO 40 MASKS”. Your own count depends on how much you use each time."
+        },
+        {
+          "label": "Time on the skin",
+          "value": "15–20",
+          "unit": "minutes",
+          "body": "Per the manufacturer’s instructions, then rinse with water and moisturise as usual. Leaving it on longer does not give a better result."
+        },
+        {
+          "label": "Ingredients printed on the tube",
+          "value": "8",
+          "unit": "ingredients",
+          "body": "EGF, Epi-On™, copper peptide, exosome cica, sodium hyaluronate, three nano ceramides, panthenol and folic acid. Full table just below."
+        }
+      ],
+      "footnote": "The number of masks is the manufacturer’s estimate; how much you apply each time will move it."
     },
     {
       "type": "ingredients",

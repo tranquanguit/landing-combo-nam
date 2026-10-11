@@ -91,8 +91,8 @@
     "description": "Bộ 4 món với Retinol 1% bọc liposome và 4 loại vi tảo. Liệu trình 3 ngày. KHÔNG dùng khi mang thai hoặc cho con bú. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "2521/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "hỗ trợ làm sạch lớp tế bào chết trên bề mặt da",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
@@ -100,8 +100,7 @@
       "Sau khi dùng, da nhạy cảm hơn với ánh nắng. Chống nắng mỗi ngày là bắt buộc trong và sau liệu trình.",
       "Ngưng sử dụng nếu da rát kéo dài, sưng, phồng rộp hoặc đau. Tránh tiếp xúc trực tiếp với mắt.",
       "Kết quả khác nhau tùy cơ địa, loại da và mức độ chống nắng hằng ngày."
-    ],
-    "productNotificationNumber": "2521/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -109,6 +108,13 @@
       "note": "Đủ một liệu trình 3 ngày",
       "price": 550000,
       "recommended": true
+    },
+    {
+      "label": "Combo 2 bộ peel",
+      "price": 990000,
+      "recommended": false,
+      "note": "Đủ hai liệu trình",
+      "qty": 2
     },
     {
       "label": "Tôi cần tư vấn trước",
@@ -120,9 +126,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Sản phẩm mạnh nhất trên trang này",
+      "eyebrow": "Bộ peel tại nhà 4 món · liệu trình 3 ngày",
       "heading": "Peel tại nhà làm sai thì hại nhiều hơn lợi",
-      "lead": "Bộ 4 món cho một liệu trình <strong>3 ngày</strong>: ống peel chứa <strong>Retinol 1% bọc liposome</strong> và 4 loại vi tảo, ống phục hồi, sữa rửa mặt và kem dưỡng. Nhà sản xuất định vị đây là dòng phân phối chuyên dụng cho spa.",
+      "lead": "Bộ 4 món cho một liệu trình 3 ngày: ống peel Retinol 1% bọc liposome, ống phục hồi, sữa rửa mặt và kem dưỡng. Có retinol nên không dùng khi mang thai hoặc cho con bú.",
       "usp": [
         {
           "text": "<strong>Retinol 1% bọc liposome</strong> — nồng độ do nhà sản xuất công bố",
@@ -155,6 +161,32 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Bộ gồm",
+          "value": "Ống peel, ống phục hồi, sữa rửa mặt, kem dưỡng Collagen"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Ống peel: Retinol 1% bọc liposome, 4 loại vi tảo"
+        },
+        {
+          "label": "Liệu trình",
+          "value": "3 ngày, mỗi ngày một lần"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Massage 3–5 phút, lưu tới 45 phút rồi rửa sạch; sau đó dùng ống phục hồi và kem dưỡng"
+        },
+        {
+          "label": "Không dùng khi",
+          "value": "Mang thai hoặc đang cho con bú"
+        },
+        {
+          "label": "Xuất xứ",
+          "value": "Việt Nam"
+        }
       ]
     },
     {
@@ -217,6 +249,105 @@
         "label": "Xem giá và đặt hàng",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "conditions",
+      "id": "tinh-trang-da-va-bo-peel",
+      "eyebrow": "Nhìn ảnh, đối chiếu da của bạn",
+      "heading": "Làn da nào hợp với một liệu trình peel, và làn da nào phải đợi",
+      "intro": "Danh sách trên nói về hoàn cảnh của bạn. Phần này đối chiếu theo tình trạng da nhìn thấy được.",
+      "items": [
+        {
+          "label": "Da dầu, bề mặt sần, lớp tế bào chết dày",
+          "image": {
+            "src": "/images/da-san-mun-an.webp",
+            "alt": "Cận cảnh vùng da sần, lỗ chân lông rõ và vài vết thâm sạm"
+          },
+          "body": "Nhóm nhà sản xuất nhắm tới: làm bong lớp tế bào chết trên bề mặt trong <strong>ba ngày</strong>. Đi kèm điều kiện: sắp xếp được hai tuần ít ra nắng sau đó.",
+          "fit": "yes",
+          "fitNote": "Hợp, nếu tránh nắng được hai tuần"
+        },
+        {
+          "label": "Da sạm màu bề mặt do nắng",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Cận cảnh vùng gò má sạm màu lan tỏa do nắng"
+          },
+          "body": "Peel nhắm vào lớp tế bào sạm màu, nhưng da mới sau peel rất dễ sạm lại. Không tránh nắng được thì đường chậm bằng hoạt chất hằng ngày là lựa chọn đúng hơn.",
+          "fit": "partial",
+          "fitNote": "Chỉ khi tránh nắng nghiêm ngặt"
+        },
+        {
+          "label": "Da đang kích ứng, mẩn đỏ",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Cận cảnh vùng da kích ứng ửng đỏ, có mẩn nhỏ"
+          },
+          "body": "Da mỏng, nổi mạch máu hoặc đang kích ứng cần phục hồi trước. Peel lên làn da đang yếu làm tình trạng nặng thêm.",
+          "fit": "no",
+          "fitNote": "Phục hồi da trước"
+        },
+        {
+          "label": "Da vừa qua thủ thuật thẩm mỹ",
+          "image": {
+            "src": "/images/da-sau-tham-my.webp",
+            "alt": "Cận cảnh vùng da ửng đỏ sau thủ thuật thẩm mỹ"
+          },
+          "body": "Da vừa qua thủ thuật cần thời gian phục hồi trước khi nhận thêm một tác động mạnh. Đợi da phục hồi hẳn rồi mới tính tới peel.",
+          "fit": "no",
+          "fitNote": "Chưa dùng, đợi da phục hồi"
+        },
+        {
+          "label": "Đang dùng combo nám",
+          "body": "Không dùng cùng lúc. Chồng liệu trình peel lên liệu trình có hoạt chất tác động sắc tố là cách nhanh nhất làm hỏng hàng rào bảo vệ. Chọn một, hoàn thành, rồi mới tính tới cái kia.",
+          "fit": "no",
+          "fitNote": "Không dùng cùng lúc"
+        },
+        {
+          "label": "Đang mang thai hoặc cho con bú",
+          "body": "Sản phẩm <strong>có chứa retinol</strong>. Giai đoạn này không dùng bộ peel.",
+          "fit": "no",
+          "fitNote": "Không dùng"
+        }
+      ],
+      "caption": "Ảnh cận vùng da minh hoạ từng tình trạng (tư liệu hình ảnh của hãng), <strong>không phải ảnh trước/sau khi dùng sản phẩm</strong>. Chưa chắc da mình thuộc nhóm nào? Gửi ảnh qua Zalo, chuyên viên xem giúp trước khi bạn đặt."
+    },
+    {
+      "type": "infographic",
+      "id": "ba-ngay-peel",
+      "kind": "stages",
+      "eyebrow": "Liệu trình đi qua những gì",
+      "heading": "Ba ngày peel: điều gì là bình thường, khi nào phải dừng",
+      "intro": "Bộ này chỉ làm việc trong ba ngày. Biết trước da sẽ phản ứng thế nào thì không hoảng vì điều bình thường, và không bỏ qua điều bất thường.",
+      "items": [
+        {
+          "label": "Trước ngày 1",
+          "body": "Đọc lại danh sách không nên dùng. Có sẵn kem chống nắng, sắp xếp được hai tuần ít ra nắng, và không có dịp quan trọng nào trong hai tuần tới."
+        },
+        {
+          "label": "Ngày 1 – 3: mỗi ngày một lần",
+          "body": "Làm sạch, thoa peel và massage 3–5 phút, lưu trên da tới 45 phút (lần đầu nên ngắn hơn), rửa sạch rồi dùng ống phục hồi và kem dưỡng. Ba ngày là ba ngày, không kéo dài thêm.",
+          "highlight": true
+        },
+        {
+          "label": "Bình thường trong liệu trình",
+          "body": "Hơi rát và châm chích khi thoa. Da khô và căng sau đó. Da có thể sẫm màu tạm thời trước khi bong.",
+          "highlight": true
+        },
+        {
+          "label": "Phải dừng ngay",
+          "body": "Rát kéo dài, sưng, phồng rộp hoặc đau. Đỏ đậm hoặc rỉ dịch thì dừng và đi khám. Những dấu hiệu này <strong>không nằm trong nhóm bình thường</strong>."
+        },
+        {
+          "label": "Ngày 3 – 10: bong và phục hồi",
+          "body": "Chỉ làm sạch dịu nhẹ, dưỡng ẩm và chống nắng. Không hoạt chất mạnh, không tẩy tế bào chết, không cạy lớp bong."
+        },
+        {
+          "label": "Tới ngày 21: tránh nắng nghiêm ngặt",
+          "body": "Vùng da mới rất dễ tăng sắc tố. Từ ngày 14, khi da hết nhạy và hết bong, mới quay lại hoạt chất thường dùng."
+        }
+      ],
+      "footnote": "Số ngày lấy từ hướng dẫn của nhà sản xuất cho liệu trình ba ngày và nguyên tắc chăm sóc sau peel trong lịch trình bên dưới. Cơ địa mỗi người khác nhau."
     },
     {
       "type": "ingredients",
@@ -380,6 +511,13 @@
       "footnote": "Nếu bạn không chắc mình sắp xếp được hai tuần kiêng nắng thì <strong>đường chậm là lựa chọn đúng hơn</strong>. Không phải vì nó nhẹ hơn. Mà vì một liệu trình peel làm dở dang thường để lại hậu quả nặng hơn là không peel."
     },
     {
+      "type": "voices",
+      "eyebrow": "Phản hồi của khách",
+      "heading": "Khách nói gì về cảm giác khi peel",
+      "intro": "Chúng tôi chỉ chọn những đoạn khách tả cảm giác trong những ngày peel. Không chọn những câu hứa kết quả.",
+      "limit": 6
+    },
+    {
       "type": "order",
       "eyebrow": "Đặt hàng",
       "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
@@ -430,7 +568,7 @@
       "intro": "Giai đoạn sau peel cần đúng ba bước này. Mua sau khi đã peel thì đã muộn vài ngày.",
       "items": [
         "uv-block-sunscreen",
-        "collagen-peptide-cream",
+        "pro-vitamin-b5-serum",
         "bio-active-cleanser"
       ]
     }

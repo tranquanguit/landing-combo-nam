@@ -1,0 +1,32 @@
+---
+/**
+ * Thông tin sản phẩm dạng nhãn — giá trị, ngay dưới phần đầu trang.
+ *
+ * Học từ trang bán hàng của hãng: người mua quét "Dung tích / Kết cấu / Dùng cho /
+ * Thành phần chính / Xuất xứ" trước, rồi mới đọc đoạn văn. Một dải mảnh, không phải
+ * một khối kể chuyện: nó không có tiêu đề lớn và không đẩy nội dung xuống sâu.
+ */
+import { t, type Locale } from '../../i18n/ui';
+interface Props { facts: { label: string; value: string }[]; locale: Locale }
+const { facts, locale } = Astro.props;
+---
+{facts.length > 0 && (
+  <section class="facts" aria-labelledby="thong-tin-title">
+    <div class="wrap">
+      <h2 id="thong-tin-title" class="sr-only">{t(locale, 'product.facts')}</h2>
+      <dl>
+        {facts.map((f) => (
+          <div><dt>{f.label}</dt><dd>{f.value}</dd></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+)}
+
+<style>
+  .facts { background: var(--paper); border-block: 1px solid var(--line); padding-block: var(--s-5); }
+  dl { margin: 0; display: grid; gap: var(--s-3) var(--s-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); }
+  dl div { display: grid; gap: 2px; padding-left: var(--s-3); border-left: 2px solid var(--line-strong); }
+  dt { font-size: var(--t-xs); letter-spacing: .06em; text-transform: uppercase; color: var(--slate); }
+  dd { margin: 0; font-size: var(--t-sm); font-weight: 600; color: var(--ink-navy); line-height: 1.45; }
+</style>

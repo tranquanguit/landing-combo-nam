@@ -3,8 +3,15 @@ import { money } from '../../lib/format';
 import { t, type Locale } from '../../i18n/ui';
 import { richText } from '../../lib/richtext';
 import { orderEndpoint } from '../../lib/order-endpoint';
-interface Props { data: any; product: any; brand: any; locale: Locale; }
-const { data, product: p, brand: b, locale } = Astro.props;
+interface Props {
+  data: any; product: any; brand: any; locale: Locale;
+  /** 'consult' = biểu mẫu nhận tư vấn (trang Liên hệ): không ô địa chỉ, nút và câu đồng ý nói đúng việc gọi lại. */
+  mode?: 'order' | 'consult';
+}
+const { data, product: p, brand: b, locale, mode = 'order' } = Astro.props;
+const consult = mode === 'consult';
+const submitKey = consult ? 'contact.submit' : 'form.submit';
+const consentKey = consult ? 'contact.consent' : 'form.consentOnSubmit';
 
 // Endpoint nhận đơn. Chưa cấu hình thì form KHÔNG giả vờ đã gửi thành công —
 // thay vào đó hiện lối liên hệ thật, vì một đơn hàng rơi vào hư không tệ hơn
@@ -41,7 +48,15 @@ const Wrapper = canOrder ? 'form' : 'div';
  * với ĐIỀU GÌ — lưu một cờ true/false thì không chứng minh được điều đó, nhất
  * là sau này khi câu chữ trên trang đã đổi.
  */
-const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
+const consentText = t(locale, consentKey).replace(/<[^>]+>/g, '');
+
+/**
+ * Giá cũ gạch ngang cạnh giá bán của từng gói — thay cho dòng chữ nhỏ "tiết kiệm …".
+ * Gói khuyến mãi: tổng giá mua lẻ; gói chính của sản phẩm: giá niêm yết (compareAtPrice).
+ */
+const wasOf = (v: any) => v.promo?.regular
+  ?? (v.qty && v.price !== null && p.price * v.qty > v.price ? p.price * v.qty : undefined)
+  ?? (v.price !== null && v.price === p.price && p.compareAtPrice > p.price ? p.compareAtPrice : undefined);
 ---
 <section id="dat-hang" class="surface-navy defer" aria-labelledby="dat-hang-title">
   <div class="wrap order-grid">
@@ -83,11 +98,11 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
                     checked={p.variants.some((x: any) => x.recommended) ? v.recommended : i === 0}
                   />
                   <span class="pack-text">
-                    <strong>{v.label}</strong>
-                    {v.note && <span class="muted">{v.note}</span>}
+                    <strong>{v.promo?.badge && <span class="pack-badge">{v.promo.badge}</span>}{v.label}</strong>
                   </span>
                   <span class="pack-price tabular">
                     {v.price === null ? t(locale, 'form.noPrice') : money(v.price, p.currency, locale)}
+                    {wasOf(v) && <s class="pack-was"><span class="sr-only">{t(locale, v.promo ? 'promo.regular' : 'price.from')} </span>{money(wasOf(v), p.currency, locale)}</s>}
                   </span>
                 </label>
               ))}
@@ -105,26 +120,25 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
         <div class="field" data-field="phone">
           <label for="phone">{t(locale, 'form.phone')} <span aria-hidden="true">*</span></label>
           <input type="tel" id="phone" name="phone" disabled={!canOrder} autocomplete="tel" inputmode="numeric" required
-            aria-describedby="phone-hint phone-err" placeholder={t(locale, 'form.phPhone')} />
-          <p class="hint" id="phone-hint">{t(locale, 'form.privacy')}</p>
+            aria-describedby="phone-err" placeholder={t(locale, 'form.phPhone')} />
           <p class="err" id="phone-err">{t(locale, 'form.errPhone')}</p>
         </div>
 
-        <div class="field" data-field="address">
+        <div class="field" data-field="address" hidden={consult}>
           <label for="address">
             {t(locale, 'form.address')}
             <span aria-hidden="true" data-req>*</span>
             <span class="muted" data-optional hidden>({t(locale, 'form.optional')})</span>
           </label>
-          <input type="text" id="address" name="address" disabled={!canOrder} autocomplete="street-address" required
+          <input type="text" id="address" name="address" disabled={!canOrder} autocomplete="street-address" required={!consult}
             aria-describedby="address-err" placeholder={t(locale, 'form.phAddress')} />
           <p class="err" id="address-err">{t(locale, 'form.errAddress')}</p>
         </div>
 
         {locale !== 'vi' && (
-          <div class="field" data-field="country">
+          <div class="field" data-field="country" hidden={consult}>
             <label for="country">{t(locale, 'form.country')} <span aria-hidden="true">*</span></label>
-            <input type="text" id="country" name="country" disabled={!canOrder} autocomplete="country-name" required
+            <input type="text" id="country" name="country" disabled={!canOrder} autocomplete="country-name" required={!consult}
               aria-describedby="country-err" />
             <p class="err" id="country-err">{t(locale, 'form.errCountry')}</p>
           </div>
@@ -147,13 +161,13 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
         <input type="hidden" name="productSlug" value={p.slug} />
         <input type="hidden" name="locale" value={locale} />
         <input type="hidden" name="consentText" value={consentText} />
+        {/* Đồng ý dữ liệu cá nhân: bấm nút gửi đơn ngay dưới câu này là hành động đồng ý
+            (Nghị định 13/2023 nhận "hành động khác thể hiện được sự đồng ý", không bắt buộc
+            ô tích). Câu khách đọc được lưu nguyên văn kèm đơn ở consentText. */}
+        <input type="hidden" name="dataConsent" value="true" />
 
-        <label class="agree">
-          <input type="checkbox" id="data-consent" name="dataConsent" required disabled={!canOrder} />
-          <span set:html={richText(t(locale, 'form.dataConsent'))} />
-        </label>
-
-        <p class="total" id="order-total" data-currency={p.currency} data-locale={locale}>
+        <p class="total" id="order-total" data-currency={p.currency} data-locale={locale}
+          hidden={p.variants.length > 0 && p.variants.every((v: any) => v.price === null)}>
           {t(locale, 'form.total')} <strong class="tabular" data-total>{money(p.price, p.currency, locale)}</strong>
           <span class="muted"> {t(locale, 'form.totalNote')}</span>
         </p>
@@ -161,15 +175,17 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
         {/* Chưa có endpoint: nút là <button type="button"> đã disabled, và bên
             ngoài không có thẻ <form> nào, nên không đường nào submit được —
             kể cả nhấn Enter trong ô nhập khi JavaScript tắt. */}
+        <p class="agree-note" id="consent-note" set:html={richText(t(locale, consentKey))} />
+
         <button
           type={canOrder ? 'submit' : 'button'}
           class="btn btn-primary btn-lg btn-block"
           data-cta="form-submit"
           data-sending-label={t(locale, 'form.sending')}
           disabled={!canOrder}
-          aria-describedby={canOrder ? undefined : (inStock ? 'form-no-endpoint' : 'form-sold-out')}
+          aria-describedby={canOrder ? 'consent-note' : (inStock ? 'form-no-endpoint' : 'form-sold-out')}
         >
-          {t(locale, 'form.submit')}
+          {t(locale, submitKey)}
         </button>
 
       </Wrapper>
@@ -251,9 +267,12 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
   .pack:hover { border-color: var(--indigo-lift); }
   .pack:has(input:checked) { border-color: var(--indigo); background: var(--paper); }
   .pack input { margin-top: 2px; width: 24px; height: 24px; accent-color: var(--indigo); flex: 0 0 auto; }
+  .pack-text { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
   .pack-text strong { display: block; color: var(--ink-navy); font-size: var(--t-sm); }
   .pack-text .muted { font-size: var(--t-xs); }
-  .pack-price { margin-left: auto; font-weight: 600; color: var(--ink-navy); white-space: nowrap; font-size: var(--t-sm); }
+  .pack-price { margin-left: auto; font-weight: 600; color: var(--ink-navy); white-space: nowrap; font-size: var(--t-sm); text-align: right; }
+  .pack-was { display: block; font-weight: 400; font-size: var(--t-xs); color: var(--slate); }
+  .pack-badge { display: inline-block; margin-right: 6px; padding: 0 7px; border-radius: 999px; background: #f2b84b; color: #2a1d00; font-size: var(--t-2xs); font-weight: 800; vertical-align: 1px; }
 
   .field { margin-bottom: var(--s-4); }
   .field label { display: block; font-weight: 600; font-size: var(--t-sm); margin-bottom: 5px; color: var(--ink-navy); }
@@ -274,18 +293,12 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
     border-color: var(--indigo); background: var(--paper);
   }
   .pack:focus-within { outline: 3px solid var(--indigo-lift); outline-offset: 2px; }
-  .hint { font-size: var(--t-xs); color: var(--ink-muted); margin: 5px 0 0; }
   .err { font-size: var(--t-xs); color: #b3261e; margin: 5px 0 0; display: none; }
   .field[data-invalid] input { border-color: #b3261e; }
-  .agree[data-invalid] { color: #b3261e; }
   .field[data-invalid] .err { display: block; }
 
-  .agree {
-    display: flex; gap: var(--s-3); align-items: flex-start;
-    font-size: var(--t-xs); color: var(--ink-muted); margin: var(--s-4) 0;
-  }
-  .agree input { width: 24px; height: 24px; accent-color: var(--indigo); flex: 0 0 auto; margin: 0; }
-  .agree:focus-within { outline: 3px solid var(--indigo-lift); outline-offset: 3px; border-radius: var(--r-input); }
+  .agree-note { font-size: var(--t-xs); line-height: 1.5; color: var(--ink-muted); margin: 0 0 var(--s-3); }
+  .agree-note :global(strong) { color: var(--ink-navy); }
 
   .trap {
     position: absolute; width: 1px; height: 1px;
@@ -378,9 +391,6 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
       }
     };
 
-    /* Đồng ý xử lý dữ liệu cá nhân là điều kiện bắt buộc theo Nghị định
-       13/2023/NĐ-CP, không phải một ô đánh dấu cho đẹp. */
-    const agree = form.elements.namedItem('dataConsent') as HTMLInputElement | null;
 
     const check = (el: HTMLInputElement) => {
       const ok = rules[el.name] ? rules[el.name](el.value) : true;
@@ -419,10 +429,6 @@ const consentText = t(locale, 'form.dataConsent').replace(/<[^>]+>/g, '');
       for (const n of Object.keys(rules)) {
         const el = form.elements.namedItem(n) as HTMLInputElement | null;
         if (el && !check(el) && !firstBad) firstBad = el;
-      }
-      if (!firstBad && agree && !agree.checked) {
-        agree.closest('.agree')?.setAttribute('data-invalid', '');
-        firstBad = agree;
       }
       if (firstBad) {
         e.preventDefault();

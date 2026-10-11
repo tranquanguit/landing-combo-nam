@@ -20,6 +20,8 @@ import { importFromFiles } from './lib/content.ts';
 import { publish } from './lib/publish.ts';
 import { createApp } from './app.ts';
 import { clientKey, purgeRateLimit } from './lib/rate-limit.ts';
+import { startPromoScheduler } from './lib/promo-server.ts';
+import { isPublishing } from './lib/publish.ts';
 
 const ROOT = process.cwd();
 const PORT = Number(process.env.PORT ?? 8080);
@@ -101,6 +103,11 @@ const server = createServer(async (req, res) => {
   }
 });
 server.listen(PORT, () => log(`đang chạy ở cổng ${PORT}`));
+/* Khuyến mãi tự bật / tự tắt: mỗi phút xem tập đợt đang chạy có đổi không; đổi thì xuất bản lại.
+   PROMO_SCHEDULER=0 để tắt (chạy thử trên máy, khi không muốn bản build bị thay). */
+if (process.env.PROMO_SCHEDULER !== '0') {
+  startPromoScheduler(sql, { publish: (by) => publish(sql, ROOT, by), isPublishing, log });
+}
 /* Bảng rate_limit có một dòng cho mỗi IP / khách từng ghé — dọn mỗi giờ. */
 setInterval(() => { purgeRateLimit(sql).catch((e) => console.error('purge_rate_limit_failed', e.message)); }, 3600_000).unref();
 

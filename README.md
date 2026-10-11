@@ -13,6 +13,9 @@ chính file đó quyết định, không phải sửa code.
 > trên Ubuntu + tên miền (DNS, `.env`, HTTPS, sao lưu) và đăng ký Google Search Console / Bing /
 > Merchant Center.
 >
+> **Khuyến mãi theo lịch:** [`docs/khuyen-mai.md`](docs/khuyen-mai.md) — mỗi đợt một nội dung, tự bật/tự gỡ theo giờ.
+> **Phản hồi khách + ảnh tình trạng da:** [`docs/phan-hoi-khach-hang.md`](docs/phan-hoi-khach-hang.md) — cổng văn bản đồng ý, mẫu tin xin đồng ý.
+>
 > **Chat:** [`docs/chat-n8n.md`](docs/chat-n8n.md) — bong bóng chat; trả lời bằng kịch bản
 > tư vấn (`/admin/chat-rules`) hoặc webhook n8n (cấu hình ở `/admin/settings/chat`), chuẩn
 > JSON gửi/nhận (`docs/chat/*.schema.json`), phân biệt khách. Lịch sử + số liệu để phân

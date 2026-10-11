@@ -1,0 +1,39 @@
+{
+  "slug": "bo-5-mon-tham-sam",
+  "locale": "en",
+  "translationKey": "combo:bo-5-mon-tham-sam",
+  "status": "published",
+  "name": "5-Piece Set for Dull Skin & Marks",
+  "shortName": "5-piece tone set",
+  "group": "nam",
+  "order": 50,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    },
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    }
+  ],
+  "price": 1380000,
+  "currency": "VND",
+  "purpose": "Two-step cleansing, sunscreen, Smart First Care serum and mark gel: for skin that is both dull and still marked after breakouts.",
+  "seo": {
+    "title": "5-Piece Set for Dull Skin & Marks | Mỹ Phẩm Mocha",
+    "description": "Two-step cleansing, sunscreen, Smart First Care serum and mark gel: for skin that is both dull and still marked after breakouts."
+  }
+}

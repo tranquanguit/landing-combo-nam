@@ -1,0 +1,31 @@
+{
+  "slug": "combo-nam-peel",
+  "locale": "vi",
+  "translationKey": "combo:combo-nam-peel",
+  "status": "published",
+  "name": "Combo Nám + Bộ Peel",
+  "shortName": "Nám + Peel",
+  "group": "nam",
+  "order": 30,
+  "items": [
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    }
+  ],
+  "price": 1470000,
+  "currency": "VND",
+  "purpose": "Một đợt peel 3 ngày để làm mới bề mặt da, xong đợt mới vào serum và kem nám. Hợp với da sạm, sần, đã quen dùng hoạt chất.",
+  "seo": {
+    "title": "Combo Nám + Bộ Peel | Mỹ Phẩm Mocha",
+    "description": "Một đợt peel 3 ngày để làm mới bề mặt da, xong đợt mới vào serum và kem nám. Hợp với da sạm, sần, đã quen dùng hoạt chất."
+  }
+}

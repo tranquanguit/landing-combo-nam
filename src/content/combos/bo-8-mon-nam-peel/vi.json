@@ -1,0 +1,51 @@
+{
+  "slug": "bo-8-mon-nam-peel",
+  "locale": "vi",
+  "translationKey": "combo:bo-8-mon-nam-peel",
+  "status": "published",
+  "name": "Bộ 8 món chăm da nám có Peel",
+  "shortName": "Bộ 8 món nám + peel",
+  "group": "toan-dien",
+  "order": 20,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    },
+    {
+      "product": "ultra-egf-bio-gel-mask",
+      "qty": 1
+    },
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    }
+  ],
+  "price": 2455000,
+  "currency": "VND",
+  "purpose": "Bộ 7 món chăm da nám, thêm bộ peel để làm mới bề mặt da trước khi vào lộ trình nám.",
+  "seo": {
+    "title": "Bộ 8 món chăm da nám có Peel | Mỹ Phẩm Mocha",
+    "description": "Bộ 7 món chăm da nám, thêm bộ peel để làm mới bề mặt da trước khi vào lộ trình nám. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

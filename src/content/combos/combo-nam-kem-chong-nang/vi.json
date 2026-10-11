@@ -1,0 +1,31 @@
+{
+  "slug": "combo-nam-kem-chong-nang",
+  "locale": "vi",
+  "translationKey": "combo:combo-nam-kem-chong-nang",
+  "status": "published",
+  "name": "Combo Nám + Kem chống nắng",
+  "shortName": "Nám + Chống nắng",
+  "group": "nam",
+  "order": 10,
+  "items": [
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    }
+  ],
+  "price": 1339000,
+  "currency": "VND",
+  "purpose": "Serum và kem nám cho buổi tối, kem chống nắng cho buổi sáng. Ba món đủ cho một lộ trình chăm da nám mỗi ngày.",
+  "seo": {
+    "title": "Combo Nám + Kem chống nắng | Mỹ Phẩm Mocha",
+    "description": "Serum và kem nám cho buổi tối, kem chống nắng cho buổi sáng. Ba món đủ cho một lộ trình chăm da nám mỗi ngày. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

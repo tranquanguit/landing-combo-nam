@@ -111,6 +111,7 @@ docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts 
 #   validate        kiểm mọi nội dung trong CSDL bằng schema
 #   publish         xuất bản một lần
 #   import --only-new  chỉ nạp nội dung/ảnh chưa có trong CSDL (dùng khi cập nhật bản mới)
+#   import --entries products/x/vi,...  ghi đè đúng các mục bản mới đã sửa
 #   import          nạp lại TOÀN BỘ nội dung từ file trong image (GHI ĐÈ bản trùng mã — cẩn thận)
 #   user <tên> admin   (mật khẩu trong biến ADMIN_PASSWORD)
 docker compose logs -f app

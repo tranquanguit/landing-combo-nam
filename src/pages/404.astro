@@ -101,10 +101,10 @@ const nav = siteNav(
       </ul>
 
       <p class="lead">
-        Cần hỗ trợ ngay: gọi <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a> ({b.hours})
+        Cần hỗ trợ ngay: gọi <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a> ({b.hours || '24/7'})
         hoặc gửi email <a href={`mailto:${b.email}`}>{b.email}</a>.
       </p>
-      <p class="muted">{b.legalName} — {b.address}</p>
+      <p class="muted">{b.tradingName} — {b.address}</p>
     </main>
 
     <style>

@@ -1,0 +1,31 @@
+{
+  "slug": "combo-peel-biovector-kem-chong-nang",
+  "locale": "en",
+  "translationKey": "combo:combo-peel-biovector-kem-chong-nang",
+  "status": "published",
+  "name": "Peel + Biovector + Sunscreen Combo",
+  "shortName": "Peel + Biovector + Sun",
+  "group": "peel",
+  "order": 50,
+  "items": [
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    }
+  ],
+  "price": 1115000,
+  "currency": "VND",
+  "purpose": "Peel, moisturiser and sunscreen: the three things post-peel skin needs, renewal, care and protection.",
+  "seo": {
+    "title": "Peel + Biovector + Sunscreen Combo | Mỹ Phẩm Mocha",
+    "description": "Peel, moisturiser and sunscreen: the three things post-peel skin needs, renewal, care and protection. Delivered to your door; inspect before you pay."
+  }
+}

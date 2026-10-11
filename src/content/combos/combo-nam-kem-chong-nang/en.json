@@ -1,0 +1,31 @@
+{
+  "slug": "combo-nam-kem-chong-nang",
+  "locale": "en",
+  "translationKey": "combo:combo-nam-kem-chong-nang",
+  "status": "published",
+  "name": "Pigmentation Combo + Sunscreen",
+  "shortName": "Pigmentation + Sunscreen",
+  "group": "nam",
+  "order": 10,
+  "items": [
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    }
+  ],
+  "price": 1339000,
+  "currency": "VND",
+  "purpose": "The pigmentation serum and cream for the evening, sunscreen for the morning. Three products that cover a full daily routine for melasma-prone skin.",
+  "seo": {
+    "title": "Pigmentation Combo + Sunscreen | Mỹ Phẩm Mocha",
+    "description": "The pigmentation serum and cream for the evening, sunscreen for the morning. Three products that cover a full daily routine for melasma-prone skin."
+  }
+}

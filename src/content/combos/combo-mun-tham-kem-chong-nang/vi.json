@@ -1,0 +1,31 @@
+{
+  "slug": "combo-mun-tham-kem-chong-nang",
+  "locale": "vi",
+  "translationKey": "combo:combo-mun-tham-kem-chong-nang",
+  "status": "published",
+  "name": "Combo Mụn + Thâm + Kem chống nắng",
+  "shortName": "Mụn + Thâm + Chống nắng",
+  "group": "mun",
+  "order": 30,
+  "items": [
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    }
+  ],
+  "price": 645000,
+  "currency": "VND",
+  "purpose": "Vết thâm sẫm lại dưới nắng. Bộ này thêm kem chống nắng để gel giảm thâm không phải làm việc vô ích.",
+  "seo": {
+    "title": "Combo Mụn + Thâm + Kem chống nắng | Mỹ Phẩm Mocha",
+    "description": "Vết thâm sẫm lại dưới nắng. Bộ này thêm kem chống nắng để gel giảm thâm không phải làm việc vô ích. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

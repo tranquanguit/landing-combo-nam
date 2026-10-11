@@ -30,7 +30,7 @@
       "note": "the step that protects your progress",
       "image": {
         "src": "/images/hero-uv-block-plus.webp",
-        "alt": "Tube of Mocha UV-Block Plus sunscreen, 2025 packaging marked SPF 50 PA++++"
+        "alt": "Tube of Mocha UV-Block Plus sunscreen, 50g, seven filters"
       }
     },
     {
@@ -47,13 +47,13 @@
   "currency": "VND",
   "variants": [
     {
-      "label": "The full duo – cream + serum",
+      "label": "Cream + serum duo + 2 gifts",
       "note": "Includes both gifts",
       "price": 1050000,
       "recommended": true
     },
     {
-      "label": "Smart Brightening Cream X3 only",
+      "label": "Brightening Cream X3 + cleanser",
       "note": "Includes the cleanser",
       "price": 590000,
       "recommended": false
@@ -77,8 +77,8 @@
     "ogImage": "/images/og-combo-nam.jpg"
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "1517/25/CBMP-LA",
+    "declarant": "mocha",
     "functions": "helps visibly reduce the look of dark spots and supports a more even-looking skin tone",
     "warnings": [
       "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
@@ -86,15 +86,14 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ],
-    "productNotificationNumber": "1517/25/CBMP-LA"
+    ]
   },
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "A cream and a serum, used together, for melasma-prone skin",
+      "eyebrow": "Serum + cream set for dark spots",
       "heading": "A two-step routine for dark spots, with every percentage published",
-      "lead": "<strong>Smart First Care Serum</strong> publishes 4-butylresorcinol 1000ppm, Niacinamide 4% and Bio-Placenta 1%; <strong>Smart Brightening Cream X3</strong> carries Tranexamic Acid, NIO-NAG and Bakuchiol. Formulated for skin dealing with stubborn discolouration and uneven tone.",
+      "lead": "Smart First Care Serum goes on first and Smart Brightening Cream X3 after, for melasma-prone skin. Strengths are printed on the packs: 4-butylresorcinol 1000ppm in the serum, tranexamic acid 3% in the cream.",
       "usp": [
         {
           "text": "<strong>No corticosteroids, no hydroquinone, no drying alcohol</strong>",
@@ -126,6 +125,32 @@
       "trustBadges": [
         "Ships from Ho Chi Minh City",
         "7-day return if the product arrives faulty"
+      ],
+      "facts": [
+        {
+          "label": "Set includes",
+          "value": "Smart First Care Serum, Smart Brightening Cream X3"
+        },
+        {
+          "label": "Gifts",
+          "value": "UV-Block sunscreen and Bio-Active Cleanser (full combo option)"
+        },
+        {
+          "label": "Serum actives",
+          "value": "4-butylresorcinol 1000ppm, niacinamide 4%, Bio-Placenta 1%, Vietnam Bio-white Complex 3%"
+        },
+        {
+          "label": "Cream actives",
+          "value": "Tranexamic acid 3%, NIO-NAG 2%, bakuchiol 2%, ceramide 1%"
+        },
+        {
+          "label": "Free from",
+          "value": "Corticosteroids, hydroquinone, drying alcohol"
+        },
+        {
+          "label": "Order of use",
+          "value": "Cleanse, serum, then cream; add sunscreen in the morning"
+        }
       ]
     },
     {
@@ -147,6 +172,38 @@
         ]
       },
       "transition": "Melasma is not one condition. Before the formula matters, you need to know which kind you are looking at."
+    },
+    {
+      "type": "infographic",
+      "id": "sac-to-nam-o-dau",
+      "kind": "layers",
+      "eyebrow": "Look beneath the surface",
+      "heading": "Where the pigment sits, and why it can’t be rushed",
+      "intro": "Pigmentation does not all sit at the same depth. Where it sits decides how long you need to keep going, and why the sunscreen step can’t be skipped.",
+      "items": [
+        {
+          "label": "What you put on the skin",
+          "depth": "surface",
+          "highlight": true,
+          "body": "At night the serum goes first and the cream seals it in overnight. In the morning <strong>sunscreen is required</strong>. Skip it and pigment comes back, whatever else you use."
+        },
+        {
+          "label": "Patchy (epidermal)",
+          "depth": "epidermis",
+          "body": "Pigment sits in the outer layer of skin, so it usually shifts first."
+        },
+        {
+          "label": "Deep (dermal)",
+          "depth": "dermis",
+          "body": "Pigment sits deeper, so you wait for the skin to finish renewing its cells. It takes more patience."
+        },
+        {
+          "label": "Mixed",
+          "depth": "dermis",
+          "body": "Both kinds in the same area of skin, so it needs the most patience and the most careful sun protection."
+        }
+      ],
+      "footnote": "Illustrative diagram, not to scale. You can’t always tell shallow pigment from deep by eye. If you’re unsure, send a photo to an adviser before you order."
     },
     {
       "type": "cards",
@@ -213,6 +270,72 @@
         }
       ],
       "footnote": "Reference ranges, not a promise. Results vary by individual and by daily sun protection — skip the sunscreen step and none of the figures above hold."
+    },
+    {
+      "type": "conditions",
+      "id": "khong-phai-vet-sam-nao",
+      "eyebrow": "Compare with your own skin",
+      "heading": "Not every dark patch is a job for this combo",
+      "intro": "The three kinds of melasma above are what the combo is for. Other dark marks on the face may need something else, or a doctor first.",
+      "items": [
+        {
+          "label": "Patchy, deep or mixed melasma",
+          "image": {
+            "src": "/images/da-nam-hon-hop.webp",
+            "alt": "Close-up of skin with both light-brown patches and darker areas of pigment"
+          },
+          "fit": "yes",
+          "fitNote": "What the combo is for",
+          "body": "The serum and cream are made to be used together for all three kinds. The deeper the pigment, the more patience it takes, and sunscreen every morning is a condition."
+        },
+        {
+          "label": "Sun-dulled, uneven tone",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Close-up of skin with uneven, sun-dulled tone"
+          },
+          "fit": "partial",
+          "fitNote": "Suits it, with daily sunscreen",
+          "body": "The Bio-white complex in both the serum and the cream aims at a brighter, more even tone. But sun dullness comes straight back if the sunscreen step is skipped."
+        },
+        {
+          "label": "Post-blemish marks",
+          "image": {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Close-up of skin with scattered brown marks left by blemishes"
+          },
+          "fit": "partial",
+          "fitNote": "The spot gel is a better fit",
+          "body": "The NIO-NAG in the cream targets post-inflammatory pigment, but the combo goes on the whole face. If it is mostly individual marks, the targeted mark gel is the better choice."
+        },
+        {
+          "label": "Melasma that appeared in or after pregnancy",
+          "image": {
+            "src": "/images/da-nam-noi-tiet.webp",
+            "alt": "Close-up of skin with an evenly spread darker patch"
+          },
+          "fit": "partial",
+          "fitNote": "Pregnant or nursing: ask a doctor",
+          "body": "The formula contains no retinoids, but that is not a reason to decide alone. If you are pregnant or breastfeeding, ask your doctor before you start."
+        },
+        {
+          "label": "Irritated skin, or just after a peel or laser",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Close-up of flushed skin with tiny bumps"
+          },
+          "fit": "no",
+          "fitNote": "Wait, and ask your doctor first",
+          "body": "Skin after a procedure, or badly irritated skin, is a medical situation. Wait for it to settle, and ask the doctor who did the procedure before you use anything."
+        },
+        {
+          "label": "A dark patch that spreads, rises or itches",
+          "fit": "no",
+          "fitNote": "See a dermatologist",
+          "body": "A dark area that changes fast, becomes raised, itches or bleeds is not a job for skincare. See a dermatologist first."
+        }
+      ],
+      "caption": "Close-up images to illustrate each condition (the brand’s own image material), <strong>not before/after photos of the product</strong>. Not sure which group you’re in? Send a photo on Zalo and an adviser will take a look before you order."
     },
     {
       "type": "ingredients",

@@ -19,4 +19,7 @@ export const DEFAULT_ANCHOR: Record<string, string> = {
   faq: 'faq',
   compare: 'so-sanh',
   relatedProducts: 'goi-y',
+  conditions: 'tinh-trang-da',
+  infographic: 'giai-thich',
+  voices: 'phan-hoi',
 };

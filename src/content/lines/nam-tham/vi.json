@@ -28,7 +28,27 @@
         "Nám chân sâu, nhiều người quen gọi là nám đốm, nằm sâu hơn và hiện thành từng chấm tròn nhỏ, màu sẫm, viền rõ. Loại này đi chậm. Chỉ bôi mà bỏ chống nắng thì gần như giậm chân tại chỗ.",
         "Nám hỗn hợp là hai loại trên cùng có mặt trên một khuôn mặt, và đây là trường hợp hay gặp nhất ở phụ nữ Việt sau tuổi 30. Soi gương thẳng dưới đèn nhà tắm thì khó thấy. Đứng chếch bên cửa sổ, để nắng hắt ngang mặt, ranh giới mới hiện ra.",
         "Vậy mà phần lớn quảng cáo vẫn nói “nám” như thể chỉ có một loại, rồi hứa chung một mốc thời gian cho tất cả mọi người. Ba loại da mà chung một lời hứa thì ít nhất hai trong ba sẽ hụt hẫng."
-      ]
+      ],
+      "figure": {
+        "items": [
+          {
+            "src": "/images/da-nam-mang.webp",
+            "alt": "Cận vùng da má có mảng nâu nhạt",
+            "label": "Nám mảng"
+          },
+          {
+            "src": "/images/da-nam-chan-sau.webp",
+            "alt": "Cận vùng da có các vùng sắc tố sẫm màu hơn",
+            "label": "Nám chân sâu"
+          },
+          {
+            "src": "/images/da-nam-hon-hop.webp",
+            "alt": "Cận vùng da có cả mảng nâu nhạt lẫn chấm sẫm màu",
+            "label": "Nám hỗn hợp"
+          }
+        ],
+        "caption": "Ảnh cận vùng da để minh hoạ tình trạng, không phải ảnh trước/sau và không dùng để tự chẩn đoán. Không chắc da mình thuộc trường hợp nào thì nên hỏi bác sĩ da liễu."
+      }
     },
     {
       "id": "hoat-chat",

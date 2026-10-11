@@ -31,8 +31,10 @@ const c = p?.compliance;
       <p>
         <strong>{p.name}</strong><br />
         {t(locale, 'footer.functions')}: {c.functions}<br />
-        {t(locale, 'footer.declaredBy')}: {c.declaringOrganization}, {c.declaringAddress}
+        {c.declaringOrganization && <>{t(locale, 'footer.declaredBy')}: {c.declaringOrganization}{c.declaringAddress && <>, {c.declaringAddress}</>}</>}
       </p>
+      {/* Chưa có tên tổ chức công bố trong Thông tin cửa hàng: nói ra, không in một tên đoán. */}
+      {!c.declaringOrganization && <p class="todo">⚠️ {t(locale, 'todo')}: {t(locale, 'footer.declaredBy')}.</p>}
       {c.productNotificationNumber
         ? <p>{t(locale, 'legal.notifNumber')}: <strong>{c.productNotificationNumber}</strong></p>
         : <p class="todo">⚠️ {t(locale, 'todo')}: {t(locale, 'legal.notifNumber')} — {t(locale, 'legal.decree')}.</p>}
@@ -64,16 +66,17 @@ const c = p?.compliance;
 
     <div>
       <h2>{t(locale, 'footer.contact')}</h2>
-      <p>
-        {b.legalName}<br />
-        {/* Mã số thuế hiện ngay dưới tên pháp nhân: trước đây nó chỉ nằm trong
-            JSON-LD, tức chỉ máy đọc được. Người mua Việt Nam — và cả bên duyệt
-            quảng cáo — tra mã số thuế bằng mắt, ngay ở chân trang. */}
+      {/* Đúng thứ tự người mua tra: tên cửa hàng, địa chỉ, mã số thuế, rồi các kênh
+          liên lạc. Không in giờ làm việc: cửa hàng nhận tin 24/7. */}
+      <p class="contact">
+        <strong>{b.tradingName}</strong><br />
+        {t(locale, 'footer.address')}: {b.address}<br />
         {b.taxId && <>{t(locale, 'legal.taxId')}: {b.taxId}<br /></>}
-        {b.address}<br />
-        <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a><br />
-        <a href={`mailto:${b.email}`}>{b.email}</a><br />
-        {t(locale, 'footer.hours')}: {b.hours}
+        {t(locale, 'footer.phone')}: <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a><br />
+        {b.zalo && <>Zalo: <a href={b.zalo} rel="noopener" target="_blank">{b.phoneDisplay}</a><br /></>}
+        Email: <a href={`mailto:${b.email}`}>{b.email}</a>
+        {b.moitNoticeUrl && <><br /><a href={b.moitNoticeUrl} rel="noopener" target="_blank">{t(locale, 'footer.moitNotice')}</a></>}
+        {b.hours && <><br />{t(locale, 'footer.hours')}: {b.hours}</>}
       </p>
       {pages.length > 0 && (
         <>
@@ -125,7 +128,7 @@ const c = p?.compliance;
   </div>
 
   <div class="wrap bottom">
-    <span>© {new Date().getFullYear()} {b.legalName}</span>
+    <span>© {new Date().getFullYear()} {b.legalName ?? b.tradingName}</span>
     <button type="button" id="withdraw-consent" class="linky" hidden>
       {t(locale, 'consent.withdraw')}
     </button>

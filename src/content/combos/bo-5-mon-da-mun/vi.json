@@ -1,0 +1,39 @@
+{
+  "slug": "bo-5-mon-da-mun",
+  "locale": "vi",
+  "translationKey": "combo:bo-5-mon-da-mun",
+  "status": "published",
+  "name": "Bộ 5 món chăm da mụn và thâm",
+  "shortName": "Bộ 5 món da mụn",
+  "group": "mun",
+  "order": 80,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    },
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    }
+  ],
+  "price": 1095000,
+  "currency": "VND",
+  "purpose": "Tẩy trang, sữa rửa mặt, kem chống nắng, gel chấm mụn và gel giảm thâm: đủ một lộ trình sáng tối cho da mụn.",
+  "seo": {
+    "title": "Bộ 5 món chăm da mụn và thâm | Mỹ Phẩm Mocha",
+    "description": "Tẩy trang, sữa rửa mặt, kem chống nắng, gel chấm mụn và gel giảm thâm: đủ một lộ trình sáng tối cho da mụn. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "slug": "bo-5-mon-tham-sam",
+  "locale": "vi",
+  "translationKey": "combo:bo-5-mon-tham-sam",
+  "status": "published",
+  "name": "Bộ 5 món cho da thâm sạm",
+  "shortName": "Bộ 5 món thâm sạm",
+  "group": "nam",
+  "order": 50,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    },
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    }
+  ],
+  "price": 1380000,
+  "currency": "VND",
+  "purpose": "Làm sạch hai bước, kem chống nắng, serum Smart First Care và gel giảm thâm: cho da vừa sạm màu vừa còn vết thâm sau mụn.",
+  "seo": {
+    "title": "Bộ 5 món cho da thâm sạm | Mỹ Phẩm Mocha",
+    "description": "Làm sạch hai bước, kem chống nắng, serum Smart First Care và gel giảm thâm: cho da vừa sạm màu vừa còn vết thâm sau mụn."
+  }
+}

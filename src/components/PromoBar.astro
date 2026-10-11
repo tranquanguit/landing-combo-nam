@@ -1,0 +1,43 @@
+---
+/**
+ * Dải thông báo khuyến mãi đầu trang — chỉ khi có đợt ĐANG CHẠY khai `banner`.
+ * Nhiều đợt cùng lúc thì hiện đợt kết thúc sớm nhất (đợt gấp hơn với khách).
+ * Không JS, không nút đóng: đây là một dòng chữ có liên kết, không phải popup.
+ */
+import { getCollection } from 'astro:content';
+import { isLive, promoNow, vnDateTime } from '../lib/promotions';
+import { isDemoBuild } from '../lib/testimonials';
+import { withBase } from '../lib/base';
+import { t, type Locale } from '../i18n/ui';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const now = promoNow();
+const live = (await getCollection('promotions'))
+  .filter((e: any) => e.data.banner && isLive(e.data, now, locale, isDemoBuild(import.meta.env)))
+  .sort((a: any, b: any) => Date.parse(a.data.endsAt) - Date.parse(b.data.endsAt));
+const p = live[0]?.data;
+const banner = p?.banner;
+---
+{p && banner && (
+  <a class="promo-bar" href={withBase(banner.href)} data-cta="promo-bar">
+    <span class="wrap pb-in">
+      {p.badge && <span class="pb-badge">{p.badge}</span>}
+      <span class="pb-text">{banner.text}</span>
+      <span class="pb-end">{t(locale, 'promo.until')} {vnDateTime(p.endsAt, locale, true)}</span>
+      <span class="pb-go" aria-hidden="true">→</span>
+    </span>
+  </a>
+)}
+
+<style>
+  .promo-bar { display: block; background: var(--night, #12143d); color: #fff; text-decoration: none; font-size: var(--t-xs); line-height: 1.35; }
+  .promo-bar:hover .pb-text { text-decoration: underline; }
+  .pb-in { display: flex; align-items: center; justify-content: center; gap: 10px; padding-block: 8px; }
+  .pb-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pb-badge, .pb-go { flex: 0 0 auto; }
+  @media (max-width: 720px) { .pb-end { display: none; } }
+  .pb-badge { padding: 1px 9px; border-radius: 999px; background: #f2b84b; color: #2a1d00; font-weight: 800; letter-spacing: .04em; }
+  .pb-text { font-weight: 600; }
+  .pb-end { color: rgba(255, 255, 255, .72); }
+  .pb-go { color: #f2b84b; font-weight: 700; }
+</style>

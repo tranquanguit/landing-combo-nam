@@ -1,0 +1,78 @@
+---
+/**
+ * Phản hồi nổi bật của khách — từ collection `testimonials`, chọn bởi src/lib/testimonials.ts.
+ *
+ * Không chấm sao, không điểm trung bình: site không có hệ thống đánh giá từ người mua
+ * đã xác minh, và một điểm số tự tính từ vài lời khen chọn lọc là con số gây hiểu nhầm.
+ * Mỗi thẻ ghi rõ: kênh khách nhắn, thời điểm, phiên bản sản phẩm khách đã dùng (nếu khác
+ * bản đang bán). Không có lời nào đủ điều kiện thì cả khối không hiện.
+ */
+import FSection from './FSection.astro';
+import { richText } from '../../lib/richtext';
+import { t, type Locale } from '../../i18n/ui';
+import type { Voice } from '../../lib/testimonials';
+interface Props { data: any; voices: Voice[]; id?: string; locale: Locale; role?: string; transition?: string; cta?: any; }
+const { data, voices, id = 'phan-hoi', locale, role, transition, cta } = Astro.props;
+const CH: Record<string, string> = {
+  messenger: 'Messenger', zalo: 'Zalo', facebook: 'Facebook', tiktok: 'TikTok', instagram: 'Instagram',
+  phone: t(locale, 'voices.phone'), email: 'Email', form: t(locale, 'voices.form'),
+};
+const month = (d?: string) => (d ? `${d.slice(5, 7)}/${d.slice(0, 4)}` : '');
+const anyDemo = voices.some((v) => v.demo);
+const versions = [...new Set(voices.map((v) => v.productVersion).filter(Boolean))];
+---
+{voices.length > 0 && (
+<FSection id={id} tone="paper" role={role} transition={transition} cta={cta}
+  eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} head="split">
+  {anyDemo && (
+    <p class="demo-note" role="note">
+      <strong>{t(locale, 'voices.demoTitle')}</strong> {t(locale, 'voices.demoBody')}
+    </p>
+  )}
+  <ul class="wall">
+    {voices.map((v, i) => (
+      <li class:list={['v', v.demo && 'is-demo']} data-reveal style={`--i:${i}`}>
+        {v.demo && <span class="ribbon">{t(locale, 'voices.demoTag')}</span>}
+        <span class="qm" aria-hidden="true">“</span>
+        <blockquote><p>{v.quote}</p></blockquote>
+        <footer>
+          <span class="who"><span class="av" aria-hidden="true">{v.display.replace(/^.*\s/, '').charAt(0)}</span>
+            <span><strong>{v.display}</strong>{v.detail && <span class="muted"> · {v.detail}</span>}</span></span>
+          <span class="src">{t(locale, 'voices.via')} {CH[v.channel] ?? v.channel}{v.receivedAt && <> · {month(v.receivedAt)}</>}</span>
+          {v.sponsored && <span class="spons">{t(locale, 'testimonial.sponsored')}</span>}
+        </footer>
+      </li>
+    ))}
+  </ul>
+  <p class="foot" data-reveal>
+    {t(locale, 'voices.method')}
+    {versions.length > 0 && <> <span set:html={richText(`${t(locale, 'voices.version')} <strong>${versions.join('; ')}</strong>.`)} /></>}
+  </p>
+</FSection>
+)}
+
+<style>
+  .demo-note { margin: 0 0 var(--s-5); padding: var(--s-3) var(--s-4); border-radius: 14px; background: #fff6df; border: 1.5px dashed #c98a0b; color: #6b4e00; font-size: var(--t-sm); }
+  .wall { list-style: none; padding: 0; margin: 0; columns: 1; column-gap: var(--s-4); }
+  @media (min-width: 720px) { .wall { columns: 2; } }
+  @media (min-width: 1080px) { .wall { columns: 3; } }
+  .v {
+    position: relative; break-inside: avoid; margin: 0 0 var(--s-4);
+    padding: var(--s-5) var(--s-5) var(--s-4); border-radius: 24px;
+    background: var(--bone); box-shadow: 0 0 0 1px rgba(26, 29, 82, .05);
+    transition: transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+  }
+  @media (hover: hover) { .v:hover { transform: translateY(-3px); box-shadow: 0 30px 50px -34px rgba(26, 29, 82, .45), 0 0 0 1px rgba(26, 29, 82, .08); } }
+  .is-demo { outline: 1.5px dashed #c98a0b; outline-offset: -1.5px; }
+  .ribbon { position: absolute; right: 14px; top: 14px; padding: 2px 9px; border-radius: 999px; background: #c98a0b; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .qm { display: block; height: 30px; font: 600 64px/1 Georgia, serif; color: var(--cobalt); opacity: .35; }
+  blockquote { margin: 0; }
+  blockquote p { margin: 0; font-size: var(--t-md); line-height: 1.55; color: var(--ink-navy); }
+  footer { margin-top: var(--s-4); display: grid; gap: 6px; font-size: var(--t-xs); color: var(--ink-muted); }
+  .who { display: flex; align-items: center; gap: 10px; }
+  .who strong { color: var(--ink-navy); }
+  .av { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, #e9e6ff, #fde8db); color: var(--ink-navy); font-weight: 700; font-size: var(--t-xs); flex: 0 0 auto; }
+  .src { color: var(--slate); }
+  .spons { justify-self: start; padding: 1px 8px; border-radius: 999px; background: var(--violet-mist); color: var(--indigo); }
+  .foot { margin: var(--s-5) 0 0; max-width: 78ch; font-size: var(--t-xs); line-height: 1.6; color: var(--ink-muted); }
+</style>

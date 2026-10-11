@@ -1,0 +1,47 @@
+{
+  "slug": "bo-7-mon-da-mun-peel",
+  "locale": "en",
+  "translationKey": "combo:bo-7-mon-da-mun-peel",
+  "status": "published",
+  "name": "7-Piece Blemish Set with Peel",
+  "shortName": "7-piece blemish + peel",
+  "group": "mun",
+  "order": 90,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    },
+    {
+      "product": "ultra-egf-bio-gel-mask",
+      "qty": 1
+    },
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    }
+  ],
+  "price": 1750000,
+  "currency": "VND",
+  "purpose": "The 5-piece blemish set plus the peel kit for rough texture and a gel mask to soothe skin after peeling.",
+  "seo": {
+    "title": "7-Piece Blemish Set with Peel | Mỹ Phẩm Mocha",
+    "description": "The 5-piece blemish set plus the peel kit for rough texture and a gel mask to soothe skin after peeling. Delivered to your door; inspect before you pay."
+  }
+}

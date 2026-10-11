@@ -56,16 +56,15 @@
     "description": "Sản phẩm duy nhất của Mocha công bố trọn vẹn danh sách INCI: Niacinamide, bộ ba rau má, nghệ, cúc bất tử, dầu mù u. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "1518/25/CBMP-LA",
+    "declarant": "mocha",
     "functions": "hỗ trợ cấp ẩm, làm dịu da và cải thiện độ đều màu da",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ],
-    "productNotificationNumber": "1518/25/CBMP-LA"
+    ]
   },
   "variants": [
     {
@@ -73,6 +72,12 @@
       "note": "Công nghệ Aminovector",
       "price": 335000,
       "recommended": true
+    },
+    {
+      "label": "Combo 2 hũ Biovector",
+      "price": 600000,
+      "recommended": false,
+      "qty": 2
     },
     {
       "label": "Tôi cần tư vấn trước",
@@ -84,9 +89,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Công bố trọn danh sách",
+      "eyebrow": "Kem dưỡng sáng da · 30gr",
       "heading": "Bạn đọc được toàn bộ danh sách thành phần, không chỉ vài cái chính",
-      "lead": "Kem dưỡng sáng, hũ 30gr. Bảng thành phần ghi <strong>đủ 45 chất</strong> theo thứ tự tỉ lệ giảm dần, nên bạn đối chiếu được với bất kỳ sản phẩm nào khác.",
+      "lead": "Kem dưỡng dùng sáng và tối, hỗ trợ cấp ẩm, làm dịu và cải thiện độ đều màu da. Bảng thành phần ghi đủ 45 chất INCI, Niacinamide đứng thứ năm.",
       "usp": [
         {
           "text": "<strong>Toàn bộ 45 thành phần INCI công bố công khai</strong>, theo thứ tự tỉ lệ giảm dần",
@@ -120,6 +125,32 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Khối lượng",
+          "value": "30gr"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Niacinamide (thứ 5/45), Asiaticoside, Madecassic Acid, Asiatic Acid, dầu mù u, chiết xuất nghệ"
+        },
+        {
+          "label": "Bảng thành phần",
+          "value": "Đủ 45 chất INCI, theo thứ tự tỉ lệ giảm dần"
+        },
+        {
+          "label": "Chống nắng",
+          "value": "Không công bố SPF hay PA; vẫn cần kem chống nắng riêng"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Sáng và tối, sau bước làm sạch; tuần đầu dùng một lần mỗi ngày"
+        },
+        {
+          "label": "Số công bố",
+          "value": "1518/25/CBMP-LA"
+        }
       ]
     },
     {
@@ -140,6 +171,97 @@
           "Hũ này công bố <strong>toàn bộ 45 thành phần theo đúng thứ tự INCI</strong>. Chúng tôi không nói như vậy nghĩa là công thức tốt hơn. Chỉ là bạn có đủ dữ kiện để tự đánh giá, kể cả khi so với sản phẩm của hãng khác."
         ]
       }
+    },
+    {
+      "type": "infographic",
+      "id": "con-so-tren-hu",
+      "kind": "facts",
+      "eyebrow": "Đọc nhanh",
+      "heading": "Năm con số đọc được từ hũ kem và bảng thành phần",
+      "intro": "Không có con số nào về kết quả ở đây, chỉ những gì đọc được từ bao bì và danh sách INCI.",
+      "items": [
+        {
+          "label": "Thành phần được công bố",
+          "value": "45",
+          "unit": "thành phần INCI",
+          "body": "Toàn bộ danh sách theo thứ tự tỉ lệ giảm dần, không chỉ vài thành phần chính."
+        },
+        {
+          "label": "Vị trí của Niacinamide",
+          "value": "5",
+          "unit": "trên 45",
+          "body": "Đứng thứ năm trong danh sách, tức trước phần lớn các chiết xuất."
+        },
+        {
+          "label": "Bộ ba rau má khai riêng",
+          "value": "3",
+          "unit": "hoạt chất rau má",
+          "body": "Asiaticoside, Madecassic Acid, Asiatic Acid, thay vì gộp thành “chiết xuất rau má”."
+        },
+        {
+          "label": "Dung tích một hũ",
+          "value": "30",
+          "unit": "gr",
+          "body": "Bước kem dưỡng sáng và tối, mỗi lần lượng bằng một hạt đậu."
+        },
+        {
+          "label": "Thử ở vùng cổ",
+          "value": "30–45",
+          "unit": "phút",
+          "body": "Quan sát trước lần dùng đầu tiên; tuần đầu dùng một lần mỗi ngày."
+        }
+      ],
+      "footnote": "Công thức có Titanium Dioxide và Zinc Oxide, nhưng bao bì không công bố chỉ số SPF hay PA. Vì vậy ở đây không có con số chống nắng nào, và vẫn cần kem chống nắng riêng."
+    },
+    {
+      "type": "conditions",
+      "id": "hop-tinh-trang-nao",
+      "eyebrow": "Nhìn ảnh, đối chiếu da của bạn",
+      "heading": "Hũ kem này hợp với tình trạng da nào, và chưa hợp với tình trạng nào",
+      "intro": "Hũ kem này là bước dưỡng: hỗ trợ cấp ẩm, làm dịu và cải thiện độ đều màu da. Có những tình trạng nó không phải câu trả lời, và chúng tôi nói luôn.",
+      "items": [
+        {
+          "label": "Da nhạy cảm, dễ đỏ",
+          "image": {
+            "src": "/images/da-yeu-nhay-cam.webp",
+            "alt": "Cận cảnh vùng da mỏng yếu, hơi ửng đỏ"
+          },
+          "body": "Có bộ ba rau má, chiết xuất hoa súng trắng và dẫn xuất cam thảo trong nhóm làm dịu. Bảng đủ 45 chất giúp bạn tra đúng chất mình từng phản ứng trước khi thử.",
+          "fit": "yes",
+          "fitNote": "Tra được từng chất trước khi thử"
+        },
+        {
+          "label": "Da xỉn, sạm nhẹ, kém đều màu",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Cận cảnh vùng gò má sạm màu lan tỏa do nắng"
+          },
+          "body": "Niacinamide hỗ trợ độ đều màu, chiết xuất nghệ dùng cho da xỉn màu. Nắng vẫn làm vùng sạm đậm thêm, nên kem chống nắng riêng mỗi sáng là bắt buộc.",
+          "fit": "partial",
+          "fitNote": "Hỗ trợ đều màu, cần chống nắng riêng"
+        },
+        {
+          "label": "Nám chân sâu, nám lâu năm",
+          "image": {
+            "src": "/images/da-nam-chan-sau.webp",
+            "alt": "Cận cảnh mảng nám sẫm màu trên vùng gò má"
+          },
+          "body": "Một hũ kem dưỡng không phải sản phẩm dành cho nám. Tình trạng này cần dòng sản phẩm nám chuyên biệt cùng chống nắng hằng ngày; nám nặng nên hỏi bác sĩ da liễu.",
+          "fit": "no",
+          "fitNote": "Cần sản phẩm nám và chống nắng"
+        },
+        {
+          "label": "Da vừa peel, vừa dùng retinol, đang rát đỏ",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Cận cảnh vùng da kích ứng, mẩn đỏ"
+          },
+          "body": "45 thành phần là nhiều biến số cho da đang phản ứng. Đợi da ổn lại rồi hãy dùng; giai đoạn này hợp hơn với Collagen Peptide Cream, ít thành phần hơn. Đỏ rát kéo dài thì đi khám.",
+          "fit": "no",
+          "fitNote": "Đợi da ổn, hoặc chọn hũ Collagen"
+        }
+      ],
+      "caption": "Ảnh cận vùng da minh hoạ từng tình trạng (tư liệu hình ảnh của hãng), <strong>không phải ảnh trước/sau khi dùng sản phẩm</strong>. Da có dấu hiệu kích ứng thì ngưng dùng. Với mọi vết sạm, chống nắng hằng ngày vẫn là bước không được bỏ."
     },
     {
       "type": "compare",

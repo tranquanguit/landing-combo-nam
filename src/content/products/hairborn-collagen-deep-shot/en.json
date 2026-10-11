@@ -1,0 +1,306 @@
+{
+  "slug": "hairborn-collagen-deep-shot",
+  "translationKey": "hairborn-collagen-deep-shot",
+  "status": "published",
+  "sku": "HAIRBORN-SP063",
+  "price": 395000,
+  "compareAtPrice": 600000,
+  "currency": "VND",
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "cham-soc-toc",
+  "locale": "en",
+  "name": "HAIRBORN Collagen Deep Shot – hair mask",
+  "shortName": "Collagen Deep Shot hair mask",
+  "primaryKeyword": "hairborn collagen deep shot hair mask",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Wants dry ends with split ends to feel softer and comb more easily",
+    "audienceSituations": [
+      "Long hair with dry, stiff ends even after conditioner",
+      "Permed, coloured or bleached hair that snaps when combed",
+      "Wants to add a mask step at home after washing"
+    ],
+    "contextHints": [
+      "someone asking how to do a hair mask at home for dry, frizzy hair",
+      "someone asking how a hair mask differs from conditioner"
+    ],
+    "approvedAngles": [
+      "A hair mask with shea butter, hydrolysed keratin and collagen, biotinoyl tripeptide-1",
+      "Apply from mid-lengths to ends, 10–15 cm from the roots, leave a few minutes, rinse"
+    ],
+    "riskyAngles": [
+      "promising to fully restore damaged hair",
+      "saying the product is silicone-free when the ingredient list contains silicones"
+    ],
+    "preferredDestination": "#thanh-phan"
+  },
+  "seo": {
+    "title": "HAIRBORN Collagen Deep Shot hair mask | Mocha Vietnam",
+    "description": "Mask for dry, frizzy hair and split ends. The jar lists shea butter, hydrolysed keratin and collagen, biotinoyl tripeptide-1. Leave on, then rinse. {{price}}."
+  },
+  "compliance": {
+    "declarant": "hairborn",
+    "functions": "softens the hair, reduces dryness and tangles, leaves hair smooth",
+    "warnings": [
+      "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
+      "Discontinue use if the scalp becomes irritated. Avoid contact with the eyes; if it gets in, rinse immediately with clean water.",
+      "Hair falling out in patches, sudden heavy shedding, or a red, itchy or thickly flaking scalp: see a dermatologist.",
+      "Results vary between individuals and hair conditions. Keep out of reach of children.",
+      "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items.",
+      "Apply to the lengths and ends only, not to the scalp."
+    ]
+  },
+  "variants": [
+    {
+      "label": "1 jar",
+      "note": "You save {{save}} off the list price",
+      "price": 395000,
+      "recommended": true
+    },
+    {
+      "label": "I would like advice first",
+      "note": "An adviser calls you back and asks about your hair and scalp before confirming",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "The mask step after washing",
+      "heading": "A mask for dry, frizzy lengths and split ends",
+      "lead": "A thick cream, applied from mid-lengths to ends after washing and then rinsed out. The jar label lists <strong>shea butter, hydrolysed keratin, hydrolysed collagen</strong> and biotinoyl tripeptide-1.",
+      "usp": [
+        {
+          "text": "<strong>Four key ingredients printed on the jar</strong>: shea butter, hydrolysed keratin, biotinoyl tripeptide-1, hydrolysed collagen",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "copied from the jar label"
+        },
+        {
+          "text": "<strong>Softer hair, fewer tangles and less breakage when combing</strong>",
+          "evidence": "ingredient",
+          "qualifier": "per the description printed on the label"
+        },
+        {
+          "text": "<strong>Keep it off the scalp</strong>, 10–15 cm from the roots",
+          "evidence": "ingredient",
+          "qualifier": "per the brand's directions for use"
+        }
+      ],
+      "image": {
+        "src": "/images/hero-hairborn-collagen-deep-shot.webp",
+        "alt": "Jar of HAIRBORN Collagen Deep Shot hair mask with a black lid and white label"
+      },
+      "primaryCta": "Order the hair mask",
+      "secondaryCta": {
+        "label": "See the ingredients",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Free delivery nationwide",
+        "Inspect before you pay",
+        "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Net weight",
+          "value": "200g per the jar label; some newer packaging images show 170g"
+        },
+        {
+          "label": "Type",
+          "value": "Hair mask (Deep Repair Conditioner Mask), thick cream"
+        },
+        {
+          "label": "For",
+          "value": "All hair types; aimed at dry, frizzy, brittle hair"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "Shea butter, hydrolysed keratin, biotinoyl tripeptide-1, hydrolysed collagen"
+        },
+        {
+          "label": "How to use",
+          "value": "Apply to lengths and ends, 10–15 cm from the roots, leave, rinse"
+        },
+        {
+          "label": "Brand",
+          "value": "HAIRBORN"
+        }
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Why the ends get dry",
+      "heading": "Dry, stiff ends and split ends that snap when combed",
+      "quotes": [
+        "“My ends are dry and stiff even with conditioner.”",
+        "“Since bleaching, my hair snaps when I comb it.”"
+      ],
+      "explainer": {
+        "heading": "The ends are the oldest part of each hair",
+        "body": [
+          "On long hair, the ends have been through a great many washes, brushings, sun and blow-drying. The outer layer wears away, so the ends turn dry and split.",
+          "A mask is thicker than conditioner and stays on longer. According to the description on the label, the blend of shea butter, keratin, collagen and peptides nourishes dry strands, helping hair look smoother and break less with regular use."
+        ],
+        "diagram": "none"
+      }
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Ingredients",
+      "heading": "Ingredients printed on the jar",
+      "intro": "These four names are printed in the Hairroot Boost Complex panel on the label. No concentrations are printed.",
+      "caption": "The full ingredient list published by the seller includes cyclopentasiloxane and dimethiconol, both silicones. If you need to avoid silicones, read the INCI list on the packaging before use.",
+      "rows": [
+        {
+          "name": "Butyrospermum Parkii Butter (shea butter)",
+          "role": "A plant butter that softens the lengths and eases dryness.",
+          "suitedFor": "Dry, frizzy hair"
+        },
+        {
+          "name": "Hydrolyzed Keratin",
+          "role": "Hydrolysed keratin coats the strand, making hair softer and more elastic.",
+          "suitedFor": "Hair damaged by perms or colour"
+        },
+        {
+          "name": "Biotinoyl Tripeptide-1",
+          "role": "A biotin-linked peptide the brand includes to nourish the hair.",
+          "suitedFor": "Weak, brittle hair"
+        },
+        {
+          "name": "Hydrolyzed Collagen",
+          "role": "Hydrolysed collagen helps the strand hold moisture.",
+          "suitedFor": "Dry hair"
+        }
+      ],
+      "cta": {
+        "label": "See price and order",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Before you order",
+      "heading": "Who it suits",
+      "columns": 2,
+      "items": [
+        {
+          "heading": "Dry, frizzy hair with split ends",
+          "body": "Use on the lengths and ends after washing. Hair is softer and easier to comb once rinsed.",
+          "meta": "Suitable"
+        },
+        {
+          "heading": "Permed, coloured or bleached hair",
+          "body": "This hair dries out fastest. Use the mask regularly after washing.",
+          "meta": "Suitable"
+        },
+        {
+          "heading": "Oily scalp",
+          "body": "Still fine to use. Apply only from the mid-lengths down and keep it off the scalp.",
+          "meta": "Keep off the scalp"
+        },
+        {
+          "heading": "You avoid silicones",
+          "body": "The seller's ingredient list includes silicones. Check the packaging before buying.",
+          "meta": "Consider"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use",
+      "heading": "How to use the mask",
+      "intro": "Following the brand's directions.",
+      "totalTime": "PT10M",
+      "items": [
+        {
+          "heading": "Wash and rinse out the shampoo",
+          "body": "Squeeze out excess water so the cream does not get diluted."
+        },
+        {
+          "heading": "Apply from mid-lengths to ends",
+          "body": "Take enough cream and apply 10–15 cm away from the roots. Do not put it on the scalp."
+        },
+        {
+          "heading": "Leave for a few minutes",
+          "body": "The brand's instruction graphic says 5–10 minutes; the shop listing says 1–3 minutes. The drier the hair, the longer within that range."
+        },
+        {
+          "heading": "Rinse well",
+          "body": "Rinse thoroughly with clean water and pat dry with a soft towel."
+        }
+      ],
+      "footnote": "The brand suggests the mask once or twice a week as part of the wash, mask, scalp-roller routine."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City. Tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support while you use it</strong> by email."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "FAQ",
+      "heading": "Common questions",
+      "items": [
+        {
+          "q": "How much is the hair mask?",
+          "a": "<strong>{{price}}</strong> for one jar. The list price is {{compareAtPrice}}. Free delivery, pay on delivery."
+        },
+        {
+          "q": "How many grams is the jar?",
+          "a": "Most of the brand's images show 200g on the jar label. Some newer packaging images show 170g. When we call to confirm the order, ask the adviser which size is being shipped."
+        },
+        {
+          "q": "Does it contain silicone?",
+          "a": "The full ingredient list published by the seller includes cyclopentasiloxane and dimethiconol, both silicones. One of the brand's ad images says “silicone-free”, so the two sources disagree. If you avoid silicones, read the INCI list on the packaging before use."
+        },
+        {
+          "q": "Can it replace conditioner?",
+          "a": "It goes where conditioner would: after shampoo, before the final rinse. The mask is thicker and stays on longer than a conditioner."
+        },
+        {
+          "q": "How should it be stored?",
+          "a": "Keep the lid tightly closed and keep water out of the jar. Store in a cool, dry place away from direct sunlight and out of reach of children."
+        }
+      ],
+      "cta": {
+        "note": "No questions left?",
+        "label": "Back to the order form",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Goes with",
+      "heading": "Before and after the mask",
+      "intro": "Wash before the mask. Roll on scalp care once the hair is rinsed and towel-dried.",
+      "items": [
+        "hairborn-kerasilk-smooth-shampoo",
+        "hairborn-hair-boost-shampoo",
+        "hairborn-peel-ion"
+      ]
+    }
+  ]
+}

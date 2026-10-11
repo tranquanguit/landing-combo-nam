@@ -6,6 +6,8 @@
  *   migrate                    áp db/pg/*.sql
  *   import [--only-new]        nạp nội dung + ảnh đang có trong src/ vào CSDL. Mặc định GHI ĐÈ bản trùng mã;
  *                              --only-new chỉ thêm cái chưa có (dùng khi phát hành bản code mới)
+ *                              --entries products/combo-nam/vi,... chỉ nạp + ghi đè đúng các mục đó
+ *                              (bản mới SỬA một nội dung đã có; kết hợp --only-new để kèm ảnh mới)
  *   export [--out <thư mục>]   ghi CSDL ra cây src/ (mặc định: thư mục hiện tại) — kéo nội dung
  *                              đang chạy thật về repo để commit
  *   validate                   kiểm mọi nội dung trong CSDL bằng schema, in lỗi tiếng Việt
@@ -25,7 +27,12 @@ await migrate(sql, join(ROOT, 'db/pg'), console.log);
 let code = 0;
 try {
   if (cmd === 'migrate') console.log('xong');
-  else if (cmd === 'import') console.log(await importFromFiles(sql, ROOT, 'cli', args.includes('--only-new')));
+  else if (cmd === 'import') {
+    const i = args.indexOf('--entries');
+    const entries = i >= 0 ? new Set(String(args[i + 1] ?? '').split(',').map((x) => x.trim()).filter(Boolean)) : undefined;
+    if (entries && !entries.size) throw new Error('Dùng: import --entries products/combo-nam/vi,promotions/ten-dot');
+    console.log(await importFromFiles(sql, ROOT, 'cli', args.includes('--only-new'), entries));
+  }
   else if (cmd === 'export') {
     const i = args.indexOf('--out');
     console.log(await exportToFiles(sql, i >= 0 ? resolve(args[i + 1]) : ROOT));
@@ -48,7 +55,7 @@ try {
     const r = await publish(sql, ROOT, 'cli');
     console.log(r.log); code = r.ok ? 0 : 1;
   } else {
-    console.log('Lệnh: migrate | import [--only-new] | export [--out dir] | validate | user <tên> [admin|editor] | publish');
+    console.log('Lệnh: migrate | import [--only-new] [--entries c/id,...] | export [--out dir] | validate | user <tên> [admin|editor] | publish');
     code = cmd ? 1 : 0;
   }
 } catch (e) { console.error((e as Error).message); code = 1; }

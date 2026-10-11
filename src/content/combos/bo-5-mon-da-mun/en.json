@@ -1,0 +1,39 @@
+{
+  "slug": "bo-5-mon-da-mun",
+  "locale": "en",
+  "translationKey": "combo:bo-5-mon-da-mun",
+  "status": "published",
+  "name": "5-Piece Blemish & Mark Set",
+  "shortName": "5-piece blemish set",
+  "group": "mun",
+  "order": 80,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    },
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    }
+  ],
+  "price": 1095000,
+  "currency": "VND",
+  "purpose": "Micellar water, cleanser, sunscreen, spot gel and mark gel: a complete morning-and-evening routine for blemish-prone skin.",
+  "seo": {
+    "title": "5-Piece Blemish & Mark Set | Mỹ Phẩm Mocha",
+    "description": "Micellar water, cleanser, sunscreen, spot gel and mark gel: a complete morning-and-evening routine for blemish-prone skin."
+  }
+}

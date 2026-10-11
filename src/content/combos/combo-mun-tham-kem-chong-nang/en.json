@@ -1,0 +1,31 @@
+{
+  "slug": "combo-mun-tham-kem-chong-nang",
+  "locale": "en",
+  "translationKey": "combo:combo-mun-tham-kem-chong-nang",
+  "status": "published",
+  "name": "Spot + Mark + Sunscreen Combo",
+  "shortName": "Spot + Mark + Sun",
+  "group": "mun",
+  "order": 30,
+  "items": [
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    }
+  ],
+  "price": 645000,
+  "currency": "VND",
+  "purpose": "Marks darken in the sun. This set adds sunscreen so the mark gel is not working against it.",
+  "seo": {
+    "title": "Spot + Mark + Sunscreen Combo | Mỹ Phẩm Mocha",
+    "description": "Marks darken in the sun. This set adds sunscreen so the mark gel is not working against it. Delivered to your door; inspect before you pay."
+  }
+}

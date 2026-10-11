@@ -1,0 +1,27 @@
+{
+  "slug": "combo-mun-tham",
+  "locale": "vi",
+  "translationKey": "combo:combo-mun-tham",
+  "status": "published",
+  "name": "Combo Gel chấm mụn + Gel giảm thâm",
+  "shortName": "Mụn + Thâm",
+  "group": "mun",
+  "order": 10,
+  "items": [
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    }
+  ],
+  "price": 425000,
+  "currency": "VND",
+  "purpose": "Gel chấm mụn cho nốt đang viêm, gel giảm thâm cho vết thâm đã lành. Hai giai đoạn, hai tuýp.",
+  "seo": {
+    "title": "Combo Gel chấm mụn + Gel giảm thâm | Mỹ Phẩm Mocha",
+    "description": "Gel chấm mụn cho nốt đang viêm, gel giảm thâm cho vết thâm đã lành. Hai giai đoạn, hai tuýp. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

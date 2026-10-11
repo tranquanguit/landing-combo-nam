@@ -1,0 +1,31 @@
+{
+  "slug": "combo-mun-tham-sua-rua-mat",
+  "locale": "vi",
+  "translationKey": "combo:combo-mun-tham-sua-rua-mat",
+  "status": "published",
+  "name": "Combo Mụn + Thâm + Sữa rửa mặt",
+  "shortName": "Mụn + Thâm + Rửa mặt",
+  "group": "mun",
+  "order": 60,
+  "items": [
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    }
+  ],
+  "price": 660000,
+  "currency": "VND",
+  "purpose": "Sữa rửa mặt, gel chấm mụn và gel giảm thâm: ba bước cho da đang có cả nốt mụn lẫn vết thâm.",
+  "seo": {
+    "title": "Combo Mụn + Thâm + Sữa rửa mặt | Mỹ Phẩm Mocha",
+    "description": "Sữa rửa mặt, gel chấm mụn và gel giảm thâm: ba bước cho da đang có cả nốt mụn lẫn vết thâm. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "slug": "combo-peel-sua-rua-mat",
+  "locale": "vi",
+  "translationKey": "combo:combo-peel-sua-rua-mat",
+  "status": "published",
+  "name": "Combo Peel + Sữa rửa mặt Bio-Active",
+  "shortName": "Peel + Sữa rửa mặt",
+  "group": "peel",
+  "order": 40,
+  "items": [
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    }
+  ],
+  "price": 750000,
+  "currency": "VND",
+  "purpose": "Bộ peel kèm sữa rửa mặt dịu nhẹ pH 5.5 để làm sạch trong và sau đợt peel.",
+  "seo": {
+    "title": "Combo Peel + Sữa rửa mặt Bio-Active | Mỹ Phẩm Mocha",
+    "description": "Bộ peel kèm sữa rửa mặt dịu nhẹ pH 5.5 để làm sạch trong và sau đợt peel. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

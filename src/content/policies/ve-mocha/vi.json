@@ -16,7 +16,7 @@
       "id": "chung-toi-la-ai",
       "heading": "Đại lý, không phải nhà sản xuất",
       "body": [
-        "Chúng tôi phân phối sản phẩm Mocha và được uỷ quyền sử dụng pháp nhân của hãng cho hoạt động bán hàng này. Công thức, quy trình sản xuất và hồ sơ công bố sản phẩm đều thuộc về công ty sản xuất ghi ở cuối trang.",
+        "{{storeName}} là đại lý phân phối sản phẩm của hãng Mocha và dòng chăm sóc tóc Hairborn. Công thức, quy trình sản xuất và hồ sơ công bố thuộc về tổ chức công bố sản phẩm, ghi ở cuối mỗi trang sản phẩm.",
         "Điều này quyết định chúng tôi trả lời được những gì. <strong>Sản phẩm, giá, giao hàng, đổi trả, cách dùng</strong>: đây là phần việc của chúng tôi và chúng tôi trả lời trực tiếp. <strong>Công thức và hồ sơ công bố</strong>: chúng tôi chuyển câu hỏi về hãng chứ không tự trả lời, vì trả lời bừa những chuyện đó là cách nhanh nhất để nói sai.",
         "Nói rõ ngay từ đầu vì một lý do thực tế: nếu bạn cần đối chiếu thông tin ở nguồn gốc, bạn nên biết nguồn gốc đó nằm ở đâu."
       ]
@@ -50,16 +50,20 @@
       ]
     },
     {
-      "id": "thong-tin-phap-nhan",
-      "heading": "Thông tin pháp nhân",
+      "id": "thong-tin-cua-hang",
+      "heading": "Thông tin cửa hàng",
       "body": [
-        "<strong>Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha</strong>",
-        "Địa chỉ: 290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
-        "Mã số thuế: 0317963313",
+        "<strong>{{storeName}}</strong>",
+        "Địa chỉ: {{address}}",
+        "Mã số thuế: {{taxId}}",
+        "Hotline và Zalo: {{phone}} · Email: {{email}}",
         "Số tiếp nhận phiếu công bố của từng sản phẩm được in trên trang sản phẩm tương ứng."
       ],
       "links": [
-        { "label": "Liên hệ với chúng tôi", "href": "/lien-he/" }
+        {
+          "label": "Liên hệ với chúng tôi",
+          "href": "/lien-he/"
+        }
       ]
     }
   ]
