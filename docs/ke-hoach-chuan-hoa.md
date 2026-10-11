@@ -54,6 +54,12 @@ Nợ kỹ thuật đang đỏ: `dist/combo-nam/index.html` gzip **24.645B / 24.5
   (`1458/24/CBMP-LA`) đã bị thay, không dùng. Kem đã có `1517/25/CBMP-LA`.
 - `[!] A5` **Năm ảnh bắt buộc còn lại** — xem `anh-can-co.md`. Chủ site đã chốt
   **không hạ ngưỡng**, chờ ảnh gốc.
+- `[!] A19` **Tên và địa chỉ tổ chức công bố của dòng Hairborn.** `src/data/mocha.json`
+  đã có mã `hairborn` (nếu thiếu mã thì build chặn), nhưng `name` và `address` để
+  trống vì chưa có xác nhận từ hãng. Năm trang Hairborn vì thế in mục "tổ chức công
+  bố" rỗng, trong khi các trang Mocha in đủ. Cần hãng cung cấp tên pháp nhân và địa
+  chỉ đúng như trên phiếu công bố, rồi điền ở trang quản trị → Thông tin cửa hàng →
+  Tổ chức công bố. Không suy ra từ bao bì.
 - `[!] A6` **Chứng từ có chữ ký giám đốc.** Phải che chữ ký và dấu cá nhân trước
   khi đăng lên trang công khai.
 - `[!] A7` **Văn bản đồng ý cho 4 ảnh trước/sau.** Cổng build đang chặn đúng.
