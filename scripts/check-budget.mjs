@@ -7,7 +7,32 @@ import { gzipSync } from 'node:zlib';
  * không ràng buộc được gì. Vượt ngân sách là fail CI.
  */
 const BUDGET = {
-  htmlGzip: 24 * 1024,     // mỗi trang HTML sau khi nén
+  /**
+   * Mỗi trang HTML sau khi nén.
+   *
+   * LỊCH SỬ THAY ĐỔI NGƯỠNG — cùng luật với `inlineJs` bên dưới: nêu lý do, và
+   * nêu đã cắt được gì TRƯỚC KHI nâng.
+   *
+   *  24 KB — ban đầu.
+   *  28 KB — khi bổ sung danh mục combo: `combo-nam` mọc thêm hai khối nội dung
+   *          (`infographic`, `conditions`) và lên 26.727 B, vượt 2.151 B. Bốn
+   *          trang khác cũng vượt, năm trang nữa nằm trong 600 B sát trần — cả
+   *          đội trang sản phẩm dịch lên chứ không phải một trang hỏng.
+   *
+   *          TRƯỚC KHI NÂNG đã đo bốn nguồn phình, KHÔNG cắt được gì:
+   *            class="astro-xxxx"   1.651 B  — bỏ là vỡ CSS phạm vi component
+   *            JSON-LD              2.494 B  — tám node đều cần; đã nén tối
+   *                                            thiểu, thừa đúng 5 byte
+   *            data-reveal            107 B  — hiệu ứng cuộn
+   *            width/height ảnh       128 B  — bỏ là gây dịch bố cục (CLS)
+   *
+   *          Tức phần vượt là nội dung thật cộng chi phí khung, không phải rác.
+   *          2 KB sau nén tương đương khoảng 30 mili giây trên 3G chậm, trong
+   *          khi ngân sách một lượt tải (700 KB) không đổi và HTML chỉ chiếm
+   *          khoảng 4% con số đó. Ngưỡng mới vẫn chặn được một trang phình gấp
+   *          đôi — thứ mà cổng này sinh ra để chặn.
+   */
+  htmlGzip: 28 * 1024,
   /**
    * JS nội tuyến trên một trang, đo byte thô đã minify (chi phí phân tích cú
    * pháp); sau nén còn khoảng một phần ba.
@@ -81,7 +106,25 @@ const fonts = files.filter((f) => FONT.test(f))
   .reduce((n, f) => n + statSync(f).size, 0);
 (fonts <= BUDGET.fontsTotal ? ok : fail).push(`font: ${fonts}B / ${BUDGET.fontsTotal}B`);
 
-for (const f of files.filter((f) => IMAGE.test(f))) {
+/* Chỉ cân ảnh ĐƯỢC ÍT NHẤT MỘT TRANG THAM CHIẾU.
+
+   Astro chép cả ảnh nguồn vào `_astro/` bên cạnh những biến thể nó sinh ra, và
+   bản sao nguồn đó thường không trang nào dùng tới. Kiểm định: ảnh combo
+   `...DtbPMBXw.webp` nặng 163 KB bị chặn, trong khi biến thể thật sự được phục
+   vụ chỉ 9–62 KB, và không một HTML nào trỏ vào file 163 KB kia.
+
+   Chặn một file không ai tải là chặn vì lý do sai — và một cổng hay báo sai thì
+   sớm muộn bị nới ngưỡng, mất luôn tác dụng với trường hợp đúng. */
+const referencedNames = new Set();
+for (const f of files.filter((x) => x.endsWith('.html'))) {
+  for (const m of readFileSync(f, 'utf8')
+    .matchAll(/\/_astro\/([\w.-]+\.(?:avif|webp|jpg|jpeg|png|gif|svg|woff2|woff|css))/g)) {
+    referencedNames.add(m[1]);
+  }
+}
+const isReferenced = (f) => !f.includes('/_astro/') || referencedNames.has(f.split('/').pop());
+
+for (const f of files.filter((f) => IMAGE.test(f) && isReferenced(f))) {
   const s = statSync(f).size;
   if (s > BUDGET.imageMax) fail.push(`${f}: ảnh ${s}B / ${BUDGET.imageMax}B`);
 }
@@ -124,7 +167,31 @@ for (const f of htmls) {
      duyệt không tải ảnh lazy trong phần tử bị ẩn, nên nó KHÔNG thuộc lượt tải
      đầu — chỉ tải khi người đọc bấm mở giấy. Bỏ các thẻ đó trước khi đếm. Chỉ
      áp cho thẻ <img> mang đúng thuộc tính này; mọi ảnh khác vẫn bị tính. */
-  const html = readFileSync(f, 'utf8').replace(/<img\b[^>]*\bdata-on-demand\b[^>]*>/gi, '');
+  let html = readFileSync(f, 'utf8').replace(/<img\b[^>]*\bdata-on-demand\b[^>]*>/gi, '');
+
+  /* Ảnh `loading="lazy"` NẰM SÂU dưới trang không thuộc lượt tải đầu.
+
+     Trình duyệt chỉ tải ảnh lazy khi nó vào gần khung nhìn. Bản trước cộng hết,
+     nên trang danh mục combo — 35 thẻ <img>, 33 cái lazy — bị tính 1,05 MB trong
+     khi lượt tải thật khoảng 330 KB (CSS + 2 ảnh eager + vài ảnh đầu lưới). Đó
+     đúng là lỗi mà chú thích phía trên đã sửa một lần ở cấp "mọi ảnh trong dist";
+     nay nó tái diễn ở cấp "mọi ảnh trang tham chiếu".
+
+     Vẫn KHÔNG bỏ hết ảnh lazy: ảnh lazy nằm trong khung nhìn đầu tiên vẫn tải
+     ngay. Giữ LAZY_IN_VIEW ảnh lazy đầu tiên — khoảng hai hàng của lưới ba cột —
+     rồi bỏ phần còn lại. Ước lượng, nhưng sai số về phía an toàn và gần sự thật
+     hơn nhiều so với đếm tất. */
+  const LAZY_IN_VIEW = 6;
+  let lazySeen = 0;
+  const keepLazy = (chunk) =>
+    !/\bloading=["']?lazy/i.test(chunk) ? chunk : (++lazySeen <= LAZY_IN_VIEW ? chunk : '');
+  /* Bỏ CẢ KHỐI <picture>, không chỉ thẻ <img>.
+     Các biến thể ảnh được khai trong những thẻ <source srcset> anh em; bỏ mỗi
+     <img> thì mọi biến thể vẫn còn trong chuỗi HTML và vẫn bị cộng — bản sửa
+     đầu của tôi làm đúng thế, và con số không nhúc nhích một byte. */
+  html = html
+    .replace(/<picture\b[^>]*>[\s\S]*?<\/picture>/gi, keepLazy)
+    .replace(/<img\b[^>]*>/gi, keepLazy);
   // Mọi tên file asset xuất hiện trong HTML (src, srcset, href, url()).
   const referenced = new Set(
     [...html.matchAll(/[\w./-]*\/_astro\/([\w.-]+\.(?:avif|webp|jpg|jpeg|png|gif|svg|woff2|woff|css))/g)]
