@@ -84,17 +84,47 @@ docker compose up -d app
 ## 5. Cập nhật mã nguồn
 
 ```bash
-deploy/backup.sh && git pull && docker compose --profile https up -d --build
+deploy/backup.sh && git pull
+PUBLISH_ON_BOOT=0 docker compose --profile https up -d --build
+docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts import --only-new
+docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts publish
+docker compose --profile https up -d --force-recreate --no-build app
 ```
 
 Nội dung trong Postgres **không** bị ghi đè khi cập nhật image: bước "nạp nội dung
 từ image" chỉ chạy khi CSDL còn trống. Bản mới có thêm sản phẩm/bài trong `src/`
 thì nạp riêng các mục **mới** (mục đã có — kể cả giá đã sửa trên trang quản trị — giữ
-nguyên), rồi Xuất bản:
+nguyên), rồi Xuất bản. Đó là hai lệnh giữa.
+
+### Vì sao phải tắt `PUBLISH_ON_BOOT` ở lượt dựng đầu
+
+Xuất bản **ghi CSDL ra `src/content` và xoá mọi file không có trong CSDL**. Nếu để
+publish-on-boot chạy trước khi nạp, nó dọn sạch nội dung mới vừa theo image vào —
+rồi `import --only-new` chỉ còn thấy phần CSDL cũ xuất ra. Thứ tự sai cho lỗi khó
+đoán: một combo tiếng Anh báo "chứa sản phẩm chưa xuất bản ở ngôn ngữ này", vì
+`en.json` của mấy món đó vừa bị xoá khỏi đĩa.
+
+Lượt `up -d --force-recreate` cuối trả container về cấu hình mặc định
+(`PUBLISH_ON_BOOT=1`) và là phép thử: log phải ghi `xuất bản lúc khởi động #N: thành công`.
+
+### Thông tin cửa hàng không nằm trong `--only-new`
+
+`src/data/mocha.json` (Thông tin cửa hàng: tổ chức công bố, mạng xã hội, sàn) cũng là
+một mục nội dung, mã `brand/mocha`. Mục đã tồn tại nên `--only-new` bỏ qua — bản mới
+thêm một tổ chức công bố thì build chặn với "Thông tin cửa hàng không có tổ chức công
+bố mã đó". Ghi đè riêng mục đó, **từ file trên host** chứ không phải file trong
+container (file trong container có thể đã bị bản xuất trước đó ghi lên bản cũ):
 
 ```bash
-docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts import --only-new
+docker compose cp src/data/mocha.json app:/app/src/data/mocha.json
+docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts import --entries brand/mocha
 ```
+
+Sau đó kiểm trên trang quản trị → Thông tin cửa hàng xem có mất chỉnh sửa tay nào không.
+
+> `docker compose exec -T` nhận stdin. Chạy nó trong một script truyền qua
+> `ssh 'bash -s' < script` thì nó ăn luôn phần script còn lại và các lệnh sau im lặng
+> không chạy. Thêm `< /dev/null` vào mỗi lệnh `exec -T` trong script.
 
 Muốn đưa nội dung đang chạy thật về repo (để commit, để review diff):
 
