@@ -1,0 +1,27 @@
+{
+  "slug": "combo-hairborn-goi-peel-ion",
+  "locale": "en",
+  "translationKey": "combo:combo-hairborn-goi-peel-ion",
+  "status": "published",
+  "name": "Hairborn Combo: Shampoo + Peel Ion",
+  "shortName": "Shampoo + Peel Ion",
+  "group": "toc",
+  "order": 10,
+  "items": [
+    {
+      "product": "hairborn-hair-boost-shampoo",
+      "qty": 1
+    },
+    {
+      "product": "hairborn-peel-ion",
+      "qty": 1
+    }
+  ],
+  "price": 615000,
+  "currency": "VND",
+  "purpose": "Hair Boost shampoo to cleanse the scalp, Peel Ion essence to care for the scalp and roots after washing.",
+  "seo": {
+    "title": "Hairborn Combo: Shampoo + Peel Ion | Mỹ Phẩm Mocha",
+    "description": "Hair Boost shampoo to cleanse the scalp, Peel Ion essence to care for the scalp and roots after washing. Delivered to your door; inspect before you pay."
+  }
+}

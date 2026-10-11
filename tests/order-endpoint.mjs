@@ -113,7 +113,6 @@ async function fillForm(page) {
   await page.fill('#name', 'Nguyễn Thu Hà');
   await page.fill('#phone', '0912345678');
   await page.fill('#address', '12 Lê Lợi, Phường Bến Nghé, Quận 1, TP.HCM');
-  await page.check('#data-consent');
 }
 
 async function fillAndSubmit(page) {
@@ -178,22 +177,32 @@ async function fillAndSubmit(page) {
   await page.close();
 }
 
-// --- 3b. Không tick ô đồng ý dữ liệu cá nhân thì không được gửi -------
+// --- 3b. Đồng ý dữ liệu cá nhân: câu đồng ý nằm ngay trên nút, đơn mang đúng câu đó --
+/* Không còn ô tích: bấm nút gửi đơn ngay dưới câu "Khi nhấn Đặt mua, tôi đồng ý…" là hành
+   động đồng ý. Điều phải giữ: câu đó NHÌN THẤY ĐƯỢC ngay trên nút, nút trỏ tới nó
+   (aria-describedby), và đơn gửi đi mang dataConsent + đúng nguyên văn câu khách đã đọc. */
 {
   mode = 'ok';
   received.length = 0;
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
   await page.goto(`http://localhost:${PAGE_PORT}/combo-nam/`, { waitUntil: 'networkidle' });
+  const note = page.locator('#consent-note');
+  const visible = await note.isVisible();
+  const noteText = (await note.innerText()).replace(/\s+/g, ' ').trim();
+  const described = await page.locator('#order-form button[type=submit]').getAttribute('aria-describedby');
+  const noCheckbox = (await page.locator('#order-form input[type=checkbox]').count()) === 0;
   await page.fill('#name', 'Nguyễn Thu Hà');
   await page.fill('#phone', '0912345678');
   await page.fill('#address', '12 Lê Lợi, Quận 1');
   await page.click('#order-form button[type=submit]');
-  await page.waitForTimeout(700);
-  const focused = await page.evaluate(() => document.activeElement?.id);
+  await page.waitForTimeout(900);
+  let b = {};
+  try { b = JSON.parse(received[0]?.body ?? '{}'); } catch { /* không phải JSON thì b rỗng, phép thử báo hỏng */ }
   results.push([
-    'chưa đồng ý dữ liệu',
-    received.length === 0 && !(await page.locator('#form-success').isVisible()) && focused === 'data-consent',
-    `${received.length} POST, focus chuyển tới: ${focused}`,
+    'đồng ý dữ liệu: câu ngay trên nút, gửi kèm nguyên văn',
+    visible && noCheckbox && described === 'consent-note' && received.length === 1
+      && String(b.dataConsent) === 'true' && String(b.consentText).replace(/\s+/g, ' ').trim() === noteText,
+    `hiện=${visible} · không ô tích=${noCheckbox} · ${received.length} POST · dataConsent=${b.dataConsent}`,
   ]);
   await page.close();
 }
@@ -261,7 +270,6 @@ async function fillAndSubmit(page) {
 
   await page.fill('#name', 'Nguyễn Thu Hà');
   await page.fill('#phone', '0912345678');
-  await page.check('#data-consent');
   await page.click('#order-form button[type=submit]');
   await page.waitForTimeout(900);
   const sent = received.length === 1 && !received[0].address;

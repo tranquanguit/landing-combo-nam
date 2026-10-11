@@ -1,0 +1,31 @@
+{
+  "slug": "combo-peel-sua-rua-mat-kem-chong-nang",
+  "locale": "en",
+  "translationKey": "combo:combo-peel-sua-rua-mat-kem-chong-nang",
+  "status": "published",
+  "name": "Peel + Cleanser + Sunscreen Combo",
+  "shortName": "Peel + Cleanser + Sun",
+  "group": "peel",
+  "order": 60,
+  "items": [
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    }
+  ],
+  "price": 1015000,
+  "currency": "VND",
+  "purpose": "The peel kit with the two basics you need during and after the course: a gentle cleanser and daily sunscreen.",
+  "seo": {
+    "title": "Peel + Cleanser + Sunscreen Combo | Mỹ Phẩm Mocha",
+    "description": "The peel kit with the two basics you need during and after the course: a gentle cleanser and daily sunscreen. Delivered to your door; inspect before you pay."
+  }
+}

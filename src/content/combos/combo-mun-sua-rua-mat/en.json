@@ -1,0 +1,27 @@
+{
+  "slug": "combo-mun-sua-rua-mat",
+  "locale": "en",
+  "translationKey": "combo:combo-mun-sua-rua-mat",
+  "status": "published",
+  "name": "Spot Gel + Cleanser Combo",
+  "shortName": "Spot + Cleanser",
+  "group": "mun",
+  "order": 40,
+  "items": [
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    }
+  ],
+  "price": 465000,
+  "currency": "VND",
+  "purpose": "A gentle cleanser to keep skin clean, and a spot gel for each inflamed blemish.",
+  "seo": {
+    "title": "Spot Gel + Cleanser Combo | Mỹ Phẩm Mocha",
+    "description": "A gentle cleanser to keep skin clean, and a spot gel for each inflamed blemish. Delivered to your door; inspect before you pay."
+  }
+}

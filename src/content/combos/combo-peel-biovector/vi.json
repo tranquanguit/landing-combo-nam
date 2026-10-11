@@ -1,0 +1,27 @@
+{
+  "slug": "combo-peel-biovector",
+  "locale": "vi",
+  "translationKey": "combo:combo-peel-biovector",
+  "status": "published",
+  "name": "Combo Peel + Kem dưỡng Biovector",
+  "shortName": "Peel + Biovector",
+  "group": "peel",
+  "order": 20,
+  "items": [
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    }
+  ],
+  "price": 835000,
+  "currency": "VND",
+  "purpose": "Peel 3 ngày, sau đó dùng kem dưỡng Biovector khi da đã hết bong và hết nhạy.",
+  "seo": {
+    "title": "Combo Peel + Kem dưỡng Biovector | Mỹ Phẩm Mocha",
+    "description": "Peel 3 ngày, sau đó dùng kem dưỡng Biovector khi da đã hết bong và hết nhạy. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

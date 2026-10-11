@@ -57,16 +57,15 @@
     "description": "Gel chấm mụn với dầu mù u Việt Nam, 3% Acnebusters, BHA, Sulfur, Zinc PCA và Bioecolia. Nồng độ in trên bao bì. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "2522/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "hỗ trợ chăm sóc vùng da có mụn",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ],
-    "productNotificationNumber": "2522/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -85,9 +84,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Bước chấm điểm",
+      "eyebrow": "Gel chấm mụn dầu mù u · tuýp 20gr",
       "heading": "Gel chấm điểm, không phải kem bôi toàn mặt",
-      "lead": "Tuýp 20gr để chấm lên từng nốt, không bôi cả vùng. Thành phần và nồng độ ghi trên vỏ tuýp.",
+      "lead": "Gel chấm lên từng nốt mụn hoặc vùng đang sưng, không bôi cả mặt. Có dầu mù u Việt Nam, Acnebusters 3% và BHA 0,5%, nồng độ in trên vỏ.",
       "usp": [
         {
           "text": "<strong>3% Acnebusters và 0,5% BHA</strong> — nồng độ in trên bao bì",
@@ -121,6 +120,32 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Khối lượng",
+          "value": "Tuýp 20gr"
+        },
+        {
+          "label": "Kết cấu",
+          "value": "Gel"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Dầu mù u Việt Nam, Acnebusters 3%, BHA 0,5% (Salicylic Acid), Sulfur, Zinc PCA, Bioecolia®"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Chấm lên da sạch, khô; đợi gel thấm hẳn rồi mới thoa bước sau"
+        },
+        {
+          "label": "Lượng dùng",
+          "value": "Một hạt đậu cho điểm mụn, hai hạt đậu cho vùng lớn"
+        },
+        {
+          "label": "Số công bố",
+          "value": "2522/25/CBMP-TN"
+        }
       ]
     },
     {
@@ -141,6 +166,102 @@
           "<strong>Chấm đúng nốt, để yên, và đợi theo ngày chứ không theo giờ.</strong> Nếu mụn lan ra cả vùng má hay cả trán thì đó không còn là việc của một tuýp chấm điểm. Nên đi khám da liễu."
         ]
       }
+    },
+    {
+      "type": "conditions",
+      "id": "hop-voi-ai",
+      "eyebrow": "Nhìn ảnh, đối chiếu da của bạn",
+      "heading": "Gel chấm hợp với loại mụn nào, và loại nào thì không",
+      "intro": "Chúng tôi là đại lý. Có những loại mụn tuýp này không giúp được, và chúng tôi nói luôn từ đầu.",
+      "items": [
+        {
+          "label": "Mụn viêm có nhân trắng",
+          "image": {
+            "src": "/images/da-mun-viem.webp",
+            "alt": "Cận cảnh nốt mụn viêm sưng đỏ có đầu trắng ở giữa"
+          },
+          "body": "Nốt đỏ, sưng, có đầu trắng ở giữa. Chấm đúng lên nốt và để yên, <strong>không nặn</strong>.",
+          "fit": "yes",
+          "fitNote": "Đúng việc của gel chấm"
+        },
+        {
+          "label": "Nốt sưng đỏ mới nổi",
+          "image": {
+            "src": "/images/da-mun-sung.webp",
+            "alt": "Cận cảnh một nốt mụn sưng đỏ chưa có đầu"
+          },
+          "body": "Nốt sưng, đau khi chạm, chưa có đầu. Chấm sớm và chỉ trên nốt — không lan ra vùng da lành xung quanh.",
+          "fit": "yes",
+          "fitNote": "Đúng việc của gel chấm"
+        },
+        {
+          "label": "Mụn ẩn li ti",
+          "image": {
+            "src": "/images/da-mun-an.webp",
+            "alt": "Cận cảnh vùng da có nhiều nốt mụn ẩn nhỏ li ti"
+          },
+          "body": "Nhiều nốt nhỏ dưới da, sần khi sờ. Gel chấm không dành cho cả vùng; bước làm sạch lỗ chân lông mỗi ngày mới là việc chính.",
+          "fit": "partial",
+          "fitNote": "Chấm nốt nổi rõ, còn lại cần làm sạch"
+        },
+        {
+          "label": "Mụn quanh cằm theo chu kỳ",
+          "aka": "thường gọi là mụn nội tiết",
+          "image": {
+            "src": "/images/da-mun-noi-tiet.webp",
+            "alt": "Cận cảnh vùng da quai hàm có nhiều nốt mụn đỏ rải rác"
+          },
+          "body": "Hay nổi ở cằm, quai hàm, theo chu kỳ. Gel chấm giúp với từng nốt đang viêm; nổi kéo dài nhiều tháng thì nên đi khám để tìm nguyên nhân.",
+          "fit": "partial",
+          "fitNote": "Chấm từng nốt; gốc nằm chỗ khác"
+        },
+        {
+          "label": "Mụn bọc, mụn nang, mụn lan cả vùng",
+          "body": "Một tuýp chấm điểm không giải quyết được diện rộng, và mụn nang là chuyện cần bác sĩ da liễu. Chúng tôi không bán cho bạn kỳ vọng đó.",
+          "fit": "no",
+          "fitNote": "Nên gặp bác sĩ da liễu"
+        },
+        {
+          "label": "Nốt đã lặn, còn vết thâm",
+          "image": {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Cận cảnh vùng da có nhiều vết thâm nâu sau mụn"
+          },
+          "body": "Thâm sau mụn là chuyện sắc tố, không còn là chuyện mụn. Tuýp này không phải thứ bạn cần. Xem gel chấm thâm ở phần so sánh.",
+          "fit": "no",
+          "fitNote": "Cần sản phẩm khác"
+        }
+      ],
+      "caption": "Ảnh cận vùng da minh hoạ từng tình trạng (tư liệu hình ảnh của hãng), <strong>không phải ảnh trước/sau khi dùng sản phẩm</strong>. Chưa chắc da mình thuộc nhóm nào? Gửi ảnh qua Zalo, chuyên viên xem giúp trước khi bạn đặt."
+    },
+    {
+      "type": "infographic",
+      "id": "vong-doi-not-mun",
+      "kind": "stages",
+      "eyebrow": "Một nốt mụn đi qua những gì",
+      "heading": "Bốn giai đoạn của một nốt mụn viêm — gel chấm làm việc ở hai giai đoạn giữa",
+      "intro": "Dùng đúng lúc quan trọng ngang dùng đúng cách. Chấm khi nốt đã lặn thì không còn gì để chấm.",
+      "items": [
+        {
+          "label": "Bít tắc",
+          "body": "Bã nhờn và tế bào chết làm bít lỗ chân lông. Chưa sưng, thường chỉ là những nốt li ti, sần khi sờ."
+        },
+        {
+          "label": "Sưng đỏ",
+          "body": "Vùng bít tắc bắt đầu viêm: sưng, đỏ, đau khi chạm. Đây là lúc nên chấm gel.",
+          "highlight": true
+        },
+        {
+          "label": "Có nhân trắng",
+          "body": "Nốt có đầu trắng ở giữa. Vẫn chấm, và không nặn, vì nặn làm vùng viêm lan rộng và dễ để lại thâm hơn.",
+          "highlight": true
+        },
+        {
+          "label": "Lặn, có thể để lại thâm",
+          "body": "Nốt xẹp, da liền lại. Vết sẫm màu còn lại là chuyện sắc tố: việc của gel chấm thâm và kem chống nắng."
+        }
+      ],
+      "footnote": "Thời gian của mỗi giai đoạn khác nhau theo từng người, nên chúng tôi không ghi số ngày."
     },
     {
       "type": "compare",
@@ -190,31 +311,6 @@
       ],
       "footnote": "Nhiều người có cả hai tình trạng cùng lúc trên cùng một khuôn mặt. Lúc đó dùng cả hai là hợp lý, nhưng ở hai vùng khác nhau chứ không chồng lên nhau.",
       "transition": "Đúng tuýp rồi. Còn vì sao chỉ chấm từng nốt — ngay bên dưới."
-    },
-    {
-      "type": "cards",
-      "id": "hop-voi-ai",
-      "eyebrow": "Trước khi đặt",
-      "heading": "Bạn đang ở tình huống nào",
-      "intro": "Chúng tôi là đại lý. Có những trường hợp tuýp này không giúp được.",
-      "columns": 3,
-      "items": [
-        {
-          "heading": "Vài nốt viêm đơn lẻ",
-          "body": "Đây là đúng thứ tuýp này được làm ra để xử lý: chấm lên từng nốt, không lan sang vùng da lành xung quanh.",
-          "meta": "Hợp nhất"
-        },
-        {
-          "heading": "Mụn lan cả vùng, hoặc mụn bọc, mụn nang",
-          "body": "Một tuýp chấm điểm không giải quyết được diện rộng, và mụn nang là chuyện cần bác sĩ da liễu. Chúng tôi không bán cho bạn kỳ vọng đó.",
-          "meta": "Nên đi khám"
-        },
-        {
-          "heading": "Nốt mụn đã lặn, chỉ còn vết thâm",
-          "body": "Thâm sau mụn là chuyện sắc tố, không còn là chuyện mụn. Tuýp này không phải thứ bạn cần. Xem gel chấm thâm ở phần dưới.",
-          "meta": "Cần sản phẩm khác"
-        }
-      ]
     },
     {
       "type": "ingredients",

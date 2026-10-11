@@ -25,13 +25,21 @@ import FOffer from '../components/flagship/FOffer.astro';
 import FSkin from '../components/flagship/FSkin.astro';
 import FCompare from '../components/flagship/FCompare.astro';
 import FDocuments from '../components/flagship/FDocuments.astro';
+import FConditions from '../components/flagship/FConditions.astro';
+import FInfographic from '../components/flagship/FInfographic.astro';
+import FVoices from '../components/flagship/FVoices.astro';
+import FPromo from '../components/flagship/FPromo.astro';
+import FFacts from '../components/flagship/FFacts.astro';
+import ComboGrid from '../components/ComboGrid.astro';
+import { packsFor, promoNow, promoWarnings, vnLastDay } from '../lib/promotions';
+import { voicesFor, isDemoBuild } from '../lib/testimonials';
 import { assertNotificationMatches } from '../lib/documents';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { expandProductTokens } from '../lib/money-text';
 import { productGraph } from '../lib/schema';
 import { resolveAssetUrl, resolveAssetImage } from '../lib/images';
 import Section from '../components/Section.astro';
-import { articlePath, homePath, linePath, productPath } from '../lib/routes';
+import { articlePath, comboIndexPath, homePath, linePath, productPath } from '../lib/routes';
 import { assertTranslated, localePath, t, type Locale } from '../i18n/ui';
 
 interface Props {
@@ -49,20 +57,28 @@ interface Props {
   productCards?: Map<string, any>;
   /** Giấy tờ áp dụng cho sản phẩm này — xem `docsFor` trong src/lib/documents.ts. */
   documents?: any[];
+  /** Thẻ các combo có chứa sản phẩm này (đã tính giá) — in ngay trước biểu mẫu đặt hàng. */
+  combos?: any[];
 }
 
-const { product: raw, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], articles = [], productCards = new Map(), documents = [] } = Astro.props;
+const { product: raw, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], articles = [], productCards = new Map(), documents = [], combos = [] } = Astro.props;
 assertNotificationMatches(documents, raw);
 
-/* Tên tổ chức công bố (in ở footer) phải trùng pháp nhân trong JSON-LD Organization.
-   Kiểm định lần 6: bản EN khai "Mocha Vietnam Cosmeceuticals" trong khi structured
-   data khai "Công ty Dược Mỹ Phẩm Mocha Việt Nam" — hai pháp nhân khác tên trên
-   cùng một trang. Tên pháp nhân là dữ kiện pháp lý, không dịch theo ngôn ngữ. */
-if (raw.compliance.declaringOrganization !== b.legalName) {
-  throw new Error(
-    `compliance.declaringOrganization ("${raw.compliance.declaringOrganization}") khác ` +
-    `brand.legalName ("${b.legalName}"). Tên pháp nhân phải giống nhau ở mọi ngôn ngữ.`
-  );
+/* Tổ chức công bố (in ở footer) là pháp nhân đưa SẢN PHẨM ra thị trường — không phải
+   người bán. Site do đại lý vận hành, và mỗi dòng (Mocha, Hairborn) có thể do một
+   công ty khác công bố. Điều phải giữ: một sản phẩm khai cùng một tên ở mọi ngôn ngữ.
+   Kiểm định lần 6: bản EN từng dịch tên pháp nhân thành "Mocha Vietnam Cosmeceuticals"
+   — tên pháp nhân là dữ kiện pháp lý, không dịch. */
+{
+  const orgs = new Set((await getCollection('products'))
+    .filter((e: any) => e.data.translationKey === raw.translationKey)
+    .map((e: any) => e.data.compliance.declarant ?? e.data.compliance.declaringOrganization));
+  if (orgs.size > 1) {
+    throw new Error(
+      `"${raw.translationKey}": các ngôn ngữ khai tổ chức công bố khác nhau (${[...orgs].join(' | ')}). ` +
+      `Tên pháp nhân phải giống hệt nhau ở mọi ngôn ngữ.`
+    );
+  }
 }
 
 // Thay token tiền một lần cho toàn bộ dữ liệu, trước khi bất kỳ component nào
@@ -106,10 +122,49 @@ const ogImageDims = {
 };
 const logoUrl = await resolveAssetUrl(b.logo, site, 512);
 
+/* ---- Khuyến mãi đang chạy (collection `promotions`) --------------------------
+   Gói khuyến mãi KHÔNG khai trong file sản phẩm: mỗi đợt một file, có giờ bắt đầu và
+   kết thúc. Lúc build lấy các gói đang chạy ở "bây giờ" (PROMO_NOW để xem trước), và
+   máy chủ tự build lại đúng lúc một đợt bắt đầu hoặc kết thúc (server/main.ts). */
+const now = promoNow();
+const sameLocale = await getCollection('products', ({ data: d }: any) => d.status === 'published' && d.locale === locale);
+const prices = new Map(sameLocale.map((e: any) => [e.data.slug, { price: e.data.price, name: e.data.shortName ?? e.data.name }]));
+const promoEntries = (await getCollection('promotions')).map((e: any) => ({ id: e.id, data: e.data }));
+const promoPacks = packsFor(p.slug, locale, promoEntries, prices, now, isDemoBuild(import.meta.env));
+const promoIds = [...new Set(promoPacks.map((x) => x.promoId))];
+const promoTerms = [...new Set(promoEntries.filter((e) => promoIds.includes(e.id)).flatMap((e) => e.data.terms))];
+for (const w of [...promoPacks.flatMap((x) => x.warnings),
+  ...promoEntries.filter((e) => promoIds.includes(e.id)).flatMap((e) => promoWarnings(e.data).map((m) => `"${e.id}": ${m}`))]) {
+  console.warn(`
+⚠️  Khuyến mãi trên ${p.slug}/${locale}: ${w}`);
+}
+/* Biểu mẫu đặt hàng: gói khuyến mãi đứng trước các gói thường. Một gói được chọn sẵn. */
+const promoRecommended = promoPacks.some((x) => x.recommended);
+const orderProduct = promoPacks.length ? {
+  ...p,
+  variants: [
+    ...promoPacks.map((x, i) => ({
+      label: x.label,
+      price: x.price,
+      recommended: promoRecommended ? x.recommended && promoPacks.findIndex((y) => y.recommended) === i : i === 0,
+      promo: { badge: x.badge, regular: x.regular > x.price ? x.regular : undefined },
+    })),
+    ...p.variants.map((v: any) => ({ ...v, recommended: false })),
+  ],
+} : p;
+/* Giá bán ưu đãi của CHÍNH sản phẩm này (1 món, không quà) thì JSON-LD phát giá đó, kèm
+   hạn = ngày kết thúc đợt. Gói combo / quà tặng là đề nghị khác, không thay giá sản phẩm. */
+const unitSale = promoPacks.find((x) => x.unitSaleOf === p.slug);
+
+/* ---- Phản hồi khách (collection `testimonials`) ------------------------------- */
+const demo = isDemoBuild(import.meta.env);
+const testimonialEntries = (await getCollection('testimonials')).map((e: any) => ({ id: e.id, data: e.data }));
+
 const jsonLd = productGraph({
   product: p, brand: b, site, url: canonical, locale, faq: faqBlock?.items, breadcrumb,
   imageUrls: ogImage ? [ogImage] : [],
   logoUrl,
+  sale: unitSale ? { price: unitSale.price, validUntil: vnLastDay(unitSale.endsAt) } : undefined,
 });
 
 /**
@@ -168,7 +223,15 @@ const r = (i: number, block: any) => ({
   <main id="main" class="fx-main">
     {p.blocks.map((block: any, i: number) => {
       switch (block.type) {
-        case 'hero':         return <FHero data={block} locale={locale} product={p} />;
+        case 'hero':         return (<>
+          <FHero data={block} locale={locale} product={p} />
+          {promoPacks.length > 0 && <FPromo packs={promoPacks} terms={promoTerms} currency={p.currency} locale={locale} />}
+          <FFacts facts={block.facts ?? []} locale={locale} />
+        </>);
+        case 'conditions':   return <FConditions data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} {...fx(i, block)} />;
+        case 'infographic':  return <FInfographic data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} {...fx(i, block)} />;
+        case 'voices':       return <FVoices data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} {...fx(i, block)}
+                               voices={voicesFor(p.slug, locale, testimonialEntries, demo, block.limit)} />;
         case 'offer':        return <FOffer data={block} product={p} locale={locale} />;
         case 'problem':      return <FProblem data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} {...fx(i, block)} />;
         case 'cards':        return <FCards data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} tone={block.items.some((x: any) => x.image) ? 'bone' : 'paper'} {...fx(i, block)} />;
@@ -176,7 +239,17 @@ const r = (i: number, block: any) => ({
         case 'steps':        return <FSteps data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} {...fx(i, block)} />;
         case 'gallery':      return <Gallery data={block} id={block.id ?? DEFAULT_ANCHOR.gallery} locale={locale} />;
         case 'testimonials': return <Testimonials data={block} id={block.id ?? DEFAULT_ANCHOR[block.type]} locale={locale} />;
-        case 'order':        return <Order data={block} product={p} brand={b} locale={locale} />;
+        case 'order':        return (<>
+          {/* Mua theo bộ đứng NGAY trước biểu mẫu: đúng lúc khách đang cân nhắc mua bao nhiêu. */}
+          {combos.length > 0 && (
+            <Section id="combo-co-san-pham" surface="paper" eyebrow={t(locale, 'combo.nav')}
+              heading={t(locale, 'combo.withProduct')} intro={t(locale, 'combo.withProductIntro')}>
+              <ComboGrid cards={combos} locale={locale} source="product-combos" />
+              <p class="combo-all"><a href={comboIndexPath(locale)} data-cta="product-combo-all">{t(locale, 'combo.all')} →</a></p>
+            </Section>
+          )}
+          <Order data={block} product={orderProduct} brand={b} locale={locale} />
+        </>);
         case 'feature':      return <Feature data={block} id={block.id} />;
         /* Khối chứng từ KHAI trong file sản phẩm (vị trí do người biên tập chọn,
            vai "proof" đọc được từ dữ liệu). Không có `items` thì giấy tờ tự gom
@@ -232,3 +305,8 @@ const r = (i: number, block: any) => ({
     itemName={p.shortName ?? p.name}
   />
 </BaseLayout>
+
+<style>
+  .combo-all { margin: var(--s-6) 0 0; }
+  .combo-all a { font-weight: 600; color: var(--cobalt); display: inline-block; min-height: 24px; line-height: 24px; }
+</style>

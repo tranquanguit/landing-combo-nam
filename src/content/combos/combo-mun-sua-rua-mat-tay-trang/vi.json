@@ -1,0 +1,31 @@
+{
+  "slug": "combo-mun-sua-rua-mat-tay-trang",
+  "locale": "vi",
+  "translationKey": "combo:combo-mun-sua-rua-mat-tay-trang",
+  "status": "published",
+  "name": "Combo Gel chấm mụn + Làm sạch 2 bước",
+  "shortName": "Mụn + Làm sạch 2 bước",
+  "group": "mun",
+  "order": 50,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    }
+  ],
+  "price": 660000,
+  "currency": "VND",
+  "purpose": "Tẩy trang và sữa rửa mặt để lỗ chân lông không bị bít bởi kem chống nắng còn sót, kèm gel chấm mụn.",
+  "seo": {
+    "title": "Combo Gel chấm mụn + Làm sạch 2 bước | Mỹ Phẩm Mocha",
+    "description": "Tẩy trang và sữa rửa mặt để lỗ chân lông không bị bít bởi kem chống nắng còn sót, kèm gel chấm mụn. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

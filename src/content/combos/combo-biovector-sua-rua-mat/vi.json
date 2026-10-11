@@ -1,0 +1,27 @@
+{
+  "slug": "combo-biovector-sua-rua-mat",
+  "locale": "vi",
+  "translationKey": "combo:combo-biovector-sua-rua-mat",
+  "status": "published",
+  "name": "Combo Biovector + Sữa rửa mặt",
+  "shortName": "Biovector + Rửa mặt",
+  "group": "duong",
+  "order": 20,
+  "items": [
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    }
+  ],
+  "price": 558000,
+  "currency": "VND",
+  "purpose": "Sữa rửa mặt dịu nhẹ và kem dưỡng Biovector: bộ nền gọn cho da dầu, da nhạy cảm.",
+  "seo": {
+    "title": "Combo Biovector + Sữa rửa mặt | Mỹ Phẩm Mocha",
+    "description": "Sữa rửa mặt dịu nhẹ và kem dưỡng Biovector: bộ nền gọn cho da dầu, da nhạy cảm. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

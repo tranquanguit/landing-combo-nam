@@ -1,0 +1,41 @@
+{
+  "slug": "bo-hairborn-5-mon",
+  "locale": "en",
+  "translationKey": "combo:bo-hairborn-5-mon",
+  "status": "published",
+  "name": "Hairborn 5-Piece Hair Care Set",
+  "shortName": "Hairborn 5-piece",
+  "group": "toc",
+  "order": 30,
+  "items": [
+    {
+      "product": "hairborn-hair-boost-shampoo",
+      "qty": 1
+    },
+    {
+      "product": "hairborn-collagen-deep-shot",
+      "qty": 1
+    },
+    {
+      "product": "hairborn-peel-ion",
+      "qty": 1
+    }
+  ],
+  "gifts": [
+    {
+      "product": "hairborn-scalp-scrub",
+      "qty": 1
+    },
+    {
+      "name": "Foaming cup",
+      "qty": 1
+    }
+  ],
+  "price": 990000,
+  "currency": "VND",
+  "purpose": "Shampoo, hair mask and Peel Ion essence, with a scalp scrub and a foaming cup as gifts.",
+  "seo": {
+    "title": "Hairborn 5-Piece Hair Care Set | Mỹ Phẩm Mocha",
+    "description": "Shampoo, hair mask and Peel Ion essence, with a scalp scrub and a foaming cup as gifts. Delivered to your door; inspect before you pay."
+  }
+}

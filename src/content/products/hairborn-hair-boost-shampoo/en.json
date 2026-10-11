@@ -1,0 +1,331 @@
+{
+  "slug": "hairborn-hair-boost-shampoo",
+  "translationKey": "hairborn-hair-boost-shampoo",
+  "status": "published",
+  "sku": "HAIRBORN-SP025",
+  "price": 395000,
+  "compareAtPrice": 550000,
+  "currency": "VND",
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "cham-soc-toc",
+  "locale": "en",
+  "name": "HAIRBORN Hair Boost – scalp care shampoo, 450g",
+  "shortName": "Hair Boost shampoo",
+  "primaryKeyword": "hairborn hair boost shampoo",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Needs a shampoo for a scalp that gets oily fast and hair that breaks when brushed and washed",
+    "audienceSituations": [
+      "Washes in the morning and the hair is greasy again by afternoon",
+      "Finds a lot of broken hair in the brush after washing",
+      "Wants one large bottle the whole household can share"
+    ],
+    "contextHints": [
+      "someone asking which shampoo suits an oily scalp and fine hair",
+      "someone asking how to wash hair so it breaks less"
+    ],
+    "approvedAngles": [
+      "A scalp care shampoo in a 450g pump bottle",
+      "The label lists Kopexil, Redensyl™ and caffeine as the Hairroot Boost Complex"
+    ],
+    "riskyAngles": [
+      "presenting the shampoo as a medicine for medical hair loss",
+      "promising thicker hair after a specific number of weeks"
+    ],
+    "preferredDestination": "#thanh-phan"
+  },
+  "seo": {
+    "title": "HAIRBORN Hair Boost shampoo, 450g | Mocha Vietnam",
+    "description": "Scalp care shampoo, 450g bottle. The label lists Kopexil, Redensyl™, caffeine, hydrolysed keratin and collagen. Also in a 50g mini tube. {{price}}."
+  },
+  "compliance": {
+    "declarant": "hairborn",
+    "functions": "cleanses the scalp, helps prevent hair breakage, leaves hair soft and looking thicker",
+    "warnings": [
+      "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
+      "Discontinue use if the scalp becomes irritated. Avoid contact with the eyes; if it gets in, rinse immediately with clean water.",
+      "Hair falling out in patches, sudden heavy shedding, or a red, itchy or thickly flaking scalp: see a dermatologist.",
+      "Results vary between individuals and hair conditions. Keep out of reach of children.",
+      "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
+    ]
+  },
+  "variants": [
+    {
+      "label": "450g bottle",
+      "note": "You save {{save}} off the list price",
+      "price": 395000,
+      "recommended": true
+    },
+    {
+      "label": "50g mini tube",
+      "note": "Same Hair Boost formula, handy for travel or trying it out",
+      "price": 140000,
+      "recommended": false
+    },
+    {
+      "label": "I would like advice first",
+      "note": "An adviser calls you back and asks about your hair and scalp before confirming",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "The washing step",
+      "heading": "A shampoo for a scalp that gets oily fast and hair that breaks easily",
+      "lead": "A 450g pump bottle, labelled <strong>scalp care shampoo</strong>, for all hair types. The label lists <strong>Kopexil, Redensyl™ and caffeine</strong>, with hydrolysed keratin and collagen.",
+      "usp": [
+        {
+          "text": "<strong>Kopexil, Redensyl™, caffeine</strong> printed as the Hairroot Boost Complex on the bottle label",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "copied from the 450g bottle label"
+        },
+        {
+          "text": "<strong>Hydrolysed keratin and collagen</strong> keep strands softer and less prone to breaking when brushed",
+          "evidence": "ingredient",
+          "qualifier": "per the description printed on the label"
+        },
+        {
+          "text": "<strong>450g bottle</strong>, also available as a 50g mini tube",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "net weight printed on each label"
+        }
+      ],
+      "image": {
+        "src": "/images/hero-hairborn-hair-boost-shampoo.webp",
+        "alt": "Navy HAIRBORN Hair Boost 450g shampoo bottle with a black pump"
+      },
+      "primaryCta": "Order Hair Boost shampoo",
+      "secondaryCta": {
+        "label": "See the ingredients",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Free delivery nationwide",
+        "Inspect before you pay",
+        "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Net weight",
+          "value": "450g pump bottle. Mini version: 50g tube"
+        },
+        {
+          "label": "Type",
+          "value": "Scalp care shampoo"
+        },
+        {
+          "label": "For",
+          "value": "All hair types"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "Kopexil (Diaminopyrimidine Oxide), Redensyl™, caffeine; hydrolysed keratin and collagen"
+        },
+        {
+          "label": "How to use",
+          "value": "Lather, wash and massage the scalp for 1–2 minutes, rinse well"
+        },
+        {
+          "label": "Brand",
+          "value": "HAIRBORN"
+        }
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Why washing matters",
+      "heading": "A scalp that gets greasy fast, hair that breaks after every wash",
+      "quotes": [
+        "“I wash it in the morning and it is greasy by the afternoon.”",
+        "“After brushing there is a whole clump of broken hair in the brush.”",
+        "“After washing my hair feels stiff and hard to comb.”"
+      ],
+      "explainer": {
+        "heading": "Washing well keeps the scalp clean without snapping the hair",
+        "body": [
+          "Excess oil, sweat and product residue build up and leave the scalp greasy and itchy. Scrubbing with nails or rubbing hard scratches the scalp and breaks hair.",
+          "Hair Boost is a scalp care shampoo. The bottle label states three uses: helps prevent hair breakage, leaves hair soft and smooth, helps hair feel stronger and look thicker."
+        ],
+        "diagram": "none"
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Before you order",
+      "heading": "Who it suits",
+      "columns": 2,
+      "items": [
+        {
+          "heading": "A scalp that gets oily fast",
+          "body": "Wash regularly and massage with the fingertips to lift excess oil and sebum.",
+          "meta": "Suitable"
+        },
+        {
+          "heading": "Fine hair that breaks when brushed or washed",
+          "body": "Hydrolysed keratin and collagen keep strands softer and less likely to snap when detangling.",
+          "meta": "Suitable"
+        },
+        {
+          "heading": "Very dry, frizzy hair that will not sit right",
+          "body": "Kerasilk Smooth suits dry, frizzy hair better. You can also add the Collagen Deep Shot mask after washing.",
+          "meta": "Consider another option"
+        },
+        {
+          "heading": "An inflamed scalp, thick scale or wounds",
+          "body": "See a dermatologist first. A care shampoo does not replace an examination.",
+          "meta": "See a doctor first"
+        }
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Ingredients",
+      "heading": "Ingredients on the bottle label",
+      "intro": "The first three are printed inside the Hairroot Boost Complex panel. Hydrolysed keratin and collagen appear in the English description on the label.",
+      "caption": "Soap pod, soapberry and holy basil come from the brand's ingredient image and do not appear on the front label. No concentrations are printed. The full INCI list is printed on the product packaging.",
+      "rows": [
+        {
+          "name": "Kopexil (Diaminopyrimidine Oxide)",
+          "inProduct": "Bottle label",
+          "role": "An active commonly found in shampoos for hair-root care.",
+          "suitedFor": "Fine hair that breaks easily"
+        },
+        {
+          "name": "Redensyl™",
+          "inProduct": "Bottle label",
+          "role": "A branded active used in scalp and hair-root care products.",
+          "suitedFor": "Fine hair, weak roots"
+        },
+        {
+          "name": "Caffeine",
+          "inProduct": "Bottle label",
+          "role": "A familiar ingredient in shampoos aimed at the scalp.",
+          "suitedFor": "Oily scalp, fine hair"
+        },
+        {
+          "name": "Hydrolyzed Keratin",
+          "inProduct": "Bottle label",
+          "role": "Hydrolysed keratin coats the strand, keeping hair softer and less prone to breaking when brushed.",
+          "suitedFor": "Dry, damaged hair"
+        },
+        {
+          "name": "Hydrolyzed Collagen",
+          "inProduct": "Bottle label",
+          "role": "Hydrolysed collagen helps the strand hold moisture and feel softer.",
+          "suitedFor": "Dry hair"
+        },
+        {
+          "name": "Soap pod and soapberry (bồ kết, bồ hòn)",
+          "inProduct": "Brand's image",
+          "role": "Gentle cleansing. The brand says they help reduce dandruff and oiliness.",
+          "suitedFor": "Oily scalp, light dandruff"
+        },
+        {
+          "name": "Holy basil (hương nhu tía)",
+          "inProduct": "Brand's image",
+          "role": "The brand says it soothes and leaves the scalp feeling fresh.",
+          "suitedFor": "Mildly itchy scalp"
+        }
+      ],
+      "cta": {
+        "label": "See price and order",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use",
+      "heading": "How to wash",
+      "intro": "Following the brand's instruction card.",
+      "totalTime": "PT5M",
+      "items": [
+        {
+          "heading": "Wet hair and scalp",
+          "body": "Use clean water. This rinses away some dirt and oil and softens the hair."
+        },
+        {
+          "heading": "Lather and wash gently for 1–2 minutes",
+          "body": "Take enough into your hand, work up a lather and apply to hair and scalp. Massage in circles with the fingertips, not the nails."
+        },
+        {
+          "heading": "Rinse well and pat dry",
+          "body": "Rinse until no foam is left. Pat dry with a soft towel, then move on to a mask or scalp care step if you use one."
+        }
+      ],
+      "footnote": "If hair is very dirty, wash a second time. The brand presents it as a shampoo for daily use."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City. Tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support while you use it</strong> by email."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "FAQ",
+      "heading": "Common questions",
+      "items": [
+        {
+          "q": "How much is Hair Boost shampoo?",
+          "a": "<strong>{{price}}</strong> for the 450g bottle. The list price is {{compareAtPrice}}. The 50g mini has its own price in the order form. Free delivery, pay on delivery."
+        },
+        {
+          "q": "What is the difference between the large bottle and the mini?",
+          "a": "Same Hair Boost name, same Hairroot Boost Complex panel on the label. The 450g comes as a pump bottle; the mini is a 50g tube, handy for travel or a first try."
+        },
+        {
+          "q": "Do I need a conditioner?",
+          "a": "Not necessarily. If your hair is long, dry or tangles easily, add the Collagen Deep Shot mask to the lengths and ends after washing."
+        },
+        {
+          "q": "How do I use it with Peel Ion?",
+          "a": "Wash with Hair Boost, rinse well, towel the hair until just damp, then roll Peel Ion onto the scalp. Peel Ion is not rinsed out."
+        },
+        {
+          "q": "How should it be stored?",
+          "a": "Close the pump after use, keep in a cool, dry place away from direct sunlight and out of reach of children."
+        }
+      ],
+      "cta": {
+        "note": "No questions left?",
+        "label": "Back to the order form",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Next step",
+      "heading": "After washing",
+      "intro": "Mask the lengths, then care for the scalp. For dry, frizzy hair you can switch to Kerasilk Smooth.",
+      "items": [
+        "hairborn-collagen-deep-shot",
+        "hairborn-peel-ion",
+        "hairborn-kerasilk-smooth-shampoo"
+      ]
+    }
+  ]
+}

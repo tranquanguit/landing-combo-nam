@@ -1,0 +1,27 @@
+{
+  "slug": "combo-peel-kem-chong-nang",
+  "locale": "vi",
+  "translationKey": "combo:combo-peel-kem-chong-nang",
+  "status": "published",
+  "name": "Combo Peel + Kem chống nắng",
+  "shortName": "Peel + Chống nắng",
+  "group": "peel",
+  "order": 30,
+  "items": [
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    }
+  ],
+  "price": 815000,
+  "currency": "VND",
+  "purpose": "Da mới sau peel rất dễ sạm lại. Bộ này đi kèm kem chống nắng để che chắn ngay từ ngày đầu.",
+  "seo": {
+    "title": "Combo Peel + Kem chống nắng | Mỹ Phẩm Mocha",
+    "description": "Da mới sau peel rất dễ sạm lại. Bộ này đi kèm kem chống nắng để che chắn ngay từ ngày đầu. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

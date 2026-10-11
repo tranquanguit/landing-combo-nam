@@ -1,0 +1,45 @@
+{
+  "status": "published",
+  "name": "Sale 15.10 — chăm da cuối tháng",
+  "startsAt": "2026-10-14T00:00:00+07:00",
+  "endsAt": "2026-10-17T00:00:00+07:00",
+  "locales": ["vi"],
+  "badge": "15.10",
+  "banner": {
+    "text": "Sale 15.10 — combo chống nắng và làm sạch, tặng sữa rửa mặt mini",
+    "href": "/uv-block-sunscreen/#uu-dai"
+  },
+  "packs": [
+    {
+      "id": "kcn-srm-1510",
+      "showOn": ["uv-block-sunscreen", "bio-active-cleanser"],
+      "label": "Combo sữa rửa mặt + kem chống nắng",
+      "note": "Hai bước nền mỗi ngày: làm sạch buổi tối, chống nắng buổi sáng.",
+      "items": [
+        { "product": "bio-active-cleanser", "qty": 1 },
+        { "product": "uv-block-sunscreen", "qty": 1 }
+      ],
+      "price": 483000,
+      "gifts": [{ "name": "Sữa rửa mặt Bio-Active mini", "qty": 1, "value": 140000 }],
+      "recommended": true
+    },
+    {
+      "id": "mun-tham-kcn-1510",
+      "showOn": ["smart-target-acne-gel", "smart-whitening-turmergel", "uv-block-sunscreen"],
+      "label": "Combo mụn + thâm + chống nắng",
+      "items": [
+        { "product": "smart-target-acne-gel", "qty": 1 },
+        { "product": "smart-whitening-turmergel", "qty": 1 },
+        { "product": "uv-block-sunscreen", "qty": 1 }
+      ],
+      "price": 570000,
+      "gifts": [{ "name": "Sữa rửa mặt Bio-Active mini", "qty": 1, "value": 140000 }],
+      "recommended": false
+    }
+  ],
+  "terms": [
+    "Áp dụng cho đơn đặt trên website và qua hotline trong thời gian chương trình.",
+    "Quà tặng không quy đổi thành tiền.",
+    "Mỗi đơn chọn một gói, không cộng dồn với ưu đãi khác."
+  ]
+}

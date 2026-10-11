@@ -1,0 +1,1048 @@
+{
+  "status": "draft",
+  "name": "Combo kèm quà tháng 10 (xem thử)",
+  "startsAt": "2026-10-11T00:00:00+07:00",
+  "endsAt": "2026-11-01T00:00:00+07:00",
+  "locales": [
+    "vi"
+  ],
+  "badge": "Quà T10",
+  "packs": [
+    {
+      "id": "qua-bo-5-mon-da-mun",
+      "showOn": [
+        "bo-5-mon-da-mun"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-deep-detox-rebalance",
+          "qty": 1
+        },
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        },
+        {
+          "product": "smart-target-acne-gel",
+          "qty": 1
+        },
+        {
+          "product": "smart-whitening-turmergel",
+          "qty": 1
+        }
+      ],
+      "price": 1095000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-bo-5-mon-duong-sang",
+      "showOn": [
+        "bo-5-mon-duong-sang"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-deep-detox-rebalance",
+          "qty": 1
+        },
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        },
+        {
+          "product": "ultra-egf-bio-gel-mask",
+          "qty": 1
+        },
+        {
+          "product": "biovector-brightening-cream",
+          "qty": 1
+        }
+      ],
+      "price": 1145000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-bo-5-mon-tham-sam",
+      "showOn": [
+        "bo-5-mon-tham-sam"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-deep-detox-rebalance",
+          "qty": 1
+        },
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        },
+        {
+          "product": "smart-first-care-serum",
+          "qty": 1
+        },
+        {
+          "product": "smart-whitening-turmergel",
+          "qty": 1
+        }
+      ],
+      "price": 1380000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-bo-6-mon-duong-sang-serum",
+      "showOn": [
+        "bo-6-mon-duong-sang-serum"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-deep-detox-rebalance",
+          "qty": 1
+        },
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        },
+        {
+          "product": "ultra-egf-bio-gel-mask",
+          "qty": 1
+        },
+        {
+          "product": "smart-first-care-serum",
+          "qty": 1
+        },
+        {
+          "product": "biovector-brightening-cream",
+          "qty": 1
+        }
+      ],
+      "price": 1665000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-bo-7-mon-da-mun-peel",
+      "showOn": [
+        "bo-7-mon-da-mun-peel"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-deep-detox-rebalance",
+          "qty": 1
+        },
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        },
+        {
+          "product": "ultra-egf-bio-gel-mask",
+          "qty": 1
+        },
+        {
+          "product": "retinol-mixpeel-kit",
+          "qty": 1
+        },
+        {
+          "product": "smart-target-acne-gel",
+          "qty": 1
+        },
+        {
+          "product": "smart-whitening-turmergel",
+          "qty": 1
+        }
+      ],
+      "price": 1750000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-bo-7-mon-nam",
+      "showOn": [
+        "bo-7-mon-nam"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-deep-detox-rebalance",
+          "qty": 1
+        },
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        },
+        {
+          "product": "ultra-egf-bio-gel-mask",
+          "qty": 1
+        },
+        {
+          "product": "smart-first-care-serum",
+          "qty": 1
+        },
+        {
+          "product": "smart-brightening-cream",
+          "qty": 1
+        },
+        {
+          "product": "biovector-brightening-cream",
+          "qty": 1
+        }
+      ],
+      "price": 2225000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-bo-8-mon-nam-peel",
+      "showOn": [
+        "bo-8-mon-nam-peel"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-deep-detox-rebalance",
+          "qty": 1
+        },
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        },
+        {
+          "product": "ultra-egf-bio-gel-mask",
+          "qty": 1
+        },
+        {
+          "product": "retinol-mixpeel-kit",
+          "qty": 1
+        },
+        {
+          "product": "smart-first-care-serum",
+          "qty": 1
+        },
+        {
+          "product": "smart-brightening-cream",
+          "qty": 1
+        },
+        {
+          "product": "biovector-brightening-cream",
+          "qty": 1
+        }
+      ],
+      "price": 2455000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-bo-hairborn-5-mon",
+      "showOn": [
+        "bo-hairborn-5-mon"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "hairborn-hair-boost-shampoo",
+          "qty": 1
+        },
+        {
+          "product": "hairborn-collagen-deep-shot",
+          "qty": 1
+        },
+        {
+          "product": "hairborn-peel-ion",
+          "qty": 1
+        }
+      ],
+      "price": 990000,
+      "gifts": [
+        {
+          "name": "Dầu gội Hair Boost mini 50g",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-bo-premium-10-mon",
+      "showOn": [
+        "bo-premium-10-mon"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-deep-detox-rebalance",
+          "qty": 1
+        },
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        },
+        {
+          "product": "ultra-egf-bio-gel-mask",
+          "qty": 1
+        },
+        {
+          "product": "retinol-mixpeel-kit",
+          "qty": 1
+        },
+        {
+          "product": "smart-first-care-serum",
+          "qty": 1
+        },
+        {
+          "product": "smart-brightening-cream",
+          "qty": 1
+        },
+        {
+          "product": "biovector-brightening-cream",
+          "qty": 1
+        },
+        {
+          "product": "smart-target-acne-gel",
+          "qty": 1
+        },
+        {
+          "product": "smart-whitening-turmergel",
+          "qty": 1
+        }
+      ],
+      "price": 3115000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-biovector-kem-chong-nang",
+      "showOn": [
+        "combo-biovector-kem-chong-nang"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "biovector-brightening-cream",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        }
+      ],
+      "price": 600000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-biovector-sua-rua-mat",
+      "showOn": [
+        "combo-biovector-sua-rua-mat"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "biovector-brightening-cream",
+          "qty": 1
+        }
+      ],
+      "price": 558000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-hairborn-goi-2-peel-ion",
+      "showOn": [
+        "combo-hairborn-goi-2-peel-ion"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "hairborn-hair-boost-shampoo",
+          "qty": 1
+        },
+        {
+          "product": "hairborn-peel-ion",
+          "qty": 2
+        }
+      ],
+      "price": 860000,
+      "gifts": [
+        {
+          "name": "Dầu gội Hair Boost mini 50g",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-hairborn-goi-peel-ion",
+      "showOn": [
+        "combo-hairborn-goi-peel-ion"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "hairborn-hair-boost-shampoo",
+          "qty": 1
+        },
+        {
+          "product": "hairborn-peel-ion",
+          "qty": 1
+        }
+      ],
+      "price": 615000,
+      "gifts": [
+        {
+          "name": "Dầu gội Hair Boost mini 50g",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-mun-mat-na",
+      "showOn": [
+        "combo-mun-mat-na"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "smart-target-acne-gel",
+          "qty": 1
+        },
+        {
+          "product": "ultra-egf-bio-gel-mask",
+          "qty": 1
+        }
+      ],
+      "price": 405000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-mun-sua-rua-mat",
+      "showOn": [
+        "combo-mun-sua-rua-mat"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "smart-target-acne-gel",
+          "qty": 1
+        }
+      ],
+      "price": 465000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-mun-sua-rua-mat-tay-trang",
+      "showOn": [
+        "combo-mun-sua-rua-mat-tay-trang"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-deep-detox-rebalance",
+          "qty": 1
+        },
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "smart-target-acne-gel",
+          "qty": 1
+        }
+      ],
+      "price": 660000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-mun-tham",
+      "showOn": [
+        "combo-mun-tham"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "smart-target-acne-gel",
+          "qty": 1
+        },
+        {
+          "product": "smart-whitening-turmergel",
+          "qty": 1
+        }
+      ],
+      "price": 425000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-mun-tham-kem-chong-nang",
+      "showOn": [
+        "combo-mun-tham-kem-chong-nang"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "smart-target-acne-gel",
+          "qty": 1
+        },
+        {
+          "product": "smart-whitening-turmergel",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        }
+      ],
+      "price": 645000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-mun-tham-lam-sach",
+      "showOn": [
+        "combo-mun-tham-lam-sach"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-deep-detox-rebalance",
+          "qty": 1
+        },
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "smart-target-acne-gel",
+          "qty": 1
+        },
+        {
+          "product": "smart-whitening-turmergel",
+          "qty": 1
+        }
+      ],
+      "price": 760000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-mun-tham-sua-rua-mat",
+      "showOn": [
+        "combo-mun-tham-sua-rua-mat"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "smart-target-acne-gel",
+          "qty": 1
+        },
+        {
+          "product": "smart-whitening-turmergel",
+          "qty": 1
+        }
+      ],
+      "price": 660000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-nam-biovector",
+      "showOn": [
+        "combo-nam-biovector"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "smart-first-care-serum",
+          "qty": 1
+        },
+        {
+          "product": "smart-brightening-cream",
+          "qty": 1
+        },
+        {
+          "product": "biovector-brightening-cream",
+          "qty": 1
+        }
+      ],
+      "price": 1283000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-nam-kem-chong-nang",
+      "showOn": [
+        "combo-nam-kem-chong-nang"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "smart-first-care-serum",
+          "qty": 1
+        },
+        {
+          "product": "smart-brightening-cream",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        }
+      ],
+      "price": 1339000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-nam-peel",
+      "showOn": [
+        "combo-nam-peel"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "smart-first-care-serum",
+          "qty": 1
+        },
+        {
+          "product": "smart-brightening-cream",
+          "qty": 1
+        },
+        {
+          "product": "retinol-mixpeel-kit",
+          "qty": 1
+        }
+      ],
+      "price": 1470000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-nam-peel-kem-chong-nang",
+      "showOn": [
+        "combo-nam-peel-kem-chong-nang"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "smart-first-care-serum",
+          "qty": 1
+        },
+        {
+          "product": "smart-brightening-cream",
+          "qty": 1
+        },
+        {
+          "product": "retinol-mixpeel-kit",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        }
+      ],
+      "price": 1755000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-peel-biovector",
+      "showOn": [
+        "combo-peel-biovector"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "retinol-mixpeel-kit",
+          "qty": 1
+        },
+        {
+          "product": "biovector-brightening-cream",
+          "qty": 1
+        }
+      ],
+      "price": 835000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-peel-biovector-kem-chong-nang",
+      "showOn": [
+        "combo-peel-biovector-kem-chong-nang"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "retinol-mixpeel-kit",
+          "qty": 1
+        },
+        {
+          "product": "biovector-brightening-cream",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        }
+      ],
+      "price": 1115000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-peel-kem-chong-nang",
+      "showOn": [
+        "combo-peel-kem-chong-nang"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "retinol-mixpeel-kit",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        }
+      ],
+      "price": 815000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-peel-mat-na",
+      "showOn": [
+        "combo-peel-mat-na"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "retinol-mixpeel-kit",
+          "qty": 1
+        },
+        {
+          "product": "ultra-egf-bio-gel-mask",
+          "qty": 1
+        }
+      ],
+      "price": 705000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-peel-sua-rua-mat",
+      "showOn": [
+        "combo-peel-sua-rua-mat"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "retinol-mixpeel-kit",
+          "qty": 1
+        },
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        }
+      ],
+      "price": 750000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-peel-sua-rua-mat-kem-chong-nan",
+      "showOn": [
+        "combo-peel-sua-rua-mat-kem-chong-nang"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "retinol-mixpeel-kit",
+          "qty": 1
+        },
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        }
+      ],
+      "price": 1015000,
+      "gifts": [
+        {
+          "name": "Mặt nạ Gel EGF Mocha 100gr",
+          "qty": 1,
+          "value": 195000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-sua-rua-mat-kem-chong-nang",
+      "showOn": [
+        "combo-sua-rua-mat-kem-chong-nang"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        },
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        }
+      ],
+      "price": 558000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    },
+    {
+      "id": "qua-combo-sua-rua-mat-tay-trang",
+      "showOn": [
+        "combo-sua-rua-mat-tay-trang"
+      ],
+      "label": "Combo kèm quà tháng 10",
+      "items": [
+        {
+          "product": "bio-deep-detox-rebalance",
+          "qty": 1
+        },
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        }
+      ],
+      "price": 425000,
+      "gifts": [
+        {
+          "name": "Sữa rửa mặt Bio-Active mini 25gr",
+          "qty": 1,
+          "value": 140000
+        }
+      ],
+      "recommended": true
+    }
+  ],
+  "terms": [
+    "Quà tặng kèm theo đơn, không quy đổi thành tiền.",
+    "Áp dụng khi đặt đúng combo trong thời gian chương trình."
+  ]
+}

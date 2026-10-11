@@ -1,0 +1,40 @@
+---
+/**
+ * Dải ảnh tình trạng da trong một mục văn bản (bài viết, trang hỏi đáp, trang dòng).
+ *
+ * Ảnh tư liệu chỉ ~180–360px nên ô giữ cỡ nhỏ, không kéo giãn theo cột: phóng
+ * ảnh nhỏ lên ô lớn là mờ. Chú thích nằm ngay dưới dải, nói rõ đây là ảnh minh
+ * hoạ tình trạng.
+ */
+import Picture from './Picture.astro';
+import { richText } from '../lib/richtext';
+interface Props { figure: { items: { src: string; alt: string; label: string }[]; caption: string }; }
+const { figure } = Astro.props;
+---
+<figure class="sf">
+  <ul class="sf-row" style={`--n:${Math.min(figure.items.length, 3)}`}>
+    {figure.items.map((it) => (
+      <li>
+        <span class="sf-ph"><Picture src={it.src} alt={it.alt} ratio="1/1" fit="cover" sizes="(min-width: 980px) 160px, 30vw" widths={[160, 240]} /></span>
+        <span class="sf-l">{it.label}</span>
+      </li>
+    ))}
+  </ul>
+  <figcaption set:html={richText(figure.caption)} />
+</figure>
+
+<style>
+  .sf { margin: var(--s-6) 0 var(--s-5); min-width: 0; }
+  .sf-row {
+    list-style: none; padding: 0; margin: 0;
+    /* Số cột cố định + minmax(0, …): lưới không có bề rộng tối thiểu nội tại, nên
+       không đẩy cột thân bài (và mục lục cùng lưới) rộng quá màn hình điện thoại. */
+    display: grid; gap: var(--s-3); grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    max-width: calc(var(--n) * 180px);
+  }
+  .sf-row li { display: flex; flex-direction: column; gap: var(--s-2); }
+  .sf-ph { display: block; border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px rgba(26, 29, 82, .08); }
+  .sf-ph :global(.ratio) { display: block; }
+  .sf-l { font-size: var(--t-xs); font-weight: 600; line-height: 1.3; color: var(--ink-navy); }
+  figcaption { margin-top: var(--s-3); max-width: 60ch; font-size: var(--t-xs); line-height: 1.55; color: var(--ink-muted); }
+</style>

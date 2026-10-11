@@ -1,0 +1,327 @@
+{
+  "slug": "hairborn-peel-ion",
+  "translationKey": "hairborn-peel-ion",
+  "status": "published",
+  "sku": "HAIRBORN-SP022",
+  "price": 295000,
+  "compareAtPrice": 405000,
+  "currency": "VND",
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "cham-soc-toc",
+  "locale": "vi",
+  "name": "HairBorn Peel Ion – tinh chất dưỡng da đầu dạng lăn",
+  "shortName": "Tinh chất da đầu Peel Ion",
+  "primaryKeyword": "tinh chất dưỡng da đầu hairborn peel ion",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Muốn dưỡng da đầu và chân tóc tại nhà khi tóc mảnh, dễ gãy",
+    "audienceSituations": [
+      "Thấy tóc rụng nhiều khi gội và muốn thêm một bước dưỡng da đầu",
+      "Đã thử tinh dầu bôi bằng tay nhưng chảy xuống mặt, dính tay",
+      "Đang dùng dầu gội HAIRBORN và muốn thêm bước dưỡng sau khi gội"
+    ],
+    "contextHints": [
+      "người hỏi cách dưỡng da đầu khi tóc mảnh, dễ gãy",
+      "người hỏi tinh chất da đầu dạng lăn dùng thế nào"
+    ],
+    "approvedAngles": [
+      "Tinh chất dưỡng da đầu dạng lăn, không cần xả lại",
+      "Thành phần chính in trên vỏ tuýp: Redensyl™, panthenol, Pentavitin"
+    ],
+    "riskyAngles": [
+      "gọi sản phẩm là thuốc dành cho người rụng tóc bệnh lý",
+      "hứa tóc dày lên sau một mốc thời gian cụ thể"
+    ],
+    "preferredDestination": "#thanh-phan"
+  },
+  "seo": {
+    "title": "HairBorn Peel Ion 60ml, tinh chất dưỡng da đầu | Mocha Việt Nam",
+    "description": "Tinh chất dưỡng da đầu dạng lăn, tuýp 60ml. Trên vỏ in Redensyl™, panthenol, Pentavitin, tinh dầu bưởi. Lăn sau khi gội, không cần xả lại. {{price}}."
+  },
+  "compliance": {
+    "declarant": "hairborn",
+    "functions": "hỗ trợ dưỡng ẩm, chăm sóc da đầu và chân tóc",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da đầu có dấu hiệu kích ứng. Tránh tiếp xúc với mắt; nếu dính vào mắt, rửa ngay bằng nước sạch.",
+      "Rụng tóc thành mảng, rụng nhiều đột ngột, hoặc da đầu đỏ, ngứa, đóng vảy dày: nên đi khám bác sĩ da liễu.",
+      "Kết quả khác nhau tùy cơ địa và tình trạng tóc. Để xa tầm tay trẻ em."
+    ]
+  },
+  "variants": [
+    {
+      "label": "1 tuýp 60ml",
+      "note": "Tiết kiệm {{save}} so với giá niêm yết",
+      "price": 295000,
+      "recommended": true
+    },
+    {
+      "label": "Combo 2 tuýp",
+      "note": "Hai tuýp 60ml, giao trong cùng một đơn",
+      "price": 480000,
+      "recommended": false,
+      "qty": 2
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, hỏi về tình trạng tóc và da đầu trước khi chốt đơn",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước dưỡng sau khi gội",
+      "heading": "Dưỡng da đầu và chân tóc bằng đầu lăn, không dính tay",
+      "lead": "Tuýp 60ml có ba đầu bi lăn. Tinh chất xuống thẳng da đầu, massage nhẹ rồi để nguyên, không cần xả lại. Trên vỏ in <strong>Redensyl™, panthenol, Pentavitin</strong> và tinh dầu bưởi.",
+      "usp": [
+        {
+          "text": "<strong>Thành phần chính in trên vỏ tuýp</strong>: Redensyl™, glycerin, chiết xuất dừa lên men, panthenol, Pentavitin, tinh dầu bưởi",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "chép từ mặt trước tuýp 60ml"
+        },
+        {
+          "text": "<strong>Ba đầu bi lăn</strong> đưa tinh chất xuống da đầu, không phải đổ ra tay",
+          "evidence": "ingredient",
+          "qualifier": "theo ảnh bao bì của hãng"
+        },
+        {
+          "text": "<strong>Không cần xả lại</strong> sau khi lăn",
+          "evidence": "ingredient",
+          "qualifier": "theo hướng dẫn sử dụng của hãng"
+        }
+      ],
+      "image": {
+        "src": "/images/hero-hairborn-peel-ion.webp",
+        "alt": "Tuýp HairBorn Peel Ion 60ml màu trắng, đầu lăn ba bi"
+      },
+      "primaryCta": "Đặt Peel Ion",
+      "secondaryCta": {
+        "label": "Xem thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Dung tích",
+          "value": "60ml"
+        },
+        {
+          "label": "Dạng",
+          "value": "Tinh chất lỏng, tuýp có ba đầu bi lăn"
+        },
+        {
+          "label": "Dùng cho",
+          "value": "Da đầu và chân tóc"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Redensyl™, glycerin, chiết xuất dừa lên men, panthenol, Pentavitin, tinh dầu bưởi"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Lăn lên da đầu sau khi gội, massage 3–5 phút, không xả lại"
+        },
+        {
+          "label": "Thương hiệu",
+          "value": "HAIRBORN"
+        }
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Vì sao cần bước này",
+      "heading": "Tóc rụng theo lược, chân tóc mảnh, đường ngôi lộ da đầu",
+      "quotes": [
+        "“Mỗi lần gội thấy tóc rụng đầy tay, nhìn mà ngại.”",
+        "“Đường ngôi ngày càng rộng ra.”",
+        "“Mua tinh dầu về bôi thì chảy xuống trán, dính tay, được vài hôm là bỏ.”"
+      ],
+      "explainer": {
+        "heading": "Phần lớn tóc rụng khi gội là tóc đã tới lúc rụng",
+        "body": [
+          "Mỗi ngày tóc rụng vài chục sợi là bình thường. Vài ngày không gội, số tóc đó dồn lại và rơi ra cùng lúc, nên trông nhiều hơn thực tế.",
+          "Việc làm được ở nhà là giữ da đầu sạch, đủ ẩm, và bớt kéo gãy sợi tóc khi chải gội. Peel Ion là bước dưỡng sau cùng, lăn thẳng lên da đầu sau khi gội.",
+          "Rụng thành mảng, rụng nhiều đột ngột hoặc kèm ngứa đỏ da đầu thì nên đi khám trước khi mua bất kỳ sản phẩm nào."
+        ],
+        "diagram": "none"
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Hợp với ai, ai nên chờ",
+      "columns": 2,
+      "items": [
+        {
+          "heading": "Tóc mảnh, dễ gãy khi chải",
+          "body": "Dùng sau khi gội để dưỡng da đầu và chân tóc. Dùng đều thì tóc trông dày và chắc hơn.",
+          "meta": "Phù hợp"
+        },
+        {
+          "heading": "Da đầu hay khô, ngứa nhẹ sau khi gội",
+          "body": "Glycerin, panthenol và Pentavitin là nhóm giữ ẩm. Lăn một lớp mỏng, massage nhẹ.",
+          "meta": "Phù hợp"
+        },
+        {
+          "heading": "Rụng tóc thành mảng, rụng nhiều đột ngột",
+          "body": "Cần bác sĩ da liễu tìm nguyên nhân trước. Một sản phẩm dưỡng không thay được việc khám.",
+          "meta": "Nên đi khám trước"
+        },
+        {
+          "heading": "Da đầu đang trầy xước, viêm hoặc có vết thương",
+          "body": "Chờ da đầu lành hẳn rồi mới dùng. Đầu bi lăn sẽ cọ vào vùng da đang tổn thương.",
+          "meta": "Chưa nên dùng"
+        }
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Thành phần",
+      "heading": "Thành phần in trên vỏ tuýp",
+      "intro": "Tên thành phần chép từ mặt trước tuýp. Vỏ không in nồng độ, nên bảng không ghi con số nào.",
+      "caption": "Theo tuýp bản mới, ghi “Tinh chất chăm sóc tóc và da đầu”. Tuýp bản cũ in glycerin, dầu dừa, panthenol, Pentavitin, tinh dầu bưởi và không có Redensyl™. Bảng INCI đầy đủ in ở bao bì sản phẩm.",
+      "rows": [
+        {
+          "name": "Redensyl™",
+          "role": "Hoạt chất thương mại thường dùng trong sản phẩm chăm sóc da đầu và chân tóc.",
+          "suitedFor": "Tóc mảnh, chân tóc yếu"
+        },
+        {
+          "name": "Glycerin",
+          "role": "Giữ ẩm, giúp da đầu không khô căng.",
+          "suitedFor": "Da đầu khô"
+        },
+        {
+          "name": "Chiết xuất dừa lên men",
+          "role": "Thành phần dưỡng gốc dừa.",
+          "suitedFor": "Tóc khô xơ"
+        },
+        {
+          "name": "Panthenol",
+          "role": "Tiền vitamin B5, giữ ẩm cho da đầu và sợi tóc.",
+          "suitedFor": "Mọi loại tóc"
+        },
+        {
+          "name": "Pentavitin™",
+          "role": "Phức hợp giữ ẩm gốc đường, bám trên bề mặt da.",
+          "suitedFor": "Da đầu khô, dễ ngứa"
+        },
+        {
+          "name": "Tinh dầu bưởi",
+          "role": "Tạo mùi thơm, quen dùng trong chăm sóc tóc ở Việt Nam.",
+          "suitedFor": "Người thích mùi bưởi; người dễ dị ứng tinh dầu nên thử trước"
+        }
+      ],
+      "cta": {
+        "label": "Xem giá và đặt hàng",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Cách dùng",
+      "intro": "Theo hướng dẫn của hãng.",
+      "totalTime": "PT5M",
+      "items": [
+        {
+          "heading": "Gội sạch, lau bớt nước",
+          "body": "Dùng sau khi gội. Lau tóc bằng khăn đến khi còn hơi ẩm, hoặc để khô."
+        },
+        {
+          "heading": "Mở khoá cho tinh chất xuống đầu lăn",
+          "body": "Mở nắp để tinh chất chảy xuống ba đầu bi rồi khoá lại. Cách này giúp lượng ra vừa đủ."
+        },
+        {
+          "heading": "Rẽ ngôi, lăn dọc da đầu",
+          "body": "Chia tóc thành từng phần, lăn đầu bi dọc da đầu và chân tóc. Massage nhẹ 3–5 phút."
+        },
+        {
+          "heading": "Để nguyên, không xả lại",
+          "body": "Không cần gội lại. Cần sấy thì để chế độ mát."
+        }
+      ],
+      "footnote": "Tần suất theo ảnh hướng dẫn của hãng: mỗi ngày nếu tóc yếu, thưa nhiều; cách ngày nếu tóc chỉ hơi yếu."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng hợp với tóc và da đầu của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt thời gian dùng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Peel Ion giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho một tuýp 60ml. Giá niêm yết là {{compareAtPrice}}. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Chữ “ion” trong tên là gì?",
+          "a": "Hãng gọi ba đầu bi lăn bằng kim loại là đầu lăn ion. Chúng tôi không có tài liệu đo riêng tác dụng của phần “ion”, nên chỉ mô tả phần thấy được: đầu bi đưa tinh chất xuống đúng da đầu và massage nhẹ khi lăn."
+        },
+        {
+          "q": "Đang rụng tóc nhiều thì dùng được không?",
+          "a": "Peel Ion là mỹ phẩm dưỡng da đầu, không phải thuốc. Nếu tóc rụng thành mảng, rụng nhiều đột ngột hoặc da đầu đỏ ngứa, nên đi khám da liễu trước."
+        },
+        {
+          "q": "Nam dùng được không?",
+          "a": "Được. Hãng ghi sản phẩm dùng cho cả nam và nữ."
+        },
+        {
+          "q": "Dùng chung với dầu gội nào?",
+          "a": "Hãng xếp Peel Ion sau dầu gội Hair Boost: gội, xả sạch, lau bớt nước rồi mới lăn. Dùng với dầu gội khác cũng được, miễn là da đầu sạch."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Khoá đầu lăn và đậy nắp sau khi dùng. Để nơi khô mát, tránh nắng trực tiếp, xa tầm tay trẻ em."
+        }
+      ],
+      "cta": {
+        "note": "Không còn câu hỏi nào nữa?",
+        "label": "Quay lại phần đặt hàng",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước đi cùng",
+      "heading": "Các bước trước khi lăn",
+      "intro": "Peel Ion là bước cuối. Trước đó là gội, ủ, và thỉnh thoảng làm sạch sâu da đầu.",
+      "items": [
+        "hairborn-hair-boost-shampoo",
+        "hairborn-collagen-deep-shot",
+        "hairborn-scalp-scrub"
+      ]
+    }
+  ]
+}

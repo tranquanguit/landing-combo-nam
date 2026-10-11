@@ -1,0 +1,308 @@
+{
+  "status": "draft",
+  "name": "Giá tốt tháng 10 (xem thử)",
+  "startsAt": "2026-10-11T00:00:00+07:00",
+  "endsAt": "2026-11-01T00:00:00+07:00",
+  "locales": [
+    "vi"
+  ],
+  "badge": "T10",
+  "banner": {
+    "text": "Tháng 10: giá tốt từng sản phẩm, combo kèm quà",
+    "href": "/combo/"
+  },
+  "packs": [
+    {
+      "id": "don-bio-active-cleanser",
+      "showOn": [
+        "bio-active-cleanser"
+      ],
+      "label": "Ưu đãi T10 – Sữa rửa mặt Bio-Active Clea",
+      "items": [
+        {
+          "product": "bio-active-cleanser",
+          "qty": 1
+        }
+      ],
+      "price": 270000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-bio-deep-detox-rebalance",
+      "showOn": [
+        "bio-deep-detox-rebalance"
+      ],
+      "label": "Ưu đãi T10 – Nước tẩy trang Bio-Deep Det",
+      "items": [
+        {
+          "product": "bio-deep-detox-rebalance",
+          "qty": 1
+        }
+      ],
+      "price": 204000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-biovector-brightening-cream",
+      "showOn": [
+        "biovector-brightening-cream"
+      ],
+      "label": "Ưu đãi T10 – Biovector Brightening Cream",
+      "items": [
+        {
+          "product": "biovector-brightening-cream",
+          "qty": 1
+        }
+      ],
+      "price": 318000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-collagen-peptide-cream",
+      "showOn": [
+        "collagen-peptide-cream"
+      ],
+      "label": "Collagen Peptide Cream – ưu đãi T10",
+      "items": [
+        {
+          "product": "collagen-peptide-cream",
+          "qty": 1
+        }
+      ],
+      "price": 237000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-combo-nam",
+      "showOn": [
+        "combo-nam"
+      ],
+      "label": "Combo Nám Mocha – ưu đãi T10",
+      "items": [
+        {
+          "product": "combo-nam",
+          "qty": 1
+        }
+      ],
+      "price": 913000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-hairborn-collagen-deep-shot",
+      "showOn": [
+        "hairborn-collagen-deep-shot"
+      ],
+      "label": "Ưu đãi T10 – Mặt nạ ủ tóc Collagen Deep ",
+      "items": [
+        {
+          "product": "hairborn-collagen-deep-shot",
+          "qty": 1
+        }
+      ],
+      "price": 375000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-hairborn-hair-boost-shampoo",
+      "showOn": [
+        "hairborn-hair-boost-shampoo"
+      ],
+      "label": "Dầu gội Hair Boost – ưu đãi T10",
+      "items": [
+        {
+          "product": "hairborn-hair-boost-shampoo",
+          "qty": 1
+        }
+      ],
+      "price": 375000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-hairborn-kerasilk-smooth-shampoo",
+      "showOn": [
+        "hairborn-kerasilk-smooth-shampoo"
+      ],
+      "label": "Dầu gội Kerasilk Smooth – ưu đãi T10",
+      "items": [
+        {
+          "product": "hairborn-kerasilk-smooth-shampoo",
+          "qty": 1
+        }
+      ],
+      "price": 160000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-hairborn-peel-ion",
+      "showOn": [
+        "hairborn-peel-ion"
+      ],
+      "label": "Tinh chất da đầu Peel Ion – ưu đãi T10",
+      "items": [
+        {
+          "product": "hairborn-peel-ion",
+          "qty": 1
+        }
+      ],
+      "price": 280000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-hairborn-scalp-scrub",
+      "showOn": [
+        "hairborn-scalp-scrub"
+      ],
+      "label": "Tẩy tế bào chết da đầu – ưu đãi T10",
+      "items": [
+        {
+          "product": "hairborn-scalp-scrub",
+          "qty": 1
+        }
+      ],
+      "price": 133000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-pro-vitamin-b5-serum",
+      "showOn": [
+        "pro-vitamin-b5-serum"
+      ],
+      "label": "Tinh chất phục hồi B5 – ưu đãi T10",
+      "items": [
+        {
+          "product": "pro-vitamin-b5-serum",
+          "qty": 1
+        }
+      ],
+      "price": 190000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-retinol-mixpeel-kit",
+      "showOn": [
+        "retinol-mixpeel-kit"
+      ],
+      "label": "Retinol mixPEEL Kit – ưu đãi T10",
+      "items": [
+        {
+          "product": "retinol-mixpeel-kit",
+          "qty": 1
+        }
+      ],
+      "price": 495000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-smart-brightening-cream",
+      "showOn": [
+        "smart-brightening-cream"
+      ],
+      "label": "Ưu đãi T10 – Kem nám Smart Brightening X",
+      "items": [
+        {
+          "product": "smart-brightening-cream",
+          "qty": 1
+        }
+      ],
+      "price": 531000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-smart-first-care-serum",
+      "showOn": [
+        "smart-first-care-serum"
+      ],
+      "label": "Serum Smart First Care – ưu đãi T10",
+      "items": [
+        {
+          "product": "smart-first-care-serum",
+          "qty": 1
+        }
+      ],
+      "price": 495000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-smart-target-acne-gel",
+      "showOn": [
+        "smart-target-acne-gel"
+      ],
+      "label": "Gel chấm mụn Smart Target – ưu đãi T10",
+      "items": [
+        {
+          "product": "smart-target-acne-gel",
+          "qty": 1
+        }
+      ],
+      "price": 223000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-smart-whitening-turmergel",
+      "showOn": [
+        "smart-whitening-turmergel"
+      ],
+      "label": "Smart Whitening Turmergel – ưu đãi T10",
+      "items": [
+        {
+          "product": "smart-whitening-turmergel",
+          "qty": 1
+        }
+      ],
+      "price": 204000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-ultra-egf-bio-gel-mask",
+      "showOn": [
+        "ultra-egf-bio-gel-mask"
+      ],
+      "label": "Ultra EGF Bio-Gel Mask – ưu đãi T10",
+      "items": [
+        {
+          "product": "ultra-egf-bio-gel-mask",
+          "qty": 1
+        }
+      ],
+      "price": 185000,
+      "gifts": [],
+      "recommended": true
+    },
+    {
+      "id": "don-uv-block-sunscreen",
+      "showOn": [
+        "uv-block-sunscreen"
+      ],
+      "label": "Ưu đãi T10 – Kem chống nắng UV-Block Plu",
+      "items": [
+        {
+          "product": "uv-block-sunscreen",
+          "qty": 1
+        }
+      ],
+      "price": 318000,
+      "gifts": [],
+      "recommended": true
+    }
+  ],
+  "terms": [
+    "Mỗi đơn áp dụng một mức ưu đãi.",
+    "Không áp dụng đồng thời với đợt khuyến mãi khác."
+  ]
+}

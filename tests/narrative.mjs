@@ -14,6 +14,10 @@
  */
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { roleOf, REQUIRED_ROLES, ARCHETYPE_BEATS } from '../src/lib/narrative.ts';
+/* Lời chứng (collection `testimonials`) — khối `voices` chỉ render khi có lời đủ điều kiện. */
+const voiceFiles = existsSync('src/content/testimonials')
+  ? readdirSync('src/content/testimonials').filter((f) => f.endsWith('.json')).map((f) => JSON.parse(readFileSync(`src/content/testimonials/${f}`, 'utf8')))
+  : [];
 
 const DIR = 'src/content/products';
 const LOCALES = ['vi', 'en'];
@@ -153,8 +157,16 @@ for (const { slug, locale, p } of pages) {
           chúng, và đó là hành vi đúng, không phải lệch.
      Bản đầu của cổng này quên nhóm 2 và báo đỏ combo-nam, nơi gallery và
      testimonials đang chờ văn bản đồng ý. */
+  /* 3. khối `voices` không có lời chứng nào đủ điều kiện (đã có văn bản đồng ý) — nó
+        tự ẩn, cùng lý do với nhóm 2. Bản demo (PUBLIC_DEMO_CONTENT=1) hiện cả lời
+        đang chờ đồng ý, nên đọc cờ đó từ chính HTML (demo luôn gắn noindex). */
+  const demo = /class="demo-note/.test(html);
+  const hasVoices = (slug, locale) => voiceFiles.some((t) => t.status === 'published' && (t.locale ?? 'vi') === locale
+    && t.products.includes(slug) && ((t.consent?.status === 'written' && (t.consent.scope ?? []).includes('website'))
+      || (demo && t.consent?.status === 'pending')));
   const expected = p.blocks
     .filter((b) => !('consent' in b) || b.consent?.obtained === true)
+    .filter((b) => b.type !== 'voices' || hasVoices(slug, locale))
     .map(roleOf)
     .filter((r) => !['orient', 'value', 'decision'].includes(r));
   ok(`${slug}/${locale}: vai render khớp dữ liệu`, rendered.join('>') === expected.join('>'),

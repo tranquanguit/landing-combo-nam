@@ -17,12 +17,15 @@ import type { Sql } from './db.ts';
 /** Thư mục của từng collection — trùng `base` trong src/content.config.ts. */
 export const COLLECTIONS: Record<string, { dir: string; skip?: RegExp }> = {
   products: { dir: 'src/content/products' },
+  combos: { dir: 'src/content/combos' },
   lines: { dir: 'src/content/lines' },
   pages: { dir: 'src/content/pages' },
   articles: { dir: 'src/content/articles' },
   policies: { dir: 'src/content/policies' },
   guides: { dir: 'src/content/guides' },
   documents: { dir: 'src/content/documents' },
+  promotions: { dir: 'src/content/promotions' },
+  testimonials: { dir: 'src/content/testimonials' },
   /* File bắt đầu bằng "_" là dữ liệu nội bộ (đặc tả ảnh…), không phải một entry. */
   brand: { dir: 'src/data', skip: /(^|\/)_/ },
 };
@@ -123,12 +126,14 @@ function vietnamese(i: any): string {
  * phát hành bản code mới có thêm sản phẩm/bài trong git mà không muốn ghi đè những gì
  * người biên tập đã sửa trên trang quản trị (giá, câu chữ…).
  */
-export async function importFromFiles(sql: Sql, root: string, by = 'import', onlyNew = false) {
+export async function importFromFiles(sql: Sql, root: string, by = 'import', onlyNew = false, only?: Set<string>) {
   let entries = 0, media = 0;
   for (const c of Object.keys(COLLECTIONS)) {
     for (const { file, id } of entryFiles(root, c)) {
       const source = readFileSync(file, 'utf8');
-      if (onlyNew && (await sql.query('SELECT 1 FROM content_entries WHERE collection = $1 AND entry_id = $2', [c, id])).rows.length) continue;
+      /* `only`: chỉ nạp (và GHI ĐÈ) đúng các mục "collection/id" được chỉ định. */
+      if (only && !only.has(`${c}/${id}`)) continue;
+      if (onlyNew && !only && (await sql.query('SELECT 1 FROM content_entries WHERE collection = $1 AND entry_id = $2', [c, id])).rows.length) continue;
       await sql.query(
         `INSERT INTO content_entries (collection, entry_id, data, source, updated_by)
          VALUES ($1, $2, $3::text::jsonb, $4, $5)
@@ -144,6 +149,7 @@ export async function importFromFiles(sql: Sql, root: string, by = 'import', onl
       const bytes = readFileSync(f);
       const path = `/${d}/${posix(relative(base, f))}`;
       if (onlyNew && (await sql.query('SELECT 1 FROM media WHERE path = $1', [path])).rows.length) continue;
+      if (only && !onlyNew) continue;
       await putMedia(sql, path, bytes, by);
       media++;
     }

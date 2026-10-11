@@ -56,16 +56,15 @@
     "description": "Nước tẩy trang micellar pH 5.5 với Exosome Cica, Epi-On, dịch gạo Sake lên men, chiết xuất trà xanh và vitamin B5. {{price}}, freeship."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "2410/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "hỗ trợ làm sạch lớp trang điểm và bụi bẩn trên da mặt",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ],
-    "productNotificationNumber": "2410/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -84,9 +83,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Bước đầu của buổi tối",
+      "eyebrow": "Nước tẩy trang micellar · pH 5.5",
       "heading": "Kem chống nắng không tự trôi đi khi bạn rửa mặt",
-      "lead": "Nước tẩy trang micellar, pH 5.5, lấy đi lớp kem chống nắng và trang điểm mà nước với sữa rửa mặt không lấy hết được. Thành phần in đủ trên vỏ chai. Dùng được cho cả vùng mắt và môi.",
+      "lead": "Nước tẩy trang dùng buổi tối, trước sữa rửa mặt, để lấy lớp kem chống nắng và trang điểm. pH 5.5, có Panthenol, dùng được cho vùng mắt và môi.",
       "usp": [
         {
           "text": "<strong>Phân tử micellar Solubule BR-02</strong> và dầu tan nước Wilbride S-753D: nhà sản xuất gọi đúng tên hai thành phần làm sạch",
@@ -119,6 +118,32 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Kết cấu",
+          "value": "Dạng nước micellar, dùng với bông tẩy trang"
+        },
+        {
+          "label": "Độ pH",
+          "value": "5.5"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Solubule BR-02 (micellar), Wilbride S-753D, Epi-On, Exosome Cica, Panthenol, chiết xuất trà xanh"
+        },
+        {
+          "label": "Dùng cho",
+          "value": "Cả mặt, kể cả vùng mắt và môi (theo nhà sản xuất)"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Buổi tối: lau nhẹ bằng bông thấm ướt, rồi rửa lại bằng sữa rửa mặt"
+        },
+        {
+          "label": "Số công bố",
+          "value": "2410/25/CBMP-TN"
+        }
       ]
     },
     {
@@ -139,6 +164,93 @@
           "Nước micellar hoạt động theo cách khác sữa rửa mặt: các phân tử micelle bám vào dầu và kéo nó ra, nên nó lấy được thứ mà nước không lấy được. Chai này khai pH 5.5 và dùng được cho cả vùng mắt lẫn môi."
         ]
       }
+    },
+    {
+      "type": "infographic",
+      "id": "tren-mat-da",
+      "kind": "layers",
+      "eyebrow": "Cuối ngày, trên mặt da có gì",
+      "heading": "Ba thứ trên mặt da, và bước nào lấy đi thứ nào",
+      "intro": "Nước tẩy trang và sữa rửa mặt không làm cùng một việc. Mỗi bước lấy đi một loại, và có một lớp không bước nào nên lấy đi.",
+      "items": [
+        {
+          "label": "Kem chống nắng, lớp trang điểm",
+          "depth": "surface",
+          "highlight": true,
+          "body": "Được làm ra để bám lại qua mồ hôi và độ ẩm, nên không trôi đi chỉ bằng nước. Nước tẩy trang làm việc này: các phân tử micelle bám vào dầu và kéo nó ra."
+        },
+        {
+          "label": "Dầu thừa, mồ hôi, bụi",
+          "depth": "surface",
+          "body": "Tan trong nước. Sữa rửa mặt lấy phần này, cùng phần cặn micelle còn lại sau khi lau bông."
+        },
+        {
+          "label": "Lớp ngoài cùng và dầu tự nhiên của da",
+          "depth": "epidermis",
+          "body": "Phần cần giữ lại. Chà mạnh tay, hoặc tẩy trang vào ngày không bôi gì, chỉ lấy đi lớp này. Panthenol và Propanediol trong chai giúp hạn chế cảm giác khô sau khi lau."
+        }
+      ],
+      "footnote": "Sơ đồ minh hoạ, không theo tỉ lệ. Việc của cả hai bước làm sạch là lấy đi thứ nằm trên bề mặt da, không phải đi sâu vào bên trong."
+    },
+    {
+      "type": "conditions",
+      "id": "tinh-trang-da",
+      "eyebrow": "Nhìn ảnh, đối chiếu da của bạn",
+      "heading": "Tẩy trang giúp được tới đâu với từng tình trạng da",
+      "intro": "Nước tẩy trang là bước làm sạch đầu tiên của buổi tối. Nó không xử lý tình trạng da nào; nó lấy đi lớp kem và trang điểm để các bước sau làm đúng việc của chúng.",
+      "items": [
+        {
+          "label": "Da dầu, lỗ chân lông rõ",
+          "image": {
+            "src": "/images/da-can-phuc-hoi.webp",
+            "alt": "Cận cảnh vùng da có lỗ chân lông to, rõ"
+          },
+          "body": "Cuối ngày, kem chống nắng trộn với dầu thừa và bụi. Tẩy trang lấy lớp kem, sữa rửa mặt lấy dầu thừa. Trong chai có chiết xuất trà xanh, thành phần thường dùng cho da dầu.",
+          "fit": "yes",
+          "fitNote": "Bước đầu của buổi tối"
+        },
+        {
+          "label": "Mụn ẩn quanh trán và cằm",
+          "image": {
+            "src": "/images/da-mun-an.webp",
+            "alt": "Cận cảnh vùng da có nhiều nốt mụn ẩn nhỏ li ti"
+          },
+          "body": "Kem chống nắng còn sót qua đêm là một trong những nguyên nhân thường gặp, kể cả ở người không trang điểm. Tẩy trang lấy lớp đó đi; nó không phải sản phẩm dành cho mụn.",
+          "fit": "partial",
+          "fitNote": "Lấy lớp kem sót, chỉ vậy thôi"
+        },
+        {
+          "label": "Da mỏng, dễ đỏ",
+          "image": {
+            "src": "/images/da-yeu-nhay-cam.webp",
+            "alt": "Cận cảnh vùng da mỏng yếu, hơi ửng đỏ"
+          },
+          "body": "Dầu tan nước Wilbride tạo lớp đệm giảm ma sát; Epi-On và Exosome Cica thuộc nhóm làm dịu. Thử ở vùng cổ 30–45 phút trước, và đặt bông đợi vài giây rồi mới lau nhẹ.",
+          "fit": "yes",
+          "fitNote": "Hợp, nếu lau thật nhẹ tay"
+        },
+        {
+          "label": "Da sạm, đang chăm sóc nám hoặc thâm",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Cận cảnh vùng gò má sạm màu lan tỏa do nắng"
+          },
+          "body": "Lộ trình nào cho vết sạm cũng cần kem chống nắng mỗi ngày, và kem chống nắng cần được tẩy đi mỗi tối. Tẩy trang không làm mờ vết sạm; nó giúp lớp chống nắng không nằm lại trên da qua đêm.",
+          "fit": "partial",
+          "fitNote": "Đi kèm bước chống nắng"
+        },
+        {
+          "label": "Da đang kích ứng, mẩn đỏ, rát",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Cận cảnh vùng da kích ứng, mẩn đỏ"
+          },
+          "body": "Tẩy trang là bước có nhiều ma sát nhất trong ngày. Da đang kích ứng thì ngưng dùng, kể cả sản phẩm này; nếu không đỡ thì nên đi khám.",
+          "fit": "no",
+          "fitNote": "Ngưng dùng, nên đi khám"
+        }
+      ],
+      "caption": "Ảnh cận vùng da minh hoạ từng tình trạng (tư liệu hình ảnh của hãng), <strong>không phải ảnh trước/sau khi dùng sản phẩm</strong>. Nước tẩy trang chỉ giúp ở đây với vai trò bước làm sạch, và luôn cần rửa lại bằng sữa rửa mặt."
     },
     {
       "type": "compare",

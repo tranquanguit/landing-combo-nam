@@ -1,10 +1,12 @@
 ---
 import Section from '../Section.astro';
 import { richText } from '../../lib/richtext';
+import SkinFigure from '../SkinFigure.astro';
 interface Props {
   section: {
     id?: string; heading: string; body: string[];
     links?: { label: string; href: string }[];
+    figure?: { items: { src: string; alt: string; label: string }[]; caption: string };
   };
   surface?: 'bone' | 'paper';
   aboveFold?: boolean;
@@ -26,6 +28,7 @@ const links = section.links ?? [];
     <h2 class="pr-h" id={section.id ? `${section.id}-title` : undefined}>{section.heading}</h2>
     <div class="prose">
       {section.body.map((para) => <p set:html={richText(para)} />)}
+      {section.figure && <SkinFigure figure={section.figure} />}
       {links.length > 0 && (
         <ul class="prose-links">
           {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}

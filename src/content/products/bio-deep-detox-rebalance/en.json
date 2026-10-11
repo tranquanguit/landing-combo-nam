@@ -56,8 +56,8 @@
     "description": "pH 5.5 micellar cleansing water with exosome cica, Epi-On, fermented sake rice, green tea extract and vitamin B5. {{price}}, free shipping."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "2410/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "helps remove make-up and daily grime from the face",
     "warnings": [
       "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
@@ -65,8 +65,7 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ],
-    "productNotificationNumber": "2410/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -85,9 +84,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "The first step of the evening",
+      "eyebrow": "Micellar cleansing water · pH 5.5",
       "heading": "Sunscreen does not simply rinse away when you wash your face",
-      "lead": "A micellar cleansing water with <strong>exosome cica, Epi-On, fermented sake rice, green tea extract, panthenol and propanediol</strong> — exactly as printed on the bottle, pH 5.5. Suitable for the eye and lip area.",
+      "lead": "A cleansing water for the evening, used before your face wash to lift off sunscreen and make-up. pH 5.5, with panthenol, and suitable for the eye and lip area.",
       "usp": [
         {
           "text": "<strong>Solubule BR-02 micelles</strong> and Wilbride S-753D water-soluble oil — the maker names both cleansing agents",
@@ -120,6 +119,32 @@
         "Free delivery nationwide",
         "Inspect before you pay",
         "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Texture",
+          "value": "Micellar water, used with a cotton pad"
+        },
+        {
+          "label": "pH",
+          "value": "5.5"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "Solubule BR-02 (micellar), Wilbride S-753D, Epi-On, exosome cica, panthenol, green tea extract"
+        },
+        {
+          "label": "Suits",
+          "value": "The whole face, including the eye and lip area (per the manufacturer)"
+        },
+        {
+          "label": "How to use",
+          "value": "Evening: wipe gently with a soaked pad, then wash with a face wash"
+        },
+        {
+          "label": "Notification no.",
+          "value": "2410/25/CBMP-TN"
+        }
       ]
     },
     {
@@ -140,6 +165,93 @@
           "Micellar water works differently from a cleanser: micelles bind to oil and carry it off, so it lifts what water cannot. This bottle states pH 5.5 and is usable on eyes and lips."
         ]
       }
+    },
+    {
+      "type": "infographic",
+      "id": "tren-mat-da",
+      "kind": "layers",
+      "eyebrow": "What is on your skin by evening",
+      "heading": "Three things on the skin surface, and which step lifts which",
+      "intro": "Micellar water and a cleanser do not do the same job. Each lifts one kind of thing, and there is one layer neither should take.",
+      "items": [
+        {
+          "label": "Sunscreen and make-up",
+          "depth": "surface",
+          "highlight": true,
+          "body": "Built to stay put through sweat and humidity, so water alone will not shift them. This is the micellar water's job: micelles bind to oil and carry it off."
+        },
+        {
+          "label": "Excess oil, sweat, dust",
+          "depth": "surface",
+          "body": "Water-soluble. The cleanser takes these, along with the micelle residue the cotton pad leaves behind."
+        },
+        {
+          "label": "The skin's outer layer and natural oils",
+          "depth": "epidermis",
+          "body": "The part to keep. Scrubbing hard, or using a remover on a day with nothing to remove, only strips this. Panthenol and propanediol in the bottle help limit that dry feeling after wiping."
+        }
+      ],
+      "footnote": "Illustration, not to scale. Both cleansing steps work on what sits on the skin surface; neither is meant to reach deeper."
+    },
+    {
+      "type": "conditions",
+      "id": "tinh-trang-da",
+      "eyebrow": "Look at the photos, then at your skin",
+      "heading": "How far a make-up remover goes with each skin condition",
+      "intro": "Micellar water is the first cleansing step of the evening. It does not address any skin condition; it lifts sunscreen and make-up so the steps after it can do their job.",
+      "items": [
+        {
+          "label": "Oily skin, visible pores",
+          "image": {
+            "src": "/images/da-can-phuc-hoi.webp",
+            "alt": "Close-up of skin with large, visible pores"
+          },
+          "body": "By evening, sunscreen has mixed with oil and dust. The remover lifts the sunscreen, the cleanser lifts the oil. The bottle also contains green tea extract, often used for oily skin.",
+          "fit": "yes",
+          "fitNote": "The first step of the evening"
+        },
+        {
+          "label": "Congestion on the forehead and chin",
+          "image": {
+            "src": "/images/da-mun-an.webp",
+            "alt": "Close-up of skin with many small closed comedones"
+          },
+          "body": "Sunscreen left on overnight is one of the common causes, even in people who wear no make-up. The remover lifts that layer; it is not an acne product.",
+          "fit": "partial",
+          "fitNote": "Lifts leftover sunscreen, that is all"
+        },
+        {
+          "label": "Thin skin that reddens easily",
+          "image": {
+            "src": "/images/da-yeu-nhay-cam.webp",
+            "alt": "Close-up of thin, fragile skin with slight redness"
+          },
+          "body": "Wilbride water-soluble oil cushions the wipe; Epi-On and exosome cica are soothing ingredients. Patch test on the neck for 30–45 minutes first, and let the pad rest a few seconds before wiping gently.",
+          "fit": "yes",
+          "fitNote": "Suits it, if you wipe gently"
+        },
+        {
+          "label": "Dull patches, pigment routine underway",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Close-up of a cheekbone with diffuse sun-related darkening"
+          },
+          "body": "Any routine for dark patches needs daily sunscreen, and sunscreen needs taking off every night. A remover does not fade pigment; it keeps that sunscreen from sitting on your skin overnight.",
+          "fit": "partial",
+          "fitNote": "Goes with your sunscreen step"
+        },
+        {
+          "label": "Irritated, red, stinging skin",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Close-up of irritated skin with red patches"
+          },
+          "body": "Removal is the step with the most friction in your day. While your skin is irritated, stop using it, this product included, and see a doctor if it does not settle.",
+          "fit": "no",
+          "fitNote": "Stop, and see a doctor"
+        }
+      ],
+      "caption": "Close-ups illustrating each skin condition (the brand's image material), <strong>not before-and-after photos of the product</strong>. Micellar water helps here only as a cleansing step, and always needs a cleanser after it."
     },
     {
       "type": "compare",

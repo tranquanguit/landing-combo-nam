@@ -74,7 +74,22 @@
           "label": "See how pigment works on the pigmentation line",
           "href": "/en/nam-tham/"
         }
-      ]
+      ],
+      "figure": {
+        "items": [
+          {
+            "src": "/images/da-mun-viem.webp",
+            "alt": "Close-up of skin with a red, swollen spot",
+            "label": "Inflamed phase"
+          },
+          {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Close-up of skin with a brown mark left after a spot healed",
+            "label": "Mark phase"
+          }
+        ],
+        "caption": "Close-up skin images to illustrate each condition. They are not before/after photos and are not a way to self-diagnose. If you are unsure which case is yours, ask a dermatologist."
+      }
     },
     {
       "id": "khong-nan",

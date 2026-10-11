@@ -1,0 +1,27 @@
+{
+  "slug": "combo-peel-biovector",
+  "locale": "en",
+  "translationKey": "combo:combo-peel-biovector",
+  "status": "published",
+  "name": "Peel Kit + Biovector Cream Combo",
+  "shortName": "Peel + Biovector",
+  "group": "peel",
+  "order": 20,
+  "items": [
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    }
+  ],
+  "price": 835000,
+  "currency": "VND",
+  "purpose": "A 3-day peel, then Biovector moisturiser once the skin has stopped flaking and feels calm again.",
+  "seo": {
+    "title": "Peel Kit + Biovector Cream Combo | Mỹ Phẩm Mocha",
+    "description": "A 3-day peel, then Biovector moisturiser once the skin has stopped flaking and feels calm again. Delivered to your door; inspect before you pay."
+  }
+}

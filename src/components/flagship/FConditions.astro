@@ -1,0 +1,78 @@
+---
+/**
+ * Ảnh thật của tình trạng da + sản phẩm hợp tới đâu với từng tình trạng.
+ *
+ * Ảnh là ảnh cận vùng da để NHẬN RA tình trạng, không phải ảnh kết quả. Chú thích
+ * nằm ngay dưới lưới (không phải chân trang) vì đó là chỗ người xem đang nhìn.
+ * Ô không có ảnh (ví dụ "mụn nang — nên gặp bác sĩ") vẫn là một ô ngang hàng: nói
+ * "không phải việc của sản phẩm này" phải to bằng nói "đúng việc".
+ */
+import FSection from './FSection.astro';
+import Picture from '../Picture.astro';
+import { richText } from '../../lib/richtext';
+import { t, type Locale } from '../../i18n/ui';
+interface Props { data: any; id?: string; locale: Locale; role?: string; transition?: string; cta?: any; }
+const { data, id = 'tinh-trang-da', locale, role, transition, cta } = Astro.props;
+const FIT: Record<string, string> = { yes: t(locale, 'fx.fit.yes'), partial: t(locale, 'fx.fit.partial'), no: t(locale, 'fx.fit.no') };
+---
+<FSection id={id} tone="bone" role={role} transition={transition} cta={cta}
+  eyebrow={data.eyebrow} heading={data.heading} intro={data.intro} head="split">
+  <ul class:list={['grid', data.items.length > 4 && 'many']}>
+    {data.items.map((it: any, i: number) => (
+      <li class:list={['cond', `fit-${it.fit}`]} data-reveal style={`--i:${i}`}>
+        <div class="ph">
+          {it.image
+            ? <Picture src={it.image.src} alt={it.image.alt} ratio="1/1" fit="cover" sizes="(min-width: 980px) 240px, 44vw" widths={[180, 240]} />
+            : <span class="ph-none" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 6v24M24 38v4" /></svg></span>}
+          <span class="chip"><span class="dot" aria-hidden="true"></span><span class="sr-only">{FIT[it.fit]}: </span>{it.fitNote}</span>
+        </div>
+        <h3>{it.label}{it.aka && <span class="aka">{it.aka}</span>}</h3>
+        <p set:html={richText(it.body)} />
+      </li>
+    ))}
+  </ul>
+  <p class="caption" data-reveal>
+    <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5" /><path d="M10 9v5M10 6.2v.1" /></svg>
+    <span set:html={richText(data.caption)} />
+  </p>
+</FSection>
+
+<style>
+  .grid { list-style: none; padding: 0; margin: 0; display: grid; gap: clamp(14px, 2vw, 24px); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 980px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  /* Từ 5 ô trở lên: thẻ ngang hai cột. Ảnh tư liệu chỉ ~180–240px — phóng lên ô 370px là mờ. */
+  @media (min-width: 980px) {
+    .grid.many { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4) var(--s-6); }
+    .many .cond { display: grid; grid-template-columns: 176px minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: var(--s-5); align-items: start;
+      padding: var(--s-3); border-radius: 26px; background: rgba(255, 255, 255, .6); box-shadow: 0 0 0 1px rgba(26, 29, 82, .05); }
+    .many .ph { grid-row: 1 / 3; margin: 0; }
+    .many .chip { left: 8px; right: 8px; bottom: 8px; padding: 5px 9px; }
+    .many h3 { padding-top: var(--s-2); }
+  }
+  .cond { display: flex; flex-direction: column; gap: var(--s-2); }
+  .ph { position: relative; border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px rgba(26, 29, 82, .08); margin-bottom: var(--s-3); }
+  .ph :global(.ratio) { display: block; }
+  .ph :global(img) { transition: transform var(--dur-3, .6s) var(--ease); }
+  @media (hover: hover) { .cond:hover .ph :global(img) { transform: scale(1.04); } }
+  .ph-none { display: grid; place-items: center; aspect-ratio: 1; background: repeating-linear-gradient(135deg, #f4f1ee 0 10px, #efebe7 10px 20px); }
+  .ph-none svg { width: 40%; stroke: #b3261e; stroke-width: 5; stroke-linecap: round; fill: none; opacity: .55; }
+  .chip {
+    position: absolute; left: 10px; bottom: 10px; right: 10px;
+    display: inline-flex; align-items: center; gap: 8px; width: fit-content; max-width: calc(100% - 20px);
+    padding: 6px 12px; border-radius: 999px;
+    background: rgba(255, 255, 255, .94); backdrop-filter: blur(6px);
+    font-size: var(--t-2xs); font-weight: 600; line-height: 1.3; color: var(--ink-navy);
+    box-shadow: 0 6px 18px -8px rgba(26, 29, 82, .35);
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; background: var(--verify); box-shadow: 0 0 0 3px rgba(31, 107, 77, .15); }
+  .fit-partial .dot { background: #c98a0b; box-shadow: 0 0 0 3px rgba(201, 138, 11, .18); }
+  .fit-no .dot { background: #b3261e; box-shadow: 0 0 0 3px rgba(179, 38, 30, .15); }
+  h3 { margin: 0; font-size: var(--t-md); line-height: 1.25; color: var(--ink-navy); letter-spacing: -0.01em; }
+  .aka { display: block; margin-top: 2px; font-size: var(--t-2xs); font-weight: 500; letter-spacing: .04em; color: var(--slate); }
+  .cond p { margin: 0; font-size: var(--t-sm); line-height: 1.55; color: var(--ink-muted); }
+  .caption {
+    display: flex; gap: 10px; align-items: flex-start; margin: clamp(28px, 4vw, 44px) 0 0; max-width: 72ch;
+    font-size: var(--t-xs); line-height: 1.55; color: var(--ink-muted);
+  }
+  .caption svg { flex: 0 0 18px; width: 18px; height: 18px; margin-top: 1px; fill: none; stroke: var(--slate); stroke-width: 1.6; stroke-linecap: round; }
+</style>

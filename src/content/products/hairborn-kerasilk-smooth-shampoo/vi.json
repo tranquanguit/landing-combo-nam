@@ -1,0 +1,327 @@
+{
+  "slug": "hairborn-kerasilk-smooth-shampoo",
+  "translationKey": "hairborn-kerasilk-smooth-shampoo",
+  "status": "published",
+  "sku": "HAIRBORN-SP041",
+  "price": 169000,
+  "compareAtPrice": 250000,
+  "currency": "VND",
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "cham-soc-toc",
+  "locale": "vi",
+  "name": "HAIRBORN Kerasilk Smooth Shampoo – dầu gội mượt tóc 200g",
+  "shortName": "Dầu gội Kerasilk Smooth",
+  "primaryKeyword": "dầu gội mượt tóc hairborn kerasilk",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Muốn tóc bớt khô xơ, dễ chải và vào nếp sau khi gội",
+    "audienceSituations": [
+      "Tóc uốn, nhuộm hoặc hay sấy nên lúc nào cũng xơ",
+      "Gội xong tóc rối, gỡ rối là đứt",
+      "Muốn một tuýp dầu gội vừa phải để dùng thử"
+    ],
+    "contextHints": [
+      "người hỏi dầu gội nào cho tóc khô xơ, chẻ ngọn",
+      "người hỏi gội xong tóc rối phải làm sao"
+    ],
+    "approvedAngles": [
+      "Dầu gội mượt tóc, tuýp 200g, cho tóc khô xơ, rối",
+      "Glycerin, bồ kết, bồ hòn, hương nhu tía, dimethiconol và guar giúp tóc mượt, dễ chải"
+    ],
+    "riskyAngles": [
+      "hứa phục hồi hoàn toàn tóc hư tổn",
+      "gán cho sản phẩm thành phần không in trên bao bì"
+    ],
+    "preferredDestination": "#thanh-phan"
+  },
+  "seo": {
+    "title": "Dầu gội mượt tóc HAIRBORN Kerasilk Smooth 200g | Mocha Việt Nam",
+    "description": "Dầu gội cho tóc khô xơ, rối, chẻ ngọn. Tuýp 200g, có glycerin, bồ kết, bồ hòn, hương nhu tía, dimethiconol và guar giúp tóc mượt, dễ chải. {{price}}."
+  },
+  "compliance": {
+    "declarant": "hairborn",
+    "functions": "làm sạch da đầu và tóc, giúp tóc mềm mượt, giảm xơ rối",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da đầu có dấu hiệu kích ứng. Tránh tiếp xúc với mắt; nếu dính vào mắt, rửa ngay bằng nước sạch.",
+      "Rụng tóc thành mảng, rụng nhiều đột ngột, hoặc da đầu đỏ, ngứa, đóng vảy dày: nên đi khám bác sĩ da liễu.",
+      "Kết quả khác nhau tùy cơ địa và tình trạng tóc. Để xa tầm tay trẻ em."
+    ]
+  },
+  "variants": [
+    {
+      "label": "1 tuýp 200g",
+      "note": "Tiết kiệm {{save}} so với giá niêm yết",
+      "price": 169000,
+      "recommended": true
+    },
+    {
+      "label": "Combo 2 tuýp",
+      "note": "Hai tuýp 200g, giao trong cùng một đơn",
+      "price": 299000,
+      "recommended": false,
+      "qty": 2
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, hỏi về tình trạng tóc và da đầu trước khi chốt đơn",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước gội cho tóc khô",
+      "heading": "Dầu gội cho tóc khô xơ, rối, khó vào nếp",
+      "lead": "Tuýp 200g, nhãn ghi dùng cho mọi loại tóc. Công thức có <strong>dimethiconol và guar</strong> phủ nhẹ lên sợi tóc, cùng chiết xuất <strong>bồ kết, bồ hòn, hương nhu tía</strong>.",
+      "usp": [
+        {
+          "text": "<strong>Bồ kết, bồ hòn, hương nhu tía</strong> in trên tuýp trong khung Hair Nourishing Complex",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "chép từ mặt trước tuýp 200g"
+        },
+        {
+          "text": "<strong>Dimethiconol và guar hydroxypropyltrimonium chloride</strong> giúp tóc bóng mượt, giảm rối, dễ chải",
+          "evidence": "ingredient",
+          "qualifier": "theo ảnh thành phần của hãng"
+        },
+        {
+          "text": "<strong>Glycerin</strong> giữ ẩm cho sợi tóc",
+          "evidence": "ingredient",
+          "qualifier": "theo ảnh thành phần của hãng"
+        }
+      ],
+      "image": {
+        "src": "/images/hero-hairborn-kerasilk-smooth-shampoo.webp",
+        "alt": "Tuýp dầu gội HAIRBORN Kerasilk Smooth Shampoo 200g màu xanh navy, nắp đen"
+      },
+      "primaryCta": "Đặt dầu gội Kerasilk",
+      "secondaryCta": {
+        "label": "Xem thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Khối lượng",
+          "value": "200g, dạng tuýp"
+        },
+        {
+          "label": "Loại",
+          "value": "Dầu gội dưỡng da đầu, làm mượt tóc"
+        },
+        {
+          "label": "Dùng cho",
+          "value": "Mọi loại tóc; hãng nhắm tới tóc khô xơ, rối, chẻ ngọn"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Glycerin, bồ kết, bồ hòn, hương nhu tía, dimethiconol, guar hydroxypropyltrimonium chloride"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Tạo bọt, massage da đầu 2–3 phút, xả thật sạch"
+        },
+        {
+          "label": "Thương hiệu",
+          "value": "HAIRBORN"
+        }
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Vì sao tóc xơ",
+      "heading": "Gội xong tóc rối, khô, chải là đứt",
+      "quotes": [
+        "“Gội xong tóc rối như rơm, chải là đứt.”",
+        "“Tóc uốn nhuộm nhiều nên lúc nào cũng xơ.”",
+        "“Không thích dầu xả vì sợ bết.”"
+      ],
+      "explainer": {
+        "heading": "Tóc khô thì các sợi cọ vào nhau và gãy khi chải",
+        "body": [
+          "Lớp ngoài của sợi tóc mòn dần vì nhiệt, uốn, nhuộm và chải mạnh. Tóc thô ráp, dễ rối, và phần lớn sợi gãy xảy ra lúc gỡ rối khi tóc còn ướt.",
+          "Kerasilk Smooth có dimethiconol và guar hydroxypropyltrimonium chloride. Hai thành phần này phủ nhẹ lên sợi tóc, giúp tóc trơn và dễ chải ngay sau khi gội."
+        ],
+        "diagram": "none"
+      }
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Thành phần",
+      "heading": "Thành phần chính",
+      "intro": "Ba chiết xuất thảo mộc in trên tuýp. Glycerin, dimethiconol và guar lấy từ ảnh thành phần của hãng.",
+      "caption": "Không thấy keratin hay tơ tằm trong danh sách thành phần chính trên tuýp và trên ảnh của hãng, dù tên sản phẩm là Kerasilk. Nhãn không in nồng độ. Bảng INCI đầy đủ in ở bao bì sản phẩm.",
+      "rows": [
+        {
+          "name": "Gleditsia Australis Fruit Extract (bồ kết)",
+          "inProduct": "Mặt trước tuýp",
+          "role": "Làm sạch dịu nhẹ. Hãng ghi nuôi dưỡng tóc chắc khỏe, suôn mượt.",
+          "suitedFor": "Mọi loại tóc"
+        },
+        {
+          "name": "Sapindus Saponaria Fruit Extract (bồ hòn)",
+          "inProduct": "Mặt trước tuýp",
+          "role": "Chất làm sạch gốc thực vật.",
+          "suitedFor": "Mọi loại tóc"
+        },
+        {
+          "name": "Ocimum Tenuiflorum Extract (hương nhu tía)",
+          "inProduct": "Mặt trước tuýp",
+          "role": "Hãng ghi hỗ trợ làm sạch da đầu, giảm khó chịu.",
+          "suitedFor": "Da đầu hay ngứa nhẹ"
+        },
+        {
+          "name": "Glycerin",
+          "inProduct": "Ảnh của hãng",
+          "role": "Giữ ẩm, giúp tóc mềm và đàn hồi hơn.",
+          "suitedFor": "Tóc khô"
+        },
+        {
+          "name": "Dimethiconol",
+          "inProduct": "Ảnh của hãng",
+          "role": "Silicone tạo lớp phủ mỏng, giúp tóc bóng mượt, dễ chải.",
+          "suitedFor": "Tóc khô xơ, rối"
+        },
+        {
+          "name": "Guar Hydroxypropyltrimonium Chloride",
+          "inProduct": "Ảnh của hãng",
+          "role": "Chất dưỡng gốc guar, giảm rối và tĩnh điện.",
+          "suitedFor": "Tóc rối, dễ xù"
+        }
+      ],
+      "cta": {
+        "label": "Xem giá và đặt hàng",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Hợp với ai",
+      "columns": 2,
+      "items": [
+        {
+          "heading": "Tóc khô xơ, rối, chẻ ngọn",
+          "body": "Đúng nhóm hãng nhắm tới. Tóc trơn, dễ gỡ rối hơn sau khi gội.",
+          "meta": "Phù hợp"
+        },
+        {
+          "heading": "Tóc uốn, nhuộm hoặc hay sấy",
+          "body": "Lớp phủ nhẹ giúp sợi tóc bớt thô ráp. Có thể ủ thêm Collagen Deep Shot ở thân và đuôi tóc.",
+          "meta": "Phù hợp"
+        },
+        {
+          "heading": "Da đầu dầu, tóc mảnh dễ xẹp",
+          "body": "Có thể thấy tóc nặng hơn. Hair Boost hợp hơn cho da đầu nhanh bết.",
+          "meta": "Cân nhắc loại khác"
+        },
+        {
+          "heading": "Da đầu đang kích ứng hoặc trầy xước",
+          "body": "Chờ da đầu ổn định rồi mới dùng. Thấy rát hoặc đỏ thì ngưng.",
+          "meta": "Chưa nên dùng"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Cách gội",
+      "intro": "Theo hướng dẫn của hãng.",
+      "totalTime": "PT5M",
+      "items": [
+        {
+          "heading": "Làm ướt toàn bộ tóc và da đầu",
+          "body": "Dùng nước ấm hoặc nước mát."
+        },
+        {
+          "heading": "Tạo bọt rồi thoa đều",
+          "body": "Lấy một lượng vừa đủ ra lòng bàn tay, thêm ít nước để tạo bọt, thoa đều lên tóc."
+        },
+        {
+          "heading": "Massage da đầu 2–3 phút",
+          "body": "Dùng đầu ngón tay, không dùng móng."
+        },
+        {
+          "heading": "Xả thật kỹ",
+          "body": "Xả bằng nước sạch đến khi hết bọt."
+        }
+      ]
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng hợp với tóc và da đầu của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt thời gian dùng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Kerasilk Smooth giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho một tuýp 200g. Giá niêm yết là {{compareAtPrice}}. Mua hai tuýp có giá riêng trong phần đặt hàng. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Tên Kerasilk có nghĩa là trong có keratin và tơ tằm?",
+          "a": "Trên tuýp và trên ảnh thành phần của hãng không ghi keratin hay tơ tằm. Thành phần chính được ghi là glycerin, chiết xuất bồ kết, bồ hòn, hương nhu tía, cùng dimethiconol và guar giúp tóc mượt, dễ chải."
+        },
+        {
+          "q": "Khác gì dầu gội Hair Boost?",
+          "a": "Kerasilk Smooth nhắm tới tóc khô xơ, rối, cần mượt. Hair Boost nhắm tới da đầu nhanh bết và tóc mảnh dễ gãy, nhãn in Kopexil, Redensyl™ và caffeine."
+        },
+        {
+          "q": "Có silicone không?",
+          "a": "Có. Dimethiconol là một loại silicone, tạo lớp phủ mỏng giúp tóc mượt. Nếu bạn cần tránh silicone, sản phẩm này không hợp."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Đậy nắp sau khi dùng, để nơi khô mát, tránh nắng trực tiếp, xa tầm tay trẻ em."
+        }
+      ],
+      "cta": {
+        "note": "Không còn câu hỏi nào nữa?",
+        "label": "Quay lại phần đặt hàng",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Đi cùng dầu gội mượt tóc",
+      "intro": "Ủ thân và đuôi tóc sau khi gội, lăn dưỡng da đầu ở bước cuối.",
+      "items": [
+        "hairborn-collagen-deep-shot",
+        "hairborn-peel-ion",
+        "hairborn-hair-boost-shampoo"
+      ]
+    }
+  ]
+}

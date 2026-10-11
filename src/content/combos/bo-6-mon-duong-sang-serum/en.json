@@ -1,0 +1,43 @@
+{
+  "slug": "bo-6-mon-duong-sang-serum",
+  "locale": "en",
+  "translationKey": "combo:bo-6-mon-duong-sang-serum",
+  "status": "published",
+  "name": "6-Piece Glow Set with Serum",
+  "shortName": "6-piece glow + serum",
+  "group": "duong",
+  "order": 40,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    },
+    {
+      "product": "ultra-egf-bio-gel-mask",
+      "qty": 1
+    },
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    }
+  ],
+  "price": 1665000,
+  "currency": "VND",
+  "purpose": "The 5-piece glow set plus Smart First Care serum for uneven, dull patches.",
+  "seo": {
+    "title": "6-Piece Glow Set with Serum | Mỹ Phẩm Mocha",
+    "description": "The 5-piece glow set plus Smart First Care serum for uneven, dull patches. Delivered to your door; inspect before you pay."
+  }
+}

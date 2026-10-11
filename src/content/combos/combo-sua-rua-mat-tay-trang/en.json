@@ -1,0 +1,27 @@
+{
+  "slug": "combo-sua-rua-mat-tay-trang",
+  "locale": "en",
+  "translationKey": "combo:combo-sua-rua-mat-tay-trang",
+  "status": "published",
+  "name": "Micellar Water + Cleanser Combo",
+  "shortName": "Micellar + Cleanser",
+  "group": "lam-sach",
+  "order": 20,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    }
+  ],
+  "price": 425000,
+  "currency": "VND",
+  "purpose": "Two-step evening cleansing: micellar water lifts sunscreen and make-up, the cleanser takes the rest.",
+  "seo": {
+    "title": "Micellar Water + Cleanser Combo | Mỹ Phẩm Mocha",
+    "description": "Two-step evening cleansing: micellar water lifts sunscreen and make-up, the cleanser takes the rest. Delivered to your door; inspect before you pay."
+  }
+}

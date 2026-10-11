@@ -1,0 +1,372 @@
+{
+  "currency": "VND",
+  "availability": "InStock",
+  "status": "published",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "phuc-hoi-da",
+  "slug": "pro-vitamin-b5-serum",
+  "translationKey": "pro-vitamin-b5-serum",
+  "sku": "8938552914013",
+  "price": 200000,
+  "locale": "en",
+  "name": "Mocha Pro-Vitamin B5 Perfection Serum – 10ml recovery serum",
+  "shortName": "Pro-Vitamin B5 Serum",
+  "primaryKeyword": "mocha pro vitamin b5 serum",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Needs a hydrating, soothing step for dry skin or for skin going through a peel",
+    "audienceSituations": [
+      "Using the Mocha peel kit and wants another recovery ampoule",
+      "Skin is dry, tight, or flushed from dryness",
+      "Wants a light hydrating step before moisturiser"
+    ],
+    "contextHints": [
+      "someone asking what to put on skin after a peel",
+      "someone asking whether the peel kit recovery ampoule is sold on its own",
+      "someone asking whether a B5 serum goes before or after moisturiser"
+    ],
+    "approvedAngles": [
+      "The recovery ampoule from the Retinol mixPEEL kit, sold on its own as a 10ml ampoule",
+      "Panthenol (pro-vitamin B5) is sixth of 47 ingredients in the notification dossier",
+      "Contains fragrance, stated on the first screen"
+    ],
+    "riskyAngles": [
+      "presenting the serum as something that repairs damaged skin",
+      "promising redness or flaking will stop after a fixed number of uses",
+      "saying the product is fragrance-free"
+    ],
+    "preferredDestination": "#hop-voi-ai"
+  },
+  "seo": {
+    "title": "Mocha Pro-Vitamin B5 Perfection Serum, 10ml | Mocha Vietnam",
+    "description": "A 10ml ampoule with panthenol (pro-vitamin B5), hyaluronic acid, centella and five peptides. The recovery ampoule from the Retinol mixPEEL kit. {{price}}."
+  },
+  "compliance": {
+    "productNotificationNumber": "0718/25/CBMP-LA",
+    "declarant": "mocha",
+    "functions": "helps soothe the skin and reduce redness caused by dryness; hydrates and keeps skin moisturised, soft and smooth; improves elasticity, helping skin feel firmer",
+    "warnings": [
+      "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
+      "Discontinue use if irritation occurs. Avoid direct contact with the eyes.",
+      "Contains fragrance. If your skin reacts to scent, patch-test on a small area first.",
+      "If you are pregnant or breastfeeding, speak to your doctor before use.",
+      "Keep out of reach of children. Results vary between individuals and skin types.",
+      "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
+    ]
+  },
+  "variants": [
+    {
+      "label": "10ml ampoule",
+      "note": "The same recovery ampoule that comes in the peel kit",
+      "price": 200000,
+      "recommended": true
+    },
+    {
+      "label": "I would like advice first",
+      "note": "An adviser calls you back and reviews your skin from photos",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Pro-vitamin B5 recovery serum · 10ml",
+      "heading": "A B5 serum for dry days and for after a peel",
+      "lead": "A 10ml ampoule, and the same recovery ampoule that comes in the Retinol mixPEEL kit. The notification dossier lists its intended use: helps soothe skin and reduce redness caused by dryness; hydrates and keeps skin soft and smooth; improves elasticity.",
+      "usp": [
+        {
+          "text": "<strong>Panthenol (pro-vitamin B5) is sixth</strong> in a list of 47 ingredients",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "per the product notification dossier"
+        },
+        {
+          "text": "<strong>The same ampoule as in the peel kit</strong>, sold on its own when you need another",
+          "evidence": "verified",
+          "source": "#chung-tu",
+          "qualifier": "same notification number as the ampoule in the kit"
+        },
+        {
+          "text": "<strong>Contains fragrance</strong> (no. 46 of 47): patch-test first if scent bothers your skin",
+          "evidence": "ingredient",
+          "qualifier": "see the ingredient table"
+        }
+      ],
+      "image": {
+        "src": "/images/hero-pro-vitamin-b5-serum.webp",
+        "alt": "Syringe-style ampoule of Mocha Pro Vitamin B5 Perfection Serum, 10ml"
+      },
+      "primaryCta": "Order the B5 serum",
+      "secondaryCta": {
+        "label": "See the ingredient table",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Free delivery nationwide",
+        "Inspect before you pay",
+        "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Volume",
+          "value": "10ml per ampoule"
+        },
+        {
+          "label": "Packaging",
+          "value": "Syringe-style ampoule with a cap"
+        },
+        {
+          "label": "For",
+          "value": "Dry skin, redness from dryness, skin during and after a peel"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "Panthenol (pro-vitamin B5), glycerin, hyaluronic acid, centella extract, five peptides"
+        },
+        {
+          "label": "How to use",
+          "value": "After cleansing, spread over the face, massage gently, then moisturise"
+        },
+        {
+          "label": "Origin",
+          "value": "Vietnam, made at the Asialab factory (Long An)"
+        }
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Worth knowing first",
+      "heading": "Dry, flushed skin needs fewer steps, but the right ones",
+      "quotes": [
+        "“After the peel my skin felt tight and sore, and I didn't know what to put on it.”",
+        "“The recovery ampoule from the peel kit is finished. Can I buy it on its own?”",
+        "“My skin is dry and flaky, and every cream stings.”",
+        "“Serum and moisturiser: which one goes first?”"
+      ],
+      "explainer": {
+        "heading": "A light hydrating step that comes before moisturiser",
+        "body": [
+          "After a peel, or on days when skin is dry, the outer layer holds water poorly. What skin needs then is a hydrating, soothing step, followed by a moisturiser to hold it in.",
+          "The B5 ampoule is that hydrating step. Glycerin, panthenol and hyaluronic acid are familiar humectants, and all three sit within the first eight ingredients.",
+          "It <strong>does not replace moisturiser and does not replace sunscreen</strong>. The manufacturer's instructions follow it with the Collagen moisturiser."
+        ]
+      },
+      "transition": "Check your skin against the list below, including the cases where it is better to wait."
+    },
+    {
+      "type": "conditions",
+      "id": "hop-voi-ai",
+      "eyebrow": "Look at the photos, then at your own skin",
+      "heading": "When it fits, and when to wait",
+      "intro": "Compare your skin with the intended use in the notification dossier: soothing, hydrating, keeping moisture in.",
+      "items": [
+        {
+          "label": "Dry, tight, short of moisture",
+          "image": {
+            "src": "/images/da-can-phuc-hoi.webp",
+            "alt": "Close-up of dehydrated skin with a rough surface and visible pores"
+          },
+          "body": "The dossier lists hydrating and keeping skin soft and smooth. Apply after cleansing, then use a moisturiser to hold the moisture in.",
+          "fit": "yes",
+          "fitNote": "Matches the declared use"
+        },
+        {
+          "label": "Flushed from dryness",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Close-up of a flushed cheek with small bumps"
+          },
+          "body": "The dossier lists soothing and reducing redness caused by dryness. If skin stings, breaks out in bumps or the redness spreads, that is irritation. Remove steps first rather than adding one.",
+          "fit": "partial",
+          "fitNote": "If the redness is from dryness, not irritation"
+        },
+        {
+          "label": "Using the Mocha peel kit",
+          "body": "The recovery ampoule in the Retinol mixPEEL kit is this product. Follow the schedule that comes with the kit, and buy a single ampoule when you need another.",
+          "fit": "yes",
+          "fitNote": "The peel kit's recovery ampoule"
+        },
+        {
+          "label": "Just had a cosmetic procedure",
+          "image": {
+            "src": "/images/da-sau-tham-my.webp",
+            "alt": "Close-up of reddened skin after a cosmetic procedure"
+          },
+          "body": "Ask the practitioner who did the procedure before you apply anything. With their go-ahead, this is a hydrating step; it does not replace your moisturiser.",
+          "fit": "partial",
+          "fitNote": "Ask your practitioner first"
+        },
+        {
+          "label": "Melasma, dark marks, uneven tone",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Close-up of a cheekbone with diffuse sun-related darkening"
+          },
+          "body": "The intended use in the dossier says nothing about pigment. If you want to fade dark marks, you need a different product in the range.",
+          "fit": "no",
+          "fitNote": "Not its declared use"
+        },
+        {
+          "label": "Broken, weeping or burnt skin",
+          "body": "Do not apply it to open or damaged skin. That needs a doctor.",
+          "fit": "no",
+          "fitNote": "See a doctor"
+        }
+      ],
+      "caption": "Close-ups illustrating each skin condition (brand image material), <strong>not before-and-after photos of the product</strong>. Not sure which group your skin falls into? Send a photo on Zalo and an adviser will take a look before you order."
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Ingredients",
+      "heading": "Ingredients as listed in the notification dossier",
+      "intro": "The dossier lists all 47 ingredients by INCI name. The table below explains the ones worth knowing.",
+      "caption": "Full list from the notification dossier: Aqua, Glycerin, Propanediol, PEG-40 Hydrogenated Castor Oil, Cetearyl Alcohol, Panthenol, Tocopheryl Acetate, Hyaluronic Acid, Lecithin, Acetyl Glutamine, Sh-Oligopeptide-1, Sh-Oligopeptide-2, Sh-Polypeptide-1, Sh-Polypeptide-9, Sh-Polypeptide-11, Bacillus/Folic Acid Ferment Filtrate Extract, Sodium Hyaluronate, Centella Asiatica Extract, Sea Water, Laminaria Digitata Extract, Chlorella Vulgaris Extract, Saccharide Isomerate, Dipotassium Glycyrrhizate, Acrylates/C10-30 Alkyl Acrylate Crosspolymer, Glyceryl Stearate, Cyclopentasiloxane, Ethylhexylglycerin, Phenoxyethanol, Ascorbic Acid, Biotin, Thiamine HCl, Cyanocobalamin, Glutathione, Ceteareth-20, Ceteareth-12, Caprylyl Glycol, Butylene Glycol, Riboflavin, Pyridoxine, Folic Acid, Menadione, Bioflavonoids, 1,2-Hexanediol, Cetyl Palmitate, Disodium EDTA, Fragrance, Triethanolamine. The dossier gives a percentage only for the two ingredients with concentration limits: phenoxyethanol 0.5% and triethanolamine 0.1%.",
+      "rows": [
+        {
+          "name": "Panthenol (pro-vitamin B5)",
+          "role": "Holds moisture and eases the tight, dry feeling. Sixth in the list.",
+          "suitedFor": "Dry, tight skin"
+        },
+        {
+          "name": "Glycerin",
+          "role": "A humectant, second in the list, right after water.",
+          "suitedFor": "All skin types"
+        },
+        {
+          "name": "Hyaluronic Acid, Sodium Hyaluronate",
+          "role": "Hold water in the outer layer of the skin. They appear at positions 8 and 17.",
+          "suitedFor": "Dehydrated skin"
+        },
+        {
+          "name": "Centella Asiatica Extract, Dipotassium Glycyrrhizate",
+          "role": "Centella extract and a liquorice derivative, both in the soothing group.",
+          "suitedFor": "Skin that flushes easily"
+        },
+        {
+          "name": "Sh-Oligopeptide-1, Sh-Oligopeptide-2, Sh-Polypeptide-1, Sh-Polypeptide-9, Sh-Polypeptide-11",
+          "role": "Five synthetic peptides, used as conditioning ingredients.",
+          "suitedFor": "Skin in a recovery phase"
+        },
+        {
+          "name": "Tocopheryl Acetate, Ascorbic Acid and B vitamins",
+          "role": "Vitamin E, vitamin C and vitamins B1, B2, B6, B7, B9 and B12, used as conditioning ingredients. Most sit in the second half of the list.",
+          "suitedFor": "All skin types"
+        },
+        {
+          "name": "Sea Water, Laminaria Digitata Extract, Chlorella Vulgaris Extract",
+          "role": "Sea water, kelp extract and green algae extract.",
+          "suitedFor": "All skin types"
+        },
+        {
+          "name": "Fragrance",
+          "role": "Added scent, at position 46. If scent bothers your skin, patch-test on a small area first.",
+          "suitedFor": "Take care with sensitive skin"
+        }
+      ],
+      "cta": {
+        "label": "See the price and order",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "documents",
+      "id": "chung-tu",
+      "eyebrow": "Documents",
+      "heading": "The paperwork behind this product",
+      "intro": "Scans of the original documents, sharp enough to read the reference numbers. Tap any document to see it in full."
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How to use",
+      "heading": "After cleansing, before moisturiser",
+      "intro": "The steps follow the manufacturer's instructions.",
+      "items": [
+        {
+          "heading": "Cleanse",
+          "body": "Wash your face and pat dry. During a peel, rinse the peel off with water first."
+        },
+        {
+          "heading": "Take enough to cover the face",
+          "body": "Spread it evenly over the whole face."
+        },
+        {
+          "heading": "Massage gently",
+          "body": "Massage lightly with your fingers so the serum spreads and sinks in evenly."
+        },
+        {
+          "heading": "Follow with moisturiser",
+          "body": "The manufacturer's instructions follow it with the Collagen moisturiser. In the daytime, finish with sunscreen."
+        }
+      ],
+      "footnote": "If you are using the Retinol mixPEEL kit, follow the schedule that comes with the kit. If burning lasts, or you get swelling, blistering or pain, stop every step and see a doctor."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Order",
+      "heading": "Tell us where you are and we'll confirm shipping before you pay",
+      "body": "International orders are confirmed by email within <strong>one business day</strong>, including shipping cost and delivery estimate for your country. Nothing is charged until you agree to it.",
+      "points": [
+        "<strong>Ships worldwide</strong> from Ho Chi Minh City — tell us your country and we quote the cost first.",
+        "<strong>Nothing is charged</strong> until you have agreed the shipping cost.",
+        "<strong>7-day return</strong> if the product arrives faulty, incorrect or unopened. EU and UK customers also have the statutory 14-day right to withdraw.",
+        "<strong>Support through the full routine</strong> by email."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "FAQ",
+      "heading": "Frequently asked questions",
+      "items": [
+        {
+          "q": "How much is the B5 serum?",
+          "a": "<strong>{{price}}</strong> for one 10ml ampoule."
+        },
+        {
+          "q": "Is it the same as the recovery ampoule in the peel kit?",
+          "a": "Yes. The Retinol mixPEEL Kit includes one recovery ampoule, and it is this product, under the same notification number, 0718/25/CBMP-LA. Buy it on its own when you need another."
+        },
+        {
+          "q": "Does it contain fragrance?",
+          "a": "Yes. Fragrance is no. 46 of the 47 ingredients. If scent bothers your skin, patch-test on a small area before using it on the whole face."
+        },
+        {
+          "q": "Morning or evening?",
+          "a": "The manufacturer does not say. It goes after cleansing and before moisturiser. If you use it in the daytime, finish with sunscreen."
+        },
+        {
+          "q": "How should I store it?",
+          "a": "Somewhere cool and airy, away from high temperatures and direct sunlight, and out of reach of children. The manufacturing and expiry dates are printed on the box."
+        }
+      ],
+      "cta": {
+        "note": "No more questions?",
+        "label": "Back to the order form",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Next step",
+      "heading": "Use it with",
+      "intro": "The peel kit already includes one of these ampoules. Moisturiser and sunscreen are the two steps that come after it.",
+      "items": [
+        "retinol-mixpeel-kit",
+        "collagen-peptide-cream",
+        "uv-block-sunscreen"
+      ]
+    }
+  ]
+}

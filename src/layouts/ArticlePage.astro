@@ -1,4 +1,5 @@
 ---
+import SkinFigure from '../components/SkinFigure.astro';
 import { shortDate } from '../lib/format';
 import BaseLayout from './BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -109,6 +110,7 @@ const orderHref = products[0] ? productPath(products[0].slug, locale) : homePath
             <section id={s.id} aria-labelledby={`${s.id}-title`}>
               <h2 id={`${s.id}-title`}>{s.heading}</h2>
               {s.body.map((para: string) => <p set:html={richText(para)} />)}
+              {s.figure && <SkinFigure figure={s.figure} />}
             </section>
           ))}
         </div>

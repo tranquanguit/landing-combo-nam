@@ -1,0 +1,27 @@
+{
+  "slug": "combo-peel-kem-chong-nang",
+  "locale": "en",
+  "translationKey": "combo:combo-peel-kem-chong-nang",
+  "status": "published",
+  "name": "Peel Kit + Sunscreen Combo",
+  "shortName": "Peel + Sunscreen",
+  "group": "peel",
+  "order": 30,
+  "items": [
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    }
+  ],
+  "price": 815000,
+  "currency": "VND",
+  "purpose": "Freshly peeled skin darkens easily. This set comes with sunscreen so it is protected from the first day.",
+  "seo": {
+    "title": "Peel Kit + Sunscreen Combo | Mỹ Phẩm Mocha",
+    "description": "Freshly peeled skin darkens easily. This set comes with sunscreen so it is protected from the first day. Delivered to your door; inspect before you pay."
+  }
+}

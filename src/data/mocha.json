@@ -1,12 +1,11 @@
 {
-  "legalName": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-  "tradingName": "Mocha Việt Nam",
-  "address": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+  "tradingName": "Mỹ Phẩm Mocha",
+  "address": "Số 5 Đinh Bộ Lĩnh, Phường Bình Thạnh, Thành phố Hồ Chí Minh",
+  "taxId": "0317963313",
   "phone": "+84367848918",
   "phoneDisplay": "0367 848 918",
   "zalo": "https://zalo.me/0367848918",
   "email": "kemnammocha@gmail.com",
-  "hours": "8:00 – 21:00",
   "logo": "/images/logo.webp",
   "profiles": [
     {
@@ -27,5 +26,20 @@
     }
   ],
   "marketplaces": [],
-  "taxId": "0317963313"
+  "declarants": [
+    {
+      "id": "mocha",
+      "label": "Mocha (dược mỹ phẩm)",
+      "brand": "Mocha",
+      "name": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
+      "address": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam"
+    },
+    {
+      "id": "hairborn",
+      "label": "Hairborn (chăm sóc tóc)",
+      "brand": "Hairborn",
+      "name": "",
+      "address": ""
+    }
+  ]
 }

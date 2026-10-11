@@ -56,16 +56,15 @@
     "description": "Mặt nạ gel với EGF, Epi-On, Copper Peptide, Exosome Cica và 3 loại Nano Ceramide bọc Liposome. Tuýp 100gr, khoảng 40 lần đắp. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "2524/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "hỗ trợ cấp ẩm và làm dịu da",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ],
-    "productNotificationNumber": "2524/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -84,9 +83,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Bước thêm, không phải bước bắt buộc",
+      "eyebrow": "Mặt nạ gel cấp ẩm, làm dịu · tuýp 100gr",
       "heading": "Mặt nạ gel cho những tuần da cần được để yên",
-      "lead": "Mặt nạ gel tuýp 100gr, dùng một đến hai lần mỗi tuần vào buổi tối. Thành phần in đủ trên vỏ tuýp.",
+      "lead": "Mặt nạ gel cấp ẩm và làm dịu, đắp buổi tối 15–20 phút rồi rửa lại. Tuýp 100gr, khoảng 40 lần đắp; có EGF, Epi-On™ và Exosome Cica.",
       "usp": [
         {
           "text": "<strong>Tám thành phần in thẳng trên vỏ tuýp</strong>, đọc được trước khi mở nắp",
@@ -119,6 +118,32 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Khối lượng",
+          "value": "Tuýp 100gr, khoảng 40 lần đắp (in trên tuýp)"
+        },
+        {
+          "label": "Kết cấu",
+          "value": "Mặt nạ dạng gel, rửa lại sau khi đắp"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "EGF, Epi-On™, Copper Peptide, Exosome Cica, Sodium Hyaluronate, 3 loại Nano Ceramide"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Buổi tối, trên da sạch; lưu 15–20 phút, rửa bằng nước rồi dưỡng ẩm"
+        },
+        {
+          "label": "Lượng dùng",
+          "value": "5–10gr mỗi lần, khoảng ba đốt ngón tay trỏ"
+        },
+        {
+          "label": "Số công bố",
+          "value": "2524/25/CBMP-TN"
+        }
       ]
     },
     {
@@ -139,32 +164,104 @@
           "Vậy khi nào nó đáng dùng? Khi ba bước nền đã đều, và bạn muốn thêm một bước cấp ẩm đậm hơn trong những tuần da cần được để yên. Đúng vai trò đó thì nó làm tốt; đặt vào vai trò khác thì không."
         ]
       },
-      "transition": "Quy trình nền ổn rồi mới tính tới bước thêm. Ba trường hợp — và một trường hợp nên để dành tiền."
+      "transition": "Quy trình nền ổn rồi mới tính tới bước thêm. Đối chiếu da của bạn ở phần dưới — kể cả những trường hợp nên để dành tiền."
     },
     {
-      "type": "cards",
+      "type": "conditions",
       "id": "hop-voi-ai",
-      "eyebrow": "Trước khi đặt",
-      "heading": "Khi nào nên mua, khi nào nên để dành tiền",
+      "eyebrow": "Nhìn ảnh, đối chiếu da của bạn",
+      "heading": "Khi nào nên đắp, khi nào nên để dành tiền",
       "intro": "Đây là sản phẩm rẻ nhất trong danh mục, nhưng rẻ không có nghĩa là nên mua khi chưa cần.",
-      "columns": 3,
       "items": [
         {
-          "heading": "Quy trình nền đã đều, muốn thêm bước cấp ẩm đậm",
-          "body": "Đúng vai trò của tuýp này. Một đến hai lần mỗi tuần, trong những giai đoạn da khô hơn bình thường hoặc vừa qua can thiệp.",
-          "meta": "Hợp nhất"
+          "label": "Da khô, căng, thiếu ẩm",
+          "image": {
+            "src": "/images/da-can-phuc-hoi.webp",
+            "alt": "Cận cảnh vùng da thiếu ẩm, lỗ chân lông lộ rõ"
+          },
+          "body": "Quy trình nền đã đều mà da vẫn có những đợt khô hơn bình thường. Đúng vai trò của tuýp này: một bước cấp ẩm đậm hơn vào buổi tối.",
+          "fit": "yes",
+          "fitNote": "Đúng vai trò của tuýp này"
         },
         {
-          "heading": "Chưa có bước chống nắng hoặc chưa dưỡng ẩm đều",
-          "body": "Để dành tiền cho hai bước đó trước. Thêm mặt nạ vào một quy trình còn thiếu nền là đầu tư vào phần ít ảnh hưởng nhất.",
-          "meta": "Chưa phải lúc"
+          "label": "Da vừa qua một đợt kích ứng",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Cận cảnh vùng má ửng đỏ trên làn da dễ kích ứng"
+          },
+          "body": "Da đã dịu bớt và cần được để yên. Công thức thuộc nhóm cấp ẩm và làm dịu, không có hoạt chất tác động lên sắc tố. Nếu da còn châm chích thì rút bớt bước trước, chưa thêm bước nào.",
+          "fit": "partial",
+          "fitNote": "Hợp khi da đã hết châm chích"
         },
         {
-          "heading": "Da đang nổi mụn viêm nhiều",
-          "body": "Một lớp gel dày để lâu trên da đang viêm không phải ý hay. Xử lý đợt mụn trước, rồi mới quay lại bước này.",
-          "meta": "Nên chờ"
+          "label": "Da vừa qua thủ thuật thẩm mỹ",
+          "image": {
+            "src": "/images/da-sau-tham-my.webp",
+            "alt": "Cận cảnh vùng da ửng đỏ sau thủ thuật thẩm mỹ"
+          },
+          "body": "Hỏi chính người đã thực hiện thủ thuật cho bạn trước khi đắp. Khi họ đồng ý, đây là một bước cấp ẩm thêm, không thay bước kem dưỡng.",
+          "fit": "partial",
+          "fitNote": "Hỏi người thực hiện trước"
+        },
+        {
+          "label": "Đang nổi mụn viêm nhiều",
+          "image": {
+            "src": "/images/da-mun-viem.webp",
+            "alt": "Cận cảnh nốt mụn viêm sưng đỏ có đầu trắng ở giữa"
+          },
+          "body": "Một lớp gel dày để lâu trên da đang viêm không phải ý hay. Lo xong đợt mụn trước, rồi mới quay lại bước này.",
+          "fit": "no",
+          "fitNote": "Nên chờ đợt mụn qua"
+        },
+        {
+          "label": "Chưa chống nắng, chưa dưỡng ẩm đều",
+          "body": "Đây không phải tình trạng da mà là quy trình còn thiếu nền. Để dành tiền cho hai bước đó trước; thêm mặt nạ lúc này là đầu tư vào phần ít ảnh hưởng nhất.",
+          "fit": "no",
+          "fitNote": "Chưa phải lúc"
+        },
+        {
+          "label": "Da trầy xước, rỉ dịch hoặc bị bỏng",
+          "body": "Không đắp mặt nạ lên vùng da hở hay đang tổn thương. Đó là việc của bác sĩ, không phải việc của một tuýp mặt nạ.",
+          "fit": "no",
+          "fitNote": "Nên gặp bác sĩ"
         }
-      ]
+      ],
+      "caption": "Ảnh cận vùng da minh hoạ từng tình trạng (tư liệu hình ảnh của hãng), <strong>không phải ảnh trước/sau khi dùng sản phẩm</strong>. Chưa chắc da mình thuộc trường hợp nào? Gửi ảnh qua Zalo, chuyên viên xem giúp trước khi bạn đặt."
+    },
+    {
+      "type": "infographic",
+      "id": "con-so-tren-tuyp",
+      "kind": "facts",
+      "eyebrow": "Con số in trên tuýp",
+      "heading": "Bốn con số, đều lấy từ vỏ tuýp và hướng dẫn của nhà sản xuất",
+      "intro": "Chúng tôi không thêm con số nào về kết quả. Những gì dưới đây bạn tự kiểm được khi cầm tuýp trên tay.",
+      "items": [
+        {
+          "label": "Dung tích một tuýp",
+          "value": "100",
+          "unit": "gr",
+          "body": "Mặt nạ dạng gel đóng tuýp, dùng vào buổi tối như một bước thêm."
+        },
+        {
+          "label": "Số lần đắp ước tính",
+          "value": "40",
+          "unit": "lần đắp",
+          "body": "Nhà sản xuất in “EQUAL TO 40 MASKS” trên tuýp. Số lần thực tế tuỳ lượng bạn lấy mỗi lần."
+        },
+        {
+          "label": "Thời gian lưu trên da",
+          "value": "15–20",
+          "unit": "phút",
+          "body": "Theo hướng dẫn của nhà sản xuất, rồi rửa sạch bằng nước và dưỡng ẩm như thường. Để lâu hơn không cho kết quả tốt hơn."
+        },
+        {
+          "label": "Thành phần in trên vỏ tuýp",
+          "value": "8",
+          "unit": "thành phần",
+          "body": "EGF, Epi-On™, Copper Peptide, Exosome Cica, Sodium Hyaluronate, 3 loại Nano Ceramide, Panthenol và Acid Folic. Bảng chi tiết ngay bên dưới."
+        }
+      ],
+      "footnote": "Số lần đắp là ước tính của nhà sản xuất; lượng bạn lấy mỗi lần sẽ làm con số này xê dịch."
     },
     {
       "type": "ingredients",
@@ -231,7 +328,7 @@
       "id": "dung-luc-nao",
       "eyebrow": "Đặt vào đâu trong tuần",
       "heading": "Bao lâu đắp một lần",
-      "intro": "Đây là bước thêm vào quy trình buổi tối, không phải bước thay thế.",
+      "intro": "Mặt nạ là bước thêm vào quy trình buổi tối, không phải bước thay thế.",
       "columns": [
         {
           "when": "morning",

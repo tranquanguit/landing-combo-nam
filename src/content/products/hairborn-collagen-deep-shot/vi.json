@@ -1,0 +1,305 @@
+{
+  "slug": "hairborn-collagen-deep-shot",
+  "translationKey": "hairborn-collagen-deep-shot",
+  "status": "published",
+  "sku": "HAIRBORN-SP063",
+  "price": 395000,
+  "compareAtPrice": 600000,
+  "currency": "VND",
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "cham-soc-toc",
+  "locale": "vi",
+  "name": "HAIRBORN Collagen Deep Shot – mặt nạ ủ tóc",
+  "shortName": "Mặt nạ ủ tóc Collagen Deep Shot",
+  "primaryKeyword": "mặt nạ ủ tóc hairborn collagen deep shot",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Muốn đuôi tóc bớt khô, chẻ ngọn và dễ chải hơn",
+    "audienceSituations": [
+      "Tóc dài, đuôi tóc khô cứng dù đã dùng dầu xả",
+      "Tóc uốn, nhuộm, tẩy nên chải là đứt",
+      "Muốn thêm một bước ủ tóc tại nhà sau khi gội"
+    ],
+    "contextHints": [
+      "người hỏi ủ tóc tại nhà thế nào cho tóc khô xơ",
+      "người hỏi mặt nạ ủ tóc khác dầu xả ra sao"
+    ],
+    "approvedAngles": [
+      "Mặt nạ ủ tóc với bơ hạt mỡ, keratin và collagen thủy phân, biotinoyl tripeptide-1",
+      "Thoa từ thân đến đuôi tóc, cách chân tóc 10–15 cm, ủ vài phút rồi xả sạch"
+    ],
+    "riskyAngles": [
+      "hứa phục hồi hoàn toàn tóc hư tổn",
+      "nói sản phẩm không có silicone khi bảng thành phần có silicone"
+    ],
+    "preferredDestination": "#thanh-phan"
+  },
+  "seo": {
+    "title": "Mặt nạ ủ tóc HAIRBORN Collagen Deep Shot | Mocha Việt Nam",
+    "description": "Mặt nạ ủ cho tóc khô xơ, chẻ ngọn. Nhãn hũ in bơ hạt mỡ, keratin thủy phân, collagen thủy phân, biotinoyl tripeptide-1. Ủ vài phút rồi xả. {{price}}."
+  },
+  "compliance": {
+    "declarant": "hairborn",
+    "functions": "làm mềm sợi tóc, giảm khô xơ và rối, giúp tóc suôn mượt",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da đầu có dấu hiệu kích ứng. Tránh tiếp xúc với mắt; nếu dính vào mắt, rửa ngay bằng nước sạch.",
+      "Rụng tóc thành mảng, rụng nhiều đột ngột, hoặc da đầu đỏ, ngứa, đóng vảy dày: nên đi khám bác sĩ da liễu.",
+      "Kết quả khác nhau tùy cơ địa và tình trạng tóc. Để xa tầm tay trẻ em.",
+      "Thoa lên thân và đuôi tóc, không bôi lên da đầu."
+    ]
+  },
+  "variants": [
+    {
+      "label": "1 hũ",
+      "note": "Tiết kiệm {{save}} so với giá niêm yết",
+      "price": 395000,
+      "recommended": true
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, hỏi về tình trạng tóc và da đầu trước khi chốt đơn",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước ủ sau khi gội",
+      "heading": "Mặt nạ ủ cho thân và đuôi tóc khô xơ, chẻ ngọn",
+      "lead": "Kem ủ đặc, thoa từ thân đến đuôi tóc sau khi gội rồi xả sạch. Nhãn hũ in <strong>bơ hạt mỡ, keratin thủy phân, collagen thủy phân</strong> và biotinoyl tripeptide-1.",
+      "usp": [
+        {
+          "text": "<strong>Bốn thành phần chính in trên nhãn hũ</strong>: bơ hạt mỡ, keratin thủy phân, biotinoyl tripeptide-1, collagen thủy phân",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "chép từ nhãn hũ"
+        },
+        {
+          "text": "<strong>Giúp tóc mềm, bớt rối và bớt gãy khi chải</strong>",
+          "evidence": "ingredient",
+          "qualifier": "theo dòng mô tả in trên nhãn"
+        },
+        {
+          "text": "<strong>Thoa tránh da đầu</strong>, cách chân tóc 10–15 cm",
+          "evidence": "ingredient",
+          "qualifier": "theo hướng dẫn sử dụng của hãng"
+        }
+      ],
+      "image": {
+        "src": "/images/hero-hairborn-collagen-deep-shot.webp",
+        "alt": "Hũ mặt nạ ủ tóc HAIRBORN Collagen Deep Shot, nắp đen, nhãn trắng"
+      },
+      "primaryCta": "Đặt mặt nạ ủ tóc",
+      "secondaryCta": {
+        "label": "Xem thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Khối lượng",
+          "value": "200g theo nhãn hũ; một số ảnh bao bì mới ghi 170g"
+        },
+        {
+          "label": "Loại",
+          "value": "Mặt nạ ủ tóc (Deep Repair Conditioner Mask), dạng kem đặc"
+        },
+        {
+          "label": "Dùng cho",
+          "value": "Mọi loại tóc; hãng nhắm tới tóc khô, xơ, dễ gãy"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Bơ hạt mỡ, keratin thủy phân, biotinoyl tripeptide-1, collagen thủy phân"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Thoa thân và đuôi tóc, cách chân tóc 10–15 cm, ủ rồi xả sạch"
+        },
+        {
+          "label": "Thương hiệu",
+          "value": "HAIRBORN"
+        }
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Vì sao đuôi tóc khô",
+      "heading": "Đuôi tóc khô cứng, chẻ ngọn, chải là gãy",
+      "quotes": [
+        "“Đuôi tóc khô cứng dù đã dùng dầu xả.”",
+        "“Tóc tẩy nhuộm xong chải là đứt.”"
+      ],
+      "explainer": {
+        "heading": "Đuôi tóc là phần lâu năm nhất của sợi tóc",
+        "body": [
+          "Tóc dài thì phần đuôi đã qua rất nhiều lần gội, chải, phơi nắng và sấy. Lớp ngoài mòn dần nên đuôi tóc khô và dễ chẻ.",
+          "Mặt nạ ủ đặc hơn dầu xả và được để trên tóc lâu hơn. Theo dòng mô tả trên nhãn, hỗn hợp bơ hạt mỡ, keratin, collagen và peptide nuôi dưỡng sợi tóc khô, giúp tóc trông mượt hơn và bớt gãy khi dùng đều."
+        ],
+        "diagram": "none"
+      }
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Thành phần",
+      "heading": "Thành phần in trên nhãn hũ",
+      "intro": "Bốn tên dưới đây in trong khung Hairroot Boost Complex trên nhãn. Nhãn không in nồng độ.",
+      "caption": "Bảng thành phần đầy đủ mà nơi bán đăng có cyclopentasiloxane và dimethiconol, đều thuộc nhóm silicone. Nếu bạn cần tránh silicone, hãy đọc bảng INCI ở bao bì trước khi dùng.",
+      "rows": [
+        {
+          "name": "Butyrospermum Parkii Butter (bơ hạt mỡ, shea butter)",
+          "role": "Chất béo thực vật, làm mềm và giảm khô cho thân tóc.",
+          "suitedFor": "Tóc khô, xơ"
+        },
+        {
+          "name": "Hydrolyzed Keratin",
+          "role": "Keratin thủy phân bám lên sợi tóc, giúp tóc mềm và đàn hồi hơn.",
+          "suitedFor": "Tóc hư tổn do uốn, nhuộm"
+        },
+        {
+          "name": "Biotinoyl Tripeptide-1",
+          "role": "Peptide gắn biotin, hãng đưa vào để nuôi dưỡng tóc.",
+          "suitedFor": "Tóc yếu, dễ gãy"
+        },
+        {
+          "name": "Hydrolyzed Collagen",
+          "role": "Collagen thủy phân giúp sợi tóc giữ ẩm.",
+          "suitedFor": "Tóc khô"
+        }
+      ],
+      "cta": {
+        "label": "Xem giá và đặt hàng",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Hợp với ai",
+      "columns": 2,
+      "items": [
+        {
+          "heading": "Tóc khô xơ, chẻ ngọn",
+          "body": "Ủ ở thân và đuôi tóc sau khi gội. Tóc mềm và dễ chải hơn sau khi xả.",
+          "meta": "Phù hợp"
+        },
+        {
+          "heading": "Tóc uốn, nhuộm, tẩy",
+          "body": "Nhóm tóc này khô nhanh nhất. Ủ đều sau khi gội.",
+          "meta": "Phù hợp"
+        },
+        {
+          "heading": "Da đầu dầu",
+          "body": "Vẫn dùng được. Chỉ thoa từ thân xuống đuôi tóc và không bôi lên da đầu.",
+          "meta": "Thoa tránh da đầu"
+        },
+        {
+          "heading": "Cần tránh silicone",
+          "body": "Bảng thành phần nơi bán đăng có silicone. Đọc kỹ bao bì trước khi mua.",
+          "meta": "Cân nhắc"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Cách ủ",
+      "intro": "Theo hướng dẫn của hãng.",
+      "totalTime": "PT10M",
+      "items": [
+        {
+          "heading": "Gội và xả sạch dầu gội",
+          "body": "Vắt bớt nước để kem không bị loãng."
+        },
+        {
+          "heading": "Thoa từ thân đến đuôi tóc",
+          "body": "Lấy một lượng vừa đủ, thoa cách chân tóc 10–15 cm. Không bôi vào da đầu."
+        },
+        {
+          "heading": "Ủ vài phút",
+          "body": "Ảnh hướng dẫn của hãng ghi 5–10 phút; trang bán hàng ghi 1–3 phút. Tóc càng khô thì ủ càng lâu trong khoảng đó."
+        },
+        {
+          "heading": "Xả sạch",
+          "body": "Xả kỹ bằng nước sạch, lau khô nhẹ bằng khăn mềm."
+        }
+      ],
+      "footnote": "Hãng gợi ý ủ 1–2 lần mỗi tuần khi dùng theo quy trình gội, ủ, lăn da đầu."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng hợp với tóc và da đầu của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt thời gian dùng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Mặt nạ ủ tóc giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho một hũ. Giá niêm yết là {{compareAtPrice}}. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Hũ bao nhiêu gam?",
+          "a": "Nhãn hũ trên phần lớn ảnh của hãng ghi 200g. Một số ảnh bao bì mới ghi 170g. Khi gọi xác nhận đơn, bạn có thể hỏi chuyên viên khối lượng của lô đang giao."
+        },
+        {
+          "q": "Có silicone không?",
+          "a": "Bảng thành phần đầy đủ mà nơi bán đăng có cyclopentasiloxane và dimethiconol, đều thuộc nhóm silicone. Một ảnh quảng cáo của hãng ghi “không silicone”, nên hai nguồn đang lệch nhau. Cần tránh silicone thì đọc bảng INCI ở bao bì trước khi dùng."
+        },
+        {
+          "q": "Có thay được dầu xả không?",
+          "a": "Dùng ở đúng chỗ của dầu xả: sau khi gội, trước khi xả lần cuối. Kem ủ đặc hơn và để trên tóc lâu hơn dầu xả."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Đậy kín nắp, không để nước vào hũ. Để nơi khô mát, tránh nắng trực tiếp, xa tầm tay trẻ em."
+        }
+      ],
+      "cta": {
+        "note": "Không còn câu hỏi nào nữa?",
+        "label": "Quay lại phần đặt hàng",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Đi cùng",
+      "heading": "Trước và sau bước ủ",
+      "intro": "Gội trước khi ủ. Lăn dưỡng da đầu sau khi xả sạch và lau khô tóc.",
+      "items": [
+        "hairborn-kerasilk-smooth-shampoo",
+        "hairborn-hair-boost-shampoo",
+        "hairborn-peel-ion"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "slug": "bo-7-mon-nam",
+  "locale": "vi",
+  "translationKey": "combo:bo-7-mon-nam",
+  "status": "published",
+  "name": "Bộ 7 món chăm da nám",
+  "shortName": "Bộ 7 món nám",
+  "group": "toan-dien",
+  "order": 10,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    },
+    {
+      "product": "ultra-egf-bio-gel-mask",
+      "qty": 1
+    },
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    }
+  ],
+  "price": 2225000,
+  "currency": "VND",
+  "purpose": "Combo nám đi cùng đủ các bước nền: tẩy trang, sữa rửa mặt, kem chống nắng, mặt nạ gel và kem dưỡng Biovector.",
+  "seo": {
+    "title": "Bộ 7 món chăm da nám | Mỹ Phẩm Mocha",
+    "description": "Combo nám đi cùng đủ các bước nền: tẩy trang, sữa rửa mặt, kem chống nắng, mặt nạ gel và kem dưỡng Biovector. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "slug": "cham-soc-toc",
+  "locale": "vi",
+  "translationKey": "cham-soc-toc",
+  "status": "published",
+  "primaryKeyword": "chăm sóc tóc và da đầu tại nhà",
+  "seo": {
+    "title": "Chăm sóc tóc và da đầu HAIRBORN | Mocha Việt Nam",
+    "description": "Dầu gội, mặt nạ ủ, tinh chất lăn da đầu và tẩy tế bào chết da đầu HAIRBORN. Thứ tự dùng: gội, ủ, rồi lăn dưỡng da đầu."
+  },
+  "eyebrow": "Dòng sản phẩm",
+  "heading": "Chăm sóc tóc và da đầu",
+  "navLabel": "Chăm sóc tóc",
+  "order": 7,
+  "lead": "Năm sản phẩm HAIRBORN cho bước gội, bước ủ và bước dưỡng da đầu. Dùng riêng từng món, hoặc ghép thành một quy trình.",
+  "products": [
+    "hairborn-hair-boost-shampoo",
+    "hairborn-kerasilk-smooth-shampoo",
+    "hairborn-collagen-deep-shot",
+    "hairborn-peel-ion",
+    "hairborn-scalp-scrub"
+  ],
+  "sections": [
+    {
+      "id": "thu-tu-dung",
+      "heading": "Thứ tự dùng: gội, ủ, rồi lăn da đầu",
+      "body": [
+        "Gội trước bằng một trong hai loại dầu gội. Hair Boost hợp với da đầu nhanh bết, tóc mảnh dễ gãy. Kerasilk Smooth hợp với tóc khô xơ, rối, khó vào nếp.",
+        "Xả sạch dầu gội rồi thoa mặt nạ ủ Collagen Deep Shot từ thân đến đuôi tóc, cách chân tóc 10–15 cm. Ủ vài phút rồi xả sạch.",
+        "Lau tóc bằng khăn đến khi còn hơi ẩm, rồi lăn Peel Ion dọc da đầu và chân tóc, massage nhẹ. Peel Ion để nguyên, không cần xả lại."
+      ],
+      "links": [
+        {
+          "label": "Dầu gội Hair Boost",
+          "href": "/hairborn-hair-boost-shampoo/"
+        },
+        {
+          "label": "Mặt nạ ủ Collagen Deep Shot",
+          "href": "/hairborn-collagen-deep-shot/"
+        },
+        {
+          "label": "Tinh chất lăn Peel Ion",
+          "href": "/hairborn-peel-ion/"
+        }
+      ]
+    },
+    {
+      "id": "lam-sach-sau",
+      "heading": "Tẩy tế bào chết da đầu không phải bước hằng ngày",
+      "body": [
+        "Kem tẩy tế bào chết dùng trước khi gội, khi da đầu bết nhanh hoặc còn nhiều cặn keo xịt. Massage nhẹ trên da đầu ướt, xả sạch, rồi gội như bình thường.",
+        "Mặt trước tuýp không in tần suất. Hướng dẫn chi tiết nằm ở trang sản phẩm. Không dùng khi da đầu đang trầy xước hoặc kích ứng."
+      ],
+      "links": [
+        {
+          "label": "Tẩy tế bào chết da đầu",
+          "href": "/hairborn-scalp-scrub/"
+        }
+      ]
+    },
+    {
+      "id": "khi-nao-di-kham",
+      "heading": "Khi nào nên đi khám trước",
+      "body": [
+        "Tóc rụng thành mảng tròn, rụng nhiều đột ngột, hoặc da đầu đỏ, ngứa, đóng vảy dày là những dấu hiệu cần bác sĩ da liễu xem nguyên nhân.",
+        "Các sản phẩm trong dòng này là mỹ phẩm làm sạch và dưỡng. Chúng giúp da đầu sạch, tóc mềm và ít gãy hơn khi chải gội, nhưng không thay được việc khám."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Nên mua món nào trước?",
+      "a": "Bắt đầu từ dầu gội, vì bước nào cũng đi sau bước gội. Da đầu nhanh bết thì chọn Hair Boost; tóc khô xơ thì chọn Kerasilk Smooth. Muốn dưỡng da đầu thì thêm Peel Ion."
+    },
+    {
+      "q": "Hair Boost và Kerasilk Smooth khác nhau thế nào?",
+      "a": "Hair Boost là chai 450g, nhãn in Kopexil, Redensyl™ và caffeine, hướng tới da đầu và chân tóc. Kerasilk Smooth là tuýp 200g, có dimethiconol và guar giúp tóc mượt, dễ chải."
+    },
+    {
+      "q": "Dùng cả năm món có bị nhiều quá không?",
+      "a": "Không cần dùng cả năm món mỗi lần gội. Dầu gội và Peel Ion dùng thường xuyên. Mặt nạ ủ và tẩy tế bào chết da đầu không cần dùng mỗi lần gội; tần suất ghi trên từng trang sản phẩm."
+    }
+  ]
+}

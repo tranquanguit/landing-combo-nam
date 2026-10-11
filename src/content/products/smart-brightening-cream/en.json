@@ -28,8 +28,8 @@
     "description": "Dark-spot cream with Tranexamic Acid, NIO-NAG, Bakuchiol and Ceramide — the exact actives printed on the jar. No corticosteroids. {{price}}, free shipping."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "1517/25/CBMP-LA",
+    "declarant": "mocha",
     "functions": "helps soften areas of uneven pigmentation and supports a more even skin tone",
     "warnings": [
       "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
@@ -37,8 +37,7 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ],
-    "productNotificationNumber": "1517/25/CBMP-LA"
+    ]
   },
   "availability": "InStock",
   "shipping": {
@@ -83,9 +82,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "The evening cream step, for melasma-prone skin",
+      "eyebrow": "Evening cream for dark spots · 30g jar",
       "heading": "Fading, then darkening again — usually this is not about how consistent you were",
-      "lead": "Most brightening creams act on the outermost layer only. Stop using them and the pigment returns. This 30gr jar takes a different route, and <strong>prints the proportion of each active on the carton</strong> so you can hold it up against anything else before deciding.",
+      "lead": "An evening cream for melasma-prone skin, with tranexamic acid 3%, NIO-NAG 2% and bakuchiol 2%. The strength of each active is printed on the carton; no corticosteroids, no hydroquinone.",
       "usp": [
         {
           "text": "<strong>No corticosteroids, no hydroquinone</strong> — the two things that thin skin after a few months of a mixed cream",
@@ -118,6 +117,32 @@
         "Free delivery nationwide",
         "Inspect before you pay",
         "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Size",
+          "value": "30g jar"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "Tranexamic acid 3%, NIO-NAG 2%, bakuchiol 2%, Vietnam Bio-white Complex 3%, black truffle 2%, ceramide 1%"
+        },
+        {
+          "label": "Free from",
+          "value": "Corticosteroids, hydroquinone"
+        },
+        {
+          "label": "How to use",
+          "value": "Evening, after cleansing and drying; about one fingertip joint"
+        },
+        {
+          "label": "Patch test",
+          "value": "A small amount on the neck, watch for 30–45 minutes"
+        },
+        {
+          "label": "Notification no.",
+          "value": "1517/25/CBMP-LA"
+        }
       ]
     },
     {
@@ -138,6 +163,107 @@
           "In exchange, you need patience measured in weeks rather than days. And you need sun protection. <strong>Skip sunscreen and no product holds its result</strong> — that is a precondition, not advice."
         ]
       }
+    },
+    {
+      "type": "conditions",
+      "id": "hop-voi-ai",
+      "eyebrow": "Compare the photos with your own skin",
+      "heading": "Which kinds of melasma this jar suits — and when it doesn’t",
+      "intro": "We are a reseller. Selling the wrong thing to the wrong person means you use it for a few weeks and give up — a loss on both sides. So the cases this jar is not for, we tell you up front.",
+      "items": [
+        {
+          "label": "Patchy melasma, a few years old",
+          "aka": "epidermal melasma — pigment near the surface",
+          "image": {
+            "src": "/images/da-nam-mang.webp",
+            "alt": "Close-up of a light-brown melasma patch with defined edges on the cheek"
+          },
+          "body": "Brown patches with clear edges, the pigment still near the surface. This is the group the cream alone suits best: the sealing step keeps the actives on your skin overnight. You still need sunscreen every morning.",
+          "fit": "yes",
+          "fitNote": "The cream alone is enough"
+        },
+        {
+          "label": "Deep or mixed melasma",
+          "aka": "pigment sits deeper, edges look blurred",
+          "image": {
+            "src": "/images/da-nam-chan-sau.webp",
+            "alt": "Close-up of deep melasma: a darker area with blurred edges on the cheek"
+          },
+          "body": "The cream still works, but on its own the deeper-absorbing step is missing, so progress is noticeably slower. Worth adding the serum — which is exactly what the combo is for.",
+          "fit": "partial",
+          "fitNote": "Usable — but look at the combo"
+        },
+        {
+          "label": "Melasma that appeared in or after pregnancy",
+          "aka": "often called hormonal melasma",
+          "image": {
+            "src": "/images/da-nam-noi-tiet.webp",
+            "alt": "Close-up of melasma on the cheek, the kind often linked to hormonal change"
+          },
+          "body": "If you are pregnant or breastfeeding, ask your doctor before using it — that advice is printed on the pack. After that, choose between the cream alone and the combo by how deep the pigment sits, as above.",
+          "fit": "partial",
+          "fitNote": "Pregnant or nursing: ask your doctor first"
+        },
+        {
+          "label": "Marks left after breakouts",
+          "aka": "post-inflammatory hyperpigmentation",
+          "image": {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Close-up of skin with several brown marks left after acne"
+          },
+          "body": "The NIO-NAG in this jar is aimed at post-inflammatory pigment, but the cream goes on the whole face. If what you have is mostly individual post-acne marks, Mocha’s spot gel for dark marks is the better tool.",
+          "fit": "partial",
+          "fitNote": "The spot gel is a better fit"
+        },
+        {
+          "label": "Irritated, flaking or freshly peeled skin",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Close-up of red, irritated skin"
+          },
+          "body": "Let your skin settle first. Adding actives to a damaged barrier is the surest way to make it react harder. If irritation starts while you are using it, stop.",
+          "fit": "no",
+          "fitNote": "Not yet"
+        },
+        {
+          "label": "A dark patch that spreads or changes fast",
+          "body": "A dark area that grows quickly, changes colour or shape, is raised, itches or bleeds is not a job for a jar of cream. See a dermatologist first — we won’t sell you that hope.",
+          "fit": "no",
+          "fitNote": "See a dermatologist"
+        }
+      ],
+      "caption": "Close-ups illustrating each skin condition (the brand's own image library) — <strong>not before-and-after photos of the product</strong>. Not sure whether your pigment is shallow or deep? Send us a photo on Zalo and an adviser will take a look before you order."
+    },
+    {
+      "type": "infographic",
+      "id": "nam-nam-o-dau",
+      "kind": "layers",
+      "eyebrow": "Where the pigment sits",
+      "heading": "Shallow or deep melasma decides whether you need one step or two",
+      "intro": "The cream works on the surface of your skin overnight. The deeper the pigment, the more it pays to add a step that gets actives in before the cream.",
+      "items": [
+        {
+          "label": "The night cream layer",
+          "depth": "surface",
+          "body": "The last step at night: it seals in moisture and keeps the actives on your skin until morning. By day, what sits on the surface should be <strong>sunscreen</strong>."
+        },
+        {
+          "label": "Patchy melasma",
+          "depth": "epidermis",
+          "body": "Pigment sits near the surface, in the epidermis, with clear edges. This is where the cream on its own fits most naturally."
+        },
+        {
+          "label": "Deep melasma",
+          "depth": "dermis",
+          "body": "Pigment reaches down into the dermis and the edges blur. The cream alone is much slower here; add the serum before it to cover both steps."
+        },
+        {
+          "label": "Mixed melasma",
+          "depth": "dermis",
+          "body": "Part shallow, part deep — so plan for it as you would for deep melasma: the two-step combo suits it better than the cream alone."
+        }
+      ],
+      "footnote": "Illustrative diagram, not to scale. You can’t always tell shallow pigment from deep by eye — if you’re unsure, send a photo to an adviser before you choose."
     },
     {
       "type": "compare",
@@ -187,31 +313,6 @@
       ],
       "footnote": "Neither option is <strong>wrong</strong>. The difference is pace, and how many steps you will realistically keep up every day — a two-step routine abandoned halfway is slower than a one-step routine done properly.",
       "transition": "If you would rather start with one step, below are the six actives in this jar and what each one does."
-    },
-    {
-      "type": "cards",
-      "id": "hop-voi-ai",
-      "eyebrow": "Before you order",
-      "heading": "Three cases, and an honest answer for each",
-      "intro": "We are a reseller; selling is good. But selling the wrong thing to the wrong person means you use it for a few weeks and stop — a loss on both sides. Find yourself below.",
-      "columns": 3,
-      "items": [
-        {
-          "heading": "Patchy melasma, a few years old",
-          "body": "Pigment still sits near the surface with defined edges. This is the group the cream alone suits best: the sealing step holds actives on the skin through the night.",
-          "meta": "The cream alone is enough"
-        },
-        {
-          "heading": "Deep or mixed melasma",
-          "body": "Pigment sits deeper and the edges are soft. The cream still works, but with only a sealing step the deeper-absorbing part is missing — noticeably slower. Worth considering the serum too.",
-          "meta": "Look at the combo"
-        },
-        {
-          "heading": "Skin that is irritated, flaking, or just peeled",
-          "body": "Let it settle first. Adding actives to a damaged barrier is the surest way to make skin react harder.",
-          "meta": "Not yet"
-        }
-      ]
     },
     {
       "type": "ingredients",

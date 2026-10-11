@@ -74,7 +74,22 @@
           "label": "Xem cơ chế sắc tố ở dòng da nám",
           "href": "/nam-tham/"
         }
-      ]
+      ],
+      "figure": {
+        "items": [
+          {
+            "src": "/images/da-mun-viem.webp",
+            "alt": "Cận vùng da có nốt mụn sưng đỏ",
+            "label": "Giai đoạn viêm"
+          },
+          {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Cận vùng da có vết thâm nâu sau khi mụn đã lặn",
+            "label": "Giai đoạn thâm"
+          }
+        ],
+        "caption": "Ảnh cận vùng da để minh hoạ tình trạng, không phải ảnh trước/sau và không dùng để tự chẩn đoán. Không chắc da mình thuộc trường hợp nào thì nên hỏi bác sĩ da liễu."
+      }
     },
     {
       "id": "khong-nan",

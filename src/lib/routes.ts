@@ -1,5 +1,5 @@
 import { getCollection } from 'astro:content';
-import { ADVICE_SEGMENT, DOCS_SEGMENT, POLICY_SEGMENT, defaultLocale, localePath, type Locale } from '../i18n/ui.ts';
+import { ADVICE_SEGMENT, COMBO_SEGMENT, DOCS_SEGMENT, POLICY_SEGMENT, defaultLocale, localePath, type Locale } from '../i18n/ui.ts';
 
 /**
  * MỘT nơi duy nhất biết URL của mọi trang trên site.
@@ -46,12 +46,22 @@ export function policyPath(slug: string, locale: Locale, topLevel = false): stri
   return withSlash(localePath(locale, topLevel ? `/${slug}/` : `/${POLICY_SEGMENT[locale]}/${slug}/`));
 }
 
+/** Trang một combo, dưới đoạn chuyên mục đã dịch: /combo/<slug>/ · /en/combos/<slug>/. */
+export function comboPath(slug: string, locale: Locale): string {
+  return withSlash(localePath(locale, `/${COMBO_SEGMENT[locale]}/${slug}/`));
+}
+
+/** Trang danh sách mọi combo. */
+export function comboIndexPath(locale: Locale): string {
+  return withSlash(localePath(locale, `/${COMBO_SEGMENT[locale]}/`));
+}
+
 /** Trang tổng giấy tờ và chứng nhận. */
 export function docsPath(locale: Locale): string {
   return withSlash(localePath(locale, `/${DOCS_SEGMENT[locale]}/`));
 }
 
-export type RouteKind = 'home' | 'product' | 'line' | 'article' | 'advice-index' | 'policy' | 'docs';
+export type RouteKind = 'home' | 'product' | 'line' | 'article' | 'advice-index' | 'policy' | 'docs' | 'combo' | 'combo-index';
 
 export interface Route {
   kind: RouteKind;
@@ -74,13 +84,14 @@ const published = <T extends { data: { status?: string } }>(entries: T[]) =>
  * từ một tập khác.
  */
 export async function allRoutes(): Promise<Route[]> {
-  const [pages, products, lines, articles, policies, documents] = await Promise.all([
+  const [pages, products, lines, articles, policies, documents, combos] = await Promise.all([
     getCollection('pages'),
     getCollection('products'),
     getCollection('lines'),
     getCollection('articles'),
     getCollection('policies'),
     getCollection('documents'),
+    getCollection('combos'),
   ]);
 
   const routes: Route[] = [];
@@ -121,6 +132,19 @@ export async function allRoutes(): Promise<Route[]> {
       kind: 'policy', path: policyPath(e.data.slug, e.data.locale, e.data.topLevel), locale: e.data.locale,
       translationKey: e.data.translationKey, slug: e.data.slug, entry: e,
     });
+  }
+
+  /* Combo và trang danh sách combo — danh sách chỉ có ở ngôn ngữ có ít nhất một combo. */
+  const comboLocales = new Set<Locale>();
+  for (const e of published(combos as any[])) {
+    comboLocales.add(e.data.locale);
+    routes.push({
+      kind: 'combo', path: comboPath(e.data.slug, e.data.locale), locale: e.data.locale,
+      translationKey: e.data.translationKey, slug: e.data.slug, entry: e,
+    });
+  }
+  for (const locale of comboLocales) {
+    routes.push({ kind: 'combo-index', path: comboIndexPath(locale), locale, translationKey: 'combo-index', slug: 'combo-index' });
   }
 
   /* Trang danh sách tư vấn chỉ tồn tại ở ngôn ngữ CÓ bài. Sinh nó ở mọi ngôn
@@ -172,6 +196,7 @@ export function siteNav(
   labels: { advice: string; products: string; contact: string },
   productLabel: (slug: string) => string | undefined = () => undefined,
   contactSlug?: string,
+  combosLabel?: string,
 ): NavItem[] {
   const ordered = [...lines].sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
   const nameOf = (l: { heading: string; navLabel?: string }) => l.navLabel ?? l.heading;
@@ -189,7 +214,7 @@ export function siteNav(
         label: productLabel(slug) ?? slug,
         href: productPath(slug, locale),
       })),
-    ]),
+    ]).concat(combosLabel ? [{ label: combosLabel, href: comboIndexPath(locale), note: 'line' }] : []),
   };
 
   return [

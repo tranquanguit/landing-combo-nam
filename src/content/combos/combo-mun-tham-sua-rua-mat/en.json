@@ -1,0 +1,31 @@
+{
+  "slug": "combo-mun-tham-sua-rua-mat",
+  "locale": "en",
+  "translationKey": "combo:combo-mun-tham-sua-rua-mat",
+  "status": "published",
+  "name": "Spot + Mark + Cleanser Combo",
+  "shortName": "Spot + Mark + Cleanser",
+  "group": "mun",
+  "order": 60,
+  "items": [
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    }
+  ],
+  "price": 660000,
+  "currency": "VND",
+  "purpose": "Cleanser, spot gel and mark gel: three steps for skin with both active blemishes and marks.",
+  "seo": {
+    "title": "Spot + Mark + Cleanser Combo | Mỹ Phẩm Mocha",
+    "description": "Cleanser, spot gel and mark gel: three steps for skin with both active blemishes and marks. Delivered to your door; inspect before you pay."
+  }
+}

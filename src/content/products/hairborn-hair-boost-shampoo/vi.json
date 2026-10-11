@@ -1,0 +1,330 @@
+{
+  "slug": "hairborn-hair-boost-shampoo",
+  "translationKey": "hairborn-hair-boost-shampoo",
+  "status": "published",
+  "sku": "HAIRBORN-SP025",
+  "price": 395000,
+  "compareAtPrice": 550000,
+  "currency": "VND",
+  "availability": "InStock",
+  "shipping": {
+    "country": "VN",
+    "rate": 0,
+    "transitDaysMin": 2,
+    "transitDaysMax": 5
+  },
+  "returnPolicy": {
+    "country": "VN",
+    "days": 7,
+    "scope": "defect",
+    "fees": "free",
+    "refund": "exchange"
+  },
+  "line": "cham-soc-toc",
+  "locale": "vi",
+  "name": "HAIRBORN Hair Boost – dầu gội dưỡng da đầu 450g",
+  "shortName": "Dầu gội Hair Boost",
+  "primaryKeyword": "dầu gội hairborn hair boost",
+  "storyArchetype": "single-product",
+  "adContext": {
+    "primaryNeed": "Cần một loại dầu gội cho da đầu nhanh bết và tóc dễ gãy khi chải gội",
+    "audienceSituations": [
+      "Gội buổi sáng mà chiều tóc đã bết",
+      "Thấy nhiều tóc gãy trên lược sau khi gội",
+      "Muốn một chai lớn dùng chung cho cả nhà"
+    ],
+    "contextHints": [
+      "người hỏi dầu gội nào cho da đầu dầu, tóc mảnh",
+      "người hỏi gội đầu thế nào để tóc ít gãy"
+    ],
+    "approvedAngles": [
+      "Dầu gội dưỡng da đầu, chai 450g có vòi nhấn",
+      "Nhãn in Kopexil, Redensyl™ và caffeine trong khung Hairroot Boost Complex"
+    ],
+    "riskyAngles": [
+      "gọi dầu gội là thuốc dành cho người rụng tóc bệnh lý",
+      "hứa tóc dày lên sau một mốc thời gian cụ thể"
+    ],
+    "preferredDestination": "#thanh-phan"
+  },
+  "seo": {
+    "title": "Dầu gội HAIRBORN Hair Boost 450g | Mocha Việt Nam",
+    "description": "Dầu gội dưỡng da đầu chai 450g. Nhãn in Kopexil, Redensyl™, caffeine cùng keratin và collagen thủy phân. Có bản mini 50g. {{price}}."
+  },
+  "compliance": {
+    "declarant": "hairborn",
+    "functions": "làm sạch da đầu, hỗ trợ ngăn ngừa tóc gãy rụng, giúp tóc mềm mượt và trông dày hơn",
+    "warnings": [
+      "Sản phẩm là mỹ phẩm dùng ngoài, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
+      "Ngưng sử dụng nếu da đầu có dấu hiệu kích ứng. Tránh tiếp xúc với mắt; nếu dính vào mắt, rửa ngay bằng nước sạch.",
+      "Rụng tóc thành mảng, rụng nhiều đột ngột, hoặc da đầu đỏ, ngứa, đóng vảy dày: nên đi khám bác sĩ da liễu.",
+      "Kết quả khác nhau tùy cơ địa và tình trạng tóc. Để xa tầm tay trẻ em."
+    ]
+  },
+  "variants": [
+    {
+      "label": "Chai 450g",
+      "note": "Tiết kiệm {{save}} so với giá niêm yết",
+      "price": 395000,
+      "recommended": true
+    },
+    {
+      "label": "Tuýp mini 50g",
+      "note": "Cùng công thức Hair Boost, tiện mang đi hoặc dùng thử",
+      "price": 140000,
+      "recommended": false
+    },
+    {
+      "label": "Tôi cần tư vấn trước",
+      "note": "Chuyên viên gọi lại, hỏi về tình trạng tóc và da đầu trước khi chốt đơn",
+      "price": null,
+      "recommended": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Bước gội",
+      "heading": "Dầu gội cho da đầu nhanh bết và tóc dễ gãy",
+      "lead": "Chai 450g có vòi nhấn, nhãn ghi <strong>dầu gội dưỡng da đầu</strong>, dùng cho mọi loại tóc. Trên nhãn in <strong>Kopexil, Redensyl™, caffeine</strong>, cùng keratin và collagen thủy phân.",
+      "usp": [
+        {
+          "text": "<strong>Kopexil, Redensyl™, caffeine</strong> in trong khung Hairroot Boost Complex trên nhãn chai",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "chép từ nhãn chai 450g"
+        },
+        {
+          "text": "<strong>Keratin và collagen thủy phân</strong> giúp sợi tóc mềm, ít gãy khi chải",
+          "evidence": "ingredient",
+          "qualifier": "theo dòng mô tả in trên nhãn"
+        },
+        {
+          "text": "<strong>Chai 450g</strong>, có bản mini 50g dạng tuýp",
+          "evidence": "verified",
+          "source": "#thanh-phan",
+          "qualifier": "khối lượng in trên nhãn từng loại"
+        }
+      ],
+      "image": {
+        "src": "/images/hero-hairborn-hair-boost-shampoo.webp",
+        "alt": "Chai dầu gội HAIRBORN Hair Boost 450g màu xanh navy, vòi nhấn đen"
+      },
+      "primaryCta": "Đặt dầu gội Hair Boost",
+      "secondaryCta": {
+        "label": "Xem thành phần",
+        "href": "#thanh-phan"
+      },
+      "trustBadges": [
+        "Miễn phí giao hàng toàn quốc",
+        "Kiểm tra hàng trước khi trả tiền",
+        "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Khối lượng",
+          "value": "450g, chai có vòi nhấn. Bản mini 50g dạng tuýp"
+        },
+        {
+          "label": "Loại",
+          "value": "Dầu gội dưỡng da đầu"
+        },
+        {
+          "label": "Dùng cho",
+          "value": "Mọi loại tóc"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Kopexil (Diaminopyrimidine Oxide), Redensyl™, caffeine; keratin và collagen thủy phân"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Tạo bọt, gội và massage da đầu 1–2 phút, xả sạch"
+        },
+        {
+          "label": "Thương hiệu",
+          "value": "HAIRBORN"
+        }
+      ]
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Vì sao bước gội quan trọng",
+      "heading": "Da đầu bết nhanh, tóc gãy nhiều sau mỗi lần gội",
+      "quotes": [
+        "“Gội buổi sáng, chiều tóc đã bết.”",
+        "“Chải tóc xong thấy cả nắm tóc gãy trên lược.”",
+        "“Gội xong tóc khô cứng, khó chải.”"
+      ],
+      "explainer": {
+        "heading": "Gội đúng cách giữ da đầu sạch mà không kéo gãy sợi tóc",
+        "body": [
+          "Dầu thừa, mồ hôi và cặn sản phẩm tích lại làm da đầu bết và ngứa. Gội bằng móng tay hoặc chà mạnh thì da đầu dễ trầy, tóc dễ gãy.",
+          "Hair Boost là dầu gội dưỡng da đầu. Nhãn chai in ba công dụng: hỗ trợ ngăn ngừa tóc gãy rụng, giúp tóc mềm mượt, giúp tóc chắc khỏe và trông dày hơn."
+        ],
+        "diagram": "none"
+      }
+    },
+    {
+      "type": "cards",
+      "id": "hop-voi-ai",
+      "eyebrow": "Trước khi đặt",
+      "heading": "Hợp với ai",
+      "columns": 2,
+      "items": [
+        {
+          "heading": "Da đầu nhanh bết",
+          "body": "Gội đều, massage bằng đầu ngón tay để làm sạch dầu thừa và bã nhờn.",
+          "meta": "Phù hợp"
+        },
+        {
+          "heading": "Tóc mảnh, dễ gãy khi chải gội",
+          "body": "Keratin và collagen thủy phân giúp sợi tóc mềm hơn, ít gãy khi gỡ rối.",
+          "meta": "Phù hợp"
+        },
+        {
+          "heading": "Tóc rất khô, xơ, khó vào nếp",
+          "body": "Kerasilk Smooth hợp hơn cho tóc khô xơ. Có thể dùng thêm mặt nạ ủ Collagen Deep Shot sau khi gội.",
+          "meta": "Cân nhắc loại khác"
+        },
+        {
+          "heading": "Da đầu đang viêm, đóng vảy dày hoặc có vết thương",
+          "body": "Nên đi khám da liễu trước. Dầu gội dưỡng không thay được việc khám.",
+          "meta": "Nên đi khám trước"
+        }
+      ]
+    },
+    {
+      "type": "ingredients",
+      "eyebrow": "Thành phần",
+      "heading": "Thành phần trên nhãn chai",
+      "intro": "Ba hoạt chất đầu in trong khung Hairroot Boost Complex. Keratin và collagen thủy phân nằm trong dòng mô tả tiếng Anh trên nhãn.",
+      "caption": "Bồ kết, bồ hòn và hương nhu tía lấy từ ảnh giới thiệu thành phần của hãng, không thấy trên mặt trước nhãn. Nhãn không in nồng độ. Bảng INCI đầy đủ in ở bao bì sản phẩm.",
+      "rows": [
+        {
+          "name": "Kopexil (Diaminopyrimidine Oxide)",
+          "inProduct": "Nhãn chai",
+          "role": "Hoạt chất thường gặp trong dầu gội chăm sóc chân tóc.",
+          "suitedFor": "Tóc mảnh, dễ gãy"
+        },
+        {
+          "name": "Redensyl™",
+          "inProduct": "Nhãn chai",
+          "role": "Hoạt chất thương mại dùng trong sản phẩm chăm sóc da đầu và chân tóc.",
+          "suitedFor": "Tóc mảnh, chân tóc yếu"
+        },
+        {
+          "name": "Caffeine",
+          "inProduct": "Nhãn chai",
+          "role": "Thành phần quen thuộc trong dầu gội dành cho da đầu.",
+          "suitedFor": "Da đầu dầu, tóc mảnh"
+        },
+        {
+          "name": "Hydrolyzed Keratin",
+          "inProduct": "Nhãn chai",
+          "role": "Keratin thủy phân bám lên sợi tóc, giúp tóc mềm và ít gãy khi chải.",
+          "suitedFor": "Tóc khô, hư tổn"
+        },
+        {
+          "name": "Hydrolyzed Collagen",
+          "inProduct": "Nhãn chai",
+          "role": "Collagen thủy phân giúp sợi tóc giữ ẩm, mềm hơn.",
+          "suitedFor": "Tóc khô"
+        },
+        {
+          "name": "Bồ kết và bồ hòn",
+          "inProduct": "Ảnh của hãng",
+          "role": "Làm sạch dịu nhẹ. Hãng ghi hỗ trợ giảm gàu và nhờn.",
+          "suitedFor": "Da đầu dầu, có gàu nhẹ"
+        },
+        {
+          "name": "Hương nhu tía",
+          "inProduct": "Ảnh của hãng",
+          "role": "Hãng ghi giúp làm dịu, da đầu thông thoáng.",
+          "suitedFor": "Da đầu hay ngứa nhẹ"
+        }
+      ],
+      "cta": {
+        "label": "Xem giá và đặt hàng",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Hướng dẫn",
+      "heading": "Cách gội",
+      "intro": "Theo thẻ hướng dẫn sử dụng của hãng.",
+      "totalTime": "PT5M",
+      "items": [
+        {
+          "heading": "Làm ướt tóc và da đầu",
+          "body": "Dùng nước sạch. Bước này giúp trôi bớt bụi bẩn, dầu thừa và làm mềm sợi tóc."
+        },
+        {
+          "heading": "Tạo bọt, gội nhẹ 1–2 phút",
+          "body": "Lấy một lượng vừa đủ ra tay, tạo bọt rồi thoa lên tóc và da đầu. Massage bằng đầu ngón tay theo vòng tròn, không dùng móng."
+        },
+        {
+          "heading": "Xả sạch, lau khô nhẹ",
+          "body": "Xả đến khi không còn bọt. Lau bằng khăn mềm rồi sang bước ủ hoặc bước dưỡng nếu cần."
+        }
+      ],
+      "footnote": "Tóc quá bẩn thì gội lần hai. Hãng giới thiệu sản phẩm để gội hằng ngày."
+    },
+    {
+      "type": "order",
+      "eyebrow": "Đặt hàng",
+      "heading": "Giao tận nơi, kiểm tra hàng rồi mới trả tiền",
+      "body": "Điền thông tin đặt hàng, chuyên viên tư vấn Mocha sẽ gọi lại trong vòng <strong>2 giờ làm việc</strong> để xác nhận đơn và hướng dẫn cách dùng hợp với tóc và da đầu của bạn.",
+      "points": [
+        "<strong>Miễn phí vận chuyển toàn quốc</strong>, nhận hàng sau 2–5 ngày.",
+        "<strong>Thanh toán khi nhận hàng</strong>, được mở kiểm tra trước khi trả tiền.",
+        "<strong>Đổi trả trong 7 ngày</strong> nếu sản phẩm lỗi, sai hàng hoặc chưa mở seal.",
+        "<strong>Hỗ trợ suốt thời gian dùng</strong> qua Zalo và hotline."
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Hỏi đáp",
+      "heading": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Dầu gội Hair Boost giá bao nhiêu?",
+          "a": "<strong>{{price}}</strong> cho chai 450g. Giá niêm yết là {{compareAtPrice}}. Bản mini 50g có giá riêng trong phần đặt hàng. Miễn phí vận chuyển, thanh toán khi nhận hàng."
+        },
+        {
+          "q": "Chai lớn và bản mini khác nhau thế nào?",
+          "a": "Cùng tên Hair Boost, cùng khung Hairroot Boost Complex trên nhãn. Chai 450g có vòi nhấn; bản mini là tuýp 50g, tiện mang đi hoặc dùng thử."
+        },
+        {
+          "q": "Có cần dầu xả không?",
+          "a": "Không bắt buộc. Tóc dài, khô hoặc hay rối thì thoa thêm mặt nạ ủ Collagen Deep Shot ở thân và đuôi tóc sau khi gội."
+        },
+        {
+          "q": "Dùng cùng Peel Ion thế nào?",
+          "a": "Gội bằng Hair Boost, xả sạch, lau tóc còn hơi ẩm rồi lăn Peel Ion lên da đầu. Peel Ion không cần xả lại."
+        },
+        {
+          "q": "Bảo quản thế nào?",
+          "a": "Đậy vòi sau khi dùng, để nơi khô mát, tránh nắng trực tiếp, xa tầm tay trẻ em."
+        }
+      ],
+      "cta": {
+        "note": "Không còn câu hỏi nào nữa?",
+        "label": "Quay lại phần đặt hàng",
+        "href": "#dat-hang"
+      }
+    },
+    {
+      "type": "relatedProducts",
+      "eyebrow": "Bước tiếp theo",
+      "heading": "Sau khi gội",
+      "intro": "Ủ thân tóc, rồi lăn dưỡng da đầu. Tóc khô xơ thì có thể đổi sang Kerasilk Smooth.",
+      "items": [
+        "hairborn-collagen-deep-shot",
+        "hairborn-peel-ion",
+        "hairborn-kerasilk-smooth-shampoo"
+      ]
+    }
+  ]
+}

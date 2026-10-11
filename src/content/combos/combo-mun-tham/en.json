@@ -1,0 +1,27 @@
+{
+  "slug": "combo-mun-tham",
+  "locale": "en",
+  "translationKey": "combo:combo-mun-tham",
+  "status": "published",
+  "name": "Spot Gel + Mark Gel Combo",
+  "shortName": "Spot + Mark",
+  "group": "mun",
+  "order": 10,
+  "items": [
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    }
+  ],
+  "price": 425000,
+  "currency": "VND",
+  "purpose": "A spot gel for inflamed blemishes, a mark gel for healed marks. Two stages, two tubes.",
+  "seo": {
+    "title": "Spot Gel + Mark Gel Combo | Mỹ Phẩm Mocha",
+    "description": "A spot gel for inflamed blemishes, a mark gel for healed marks. Two stages, two tubes. Delivered to your door; inspect before you pay."
+  }
+}

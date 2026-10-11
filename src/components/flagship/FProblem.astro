@@ -40,7 +40,8 @@ const dendrites = cells.map((x) => `M${x} 146l-14 -18M${x} 146l12 -20M${x} 146l2
     ))}
   </ul>
 
-  <div class="explain" data-reveal>
+  <div class:list={['explain', data.explainer.diagram === 'none' && 'solo']} data-reveal>
+    {data.explainer.diagram !== 'none' && (
     <figure class="skin" role="img" aria-label={`${L.surface}, ${L.epi}, ${L.pig}, ${L.der}`}>
       <svg viewBox="0 0 480 320" aria-hidden="true">
         <defs>
@@ -68,6 +69,7 @@ const dendrites = cells.map((x) => `M${x} 146l-14 -18M${x} 146l12 -20M${x} 146l2
         <li style="top:72%">{L.der}</li>
       </ul>
     </figure>
+    )}
 
     <div class="text">
       <h3>{data.explainer.heading}</h3>
@@ -107,7 +109,8 @@ const dendrites = cells.map((x) => `M${x} 146l-14 -18M${x} 146l12 -20M${x} 146l2
   .explain {
     display: grid; gap: clamp(32px, 5vw, 80px); align-items: center;
   }
-  @media (min-width: 900px) { .explain { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); } }
+  @media (min-width: 900px) { .explain:not(.solo) { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); } }
+  .explain.solo .text { max-width: 62ch; }
 
   .skin {
     position: relative; margin: 0;

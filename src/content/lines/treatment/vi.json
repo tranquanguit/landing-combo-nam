@@ -52,7 +52,22 @@
           "label": "Xem dòng phục hồi da",
           "href": "/phuc-hoi-da/"
         }
-      ]
+      ],
+      "figure": {
+        "items": [
+          {
+            "src": "/images/da-yeu-nhay-cam.webp",
+            "alt": "Cận vùng da mỏng, ửng đỏ nhẹ",
+            "label": "Da mỏng, đang yếu"
+          },
+          {
+            "src": "/images/da-sau-tham-my.webp",
+            "alt": "Cận vùng da còn đỏ sau thủ thuật",
+            "label": "Vừa qua laser, lăn kim"
+          }
+        ],
+        "caption": "Ảnh cận vùng da để minh hoạ tình trạng, không phải ảnh trước/sau và không dùng để tự chẩn đoán. Không chắc da mình thuộc trường hợp nào thì nên hỏi bác sĩ da liễu."
+      }
     }
   ],
   "faq": [

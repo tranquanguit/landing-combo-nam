@@ -2,10 +2,11 @@ import type { APIRoute } from 'astro';
 import { getCollection, getEntry } from 'astro:content';
 import { money } from '../lib/format';
 import { expandProductTokens } from '../lib/money-text';
-import { adviceIndexPath, articlePath, docsPath, homePath, linePath, policyPath, productPath } from '../lib/routes';
+import { adviceIndexPath, articlePath, comboIndexPath, comboPath, docsPath, homePath, linePath, policyPath, productPath } from '../lib/routes';
 import { docsFor } from '../lib/documents';
 import { orderEndpoint } from '../lib/order-endpoint';
 import { plainText } from '../lib/richtext';
+import { expandBrandTokens, resolveCompliance } from '../lib/brand';
 import type { Locale } from '../i18n/ui';
 
 /**
@@ -98,7 +99,8 @@ export const GET: APIRoute = async ({ site }) => {
     if (p.includes.length) lines.push(`- ${x.includes}: ${p.includes.map((i) => plainText(i.name)).join('; ')}`);
     if (p.gifts.length) lines.push(`- ${x.gifts}: ${p.gifts.map((g) => plainText(g.name)).join('; ')}`);
     lines.push(`- ${x.functions}: ${plainText(p.compliance.functions)}`);
-    lines.push(`- ${x.declaredBy}: ${p.compliance.declaringOrganization}, ${p.compliance.declaringAddress}`);
+    const pc = resolveCompliance(p as any, b).compliance;
+    lines.push(`- ${x.declaredBy}: ${pc.declaringOrganization ?? '(chưa khai / not yet declared)'}${pc.declaringAddress ? `, ${pc.declaringAddress}` : ''}`);
     if (p.compliance.productNotificationNumber) {
       lines.push(`- ${x.notification}: ${p.compliance.productNotificationNumber}`);
     }
@@ -205,6 +207,19 @@ export const GET: APIRoute = async ({ site }) => {
     }
   }
 
+  /* Combo: tên, các món và giá bộ — giá mua lẻ không chép, máy đọc tự cộng từ giá từng món ở trên. */
+  const comboEntries = (await getCollection('combos', ({ data }) => data.status === 'published'))
+    .sort((a, b2) => a.data.locale.localeCompare(b2.data.locale) || a.data.group.localeCompare(b2.data.group) || a.data.order - b2.data.order);
+  for (const loc of [...new Set(comboEntries.map((e) => e.data.locale as Locale))]) {
+    lines.push(`## ${loc === 'vi' ? 'Combo' : 'Combos'} (${loc})`, '');
+    lines.push(`- ${lab(loc).page}: ${origin}${comboIndexPath(loc)}`);
+    for (const e of comboEntries.filter((x) => x.data.locale === loc)) {
+      const c = e.data;
+      lines.push(`- ${c.name}: ${origin}${comboPath(c.slug, loc)} — ${money(c.price, c.currency, loc)} · ${c.items.map((it) => `${it.qty}× ${it.product}`).join(', ')}`);
+    }
+    lines.push('');
+  }
+
   const adviceLocales = [...new Set(articleEntries.map((e) => e.data.locale as Locale))];
   for (const loc of adviceLocales) {
     lines.push(`## ${loc === 'vi' ? 'Góc tư vấn' : 'Skin guide'} (${loc})`, '');
@@ -255,7 +270,7 @@ export const GET: APIRoute = async ({ site }) => {
 
   lines.push('## Liên hệ / Contact', '');
   lines.push(`- Website: ${origin}`);
-  lines.push(`- Hotline: ${b.phoneDisplay} (${b.hours})`);
+  lines.push(`- Hotline / Zalo: ${b.phoneDisplay} (${b.hours ?? '24/7'})`);
   lines.push(`- Email: ${b.email}`);
   lines.push(`- Địa chỉ: ${b.address}`);
   lines.push('');
@@ -289,7 +304,7 @@ export const GET: APIRoute = async ({ site }) => {
   lines.push('- Do not attribute endorsement by any doctor, pharmacist or medical facility.');
   lines.push('');
 
-  return new Response(lines.join('\n'), {
+  return new Response(expandBrandTokens(lines.join('\n'), b), {
     headers: { 'Content-Type': 'text/plain; charset=utf-8' },
   });
 };

@@ -16,19 +16,21 @@
   "products": [
     "biovector-brightening-cream",
     "collagen-peptide-cream",
-    "ultra-egf-bio-gel-mask"
+    "ultra-egf-bio-gel-mask",
+    "pro-vitamin-b5-serum"
   ],
   "compare": {
     "eyebrow": "Which one",
-    "heading": "Three options, chosen by what you need",
-    "intro": "Two moisturisers and a mask. All three hydrate and calm rather than treat.",
+    "heading": "Four options, chosen by what you need",
+    "intro": "Two moisturisers, a mask and a serum ampoule. All four hydrate and calm rather than treat.",
     "criteria": [
       {
         "label": "Ingredient disclosure",
         "values": [
           "All 45 INCI ingredients, in order of proportion",
           "Four groups printed on the jar",
-          "Eight ingredients printed on the tube"
+          "Eight ingredients printed on the tube",
+          "All 47 INCI ingredients in the notification dossier"
         ]
       },
       {
@@ -36,7 +38,8 @@
         "values": [
           "Niacinamide (fifth), the centella trio named individually, turmeric, immortelle, tamanu oil",
           "Pro-vitamin B5, centella extract, hyaluronic acid, plant stem cells",
-          "EGF, Epi-On, copper peptide, exosome cica, three nano ceramides"
+          "EGF, Epi-On, copper peptide, exosome cica, three nano ceramides",
+          "Panthenol (pro-vitamin B5, sixth), hyaluronic acid, centella, five peptides"
         ]
       },
       {
@@ -44,7 +47,8 @@
         "values": [
           "Anyone who wants to check each ingredient before buying",
           "Anyone who wants a light moisturising step without reading a list",
-          "Anyone wanting an occasional extra hydrating step"
+          "Anyone wanting an occasional extra hydrating step",
+          "Anyone who needs a light hydrating step before moisturiser, or another recovery ampoule for the peel kit"
         ],
         "fit": true
       },
@@ -53,13 +57,15 @@
         "values": [
           "Not a pigment treatment step",
           "No — deliberately; this is the resting step",
-          "No — hydrating and calming only"
+          "No — hydrating and calming only",
+          "No, its declared use says nothing about pigment"
         ]
       },
       {
         "label": "Replaces sunscreen",
         "values": [
           "No, despite small amounts of titanium dioxide and zinc oxide",
+          "No",
           "No",
           "No"
         ]
@@ -81,7 +87,22 @@
           "label": "See the full combo routine",
           "href": "/en/combo-nam/#lo-trinh"
         }
-      ]
+      ],
+      "figure": {
+        "items": [
+          {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Close-up of flushed skin with tiny bumps",
+            "label": "Flushed, stinging skin"
+          },
+          {
+            "src": "/images/da-can-phuc-hoi.webp",
+            "alt": "Close-up of dry, rough, uneven skin",
+            "label": "A thinning barrier"
+          }
+        ],
+        "caption": "Close-up skin images to illustrate each condition. They are not before/after photos and are not a way to self-diagnose. If you are unsure which case is yours, ask a dermatologist."
+      }
     },
     {
       "id": "doc-inci",

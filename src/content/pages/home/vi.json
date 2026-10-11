@@ -30,7 +30,8 @@
     "phuc-hoi-da",
     "lam-sach",
     "bao-ve-da",
-    "treatment"
+    "treatment",
+    "cham-soc-toc"
   ],
   "featured": [
     "combo-nam",
@@ -157,7 +158,7 @@
   "faq": [
     {
       "q": "Website này có phải của chính hãng Mocha không?",
-      "a": "Trang do Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha đứng tên. Pháp nhân, mã số thuế và địa chỉ đăng ký đều ghi ở chân trang mọi trang. Tổ chức chịu trách nhiệm công bố sản phẩm với cơ quan quản lý cũng là đơn vị này, và số tiếp nhận phiếu công bố in ngay trên từng trang sản phẩm."
+      "a": "Trang do Mỹ Phẩm Mocha, đại lý phân phối sản phẩm Mocha, vận hành. Mã số thuế, địa chỉ và số điện thoại ghi ở chân trang mọi trang. Tổ chức chịu trách nhiệm công bố từng sản phẩm và số tiếp nhận phiếu công bố in ngay trên trang của sản phẩm đó."
     },
     {
       "q": "Vì sao giá trên trang thấp hơn giá niêm yết?",

@@ -56,8 +56,8 @@
     "description": "Sabiwhite 0.3%, niacinamide 3%, tranexamic acid 3%, glutathione, TECA, EGF — published figures. Evening use. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "2626/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "helps soften darker marks left after blemishes and supports an even tone",
     "warnings": [
       "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
@@ -65,8 +65,7 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ],
-    "productNotificationNumber": "2626/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -85,9 +84,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "The step after the spot has gone",
+      "eyebrow": "Post-blemish mark gel · 20g tube",
       "heading": "A mark left after a blemish is a pigment problem, no longer a blemish problem",
-      "lead": "A 20g tube with <strong>Sabiwhite® 0.3%, niacinamide 3%, tranexamic acid 3% and glutathione</strong>, plus TECA, EGF and MC Zyme E. The first three figures are published by the manufacturer.",
+      "lead": "A gel for the marks left once a blemish has healed, not for spots that are still inflamed. With Sabiwhite® 0.3%, niacinamide 3% and tranexamic acid 3%.",
       "usp": [
         {
           "text": "<strong>Three concentrations published as figures</strong>: Sabiwhite 0.3%, niacinamide 3%, tranexamic acid 3%",
@@ -120,6 +119,32 @@
         "Free delivery nationwide",
         "Inspect before you pay",
         "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Size",
+          "value": "20g gel tube"
+        },
+        {
+          "label": "Suits",
+          "value": "Post-blemish marks on healed skin; not for spots that are still inflamed"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "Sabiwhite® 0.3%, niacinamide 3%, tranexamic acid 3%, glutathione, TECA, EGF"
+        },
+        {
+          "label": "Free from",
+          "value": "Alcohol, parabens, synthetic fragrance, mineral oil"
+        },
+        {
+          "label": "Made in",
+          "value": "Vietnam"
+        },
+        {
+          "label": "Notification no.",
+          "value": "2626/25/CBMP-TN"
+        }
       ]
     },
     {
@@ -140,6 +165,88 @@
           "And because this is pigment, sun darkens it exactly as it darkens melasma. A mark kept out of the sun fades noticeably faster than the same mark exposed daily."
         ]
       }
+    },
+    {
+      "type": "conditions",
+      "id": "hop-voi-ai",
+      "eyebrow": "Compare the photos with your skin",
+      "heading": "Which post-acne marks this tube is for, and which it is not",
+      "intro": "Not every mark left by acne is the same thing. Telling them apart first saves both money and time.",
+      "items": [
+        {
+          "label": "Flat brown marks after a spot has settled",
+          "aka": "post-inflammatory hyperpigmentation",
+          "image": {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Close-up of skin with several brown marks left after acne"
+          },
+          "body": "Pigment left after inflammation, with the skin surface still smooth. This is what the tube was made for: apply it to fully healed areas, and <strong>wear sunscreen every day</strong>.",
+          "fit": "yes",
+          "fitNote": "Exactly what this gel is for"
+        },
+        {
+          "label": "Old marks mixed with clogged, bumpy skin",
+          "image": {
+            "src": "/images/da-san-mun-an.webp",
+            "alt": "Close-up of bumpy skin with small clogged pores and a few dark marks"
+          },
+          "body": "Old marks and new spots often turn up together. Use the gel on the healed marks; the spots that are still forming need cleansing and the spot gel, on separate areas rather than layered.",
+          "fit": "partial",
+          "fitNote": "Only the healed marks"
+        },
+        {
+          "label": "Spots that are still inflamed",
+          "image": {
+            "src": "/images/da-mun-viem.webp",
+            "alt": "Close-up of a red, swollen spot with a white head"
+          },
+          "body": "Too early for this tube. Inflamed spots need a different product — the spot gel, dotted on each one. And do not squeeze: it leaves a deeper, longer-lasting mark.",
+          "fit": "no",
+          "fitNote": "Use the spot gel first"
+        },
+        {
+          "label": "Flat red or pink marks",
+          "body": "Dilated vessels left after inflammation, not melanin. These usually fade on their own; brightening actives do little. Moisturising and sun protection do the work.",
+          "fit": "no",
+          "fitNote": "This tube does little here"
+        },
+        {
+          "label": "Indented or raised scars",
+          "body": "A change in the structure of the skin, not in its pigment. No topical product fills an indented scar — that needs a specialist clinic.",
+          "fit": "no",
+          "fitNote": "Not what you need"
+        }
+      ],
+      "caption": "Close-ups illustrating each skin condition (brand image material), <strong>not before-and-after photos of the product</strong>. If you are pregnant or breastfeeding, speak to your doctor before use. Not sure which group you are in? Send us a photo on Zalo and an adviser will take a look before you order."
+    },
+    {
+      "type": "infographic",
+      "id": "tu-not-mun-toi-vet-tham",
+      "kind": "stages",
+      "eyebrow": "From spot to mark",
+      "heading": "This tube starts working once the spot has settled",
+      "intro": "A spot and the mark it leaves are two different stages. On an inflamed spot this gel is in the wrong place; on a mark without sunscreen, the effort is wasted.",
+      "items": [
+        {
+          "label": "Red and swollen",
+          "body": "An active spot: raised, red, tender to the touch. That is a job for the spot gel, not for this tube yet."
+        },
+        {
+          "label": "White head",
+          "body": "Leave it alone. Squeezing pushes the damage deeper and prolongs the inflammation, so the mark it leaves is darker and lasts longer."
+        },
+        {
+          "label": "Spot gone, brown mark left",
+          "body": "Inflamed skin produces extra melanin in that area. The spot settles; the pigment stays. This is when the gel goes on, over fully healed skin.",
+          "highlight": true
+        },
+        {
+          "label": "Steady use, daily sunscreen",
+          "body": "Pigment fades with the skin’s renewal cycle — think weeks and months, not days. Sun darkens marks again, so daytime sunscreen is a condition, not an option.",
+          "highlight": true
+        }
+      ],
+      "footnote": "How long each stage lasts varies from person to person, so we do not put a number of days on it. Indented or raised scars are a structural change and are not part of this cycle."
     },
     {
       "type": "compare",
@@ -189,31 +296,6 @@
       ],
       "footnote": "Plenty of people have both at once on the same face. Using both then makes sense, but on different areas rather than on top of each other.",
       "transition": "If the spot has fully settled, below are the eight ingredients in this tube."
-    },
-    {
-      "type": "cards",
-      "id": "hop-voi-ai",
-      "eyebrow": "Before you order",
-      "heading": "Three kinds of post-acne mark, and which one this tube addresses",
-      "intro": "Not every mark left by acne is the same thing. Telling them apart first saves both money and time.",
-      "columns": 3,
-      "items": [
-        {
-          "heading": "Flat brown marks",
-          "body": "Pigment left after inflammation, with the skin surface still smooth. This is what the tube was made for.",
-          "meta": "Best fit"
-        },
-        {
-          "heading": "Flat red or pink marks",
-          "body": "Dilated vessels left after inflammation, not melanin. These usually fade on their own; brightening actives do little. Moisturising and sun protection do the work.",
-          "meta": "Needs more patience"
-        },
-        {
-          "heading": "Indented or raised scars",
-          "body": "A change in the structure of the skin, not in its pigment. No topical product fills an indented scar — that needs a clinic.",
-          "meta": "Not what you need"
-        }
-      ]
     },
     {
       "type": "ingredients",

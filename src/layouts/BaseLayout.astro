@@ -36,7 +36,8 @@ interface Props {
  * thuế của Mocha, nên một bản sao được lập chỉ mục ở tên miền khác là rủi ro
  * nhầm lẫn thực thể thật, không phải chuyện thẩm mỹ.
  */
-const FORCE_NOINDEX = import.meta.env.PUBLIC_NOINDEX === '1';
+/* Bản xem thử nội dung demo (lời chứng chưa có đồng ý) cũng KHÔNG được lập chỉ mục. */
+const FORCE_NOINDEX = import.meta.env.PUBLIC_NOINDEX === '1' || import.meta.env.PUBLIC_DEMO_CONTENT === '1';
 
 const {
   locale, title, description, canonical, ogImage, alternates = [], jsonLd, siteName,
@@ -90,7 +91,11 @@ const {
     )}
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
+    {/* Logo tròn chính thức của hãng (mochavietnam.com), không phải chữ M tự vẽ. */}
+    <link rel="icon" href={withBase("/favicon.ico")} sizes="48x48" />
+    <link rel="icon" href={withBase("/favicon-32x32.png")} type="image/png" sizes="32x32" />
+    <link rel="icon" href={withBase("/icon-192.png")} type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href={withBase("/apple-touch-icon.png")} />
 
     {/* Font self-host, tách subset latin và vietnamese qua unicode-range.
         Chỉ preload hai file cần ngay cho màn hình đầu: body 400 và tiêu đề Fraunces 600. */}

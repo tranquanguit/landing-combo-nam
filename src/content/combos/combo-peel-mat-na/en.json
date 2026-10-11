@@ -1,0 +1,27 @@
+{
+  "slug": "combo-peel-mat-na",
+  "locale": "en",
+  "translationKey": "combo:combo-peel-mat-na",
+  "status": "published",
+  "name": "Peel Kit + EGF Gel Mask Combo",
+  "shortName": "Peel + Gel Mask",
+  "group": "peel",
+  "order": 10,
+  "items": [
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "ultra-egf-bio-gel-mask",
+      "qty": 1
+    }
+  ],
+  "price": 705000,
+  "currency": "VND",
+  "purpose": "The peel kit with a soothing, hydrating gel mask for the days when skin feels dry and tight after peeling.",
+  "seo": {
+    "title": "Peel Kit + EGF Gel Mask Combo | Mỹ Phẩm Mocha",
+    "description": "The peel kit with a soothing, hydrating gel mask for the days when skin feels dry and tight after peeling. Delivered to your door; inspect before you pay."
+  }
+}

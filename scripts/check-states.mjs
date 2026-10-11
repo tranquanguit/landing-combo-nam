@@ -152,7 +152,7 @@ for (const w of [390, 768]) {
   await page.fill('#name', 'Nguyen Van Test');
   await page.fill('#phone', '0900000123');
   const a = await page.$('#address'); if (a) await a.fill('12 Duong Test');
-  const c = await page.$('input[name=dataConsent]'); if (c) await c.check();
+  const c = await page.$('input[type=checkbox][name=dataConsent]'); if (c) await c.check();
   await page.click('#order-form button[type=submit]');
   await page.waitForTimeout(1200);
   const r = await page.evaluate(() => {
@@ -182,7 +182,7 @@ for (const w of [390, 768]) {
   await page.fill('#name', 'Nguyen Van Test');
   await page.fill('#phone', '0900000123');
   const a = await page.$('#address'); if (a) await a.fill('12 Duong Test');
-  const c = await page.$('input[name=dataConsent]'); if (c) await c.check();
+  const c = await page.$('input[type=checkbox][name=dataConsent]'); if (c) await c.check();
   await page.click('#order-form button[type=submit]');
   await page.waitForTimeout(1200);
   const r = await page.evaluate(() => {

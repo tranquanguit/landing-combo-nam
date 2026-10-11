@@ -19,6 +19,8 @@ import {
   page, redirect, esc, notice, pageHead, statusPill, STATUS_LABEL, AVAILABILITY_LABEL, COLLECTION_LABEL, type Viewer,
 } from './html.ts';
 import { chatRoutes } from './chat.ts';
+import { promotionsPage } from './promotions.ts';
+import { storePage, saveStore } from './store.ts';
 import { limited } from '../lib/rate-limit.ts';
 import { hashIp } from '../lib/chat.ts';
 
@@ -42,6 +44,16 @@ const QUICK: Record<string, Quick[]> = {
     { path: 'validUntil', label: 'Hiệu lực đến', type: 'date' },
   ],
   articles: [STATUS_Q], lines: [STATUS_Q], guides: [STATUS_Q], policies: [STATUS_Q],
+  promotions: [
+    STATUS_Q,
+    { path: 'startsAt', label: 'Bắt đầu (giờ VN, +07:00)', type: 'text' },
+    { path: 'endsAt', label: 'Kết thúc (giờ VN, +07:00)', type: 'text' },
+  ],
+  testimonials: [
+    STATUS_Q,
+    { path: 'consent.status', label: 'Đồng ý của khách', type: 'select', options: { written: 'Đã có văn bản đồng ý', pending: 'Đang chờ', refused: 'Khách từ chối' } },
+    { path: 'consent.date', label: 'Ngày đồng ý', type: 'date' },
+  ],
 };
 
 const get = (o: any, path: string) => path.split('.').reduce((a, k) => (a == null ? a : a[k]), o);
@@ -50,7 +62,13 @@ function set(o: any, path: string, v: unknown) {
   for (const k of ks.slice(0, -1)) cur = cur[k] ??= {};
   if (v === undefined) delete cur[ks.at(-1)!]; else cur[ks.at(-1)!] = v;
 }
-const titleOf = (d: any) => d?.shortName ?? d?.name ?? d?.title ?? d?.heading ?? d?.tradingName ?? d?.hero?.heading ?? '';
+const titleOf = (d: any) => d?.shortName ?? d?.name ?? d?.title ?? d?.heading ?? d?.tradingName ?? d?.hero?.heading
+  ?? (d?.quote ? `${d.person?.display ?? ''}: ${String(d.quote).slice(0, 60)}${String(d.quote).length > 60 ? '…' : ''}` : '');
+/** Lời chứng: "Đang hiện" chưa đủ — chưa có văn bản đồng ý thì trang thật vẫn không hiện nó. */
+const consentPill = (d: any) => !d?.consent ? '' : d.consent.status === 'written'
+  ? ' <span class="pill published">Có văn bản đồng ý</span>'
+  : d.consent.status === 'refused' ? ' <span class="pill bad">Khách từ chối</span>'
+  : ' <span class="pill draft">Chờ đồng ý — chưa hiện trên web</span>';
 const ID = /^[a-z0-9][a-z0-9-]*(?:\/[a-z]{2})?$/;
 const fmt = (d: any) => (d ? new Date(d).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }) : '—');
 const label = (c: string) => COLLECTION_LABEL[c] ?? c;
@@ -62,12 +80,17 @@ async function badges(sql: Sql): Promise<NonNullable<Viewer['badges']>> {
       (SELECT count(*)::int FROM orders WHERE status = 'new') AS orders,
       (SELECT count(*)::int FROM content_revisions WHERE saved_at > coalesce((SELECT max(started_at) FROM publish_runs WHERE ok), 'epoch')) AS pending,
       (SELECT count(*)::int FROM chat_messages WHERE role = 'bot' AND matched = false AND created_at > now() - interval '7 days') AS unanswered`)).rows[0];
+    const now = Date.now();
+    r.promoLive = (await sql.query<{ data: any }>("SELECT data FROM content_entries WHERE collection = 'promotions'")).rows
+      .filter(({ data: d }) => d?.status === 'published' && Date.parse(d.startsAt) <= now && now < Date.parse(d.endsAt)).length;
     return r;
   } catch { return {}; }
 }
 function sectionOf(path: string, url: URL) {
   if (path === '/admin') return 'home';
-  if (path === '/admin/edit' || path === '/admin/history') return `content/${url.searchParams.get('c') ?? ''}`;
+  if (path === '/admin/store') return 'store';
+  if (path === '/admin/edit' || path === '/admin/history') return url.searchParams.get('c') === 'promotions' ? 'promotions' : `content/${url.searchParams.get('c') ?? ''}`;
+  if (path === '/admin/content/promotions') return 'promotions';
   if (path.startsWith('/admin/chat-rules')) return 'chat-rules';
   return path.replace(/^\/admin\//, '').replace(/\/(raw|delete)$/, '');
 }
@@ -131,6 +154,8 @@ export async function adminHandler(request: Request, ctx: AdminCtx): Promise<Res
   const chat = await chatRoutes(path, request, ctx, user, url);
   if (chat) return chat;
   if (path === '/admin/orders') return request.method === 'POST' ? updateOrder(ctx, request) : ordersPage(ctx, user, url);
+  if (path === '/admin/promotions') return promotionsPage(ctx, user);
+  if (path === '/admin/store') return request.method === 'POST' ? saveStore(ctx, user, request) : storePage(ctx, user);
   if (path.startsWith('/admin/users')) {
     if (user.role !== 'admin') return page('Không có quyền', notice('err', 'Chỉ tài khoản quyền <b>quản trị</b> quản lý được tài khoản.'), user, 403);
     if (path === '/admin/users') return request.method === 'POST' ? saveUser(ctx, request) : usersPage(ctx, user, url);
@@ -215,7 +240,7 @@ async function listPage({ sql }: AdminCtx, user: Viewer, url: URL, collection: s
     <table><tr><th>Tên</th><th>Trạng thái</th><th class="hide-sm">Sửa lần cuối</th><th class="hide-sm"></th></tr>
     ${shown.map((r) => `<tr>
       <td><a href="/admin/edit?c=${esc(collection)}&id=${encodeURIComponent(r.entry_id)}"><b>${esc(titleOf(r.data) || r.entry_id)}</b></a><br><code class="muted">${esc(r.entry_id)}</code></td>
-      <td>${statusPill(r.data?.status)}</td>
+      <td>${statusPill(r.data?.status)}${consentPill(r.data)}</td>
       <td class="muted hide-sm">${esc(fmt(r.updated_at))}<br>${esc(r.updated_by)}</td>
       <td class="nowrap hide-sm"><a href="/admin/edit?c=${esc(collection)}&id=${encodeURIComponent(r.entry_id)}">Sửa</a> ·
           <a href="/admin/edit?c=${esc(collection)}&new=1&from=${encodeURIComponent(r.entry_id)}">Nhân bản</a></td></tr>`).join('')
@@ -247,7 +272,7 @@ async function editPage({ sql }: AdminCtx, user: Viewer, url: URL, state?: { sou
   return page(`${isNew ? 'Thêm' : 'Sửa'} ${label(c)}`, `
     ${pageHead(isNew ? `Thêm ${esc(label(c).toLowerCase())}` : esc(name || id), {
       back: [`/admin/content/${c}`, label(c)],
-      sub: isNew ? '' : `<code>${esc(id)}</code> ${statusPill(data.status)}`,
+      sub: isNew ? '' : `<code>${esc(id)}</code> ${statusPill(data.status)}${consentPill(data)}`,
       actions: isNew ? '' : `<a class="btn ghost sm" href="/admin/history?c=${esc(c)}&id=${encodeURIComponent(id)}">Lịch sử sửa</a>` })}
     ${state?.msg ? notice('ok', esc(state.msg)) : ''}
     ${issues?.length ? notice('err', `<b>Chưa lưu — ${issues.length} lỗi.</b> Sửa rồi lưu lại; nội dung bạn gõ vẫn còn nguyên bên dưới.<ul>${

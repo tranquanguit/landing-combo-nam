@@ -1,0 +1,35 @@
+{
+  "slug": "combo-mun-tham-lam-sach",
+  "locale": "vi",
+  "translationKey": "combo:combo-mun-tham-lam-sach",
+  "status": "published",
+  "name": "Combo Mụn + Thâm + Làm sạch 2 bước",
+  "shortName": "Mụn + Thâm + Làm sạch",
+  "group": "mun",
+  "order": 70,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "smart-whitening-turmergel",
+      "qty": 1
+    }
+  ],
+  "price": 760000,
+  "currency": "VND",
+  "purpose": "Tẩy trang, sữa rửa mặt, gel chấm mụn và gel giảm thâm. Bộ đủ cho da mụn có trang điểm hoặc dùng kem chống nắng mỗi ngày.",
+  "seo": {
+    "title": "Combo Mụn + Thâm + Làm sạch 2 bước | Mỹ Phẩm Mocha",
+    "description": "Tẩy trang, sữa rửa mặt, gel chấm mụn và gel giảm thâm. Bộ đủ cho da mụn có trang điểm hoặc dùng kem chống nắng mỗi ngày."
+  }
+}

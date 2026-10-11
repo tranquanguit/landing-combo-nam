@@ -56,8 +56,8 @@
     "description": "The one Mocha product with its complete INCI list published: niacinamide, the centella trio, turmeric, immortelle, tamanu oil. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "1518/25/CBMP-LA",
+    "declarant": "mocha",
     "functions": "helps hydrate, calm the skin and support an even tone",
     "warnings": [
       "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
@@ -65,8 +65,7 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ],
-    "productNotificationNumber": "1518/25/CBMP-LA"
+    ]
   },
   "variants": [
     {
@@ -74,6 +73,12 @@
       "note": "Aminovector technology",
       "price": 335000,
       "recommended": true
+    },
+    {
+      "label": "Combo of 2 Biovector jars",
+      "price": 600000,
+      "recommended": false,
+      "qty": 2
     },
     {
       "label": "I would like advice first",
@@ -85,9 +90,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "The full list published",
+      "eyebrow": "Brightening moisturiser · 30g",
       "heading": "The one product here with all 45 INCI ingredients published",
-      "lead": "Not “key ingredients”, not four selected groups — the <strong>entire list</strong>, in descending order of proportion. You can compare it against any other product, including other brands.",
+      "lead": "A morning and evening moisturiser that helps hydrate, soothe and even out skin tone. The full list of 45 INCI ingredients is published, with niacinamide fifth.",
       "usp": [
         {
           "text": "<strong>All 45 INCI ingredients published</strong>, in descending order of proportion",
@@ -121,6 +126,32 @@
         "Free delivery nationwide",
         "Inspect before you pay",
         "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Size",
+          "value": "30g"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "Niacinamide (5th of 45), asiaticoside, madecassic acid, asiatic acid, tamanu oil, turmeric extract"
+        },
+        {
+          "label": "Ingredient list",
+          "value": "All 45 INCI ingredients, in descending order of proportion"
+        },
+        {
+          "label": "Sun protection",
+          "value": "No SPF or PA published; you still need a separate sunscreen"
+        },
+        {
+          "label": "How to use",
+          "value": "Morning and evening, after cleansing; once a day in the first week"
+        },
+        {
+          "label": "Notification no.",
+          "value": "1518/25/CBMP-LA"
+        }
       ]
     },
     {
@@ -141,6 +172,97 @@
           "This jar declares <strong>all 45 ingredients in INCI order</strong>. We are not claiming that makes the formula better — only that you have enough to judge it yourself, including against other brands."
         ]
       }
+    },
+    {
+      "type": "infographic",
+      "id": "con-so-tren-hu",
+      "kind": "facts",
+      "eyebrow": "At a glance",
+      "heading": "Five numbers you can read off the jar and its ingredient list",
+      "intro": "No result figures here, only what can be read from the packaging and the INCI list.",
+      "items": [
+        {
+          "label": "Ingredients published",
+          "value": "45",
+          "unit": "INCI ingredients",
+          "body": "The complete list, in descending order of proportion, not just a few headline names."
+        },
+        {
+          "label": "Where niacinamide sits",
+          "value": "5",
+          "unit": "of 45",
+          "body": "Fifth on the list, ahead of most of the extracts."
+        },
+        {
+          "label": "The centella trio, named one by one",
+          "value": "3",
+          "unit": "centella actives",
+          "body": "Asiaticoside, madecassic acid and asiatic acid, rather than lumped together as “centella extract”."
+        },
+        {
+          "label": "Jar size",
+          "value": "30",
+          "unit": "gr",
+          "body": "The cream step, morning and night, a pea-sized amount each time."
+        },
+        {
+          "label": "Neck patch test",
+          "value": "30–45",
+          "unit": "minutes",
+          "body": "Watch the patch before your first use, then start with once a day for the first week."
+        }
+      ],
+      "footnote": "It contains titanium dioxide and zinc oxide, but the pack declares no SPF or PA rating. So there is no sun-protection number here, and you still need a separate sunscreen."
+    },
+    {
+      "type": "conditions",
+      "id": "hop-tinh-trang-nao",
+      "eyebrow": "Look at the photos, then at your skin",
+      "heading": "Which skin conditions this cream suits, and which it does not",
+      "intro": "This is a moisturising step: it helps hydrate, soothe and even out skin tone. For some conditions it is not the answer, and we say so up front.",
+      "items": [
+        {
+          "label": "Sensitive skin that reddens easily",
+          "image": {
+            "src": "/images/da-yeu-nhay-cam.webp",
+            "alt": "Close-up of thin, fragile skin with slight redness"
+          },
+          "body": "Contains the centella trio, white water lily extract and a liquorice derivative, all soothing ingredients. With all 45 listed, you can check for anything you have reacted to before you try it.",
+          "fit": "yes",
+          "fitNote": "Every ingredient can be checked"
+        },
+        {
+          "label": "Dull, slightly sun-darkened, uneven skin",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Close-up of a cheekbone with diffuse sun-related darkening"
+          },
+          "body": "Niacinamide supports a more even tone, and turmeric extract is used for dull skin. Sun still deepens darkened areas, so a separate sunscreen every morning is not optional.",
+          "fit": "partial",
+          "fitNote": "Helps evenness; needs sunscreen"
+        },
+        {
+          "label": "Deep or long-standing melasma",
+          "image": {
+            "src": "/images/da-nam-chan-sau.webp",
+            "alt": "Close-up of a dark melasma patch on the cheekbone"
+          },
+          "body": "A moisturiser is not a melasma product. This needs a dedicated melasma range plus daily sunscreen; for severe melasma, ask a dermatologist.",
+          "fit": "no",
+          "fitNote": "Needs melasma care and sunscreen"
+        },
+        {
+          "label": "Just peeled, on retinol, or red and stinging",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Close-up of irritated skin with red patches"
+          },
+          "body": "Forty-five ingredients is a lot of variables for reacting skin. Wait until it settles; for this phase the Collagen Peptide Cream, with fewer ingredients, is the better fit. If redness persists, see a doctor.",
+          "fit": "no",
+          "fitNote": "Wait, or choose the Collagen jar"
+        }
+      ],
+      "caption": "Close-ups illustrating each skin condition (the brand's image material), <strong>not before-and-after photos of the product</strong>. Stop using it if your skin shows signs of irritation. For any kind of pigmentation, daily sunscreen remains essential."
     },
     {
       "type": "compare",

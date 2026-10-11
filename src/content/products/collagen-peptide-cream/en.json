@@ -56,8 +56,8 @@
     "description": "Moisturiser with pro-vitamin B5, centella extract, hyaluronic acid and plant stem cells — as printed on the jar. {{price}}, free shipping."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "1409/25/CBMP-LA",
+    "declarant": "mocha",
     "functions": "helps hydrate, calm and maintain the softness of the skin",
     "warnings": [
       "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
@@ -65,8 +65,7 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ],
-    "productNotificationNumber": "1409/25/CBMP-LA"
+    ]
   },
   "variants": [
     {
@@ -85,9 +84,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "The basic moisturising step",
+      "eyebrow": "Recovery moisturiser · 30g jar",
       "heading": "A moisturiser for the phase when skin needs rest, not more actives",
-      "lead": "A 30g jar with <strong>pro-vitamin B5, centella extract, hyaluronic acid and plant stem cells</strong> — the four groups printed on the jar. This is a base moisturiser, not a treatment step.",
+      "lead": "A moisturising, soothing cream for morning and evening while your skin takes a break from strong actives. With pro-vitamin B5, centella and hyaluronic acid; no pigment-targeting actives.",
       "usp": [
         {
           "text": "<strong>Four ingredient groups printed on the jar</strong>, readable before you open it",
@@ -119,6 +118,32 @@
         "Free delivery nationwide",
         "Inspect before you pay",
         "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Size",
+          "value": "30g jar"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "Pro-vitamin B5 (panthenol), centella extract, hyaluronic acid, plant stem cells"
+        },
+        {
+          "label": "Suits",
+          "value": "All skin types (per the manufacturer); skin taking a break from strong actives"
+        },
+        {
+          "label": "How to use",
+          "value": "Morning and evening, as the last step; add sunscreen in the morning"
+        },
+        {
+          "label": "Amount",
+          "value": "A pea-sized amount, dotted on five points, then spread and patted in"
+        },
+        {
+          "label": "Notification no.",
+          "value": "1409/25/CBMP-LA"
+        }
       ]
     },
     {
@@ -139,6 +164,102 @@
           "It is a basic moisturising step. We call it that rather than a treatment, because putting treatment expectations on a moisturiser is the fastest way to be disappointed by one."
         ]
       }
+    },
+    {
+      "type": "infographic",
+      "id": "giai-doan-de-da-yen",
+      "kind": "stages",
+      "eyebrow": "Where this jar sits",
+      "heading": "Four steps through a phase when skin needs calm — this jar is the third",
+      "intro": "A base moisturiser neither starts nor ends this phase. It keeps skin steady once you have dropped whatever was making it sting.",
+      "items": [
+        {
+          "label": "Signs of too much",
+          "body": "Stinging, redness and light flaking even though you follow the instructions. The barrier is weak, so actives get in faster than intended."
+        },
+        {
+          "label": "Cut back the steps",
+          "body": "Pause retinol, exfoliating acids and high-strength vitamin C. This phase needs fewer things acting on the skin, not more."
+        },
+        {
+          "label": "Base moisturiser, morning and night",
+          "body": "This is where the jar sits: the last step of the routine, hydrating and soothing, with sunscreen added in the morning.",
+          "highlight": true
+        },
+        {
+          "label": "Back to actives",
+          "body": "Actives come back once skin has settled again, not while it is recovering. This jar can stay on as your everyday moisturiser."
+        }
+      ],
+      "footnote": "How long each step takes varies from person to person. If skin still stings, stays red or flakes heavily after you have cut back, that is no longer a moisturiser’s job — see a dermatologist."
+    },
+    {
+      "type": "conditions",
+      "id": "hop-voi-ai",
+      "eyebrow": "Look at the photos, then at your own skin",
+      "heading": "Which phase of skin this jar is for",
+      "intro": "A basic moisturiser cannot do an active’s job. We go through each case so you do not buy the wrong expectation.",
+      "items": [
+        {
+          "label": "Red and stinging after too many actives",
+          "aka": "irritated skin",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Close-up of a flushed cheek on easily irritated skin"
+          },
+          "body": "Red, stinging and lightly flaking even though you follow the instructions. Pause the strong actives, keep the routine short, and use this jar as the last step, morning and night.",
+          "fit": "yes",
+          "fitNote": "Exactly the phase this jar is for"
+        },
+        {
+          "label": "Just stopped retinol or exfoliating acids",
+          "image": {
+            "src": "/images/da-yeu-nhay-cam.webp",
+            "alt": "Close-up of thin, sensitive skin with slight redness"
+          },
+          "body": "During the break, skin is thinner and more reactive than usual. The four groups printed on the jar are all hydrating and soothing, with no strong actives added.",
+          "fit": "yes",
+          "fitNote": "Suits the resting phase"
+        },
+        {
+          "label": "Dry and short of moisture all year",
+          "image": {
+            "src": "/images/da-can-phuc-hoi.webp",
+            "alt": "Close-up of dehydrated skin with visible pores"
+          },
+          "body": "No pigmentation concerns, just a frequent tight, dry feeling. Fine as a long-term daily moisturiser; while your skin is settled there is no need for a busier formula.",
+          "fit": "yes",
+          "fitNote": "Fine for long-term use"
+        },
+        {
+          "label": "Just had a cosmetic procedure",
+          "aka": "a peel or similar",
+          "image": {
+            "src": "/images/da-sau-tham-my.webp",
+            "alt": "Close-up of reddened skin after a cosmetic procedure"
+          },
+          "body": "This is the phase the jar is aimed at, but freshly treated skin is a clinical situation: ask the practitioner who did the procedure before you apply anything.",
+          "fit": "partial",
+          "fitNote": "Ask your practitioner first"
+        },
+        {
+          "label": "Wanting to fade melasma or dark marks",
+          "image": {
+            "src": "/images/da-nam-mang.webp",
+            "alt": "Close-up of a light-brown melasma patch on the cheekbone"
+          },
+          "body": "There are no brightening actives here. It keeps skin settled so other steps can work, but on its own it does not act on pigment — you need a different product.",
+          "fit": "no",
+          "fitNote": "You need a different product"
+        },
+        {
+          "label": "Broken, weeping or persistently sore skin",
+          "body": "Open, weeping or burnt skin is not the place for a moisturiser. If you have cut back on actives and skin still stings, stays red or flakes heavily, see a dermatologist.",
+          "fit": "no",
+          "fitNote": "See a dermatologist"
+        }
+      ],
+      "caption": "Close-ups illustrating each skin condition (brand image material), <strong>not before-and-after photos of the product in use</strong>. Not sure which phase your skin is in? Send us a photo and an adviser will take a look before you order."
     },
     {
       "type": "compare",
@@ -188,31 +309,6 @@
       ],
       "footnote": "Fewer ingredients does not mean lesser. For reacting skin, <strong>fewer variables is precisely what you need</strong>, and that is this jar's job.",
       "transition": "If yours is the phase that needs calm, below are the four ingredient groups in this jar."
-    },
-    {
-      "type": "cards",
-      "id": "hop-voi-ai",
-      "eyebrow": "Before you order",
-      "heading": "Three phases, and which one this jar is for",
-      "intro": "A basic moisturiser cannot do an active's job. Said plainly so you do not buy the wrong expectation.",
-      "columns": 3,
-      "items": [
-        {
-          "heading": "Recently irritated, peeled, or off retinol",
-          "body": "Exactly the phase this jar exists for: few ingredients, no strong actives, and a quiet stretch for the skin.",
-          "meta": "Best fit"
-        },
-        {
-          "heading": "Dry year-round, no pigmentation concerns",
-          "body": "Fine as a long-term daily moisturiser. No reason to move to a busier formula while your skin is settled.",
-          "meta": "Good long term"
-        },
-        {
-          "heading": "Working on melasma or dark marks",
-          "body": "There are no brightening actives here. It keeps the barrier in shape so other steps can work, but on its own it does not act on pigment — you need something else.",
-          "meta": "Not what you need"
-        }
-      ]
     },
     {
       "type": "ingredients",

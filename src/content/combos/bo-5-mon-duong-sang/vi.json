@@ -1,0 +1,39 @@
+{
+  "slug": "bo-5-mon-duong-sang",
+  "locale": "vi",
+  "translationKey": "combo:bo-5-mon-duong-sang",
+  "status": "published",
+  "name": "Bộ 5 món dưỡng da sáng khoẻ",
+  "shortName": "Bộ 5 món dưỡng sáng",
+  "group": "duong",
+  "order": 30,
+  "items": [
+    {
+      "product": "bio-deep-detox-rebalance",
+      "qty": 1
+    },
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    },
+    {
+      "product": "ultra-egf-bio-gel-mask",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    }
+  ],
+  "price": 1145000,
+  "currency": "VND",
+  "purpose": "Tẩy trang, sữa rửa mặt, kem chống nắng, mặt nạ gel và kem dưỡng Biovector: bộ dưỡng hằng ngày không có hoạt chất mạnh.",
+  "seo": {
+    "title": "Bộ 5 món dưỡng da sáng khoẻ | Mỹ Phẩm Mocha",
+    "description": "Tẩy trang, sữa rửa mặt, kem chống nắng, mặt nạ gel và kem dưỡng Biovector: bộ dưỡng hằng ngày không có hoạt chất mạnh."
+  }
+}

@@ -30,7 +30,22 @@
           "label": "Xem lộ trình sáng và tối",
           "href": "/combo-nam/#lo-trinh"
         }
-      ]
+      ],
+      "figure": {
+        "items": [
+          {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Cận vùng da sạm màu không đều do nắng",
+            "label": "Da sạm do nắng"
+          },
+          {
+            "src": "/images/da-nam-mang.webp",
+            "alt": "Cận vùng da má có mảng nâu nhạt",
+            "label": "Nám mảng"
+          }
+        ],
+        "caption": "Ảnh cận vùng da để minh hoạ tình trạng, không phải ảnh trước/sau và không dùng để tự chẩn đoán. Không chắc da mình thuộc trường hợp nào thì nên hỏi bác sĩ da liễu."
+      }
     },
     {
       "id": "hoa-hoc-hay-vat-ly",

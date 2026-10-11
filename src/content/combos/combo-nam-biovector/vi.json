@@ -1,0 +1,31 @@
+{
+  "slug": "combo-nam-biovector",
+  "locale": "vi",
+  "translationKey": "combo:combo-nam-biovector",
+  "status": "published",
+  "name": "Combo Nám + Kem dưỡng Biovector",
+  "shortName": "Nám + Biovector",
+  "group": "nam",
+  "order": 20,
+  "items": [
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    }
+  ],
+  "price": 1283000,
+  "currency": "VND",
+  "purpose": "Serum và kem nám, thêm kem dưỡng Biovector cho buổi sáng hoặc những hôm da cần nghỉ hoạt chất.",
+  "seo": {
+    "title": "Combo Nám + Kem dưỡng Biovector | Mỹ Phẩm Mocha",
+    "description": "Serum và kem nám, thêm kem dưỡng Biovector cho buổi sáng hoặc những hôm da cần nghỉ hoạt chất. Giao tận nơi, kiểm tra hàng rồi mới trả tiền."
+  }
+}

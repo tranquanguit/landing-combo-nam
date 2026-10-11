@@ -3,6 +3,7 @@ import { t, type Locale } from '../i18n/ui';
 import Picture from '../components/Picture.astro';
 import LocaleSwitcher from './LocaleSwitcher.astro';
 import { localePath } from '../i18n/ui';
+import PromoBar from './PromoBar.astro';
 interface Props {
   brand: any; locale: Locale; alternates?: { locale: Locale; url: string }[];
   /**
@@ -34,6 +35,7 @@ function groupChildren(children: { label: string; href: string; note?: string }[
   return groups;
 }
 ---
+<PromoBar locale={locale} />
 <header>
   <div class="wrap bar">
     {/* Logo phải về trang chủ. Trước đây là href="#main", tức một skip-link thứ

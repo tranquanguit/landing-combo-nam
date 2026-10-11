@@ -1,0 +1,27 @@
+{
+  "slug": "combo-sua-rua-mat-kem-chong-nang",
+  "locale": "en",
+  "translationKey": "combo:combo-sua-rua-mat-kem-chong-nang",
+  "status": "published",
+  "name": "Cleanser + Sunscreen Combo",
+  "shortName": "Cleanser + Sunscreen",
+  "group": "lam-sach",
+  "order": 10,
+  "items": [
+    {
+      "product": "bio-active-cleanser",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    }
+  ],
+  "price": 558000,
+  "currency": "VND",
+  "purpose": "The two most basic daily steps: cleanse morning and evening, sunscreen in the morning.",
+  "seo": {
+    "title": "Cleanser + Sunscreen Combo | Mỹ Phẩm Mocha",
+    "description": "The two most basic daily steps: cleanse morning and evening, sunscreen in the morning. Delivered to your door; inspect before you pay."
+  }
+}

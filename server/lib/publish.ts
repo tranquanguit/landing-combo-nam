@@ -15,6 +15,8 @@ import { existsSync, readdirSync, readFileSync, renameSync, rmSync, writeFileSyn
 import { join } from 'node:path';
 import type { Sql } from './db.ts';
 import { exportToFiles } from './content.ts';
+import { loadPromos, saveSignature } from './promo-server.ts';
+import { liveSignature } from '../../src/lib/promotions.ts';
 
 let running: Promise<unknown> | null = null;
 export const isPublishing = () => running !== null;
@@ -63,6 +65,8 @@ export function publish(sql: Sql, root: string, by: string): Promise<PublishResu
     const id = (await sql.query<{ id: number }>('INSERT INTO publish_runs (started_by) VALUES ($1) RETURNING id', [by])).rows[0].id;
     const log: string[] = [];
     let ok = false;
+    /* Tập đợt khuyến mãi đang chạy ở thời điểm build — lịch tự xuất bản so với nó. */
+    const promoSig = liveSignature(await loadPromos(sql).catch(() => []), new Date());
     try {
       const ex = await exportToFiles(sql, root);
       log.push(`xuất ${ex.entries} nội dung, ${ex.media} ảnh — ${ex.written} file ghi mới, ${ex.removed} file xoá`);
@@ -81,7 +85,8 @@ export function publish(sql: Sql, root: string, by: string): Promise<PublishResu
         writeFileSync(join(root, POINTER + '.tmp'), out + '\n');
         renameSync(join(root, POINTER + '.tmp'), join(root, POINTER));
         ok = true;
-        log.push(`đã chuyển sang bản mới (${out}).`);
+        log.push(`đã chuyển sang bản mới (${out}).${promoSig ? ` Khuyến mãi đang chạy: ${promoSig}.` : ''}`);
+        await saveSignature(sql, promoSig, by).catch((e) => log.push(`(không ghi được mốc khuyến mãi: ${(e as Error).message})`));
         /* Giữ bản mới + bản ngay trước (để quay lại nếu cần), xoá các bản cũ hơn. */
         const keep = new Set([out, prev]);
         for (const d of existsSync(join(root, 'builds')) ? readdirSync(join(root, 'builds')) : []) {

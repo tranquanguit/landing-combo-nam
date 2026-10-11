@@ -56,16 +56,15 @@
     "description": "Kem dưỡng với Pro-vitamin B5, chiết xuất rau má, HA và tế bào gốc thực vật, đúng danh sách in trên hũ. {{price}}, freeship."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "1409/25/CBMP-LA",
+    "declarant": "mocha",
     "functions": "hỗ trợ cấp ẩm, làm dịu da và duy trì độ mềm mịn",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ],
-    "productNotificationNumber": "1409/25/CBMP-LA"
+    ]
   },
   "variants": [
     {
@@ -84,9 +83,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Bước dưỡng cơ bản",
+      "eyebrow": "Kem dưỡng phục hồi · hũ 30gr",
       "heading": "Kem dưỡng cho giai đoạn da cần được để yên",
-      "lead": "Hũ 30gr, dưỡng ẩm và làm dịu, không có hoạt chất đặc trị sắc tố. Bốn nhóm thành phần in trên hũ.",
+      "lead": "Kem dưỡng ẩm và làm dịu, dùng sáng và tối khi da cần tạm nghỉ hoạt chất mạnh. Có Pro-vitamin B5, rau má và Hyaluronic Acid; không có hoạt chất tác động lên sắc tố.",
       "usp": [
         {
           "text": "<strong>Bốn nhóm thành phần in thẳng trên hũ</strong>, đọc được trước khi mở nắp",
@@ -95,7 +94,7 @@
           "qualifier": "in trên bao bì sản phẩm"
         },
         {
-          "text": "<strong>Không chứa hoạt chất đặc trị sắc tố</strong>: chủ ý, vì đây là bước để da nghỉ",
+          "text": "<strong>Không chứa hoạt chất tác động lên sắc tố</strong>: chủ ý, vì đây là bước để da nghỉ",
           "evidence": "ingredient",
           "qualifier": "xem bảng thành phần"
         },
@@ -118,6 +117,32 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Khối lượng",
+          "value": "Hũ 30gr"
+        },
+        {
+          "label": "Thành phần chính",
+          "value": "Pro-vitamin B5 (Panthenol), chiết xuất rau má, Hyaluronic Acid, tế bào gốc thực vật"
+        },
+        {
+          "label": "Dùng cho",
+          "value": "Mọi loại da (theo nhà sản xuất); da đang tạm nghỉ hoạt chất mạnh"
+        },
+        {
+          "label": "Cách dùng",
+          "value": "Sáng và tối, bước cuối; buổi sáng thêm kem chống nắng"
+        },
+        {
+          "label": "Lượng dùng",
+          "value": "Bằng hạt đậu, chấm năm điểm rồi thoa đều và vỗ nhẹ"
+        },
+        {
+          "label": "Số công bố",
+          "value": "1409/25/CBMP-LA"
+        }
       ]
     },
     {
@@ -135,9 +160,105 @@
         "body": [
           "Lớp ngoài cùng của da giữ nước bên trong và giữ chất kích ứng bên ngoài. Khi nó yếu đi, hoạt chất thấm vào nhanh hơn mức dự tính. Cùng một sản phẩm vì thế hôm nay êm, tuần sau lại rát.",
           "Giai đoạn này cần <strong>ít thứ tác động hơn, không phải nhiều hơn</strong>. Bốn nhóm in trên hũ này đều thuộc nhóm cấp ẩm và làm dịu, không có hoạt chất làm sáng hay tẩy tế bào chết.",
-          "Hũ này là bước dưỡng nền. Chúng tôi gọi đúng tên nó chứ không gọi là bước đặc trị, vì đặt nhầm kỳ vọng vào một hũ kem dưỡng là cách nhanh nhất để thất vọng với nó."
+          "Hũ này là bước dưỡng nền. Chúng tôi gọi đúng tên nó chứ không gọi là bước xử lý sắc tố, vì đặt nhầm kỳ vọng vào một hũ kem dưỡng là cách nhanh nhất để thất vọng với nó."
         ]
       }
+    },
+    {
+      "type": "infographic",
+      "id": "giai-doan-de-da-yen",
+      "kind": "stages",
+      "eyebrow": "Hũ này nằm ở đâu",
+      "heading": "Bốn bước của giai đoạn da cần được để yên — hũ này ở bước thứ ba",
+      "intro": "Kem dưỡng nền không mở đầu, cũng không kết thúc giai đoạn này. Nó giữ da ổn trong lúc bạn đã bỏ bớt những thứ gây rát.",
+      "items": [
+        {
+          "label": "Dấu hiệu dùng quá nhiều",
+          "body": "Da rát, đỏ, bong nhẹ dù vẫn dùng đúng hướng dẫn. Hàng rào bảo vệ đang yếu nên hoạt chất thấm vào nhanh hơn mức dự tính."
+        },
+        {
+          "label": "Rút bớt các bước",
+          "body": "Tạm dừng retinol, acid tẩy da chết, vitamin C nồng độ cao. Giai đoạn này cần ít thứ tác động hơn, không phải nhiều hơn."
+        },
+        {
+          "label": "Dưỡng nền, sáng và tối",
+          "body": "Hũ này nằm ở đây: bước cuối của quy trình, cấp ẩm và làm dịu, buổi sáng thêm kem chống nắng.",
+          "highlight": true
+        },
+        {
+          "label": "Quay lại với hoạt chất",
+          "body": "Da yên trở lại rồi mới tới lúc dùng lại hoạt chất, không phải trong lúc đang phục hồi. Hũ này vẫn dùng tiếp được như bước dưỡng ẩm hằng ngày."
+        }
+      ],
+      "footnote": "Mỗi bước dài ngắn khác nhau theo từng người. Nếu đã bỏ bớt hoạt chất mà da vẫn rát, đỏ hoặc bong nhiều, đó không còn là chuyện của một hũ kem dưỡng. Nên đi khám da liễu."
+    },
+    {
+      "type": "conditions",
+      "id": "hop-voi-ai",
+      "eyebrow": "Nhìn ảnh, đối chiếu da của bạn",
+      "heading": "Hũ kem này hợp với da đang ở giai đoạn nào",
+      "intro": "Một hũ kem dưỡng nền không làm được việc của hoạt chất mạnh. Chúng tôi nói rõ từng trường hợp để bạn khỏi mua nhầm kỳ vọng.",
+      "items": [
+        {
+          "label": "Da đỏ, rát sau khi dùng nhiều hoạt chất",
+          "aka": "da đang kích ứng",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Cận cảnh vùng má ửng đỏ trên làn da dễ kích ứng"
+          },
+          "body": "Đỏ, châm chích, bong nhẹ dù bạn dùng đúng hướng dẫn. Tạm dừng hoạt chất mạnh, giữ quy trình thật ngắn, và dùng hũ này làm bước dưỡng cuối, sáng và tối.",
+          "fit": "yes",
+          "fitNote": "Đúng giai đoạn của hũ này"
+        },
+        {
+          "label": "Vừa ngưng retinol hoặc acid tẩy da chết",
+          "image": {
+            "src": "/images/da-yeu-nhay-cam.webp",
+            "alt": "Cận cảnh vùng da mỏng, nhạy cảm, hơi ửng đỏ"
+          },
+          "body": "Trong giai đoạn nghỉ, da mỏng và nhạy hơn bình thường. Bốn nhóm thành phần in trên hũ đều thuộc nhóm cấp ẩm và làm dịu, không thêm hoạt chất mạnh nào.",
+          "fit": "yes",
+          "fitNote": "Hợp cho giai đoạn nghỉ"
+        },
+        {
+          "label": "Da khô, thiếu ẩm quanh năm",
+          "image": {
+            "src": "/images/da-can-phuc-hoi.webp",
+            "alt": "Cận cảnh vùng da thiếu ẩm, lỗ chân lông lộ rõ"
+          },
+          "body": "Không có vấn đề sắc tố, chỉ hay khô căng. Dùng được lâu dài như bước dưỡng ẩm hằng ngày; da đang ổn thì không cần đổi sang công thức nhiều hoạt chất.",
+          "fit": "yes",
+          "fitNote": "Dùng lâu dài được"
+        },
+        {
+          "label": "Da vừa qua thủ thuật thẩm mỹ",
+          "aka": "peel và các thủ thuật tương tự",
+          "image": {
+            "src": "/images/da-sau-tham-my.webp",
+            "alt": "Cận cảnh vùng da ửng đỏ sau thủ thuật thẩm mỹ"
+          },
+          "body": "Đây là giai đoạn hũ này hướng tới, nhưng da vừa qua thủ thuật là tình huống y khoa: hỏi chính người đã thực hiện thủ thuật cho bạn trước khi thoa bất cứ thứ gì lên da.",
+          "fit": "partial",
+          "fitNote": "Hỏi người thực hiện trước"
+        },
+        {
+          "label": "Muốn làm mờ nám hoặc thâm",
+          "image": {
+            "src": "/images/da-nam-mang.webp",
+            "alt": "Cận cảnh mảng nám nâu nhạt trên gò má"
+          },
+          "body": "Hũ này không có hoạt chất làm sáng. Nó giữ da ổn để các bước khác làm việc, nhưng tự nó không tác động lên sắc tố, nên bạn cần sản phẩm khác.",
+          "fit": "no",
+          "fitNote": "Cần sản phẩm khác"
+        },
+        {
+          "label": "Da trầy xước, rỉ dịch, hoặc rát mãi không dịu",
+          "body": "Vùng da hở, rỉ dịch hay bị bỏng không phải chỗ để thoa kem dưỡng. Nếu đã bỏ bớt hoạt chất mà da vẫn rát, đỏ hoặc bong nhiều, nên đi khám da liễu.",
+          "fit": "no",
+          "fitNote": "Nên gặp bác sĩ da liễu"
+        }
+      ],
+      "caption": "Ảnh cận vùng da minh hoạ từng tình trạng (tư liệu hình ảnh của hãng), <strong>không phải ảnh trước/sau khi dùng sản phẩm</strong>. Chưa chắc da mình đang ở giai đoạn nào? Gửi ảnh qua Zalo, chuyên viên xem giúp trước khi bạn đặt."
     },
     {
       "type": "compare",
@@ -187,31 +308,6 @@
       ],
       "footnote": "Ít thành phần hơn không có nghĩa là kém hơn. Với da đang phản ứng thì <strong>ít biến số chính là điều bạn cần</strong>, và đó là việc hũ này làm.",
       "transition": "Da đang cần để yên thì đây là hũ cho lúc đó. Bốn nhóm thành phần, không thêm hoạt chất mạnh nào."
-    },
-    {
-      "type": "cards",
-      "id": "hop-voi-ai",
-      "eyebrow": "Trước khi đặt",
-      "heading": "Da bạn đang ở giai đoạn nào",
-      "intro": "Một hũ kem dưỡng nền không làm được việc của hoạt chất mạnh. Nói rõ để bạn khỏi mua nhầm kỳ vọng.",
-      "columns": 3,
-      "items": [
-        {
-          "heading": "Da vừa kích ứng, vừa peel, vừa ngưng retinol",
-          "body": "Đây là đúng giai đoạn hũ này được làm ra để phục vụ: ít thành phần, không hoạt chất mạnh, để da có một khoảng yên.",
-          "meta": "Hợp nhất"
-        },
-        {
-          "heading": "Da khô quanh năm, không có vấn đề sắc tố",
-          "body": "Dùng được lâu dài như bước dưỡng ẩm hằng ngày. Không cần đổi sang công thức nhiều hoạt chất nếu da bạn đang ổn.",
-          "meta": "Dùng lâu dài được"
-        },
-        {
-          "heading": "Muốn làm mờ nám hoặc thâm",
-          "body": "Hũ này không có hoạt chất làm sáng. Nó giữ cho da ổn để các bước khác làm việc, nhưng tự nó không xử lý sắc tố — cần sản phẩm khác.",
-          "meta": "Không phải thứ bạn cần"
-        }
-      ]
     },
     {
       "type": "ingredients",

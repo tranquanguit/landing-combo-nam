@@ -5,6 +5,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import Section from '../components/Section.astro';
 import Picture from '../components/Picture.astro';
 import ProductGrid from '../components/ProductGrid.astro';
+import ComboGrid from '../components/ComboGrid.astro';
 import Prose from '../components/blocks/Prose.astro';
 import Faq from '../components/blocks/Faq.astro';
 import Analytics from '../components/Analytics.astro';
@@ -14,7 +15,7 @@ import FSkin from '../components/flagship/FSkin.astro';
 import { homeGraph } from '../lib/schema';
 import { money } from '../lib/format';
 import { resolveAssetImage, resolveAssetUrl } from '../lib/images';
-import { articlePath, docsPath, linePath, productPath } from '../lib/routes';
+import { comboIndexPath, articlePath, docsPath, linePath, productPath } from '../lib/routes';
 import { assertTranslated, t, type Locale } from '../i18n/ui';
 import { richText } from '../lib/richtext';
 
@@ -34,9 +35,11 @@ interface Props {
   products?: any[];
   /** Giấy tờ đã xuất bản — dải chứng từ thương hiệu. */
   docs?: any[];
+  /** Vài combo tiêu biểu (đã tính giá) — dẫn sang trang danh sách combo. */
+  combos?: any[];
 }
 
-const { page, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], lines, featured, articles, products = [], docs = [] } = Astro.props;
+const { page, brand: b, locale, canonical, alternates = [], nav = [], policies = [], pages = [], lines, featured, articles, products = [], docs = [], combos = [] } = Astro.props;
 const site = Astro.site?.origin ?? 'https://mochatrinam.com';
 assertTranslated(locale);
 
@@ -183,6 +186,13 @@ const soloArticle = articles.length === 1 ? articles[0] : undefined;
     ) : featured.length > 0 && (
       <Section id="san-pham" surface="bone" heading={t(locale, 'home.allProducts')}>
         <ProductGrid products={featured} locale={locale} priority source="home-featured" />
+      </Section>
+    )}
+
+    {combos.length > 0 && (
+      <Section id="combo" surface="paper" eyebrow={t(locale, 'combo.nav')} heading={t(locale, 'combo.homeHeading')} intro={t(locale, 'combo.withProductIntro')}>
+        <ComboGrid cards={combos} locale={locale} source="home-combos" />
+        <p class="combo-all"><a href={comboIndexPath(locale)} data-cta="home-combo-all">{t(locale, 'combo.all')} →</a></p>
       </Section>
     )}
 
@@ -402,4 +412,6 @@ const soloArticle = articles.length === 1 ? articles[0] : undefined;
   }
   .lines a:hover .line-name, .reads a:hover .read-title { color: var(--cobalt); }
   .line-lead, .read-lead { color: var(--slate); max-width: 68ch; line-height: 1.6; }
+  .combo-all { margin: var(--s-6) 0 0; }
+  .combo-all a { font-weight: 600; color: var(--cobalt); display: inline-block; min-height: 24px; line-height: 24px; }
 </style>

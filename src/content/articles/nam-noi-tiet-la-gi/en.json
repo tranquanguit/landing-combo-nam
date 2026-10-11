@@ -28,7 +28,27 @@
         "The clearest sign is symmetry: the two cheeks nearly mirror each other, sometimes reaching the forehead and the area above the lip. Darkening left behind by acne is scattered and not symmetrical like this.",
         "The edges are usually soft, fading gradually rather than forming a sharply outlined spot. The colour runs brown or grey-brown depending on how deep the pigment sits.",
         "And it moves with the seasons. Darker through the sunny months, lighter when there is less sun — this is the strongest clue separating it from darkening with other causes."
-      ]
+      ],
+      "figure": {
+        "items": [
+          {
+            "src": "/images/da-nam-mang.webp",
+            "alt": "Close-up of a cheek with a light-brown patch",
+            "label": "Patchy melasma on both cheeks"
+          },
+          {
+            "src": "/images/da-nam-noi-tiet.webp",
+            "alt": "Close-up of skin with an evenly spread darker patch",
+            "label": "Hormone-related melasma"
+          },
+          {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Close-up of skin with scattered brown marks left by blemishes",
+            "label": "Post-blemish marks, not melasma"
+          }
+        ],
+        "caption": "Close-up skin images to illustrate each condition. They are not before/after photos and are not a way to self-diagnose. If you are unsure which case is yours, ask a dermatologist."
+      }
     },
     {
       "id": "recurrence",

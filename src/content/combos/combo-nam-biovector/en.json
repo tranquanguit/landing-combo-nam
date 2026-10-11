@@ -1,0 +1,31 @@
+{
+  "slug": "combo-nam-biovector",
+  "locale": "en",
+  "translationKey": "combo:combo-nam-biovector",
+  "status": "published",
+  "name": "Pigmentation Combo + Biovector Cream",
+  "shortName": "Pigmentation + Biovector",
+  "group": "nam",
+  "order": 20,
+  "items": [
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "biovector-brightening-cream",
+      "qty": 1
+    }
+  ],
+  "price": 1283000,
+  "currency": "VND",
+  "purpose": "The pigmentation serum and cream, plus Biovector moisturiser for mornings or for days when your skin needs a break from actives.",
+  "seo": {
+    "title": "Pigmentation Combo + Biovector Cream | Mỹ Phẩm Mocha",
+    "description": "The pigmentation serum and cream, plus Biovector moisturiser for mornings or for days when your skin needs a break from actives."
+  }
+}

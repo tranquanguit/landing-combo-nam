@@ -57,8 +57,8 @@
     "description": "Spot gel with Vietnamese tamanu oil, 3% Acnebusters, BHA, sulfur, zinc PCA and Bioecolia. Concentrations printed on the pack. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "2522/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "helps care for areas of skin affected by blemishes",
     "warnings": [
       "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
@@ -66,8 +66,7 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ],
-    "productNotificationNumber": "2522/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -86,9 +85,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "The spot step",
+      "eyebrow": "Tamanu oil spot gel · 20g tube",
       "heading": "A spot gel, not an all-over cream",
-      "lead": "A 20g tube with <strong>Vietnamese tamanu oil, 3% Acnebusters, BHA, salicylic acid, sulfur, zinc PCA and Bioecolia®</strong>. It is meant for the places that need it, not for the whole face.",
+      "lead": "A gel you dab onto individual spots or swollen areas, not an all-over cream. With Vietnamese tamanu oil, 3% Acnebusters and 0.5% BHA, strengths printed on the pack.",
       "usp": [
         {
           "text": "<strong>3% Acnebusters and 0.5% BHA</strong> — concentrations printed on the pack",
@@ -122,6 +121,32 @@
         "Free delivery nationwide",
         "Inspect before you pay",
         "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Size",
+          "value": "20g tube"
+        },
+        {
+          "label": "Texture",
+          "value": "Gel"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "Vietnamese tamanu oil, Acnebusters 3%, BHA 0.5% (salicylic acid), sulfur, zinc PCA, Bioecolia®"
+        },
+        {
+          "label": "How to use",
+          "value": "Dab onto clean, dry skin; let it sink in fully before the next step"
+        },
+        {
+          "label": "Amount",
+          "value": "One pea-sized amount for a spot, two for a larger area"
+        },
+        {
+          "label": "Notification no.",
+          "value": "2522/25/CBMP-TN"
+        }
       ]
     },
     {
@@ -142,6 +167,102 @@
           "<strong>Dot the spot, leave it alone, and judge it in days rather than hours.</strong> If breakouts cover a whole cheek or the whole forehead, that is no longer a job for a spot gel — see a dermatologist."
         ]
       }
+    },
+    {
+      "type": "conditions",
+      "id": "hop-voi-ai",
+      "eyebrow": "Look at the photos, then at your own skin",
+      "heading": "Which breakouts a spot gel suits, and which it does not",
+      "intro": "We are a reseller. There are breakouts this tube will not help with, and we say so up front.",
+      "items": [
+        {
+          "label": "Inflamed spot with a whitehead",
+          "image": {
+            "src": "/images/da-mun-viem.webp",
+            "alt": "Close-up of a red, swollen spot with a white head in the centre"
+          },
+          "body": "A red, swollen spot with a white head in the middle. Dot the gel right on the spot and leave it alone — <strong>do not squeeze</strong>.",
+          "fit": "yes",
+          "fitNote": "Exactly what a spot gel is for"
+        },
+        {
+          "label": "A new, red, swollen spot",
+          "image": {
+            "src": "/images/da-mun-sung.webp",
+            "alt": "Close-up of a red, swollen spot with no head yet"
+          },
+          "body": "Swollen and sore to the touch, no head yet. Dot early and only on the spot — not onto the clear skin around it.",
+          "fit": "yes",
+          "fitNote": "Exactly what a spot gel is for"
+        },
+        {
+          "label": "Tiny bumps under the skin",
+          "image": {
+            "src": "/images/da-mun-an.webp",
+            "alt": "Close-up of skin with many tiny bumps under the surface"
+          },
+          "body": "Lots of small bumps beneath the surface that feel rough to the touch. A spot gel is not meant for a whole area; daily cleansing to keep pores clear does the main work here.",
+          "fit": "partial",
+          "fitNote": "Dot the visible ones; cleansing does the rest"
+        },
+        {
+          "label": "Breakouts around the chin that come in cycles",
+          "aka": "often called hormonal acne",
+          "image": {
+            "src": "/images/da-mun-noi-tiet.webp",
+            "alt": "Close-up of the jawline with scattered red spots"
+          },
+          "body": "Tends to appear on the chin and jawline, in cycles. The gel helps with each inflamed spot; if they keep coming for months, see a doctor to find out why.",
+          "fit": "partial",
+          "fitNote": "Spot by spot; the cause lies elsewhere"
+        },
+        {
+          "label": "Cystic acne, or breakouts across a whole area",
+          "body": "A spot gel cannot cover a large area, and cystic acne is a matter for a dermatologist. We are not going to sell you that expectation.",
+          "fit": "no",
+          "fitNote": "See a dermatologist"
+        },
+        {
+          "label": "The spot has gone, a mark remains",
+          "image": {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Close-up of skin with brown marks left after breakouts"
+          },
+          "body": "A post-acne mark is about pigment, not acne any more. This is not the tube you need — see the mark gel in the comparison.",
+          "fit": "no",
+          "fitNote": "You need a different product"
+        }
+      ],
+      "caption": "Close-ups illustrating each skin condition (brand image material), <strong>not before-and-after photos of the product in use</strong>. Not sure which group your skin falls into? Send us a photo and an adviser will take a look before you order."
+    },
+    {
+      "type": "infographic",
+      "id": "vong-doi-not-mun",
+      "kind": "stages",
+      "eyebrow": "What a spot goes through",
+      "heading": "Four stages of an inflamed spot — the gel works in the middle two",
+      "intro": "When you use it matters as much as how. Once the spot has gone down, there is nothing left to dot.",
+      "items": [
+        {
+          "label": "Clogged",
+          "body": "Oil and dead skin cells block the pore. No swelling yet — usually just tiny bumps that feel rough to the touch."
+        },
+        {
+          "label": "Red and swollen",
+          "body": "The clogged pore becomes inflamed: swollen, red, sore to the touch. This is the moment to dot the gel.",
+          "highlight": true
+        },
+        {
+          "label": "Whitehead",
+          "body": "A white head forms in the centre. Keep dotting, and do not squeeze — squeezing spreads the inflammation and makes a mark more likely.",
+          "highlight": true
+        },
+        {
+          "label": "Goes down, may leave a mark",
+          "body": "The spot flattens and the skin closes over. Any darker mark left behind is pigment: a job for the mark gel and sunscreen."
+        }
+      ],
+      "footnote": "How long each stage lasts varies from person to person, so we do not give a number of days."
     },
     {
       "type": "compare",
@@ -191,31 +312,6 @@
       ],
       "footnote": "Plenty of people have both at once on the same face. Using both then makes sense, but on different areas rather than on top of each other.",
       "transition": "If this tube is the one you need, the section below explains why it is for spots only."
-    },
-    {
-      "type": "cards",
-      "id": "hop-voi-ai",
-      "eyebrow": "Before you order",
-      "heading": "Three situations, and what we would actually tell you",
-      "intro": "We are a reseller. Saying up front where this will not help beats letting you buy and be disappointed.",
-      "columns": 3,
-      "items": [
-        {
-          "heading": "A few isolated inflamed spots",
-          "body": "Exactly what this tube was made for: dotted onto each spot, not spread across the healthy skin around them.",
-          "meta": "Best fit"
-        },
-        {
-          "heading": "Breakouts across a whole area, or cystic acne",
-          "body": "A spot gel cannot cover large areas, and cystic acne belongs with a dermatologist. We are not going to sell you that expectation.",
-          "meta": "See a doctor"
-        },
-        {
-          "heading": "The spot has healed, only a mark remains",
-          "body": "Post-acne marks are pigment, not acne. This is not the tube you need — see the mark gel further down.",
-          "meta": "Different product"
-        }
-      ]
     },
     {
       "type": "ingredients",

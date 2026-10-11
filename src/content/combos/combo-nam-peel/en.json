@@ -1,0 +1,31 @@
+{
+  "slug": "combo-nam-peel",
+  "locale": "en",
+  "translationKey": "combo:combo-nam-peel",
+  "status": "published",
+  "name": "Pigmentation Combo + Peel Kit",
+  "shortName": "Pigmentation + Peel",
+  "group": "nam",
+  "order": 30,
+  "items": [
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    }
+  ],
+  "price": 1470000,
+  "currency": "VND",
+  "purpose": "A 3-day peel course to renew the skin surface, then the pigmentation serum and cream once the course is over. Suits dull, rough skin that already tolerates actives.",
+  "seo": {
+    "title": "Pigmentation Combo + Peel Kit | Mỹ Phẩm Mocha",
+    "description": "A 3-day peel course to renew the skin surface, then the pigmentation serum and cream once the course is over. Suits dull, rough skin that already tolerates a…"
+  }
+}

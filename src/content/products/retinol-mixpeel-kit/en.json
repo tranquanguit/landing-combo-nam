@@ -91,8 +91,8 @@
     "description": "Four-piece kit with 1% liposome retinol and four microalgae. A three-day course. NOT for use in pregnancy or breastfeeding. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "2521/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "helps clear dead surface cells from the skin",
     "warnings": [
       "This is a topical cosmetic, not a medicine, and is not a substitute for medical treatment.",
@@ -100,8 +100,7 @@
       "After use the skin is more sensitive to sunlight. Daily sun protection is mandatory during and after the course.",
       "Stop use if stinging persists, or if there is swelling, blistering or pain. Avoid direct contact with the eyes.",
       "Results vary by individual, skin type and daily sun protection."
-    ],
-    "productNotificationNumber": "2521/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -109,6 +108,13 @@
       "note": "One complete three-day course",
       "price": 550000,
       "recommended": true
+    },
+    {
+      "label": "Combo of 2 peel kits",
+      "price": 990000,
+      "recommended": false,
+      "note": "Two full courses",
+      "qty": 2
     },
     {
       "label": "I would like advice first",
@@ -120,9 +126,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "The strongest product on this site",
+      "eyebrow": "Four-piece at-home peel · 3-day course",
       "heading": "An at-home peel is the easiest thing here to damage your skin with, so read all of this first",
-      "lead": "A four-piece kit for a <strong>three-day</strong> course: a peel ampoule with <strong>1% liposome-encapsulated retinol</strong> and four microalgae, a recovery ampoule, a cleanser and a moisturiser. The manufacturer positions this as a professional line supplied to salons.",
+      "lead": "Four pieces for one three-day course: a peel ampoule with 1% liposome-encapsulated retinol, a recovery ampoule, a cleanser and a moisturiser. It contains retinol, so do not use it while pregnant or breastfeeding.",
       "usp": [
         {
           "text": "<strong>1% liposome-encapsulated retinol</strong> — figure published by the manufacturer",
@@ -155,6 +161,32 @@
         "Free delivery nationwide",
         "Inspect before you pay",
         "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Kit contents",
+          "value": "Peel ampoule, recovery ampoule, cleanser, Collagen moisturiser"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "Peel ampoule: 1% liposome-encapsulated retinol, four microalgae"
+        },
+        {
+          "label": "Course",
+          "value": "3 days, once a day"
+        },
+        {
+          "label": "How to use",
+          "value": "Massage 3–5 min, leave on up to 45 min, rinse; then the recovery ampoule and moisturiser"
+        },
+        {
+          "label": "Do not use if",
+          "value": "Pregnant or breastfeeding"
+        },
+        {
+          "label": "Made in",
+          "value": "Vietnam"
+        }
       ]
     },
     {
@@ -217,6 +249,105 @@
         "label": "See the price and order",
         "href": "#dat-hang"
       }
+    },
+    {
+      "type": "conditions",
+      "id": "tinh-trang-da-va-bo-peel",
+      "eyebrow": "Compare the photos with your skin",
+      "heading": "Which skin suits a peel course, and which has to wait",
+      "intro": "The list above is about your circumstances. This one is about what you can see on your skin.",
+      "items": [
+        {
+          "label": "Oily, rough skin with a thick dead-cell layer",
+          "image": {
+            "src": "/images/da-san-mun-an.webp",
+            "alt": "Close-up of rough skin with visible pores and a few dull marks"
+          },
+          "body": "Who the manufacturer designed this for: shedding the dead surface cells over <strong>three days</strong>. On one condition — that you can arrange two low-sun weeks afterwards.",
+          "fit": "yes",
+          "fitNote": "A fit, if you can avoid sun for 2 weeks"
+        },
+        {
+          "label": "Sun-dulled surface tone",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Close-up of a cheekbone with diffuse sun-related dullness"
+          },
+          "body": "A peel targets darkened surface cells, but the new skin underneath darkens very readily. If you cannot stay out of the sun, the slow route with daily actives is the better choice.",
+          "fit": "partial",
+          "fitNote": "Only with strict sun avoidance"
+        },
+        {
+          "label": "Irritated, red, bumpy skin",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Close-up of irritated skin with redness and small bumps"
+          },
+          "body": "Thin skin, visible vessels or active irritation need to recover first. Peeling over a weakened barrier makes it worse.",
+          "fit": "no",
+          "fitNote": "Let the skin recover first"
+        },
+        {
+          "label": "Skin fresh from a cosmetic procedure",
+          "image": {
+            "src": "/images/da-sau-tham-my.webp",
+            "alt": "Close-up of reddened skin after a cosmetic procedure"
+          },
+          "body": "Skin that has just had a procedure needs time to recover before it takes another strong intervention. Wait until it has fully recovered before you think about a peel.",
+          "fit": "no",
+          "fitNote": "Not yet — wait until it recovers"
+        },
+        {
+          "label": "Currently on the pigmentation combo",
+          "body": "Not at the same time. Stacking a peel on top of a course of pigment-targeting actives is the fastest way to break the skin barrier. Pick one, finish it, then consider the other.",
+          "fit": "no",
+          "fitNote": "Not at the same time"
+        },
+        {
+          "label": "Pregnant or breastfeeding",
+          "body": "This product <strong>contains retinol</strong>. Do not use the kit during this time.",
+          "fit": "no",
+          "fitNote": "Do not use"
+        }
+      ],
+      "caption": "Close-ups illustrating each skin condition (brand image material), <strong>not before-and-after photos of the product</strong>. Not sure which group you are in? Send us a photo on Zalo and an adviser will take a look before you order."
+    },
+    {
+      "type": "infographic",
+      "id": "ba-ngay-peel",
+      "kind": "stages",
+      "eyebrow": "What the course involves",
+      "heading": "Three days of peeling: what is normal, and when to stop",
+      "intro": "This kit only works over three days. Knowing how your skin will react means you will not panic at what is normal — or brush off what is not.",
+      "items": [
+        {
+          "label": "Before day 1",
+          "body": "Re-read the list of who should not use it. Have sunscreen ready, make sure you can arrange two low-sun weeks, and have no important occasion in the next two weeks."
+        },
+        {
+          "label": "Days 1–3: once a day",
+          "body": "Cleanse, apply the peel and massage for 3–5 minutes, leave it on for up to 45 minutes (shorter the first time), rinse, then use the recovery ampoule and moisturiser. Three days means three days.",
+          "highlight": true
+        },
+        {
+          "label": "Normal during the course",
+          "body": "Mild stinging on application. Dryness and tightness afterwards. Skin may darken temporarily before it flakes.",
+          "highlight": true
+        },
+        {
+          "label": "Stop immediately",
+          "body": "Persistent stinging, swelling, blistering or pain. If redness deepens or the skin weeps, stop and see a doctor. None of these are <strong>in the normal group</strong>."
+        },
+        {
+          "label": "Days 3–10: shedding and recovery",
+          "body": "Gentle cleansing, moisturiser and sunscreen only. No strong actives, no exfoliation, and do not pick at the flaking."
+        },
+        {
+          "label": "Up to day 21: strict sun avoidance",
+          "body": "New skin darkens very readily. From day 14, once sensitivity and flaking have ended, you can return to your usual actives."
+        }
+      ],
+      "footnote": "The days come from the manufacturer’s instructions for the three-day course and from the post-peel care in the schedule below. Skin differs from person to person."
     },
     {
       "type": "ingredients",
@@ -430,7 +561,7 @@
       "intro": "The post-peel period needs exactly these three. Buying them after the peel is already a few days too late.",
       "items": [
         "uv-block-sunscreen",
-        "collagen-peptide-cream",
+        "pro-vitamin-b5-serum",
         "bio-active-cleanser"
       ]
     }

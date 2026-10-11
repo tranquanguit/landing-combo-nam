@@ -1,5 +1,6 @@
 import type { CollectionEntry } from 'astro:content';
 import { htmlLang, type Locale } from '../i18n/ui.ts';
+import { productBrand } from './brand.ts';
 import { plainText } from './richtext.ts';
 
 const languageName: Record<Locale, string> = {
@@ -89,8 +90,8 @@ export function organizationNode(b: Brand, site: string, locale: Locale, logoUrl
   return {
     '@type': 'Organization',
     '@id': `${site}/#organization`,
-    name: b.legalName,
-    alternateName: b.tradingName,
+    name: b.legalName ?? b.tradingName,
+    ...(b.legalName ? { alternateName: b.tradingName } : {}),
     url: site,
     ...(logoUrl ? { logo: { '@type': 'ImageObject', url: logoUrl } } : {}),
     email: b.email,
@@ -311,8 +312,14 @@ export function productGraph(opts: {
   /** URL tuyệt đối đã giải qua pipeline ảnh. */
   imageUrls?: string[];
   logoUrl?: string;
+  /**
+   * Giá bán ưu đãi đang chạy của CHÍNH sản phẩm này (từ collection `promotions`).
+   * Có thì Offer phát giá đó và `priceValidUntil` = ngày kết thúc đợt — trang hiển thị
+   * giá nào thì máy đọc đọc giá đó. Hết đợt, máy chủ build lại và giá quay về bình thường.
+   */
+  sale?: { price: number; validUntil: string };
 }) {
-  const { product: p, brand: b, site, url, locale, faq, breadcrumb, imageUrls = [], logoUrl } = opts;
+  const { product: p, brand: b, site, url, locale, faq, breadcrumb, imageUrls = [], logoUrl, sale } = opts;
   const orgId = `${site}/#organization`;
   const offerBlock = p.blocks.find((x) => x.type === 'offer');
   const declaredValidUntil = offerBlock && offerBlock.type === 'offer' ? offerBlock.validUntil : undefined;
@@ -374,8 +381,16 @@ export function productGraph(opts: {
    * khác, khai riêng và liên kết bằng `isRelatedTo`.
    */
   function buildOffers() {
+    if (sale) return { '@type': 'Offer', url: `${url}#dat-hang`, ...offerBase, price: String(sale.price), priceValidUntil: sale.validUntil };
     return { '@type': 'Offer', url: `${url}#dat-hang`, price: String(p.price), ...offerBase };
   }
+
+  const brandName = productBrand(p as any, b);
+  const comp: any = p.compliance;
+  const maker = comp?.declaringOrganization
+    ? { '@type': 'Organization', name: comp.declaringOrganization,
+        ...(comp.declaringAddress ? { address: { '@type': 'PostalAddress', streetAddress: comp.declaringAddress, addressCountry: 'VN' } } : {}) }
+    : undefined;
 
   /** Các món bán lẻ: sản phẩm riêng, giá riêng, không trộn vào giá combo. */
   function standaloneProducts() {
@@ -386,7 +401,8 @@ export function productGraph(opts: {
         '@id': `${url}#variant-${i}`,
         name: v.label,
         ...(v.note ? { description: plainText(v.note) } : {}),
-        brand: { '@type': 'Brand', name: b.tradingName },
+        ...(imageUrls.length ? { image: imageUrls } : {}),
+        brand: { '@type': 'Brand', name: brandName },
         offers: {
           '@type': 'Offer',
           url: `${url}#dat-hang`,
@@ -414,11 +430,12 @@ export function productGraph(opts: {
       sku: p.sku,
       description: plainText(p.seo.description),
       ...(imageUrls.length ? { image: imageUrls } : {}),
-      brand: { '@type': 'Brand', name: b.tradingName },
-      manufacturer: { '@id': orgId },
-      ...(p.includes.length
-        ? { hasPart: p.includes.map((i) => ({ '@type': 'Product', name: i.name, description: i.note })) }
-        : {}),
+      /* Thương hiệu in trên bao bì (Mocha, Hairborn), không phải tên cửa hàng: cửa hàng là NGƯỜI
+         BÁN (offers.seller), không phải nhà sản xuất. Nhà sản xuất = tổ chức công bố sản phẩm.
+         Không khai `hasPart` cho các món trong bộ: Google coi mỗi Product lồng vào là một sản
+         phẩm riêng và báo lỗi "thiếu offers" — các món bán lẻ đã có Offer riêng ở isRelatedTo. */
+      brand: { '@type': 'Brand', name: brandName },
+      ...(maker ? { manufacturer: maker } : {}),
       ...(standaloneProducts().length
         ? { isRelatedTo: standaloneProducts().map((v) => ({ '@id': v['@id'] })) }
         : {}),

@@ -1,0 +1,105 @@
+---
+/**
+ * Ưu đãi ĐANG CHẠY cho sản phẩm này — dựng từ collection `promotions`, không khai
+ * trong file sản phẩm. Hết `endsAt` thì máy chủ tự build lại và khối này biến mất.
+ *
+ * Giờ kết thúc là giờ thật của chương trình, không phải đồng hồ đếm ngược đặt lại mỗi
+ * lần tải trang. Giá mua lẻ là tổng giá ĐANG BÁN của các món trong gói; quà có khai giá
+ * trị thì in giá trị, nhưng không cộng vào "tiết kiệm".
+ */
+import { money } from '../../lib/format';
+import { vnDateTime, type PackView } from '../../lib/promotions';
+import { t, type Locale } from '../../i18n/ui';
+interface Props { packs: PackView[]; terms: string[]; currency: string; locale: Locale; }
+const { packs, terms, currency, locale } = Astro.props;
+const first = packs[0];
+const ends = [...new Set(packs.map((p) => p.endsAt))].sort();
+const m = (n: number) => money(n, currency, locale);
+---
+<section id="uu-dai" class="fx-promo" aria-labelledby="uu-dai-km-title" data-reveal-group>
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <p class="eb">{first.badge && <span class="badge">{first.badge}</span>}{t(locale, 'promo.eyebrow')}</p>
+      <h2 id="uu-dai-km-title">{first.promoName}</h2>
+      {packs.every((x) => x.draft) && <p class="preview">{t(locale, 'promo.preview')}</p>}
+      <p class="ends">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.2" /><path d="M10 5.5V10l3 2" /></svg>
+        {t(locale, 'promo.endsAt')} <strong>{vnDateTime(ends[0], locale, true)}</strong>
+      </p>
+    </div>
+    <ul class:list={['packs', packs.length === 1 && 'one']}>
+      {packs.map((p, i) => (
+        <li class:list={['pk', p.recommended && 'rec']} data-reveal style={`--i:${i}`}>
+          {p.recommended && <span class="rec-tag">{t(locale, 'promo.recommended')}</span>}
+          <h3>{p.label}</h3>
+          {p.draft && !packs.every((x) => x.draft) && <p class="preview">{t(locale, 'promo.previewPack')}</p>}
+          {p.note && <p class="nt">{p.note}</p>}
+          <ul class="incl">
+            {p.items.map((it) => <li><span class="q">{it.qty}×</span> {it.name}</li>)}
+            {p.gifts.map((g) => (
+              <li class="gift"><span class="q">+{g.qty}</span> {g.name}
+                {g.value && <span class="gv"> · {t(locale, 'promo.giftValue')} {m(g.value * g.qty)}</span>}</li>
+            ))}
+          </ul>
+          <p class="price"><span class="now figure">{m(p.price)}</span>
+            {p.regular > p.price && <s class="was"><span class="sr-only">{t(locale, 'promo.regular')} </span>{m(p.regular)}</s>}</p>
+          {p.save > 0 && (
+            <p class="save">{t(locale, 'promo.save')} <strong>{m(p.save)}</strong> <span class="pct">−{p.savePct}%</span>
+              <span class="vs">{t(locale, 'promo.vsRegular')}</span></p>
+          )}
+          <a class="go" href="#dat-hang" data-cta="promo-pack" data-pack={p.id}>{t(locale, 'promo.cta')}<span aria-hidden="true">→</span></a>
+        </li>
+      ))}
+    </ul>
+    {terms.length > 0 && (
+      <ul class="terms" data-reveal>{terms.map((x) => <li>{x}</li>)}</ul>
+    )}
+  </div>
+</section>
+
+<style>
+  .preview {
+    display: inline-block; margin: var(--s-2) 0 0; padding: 4px 12px; border-radius: 999px;
+    background: #ffe7a3; color: #4a3500; font-size: var(--t-xs); font-weight: 600;
+  }
+  .fx-promo {
+    position: relative; overflow: clip; color: #fff;
+    padding-block: clamp(56px, 7vw, 104px);
+    background:
+      radial-gradient(40% 70% at 8% 0%, rgba(143, 152, 255, .35), transparent 70%),
+      radial-gradient(45% 60% at 100% 100%, rgba(242, 184, 75, .22), transparent 70%),
+      var(--night, #12143d);
+  }
+  .head { display: grid; gap: var(--s-3); margin-bottom: clamp(28px, 4vw, 48px); }
+  .eb { margin: 0; display: flex; align-items: center; gap: var(--s-3); font-size: var(--t-2xs); font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #c9ccff; }
+  .badge { padding: 4px 12px; border-radius: 999px; background: #f2b84b; color: #2a1d00; letter-spacing: .06em; font-size: var(--t-xs); font-weight: 800; }
+  h2 { margin: 0; font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.06; letter-spacing: -0.035em; color: #fff; }
+  .ends { margin: 0; display: flex; align-items: center; gap: 8px; color: rgba(255, 255, 255, .82); font-size: var(--t-sm); }
+  .ends svg { width: 18px; height: 18px; fill: none; stroke: #f2b84b; stroke-width: 1.8; stroke-linecap: round; }
+  .ends strong { color: #fff; }
+  .packs { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-4); }
+  @media (min-width: 860px) { .packs { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); } .packs.one { grid-template-columns: minmax(0, 560px); } }
+  .pk { position: relative; display: flex; flex-direction: column; padding: clamp(22px, 2.6vw, 32px); border-radius: 28px; background: #fff; color: var(--ink); box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .6); }
+  .rec { box-shadow: 0 0 0 3px #f2b84b, 0 40px 80px -40px rgba(0, 0, 0, .6); }
+  .rec-tag { position: absolute; top: -12px; left: 24px; padding: 4px 12px; border-radius: 999px; background: #f2b84b; color: #2a1d00; font-size: var(--t-2xs); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  h3 { margin: 0; font-size: var(--t-lg, 1.25rem); line-height: 1.2; color: var(--ink-navy); letter-spacing: -0.01em; }
+  .nt { margin: var(--s-2) 0 0; font-size: var(--t-sm); color: var(--ink-muted); }
+  .incl { list-style: none; padding: 0; margin: var(--s-4) 0 0; display: grid; gap: 6px; font-size: var(--t-sm); color: var(--ink-navy); }
+  .q { display: inline-block; min-width: 2.2em; font-weight: 700; color: var(--cobalt); }
+  .gift .q { color: #a86b00; }
+  .gv { color: var(--ink-muted); font-size: var(--t-xs); }
+  .price { margin: var(--s-5) 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-2) var(--s-4); }
+  .now { font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 600; line-height: 1; color: var(--ink-navy); letter-spacing: -0.02em; }
+  .was { color: var(--slate); font-size: var(--t-md); }
+  .save { margin: var(--s-3) 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: var(--t-sm); color: var(--verify); }
+  .pct { padding: 1px 8px; border-radius: 999px; background: rgba(31, 107, 77, .1); font-weight: 700; }
+  .vs { flex-basis: 100%; font-size: var(--t-xs); color: var(--ink-muted); }
+  .go {
+    margin-top: var(--s-5); min-height: 56px;
+    display: flex; align-items: center; justify-content: center; gap: var(--s-3);
+    border-radius: 999px; background: var(--ink-navy); color: #fff; text-decoration: none; font-weight: 600;
+  }
+  .go:hover { background: var(--cobalt); color: #fff; }
+  .terms { list-style: none; padding: 0; margin: var(--s-5) 0 0; display: grid; gap: 4px; font-size: var(--t-xs); color: rgba(255, 255, 255, .7); }
+  .terms li::before { content: "· "; }
+</style>

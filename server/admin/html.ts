@@ -32,7 +32,7 @@ export const SECURITY_HEADERS: Record<string, string> = {
 export interface Viewer extends User {
   /** khoá mục menu đang mở, ví dụ "content/products", "orders", "chat-rules" */
   section?: string;
-  badges?: { orders?: number; pending?: number; unanswered?: number };
+  badges?: { orders?: number; pending?: number; unanswered?: number; promoLive?: number };
 }
 
 // ----------------------------------------------------------------- nhãn tiếng Việt
@@ -43,6 +43,7 @@ export const statusPill = (s: unknown) => (s ? `<span class="pill ${s === 'publi
 export const COLLECTION_LABEL: Record<string, string> = {
   products: 'Sản phẩm', lines: 'Dòng sản phẩm', documents: 'Giấy tờ', articles: 'Bài tư vấn', guides: 'Góc tư vấn',
   policies: 'Chính sách', pages: 'Trang chủ', brand: 'Thương hiệu',
+  promotions: 'Khuyến mãi', testimonials: 'Phản hồi khách', combos: 'Combo',
 };
 
 // ----------------------------------------------------------------- menu
@@ -50,13 +51,19 @@ interface Item { key: string; href: string; label: string; badge?: number; admin
 function groups(v: Viewer): { title: string; items: Item[] }[] {
   return [
     { title: '', items: [{ key: 'home', href: '/admin/', label: 'Tổng quan' }] },
-    { title: 'Bán hàng', items: [{ key: 'orders', href: '/admin/orders', label: 'Đơn hàng', badge: v.badges?.orders }] },
+    { title: 'Bán hàng', items: [
+      { key: 'orders', href: '/admin/orders', label: 'Đơn hàng', badge: v.badges?.orders },
+      { key: 'promotions', href: '/admin/promotions', label: 'Khuyến mãi', badge: v.badges?.promoLive },
+    ] },
     { title: 'Nội dung', items: [
-      ...['products', 'lines', 'documents', 'articles', 'guides', 'policies', 'pages', 'brand']
+      ...['products', 'combos', 'lines', 'documents', 'testimonials', 'articles', 'guides', 'policies', 'pages']
         .map((c) => ({ key: `content/${c}`, href: `/admin/content/${c}`, label: COLLECTION_LABEL[c] })),
       { key: 'media', href: '/admin/media', label: 'Ảnh' },
     ] },
-    { title: 'Website', items: [{ key: 'publish', href: '/admin/publish', label: 'Xuất bản', badge: v.badges?.pending }] },
+    { title: 'Website', items: [
+      { key: 'store', href: '/admin/store', label: 'Thông tin cửa hàng' },
+      { key: 'publish', href: '/admin/publish', label: 'Xuất bản', badge: v.badges?.pending },
+    ] },
     { title: 'Chat', items: [
       { key: 'chats', href: '/admin/chats', label: 'Hội thoại & số liệu', badge: v.badges?.unanswered },
       { key: 'chat-rules', href: '/admin/chat-rules', label: 'Kịch bản tư vấn' },

@@ -1,0 +1,84 @@
+{
+  "slug": "cham-soc-toc",
+  "locale": "en",
+  "translationKey": "cham-soc-toc",
+  "status": "published",
+  "primaryKeyword": "hair and scalp care at home",
+  "seo": {
+    "title": "HAIRBORN hair and scalp care | Mocha Vietnam",
+    "description": "HAIRBORN shampoos, hair mask, roll-on scalp essence and scalp exfoliating cream. The order of use: wash, mask, then roll on scalp care."
+  },
+  "eyebrow": "Product line",
+  "heading": "Hair and scalp care",
+  "navLabel": "Hair care",
+  "order": 7,
+  "lead": "Five HAIRBORN products for washing, masking and scalp care. Use them one at a time, or put them together as a routine.",
+  "products": [
+    "hairborn-hair-boost-shampoo",
+    "hairborn-kerasilk-smooth-shampoo",
+    "hairborn-collagen-deep-shot",
+    "hairborn-peel-ion",
+    "hairborn-scalp-scrub"
+  ],
+  "sections": [
+    {
+      "id": "thu-tu-dung",
+      "heading": "The order: wash, mask, then roll on the scalp",
+      "body": [
+        "Wash first with one of the two shampoos. Hair Boost suits a scalp that gets oily fast and fine hair that breaks easily. Kerasilk Smooth suits dry, frizzy hair that tangles and will not sit right.",
+        "Rinse out the shampoo, then apply the Collagen Deep Shot mask from mid-lengths to ends, 10–15 cm away from the roots. Leave it a few minutes, then rinse.",
+        "Towel the hair until just damp, then roll Peel Ion along the scalp and roots and massage gently. Peel Ion stays in; no rinsing."
+      ],
+      "links": [
+        {
+          "label": "Hair Boost shampoo",
+          "href": "/en/hairborn-hair-boost-shampoo/"
+        },
+        {
+          "label": "Collagen Deep Shot hair mask",
+          "href": "/en/hairborn-collagen-deep-shot/"
+        },
+        {
+          "label": "Peel Ion roll-on scalp essence",
+          "href": "/en/hairborn-peel-ion/"
+        }
+      ]
+    },
+    {
+      "id": "lam-sach-sau",
+      "heading": "Scalp exfoliation is not a daily step",
+      "body": [
+        "The exfoliating cream is used before washing, when the scalp gets greasy fast or still carries hairspray build-up. Massage gently into the wet scalp, rinse, then shampoo as usual.",
+        "The front of the tube does not state a frequency. Detailed directions are on the product page. Do not use it on a scratched or irritated scalp."
+      ],
+      "links": [
+        {
+          "label": "Scalp exfoliating cream",
+          "href": "/en/hairborn-scalp-scrub/"
+        }
+      ]
+    },
+    {
+      "id": "khi-nao-di-kham",
+      "heading": "When to see a doctor first",
+      "body": [
+        "Hair falling out in round patches, sudden heavy shedding, or a red, itchy, thickly scaling scalp are signs that a dermatologist should look for the cause.",
+        "The products in this line are cosmetics for cleansing and care. They keep the scalp clean and the hair softer and less prone to breaking when brushed and washed, but they do not replace an examination."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Which one should I buy first?",
+      "a": "Start with a shampoo, since every other step comes after washing. Choose Hair Boost for a scalp that gets oily fast, Kerasilk Smooth for dry, frizzy hair. Add Peel Ion if you want a scalp care step."
+    },
+    {
+      "q": "How do Hair Boost and Kerasilk Smooth differ?",
+      "a": "Hair Boost is a 450g bottle whose label lists Kopexil, Redensyl™ and caffeine, aimed at the scalp and roots. Kerasilk Smooth is a 200g tube with dimethiconol and guar for smoother, easier-to-comb hair."
+    },
+    {
+      "q": "Is using all five too much?",
+      "a": "You do not need all five every wash. The shampoo and Peel Ion are for regular use. The mask and the scalp exfoliating cream are not needed every wash; each product page gives the frequency."
+    }
+  ]
+}

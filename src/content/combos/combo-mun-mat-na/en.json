@@ -1,0 +1,27 @@
+{
+  "slug": "combo-mun-mat-na",
+  "locale": "en",
+  "translationKey": "combo:combo-mun-mat-na",
+  "status": "published",
+  "name": "Spot Gel + EGF Gel Mask Combo",
+  "shortName": "Spot + Gel Mask",
+  "group": "mun",
+  "order": 20,
+  "items": [
+    {
+      "product": "smart-target-acne-gel",
+      "qty": 1
+    },
+    {
+      "product": "ultra-egf-bio-gel-mask",
+      "qty": 1
+    }
+  ],
+  "price": 405000,
+  "currency": "VND",
+  "purpose": "The spot gel with a soothing, hydrating gel mask for skin that feels dry and tight around blemishes.",
+  "seo": {
+    "title": "Spot Gel + EGF Gel Mask Combo | Mỹ Phẩm Mocha",
+    "description": "The spot gel with a soothing, hydrating gel mask for skin that feels dry and tight around blemishes. Delivered to your door; inspect before you pay."
+  }
+}

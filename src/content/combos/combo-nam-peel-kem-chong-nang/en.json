@@ -1,0 +1,35 @@
+{
+  "slug": "combo-nam-peel-kem-chong-nang",
+  "locale": "en",
+  "translationKey": "combo:combo-nam-peel-kem-chong-nang",
+  "status": "published",
+  "name": "Pigmentation + Peel + Sunscreen Combo",
+  "shortName": "Pigmentation + Peel + Sun",
+  "group": "nam",
+  "order": 40,
+  "items": [
+    {
+      "product": "smart-first-care-serum",
+      "qty": 1
+    },
+    {
+      "product": "smart-brightening-cream",
+      "qty": 1
+    },
+    {
+      "product": "retinol-mixpeel-kit",
+      "qty": 1
+    },
+    {
+      "product": "uv-block-sunscreen",
+      "qty": 1
+    }
+  ],
+  "price": 1755000,
+  "currency": "VND",
+  "purpose": "The fullest set for melasma-prone skin: a peel to renew the surface, the pigmentation serum and cream after the course, sunscreen every morning.",
+  "seo": {
+    "title": "Pigmentation + Peel + Sunscreen Combo | Mỹ Phẩm Mocha",
+    "description": "The fullest set for melasma-prone skin: a peel to renew the surface, the pigmentation serum and cream after the course, sunscreen every morning."
+  }
+}

@@ -28,7 +28,27 @@
         "Dấu dễ thấy nhất là hai bên mặt gần như soi gương nhau: gò má bên này đậm thì bên kia cũng đậm, đôi khi lan lên trán và quanh mép. Vết thâm do mụn để lại thì rải rác, bên nhiều bên ít, không cân như vậy.",
         "Mép thường nhoè, màu chuyển dần chứ không phải một đốm rõ viền. Ngả nâu hay ngả xám là tuỳ sắc tố nằm nông hay nằm sâu.",
         "Và nó đổi theo mùa. Đậm lên vào những tháng nắng gắt, nhạt bớt khi trời dịu. Trong Nam thì nhịp ấy đi theo mùa khô và mùa mưa, ngoài Bắc thì theo mùa hè và mùa đông. Đó mới là dấu phân biệt rõ nhất với các vùng sẫm màu do nguyên nhân khác."
-      ]
+      ],
+      "figure": {
+        "items": [
+          {
+            "src": "/images/da-nam-mang.webp",
+            "alt": "Cận vùng da má có mảng nâu nhạt",
+            "label": "Nám mảng hai bên má"
+          },
+          {
+            "src": "/images/da-nam-noi-tiet.webp",
+            "alt": "Cận vùng da có mảng sẫm màu loang đều",
+            "label": "Nám liên quan nội tiết"
+          },
+          {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Cận vùng da có các vết thâm nâu rải rác sau mụn",
+            "label": "Thâm sau mụn, không phải nám"
+          }
+        ],
+        "caption": "Ảnh cận vùng da để minh hoạ tình trạng, không phải ảnh trước/sau và không dùng để tự chẩn đoán. Không chắc da mình thuộc trường hợp nào thì nên hỏi bác sĩ da liễu."
+      }
     },
     {
       "id": "tai-phat",

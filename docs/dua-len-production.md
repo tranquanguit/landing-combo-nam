@@ -231,13 +231,17 @@ docker compose --profile https up -d --build
 ```
 
 Nội dung đang chạy (giá, câu chữ, ảnh đã sửa trên trang quản trị) **không** bị ghi đè khi cập
-nhật — CSDL là bản gốc. Nếu bản mới có thêm sản phẩm/bài viết trong mã nguồn, nạp riêng các
-mục **mới** (không đụng mục đã có) rồi xuất bản:
+nhật — CSDL là bản gốc. Bản mới có nội dung trong mã nguồn thì nạp có chọn lọc, rồi xuất bản:
 
 ```bash
-docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts import --only-new
+CLI="docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts"
+$CLI import --only-new        # thêm mục + ảnh MỚI (sản phẩm, đợt khuyến mãi, lời chứng…), không đụng mục đã có
+$CLI import --entries products/uv-block-sunscreen/vi,products/smart-target-acne-gel/vi
+                              # ghi đè ĐÚNG các mục bản mới đã sửa — giá admin đổi ở các mục khác giữ nguyên
 # rồi vào trang quản trị -> Xuất bản
 ```
+
+Ghi chú phát hành (commit / changelog) luôn liệt kê mục nào cần `--entries`.
 
 Quay lại bản trước nếu bản mới lỗi: `git checkout <mã commit cũ>` rồi chạy lại lệnh
 `docker compose … up -d --build`; nếu dữ liệu cũng hỏng thì khôi phục bản sao lưu.

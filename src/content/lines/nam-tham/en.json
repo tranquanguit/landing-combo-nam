@@ -28,7 +28,27 @@
         "Deep spots sit lower in the skin and appear as small, round, darker marks with clear edges. They change slowly and barely move at all if a topical product is used without daily sun protection.",
         "Mixed pigmentation is both kinds at once on the same face, and it is the most common pattern among Vietnamese women after thirty. It is hard to tell apart in a mirror; side lighting makes it easier.",
         "Most skincare advertising talks about pigmentation as one single thing and then offers one single timeline. When three different skin types share one promise, at least two of them end up disappointed."
-      ]
+      ],
+      "figure": {
+        "items": [
+          {
+            "src": "/images/da-nam-mang.webp",
+            "alt": "Close-up of a cheek with a light-brown patch",
+            "label": "Patchy (epidermal)"
+          },
+          {
+            "src": "/images/da-nam-chan-sau.webp",
+            "alt": "Close-up of skin with darker areas of pigment",
+            "label": "Deep (dermal)"
+          },
+          {
+            "src": "/images/da-nam-hon-hop.webp",
+            "alt": "Close-up of skin with both light patches and darker spots",
+            "label": "Mixed"
+          }
+        ],
+        "caption": "Close-up skin images to illustrate each condition. They are not before/after photos and are not a way to self-diagnose. If you are unsure which case is yours, ask a dermatologist."
+      }
     },
     {
       "id": "actives",

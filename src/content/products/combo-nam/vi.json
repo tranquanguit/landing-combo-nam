@@ -30,7 +30,7 @@
       "note": "bước giữ kết quả, dùng mỗi sáng",
       "image": {
         "src": "/images/hero-uv-block-plus.webp",
-        "alt": "Tuýp kem chống nắng Mocha UV-Block Plus, bao bì 2025 in SPF 50 PA++++"
+        "alt": "Tuýp kem chống nắng Mocha UV-Block Plus 50gr, 7 màng lọc"
       }
     },
     {
@@ -47,13 +47,13 @@
   "currency": "VND",
   "variants": [
     {
-      "label": "Combo đầy đủ – Kem + Serum",
+      "label": "Combo Kem + Serum + 2 quà tặng",
       "note": "Kèm 2 quà tặng, tiết kiệm {{save}}",
       "price": 1050000,
       "recommended": true
     },
     {
-      "label": "Chỉ Kem Smart Brightening X3",
+      "label": "Kem Smart Brightening X3 + sữa rửa mặt",
       "note": "Kèm sữa rửa mặt",
       "price": 590000,
       "recommended": false
@@ -77,23 +77,22 @@
     "ogImage": "/images/og-combo-nam.jpg"
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "1517/25/CBMP-LA",
+    "declarant": "mocha",
     "functions": "hỗ trợ làm mờ vùng da sạm nám, dưỡng sáng và cải thiện độ đều màu da",
     "warnings": [
       "Sản phẩm là mỹ phẩm dùng ngoài da, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.",
       "Ngưng sử dụng nếu da có dấu hiệu kích ứng. Tránh tiếp xúc trực tiếp với mắt.",
       "Phụ nữ mang thai hoặc đang cho con bú nên hỏi ý kiến bác sĩ trước khi dùng.",
       "Kết quả khác nhau tùy cơ địa, loại nám và mức độ chống nắng hằng ngày."
-    ],
-    "productNotificationNumber": "1517/25/CBMP-LA"
+    ]
   },
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "Kem + serum dùng cùng nhau, cho da nám",
+      "eyebrow": "Bộ serum + kem cho da sạm nám",
       "heading": "Serum và kem dưỡng, dùng cùng nhau cho da nám",
-      "lead": "Serum <strong>Smart First Care</strong> và kem <strong>Smart Brightening X3</strong> được làm để dùng cùng nhau trong một chu trình. Nồng độ các hoạt chất chính ghi rõ trên bao bì, và có đủ trong bảng thành phần bên dưới.",
+      "lead": "Serum Smart First Care dùng trước, kem Smart Brightening X3 dùng sau, cho da sạm nám. Nồng độ hoạt chất in trên bao bì: 4-butylresorcinol 1000ppm trong serum, Tranexamic Acid 3% trong kem.",
       "usp": [
         {
           "text": "<strong>Không corticoid, không hydroquinone, không cồn khô</strong>",
@@ -126,6 +125,32 @@
         "Miễn phí giao hàng toàn quốc",
         "Kiểm tra hàng trước khi trả tiền",
         "Đổi trả trong 7 ngày nếu sản phẩm lỗi"
+      ],
+      "facts": [
+        {
+          "label": "Bộ gồm",
+          "value": "Serum Smart First Care, kem Smart Brightening X3"
+        },
+        {
+          "label": "Tặng kèm",
+          "value": "Kem chống nắng UV-Block và sữa rửa mặt Bio-Active Cleanser (bản combo đủ)"
+        },
+        {
+          "label": "Hoạt chất trong serum",
+          "value": "4-butylresorcinol 1000ppm, Niacinamide 4%, Bio-Placenta 1%, Vietnam Bio-white Complex 3%"
+        },
+        {
+          "label": "Hoạt chất trong kem",
+          "value": "Tranexamic Acid 3%, NIO-NAG 2%, Bakuchiol 2%, Ceramide 1%"
+        },
+        {
+          "label": "Không chứa",
+          "value": "Corticoid, hydroquinone, cồn khô"
+        },
+        {
+          "label": "Thứ tự dùng",
+          "value": "Rửa mặt, serum, rồi kem; buổi sáng thêm kem chống nắng"
+        }
       ]
     },
     {
@@ -147,6 +172,38 @@
         ]
       },
       "transition": "Nám không phải một loại. Trước khi bàn tới công thức, phải biết mảng sạm trên mặt bạn thuộc nhóm nào."
+    },
+    {
+      "type": "infographic",
+      "id": "sac-to-nam-o-dau",
+      "kind": "layers",
+      "eyebrow": "Nhìn vào lớp da",
+      "heading": "Sắc tố nằm ở đâu, và vì sao không thể vội",
+      "intro": "Nám không nằm cùng một độ sâu. Chỗ sắc tố nằm quyết định bạn phải kiên trì bao lâu, và vì sao bước chống nắng không bỏ được.",
+      "items": [
+        {
+          "label": "Lớp sản phẩm trên da",
+          "depth": "surface",
+          "highlight": true,
+          "body": "Tối: serum là bước mở đường, kem là bước khoá lại suốt đêm. Sáng: <strong>kem chống nắng là bắt buộc</strong>. Bỏ bước này thì sắc tố quay lại, bất kể dùng sản phẩm nào."
+        },
+        {
+          "label": "Nám mảng",
+          "depth": "epidermis",
+          "body": "Sắc tố nằm ở lớp da ngoài, nên thường chuyển sớm nhất."
+        },
+        {
+          "label": "Nám chân sâu",
+          "depth": "dermis",
+          "body": "Sắc tố nằm sâu hơn, phải chờ da thay xong lớp tế bào mới. Cần kiên trì lâu hơn."
+        },
+        {
+          "label": "Nám hỗn hợp",
+          "depth": "dermis",
+          "body": "Có cả hai dạng trên cùng một vùng da, nên cần kiên trì lâu nhất và che nắng chặt tay nhất."
+        }
+      ],
+      "footnote": "Sơ đồ minh hoạ, không theo tỉ lệ. Nhìn bằng mắt không phải lúc nào cũng phân biệt được nám nông hay sâu. Chưa chắc thì gửi ảnh cho chuyên viên trước khi đặt."
     },
     {
       "type": "cards",
@@ -213,6 +270,72 @@
         }
       ],
       "footnote": "Khoảng thời gian tham khảo, không phải cam kết. Kết quả khác nhau tùy cơ địa và mức độ chống nắng hằng ngày. Bỏ bước chống nắng thì mọi mốc ở trên đều không còn đúng."
+    },
+    {
+      "type": "conditions",
+      "id": "khong-phai-vet-sam-nao",
+      "eyebrow": "Đối chiếu với da bạn",
+      "heading": "Không phải mảng sẫm nào cũng là việc của combo nám",
+      "intro": "Ba loại nám ở trên là việc của combo. Những vết sẫm khác trên mặt có thể cần thứ khác, hoặc cần đi khám trước.",
+      "items": [
+        {
+          "label": "Nám mảng, nám chân sâu, nám hỗn hợp",
+          "image": {
+            "src": "/images/da-nam-hon-hop.webp",
+            "alt": "Cận vùng da có cả mảng nâu nhạt lẫn vùng sắc tố sẫm hơn"
+          },
+          "fit": "yes",
+          "fitNote": "Đúng việc của combo",
+          "body": "Serum và kem được làm để dùng cùng nhau cho cả ba loại. Nám càng nằm sâu thì càng cần kiên trì, và chống nắng mỗi sáng là điều kiện."
+        },
+        {
+          "label": "Da sạm do nắng, màu da không đều",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Cận vùng da sạm màu không đều do nắng"
+          },
+          "fit": "partial",
+          "fitNote": "Hợp, nếu chống nắng đều",
+          "body": "Phức hợp Bio-white trong cả serum và kem hướng tới làm sáng đều màu. Nhưng sạm do nắng quay lại ngay nếu bước chống nắng bị bỏ."
+        },
+        {
+          "label": "Thâm sau mụn",
+          "image": {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Cận vùng da có các vết thâm nâu rải rác sau mụn"
+          },
+          "fit": "partial",
+          "fitNote": "Gel chấm thâm đúng việc hơn",
+          "body": "NIO-NAG trong kem có hướng tới tăng sắc tố sau viêm, nhưng combo thoa cả mặt. Nếu chủ yếu là từng vết thâm riêng lẻ, gel chấm thâm là lựa chọn đúng việc hơn."
+        },
+        {
+          "label": "Nám nổi lên khi mang thai hoặc sau sinh",
+          "image": {
+            "src": "/images/da-nam-noi-tiet.webp",
+            "alt": "Cận vùng da có mảng sẫm màu loang đều"
+          },
+          "fit": "partial",
+          "fitNote": "Mang thai, cho con bú: hỏi bác sĩ",
+          "body": "Công thức không chứa retinoid, nhưng đó không phải lý do để tự quyết. Đang mang thai hoặc cho con bú thì hỏi bác sĩ trước khi bắt đầu."
+        },
+        {
+          "label": "Da đang kích ứng, vừa peel hoặc laser",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Cận vùng da ửng đỏ, có nốt li ti"
+          },
+          "fit": "no",
+          "fitNote": "Đợi da ổn, hỏi bác sĩ trước",
+          "body": "Da sau thủ thuật hoặc đang kích ứng nặng là tình huống y khoa. Đợi da ổn định, và hỏi chính bác sĩ đã làm thủ thuật cho bạn trước khi dùng."
+        },
+        {
+          "label": "Mảng sẫm lan nhanh, gồ lên, ngứa",
+          "fit": "no",
+          "fitNote": "Nên gặp bác sĩ da liễu",
+          "body": "Vùng sẫm màu thay đổi nhanh, gồ lên, ngứa hoặc chảy máu không phải chuyện của mỹ phẩm. Hãy đi khám da liễu trước."
+        }
+      ],
+      "caption": "Ảnh cận vùng da minh hoạ từng tình trạng (tư liệu hình ảnh của hãng), <strong>không phải ảnh trước/sau khi dùng sản phẩm</strong>. Chưa chắc da mình thuộc nhóm nào? Gửi ảnh qua Zalo, chuyên viên xem giúp trước khi bạn đặt."
     },
     {
       "type": "ingredients",
@@ -545,7 +668,7 @@
         },
         {
           "q": "Làm sao biết là hàng chính hãng?",
-          "a": "Sản phẩm chính hãng có tem chống giả kèm mã QR tra cứu. Hiện Mocha chỉ bán qua website chính thức này và hotline 0367 848 918. Mocha chưa có gian hàng trên sàn thương mại điện tử, nên hàng rao bán ở nơi khác không phải do Mocha phân phối."
+          "a": "Sản phẩm chính hãng có tem chống giả kèm mã QR tra cứu. Hiện Mocha chỉ bán qua website chính thức này và hotline {{phone}}. Mocha chưa có gian hàng trên sàn thương mại điện tử, nên hàng rao bán ở nơi khác không phải do Mocha phân phối."
         }
       ],
       "cta": {

@@ -54,11 +54,11 @@
   },
   "seo": {
     "title": "Mocha UV-Block Plus sunscreen, 50g | Mocha Vietnam",
-    "description": "Hybrid SPF 50 sunscreen with seven filters (five chemical, two physical nano), plus niacinamide and centella. No fragrance, no parabens. {{price}}."
+    "description": "Hybrid sunscreen with seven filters (five chemical, two physical nano), plus niacinamide and centella. No fragrance, no parabens. {{price}}."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "353/25/CBMP-TN",
+    "declarant": "mocha",
     "functions": "helps protect the skin from the effects of UVA and UVB radiation",
     "warnings": [
       "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
@@ -66,8 +66,7 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ],
-    "productNotificationNumber": "353/25/CBMP-TN"
+    ]
   },
   "variants": [
     {
@@ -75,6 +74,13 @@
       "note": "You save {{save}} off the list price",
       "price": 335000,
       "recommended": true
+    },
+    {
+      "label": "Combo of 2 UV-Block Plus tubes",
+      "price": 600000,
+      "recommended": false,
+      "note": "For daily use, lasts longer",
+      "qty": 2
     },
     {
       "label": "I would like advice first",
@@ -86,9 +92,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "The step you cannot skip",
+      "eyebrow": "Hybrid sunscreen, 7 filters · 50g tube",
       "heading": "The step that decides whether any of the others were worth doing",
-      "lead": "A 50g tube with <strong>seven filters</strong> — five chemical and two physical nano — plus <strong>EpiOn™, niacinamide, vitamin E</strong> and centella extract, exactly as printed on the tube. No fragrance, no parabens.",
+      "lead": "Sunscreen for the last step of your morning, thin in texture, positioned by the maker for oily skin and skin after a peel. Seven filters named on the tube; no fragrance, no parabens.",
       "usp": [
         {
           "text": "<strong>Seven filters named by INCI</strong>, not wrapped in a phrase like “sun protection technology”",
@@ -110,7 +116,7 @@
       ],
       "image": {
         "src": "/images/hero-uv-block-plus.webp",
-        "alt": "Tube of Mocha UV-Block Plus sunscreen, 2025 packaging marked SPF 50 PA++++"
+        "alt": "Tube of Mocha UV-Block Plus sunscreen, 50g, seven filters"
       },
       "primaryCta": "Order the sunscreen",
       "secondaryCta": {
@@ -121,6 +127,32 @@
         "Free delivery nationwide",
         "Inspect before you pay",
         "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Size",
+          "value": "50g tube"
+        },
+        {
+          "label": "Filters",
+          "value": "7 filters: 5 chemical, 2 physical (zinc oxide, titanium dioxide)"
+        },
+        {
+          "label": "Texture",
+          "value": "Thin; positioned for oily, combination and post-peel skin"
+        },
+        {
+          "label": "Free from",
+          "value": "Fragrance, parabens"
+        },
+        {
+          "label": "How to use",
+          "value": "Last step of the morning; reapply every 2–3 hours outdoors"
+        },
+        {
+          "label": "Notification no.",
+          "value": "353/25/CBMP-TN"
+        }
       ]
     },
     {
@@ -139,6 +171,81 @@
           "Light through a window and blue light from a screen are weaker than direct sun, but they are present through the whole working day. It is the total exposure time that adds up."
         ]
       }
+    },
+    {
+      "type": "infographic",
+      "id": "tia-uv",
+      "kind": "layers",
+      "eyebrow": "How far sunlight reaches",
+      "heading": "Two kinds of UV, two depths — and where the sunscreen sits",
+      "intro": "Redness and burning are UVB’s doing, but most sun-related darkening and ageing comes from UVA — which is there all day, even through window glass.",
+      "items": [
+        {
+          "label": "The sunscreen layer",
+          "depth": "surface",
+          "body": "Five chemical filters absorb UV and two physical filters reflect it. All of them work in the layer of cream sitting on your skin — so <strong>how much you apply</strong> sets the level of protection."
+        },
+        {
+          "label": "UVB",
+          "depth": "epidermis",
+          "body": "Stops in the epidermis. It is the ray behind redness and sunburn in strong sun. Window glass blocks most of it."
+        },
+        {
+          "label": "UVA",
+          "depth": "dermis",
+          "body": "Reaches down to the dermis and passes through window glass. Linked to darkening and sun-related ageing — which is why sitting by a window indoors still calls for sunscreen."
+        }
+      ],
+      "footnote": "Illustrative diagram, not to scale. Each filter is named in the ingredient table below."
+    },
+    {
+      "type": "conditions",
+      "id": "nang-lam-nang-them",
+      "eyebrow": "What the sun makes worse",
+      "heading": "Skin concerns where skipping sunscreen sets you back",
+      "intro": "Sunscreen does not fade any of these. Its job is to stop UV from darkening them further while your other products do their work.",
+      "items": [
+        {
+          "label": "Sun-darkened skin",
+          "aka": "hyperpigmentation from sun and environment",
+          "image": {
+            "src": "/images/da-sam-nang.webp",
+            "alt": "Close-up of a cheekbone with diffuse, sun-related darkening"
+          },
+          "body": "Diffuse darkening across the cheekbones and nose — the places that catch the most sun. Daily sunscreen does not undo what has already darkened, but it keeps it from getting deeper.",
+          "fit": "yes",
+          "fitNote": "The main preventive step"
+        },
+        {
+          "label": "Melasma patches",
+          "aka": "epidermal melasma",
+          "image": {
+            "src": "/images/da-nam-mang.webp",
+            "alt": "Close-up of a light-brown, well-defined melasma patch on the cheek"
+          },
+          "body": "Sun is one of the things that makes melasma darker. Sunscreen does not fade melasma — it stops the work of your melasma product from being pulled backwards.",
+          "fit": "partial",
+          "fitNote": "Must go alongside a melasma product"
+        },
+        {
+          "label": "Post-acne marks",
+          "aka": "post-inflammatory hyperpigmentation",
+          "image": {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Close-up of skin with brown marks left after breakouts"
+          },
+          "body": "New post-acne marks darken quickly in the sun. Used alongside a mark gel, sunscreen helps keep them from getting darker.",
+          "fit": "partial",
+          "fitNote": "Keeps marks from darkening again"
+        },
+        {
+          "label": "Red, blistering skin after time in the sun",
+          "body": "That is sunburn. Cool the skin, stay out of the sun, and see a doctor if it blisters or hurts a lot — do not put more products on damaged skin.",
+          "fit": "no",
+          "fitNote": "See a doctor"
+        }
+      ],
+      "caption": "Close-ups illustrating each skin condition (brand image material), <strong>not before-and-after photos of the product in use</strong>. Sunscreen does not reverse these conditions; its role is to stop UV from making them worse."
     },
     {
       "type": "compare",

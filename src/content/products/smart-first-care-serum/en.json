@@ -54,8 +54,8 @@
     "description": "Serum with 4-butylresorcinol 1000ppm, Niacinamide and Bio-Placenta — printed on the bottle. Airless pump. {{price}}, free shipping, pay on delivery."
   },
   "compliance": {
-    "declaringOrganization": "Công ty TNHH Thương mại Ứng dụng Dược Mỹ phẩm Công nghệ cao Mocha",
-    "declaringAddress": "290/2 Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, Thành phố Hồ Chí Minh, Việt Nam",
+    "productNotificationNumber": "1458/24/CBMP-LA",
+    "declarant": "mocha",
     "functions": "helps soften areas of uneven pigmentation, hydrates and supports a more even skin tone",
     "warnings": [
       "This is a cosmetic product for external use. It is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.",
@@ -63,8 +63,7 @@
       "If you are pregnant or breastfeeding, speak to your doctor before use.",
       "Results vary between individuals and depend on consistent daily sun protection.",
       "For customers in the EU and UK: you have the right to withdraw from the purchase within 14 days of delivery, in addition to the 7-day return for faulty or incorrect items."
-    ],
-    "productNotificationNumber": "1458/24/CBMP-LA"
+    ]
   },
   "variants": [
     {
@@ -83,9 +82,9 @@
   "blocks": [
     {
       "type": "hero",
-      "eyebrow": "The serum step, morning and night",
+      "eyebrow": "Dark-spot serum · 30ml airless pump",
       "heading": "Using it every day and nothing changes? The actives may never be getting in",
-      "lead": "Cream is the sealing step. Serum is the step that gets actives in. Without it they sit on the surface and rinse away at the next wash. This 30ml bottle <strong>prints 4-butylresorcinol 1000ppm on the label</strong> so you can compare it against anything else.",
+      "lead": "A serum for morning and evening, after cleansing and before moisturiser. The 30ml bottle states 4-butylresorcinol 1000ppm and niacinamide 4%; no corticosteroids, no hydroquinone.",
       "usp": [
         {
           "text": "<strong>4-butylresorcinol 1000ppm printed on the bottle</strong>, not hidden behind a “proprietary complex”",
@@ -119,6 +118,28 @@
         "Free delivery nationwide",
         "Inspect before you pay",
         "7-day return if the product is faulty"
+      ],
+      "facts": [
+        {
+          "label": "Size",
+          "value": "30ml airless pump bottle"
+        },
+        {
+          "label": "Key ingredients",
+          "value": "4-butylresorcinol 1000ppm, niacinamide 4%, Bio-Placenta 1%, Vietnam Bio-white Complex 3%, Bioyoga 2%"
+        },
+        {
+          "label": "Free from",
+          "value": "Corticosteroids, hydroquinone"
+        },
+        {
+          "label": "How to use",
+          "value": "Morning and evening, straight after cleansing, before moisturiser"
+        },
+        {
+          "label": "Notification no.",
+          "value": "1458/24/CBMP-LA"
+        }
       ]
     },
     {
@@ -139,6 +160,116 @@
           "Which makes order as important as the product itself: <strong>serum first, cream after</strong>. Reverse it and the cream has already closed the route, and the serum you just paid for stays outside."
         ]
       }
+    },
+    {
+      "type": "conditions",
+      "id": "hop-voi-ai",
+      "eyebrow": "Compare the photos with your own skin",
+      "heading": "Who this serum suits — and when it doesn’t",
+      "intro": "We are a reseller. Selling the wrong thing to the wrong person means you give up after a few weeks — a loss on both sides. So the cases this bottle can’t help with, we tell you up front.",
+      "items": [
+        {
+          "label": "Thin skin that has flaked on retinol",
+          "aka": "sensitive, easily reddened skin",
+          "image": {
+            "src": "/images/da-yeu-nhay-cam.webp",
+            "alt": "Close-up of thin, sensitive skin with slight redness"
+          },
+          "body": "This is who the bottle was formulated for: no retinoids and no drying alcohol, so there is no peeling phase to sit through. Still patch-test on your neck and watch for 30–45 minutes before the first use.",
+          "fit": "yes",
+          "fitNote": "Best fit"
+        },
+        {
+          "label": "Patchy or mixed melasma",
+          "aka": "pigment gathered in patches",
+          "image": {
+            "src": "/images/da-nam-hon-hop.webp",
+            "alt": "Close-up of mixed melasma, with lighter and darker brown areas on the cheek"
+          },
+          "body": "What the 1000ppm 4-butylresorcinol is aimed at. The serum gets actives in; a cream has to seal them afterwards. If the pigment is marked and you want faster progress, the combo comes with that cream step.",
+          "fit": "yes",
+          "fitNote": "A fit — seal it with a cream"
+        },
+        {
+          "label": "Skin after laser or microneedling",
+          "image": {
+            "src": "/images/da-sau-tham-my.webp",
+            "alt": "Close-up of skin recovering after a cosmetic procedure"
+          },
+          "body": "The manufacturer positions the product for this skin too. But post-procedure skin is a medical situation: ask the doctor who performed your procedure before adding any product.",
+          "fit": "partial",
+          "fitNote": "Check with your practitioner first"
+        },
+        {
+          "label": "Marks left after breakouts",
+          "aka": "post-inflammatory hyperpigmentation",
+          "image": {
+            "src": "/images/da-tham-sau-viem.webp",
+            "alt": "Close-up of skin with several brown marks left after acne"
+          },
+          "body": "The serum goes on the whole face and helps soften areas of uneven pigmentation in general. If what you have is mostly individual post-acne marks, Mocha’s spot gel for dark marks is the better tool.",
+          "fit": "partial",
+          "fitNote": "The spot gel is a better fit"
+        },
+        {
+          "label": "Irritated, red or freshly peeled skin",
+          "image": {
+            "src": "/images/da-kich-ung-man-do.webp",
+            "alt": "Close-up of red, irritated skin"
+          },
+          "body": "Let your skin barrier settle first. Adding actives now is the surest way to make it react harder. If irritation starts while you are using it, stop.",
+          "fit": "no",
+          "fitNote": "Not yet"
+        },
+        {
+          "label": "A dark patch that spreads or changes fast",
+          "body": "A dark area that grows quickly, changes colour or shape, is raised, itches or bleeds needs a dermatologist first. If you are pregnant or breastfeeding, ask your doctor before using the serum as well.",
+          "fit": "no",
+          "fitNote": "See a doctor first"
+        }
+      ],
+      "caption": "Close-ups illustrating each skin condition (the brand's own image library) — <strong>not before-and-after photos of the product</strong>. Not sure which group your skin falls into? Send us a photo on Zalo and an adviser will take a look before you order."
+    },
+    {
+      "type": "infographic",
+      "id": "con-so-tren-chai",
+      "kind": "facts",
+      "eyebrow": "Numbers you can check",
+      "heading": "Five numbers from the bottle and the instructions",
+      "intro": "Only figures printed on the pack or in the instructions that come with it. None of them is a promise about results.",
+      "items": [
+        {
+          "label": "4-butylresorcinol",
+          "value": "1000",
+          "unit": "ppm",
+          "body": "Printed on the bottle, not hidden inside a “proprietary complex”. An active studied for its ability to inhibit tyrosinase."
+        },
+        {
+          "label": "Niacinamide",
+          "value": "4",
+          "unit": "%",
+          "body": "Kept moderate to limit stinging; supports the skin barrier and evens out tone."
+        },
+        {
+          "label": "Morning and night",
+          "value": "2",
+          "unit": "times a day",
+          "body": "Straight after cleansing, before your moisturiser. Mornings always finish with sunscreen."
+        },
+        {
+          "label": "Patch test first",
+          "value": "30–45",
+          "unit": "minutes",
+          "body": "Apply a little to your neck and wait this long before the first use on your whole face."
+        },
+        {
+          "label": "Airless pump bottle",
+          "value": "30",
+          "unit": "ml",
+          "body": "No air gets in, and every press gives the same dose — nothing to judge by eye."
+        }
+      ],
+      "footnote": "We don’t give a timeline for results: they vary from person to person, with the type of pigmentation and with how consistently you wear sunscreen."
     },
     {
       "type": "compare",
@@ -188,31 +319,6 @@
       ],
       "footnote": "If you already have a moisturiser that works for you, the serum on its own is the more sensible buy — there is no reason to drop something that works in order to buy a set.",
       "transition": "If you are starting with the serum step, below are the six actives printed on the bottle and what each does."
-    },
-    {
-      "type": "cards",
-      "id": "hop-voi-ai",
-      "eyebrow": "Before you order",
-      "heading": "Three cases, and an honest answer for each",
-      "intro": "We are a reseller. Selling is good, but selling the wrong thing to the wrong person means you stop after a few weeks — a loss on both sides.",
-      "columns": 3,
-      "items": [
-        {
-          "heading": "Thin skin that has flaked on retinol",
-          "body": "This is who the bottle was formulated for. No retinoids and no drying alcohol, so there is no peeling phase to sit through.",
-          "meta": "Best fit"
-        },
-        {
-          "heading": "Marked pigmentation, wanting faster progress",
-          "body": "The serum handles getting actives in, but without a sealing step they leave with the moisture. This case wants the cream too — hence the combo.",
-          "meta": "Consider the combo"
-        },
-        {
-          "heading": "Skin that is irritated, red, or just peeled",
-          "body": "Let the barrier settle first. Adding actives to a damaged barrier is the surest way to make skin react, and you will blame the product.",
-          "meta": "Not yet"
-        }
-      ]
     },
     {
       "type": "ingredients",
