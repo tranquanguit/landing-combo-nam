@@ -298,7 +298,7 @@ const articlesSorted = allArticles
     articles={pick<any>(data.relatedArticles, articleBySlug)}
     productCards={productBySlug}
     documents={docsFor(allDocuments as any[], data.slug)}
-    combos={comboCards.filter((c) => c.products.has(data.slug)).sort((a, b) => a.count - b.count || b.pct - a.pct).slice(0, 6)}
+    combos={comboCards.filter((c) => c.products.has(data.slug)).sort((a, b) => a.count - b.count || b.pct - a.pct).slice(0, 4)}
   />
 )}
 

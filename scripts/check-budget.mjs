@@ -7,7 +7,15 @@ import { gzipSync } from 'node:zlib';
  * không ràng buộc được gì. Vượt ngân sách là fail CI.
  */
 const BUDGET = {
-  htmlGzip: 24 * 1024,     // mỗi trang HTML sau khi nén
+  /*
+   * 24 KB -> 28 KB (2026-10-12): trang sản phẩm thêm các khối người bán yêu cầu — ảnh tình trạng
+   * da, infographic, dải "thông tin sản phẩm", combo có sản phẩm này. Combo Nám đo 26,6 KB.
+   * TRƯỚC KHI NÂNG đã cắt: hai ô trùng nội dung với mục "Khi nào nên cân nhắc lại" trên cùng
+   * trang, khối combo từ 6 xuống 4 thẻ, điều kiện giao hàng/đổi trả khai một lần và trỏ @id
+   * thay vì chép vào từng gói bán lẻ. Không cắt FAQPage/HowTo (lý do ở src/lib/schema.ts).
+   * LCP vẫn đo trong ngưỡng (test:perf); tổng một lượt tải 700 KB không đổi.
+   */
+  htmlGzip: 28 * 1024,     // mỗi trang HTML sau khi nén
   /**
    * JS nội tuyến trên một trang, đo byte thô đã minify (chi phí phân tích cú
    * pháp); sau nén còn khoảng một phần ba.
