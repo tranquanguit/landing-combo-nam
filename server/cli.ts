@@ -8,6 +8,9 @@
  *                              --only-new chỉ thêm cái chưa có (dùng khi phát hành bản code mới)
  *                              --entries products/combo-nam/vi,... chỉ nạp + ghi đè đúng các mục đó
  *                              (bản mới SỬA một nội dung đã có; kết hợp --only-new để kèm ảnh mới)
+ *   sync                       đồng bộ bản code mới: thêm mục/ảnh mới, cập nhật mục chưa từng sửa trong
+ *                              trang quản trị, giữ (và liệt kê) mục nhân viên đã sửa. Máy chủ tự chạy
+ *                              lệnh này mỗi lần khởi động (tắt bằng SYNC_ON_BOOT=0).
  *   export [--out <thư mục>]   ghi CSDL ra cây src/ (mặc định: thư mục hiện tại) — kéo nội dung
  *                              đang chạy thật về repo để commit
  *   validate                   kiểm mọi nội dung trong CSDL bằng schema, in lỗi tiếng Việt
@@ -16,7 +19,7 @@
  */
 import { join, resolve } from 'node:path';
 import { connect, migrate } from './lib/db.ts';
-import { importFromFiles, exportToFiles, validate } from './lib/content.ts';
+import { importFromFiles, exportToFiles, validate, syncFromFiles } from './lib/content.ts';
 import { createUser } from './lib/auth.ts';
 import { publish } from './lib/publish.ts';
 
@@ -27,6 +30,10 @@ await migrate(sql, join(ROOT, 'db/pg'), console.log);
 let code = 0;
 try {
   if (cmd === 'migrate') console.log('xong');
+  else if (cmd === 'sync') {
+    const r = await syncFromFiles(sql, ROOT);
+    console.log(JSON.stringify(r, null, 1));
+  }
   else if (cmd === 'import') {
     const i = args.indexOf('--entries');
     const entries = i >= 0 ? new Set(String(args[i + 1] ?? '').split(',').map((x) => x.trim()).filter(Boolean)) : undefined;
@@ -55,7 +62,7 @@ try {
     const r = await publish(sql, ROOT, 'cli');
     console.log(r.log); code = r.ok ? 0 : 1;
   } else {
-    console.log('Lệnh: migrate | import [--only-new] [--entries c/id,...] | export [--out dir] | validate | user <tên> [admin|editor] | publish');
+    console.log('Lệnh: migrate | sync | import [--only-new] [--entries c/id,...] | export [--out dir] | validate | user <tên> [admin|editor] | publish');
     code = cmd ? 1 : 0;
   }
 } catch (e) { console.error((e as Error).message); code = 1; }

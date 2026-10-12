@@ -147,6 +147,43 @@ ok('Thông tin cửa hàng: lưu hotline (tự suy số +84), tổ chức công 
 r = await postStore(storeForm({ [`d:${hbIdx}:id`]: '', [`d:${hbIdx}:label`]: '', [`d:${hbIdx}:brand`]: '', [`d:${hbIdx}:name`]: '', [`d:${hbIdx}:address`]: '' }));
 ok('Thông tin cửa hàng: không xoá được tổ chức công bố còn sản phẩm dùng', r.status === 422 && /hairborn/.test(await r.text()), String(r.status));
 
+/* Đồng bộ bản code mới (máy chủ tự chạy lúc khởi động) — tình huống deploy 2026-10-11:
+   CSDL giữ bản cũ của sản phẩm do máy nạp, Thông tin cửa hàng đã sửa trong trang quản trị
+   nhưng thiếu danh sách tổ chức công bố, một lời chứng đã bị xoá, ảnh bìa đã được làm lại. */
+{
+  const { syncFromFiles } = await import('../server/lib/content.ts');
+  const repoUv = readFileSync(join(ROOT, 'src/content/products/uv-block-sunscreen/vi.json'), 'utf8');
+  const oldUv = JSON.parse(repoUv); oldUv.blocks = oldUv.blocks.slice(0, 2);
+  const oldSrc = JSON.stringify(oldUv, null, 2) + '\n';
+  await sql.query("UPDATE content_entries SET data = $1::text::jsonb, source = $1, updated_by = 'seed' WHERE collection = 'products' AND entry_id = 'uv-block-sunscreen/vi'", [oldSrc]);
+  const b0 = await brandNow(); delete b0.declarants;
+  const b0src = JSON.stringify(b0, null, 2) + '\n';
+  await sql.query("UPDATE content_entries SET data = $1::text::jsonb, source = $1, updated_by = 'bien-tap' WHERE collection = 'brand' AND entry_id = 'mocha'", [b0src]);
+  await admin('/admin/edit', { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    body: form({ c: 'testimonials', id: 'kcn-01-chi-t', action: 'delete', confirm: '1' }) });
+  await sql.query("UPDATE media SET sha256 = 'cu', uploaded_by = 'seed' WHERE path = '/images/hero-uv-block-plus.webp'");
+  await sql.query("UPDATE media SET sha256 = 'tu-tai-len', uploaded_by = 'bien-tap' WHERE path = '/images/logo.webp'");
+
+  const rep = await syncFromFiles(sql, ROOT);
+  const uvNow = (await sql.query("SELECT source FROM content_entries WHERE collection = 'products' AND entry_id = 'uv-block-sunscreen/vi'")).rows[0].source;
+  ok('đồng bộ: mục máy nạp còn bản cũ -> cập nhật theo bản code mới', uvNow === repoUv && rep.updated.includes('products/uv-block-sunscreen/vi'));
+  const cnPrice = (await sql.query("SELECT data->>'price' AS p FROM content_entries WHERE collection = 'products' AND entry_id = 'combo-nam/vi'")).rows[0].p;
+  ok('đồng bộ: mục nhân viên đã sửa -> giữ nguyên, có tên trong báo cáo', cnPrice === '1040000' && rep.keptEdited.includes('products/combo-nam/vi'), cnPrice);
+  const b1 = await brandNow();
+  ok('đồng bộ: Thông tin cửa hàng đã sửa -> bổ sung tổ chức công bố, giữ hotline đã sửa',
+    rep.merged.includes('brand/mocha') && b1.phoneDisplay === '0900 111 222' && b1.declarants?.some((d) => d.id === 'hairborn'),
+    `${b1.phoneDisplay} · ${(b1.declarants ?? []).map((d) => d.id).join(',')}`);
+  const tm = (await sql.query("SELECT 1 FROM content_entries WHERE collection = 'testimonials' AND entry_id = 'kcn-01-chi-t'")).rows.length;
+  ok('đồng bộ: mục đã xoá trong trang quản trị -> không tự thêm lại', tm === 0);
+  const m1 = (await sql.query("SELECT sha256, uploaded_by FROM media WHERE path = '/images/hero-uv-block-plus.webp'")).rows[0];
+  const m2 = (await sql.query("SELECT sha256 FROM media WHERE path = '/images/logo.webp'")).rows[0];
+  ok('đồng bộ: ảnh máy nạp -> cập nhật; ảnh nhân viên tải lên -> giữ',
+    m1.sha256 !== 'cu' && m1.uploaded_by === 'sync' && m2.sha256 === 'tu-tai-len' && rep.mediaKept.includes('/images/logo.webp'));
+  const rep2 = await syncFromFiles(sql, ROOT);
+  ok('đồng bộ chạy lại lần hai -> không đổi gì', !rep2.added.length && !rep2.updated.length && !rep2.merged.length && !rep2.mediaUpdated,
+    JSON.stringify({ a: rep2.added.length, u: rep2.updated.length, m: rep2.merged.length }));
+}
+
 r = await admin('/admin/users');
 ok('biên tập viên không vào được trang tài khoản', r.status === 403, String(r.status));
 

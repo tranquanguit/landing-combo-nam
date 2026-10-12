@@ -6,7 +6,9 @@
  * Lúc khởi động:
  *   1. áp migration db/pg/*.sql
  *   2. chưa có tài khoản nào -> tạo từ ADMIN_BOOTSTRAP_USER / ADMIN_BOOTSTRAP_PASSWORD
- *   3. CSDL chưa có nội dung -> nạp nội dung đang có trong image (lần chạy đầu)
+ *   3. CSDL chưa có nội dung -> nạp nội dung đang có trong image (lần chạy đầu);
+ *      đã có -> ĐỒNG BỘ bản code mới (SYNC_ON_BOOT=1, mặc định): thêm mục/ảnh mới, cập nhật mục
+ *      chưa từng sửa trong trang quản trị, giữ nguyên mục nhân viên đã sửa (xem syncFromFiles)
  *   4. PUBLISH_ON_BOOT=1 (mặc định) -> build lại site từ CSDL ở nền; trong lúc đó
  *      vẫn phục vụ bản dist/ có sẵn trong image, nên khởi động lại không có lúc trắng trang.
  */
@@ -16,7 +18,7 @@ import { Readable } from 'node:stream';
 import { connect, migrate } from './lib/db.ts';
 import { bootstrapAdmin } from './lib/auth.ts';
 import { seedRules } from './lib/chat-rules.ts';
-import { importFromFiles } from './lib/content.ts';
+import { importFromFiles, syncFromFiles } from './lib/content.ts';
 import { publish } from './lib/publish.ts';
 import { createApp } from './app.ts';
 import { clientKey, purgeRateLimit } from './lib/rate-limit.ts';
@@ -44,6 +46,12 @@ const n = (await sql.query<{ n: number }>('SELECT count(*)::int AS n FROM conten
 if (n === 0) {
   const r = await importFromFiles(sql, ROOT, 'seed');
   log(`nạp nội dung lần đầu từ image: ${r.entries} nội dung, ${r.media} ảnh`);
+} else if (process.env.SYNC_ON_BOOT !== '0') {
+  const r = await syncFromFiles(sql, ROOT);
+  log(`đồng bộ bản code mới: thêm ${r.added.length}, cập nhật ${r.updated.length}, bổ sung ${r.merged.length} nội dung; ` +
+    `ảnh thêm ${r.mediaAdded}, cập nhật ${r.mediaUpdated}`);
+  if (r.keptEdited.length) log(`giữ bản đã sửa trong trang quản trị (bản code mới KHÁC — kiểm tra lại): ${r.keptEdited.join(', ')}`);
+  if (r.mediaKept.length) log(`giữ ảnh đã tải lên trong trang quản trị: ${r.mediaKept.join(', ')}`);
 }
 if (process.env.PUBLISH_ON_BOOT !== '0') {
   publish(sql, ROOT, 'boot').then((r) => log(`xuất bản lúc khởi động #${r.id}: ${r.ok ? 'thành công' : 'LỖI — xem /admin/publish'}`))
