@@ -42,18 +42,23 @@ export function expandBrandTokens<T>(data: T, b: any): T {
 
 /**
  * Tên + địa chỉ tổ chức công bố của một sản phẩm, lấy từ `brand.declarants` theo
- * `compliance.declarant`. Mã không có trong danh sách thì DỪNG BUILD: một sản phẩm in ra
- * pháp nhân trống vì gõ sai mã là lỗi pháp lý, không phải lỗi trình bày.
+ * `compliance.declarant`.
+ *
+ * Mã không có trong danh sách: CẢNH BÁO lúc build và để trống, trang tự hiện "cần bổ sung".
+ * Bản trước dừng build — đúng về nguyên tắc, nhưng lần deploy 2026-10-11 cho thấy hậu quả:
+ * Thông tin cửa hàng trong CSDL còn bản cũ chưa có danh sách tổ chức, thế là MỌI lần xuất bản
+ * đều hỏng, kể cả những sửa đổi không liên quan. Thiếu dữ liệu pháp lý của một sản phẩm phải
+ * hiện ra ở đúng sản phẩm đó, không được chặn cả website.
  */
 export function resolveCompliance<T extends { slug: string; compliance: any }>(p: T, b: any): T {
   const c = p.compliance;
   if (!c?.declarant) return p;
   const d: Declarant | undefined = (b.declarants ?? []).find((x: Declarant) => x.id === c.declarant);
   if (!d) {
-    throw new Error(
-      `Sản phẩm "${p.slug}" khai compliance.declarant = "${c.declarant}" nhưng Thông tin cửa hàng ` +
-      `không có tổ chức công bố mã đó. Thêm ở trang quản trị → Thông tin cửa hàng → Tổ chức công bố.`,
-    );
+    console.warn(`
+⚠️  Sản phẩm "${p.slug}": tổ chức công bố "${c.declarant}" chưa có trong Thông tin cửa hàng ` +
+      `(trang quản trị → Thông tin cửa hàng → Tổ chức công bố). Trang hiện cảnh báo "cần bổ sung".`);
+    return { ...p, compliance: { ...c, declaringOrganization: undefined, declaringAddress: undefined } };
   }
   return { ...p, compliance: { ...c, declaringOrganization: d.name || undefined, declaringAddress: d.address || undefined, brandName: d.brand || undefined } };
 }

@@ -230,18 +230,34 @@ git pull
 docker compose --profile https up -d --build
 ```
 
-Nội dung đang chạy (giá, câu chữ, ảnh đã sửa trên trang quản trị) **không** bị ghi đè khi cập
-nhật — CSDL là bản gốc. Bản mới có nội dung trong mã nguồn thì nạp có chọn lọc, rồi xuất bản:
+Máy chủ **tự đồng bộ** nội dung của bản mới mỗi lần khởi động, rồi tự xuất bản — không cần
+chạy lệnh nạp nào. Quy tắc đồng bộ:
+
+| Nội dung trong CSDL | Khi bản mới có thay đổi |
+|---|---|
+| chưa có (sản phẩm, combo, đợt khuyến mãi… mới) | **thêm** |
+| có, chưa ai sửa trong trang quản trị | **cập nhật** theo bản mới (câu chữ, khối mới, ảnh làm lại) |
+| có, nhân viên đã sửa trong trang quản trị | **giữ** bản trang quản trị, ghi tên mục vào nhật ký |
+| Thông tin cửa hàng đã sửa | giữ giá trị đã điền, chỉ **bổ sung** trường mới (vd tổ chức công bố) |
+| đã bị xoá trong trang quản trị | **không** thêm lại |
+
+Xem kết quả đồng bộ trong nhật ký:
+
+```bash
+docker compose logs app | grep -E "đồng bộ|giữ bản|xuất bản"
+```
+
+Dòng *"giữ bản đã sửa trong trang quản trị (bản code mới KHÁC…)"* liệt kê mục nhân viên đã sửa mà bản mới
+cũng sửa. Muốn lấy bản mới cho đúng mục đó (mất phần đã sửa tay) thì ghi đè có chủ đích:
 
 ```bash
 CLI="docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts"
-$CLI import --only-new        # thêm mục + ảnh MỚI (sản phẩm, đợt khuyến mãi, lời chứng…), không đụng mục đã có
-$CLI import --entries products/uv-block-sunscreen/vi,products/smart-target-acne-gel/vi
-                              # ghi đè ĐÚNG các mục bản mới đã sửa — giá admin đổi ở các mục khác giữ nguyên
+$CLI import --entries products/uv-block-sunscreen/vi      # ghi đè đúng mục đó bằng bản trong mã nguồn
+$CLI sync                                                  # chạy lại đồng bộ (như lúc khởi động), in báo cáo
 # rồi vào trang quản trị -> Xuất bản
 ```
 
-Ghi chú phát hành (commit / changelog) luôn liệt kê mục nào cần `--entries`.
+Tắt tự đồng bộ: đặt `SYNC_ON_BOOT=0` trong `.env`.
 
 Quay lại bản trước nếu bản mới lỗi: `git checkout <mã commit cũ>` rồi chạy lại lệnh
 `docker compose … up -d --build`; nếu dữ liệu cũng hỏng thì khôi phục bản sao lưu.

@@ -157,6 +157,94 @@ export async function importFromFiles(sql: Sql, root: string, by = 'import', onl
   return { entries, media };
 }
 
+/** Người ghi là MÁY (nạp từ mã nguồn), không phải nhân viên sửa trong trang quản trị. */
+export const MACHINE = new Set(['seed', 'import', 'cli', 'sync']);
+
+export interface SyncReport {
+  added: string[]; updated: string[]; merged: string[];
+  /** Nhân viên đã sửa trong trang quản trị và bản trong mã nguồn khác — giữ bản trang quản trị. */
+  keptEdited: string[];
+  mediaAdded: number; mediaUpdated: number; mediaKept: string[];
+}
+
+/**
+ * Đồng bộ nội dung + ảnh của BẢN CODE MỚI vào CSDL, không cần liệt kê từng mục.
+ *
+ * Trước đây phát hành bản mới phải chạy `import --only-new` rồi `import --entries <danh sách
+ * dài>` cho mọi mục đã sửa — sót một mục là trang thật giữ bản cũ mà không ai biết (lỗi gặp
+ * thật lần deploy 2026-10-11: sản phẩm mới có, khối mới của sản phẩm cũ thì không).
+ *
+ * Quy tắc, cho từng mục trong mã nguồn:
+ *   - CSDL chưa có -> thêm;
+ *   - CSDL có, lần ghi cuối là MÁY (seed/import/cli/sync) và khác mã nguồn -> ghi đè: chưa ai
+ *     sửa tay thì bản mới trong mã nguồn chính là bản đúng;
+ *   - CSDL có, nhân viên đã sửa trong trang quản trị -> GIỮ bản trang quản trị, báo tên mục.
+ *     Riêng Thông tin cửa hàng (`brand`): bổ sung các trường bản mới thêm mà CSDL chưa có
+ *     (vd danh sách tổ chức công bố), không đụng giá trị nhân viên đã điền.
+ * Ảnh: cùng quy tắc theo người tải lên. Không xoá gì: mục bị bỏ khỏi mã nguồn vẫn ở CSDL.
+ */
+export async function syncFromFiles(sql: Sql, root: string): Promise<SyncReport> {
+  const rep: SyncReport = { added: [], updated: [], merged: [], keptEdited: [], mediaAdded: 0, mediaUpdated: 0, mediaKept: [] };
+  const write = (c: string, id: string, source: string) => sql.query(
+    `INSERT INTO content_entries (collection, entry_id, data, source, updated_by)
+     VALUES ($1, $2, $3::text::jsonb, $4, 'sync')
+     ON CONFLICT (collection, entry_id) DO UPDATE
+       SET data = EXCLUDED.data, source = EXCLUDED.source, updated_at = now(), updated_by = 'sync'`,
+    [c, id, source, source]);
+  for (const c of Object.keys(COLLECTIONS)) {
+    for (const { file, id } of entryFiles(root, c)) {
+      const source = readFileSync(file, 'utf8');
+      const row = (await sql.query<{ source: string; updated_by: string | null }>(
+        'SELECT source, updated_by FROM content_entries WHERE collection = $1 AND entry_id = $2', [c, id])).rows[0];
+      const key = `${c}/${id}`;
+      if (!row) {
+        /* Nhân viên đã XOÁ mục này trong trang quản trị (lịch sử ghi bản xoá): không tự thêm lại. */
+        const last = (await sql.query<{ source: string | null }>(
+          'SELECT source FROM content_revisions WHERE collection = $1 AND entry_id = $2 ORDER BY id DESC LIMIT 1', [c, id])).rows[0];
+        if (last && last.source === null) { rep.keptEdited.push(`${key} (đã xoá trong trang quản trị)`); continue; }
+        await write(c, id, source); rep.added.push(key); continue;
+      }
+      if (row.source === source) continue;
+      if (MACHINE.has(row.updated_by ?? '')) { await write(c, id, source); rep.updated.push(key); continue; }
+      if (c === 'brand') {
+        /* Bổ sung trường mới (nông) + tổ chức công bố còn thiếu theo mã; giữ mọi giá trị đã sửa. */
+        const db = JSON.parse(row.source), repo = JSON.parse(source);
+        const merged = { ...db };
+        for (const [k, v] of Object.entries(repo)) if (!(k in merged)) merged[k] = v;
+        if (Array.isArray(repo.declarants)) {
+          const have = new Set((merged.declarants ?? []).map((d: any) => d.id));
+          merged.declarants = [...(merged.declarants ?? []), ...repo.declarants.filter((d: any) => !have.has(d.id))];
+        }
+        const next = canonicalSource(merged);
+        if (next !== canonicalSource(db)) {
+          await sql.query(
+            `UPDATE content_entries SET data = $1::text::jsonb, source = $2, updated_at = now() WHERE collection = $3 AND entry_id = $4`,
+            [next, next, c, id]);
+          await sql.query('INSERT INTO content_revisions (collection, entry_id, source, saved_by, note) VALUES ($1, $2, $3, $4, $5)',
+            [c, id, next, 'sync', 'bổ sung trường mới từ bản code mới']);
+          rep.merged.push(key);
+        }
+        continue;
+      }
+      rep.keptEdited.push(key);
+    }
+  }
+  for (const d of MEDIA_DIRS) {
+    const base = join(root, 'src/assets', d);
+    for (const f of walk(base).filter((x) => IMAGE.test(x))) {
+      const bytes = readFileSync(f);
+      const path = `/${d}/${posix(relative(base, f))}`;
+      const row = (await sql.query<{ sha256: string; uploaded_by: string | null }>(
+        'SELECT sha256, uploaded_by FROM media WHERE path = $1', [path])).rows[0];
+      if (!row) { await putMedia(sql, path, bytes, 'sync'); rep.mediaAdded++; continue; }
+      if (row.sha256 === createHash('sha256').update(bytes).digest('hex')) continue;
+      if (MACHINE.has(row.uploaded_by ?? '')) { await putMedia(sql, path, bytes, 'sync'); rep.mediaUpdated++; continue; }
+      rep.mediaKept.push(path);
+    }
+  }
+  return rep;
+}
+
 export async function putMedia(sql: Sql, path: string, bytes: Buffer, by: string) {
   const ext = path.split('.').pop()!.toLowerCase();
   const sha256 = createHash('sha256').update(bytes).digest('hex');

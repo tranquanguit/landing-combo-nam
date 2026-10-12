@@ -85,42 +85,44 @@ docker compose up -d app
 
 ```bash
 deploy/backup.sh && git pull
-PUBLISH_ON_BOOT=0 docker compose --profile https up -d --build
-docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts import --only-new
-docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts publish
-docker compose --profile https up -d --force-recreate --no-build app
+docker compose --profile https up -d --build
+docker compose logs app | grep -E "đồng bộ|giữ bản|xuất bản"
 ```
 
-Nội dung trong Postgres **không** bị ghi đè khi cập nhật image: bước "nạp nội dung
-từ image" chỉ chạy khi CSDL còn trống. Bản mới có thêm sản phẩm/bài trong `src/`
-thì nạp riêng các mục **mới** (mục đã có — kể cả giá đã sửa trên trang quản trị — giữ
-nguyên), rồi Xuất bản. Đó là hai lệnh giữa.
+Lúc khởi động, máy chủ làm theo thứ tự: migration → **đồng bộ bản code mới vào CSDL** → xuất bản.
+Đồng bộ (`syncFromFiles`, bật mặc định, tắt bằng `SYNC_ON_BOOT=0`):
 
-### Vì sao phải tắt `PUBLISH_ON_BOOT` ở lượt dựng đầu
+| Mục trong CSDL | Bản mới có thay đổi |
+|---|---|
+| chưa có | thêm |
+| có, lần ghi cuối là máy (nạp lần đầu, `import`, `sync`) | cập nhật theo bản mới — câu chữ, khối mới, ảnh làm lại |
+| có, nhân viên đã sửa trong trang quản trị | **giữ** bản trang quản trị, ghi tên mục vào log ("giữ bản đã sửa…") |
+| Thông tin cửa hàng (`brand/mocha`) đã sửa tay | giữ giá trị đã điền, chỉ bổ sung trường / tổ chức công bố mới |
+| đã xoá trong trang quản trị | không thêm lại |
 
-Xuất bản **ghi CSDL ra `src/content` và xoá mọi file không có trong CSDL**. Nếu để
-publish-on-boot chạy trước khi nạp, nó dọn sạch nội dung mới vừa theo image vào —
-rồi `import --only-new` chỉ còn thấy phần CSDL cũ xuất ra. Thứ tự sai cho lỗi khó
-đoán: một combo tiếng Anh báo "chứa sản phẩm chưa xuất bản ở ngôn ngữ này", vì
-`en.json` của mấy món đó vừa bị xoá khỏi đĩa.
+Log phải có hai dòng `đồng bộ bản code mới: …` và `xuất bản lúc khởi động #N: thành công`.
 
-Lượt `up -d --force-recreate` cuối trả container về cấu hình mặc định
-(`PUBLISH_ON_BOOT=1`) và là phép thử: log phải ghi `xuất bản lúc khởi động #N: thành công`.
+### Vì sao đồng bộ phải chạy TRƯỚC xuất bản
 
-### Thông tin cửa hàng không nằm trong `--only-new`
+Xuất bản **ghi CSDL ra `src/content` và xoá mọi file không có trong CSDL**. Nếu xuất bản
+chạy trước, nó dọn sạch nội dung mới vừa theo image vào; thứ tự sai cho lỗi khó đoán —
+một combo tiếng Anh báo "chứa sản phẩm chưa xuất bản ở ngôn ngữ này" vì `en.json` của
+mấy món đó vừa bị xoá khỏi đĩa. Đồng bộ đọc `src/` khi nó còn nguyên bản trong image,
+nên lần deploy 2026-10-11 (phải tắt `PUBLISH_ON_BOOT`, nạp tay, ghi đè riêng
+`brand/mocha` từ file trên host) không cần lặp lại nữa.
 
-`src/data/mocha.json` (Thông tin cửa hàng: tổ chức công bố, mạng xã hội, sàn) cũng là
-một mục nội dung, mã `brand/mocha`. Mục đã tồn tại nên `--only-new` bỏ qua — bản mới
-thêm một tổ chức công bố thì build chặn với "Thông tin cửa hàng không có tổ chức công
-bố mã đó". Ghi đè riêng mục đó, **từ file trên host** chứ không phải file trong
-container (file trong container có thể đã bị bản xuất trước đó ghi lên bản cũ):
+### Lấy bản mới cho một mục đã sửa tay
+
+Mục có tên trong dòng "giữ bản đã sửa trong trang quản trị" là mục cả nhân viên lẫn bản
+mới cùng sửa. Muốn lấy bản mới (mất phần sửa tay) thì ghi đè có chủ đích, rồi Xuất bản:
 
 ```bash
-docker compose cp src/data/mocha.json app:/app/src/data/mocha.json
-docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts import --entries brand/mocha
+docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts import --entries products/uv-block-sunscreen/vi < /dev/null
+docker compose exec app node --import ./scripts/shim/register.mjs server/cli.ts sync < /dev/null      # chạy lại đồng bộ, in báo cáo
 ```
 
-Sau đó kiểm trên trang quản trị → Thông tin cửa hàng xem có mất chỉnh sửa tay nào không.
+Một sản phẩm trỏ tới tổ chức công bố chưa khai trong Thông tin cửa hàng **không** còn làm
+hỏng cả lần xuất bản: build cảnh báo và trang sản phẩm đó hiện "cần bổ sung".
 
 > `docker compose exec -T` nhận stdin. Chạy nó trong một script truyền qua
 > `ssh 'bash -s' < script` thì nó ăn luôn phần script còn lại và các lệnh sau im lặng

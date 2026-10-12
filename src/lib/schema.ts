@@ -381,8 +381,8 @@ export function productGraph(opts: {
    * khác, khai riêng và liên kết bằng `isRelatedTo`.
    */
   function buildOffers() {
-    if (sale) return { '@type': 'Offer', url: `${url}#dat-hang`, ...offerBase, price: String(sale.price), priceValidUntil: sale.validUntil };
-    return { '@type': 'Offer', url: `${url}#dat-hang`, price: String(p.price), ...offerBase };
+    if (sale) return { '@type': 'Offer', url: `${url}#dat-hang`, ...mainOfferBase, price: String(sale.price), priceValidUntil: sale.validUntil };
+    return { '@type': 'Offer', url: `${url}#dat-hang`, price: String(p.price), ...mainOfferBase };
   }
 
   const brandName = productBrand(p as any, b);
@@ -391,6 +391,24 @@ export function productGraph(opts: {
     ? { '@type': 'Organization', name: comp.declaringOrganization,
         ...(comp.declaringAddress ? { address: { '@type': 'PostalAddress', streetAddress: comp.declaringAddress, addressCountry: 'VN' } } : {}) }
     : undefined;
+
+  /* Các gói bán lẻ dùng CHUNG điều kiện giao hàng + đổi trả của offer chính: khai đầy đủ một
+     lần (có @id) rồi trỏ tới, thay vì chép nguyên khối vào từng gói — bản chép làm HTML trang
+     Combo Nám vượt ngân sách 24KB nén khi trang có ba gói bán lẻ. */
+  const shipId = `${url}#shipping`;
+  const returnId = `${url}#returns`;
+  const mainOfferBase = {
+    ...offerBase,
+    ...(offerBase.shippingDetails ? { shippingDetails: { '@id': shipId, ...offerBase.shippingDetails } } : {}),
+    ...(offerBase.hasMerchantReturnPolicy && !Array.isArray(offerBase.hasMerchantReturnPolicy)
+      ? { hasMerchantReturnPolicy: { '@id': returnId, ...offerBase.hasMerchantReturnPolicy } } : {}),
+  };
+  const refOfferBase = {
+    ...offerBase,
+    ...(offerBase.shippingDetails ? { shippingDetails: { '@id': shipId } } : {}),
+    ...(offerBase.hasMerchantReturnPolicy && !Array.isArray(offerBase.hasMerchantReturnPolicy)
+      ? { hasMerchantReturnPolicy: { '@id': returnId } } : {}),
+  };
 
   /** Các món bán lẻ: sản phẩm riêng, giá riêng, không trộn vào giá combo. */
   function standaloneProducts() {
@@ -407,7 +425,7 @@ export function productGraph(opts: {
           '@type': 'Offer',
           url: `${url}#dat-hang`,
           price: String(v.price),
-          ...offerBase,
+          ...refOfferBase,
         },
       }));
   }

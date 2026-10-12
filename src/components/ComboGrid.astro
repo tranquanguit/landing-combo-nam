@@ -23,7 +23,7 @@ const { cards, locale, source, priority = false } = Astro.props;
          data-cta-kind={source ? 'select' : undefined}>
         <span class="shot">
           <Picture src={c.image} alt={c.imageAlt ?? c.name} ratio="4/3" fit={c.product ? 'contain' : 'cover'}
-            sizes="(min-width: 760px) 340px, 90vw" widths={[340, 520, 680]}
+            sizes="(min-width: 760px) 280px, 46vw" widths={[360]}
             loading={priority && i === 0 ? 'eager' : 'lazy'} fetchpriority={priority && i === 0 ? 'high' : 'auto'} />
         </span>
         <span class="name">{c.shortName ?? c.name}</span>
