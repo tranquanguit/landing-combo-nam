@@ -1,0 +1,134 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Analytics from '../components/Analytics.astro';
+import { comboIndexPath, homePath, type ThanksKind } from '../lib/routes';
+import { assertTranslated, t, type Locale } from '../i18n/ui';
+
+/**
+ * Trang cảm ơn sau khi gửi biểu mẫu: /dat-hang-thanh-cong/ · /da-nhan-yeu-cau-tu-van/.
+ *
+ * Hai việc: (1) nói rõ cho khách chuyện gì xảy ra tiếp theo, kèm mã đơn để đọc qua hotline;
+ * (2) làm MỐC chuyển đổi cho quảng cáo — Analytics bắn generate_lead + chuyển đổi Google Ads
+ * đúng một lần cho mỗi đơn, chỉ khi tab này vừa gửi đơn thật (sessionStorage), nên mở thẳng
+ * URL hay tải lại trang không đếm thêm.
+ *
+ * Mã đơn KHÔNG nằm trên URL. Trang noindex, không vào sitemap.
+ */
+interface Props {
+  kind: ThanksKind;
+  brand: any;
+  locale: Locale;
+  canonical: string;
+  nav?: { label: string; href: string }[];
+  policies?: { label: string; href: string }[];
+  pages?: { label: string; href: string }[];
+  hasCombos?: boolean;
+}
+const { kind, brand: b, locale, canonical, nav = [], policies = [], pages = [], hasCombos = false } = Astro.props;
+assertTranslated(locale);
+const k = (s: string) => t(locale, `thanks.${kind}.${s}` as any);
+const phone = `<a href="tel:${b.phone}">${b.phoneDisplay}</a>`;
+const steps = (kind === 'order' ? ['step1', 'step2', 'step3'] : ['step1', ...(b.zalo ? ['step2'] : [])])
+  .map((s) => k(s).replace('{phone}', phone));
+---
+<BaseLayout
+  siteName={b.tradingName}
+  locale={locale}
+  title={`${k('title')} — ${b.tradingName}`}
+  description={k('lead')}
+  canonical={canonical}
+  noindex
+  quiet
+>
+  <SiteHeader brand={b} locale={locale} nav={nav} orderHref={homePath(locale)} />
+
+  <main id="main" class="thanks" data-kind={kind}>
+    <div class="wrap">
+      <p class="eyebrow">{k('eyebrow')}</p>
+      <h1>{k('title')}</h1>
+      <p class="lead">{k('lead')}</p>
+
+      {/* Điền bằng script từ sessionStorage của tab vừa gửi đơn; không có thì để ẩn. */}
+      <dl class="receipt" id="thanks-receipt" hidden>
+        <div id="thanks-code-row" hidden>
+          <dt>{t(locale, 'thanks.code')}</dt>
+          <dd><strong class="code" id="thanks-code"></strong><span class="note">{t(locale, 'thanks.codeNote')}</span></dd>
+        </div>
+        <div id="thanks-pack-row" hidden>
+          <dt>{t(locale, 'thanks.pack')}</dt>
+          <dd><span id="thanks-pack"></span> <span class="price tabular" id="thanks-price"></span></dd>
+        </div>
+      </dl>
+
+      <h2>{t(locale, 'thanks.next')}</h2>
+      <ol class="steps">
+        {steps.map((s) => <li set:html={s} />)}
+      </ol>
+
+      <div class="help">
+        <p>{t(locale, 'thanks.help')}</p>
+        <div class="actions">
+          <a class="btn btn-primary" href={`tel:${b.phone}`} data-cta="thanks-call">{t(locale, 'thanks.call')} {b.phoneDisplay}</a>
+          {b.zalo && <a class="btn btn-ghost" href={b.zalo} rel="noopener" target="_blank" data-cta="thanks-zalo">{t(locale, 'thanks.zalo')}</a>}
+        </div>
+      </div>
+
+      <p class="more">
+        <a href={homePath(locale)}>{t(locale, 'thanks.home')}</a>
+        {hasCombos && <> · <a href={comboIndexPath(locale)}>{t(locale, 'combo.nav')}</a></>}
+      </p>
+    </div>
+  </main>
+
+  <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} pages={pages} />
+  <Analytics locale={locale} thanks={kind} />
+</BaseLayout>
+
+<style>
+  .thanks { padding-block: clamp(40px, 7vw, 88px); background: var(--paper); }
+  .thanks .wrap { max-width: 680px; }
+  .thanks h1 { margin: var(--s-2) 0 var(--s-4); }
+  .thanks .lead { margin: 0 0 var(--s-5); }
+  .thanks h2 { font-size: var(--t-lg); margin: var(--s-6) 0 var(--s-3); }
+  .receipt {
+    margin: 0; display: grid; gap: var(--s-3); padding: var(--s-4) var(--s-5);
+    background: #fff; border: 1px solid var(--line); border-radius: var(--r-card);
+  }
+  .receipt[hidden], .receipt div[hidden] { display: none; }
+  .receipt div { display: grid; gap: 2px; }
+  .receipt dt { font-size: var(--t-xs); letter-spacing: .08em; text-transform: uppercase; color: var(--slate); }
+  .receipt dd { margin: 0; color: var(--ink-navy); }
+  .receipt .code { font-size: clamp(1.25rem, 6vw, var(--t-xl)); letter-spacing: .04em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .receipt .note { display: block; font-size: var(--t-sm); color: var(--ink-muted); }
+  .receipt .price { font-weight: 700; white-space: nowrap; }
+  .steps { margin: 0; padding-left: 1.4em; display: grid; gap: var(--s-2); }
+  .help { margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--line); }
+  .help p { margin: 0 0 var(--s-3); }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .more { margin-top: var(--s-6); font-size: var(--t-sm); }
+  .more a { display: inline-block; min-height: 24px; line-height: 24px; }
+</style>
+
+<script>
+  import { money } from '../lib/format';
+  type Last = { code?: string; pack?: string; price?: number; currency?: string; item?: string };
+  let last: Last | null = null;
+  try { last = JSON.parse(sessionStorage.getItem('mocha_last_order') ?? 'null'); } catch { /* chế độ riêng tư */ }
+  const locale = document.documentElement.lang.startsWith('vi') ? 'vi' : 'en';
+  if (last) {
+    const $ = (id: string) => document.getElementById(id)!;
+    /* textContent, không innerHTML: chuỗi đến từ phản hồi mạng và từ biểu mẫu. */
+    if (last.code) { $('thanks-code').textContent = last.code; $('thanks-code-row').hidden = false; }
+    /* Tên gói thường đã chứa tên sản phẩm ("Combo Nám Mocha – ưu đãi T10"): khi đó không ghép thêm. */
+    const pk = last.pack ?? '', it = last.item ?? '';
+    const what = it && !pk.toLowerCase().includes(it.toLowerCase()) ? [it, pk].filter(Boolean).join(' — ') : pk || it;
+    if (what) {
+      $('thanks-pack').textContent = what;
+      if (Number(last.price) > 0) $('thanks-price').textContent = `· ${money(Number(last.price), last.currency || 'VND', locale as any)}`;
+      $('thanks-pack-row').hidden = false;
+    }
+    if (last.code || what) $('thanks-receipt').hidden = false;
+  }
+</script>

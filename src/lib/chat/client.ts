@@ -10,7 +10,9 @@
  * duyệt (≤ 1280px, JPEG) trước khi gửi.
  */
 type S = Record<string, string>;
-interface Config { endpoint: string; locale: 'vi' | 'en'; privacyUrl: string; strings: S }
+interface Config { endpoint: string; locale: 'vi' | 'en'; privacyUrl: string; strings: S;
+  /** Câu hỏi gợi ý theo trang đang xem (ChatWidget dựng từ tên sản phẩm); trống = câu gợi ý chung. */
+  suggestions?: string[] }
 interface Card { slug: string; name: string; tagline?: string | null; priceText: string; compareAtPriceText?: string | null;
   image?: string | null; imageAlt?: string; url: string; orderUrl: string; available: boolean }
 type Block =
@@ -145,7 +147,7 @@ export function mount(root: HTMLElement) {
     log.replaceChildren();
     if (!state.turns.length) {
       log.append(renderTurn({ role: 'bot', blocks: [{ type: 'text', text: s.greeting }], at: 0 }));
-      setQuick([s.suggest1, s.suggest2, s.suggest3].map((l) => ({ label: l, payload: l })));
+      setQuick([...(cfg.suggestions?.length ? cfg.suggestions : [s.suggest1, s.suggest2]), s.suggest3].map((l) => ({ label: l, payload: l })));
     } else {
       for (const t of state.turns) log.append(renderTurn(t));
       setQuick(state.quick);
@@ -289,5 +291,12 @@ export function mount(root: HTMLElement) {
   function close() {
     panel.hidden = true; root.classList.remove('is-open'); fab.setAttribute('aria-expanded', 'false'); fab.focus();
   }
-  return { toggle: () => (panel.hidden ? open() : close()) };
+  return {
+    toggle: () => (panel.hidden ? open() : close()),
+    /** Mở chat và gửi luôn một câu hỏi gợi ý (lời mời chat trong ChatWidget). */
+    ask: (text: string) => {
+      if (panel.hidden) open();
+      submit({ text, payload: text, event: 'quick_reply', images: [] });
+    },
+  };
 }

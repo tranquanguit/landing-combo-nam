@@ -1,0 +1,205 @@
+---
+/**
+ * "Để lại số" khi khách sắp rời trang mà chưa hỏi, chưa điền biểu mẫu (brand.engagement.exitLead).
+ *
+ * Nhận biết "sắp rời" — không chặn nút Back (Chrome bỏ qua kiểu đó, và Google Ads coi là lừa):
+ *  - điện thoại: vuốt ngược lên nhanh sau khi đã đọc sâu, hoặc kéo về đầu trang (động tác tìm
+ *    thanh địa chỉ / nút đóng tab); khách chuyển sang ứng dụng khác rồi quay lại;
+ *  - máy tính: chuột rời khỏi mép trên cửa sổ (đi tới tab / thanh địa chỉ).
+ * Chỉ sau 12 giây xem thật, mỗi phiên một lần, không khi khách đã chat, đã bấm gọi / Zalo, đã điền
+ * biểu mẫu, đã để lại số trước đó, hoặc đang mở lớp phủ khác.
+ *
+ * Gửi về đúng đường nhận đơn (/api/orders) với `quick: true`: chỉ số điện thoại + điều khách muốn
+ * được tư vấn, không bắt tên. Thành công -> trang cảm ơn "đã nhận yêu cầu tư vấn" (mốc chuyển đổi).
+ */
+import { t, type Locale } from '../i18n/ui';
+import { orderEndpoint } from '../lib/order-endpoint';
+import { thanksPath } from '../lib/routes';
+import type { Subject } from '../lib/engagement';
+
+interface Props { locale: Locale; subject?: Subject; brand: any }
+const { locale, subject, brand: b } = Astro.props;
+const endpoint = orderEndpoint();
+const consent = t(locale, 'exit.consent').replace('{store}', b.tradingName);
+const choose = subject && subject.kind !== 'line';
+---
+{endpoint && (
+  <dialog id="exit-lead" class="xl" aria-labelledby="xl-title"
+    data-action={endpoint} data-thanks={thanksPath('consult', locale)}
+    data-slug={subject?.slug ?? 'tu-van-chung'} data-name={subject?.name ?? ''}
+    data-pack-this={t(locale, 'exit.packThis')} data-pack-other={t(locale, 'exit.packOther')}
+    data-pack-general={t(locale, 'exit.packGeneral')} data-sending={t(locale, 'exit.sending')}>
+    <form method="dialog" class="xl-x-wrap"><button class="xl-x" value="close" aria-label={t(locale, 'pp.close')}>×</button></form>
+    <h2 id="xl-title">{t(locale, 'exit.title')}</h2>
+    <p class="xl-lead">{t(locale, 'exit.lead')}</p>
+    <form id="exit-form" class="xl-form" novalidate>
+      {choose && (
+        <fieldset>
+          <legend>{t(locale, 'exit.about')}</legend>
+          <label class="xl-opt"><input type="radio" name="about" value="this" checked /> {t(locale, 'exit.optThis').replace('{name}', subject!.name)}</label>
+          <label class="xl-opt"><input type="radio" name="about" value="other" /> {t(locale, 'exit.optOther')}</label>
+        </fieldset>
+      )}
+      <label class="xl-field" for="exit-phone">{t(locale, 'exit.phone')}</label>
+      <input id="exit-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" required
+        placeholder={t(locale, 'form.phPhone')} aria-describedby="exit-phone-err exit-consent" />
+      <p class="xl-err" id="exit-phone-err" hidden>{t(locale, 'form.errPhone')}</p>
+      {/* Bẫy bot, giống biểu mẫu đặt hàng. */}
+      <input class="xl-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <p class="xl-consent" id="exit-consent" set:html={consent} />
+      <button type="submit" class="btn btn-primary xl-go">{t(locale, 'exit.submit')}</button>
+      <p class="xl-fail" role="alert" hidden>{t(locale, 'exit.failed')} <a href={`tel:${b.phone}`}>{b.phoneDisplay}</a></p>
+    </form>
+    <form method="dialog"><button class="xl-later" value="later">{t(locale, 'exit.later')}</button></form>
+  </dialog>
+)}
+
+<style>
+  .xl {
+    width: min(440px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow: auto;
+    padding: 28px 22px 14px; border: 0; border-radius: 22px; background: #fff; color: var(--ink, #15162e);
+    box-shadow: 0 30px 90px -20px rgba(8, 10, 40, .5);
+  }
+  .xl::backdrop { background: rgba(10, 12, 40, .5); }
+  @media (max-width: 640px) {
+    .xl { width: 100vw; max-width: 100vw; margin: auto 0 0; border-radius: 22px 22px 0 0; max-height: 88dvh;
+      padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .xl[open] { animation: xl-in .28s cubic-bezier(.16, 1, .3, 1); }
+    @keyframes xl-in { from { opacity: 0; transform: translateY(24px); } }
+  }
+  .xl-x-wrap { position: absolute; top: 10px; right: 10px; margin: 0; }
+  .xl-x { width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--bone, #f1f2f6); color: var(--ink-navy, #1a1d52);
+    font-size: 24px; line-height: 40px; padding: 0; cursor: pointer; }
+  .xl h2 { margin: 0 44px 8px 0; font-size: clamp(1.2rem, 5vw, 1.45rem); line-height: 1.2; color: var(--ink-navy, #1a1d52); }
+  .xl-lead { margin: 0 0 14px; font-size: 15px; color: var(--ink-muted, #5d6076); }
+  .xl-form { display: grid; gap: 8px; margin: 0; }
+  .xl fieldset { border: 0; padding: 0; margin: 0 0 6px; display: grid; gap: 6px; }
+  .xl legend { padding: 0; margin-bottom: 6px; font-weight: 700; font-size: 14px; }
+  .xl-opt { display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line, #d9dce5);
+    border-radius: 12px; cursor: pointer; font-size: 15px; }
+  .xl-opt:has(input:checked) { border-color: var(--cobalt, #2b34b8); background: #f3f4fd; font-weight: 600; }
+  .xl-opt input { width: 18px; height: 18px; accent-color: var(--cobalt, #2b34b8); flex: none; }
+  .xl-field { font-weight: 700; font-size: 14px; margin-top: 4px; }
+  #exit-phone { min-height: 48px; padding: 10px 14px; border: 1px solid #8b90a2; border-radius: 12px; font: inherit; font-size: 17px; width: 100%; }
+  #exit-phone:focus { outline: 2px solid var(--cobalt, #2b34b8); border-color: var(--cobalt, #2b34b8); }
+  #exit-phone[aria-invalid='true'] { border-color: var(--err, #a3261b); }
+  .xl-err, .xl-fail { margin: 0; color: var(--err, #a3261b); font-size: 14px; }
+  .xl-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .xl-consent { margin: 4px 0 2px; font-size: 13px; line-height: 1.45; color: var(--ink-muted, #5d6076); }
+  .xl-go { width: 100%; justify-content: center; min-height: 52px; font-size: 17px; }
+  .xl > form[method='dialog'] { margin: 4px 0 0; }
+  .xl-later { width: 100%; min-height: 44px; background: none; border: 0; color: var(--ink-muted, #5d6076); font: inherit; font-size: 14px;
+    text-decoration: underline; cursor: pointer; }
+</style>
+
+<script>
+  import { afterVisible, formTouched, hasChatted, hidePassive, overlayBusy, store } from '../lib/overlay';
+  import { journeyEvent } from '../lib/journey-client';
+
+  const dlg = document.getElementById('exit-lead') as HTMLDialogElement | null;
+  const form = document.getElementById('exit-form') as HTMLFormElement | null;
+  if (dlg && form && typeof dlg.showModal === 'function') {
+    const SHOWN = 'mocha_exit_shown';     // phiên: đã hiện
+    const DONE = 'mocha_lead_done';       // máy: đã để lại số / đã gọi — không hỏi lại
+    let armed = false;
+    afterVisible(12_000, () => { armed = true; });
+
+    /* Khách đã bấm gọi / Zalo / nhắn: họ đã liên hệ, không hỏi số nữa. */
+    document.addEventListener('click', (e) => {
+      const a = (e.target as Element).closest?.('a[href^="tel:"], a[href*="zalo.me"], [data-cta*="call"], [data-cta*="zalo"]');
+      if (a) store.set(DONE, '1', true);
+    }, { capture: true, passive: true });
+
+    const eligible = () => armed && !store.get(SHOWN, true) && !store.get(DONE) && !store.get(DONE, true)
+      && !formTouched() && !hasChatted() && !overlayBusy(true) && document.documentElement.dataset.redirecting !== '1';
+    const trigger = (why: string) => {
+      if (!eligible()) return;
+      store.set(SHOWN, '1', true);
+      hidePassive();
+      dlg.showModal();
+      journeyEvent('popup', why, 'exit:show');
+    };
+
+    /* Điện thoại: vuốt ngược lên nhanh / về đầu trang sau khi đã đọc sâu. Cuộn do bấm link trong
+       trang (mục lục, "lên đầu") không phải động tác rời đi — bỏ qua 1,5 giây sau cú bấm đó. */
+    if (matchMedia('(max-width: 899px), (pointer: coarse)').matches) {
+      let maxY = scrollY, lastY = scrollY, upFromY = scrollY, upAt = 0, jumpAt = 0;
+      document.addEventListener('click', (e) => {
+        if ((e.target as Element).closest?.('a[href^="#"], [data-cta]')) jumpAt = performance.now();
+      }, { capture: true, passive: true });
+      addEventListener('scroll', () => {
+        const y = scrollY, now = performance.now();
+        if (now - jumpAt < 1500) { lastY = y; upAt = 0; return; }
+        maxY = Math.max(maxY, y);
+        if (y > lastY) { upFromY = y; upAt = 0; }               // đang cuộn xuống: đặt lại điểm đầu
+        else if (y < lastY && !upAt) { upFromY = lastY; upAt = now; }
+        lastY = y;
+        if (upAt && maxY > 900 && upFromY - y > 450 && now - upAt < 700) trigger('scroll-up');
+        else if (maxY > 1500 && y < 160) trigger('top');
+      }, { passive: true });
+    } else {
+      /* Máy tính: chuột ra khỏi mép trên cửa sổ. */
+      document.addEventListener('mouseout', (e) => { if (!e.relatedTarget && e.clientY <= 0) trigger('mouse-top'); });
+    }
+    /* Chuyển sang ứng dụng / tab khác rồi quay lại. */
+    let hiddenAt = 0;
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') hiddenAt = Date.now();
+      else if (hiddenAt && Date.now() - hiddenAt > 3000) trigger('return');
+    });
+
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close('backdrop'); });
+    dlg.addEventListener('close', () => { if (dlg.returnValue !== 'sent') journeyEvent('popup', undefined, 'exit:close'); });
+
+    /* ---- gửi ---- */
+    const phone = form.querySelector<HTMLInputElement>('#exit-phone')!;
+    const err = form.querySelector<HTMLElement>('#exit-phone-err')!;
+    const fail = form.querySelector<HTMLElement>('.xl-fail')!;
+    const btn = form.querySelector<HTMLButtonElement>('.xl-go')!;
+    const vi = document.documentElement.lang.startsWith('vi');
+    const norm = (v: string) => v.replace(/[\s.\-()]/g, '').replace(/^\+?84/, '0');
+    const valid = (v: string) => (vi ? /^0\d{9}$/.test(norm(v)) : (v.match(/\d/g)?.length ?? 0) >= 7 && /^\+?[\d\s.\-()]{7,20}$/.test(v.trim()));
+    phone.addEventListener('input', () => { if (!err.hidden && valid(phone.value)) { err.hidden = true; phone.removeAttribute('aria-invalid'); } });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!valid(phone.value)) { err.hidden = false; phone.setAttribute('aria-invalid', 'true'); phone.focus(); return; }
+      const d = dlg.dataset;
+      const about = (form.querySelector<HTMLInputElement>('input[name="about"]:checked')?.value) ?? '';
+      const pack = about === 'this' ? d.packThis! : about === 'other' ? d.packOther! : d.packGeneral!;
+      const q = new URLSearchParams(location.search);
+      const payload: Record<string, unknown> = {
+        quick: true, name: '', phone: vi ? norm(phone.value) : phone.value.trim(), pack,
+        productSlug: d.slug, locale: document.documentElement.lang.slice(0, 2) === 'en' ? 'en' : 'vi',
+        dataConsent: true, consentText: (form.querySelector('#exit-consent')?.textContent ?? '').replace(/\s+/g, ' ').trim(),
+        website: (form.querySelector<HTMLInputElement>('input[name="website"]')?.value ?? ''),
+      };
+      for (const k of ['Source', 'Medium', 'Campaign', 'Content', 'Term']) {
+        const v = q.get(`utm_${k.toLowerCase()}`); if (v) payload[`utm${k}`] = v.slice(0, 120);
+      }
+      fail.hidden = true; btn.disabled = true;
+      const idle = btn.textContent; btn.textContent = d.sending ?? idle;
+      try {
+        const res = await fetch(d.action!, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || data.ok === false) throw new Error(String(res.status));
+        store.set(DONE, '1');
+        journeyEvent('popup', pack, 'exit:submit');
+        /* Trang cảm ơn đọc mã đơn từ đây (giống biểu mẫu đặt hàng) và bắn chuyển đổi "nhận tư vấn". */
+        store.set('mocha_last_order', JSON.stringify({
+          code: typeof data.orderCode === 'string' ? data.orderCode : '', pack, price: 0, currency: 'VND',
+          item: about === 'other' ? '' : (d.name ?? ''), at: Date.now(),
+        }), true);
+        document.documentElement.dataset.redirecting = '1';
+        window.dispatchEvent(new CustomEvent('mocha:lead', { detail: { pack } }));
+        dlg.close('sent');
+        location.assign(d.thanks!);
+      } catch {
+        fail.hidden = false;
+        btn.disabled = false; btn.textContent = idle;
+      }
+    });
+  }
+</script>

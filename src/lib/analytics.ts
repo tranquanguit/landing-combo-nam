@@ -20,12 +20,23 @@ export type EventName =
   | 'begin_checkout'
   | 'form_start'
   | 'generate_lead'
-  | 'contact';
+  | 'contact'
+  | 'select_item'
+  | 'conversion';
 
 export interface AnalyticsConfig {
   ga4?: string;
+  /** Google Ads AW-… và nhãn của hai hành động chuyển đổi (trang cảm ơn). */
+  googleAds?: string;
+  adsOrderLabel?: string;
+  adsConsultLabel?: string;
   metaPixel?: string;
   tiktokPixel?: string;
+  /** Hành trình khách bên thứ nhất (/api/j → /admin/journey), sau khi khách đồng ý. */
+  journey: boolean;
+  endpoint: string;
+  /** Có = đây là trang cảm ơn của loại biểu mẫu này. */
+  thanks?: 'order' | 'consult';
   /** true với thị trường cần đồng ý trước khi đặt cookie đo lường. */
   requireConsent: boolean;
   /* Bốn trường thương mại chỉ có trên trang sản phẩm. Trang chủ, trang dòng và

@@ -184,19 +184,22 @@ for (const w of [390, 768]) {
   const a = await page.$('#address'); if (a) await a.fill('12 Duong Test');
   const c = await page.$('input[type=checkbox][name=dataConsent]'); if (c) await c.check();
   await page.click('#order-form button[type=submit]');
-  await page.waitForTimeout(1200);
+  /* Thành công = sang trang cảm ơn (mốc chuyển đổi quảng cáo), mã đơn hiện ở đầu trang. */
+  await page.waitForURL((u) => u.pathname === '/dat-hang-thanh-cong/', { timeout: 5000 }).catch(() => {});
+  await page.waitForTimeout(300);
   const r = await page.evaluate(() => {
-    const okBox = document.getElementById('form-success');
-    const b = okBox.getBoundingClientRect();
+    const box = document.getElementById('thanks-receipt');
+    const b = box ? box.getBoundingClientRect() : { top: 1e6, bottom: -1 };
     return {
-      shown: !okBox.hidden, inView: b.top < window.innerHeight && b.bottom > 0,
+      path: location.pathname, url: location.href,
+      shown: !!box && !box.hidden, inView: b.top < window.innerHeight && b.bottom > 0,
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      code: (document.getElementById('order-code') || {}).textContent || '',
-      focus: document.activeElement.id,
+      code: (document.getElementById('thanks-code') || {}).textContent || '',
     };
   });
-  if (OUT) await page.screenshot({ path: join(OUT, 'state-form-ok-390.png') });
-  ok('form thành công: hiện và nằm trong khung nhìn', r.shown && r.inView, `focus=${r.focus} mã=${r.code}`);
+  if (OUT) await page.screenshot({ path: join(OUT, 'state-form-ok-390.png'), fullPage: true });
+  ok('form thành công: sang trang cảm ơn, mã đơn trong khung nhìn', r.path === '/dat-hang-thanh-cong/' && r.shown && r.inView && r.code === 'MC-STATE-1', `${r.path} mã=${r.code}`);
+  ok('form thành công: URL không mang mã đơn', !r.url.includes('MC-STATE-1'), r.url);
   ok('form thành công: không tràn ngang', r.overflow <= 0, `tràn=${r.overflow}`);
   await ctx.close();
 }

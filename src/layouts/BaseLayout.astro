@@ -3,6 +3,10 @@ import '../styles/fonts.css';
 import '../styles/tokens.css';
 import { htmlLang, type Locale, localePath, t } from '../i18n/ui';
 import ChatWidget from '../components/ChatWidget.astro';
+import ExitLead from '../components/ExitLead.astro';
+import RecentOrders from '../components/RecentOrders.astro';
+import { getEntry } from 'astro:content';
+import { engagementOf, type Subject } from '../lib/engagement';
 import { withBase } from '../lib/base';
 import { safeJsonLd } from '../lib/richtext';
 
@@ -28,6 +32,10 @@ interface Props {
    * chính trang gốc trên kết quả tìm kiếm.
    */
   noindex?: boolean;
+  /** Sản phẩm / combo / dòng trang đang nói về: lời mời chat và biểu mẫu "để lại số" gọi đúng tên. */
+  subject?: Subject;
+  /** Trang không mời chào gì thêm (trang cảm ơn): không lời mời chat, không "để lại số", không thông báo đơn. */
+  quiet?: boolean;
 }
 
 /**
@@ -41,8 +49,10 @@ const FORCE_NOINDEX = import.meta.env.PUBLIC_NOINDEX === '1' || import.meta.env.
 
 const {
   locale, title, description, canonical, ogImage, alternates = [], jsonLd, siteName,
-  ogImageWidth = 1200, ogImageHeight = 630, ogImageAlt, ogType = 'website', noindex = false,
+  ogImageWidth = 1200, ogImageHeight = 630, ogImageAlt, ogType = 'website', noindex = false, subject, quiet = false,
 } = Astro.props;
+const brandData = (await getEntry('brand', 'mocha'))?.data as any;
+const eng = engagementOf(brandData);
 ---
 <!DOCTYPE html>
 <html lang={htmlLang[locale]}>
@@ -151,6 +161,8 @@ const {
     </script>
     <a class="sr-only skip-link" href="#main">{t(locale, 'nav.skip')}</a>
     <slot />
-    <ChatWidget locale={locale} />
+    <ChatWidget locale={locale} subject={subject} invite={!quiet && eng.chatInvite} inviteDelaySec={eng.chatDelaySec} />
+    {!quiet && eng.exitLead && brandData && <ExitLead locale={locale} subject={subject} brand={brandData} />}
+    {!quiet && eng.recentOrders && <RecentOrders locale={locale} gapSec={eng.recentOrdersGapSec} />}
   </body>
 </html>

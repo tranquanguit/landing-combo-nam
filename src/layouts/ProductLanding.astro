@@ -6,6 +6,8 @@ import BaseLayout from './BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import StickyCta from '../components/StickyCta.astro';
+import PromoPopup from '../components/PromoPopup.astro';
+import { engagementOf } from '../lib/engagement';
 import Gallery from '../components/blocks/Gallery.astro';
 import Testimonials from '../components/blocks/Testimonials.astro';
 import Order from '../components/blocks/Order.astro';
@@ -215,6 +217,7 @@ const r = (i: number, block: any) => ({
   ogImageAlt={ogImageDims.alt}
   alternates={alternates}
   jsonLd={jsonLd}
+  subject={{ slug: p.slug, name: p.shortName ?? p.name, kind: 'product' }}
 >
   <SiteHeader brand={b} locale={locale} alternates={alternates} nav={nav} />
   <Breadcrumb items={breadcrumb} locale={locale} />
@@ -297,6 +300,10 @@ const r = (i: number, block: any) => ({
 
   <SiteFooter brand={b} product={p} locale={locale} nav={nav} policies={policies} pages={pages} />
   <StickyCta brand={b} locale={locale} />
+  {promoPacks.length > 0 && engagementOf(b).promoPopup && (
+    <PromoPopup packs={promoPacks} currency={p.currency} locale={locale} delaySec={engagementOf(b).promoDelaySec}
+      image={heroBlock?.image?.src ? { src: heroBlock.image.src, alt: heroBlock.image.alt ?? p.name } : undefined} />
+  )}
   <Analytics
     locale={locale}
     value={p.price}

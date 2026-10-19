@@ -1,0 +1,149 @@
+---
+/**
+ * Popup giới thiệu khuyến mãi đang chạy, trên trang sản phẩm / combo có gói khuyến mãi.
+ * Bật tắt + độ trễ ở /admin/store → Tương tác trên website (brand.engagement).
+ *
+ * - Hiện SAU vài giây tab đang mở (không bật ngay khi trang vừa tải: trên điện thoại, một lớp phủ
+ *   che nội dung ngay lúc khách bấm từ Google vào bị Google tính là "interstitial gây phiền").
+ * - Mỗi đợt khuyến mãi một lần trong phiên; không hiện nếu khách đã điền biểu mẫu, đang nhìn
+ *   phần đặt hàng, hoặc đang mở lớp phủ khác (src/lib/overlay.ts).
+ * - Nút "Đặt hàng ngay": đóng popup, chọn sẵn gói khuyến mãi trong biểu mẫu, cuộn tới biểu mẫu
+ *   và đặt con trỏ vào ô họ tên.
+ * Mọi con số lấy từ chính gói khuyến mãi (src/lib/promotions.ts), không viết tay.
+ */
+import Picture from './Picture.astro';
+import { money } from '../lib/format';
+import { vnDateTime, type PackView } from '../lib/promotions';
+import { t, type Locale } from '../i18n/ui';
+
+interface Props {
+  packs: PackView[]; currency: string; locale: Locale; delaySec: number;
+  image?: { src: string; alt: string };
+}
+const { packs, currency, locale, delaySec, image } = Astro.props;
+const p = packs.find((x) => x.recommended) ?? packs[0];
+const m = (n: number) => money(n, currency, locale);
+const gifts = p.gifts.map((g) => `${g.qty > 1 ? `${g.qty} ` : ''}${g.name}`).join(', ');
+---
+<dialog id="promo-pop" class="pp" aria-labelledby="pp-title" data-promo={p.promoId} data-pack={p.label} data-delay={delaySec}>
+  <form method="dialog" class="pp-x-wrap"><button class="pp-x" value="close" aria-label={t(locale, 'pp.close')}>×</button></form>
+  <div class="pp-body">
+    {image && (
+      <div class="pp-img">
+        <Picture src={image.src} alt={image.alt} widths={[240, 400]} sizes="(max-width: 640px) 34vw, 180px" loading="lazy" />
+      </div>
+    )}
+    <div class="pp-text">
+      <p class="pp-eb">{p.badge && <span class="pp-badge">{p.badge}</span>}{t(locale, 'promo.eyebrow')}</p>
+      <h2 id="pp-title">{p.promoName}</h2>
+      {p.draft && <p class="pp-preview">{t(locale, 'promo.previewPack')}</p>}
+      <p class="pp-pack">{p.label}</p>
+      <p class="pp-price"><span class="pp-now">{m(p.price)}</span>
+        {p.regular > p.price && <s class="pp-was"><span class="sr-only">{t(locale, 'promo.regular')} </span>{m(p.regular)}</s>}
+        {p.savePct > 0 && <span class="pp-pct">−{p.savePct}%</span>}</p>
+      {gifts && <p class="pp-gifts"><strong>{t(locale, 'pp.gifts')}:</strong> {gifts}</p>}
+      <p class="pp-ends">{t(locale, 'promo.endsAt')} <strong>{vnDateTime(p.endsAt, locale, true)}</strong></p>
+    </div>
+  </div>
+  {packs.length > 1 && <p class="pp-more">{t(locale, 'pp.more').replace('{n}', String(packs.length - 1))}</p>}
+  <div class="pp-actions">
+    <a class="btn btn-primary pp-go" href="#dat-hang" data-cta="promo-popup-order" data-pp-order>{t(locale, 'pp.order')}</a>
+    <form method="dialog"><button class="pp-later" value="later">{t(locale, 'pp.later')}</button></form>
+  </div>
+</dialog>
+
+<style>
+  .pp {
+    width: min(460px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow: auto;
+    padding: 0; border: 0; border-radius: 22px; color: #fff;
+    background:
+      radial-gradient(60% 70% at 0% 0%, rgba(143, 152, 255, .38), transparent 70%),
+      radial-gradient(55% 60% at 100% 100%, rgba(242, 184, 75, .25), transparent 70%),
+      var(--night, #12143d);
+    box-shadow: 0 30px 90px -20px rgba(8, 10, 40, .6);
+  }
+  .pp::backdrop { background: rgba(10, 12, 40, .55); }
+  @media (max-width: 640px) {
+    /* Điện thoại: tấm trượt từ đáy, chừa phần trên của trang — không che hết màn hình. */
+    .pp { width: 100vw; max-width: 100vw; margin: auto 0 0; border-radius: 22px 22px 0 0; max-height: 85dvh;
+      padding-bottom: env(safe-area-inset-bottom); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .pp[open] { animation: pp-in .28s cubic-bezier(.16, 1, .3, 1); }
+    @keyframes pp-in { from { opacity: 0; transform: translateY(24px); } }
+  }
+  .pp-x-wrap { position: absolute; top: 10px; right: 10px; margin: 0; }
+  .pp-x {
+    width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
+    background: rgba(255, 255, 255, .12); color: #fff; font-size: 24px; line-height: 40px; padding: 0;
+  }
+  .pp-x:hover { background: rgba(255, 255, 255, .22); }
+  .pp-body { display: grid; grid-template-columns: 34% 1fr; gap: 16px; padding: 28px 22px 8px; align-items: center; }
+  .pp-img { border-radius: 14px; overflow: hidden; background: #fff; aspect-ratio: 1; display: grid; place-items: center; }
+  .pp-img :global(img) { width: 100%; height: 100%; object-fit: contain; }
+  .pp-text { min-width: 0; }
+  .pp-eb { margin: 0 0 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 11px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase; color: #c9ccff; padding-right: 36px; }
+  .pp-badge { padding: 3px 10px; border-radius: 999px; background: #f2b84b; color: #2a1d00; letter-spacing: .04em; font-size: 12px; font-weight: 800; }
+  .pp h2 { margin: 0 0 6px; color: #fff; font-size: clamp(1.25rem, 5vw, 1.6rem); line-height: 1.15; letter-spacing: -0.02em; }
+  .pp-preview { display: inline-block; margin: 0 0 6px; padding: 3px 10px; border-radius: 999px; background: #ffe7a3; color: #4a3500; font-size: 12px; font-weight: 600; }
+  .pp-pack { margin: 0 0 4px; font-weight: 600; color: rgba(255, 255, 255, .9); font-size: 15px; }
+  .pp-price { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+  .pp-now { font-size: clamp(1.6rem, 7vw, 2rem); font-weight: 800; color: #fff; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .pp-was { color: rgba(255, 255, 255, .7); font-size: 15px; }
+  .pp-pct { padding: 2px 8px; border-radius: 999px; background: #f2b84b; color: #2a1d00; font-weight: 800; font-size: 13px; }
+  .pp-gifts { margin: 8px 0 0; font-size: 14px; color: rgba(255, 255, 255, .9); }
+  .pp-gifts strong { color: #f2b84b; }
+  .pp-ends { margin: 8px 0 0; font-size: 13px; color: rgba(255, 255, 255, .78); }
+  .pp-ends strong { color: #fff; }
+  .pp-more { margin: 8px 22px 0; font-size: 13px; color: rgba(255, 255, 255, .78); }
+  .pp-actions { display: grid; gap: 6px; padding: 16px 22px 20px; }
+  .pp-actions form { margin: 0; }
+  .pp-go { width: 100%; justify-content: center; background: #f2b84b; color: #2a1d00; font-weight: 800; min-height: 52px; font-size: 17px; }
+  .pp-go:hover { background: #ffd27a; color: #2a1d00; }
+  .pp-later { width: 100%; min-height: 44px; background: none; border: 0; color: rgba(255, 255, 255, .8); font: inherit; font-size: 14px; cursor: pointer; text-decoration: underline; }
+  @media (max-width: 360px) { .pp-body { grid-template-columns: 1fr; } .pp-img { max-width: 140px; } }
+</style>
+
+<script>
+  import { overlayBusy, formTouched, store, afterVisible } from '../lib/overlay';
+  import { journeyEvent } from '../lib/journey-client';
+
+  const dlg = document.getElementById('promo-pop') as HTMLDialogElement | null;
+  if (dlg && typeof dlg.showModal === 'function') {
+    const key = `mocha_pp_${dlg.dataset.promo}`;
+    const pack = dlg.dataset.pack ?? '';
+    const formInView = () => {
+      const r = document.getElementById('dat-hang')?.getBoundingClientRect();
+      return !!r && r.top < innerHeight && r.bottom > 0;
+    };
+    let tries = 0;
+    const show = () => {
+      if (store.get(key, true) || formTouched() || formInView() || location.hash === '#dat-hang') return;
+      /* Lớp phủ khác đang mở: thử lại vài lần, không chen ngang. */
+      if (overlayBusy()) { if (++tries < 5) setTimeout(show, 4000); return; }
+      store.set(key, '1', true);
+      dlg.showModal();
+      journeyEvent('popup', pack, 'promo:show');
+    };
+    afterVisible(Number(dlg.dataset.delay || 0) * 1000, show);
+
+    /* Bấm ra ngoài hộp (vào nền mờ) = đóng. */
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close('backdrop'); });
+    dlg.addEventListener('close', () => {
+      if (dlg.returnValue !== 'order') journeyEvent('popup', pack, 'promo:close');
+    });
+    dlg.querySelector('[data-pp-order]')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      journeyEvent('popup', pack, 'promo:order');
+      dlg.close('order');
+      const input = [...document.querySelectorAll<HTMLInputElement>('#order-form input[name="pack"]')].find((i) => i.value === pack);
+      if (input && !input.disabled) { input.checked = true; input.dispatchEvent(new Event('change', { bubbles: true })); }
+      const smooth = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      /* Cuộn thẳng tới biểu mẫu (không phải đầu khu đặt hàng — phía trên còn tiêu đề và lời dẫn),
+         rồi đặt con trỏ vào ô họ tên khi đã cuộn xong. */
+      (document.getElementById('order-form') ?? document.getElementById('dat-hang'))?.scrollIntoView({ behavior: smooth, block: 'start' });
+      setTimeout(() => document.getElementById('name')?.focus({ preventScroll: true }), smooth === 'smooth' ? 900 : 50);
+    });
+  }
+</script>

@@ -1431,6 +1431,36 @@ const brand = defineCollection({
     }).strict()).default([]),
     /** Đường dẫn xác nhận website đã thông báo với Bộ Công Thương (online.gov.vn). Có thì hiện ở chân trang. */
     moitNoticeUrl: safeUrl.optional(),
+    /**
+     * Mã đo lường quảng cáo, nhập ở /admin/store. Trống thì dùng biến môi trường PUBLIC_*
+     * (bản cũ). Chỉ nạp sau khi khách bấm "Đồng ý" ở thanh đo lường.
+     * googleAdsOrderLabel / googleAdsConsultLabel: nhãn của hai hành động chuyển đổi trong
+     * Google Ads, bắn ở trang cảm ơn đặt hàng / nhận tư vấn.
+     */
+    tracking: z.object({
+      ga4: z.string().regex(/^G-[A-Z0-9]{4,16}$/, 'GA4 dạng G-XXXXXXX').optional(),
+      googleAds: z.string().regex(/^AW-\d{6,14}$/, 'Google Ads dạng AW-123456789').optional(),
+      googleAdsOrderLabel: z.string().regex(/^[A-Za-z0-9_-]{4,40}$/, 'nhãn chuyển đổi chỉ gồm chữ, số, - và _').optional(),
+      googleAdsConsultLabel: z.string().regex(/^[A-Za-z0-9_-]{4,40}$/, 'nhãn chuyển đổi chỉ gồm chữ, số, - và _').optional(),
+      metaPixel: z.string().regex(/^\d{8,20}$/, 'Meta Pixel là dãy số').optional(),
+      tiktokPixel: z.string().regex(/^[A-Z0-9]{8,30}$/, 'TikTok Pixel gồm chữ in hoa và số').optional(),
+    }).strict().optional(),
+    /**
+     * Tương tác trên website, bật/tắt ở /admin/store (docs/tuong-tac-website.md). Trống = mặc định.
+     *  - promoPopup: trang sản phẩm/combo có khuyến mãi đang chạy -> popup giới thiệu + nút đặt hàng.
+     *  - chatInvite: trang không có popup khuyến mãi -> lời mời chat kèm câu hỏi gợi ý theo sản phẩm.
+     *  - exitLead: khách sắp rời mà chưa hỏi/chưa điền -> biểu mẫu để lại số điện thoại.
+     *  - recentOrders: thông báo nhỏ góc trên bên trái về đơn THẬT gần đây (ẩn danh).
+     */
+    engagement: z.object({
+      promoPopup: z.boolean().default(true),
+      promoDelaySec: z.number().int().min(0).max(60).default(4),
+      chatInvite: z.boolean().default(true),
+      chatDelaySec: z.number().int().min(0).max(120).default(10),
+      exitLead: z.boolean().default(true),
+      recentOrders: z.boolean().default(true),
+      recentOrdersGapSec: z.number().int().min(8).max(300).default(20),
+    }).strict().optional(),
   }).strict().superRefine((b, ctx) => {
     /*
      * Dữ liệu thương hiệu phải qua ĐÚNG những hàng rào mà sản phẩm phải qua.
@@ -1450,7 +1480,7 @@ const brand = defineCollection({
        của chính doanh nghiệp; `taxId` là mã số thuế — 10 chữ số bắt đầu bằng 0,
        đúng hình dạng số điện thoại Việt Nam, nên kiểm định lần 14 chỉ ra cổng sẽ
        chặn build ngay ngày doanh nghiệp điền trường mà chính schema mời điền. */
-    const SKIP = new Set(['logo', 'email', 'phone', 'phoneDisplay', 'taxId']);
+    const SKIP = new Set(['logo', 'email', 'phone', 'phoneDisplay', 'taxId', 'tracking', 'engagement']);
 
     /* Quét ĐỆ QUY. Bản trước chỉ xét chuỗi ở cấp một nên `marketplaces[]` —
        "Kênh bán chính hãng" hiện ở footer mọi trang — hoàn toàn không được quét. */

@@ -21,6 +21,7 @@ import {
 import { chatRoutes } from './chat.ts';
 import { promotionsPage } from './promotions.ts';
 import { storePage, saveStore } from './store.ts';
+import { journeyPage, journeySessionPage, journeyByOrders } from './journey.ts';
 import { limited } from '../lib/rate-limit.ts';
 import { hashIp } from '../lib/chat.ts';
 
@@ -89,6 +90,7 @@ async function badges(sql: Sql): Promise<NonNullable<Viewer['badges']>> {
 function sectionOf(path: string, url: URL) {
   if (path === '/admin') return 'home';
   if (path === '/admin/store') return 'store';
+  if (path.startsWith('/admin/journey')) return 'journey';
   if (path === '/admin/edit' || path === '/admin/history') return url.searchParams.get('c') === 'promotions' ? 'promotions' : `content/${url.searchParams.get('c') ?? ''}`;
   if (path === '/admin/content/promotions') return 'promotions';
   if (path.startsWith('/admin/chat-rules')) return 'chat-rules';
@@ -155,6 +157,8 @@ export async function adminHandler(request: Request, ctx: AdminCtx): Promise<Res
   if (chat) return chat;
   if (path === '/admin/orders') return request.method === 'POST' ? updateOrder(ctx, request) : ordersPage(ctx, user, url);
   if (path === '/admin/promotions') return promotionsPage(ctx, user);
+  if (path === '/admin/journey') return journeyPage(ctx, user, url);
+  if (path === '/admin/journey/session') return journeySessionPage(ctx, user, url);
   if (path === '/admin/store') return request.method === 'POST' ? saveStore(ctx, user, request) : storePage(ctx, user);
   if (path.startsWith('/admin/users')) {
     if (user.role !== 'admin') return page('Không có quyền', notice('err', 'Chỉ tài khoản quyền <b>quản trị</b> quản lý được tài khoản.'), user, 403);
@@ -502,6 +506,7 @@ async function ordersPage({ sql }: AdminCtx, user: Viewer, url: URL) {
     `SELECT order_code, created_at, status, product_slug, pack, pack_price, name, phone, address, note, staff_note, utm_source, utm_campaign
        FROM orders ${where.length ? 'WHERE ' + where.join(' AND ') : ''} ORDER BY id DESC LIMIT 200`, params)).rows;
   const counts = new Map((await sql.query<{ status: string; n: number }>('SELECT status, count(*)::int AS n FROM orders GROUP BY status')).rows.map((r) => [r.status, r.n]));
+  const journeys = await journeyByOrders(sql, rows.map((o) => o.order_code));
   const total = [...counts.values()].reduce((a, b) => a + b, 0);
   const back = `/admin/orders?${new URLSearchParams({ ...(st ? { status: st } : {}), ...(q ? { q } : {}) })}`;
   return page('Đơn hàng', `
@@ -513,8 +518,8 @@ async function ordersPage({ sql }: AdminCtx, user: Viewer, url: URL) {
       ${q ? `<a href="/admin/orders${st ? `?status=${st}` : ''}">Bỏ tìm</a>` : ''}</form>
     <table><tr><th>Đơn</th><th>Khách</th><th>Sản phẩm</th><th>Xử lý</th></tr>
     ${rows.map((o) => `<tr>
-      <td class="nowrap"><b>${esc(o.order_code)}</b><br><span class="muted">${esc(fmt(o.created_at))}</span>${o.utm_source ? `<br><span class="muted">${esc(o.utm_source)}${o.utm_campaign ? ' / ' + esc(o.utm_campaign) : ''}</span>` : ''}</td>
-      <td>${esc(o.name)}<br><a href="tel:${esc(o.phone)}">${esc(o.phone)}</a><br><span class="muted">${esc(o.address ?? '')}</span>${o.note ? `<br><i>${esc(o.note)}</i>` : ''}</td>
+      <td class="nowrap"><b>${esc(o.order_code)}</b><br><span class="muted">${esc(fmt(o.created_at))}</span>${o.utm_source ? `<br><span class="muted">${esc(o.utm_source)}${o.utm_campaign ? ' / ' + esc(o.utm_campaign) : ''}</span>` : ''}${journeys.has(o.order_code) ? `<br><a href="/admin/journey/session?id=${encodeURIComponent(journeys.get(o.order_code)!)}">Xem hành trình</a>` : ''}</td>
+      <td>${o.name ? esc(o.name) : '<i class="muted">Để lại số nhanh (chưa có tên)</i>'}<br><a href="tel:${esc(o.phone)}">${esc(o.phone)}</a><br><span class="muted">${esc(o.address ?? '')}</span>${o.note ? `<br><i>${esc(o.note)}</i>` : ''}</td>
       <td>${esc(o.product_slug)}<br><span class="muted">${esc(o.pack)}${o.pack_price ? ` · ${Number(o.pack_price).toLocaleString('vi-VN')}đ` : ''}</span></td>
       <td style="min-width:230px"><form method="post" action="/admin/orders" class="grid" style="grid-template-columns:1fr;gap:6px">
         <input type="hidden" name="order_code" value="${esc(o.order_code)}"><input type="hidden" name="back" value="${esc(back)}">

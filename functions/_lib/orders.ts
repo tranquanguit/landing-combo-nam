@@ -108,8 +108,11 @@ export function validateOrder(
   // Bẫy bot: ô ẩn mà người thật không bao giờ điền được.
   if (str(body.website) !== '') bad.push({ field: 'website', code: 'honeypot' });
 
+  /* "Để lại số nhanh" (khách sắp rời trang, src/components/ExitLead.astro): chỉ số điện thoại +
+     điều khách muốn được tư vấn — KHÔNG bắt tên. Chỉ áp cho gói không giá (yêu cầu tư vấn). */
+  const quick = (body.quick === true || body.quick === 'true') && !(Number(body.packPrice) > 0);
   const name = str(body.name);
-  if (name.length < 2) bad.push({ field: 'name', code: 'too_short' });
+  if (name.length < 2 && !(quick && name === '')) bad.push({ field: 'name', code: 'too_short' });
   else if (name.length > LIMITS.name) bad.push({ field: 'name', code: 'too_long' });
   else if (CONTROL.test(name)) bad.push({ field: 'name', code: 'invalid' });
 

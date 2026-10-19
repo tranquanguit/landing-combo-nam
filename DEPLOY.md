@@ -112,11 +112,13 @@ docker compose logs app | grep -E "đồng bộ|giữ bản|xuất bản"
 ```bash
 docker compose ps                                               # db, app: healthy
 curl -s  "$SITE/healthz"                                        # -> ok
-for p in / /combo/ /combo-nam/ /uv-block-sunscreen/ /hairborn-peel-ion/ /lien-he/ /sitemap-index.xml; do
+for p in / /combo/ /combo-nam/ /uv-block-sunscreen/ /hairborn-peel-ion/ /lien-he/ /dat-hang-thanh-cong/ /sitemap-index.xml; do
   printf '%-24s %s\n' "$p" "$(curl -s -o /dev/null -w '%{http_code}' "$SITE$p")"
 done                                                            # mọi dòng -> 200
 curl -s "$SITE/uv-block-sunscreen/" | grep -c 'id="combo-co-san-pham"'   # -> 1 (khối combo mới có trên trang cũ)
 curl -sI "https://$ADMIN/admin/login" | head -1                          # -> HTTP/2 200
+curl -s -o /dev/null -w '%{http_code}\n' -X POST -H "Origin: $SITE" "$SITE/api/j" -d '{}'   # -> 204 (nhận hành trình khách)
+curl -s "$SITE/api/recent-orders?l=vi" | head -c 200; echo                     # -> {"items":[…]} (đơn thật gần đây, không tên/số)
 ```
 
 **Bằng mắt** (trình duyệt, nhấn **Ctrl+F5** để bỏ bản lưu tạm):
@@ -129,10 +131,16 @@ curl -sI "https://$ADMIN/admin/login" | head -1                          # -> HT
 - [ ] Chân trang: tên cửa hàng, địa chỉ, mã số thuế, SĐT, Zalo, email đúng thực tế.
 - [ ] Tab trình duyệt hiện logo tròn MOCHA (không phải chữ "M").
 - [ ] Trang quản trị (`https://$ADMIN/admin/`) đăng nhập được; menu **Website → Thông tin cửa
-      hàng** mở được.
+      hàng** mở được, có mục **Mã đo lường quảng cáo**.
+- [ ] Mở website bằng cửa sổ ẩn danh: thanh **Đo lường truy cập** hiện ở cuối trang → bấm **Đồng ý**,
+      xem vài trang → trang quản trị **Bán hàng → Hành trình khách** có phiên vừa xem (chậm tối đa
+      khoảng 20 giây).
+- [ ] Trên điện thoại, trang chủ: sau khoảng 10 giây hiện **lời mời chat** kèm câu hỏi gợi ý ở góc phải
+      dưới. Có đơn thật trong 7 ngày thì góc trên bên trái hiện "Một khách đã đặt …".
 
-**Tuỳ chọn — đặt một đơn thử**: đặt ở `/combo-nam/` → đơn hiện trong **Đơn hàng** trên trang quản trị
-→ đổi trạng thái sang **Huỷ**, ghi chú "đơn thử deploy".
+**Tuỳ chọn — đặt một đơn thử**: đặt ở `/combo-nam/` → trình duyệt chuyển sang trang **Cảm ơn bạn đã
+đặt hàng** có mã đơn → đơn hiện trong **Đơn hàng** trên trang quản trị, kèm link **Xem hành trình** (nếu
+đã bấm Đồng ý) → đổi trạng thái sang **Huỷ**, ghi chú "đơn thử deploy".
 
 ## 7. Báo cáo lại
 
@@ -167,6 +175,14 @@ Không thuộc phần kỹ thuật, nhưng cần làm sau lần deploy này:
    mở đợt → **Trạng thái: Đang hiện** → lưu → **Xuất bản**.
 4. Google Search Console: gửi lại `sitemap-index.xml`; chạy lại **Rich Results Test** cho
    `/combo-nam/` và một trang combo (ví dụ `/combo/combo-nam-peel/`).
+5. **Chuyển đổi Google Ads**: tạo hành động chuyển đổi trong Google Ads, chép mã `AW-…` và nhãn vào
+   **Website → Thông tin cửa hàng → Mã đo lường quảng cáo** → lưu → **Xuất bản**. Từng bước ở
+   [`docs/hanh-trinh-khach.md`](docs/hanh-trinh-khach.md) mục 2. Trang cảm ơn dùng làm mốc:
+   `/dat-hang-thanh-cong/` (đặt hàng), `/da-nhan-yeu-cau-tu-van/` (nhận tư vấn).
+6. **Tương tác trên website** (**Thông tin cửa hàng**): kiểm bốn lời mời — popup khuyến mãi, lời mời chat,
+   giữ chân khách sắp rời, thông báo đơn gần đây — bật/tắt theo ý; lưu → **Xuất bản**. Chi tiết ở
+   [`docs/tuong-tac-website.md`](docs/tuong-tac-website.md). **Đơn thử nghiệm phải chuyển sang "Huỷ"**,
+   nếu không sẽ hiện trong thông báo đơn gần đây.
 
 ---
 

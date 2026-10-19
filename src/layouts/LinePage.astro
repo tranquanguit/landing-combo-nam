@@ -126,6 +126,7 @@ const lastProse = line.sections.length - 1;
   ogType="website"
   alternates={alternates}
   jsonLd={jsonLd}
+  subject={{ slug: line.slug, name: line.heading, kind: 'line' }}
 >
   <SiteHeader brand={b} locale={locale} alternates={alternates} nav={nav} orderHref={orderHref} orderLabel={orderLabel} />
   <Breadcrumb items={breadcrumb} locale={locale} />

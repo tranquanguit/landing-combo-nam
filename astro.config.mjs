@@ -61,6 +61,8 @@ export default defineConfig({
 
   integrations: [
     sitemap({
+      /* Trang cảm ơn (noindex) không vào sitemap — cùng danh sách slug với thanksPath() trong src/lib/routes.ts. */
+      filter: (page) => !/\/(dat-hang-thanh-cong|da-nhan-yeu-cau-tu-van|order-received|request-received)\/$/.test(new URL(page).pathname),
       serialize(item) {
         const lastmod = lastmodFor(new URL(item.url).pathname);
         return lastmod ? { ...item, lastmod } : item;

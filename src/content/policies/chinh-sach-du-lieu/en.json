@@ -9,7 +9,7 @@
   },
   "title": "Personal data protection policy",
   "lead": "This page describes what the system actually does with your information. If anything here differs from reality, that is our mistake — please tell us using the contact details at the foot of the page.",
-  "updatedAt": "2026-09-16",
+  "updatedAt": "2026-10-16",
   "sections": [
     {
       "id": "what-we-collect",
@@ -35,6 +35,7 @@
       "heading": "Measurement and advertising",
       "body": [
         "The website may use measurement tools from Google, Meta and TikTok to understand which advertising brings visitors. These tools are <strong>loaded only after you press accept</strong> on the notice bar. If you decline, or have not yet answered, no third-party measurement code is downloaded to your device at all.",
+        "If you accept, the website also records <strong>your path through this website</strong>: which pages you open, which parts you read and for how long, which buttons you press, which questions you open, and when. This is tied to a random code your browser creates, <strong>never to your name, phone number, address or anything you type</strong>; no IP address is stored and nothing is shared with anyone. When you order, the order is linked to that path so we can see which parts of the page helped you decide. The path is deleted automatically after 90 days; withdrawing consent makes your browser delete the random code and stop recording.",
         "Your choice is stored in your own browser and is not sent to our servers. You can withdraw consent at any time using the button at the foot of every page.",
         "Internal measurement events carry only the name of the product package — never your name, phone number or address."
       ]
@@ -43,7 +44,7 @@
       "id": "where-stored",
       "heading": "Where it is stored, and for how long",
       "body": [
-        "Orders are stored in a Cloudflare database on the same infrastructure that serves this website. Only Mocha staff who process orders can reach it, through an administration page protected by its own access code.",
+        "Orders are stored in a database on the dedicated server that runs this website. Only Mocha staff who process orders can reach it, through an administration page with its own accounts and passwords.",
         "We keep order information for as long as is needed to complete the transaction and to meet accounting record-keeping obligations."
       ]
     },

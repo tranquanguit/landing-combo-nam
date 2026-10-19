@@ -12,11 +12,22 @@
 import type { AdminCtx } from './app.ts';
 import { page, esc, notice, pageHead, type Viewer } from './html.ts';
 import { validate, canonicalSource, type Issue } from '../lib/content.ts';
+import { ENGAGEMENT_DEFAULTS, engagementOf } from '../../src/lib/engagement.ts';
 
 const BRAND_ID = 'mocha';
 const SOCIAL = ['Facebook', 'Instagram', 'TikTok', 'YouTube'] as const;
 
 type Row = { entry_id: string; data: any };
+
+/** Mã đo lường: [khoá trong brand.tracking, nhãn, gợi ý]. */
+const TRACKING: [string, string, string][] = [
+  ['ga4', 'Google Analytics 4', 'Dạng G-XXXXXXXXXX.'],
+  ['googleAds', 'Google Ads — mã tài khoản', 'Dạng AW-123456789.'],
+  ['googleAdsOrderLabel', 'Google Ads — nhãn chuyển đổi “Đặt hàng”', 'Phần sau dấu “/” trong send_to của hành động chuyển đổi.'],
+  ['googleAdsConsultLabel', 'Google Ads — nhãn chuyển đổi “Nhận tư vấn”', 'Để trống nếu không đo yêu cầu tư vấn như một chuyển đổi.'],
+  ['metaPixel', 'Meta (Facebook) Pixel', 'Dãy số.'],
+  ['tiktokPixel', 'TikTok Pixel', 'Chữ in hoa và số.'],
+];
 
 /** "0367 848 918" → "+84367848918". Số đã có mã quốc gia thì giữ nguyên. */
 export function intlPhone(display: string): string {
@@ -46,6 +57,26 @@ function bySlug(products: Row[]) {
     const vi = rows.find((r) => r.entry_id.endsWith('/vi')) ?? rows[0];
     return { slug, rows, name: vi.data.shortName ?? vi.data.name ?? slug, status: vi.data.status, c: vi.data.compliance ?? {} };
   });
+}
+
+/** Bật/tắt từng lời mời + số giây chờ (brand.engagement — src/lib/engagement.ts). */
+const ENGAGE: { key: string; label: string; hint: string; delay?: [string, string, number, number] }[] = [
+  { key: 'promoPopup', label: 'Popup khuyến mãi', hint: 'Trang sản phẩm / combo đang có khuyến mãi: giới thiệu ưu đãi, nút “Đặt hàng ngay” đưa thẳng tới biểu mẫu.',
+    delay: ['promoDelaySec', 'Hiện sau (giây)', 0, 60] },
+  { key: 'chatInvite', label: 'Lời mời chat', hint: 'Trang không có popup khuyến mãi: mời chat kèm câu hỏi gợi ý theo sản phẩm đang xem.',
+    delay: ['chatDelaySec', 'Hiện sau (giây)', 0, 120] },
+  { key: 'exitLead', label: 'Giữ chân khách sắp rời', hint: 'Khách chưa hỏi, chưa điền mà sắp rời (vuốt ngược lên nhanh, quay lại từ ứng dụng khác, chuột ra mép trên): mời để lại số điện thoại để được gọi tư vấn.' },
+  { key: 'recentOrders', label: 'Thông báo đơn gần đây', hint: 'Góc trên bên trái: “Một khách đã đặt … · 2 giờ trước”, chỉ từ đơn THẬT trong 7 ngày (không tên, không số). Đơn thử nghiệm hãy chuyển sang Huỷ để không hiện.',
+    delay: ['recentOrdersGapSec', 'Cách nhau (giây)', 8, 300] },
+];
+function engagementFields(b: any) {
+  const e = engagementOf(b);
+  return `<div class="engage">${ENGAGE.map((x) => `
+    <div class="engage-row">
+      <label class="check"><input type="checkbox" name="e:${x.key}" value="1" ${(e as any)[x.key] ? 'checked' : ''}> <b>${x.label}</b></label>
+      ${x.delay ? `<label class="engage-delay">${x.delay[1]} <input type="number" name="e:${x.delay[0]}" min="${x.delay[2]}" max="${x.delay[3]}" step="1" value="${(e as any)[x.delay[0]]}"></label>` : '<span></span>'}
+      <span class="muted engage-hint">${x.hint}</span>
+    </div>`).join('')}<input type="hidden" name="e:present" value="1"></div>`;
 }
 
 const field = (name: string, label: string, value: unknown, opts: { hint?: string; type?: string; required?: boolean; wide?: boolean } = {}) => `
@@ -104,6 +135,24 @@ function form(brand: any, products: Row[], state?: { issues?: Issue[]; msg?: str
       </div>
 
       <div class="card">
+        <h2>Mã đo lường quảng cáo</h2>
+        <p class="muted">Chỉ nạp sau khi khách bấm “Đồng ý” ở thanh đo lường. Để trống = không dùng.
+          Chuyển đổi Google Ads bắn ở trang cảm ơn: <code>/dat-hang-thanh-cong/</code> (đặt hàng, kèm giá trị gói) và
+          <code>/da-nhan-yeu-cau-tu-van/</code> (nhận tư vấn) — xem <code>docs/hanh-trinh-khach.md</code>.</p>
+        <div class="grid">
+          ${TRACKING.map(([k, label, hint]) => field(`t:${k}`, label, b.tracking?.[k], { hint })).join('')}
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Tương tác trên website</h2>
+        <p class="muted">Lời mời hiện cho khách trên website. Mỗi lời mời hiện tối đa một lần mỗi phiên, không chen khi khách đang
+          điền biểu mẫu hay đang mở một lời mời khác. Hiệu quả từng cái xem ở <a href="/admin/journey">Hành trình khách → Popup &amp; lời mời</a>.
+          Lưu xong cần <b>Xuất bản</b>.</p>
+        ${engagementFields(b)}
+      </div>
+
+      <div class="card">
         <h2>Tổ chức công bố sản phẩm</h2>
         <p class="muted">Tổ chức chịu trách nhiệm đưa sản phẩm ra thị trường — in ở chân trang của từng sản phẩm, theo luật mỹ phẩm.
           “Thương hiệu” là tên in trên bao bì (Mocha, Hairborn), dùng cho dữ liệu gửi Google. Mỗi hãng/dòng một dòng. Tên pháp nhân để trống = chưa có thông tin: trang sản phẩm hiện cảnh báo “cần bổ sung”.</p>
@@ -149,6 +198,13 @@ function form(brand: any, products: Row[], state?: { issues?: Issue[]; msg?: str
       .store label .muted { display: block; font-weight: 400; font-size: 12px; margin-top: 4px; }
       .store table input, .store table select { width: 100%; min-width: 0; }
       .store h2 { margin-top: 0; }
+      .engage { display: grid; gap: 10px; }
+      .engage-row { display: grid; grid-template-columns: 240px 200px 1fr; gap: 6px 16px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
+      .engage-row:first-child { border-top: 0; }
+      .engage .check { display: flex; gap: 8px; align-items: center; font-weight: 400; }
+      .engage-delay { display: flex; gap: 8px; align-items: center; font-weight: 400; font-size: 14px; }
+      .engage-delay input { width: 80px; }
+      @media (max-width: 900px) { .engage-row { grid-template-columns: 1fr; } }
     </style>`;
 }
 
@@ -182,6 +238,16 @@ export async function saveStore(ctx: AdminCtx, user: Viewer, request: Request) {
   setOpt('zalo', s('zalo'));
   b.email = s('email');
   setOpt('moitNoticeUrl', s('moitNoticeUrl'));
+  /* Tương tác trên website: ô đánh dấu bỏ trống = tắt; số giây ngoài khoảng thì schema báo lỗi. */
+  if (f.has('e:present')) {
+    const num = (k: string) => { const v = s(`e:${k}`); return v === '' ? (ENGAGEMENT_DEFAULTS as any)[k] : Number(v); };
+    b.engagement = Object.fromEntries(ENGAGE.flatMap((x) => [
+      [x.key, f.get(`e:${x.key}`) === '1'],
+      ...(x.delay ? [[x.delay[0], num(x.delay[0])]] : []),
+    ]));
+  }
+  const tracking = Object.fromEntries(TRACKING.map(([k]) => [k, s(`t:${k}`)]).filter(([, v]) => v));
+  if (Object.keys(tracking).length) b.tracking = tracking; else delete b.tracking;
   /* Mạng xã hội: bốn kênh có ô riêng; kênh khác (nếu có trong JSON) giữ nguyên. */
   const others = (b.profiles ?? []).filter((p: any) => !SOCIAL.some((n) => n.toLowerCase() === p.name.toLowerCase()));
   b.profiles = [...SOCIAL.map((n) => ({ name: n, url: s(`social:${n}`) })).filter((p) => p.url), ...others];
