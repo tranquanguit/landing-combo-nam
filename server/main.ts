@@ -22,6 +22,7 @@ import { importFromFiles, syncFromFiles } from './lib/content.ts';
 import { publish } from './lib/publish.ts';
 import { createApp } from './app.ts';
 import { clientKey, purgeRateLimit } from './lib/rate-limit.ts';
+import { purgeJourney } from './lib/journey.ts';
 import { startPromoScheduler } from './lib/promo-server.ts';
 import { isPublishing } from './lib/publish.ts';
 
@@ -34,6 +35,7 @@ function maxBody(path: string) {
   if (path === '/admin/media') return 30 * 1024 * 1024;     // ảnh gốc trước khi nén
   if (path === '/api/chat') return 8 * 1024 * 1024;         // tối đa 3 ảnh đã thu nhỏ
   if (path.startsWith('/admin')) return 2 * 1024 * 1024;    // biểu mẫu nội dung JSON
+  if (path === '/api/j') return 32 * 1024;                  // một lô sự kiện hành trình
   return 64 * 1024;                                         // đơn hàng, sự kiện chat
 }
 
@@ -118,6 +120,8 @@ if (process.env.PROMO_SCHEDULER !== '0') {
 }
 /* Bảng rate_limit có một dòng cho mỗi IP / khách từng ghé — dọn mỗi giờ. */
 setInterval(() => { purgeRateLimit(sql).catch((e) => console.error('purge_rate_limit_failed', e.message)); }, 3600_000).unref();
+/* Hành trình khách giữ JOURNEY_RETENTION_DAYS ngày (mặc định 90) rồi xoá. */
+setInterval(() => { purgeJourney(sql).catch((e) => console.error('purge_journey_failed', e.message)); }, 3600_000).unref();
 
 const stop = async () => { log('dừng…'); server.close(); await sql.close(); process.exit(0); };
 process.on('SIGTERM', stop);

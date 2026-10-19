@@ -1,0 +1,98 @@
+---
+/**
+ * Thông báo nhỏ góc trên bên trái: "Một khách đã đặt Combo Nám · 2 giờ trước".
+ * Bật tắt + khoảng cách ở /admin/store → Tương tác trên website (brand.engagement.recentOrders).
+ *
+ * Chỉ từ ĐƠN THẬT (GET /api/recent-orders, server/lib/recent-orders.ts): không tên, không số,
+ * không giờ chính xác. Không có đơn nào trong 7 ngày thì không hiện gì. Mỗi đơn hiện tối đa một
+ * lần mỗi lượt xem trang — không lặp lại vòng vòng để trông đông hơn sự thật.
+ */
+import { t, type Locale } from '../i18n/ui';
+import { orderEndpoint } from '../lib/order-endpoint';
+
+interface Props { locale: Locale; gapSec: number }
+const { locale, gapSec } = Astro.props;
+/* Cần máy chủ thật (cùng điều kiện với đường nhận đơn); bản xem thử tĩnh thì bỏ. */
+const on = !!orderEndpoint();
+const api = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/api/recent-orders?l=${locale === 'en' ? 'en' : 'vi'}`;
+const strings = JSON.stringify(Object.fromEntries(['text', 'just', 'min', 'hour', 'day'].map((k) => [k, t(locale, `recent.${k}` as any)])));
+---
+{on && (
+  <div class="ro" id="recent-orders" hidden data-api={api} data-gap={gapSec} data-strings={strings}>
+    <svg class="ro-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1 13H7z" /><path d="M9 7a3 3 0 0 1 6 0" /></svg>
+    <p><span class="ro-t"></span> <span class="ro-ago"></span></p>
+    <button type="button" class="ro-x" aria-label={t(locale, 'recent.close')}>×</button>
+  </div>
+)}
+
+<style>
+  .ro {
+    position: fixed; left: 12px; top: 76px; z-index: 45; max-width: min(340px, calc(100vw - 24px));
+    display: flex; align-items: center; gap: 10px; padding: 9px 8px 9px 12px;
+    background: #fff; color: var(--ink-navy, #1a1d52); border-radius: 14px; font-size: 13px; line-height: 1.35;
+    box-shadow: 0 12px 34px -12px rgba(26, 29, 82, .45), 0 0 0 1px rgba(26, 29, 82, .07);
+    opacity: 0; transform: translateY(-8px); transition: opacity .25s ease, transform .25s ease;
+  }
+  .ro[hidden] { display: none; }
+  .ro.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .ro { transition: none; } }
+  .ro-ic { flex: none; width: 28px; height: 28px; padding: 5px; border-radius: 50%; background: #f3f4fd;
+    fill: none; stroke: var(--cobalt, #2b34b8); stroke-width: 1.8; stroke-linejoin: round; }
+  .ro p { margin: 0; }
+  .ro-t { font-weight: 600; }
+  .ro-ago { color: var(--ink-muted, #5d6076); white-space: nowrap; }
+  .ro-x { flex: none; width: 28px; height: 28px; border: 0; border-radius: 50%; background: none; color: var(--ink-muted, #5d6076);
+    font-size: 18px; line-height: 28px; padding: 0; cursor: pointer; }
+  .ro-x:hover { background: var(--bone, #f1f2f6); }
+</style>
+
+<script>
+  import { afterVisible, overlayBusy, store } from '../lib/overlay';
+  import { journeyEvent } from '../lib/journey-client';
+
+  const el = document.getElementById('recent-orders');
+  const OFF = 'mocha_recent_off';
+  if (el && !store.get(OFF, true)) {
+    const s = JSON.parse(el.dataset.strings ?? '{}') as Record<string, string>;
+    const gap = Number(el.dataset.gap || 20) * 1000;
+    const SHOW_MS = 5000;
+    const ago = (m: number) => m < 10 ? s.just
+      : m < 60 ? s.min.replace('{n}', String(m))
+      : m < 1440 ? s.hour.replace('{n}', String(Math.floor(m / 60)))
+      : s.day.replace('{n}', String(Math.floor(m / 1440)));
+    let stop = false;
+    el.querySelector('.ro-x')?.addEventListener('click', () => {
+      stop = true; store.set(OFF, '1', true);
+      el.classList.remove('in'); el.hidden = true;
+      journeyEvent('popup', undefined, 'recent:close');
+    });
+
+    /* Biểu mẫu "để lại số" chen lên: cất thông báo đang hiện. */
+    addEventListener('mocha:hide-passive', () => el.classList.remove('in'));
+
+    afterVisible(6000, async () => {
+      let items: { name: string; ago: number }[] = [];
+      try { items = (await (await fetch(el.dataset.api!)).json()).items ?? []; } catch { /* không có máy chủ: im lặng */ }
+      let i = 0;
+      const next = () => {
+        if (stop || i >= Math.min(5, items.length)) return;
+        /* Không chen khi khách đang mở hộp thoại / đang gõ / tab đang ẩn: thử lại sau. */
+        if (overlayBusy() || document.visibilityState !== 'visible') { setTimeout(next, gap); return; }
+        const it = items[i++];
+        el.querySelector('.ro-t')!.textContent = s.text.replace('{name}', it.name);
+        el.querySelector('.ro-ago')!.textContent = `· ${ago(it.ago)}`;
+        /* Ngay dưới thanh đầu trang (thanh này dính trên đỉnh khi cuộn). */
+        const header = document.querySelector('header');
+        el.style.top = `${Math.max(8, (header?.getBoundingClientRect().bottom ?? 60) + 10)}px`;
+        el.hidden = false;
+        requestAnimationFrame(() => el.classList.add('in'));
+        journeyEvent('popup', it.name, 'recent:show');
+        setTimeout(() => {
+          el.classList.remove('in');
+          setTimeout(() => { if (!stop) el.hidden = true; setTimeout(next, gap); }, 300);
+        }, SHOW_MS);
+      };
+      next();
+    });
+  }
+</script>

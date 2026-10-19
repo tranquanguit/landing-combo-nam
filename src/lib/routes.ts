@@ -61,7 +61,23 @@ export function docsPath(locale: Locale): string {
   return withSlash(localePath(locale, `/${DOCS_SEGMENT[locale]}/`));
 }
 
-export type RouteKind = 'home' | 'product' | 'line' | 'article' | 'advice-index' | 'policy' | 'docs' | 'combo' | 'combo-index';
+/**
+ * Trang cảm ơn sau khi gửi biểu mẫu — mốc chuyển đổi cho quảng cáo.
+ *
+ * Hai trang, không một: "đặt hàng" và "nhận tư vấn" là hai chuyển đổi khác giá trị, gộp
+ * chung thì Google Ads tối ưu cho người hỏi chơi ngang với người mua. Không mang mã đơn
+ * trên URL (mã đơn đọc từ sessionStorage của chính tab vừa gửi), không vào sitemap, noindex.
+ */
+export type ThanksKind = 'order' | 'consult';
+const THANKS_SLUG: Record<ThanksKind, Partial<Record<Locale, string>> & { en: string }> = {
+  order: { vi: 'dat-hang-thanh-cong', en: 'order-received' },
+  consult: { vi: 'da-nhan-yeu-cau-tu-van', en: 'request-received' },
+};
+export function thanksPath(kind: ThanksKind, locale: Locale): string {
+  return withSlash(localePath(locale, `/${THANKS_SLUG[kind][locale] ?? THANKS_SLUG[kind].en}/`));
+}
+
+export type RouteKind = 'home' | 'product' | 'line' | 'article' | 'advice-index' | 'policy' | 'docs' | 'combo' | 'combo-index' | 'thanks';
 
 export interface Route {
   kind: RouteKind;
@@ -157,12 +173,19 @@ export async function allRoutes(): Promise<Route[]> {
     });
   }
 
+  const productLocales = new Set(published(products as any[]).map((e: any) => e.data.locale as Locale));
   /* Trang chứng nhận chỉ tồn tại khi có ít nhất một giấy đã xuất bản, và ở
      những ngôn ngữ có sản phẩm. Không giấy nào thì không sinh một trang rỗng. */
   if (published(documents as any[]).length > 0) {
-    const productLocales = new Set(published(products as any[]).map((e: any) => e.data.locale as Locale));
     for (const locale of productLocales) {
       routes.push({ kind: 'docs', path: docsPath(locale), locale, translationKey: 'docs', slug: 'docs' });
+    }
+  }
+
+  /* Trang cảm ơn: ở mọi ngôn ngữ có biểu mẫu đặt hàng (= có sản phẩm). */
+  for (const locale of productLocales) {
+    for (const kind of ['order', 'consult'] as ThanksKind[]) {
+      routes.push({ kind: 'thanks', path: thanksPath(kind, locale), locale, translationKey: `thanks-${kind}`, slug: kind });
     }
   }
 

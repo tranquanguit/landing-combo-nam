@@ -1,4 +1,5 @@
 ---
+import { getEntry } from 'astro:content';
 import type { AnalyticsConfig } from '../lib/analytics';
 import { t, type Locale } from '../i18n/ui';
 import { safeJsonLd } from '../lib/richtext';
@@ -9,13 +10,25 @@ import { safeJsonLd } from '../lib/richtext';
 interface Props {
   locale: Locale;
   value?: number; currency?: string; itemId?: string; itemName?: string;
+  /** Trang cảm ơn: bắn chuyển đổi (một lần cho mỗi đơn) và sự kiện 'thanks' của hành trình. */
+  thanks?: 'order' | 'consult';
 }
-const { locale, value, currency, itemId, itemName } = Astro.props;
+const { locale, value, currency, itemId, itemName, thanks } = Astro.props;
 
+/* Mã đo lường nhập ở /admin/store (brand.tracking); trống thì lấy biến môi trường PUBLIC_*. */
+const tr = ((await getEntry('brand', 'mocha'))?.data as any)?.tracking ?? {};
+const env = import.meta.env;
 const config: AnalyticsConfig = {
-  ga4: import.meta.env.PUBLIC_GA4_ID || undefined,
-  metaPixel: import.meta.env.PUBLIC_META_PIXEL_ID || undefined,
-  tiktokPixel: import.meta.env.PUBLIC_TIKTOK_PIXEL_ID || undefined,
+  ga4: tr.ga4 || env.PUBLIC_GA4_ID || undefined,
+  googleAds: tr.googleAds || env.PUBLIC_GOOGLE_ADS_ID || undefined,
+  adsOrderLabel: tr.googleAdsOrderLabel || env.PUBLIC_GOOGLE_ADS_ORDER_LABEL || undefined,
+  adsConsultLabel: tr.googleAdsConsultLabel || env.PUBLIC_GOOGLE_ADS_CONSULT_LABEL || undefined,
+  metaPixel: tr.metaPixel || env.PUBLIC_META_PIXEL_ID || undefined,
+  tiktokPixel: tr.tiktokPixel || env.PUBLIC_TIKTOK_PIXEL_ID || undefined,
+  /* Hành trình khách (bên thứ nhất, /admin/journey). Tắt bằng PUBLIC_JOURNEY=0. */
+  journey: env.PUBLIC_JOURNEY !== '0',
+  endpoint: `${env.BASE_URL.replace(/\/$/, '')}/api/j`,
+  ...(thanks ? { thanks } : {}),
   /**
    * Hỏi đồng ý ở MỌI ngôn ngữ.
    *
@@ -31,7 +44,7 @@ const config: AnalyticsConfig = {
   ...(itemId ? { currency, value, itemId, itemName } : {}),
 };
 
-const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
+const anyConfigured = !!(config.ga4 || config.googleAds || config.metaPixel || config.tiktokPixel || config.journey);
 ---
 <script is:inline set:html={`window.__mochaAnalytics=${safeJsonLd(config)}`} />
 
@@ -78,12 +91,11 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
 </style>
 
 <script>
-  const cfg = (window as any).__mochaAnalytics as {
-    ga4?: string; metaPixel?: string; tiktokPixel?: string;
-    requireConsent: boolean;
-    currency?: string; value?: number; itemId?: string; itemName?: string;
-  };
+  import type { AnalyticsConfig } from '../lib/analytics';
+  import { startJourney, forgetJourney, journeyEvent } from '../lib/journey-client';
+  const cfg = (window as any).__mochaAnalytics as AnalyticsConfig;
   const CONSENT_KEY = 'mocha_analytics_consent';
+  const vendors = !!(cfg.ga4 || cfg.googleAds || cfg.metaPixel || cfg.tiktokPixel);
 
   /* GDPR điều 7(3): rút lại sự đồng ý phải dễ như khi cho. Hàm này được gắn
      vào link trong footer, và xoá luôn cookie mà pixel đã đặt. */
@@ -95,6 +107,7 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
 
   (window as any).mochaWithdrawConsent = () => {
     try { localStorage.setItem(CONSENT_KEY, 'no'); } catch { /* chế độ riêng tư */ }
+    forgetJourney();
     for (const c of document.cookie.split(';')) {
       const name = c.split('=')[0].trim();
       if (/^(_ga|_gid|_fbp|_fbc|_ttp|_tt_)/.test(name)) {
@@ -150,12 +163,14 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
     loaded = true;
     const w = window as any;
 
-    if (cfg.ga4) {
+    /* Một gtag cho cả GA4 và Google Ads: hai lệnh config, một file script. */
+    const gIds = [cfg.ga4, cfg.googleAds].filter(Boolean) as string[];
+    if (gIds.length) {
       w.dataLayer = w.dataLayer || [];
       w.gtag = function () { w.dataLayer.push(arguments); };
       w.gtag('js', new Date());
-      w.gtag('config', cfg.ga4);
-      inject(`https://www.googletagmanager.com/gtag/js?id=${cfg.ga4}`);
+      for (const id of gIds) w.gtag('config', id);
+      inject(`https://www.googletagmanager.com/gtag/js?id=${gIds[0]}`);
     }
     if (cfg.metaPixel) {
       /* Khởi tạo tối thiểu, viết tay để không kéo theo phần auto-config nặng. */
@@ -180,10 +195,37 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
     } catch { return null; }
   }
 
+  /* Trang cảm ơn: đọc đơn vừa gửi từ sessionStorage của tab này (Order.astro ghi). */
+  let lastOrder: { code?: string; pack?: string; price?: number; currency?: string; item?: string; fired?: number } | null = null;
+  if (cfg.thanks) {
+    try { lastOrder = JSON.parse(sessionStorage.getItem('mocha_last_order') ?? 'null'); } catch { /* chế độ riêng tư */ }
+  }
+
+  /* Chuyển đổi bắn MỘT lần cho mỗi đơn: tải lại trang cảm ơn hay mở thẳng URL không đếm thêm.
+     Không mang mã đơn ra ngoài — chống trùng nằm ở cờ `fired` trong tab và ở máy chủ. */
+  function conversion() {
+    if (!cfg.thanks || !lastOrder || lastOrder.fired) return;
+    lastOrder.fired = 1;
+    try { sessionStorage.setItem('mocha_last_order', JSON.stringify(lastOrder)); } catch { /* chế độ riêng tư */ }
+    const value = cfg.thanks === 'order' && Number(lastOrder.price) > 0 ? Number(lastOrder.price) : undefined;
+    const money = value ? { value, currency: lastOrder.currency || 'VND' } : {};
+    track('generate_lead', { ...money, lead_type: cfg.thanks, ...(lastOrder.pack ? { pack: lastOrder.pack } : {}) });
+    const label = cfg.thanks === 'order' ? cfg.adsOrderLabel : cfg.adsConsultLabel;
+    if (cfg.googleAds && label) track('conversion', { send_to: `${cfg.googleAds}/${label}`, ...money });
+  }
+
+  function consented() {
+    if (vendors) loadVendors();
+    if (cfg.journey) {
+      startJourney(cfg.endpoint);
+      if (cfg.thanks && lastOrder) journeyEvent('thanks', lastOrder.pack);
+    }
+  }
+
   function arm() {
-    if (!cfg.ga4 && !cfg.metaPixel && !cfg.tiktokPixel) return;
+    if (!vendors && !cfg.journey) return;
     const decided = consentDecision();
-    if (decided === 'yes') { loadVendors(); return; }
+    if (decided === 'yes') { consented(); return; }
     /* Đã từ chối thì im lặng, không hỏi lại mỗi lần tải trang. Người dùng đổi ý
        được qua link trong footer. */
     if (decided === 'no') return;
@@ -199,7 +241,7 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
           try { localStorage.setItem(CONSENT_KEY, 'yes'); } catch { /* chế độ riêng tư */ }
           bar.hidden = true;
           release();
-          loadVendors();
+          consented();
         });
         document.getElementById('consent-no')?.addEventListener('click', () => {
           try { localStorage.setItem(CONSENT_KEY, 'no'); } catch { /* chế độ riêng tư */ }
@@ -211,7 +253,7 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
     }
     /* Không chặn luồng chính. Idle callback có thể bắn ngay khi trang còn đang
        dựng nốt, nên chỉ tính từ sau sự kiện load, và vẫn ưu tiên tương tác thật. */
-    const go = () => loadVendors();
+    const go = () => consented();
     for (const ev of ['pointerdown', 'keydown']) {
       window.addEventListener(ev, go, { once: true, passive: true });
     }
@@ -226,7 +268,8 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
     else window.addEventListener('load', () => setTimeout(afterLoad, 1200), { once: true });
   }
 
-  track('view_item');
+  if (!cfg.thanks) track('view_item');
+  conversion();
   arm();
 
   /* Sự kiện từ giao diện: mọi CTA đã có data-cta, form phát mocha:lead. */
@@ -249,6 +292,9 @@ const anyConfigured = !!(config.ga4 || config.metaPixel || config.tiktokPixel);
     track('form_start');
   });
   window.addEventListener('mocha:lead', (e) => {
+    /* Sắp sang trang cảm ơn: chuyển đổi bắn ở đó (có giá trị, đúng một lần). Ở lại trang
+       (không ghi được sessionStorage) thì bắn ngay tại đây như trước. */
+    if (document.documentElement.dataset.redirecting === '1') return;
     track('generate_lead', { pack: (e as CustomEvent).detail?.pack });
   });
 

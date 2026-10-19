@@ -10,6 +10,7 @@ import PolicyPage from '../layouts/PolicyPage.astro';
 import DocsPage from '../layouts/DocsPage.astro';
 import ComboPage from '../layouts/ComboPage.astro';
 import ComboIndex from '../layouts/ComboIndex.astro';
+import ThanksPage from '../layouts/ThanksPage.astro';
 import { comboPricing } from '../lib/combos';
 import { expandBrandTokens, productBrand, resolveCompliance } from '../lib/brand';
 import { packsFor, promoNow } from '../lib/promotions';
@@ -398,5 +399,18 @@ const articlesSorted = allArticles
     canonical={canonical}
     alternates={alternates}
     fallbackOgImage={fallbackOgImage}
+  />
+)}
+
+{route.kind === 'thanks' && (
+  <ThanksPage
+    kind={route.slug as 'order' | 'consult'}
+    nav={nav}
+    policies={policies}
+    pages={topPages}
+    hasCombos={comboCards.length > 0}
+    brand={brand.data}
+    locale={locale}
+    canonical={canonical}
   />
 )}

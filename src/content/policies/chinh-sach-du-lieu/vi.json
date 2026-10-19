@@ -9,7 +9,7 @@
   },
   "title": "Chính sách bảo vệ dữ liệu cá nhân",
   "lead": "Trang này nói đúng những gì hệ thống thật sự làm với thông tin của bạn. Nếu có chỗ nào khác với thực tế, đó là lỗi của chúng tôi và xin báo lại theo thông tin liên hệ ở cuối trang.",
-  "updatedAt": "2026-09-16",
+  "updatedAt": "2026-10-16",
   "sections": [
     {
       "id": "thu-thap-gi",
@@ -35,6 +35,7 @@
       "heading": "Đo lường và quảng cáo",
       "body": [
         "Website có thể dùng công cụ đo lường của Google, Meta và TikTok để biết quảng cáo nào đưa khách tới. Các công cụ này <strong>chỉ được nạp sau khi bạn bấm đồng ý</strong> trên thanh thông báo. Nếu bạn từ chối hoặc chưa trả lời, không một mã đo lường nào của bên thứ ba được tải về máy bạn.",
+        "Nếu bạn đồng ý, website cũng ghi lại <strong>hành trình xem trang trên chính website này</strong>: bạn mở trang nào, đọc phần nội dung nào bao lâu, bấm nút nào, mở câu hỏi nào, vào lúc nào. Dữ liệu này gắn với một mã ngẫu nhiên do trình duyệt tạo ra, <strong>không kèm họ tên, số điện thoại, địa chỉ hay nội dung bạn gõ</strong>, không lưu địa chỉ IP và không chia sẻ cho bên nào. Khi bạn đặt hàng, đơn được gắn với hành trình đó để chúng tôi biết phần nào của trang giúp bạn quyết định. Hành trình tự xoá sau 90 ngày; rút lại đồng ý thì trình duyệt xoá mã ngẫu nhiên và ngừng ghi.",
         "Lựa chọn của bạn lưu trên chính trình duyệt của bạn, không gửi về máy chủ của chúng tôi. Bạn rút lại đồng ý bất cứ lúc nào bằng nút ở cuối mỗi trang.",
         "Sự kiện đo lường nội bộ chỉ mang tên gói sản phẩm, không kèm họ tên, số điện thoại hay địa chỉ."
       ]
@@ -43,7 +44,7 @@
       "id": "luu-o-dau",
       "heading": "Lưu ở đâu và trong bao lâu",
       "body": [
-        "Đơn hàng lưu trong cơ sở dữ liệu của Cloudflare, cùng hạ tầng phục vụ website này. Chỉ nhân sự xử lý đơn của Mocha mới truy cập được, thông qua một trang quản trị có mã truy cập riêng.",
+        "Đơn hàng lưu trong cơ sở dữ liệu trên máy chủ riêng phục vụ website này. Chỉ nhân sự xử lý đơn của Mocha mới truy cập được, thông qua trang quản trị có tài khoản và mật khẩu riêng.",
         "Chúng tôi giữ thông tin đơn hàng trong thời gian cần thiết để hoàn tất giao dịch và đáp ứng nghĩa vụ chứng từ kế toán theo quy định."
       ]
     },

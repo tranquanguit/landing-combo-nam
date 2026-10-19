@@ -10,34 +10,86 @@
 import { t, type Locale } from '../i18n/ui';
 import { chatEndpoint } from '../lib/order-endpoint';
 import { policyPath } from '../lib/routes';
-interface Props { locale: Locale }
-const { locale } = Astro.props;
+import type { Subject } from '../lib/engagement';
+interface Props {
+  locale: Locale;
+  /** Trang đang nói về sản phẩm / combo / dòng nào — câu hỏi gợi ý gọi đúng tên. */
+  subject?: Subject;
+  /** Lời mời chat (brand.engagement.chatInvite): hiện sau `inviteDelaySec` giây trên trang KHÔNG có popup khuyến mãi. */
+  invite?: boolean;
+  inviteDelaySec?: number;
+}
+const { locale, subject, invite = false, inviteDelaySec = 10 } = Astro.props;
 const endpoint = chatEndpoint();
+const fill = (k: string) => t(locale, k as any).replace('{name}', subject?.name ?? '');
+/* Câu hỏi gợi ý: theo sản phẩm đang xem nếu có, không thì câu chung. Câu "gửi ảnh da" luôn ở cuối bảng chat. */
+const suggestions = !subject ? [t(locale, 'chat.suggest1'), t(locale, 'chat.suggest2')]
+  : subject.kind === 'line' ? [fill('chat.askLine'), t(locale, 'chat.suggest1')]
+  : [fill('chat.askFit'), fill('chat.askHow'), fill('chat.askOffer')];
 const keys = ['title', 'status', 'greeting', 'suggest1', 'suggest2', 'suggest3', 'placeholder', 'send', 'attach', 'removeImage',
   'close', 'new', 'typing', 'retry', 'error', 'viewProduct', 'orderProduct', 'outOfStock', 'imagesSent', 'imageTooBig',
   'maxImages', 'notice', 'privacy', 'you'] as const;
 const strings = Object.fromEntries(keys.map((k) => [k, t(locale, `chat.${k}` as any)]));
-const config = JSON.stringify({ endpoint, locale, privacyUrl: policyPath('chinh-sach-du-lieu', locale), strings });
+const config = JSON.stringify({ endpoint, locale, privacyUrl: policyPath('chinh-sach-du-lieu', locale), strings, ...(subject ? { suggestions } : {}) });
 ---
 {endpoint && (
-  <div class="mchat" id="mchat" data-config={config}>
+  <div class="mchat" id="mchat" data-config={config} data-invite={invite ? inviteDelaySec : undefined}>
     <button type="button" class="mchat-fab" aria-haspopup="dialog" aria-expanded="false" aria-controls="mchat-panel">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.6a.5.5 0 0 1-.8-.4V16H6.5A2.5 2.5 0 0 1 4 13.5z" /><path d="M8.5 8.5h7M8.5 11.5h4.5" /></svg>
       <span class="mchat-fab-label">{t(locale, 'chat.open')}</span>
     </button>
     <span class="mchat-teaser" aria-hidden="true">{t(locale, 'chat.teaser')}</span>
+    {invite && (
+      <div class="mchat-invite" role="region" aria-label={t(locale, 'chat.title')} hidden>
+        <button type="button" class="mchat-invite-x" aria-label={t(locale, 'chat.inviteClose')}>×</button>
+        <p>{subject && subject.kind !== 'line' ? fill('chat.inviteProduct') : t(locale, 'chat.inviteGeneral')}</p>
+        <div class="mchat-invite-q">
+          {suggestions.map((q) => <button type="button" data-ask={q}>{q}</button>)}
+        </div>
+      </div>
+    )}
   </div>
 )}
 
 <script>
+  import { afterVisible, formTouched, hasChatted, overlayBusy, store } from '../lib/overlay';
+  import { journeyEvent } from '../lib/journey-client';
   /* Chỉ cần đủ để mở: mã giao diện tách thành chunk riêng, tải theo yêu cầu. */
   const root = document.getElementById('mchat');
   const fab = root?.querySelector<HTMLButtonElement>('.mchat-fab');
-  let app: Promise<{ toggle: () => void }> | null = null;
-  fab?.addEventListener('click', () => {
-    app ??= import('../lib/chat/client.ts').then((m) => m.mount(root!));
-    app.then((a) => a.toggle());
-  });
+  let app: Promise<{ toggle: () => void; ask: (q: string) => void }> | null = null;
+  const load = () => (app ??= import('../lib/chat/client.ts').then((m) => m.mount(root!)));
+  fab?.addEventListener('click', () => { hideInvite(); load().then((a) => a.toggle()); });
+
+  /* ---- Lời mời chat: câu hỏi gợi ý theo sản phẩm đang xem ----------------------------
+     Chỉ trên trang KHÔNG có popup khuyến mãi; mỗi phiên một lần; không khi khách đã từng chat,
+     đang điền biểu mẫu, hay đang mở lớp phủ khác (src/lib/overlay.ts). */
+  const invite = root?.querySelector<HTMLElement>('.mchat-invite');
+  function hideInvite() {
+    if (!invite || invite.hidden) return;
+    invite.hidden = true; root!.classList.remove('inviting'); root!.classList.add('seen');
+  }
+  if (root && invite) {
+    const KEY = 'mocha_chat_invite';
+    let tries = 0;
+    const show = () => {
+      if (document.getElementById('promo-pop') || store.get(KEY, true) || hasChatted() || formTouched() || root.classList.contains('is-open')) return;
+      if (overlayBusy()) { if (++tries < 4) setTimeout(show, 5000); return; }
+      store.set(KEY, '1', true);
+      invite.hidden = false; root.classList.add('inviting');
+      journeyEvent('popup', undefined, 'chat:show');
+    };
+    afterVisible(Number(root.dataset.invite ?? 10) * 1000, show);
+    addEventListener('mocha:hide-passive', hideInvite);
+    invite.addEventListener('click', (e) => {
+      const b = (e.target as Element).closest<HTMLButtonElement>('button');
+      if (!b) return;
+      hideInvite();
+      const q = b.dataset.ask;
+      if (q) { journeyEvent('popup', q, 'chat:ask'); load().then((a) => a.ask(q)); }
+      else { journeyEvent('popup', undefined, 'chat:close'); fab?.focus(); }
+    });
+  }
   /* Đã có cuộc trò chuyện dở thì nạp sẵn lúc rảnh để mở là thấy ngay. */
   try {
     if (root && localStorage.getItem('mocha-chat-v1')) {
@@ -51,15 +103,18 @@ const config = JSON.stringify({ endpoint, locale, privacyUrl: policyPath('chinh-
   .mchat {
     --mc-navy: var(--ink-navy, #1a1d52); --mc-cobalt: var(--cobalt, #2b34b8); --mc-bone: var(--bone, #f1f2f6);
     --mc-line: var(--line, #d9dce5); --mc-muted: var(--ink-muted, #5d6076);
-    position: fixed; right: 20px; bottom: calc(20px + var(--consent-h, 0px) + env(safe-area-inset-bottom));
+    position: fixed; right: 20px; bottom: calc(20px + env(safe-area-inset-bottom));
     z-index: 70; font-family: var(--font-body, system-ui, sans-serif);
   }
   /* Trang sản phẩm có thanh "Gọi tư vấn / Đặt hàng" dính đáy trên điện thoại: nổi lên trên nó. */
   @media (max-width: 899px) {
-    html:has(.sticky) .mchat { bottom: calc(76px + var(--consent-h, 0px) + env(safe-area-inset-bottom)); }
+    html:has(.sticky) .mchat { bottom: calc(76px + env(safe-area-inset-bottom)); }
     .mchat { right: 14px; }
   }
+  /* Nhường chỗ cho thanh đồng ý đo lường bằng `translate`, không bằng `bottom`: dời một phần tử
+     cố định bằng thuộc tính bố cục bị tính là dịch bố cục (CLS 0,024 trên mọi trang khi thanh hiện). */
   .mchat-fab {
+    translate: 0 calc(-1 * var(--consent-h, 0px));
     display: inline-flex; align-items: center; gap: 10px;
     height: 56px; padding: 0 20px 0 16px; border: 0; border-radius: 999px; cursor: pointer;
     background: var(--mc-navy); color: #fff; font: inherit; font-weight: 600; font-size: 15px;
@@ -77,7 +132,26 @@ const config = JSON.stringify({ endpoint, locale, privacyUrl: policyPath('chinh-
     font-size: 13px; font-weight: 600; box-shadow: 0 10px 30px -12px rgba(26, 29, 82, .45); pointer-events: none;
   }
   @media (max-width: 899px) { .mchat-teaser { display: none; } }
-  .mchat.is-open .mchat-teaser, .mchat.seen .mchat-teaser { display: none; }
+  .mchat.is-open .mchat-teaser, .mchat.seen .mchat-teaser, .mchat.inviting .mchat-teaser { display: none; }
+  .mchat-invite {
+    position: absolute; right: 0; bottom: 68px; width: min(320px, calc(100vw - 28px));
+    translate: 0 calc(-1 * var(--consent-h, 0px));
+    padding: 16px 16px 14px; border-radius: 18px 18px 6px 18px; background: #fff; color: var(--mc-navy);
+    box-shadow: 0 18px 50px -14px rgba(26, 29, 82, .5), 0 0 0 1px rgba(26, 29, 82, .06);
+  }
+  .mchat-invite[hidden] { display: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .mchat-invite:not([hidden]) { animation: mchat-in .26s cubic-bezier(.16, 1, .3, 1); }
+  }
+  .mchat-invite p { margin: 0 28px 10px 0; font-size: 14px; font-weight: 700; line-height: 1.4; }
+  .mchat-invite-x { position: absolute; top: 6px; right: 6px; width: 32px; height: 32px; border: 0; border-radius: 50%;
+    background: none; color: var(--mc-muted); font-size: 20px; line-height: 32px; padding: 0; cursor: pointer; }
+  .mchat-invite-x:hover { background: var(--mc-bone); }
+  .mchat-invite-q { display: grid; gap: 6px; }
+  .mchat-invite-q button { text-align: left; border: 1px solid var(--mc-cobalt); background: #fff; color: var(--mc-cobalt);
+    border-radius: 14px; padding: 9px 12px; font: inherit; font-size: 14px; font-weight: 600; line-height: 1.3; cursor: pointer; min-height: 40px; }
+  .mchat-invite-q button:hover { background: var(--mc-cobalt); color: #fff; }
+  .mchat.is-open .mchat-invite { display: none; }
   .mchat.is-open .mchat-fab { visibility: hidden; }
 
   /* ---------------- bảng chat (do client.ts dựng) ---------------- */

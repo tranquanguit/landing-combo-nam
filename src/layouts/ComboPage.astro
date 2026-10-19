@@ -1,5 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import PromoPopup from '../components/PromoPopup.astro';
+import { engagementOf } from '../lib/engagement';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import StickyCta from '../components/StickyCta.astro';
@@ -146,6 +148,7 @@ const jsonLd = {
   ogImageAlt={image.alt}
   alternates={alternates}
   jsonLd={jsonLd}
+  subject={{ slug: c.slug, name: c.shortName ?? c.name, kind: 'combo' }}
 >
   <SiteHeader brand={b} locale={locale} alternates={alternates} nav={nav} />
   <Breadcrumb items={breadcrumb} locale={locale} />
@@ -259,6 +262,9 @@ const jsonLd = {
 
   <SiteFooter brand={b} locale={locale} nav={nav} policies={policies} pages={pages} />
   <StickyCta brand={b} locale={locale} />
+  {promoPacks.length > 0 && engagementOf(b).promoPopup && (
+    <PromoPopup packs={promoPacks} currency="VND" locale={locale} delaySec={engagementOf(b).promoDelaySec} image={image} />
+  )}
   <Analytics locale={locale} value={c.price} currency="VND" itemId={`COMBO-${c.slug.toUpperCase()}`} itemName={c.shortName} />
 </BaseLayout>
 

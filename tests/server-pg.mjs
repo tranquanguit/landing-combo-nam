@@ -184,6 +184,110 @@ ok('Thông tin cửa hàng: không xoá được tổ chức công bố còn s�
     JSON.stringify({ a: rep2.added.length, u: rep2.updated.length, m: rep2.merged.length }));
 }
 
+/* Mã đo lường quảng cáo (Google Ads cho trang cảm ơn) nhập ở Thông tin cửa hàng. */
+{
+  r = await postStore(storeForm({ phoneDisplay: '0900 111 222', 't:googleAds': '123456789' }));
+  ok('mã đo lường: Google Ads sai dạng -> 422, không ghi', r.status === 422 && !(await brandNow()).tracking, String(r.status));
+  r = await postStore(storeForm({ phoneDisplay: '0900 111 222', 't:googleAds': 'AW-123456789', 't:googleAdsOrderLabel': 'AbC-12_xy', 't:ga4': '' }));
+  const tr = (await brandNow()).tracking;
+  ok('mã đo lường: lưu AW + nhãn chuyển đổi, bỏ ô trống', r.status === 200 && tr?.googleAds === 'AW-123456789' && tr.googleAdsOrderLabel === 'AbC-12_xy' && !('ga4' in tr), JSON.stringify(tr));
+}
+
+// ---------------------------------------------------------------- hành trình khách
+{
+  const { purgeJourney } = await import('../server/lib/journey.ts');
+  const V = `j_${'a'.repeat(22)}`, S = `j_${'b'.repeat(22)}`, S2 = `j_${'c'.repeat(22)}`;
+  const t0 = Date.now();
+  const beacon = (body, headers = {}) => app(new Request(`${H}/api/j`, {
+    method: 'POST', body: typeof body === 'string' ? body : JSON.stringify(body),
+    headers: { 'content-type': 'text/plain', origin: H, 'user-agent': 'Mozilla/5.0 (iPhone)', 'cf-connecting-ip': '203.0.113.50', ...headers },
+  }));
+  const count = async (sid) => (await sql.query('SELECT count(*)::int AS n FROM journey_events WHERE session_id = $1', [sid])).rows[0].n;
+  r = await beacon({ v: V, s: S, m: { l: 'vi', w: 390, ref: 'm.facebook.com', us: 'facebook', uc: 'nam-thang-10', ad: 'facebook', r: 0 }, e: [
+    { t: 'page', a: t0 - 60000, p: '/combo-nam/', b: 'Combo Nám' },
+    { t: 'section', a: t0 - 30000, p: '/combo-nam/', x: 'thanh-phan', b: 'Thành phần trong bộ', d: 25000 },
+    { t: 'click', a: t0 - 20000, p: '/combo-nam/', x: 'order:hero-order', b: 'Đặt mua' },
+    { t: 'form_start', a: t0 - 15000, p: '/combo-nam/' },
+    { t: 'order', a: t0 - 10000, p: '/combo-nam/', b: 'Combo' },
+    { t: 'leave', a: t0 - 9000, p: '/combo-nam/', d: 50000 },
+    { t: 'ghi-tuy-y', a: t0, p: '/combo-nam/' },
+    { t: 'click', a: t0, p: 'javascript:alert(1)' },
+  ] });
+  const ss = (await sql.query('SELECT * FROM journey_sessions WHERE session_id = $1', [S])).rows[0];
+  ok('hành trình: nhận một lô, bỏ loại lạ và đường dẫn sai', r.status === 204 && (await count(S)) === 6
+    && ss.device === 'mobile' && ss.utm_source === 'facebook' && ss.ad_click === 'facebook' && ss.page_views === 1 && Number(ss.active_ms) === 50000,
+    `${await count(S)} sự kiện · ${ss?.device} · ${ss?.utm_source}`);
+  await beacon({ v: `j_${'z'.repeat(22)}`, s: S, e: [{ t: 'page', a: t0, p: '/ghi-de/' }] });
+  ok('hành trình: mã phiên của khách khác -> không ghi vào', (await count(S)) === 6);
+  await beacon({ v: V, s: S2, e: [{ t: 'page', a: t0, p: '/' }] }, { 'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1)' });
+  ok('hành trình: bot -> bỏ', (await count(S2)) === 0);
+  r = await beacon(JSON.stringify({ v: V, s: S2, e: [{ t: 'page', a: t0, p: '/', b: 'x'.repeat(40000) }] }));
+  ok('hành trình: lô quá 32KB -> bỏ, vẫn 204', r.status === 204 && (await count(S2)) === 0, String(r.status));
+  r = await app(new Request(`${H}/api/orders`, { method: 'POST', body: JSON.stringify({ ...order, phone: '0911222333' }),
+    headers: { 'content-type': 'application/json', origin: H, 'cf-connecting-ip': '203.0.113.77', cookie: `mocha_js=${S}` } }));
+  j = await r.json();
+  const linked = (await sql.query('SELECT order_code FROM journey_sessions WHERE session_id = $1', [S])).rows[0].order_code;
+  ok('hành trình: đơn gửi kèm cookie mocha_js -> gắn mã đơn vào phiên', !!j.orderCode && linked === j.orderCode, `${j.orderCode} ↔ ${linked}`);
+
+  r = await admin('/admin/journey?days=7'); const jh = await r.text();
+  ok('trang Hành trình khách: chỉ số, phễu, khối đọc lâu, nguồn, phiên có đơn',
+    r.status === 200 && jh.includes('Phễu đặt hàng') && jh.includes('Thành phần trong bộ') && jh.includes('facebook') && jh.includes(j.orderCode), String(r.status));
+  r = await admin(`/admin/journey/session?id=${S}`); const th = await r.text();
+  ok('dòng thời gian của một phiên', r.status === 200 && th.includes('Bắt đầu điền biểu mẫu') && th.includes('25 giây') && th.includes('Gửi đơn'), String(r.status));
+  r = await admin(`/admin/orders?q=${j.orderCode}`);
+  ok('trang Đơn hàng: link “Xem hành trình” của đơn', (await r.text()).includes(`/admin/journey/session?id=${S}`));
+
+  await sql.query("UPDATE journey_events SET at = now() - interval '100 days' WHERE session_id = $1", [S]);
+  await sql.query("UPDATE journey_sessions SET last_at = now() - interval '100 days' WHERE session_id = $1", [S]);
+  await purgeJourney(sql, 90);
+  const left = (await sql.query('SELECT count(*)::int AS n FROM journey_sessions WHERE session_id = $1', [S])).rows[0].n;
+  ok('hành trình: quá 90 ngày -> xoá cả phiên lẫn sự kiện', left === 0 && (await count(S)) === 0);
+}
+
+/* "Để lại số nhanh" (khách sắp rời trang) + đơn gần đây ẩn danh + bật tắt lời mời. */
+{
+  const postJson = (body, ip) => app(new Request(`${H}/api/orders`, { method: 'POST', body: JSON.stringify(body),
+    headers: { 'content-type': 'application/json', origin: H, 'cf-connecting-ip': ip } }));
+  const lead = { quick: true, name: '', phone: '0933444555', pack: 'Gọi lại: tư vấn sản phẩm này', productSlug: 'combo-nam', locale: 'vi',
+    dataConsent: true, consentText: 'Khi nhấn Gọi lại cho tôi, tôi đồng ý…' };
+  r = await postJson(lead, '203.0.113.81'); j = await r.json();
+  const saved = (await sql.query('SELECT name, phone, pack, pack_price FROM orders WHERE order_code = $1', [j.orderCode ?? ''])).rows[0];
+  ok('để lại số nhanh: chỉ số điện thoại, không bắt tên', r.status === 200 && saved?.name === '' && saved.phone === '0933444555' && saved.pack_price === null, JSON.stringify(j));
+  r = await postJson({ ...lead, quick: false, phone: '0933444556' }, '203.0.113.82');
+  ok('không có quick -> vẫn bắt tên', r.status === 422, String(r.status));
+  r = await postJson({ ...lead, phone: '0933444557', packPrice: 1050000, address: '12 Lê Lợi, Quận 1' }, '203.0.113.83');
+  ok('quick không áp cho đơn mua có giá -> vẫn bắt tên', r.status === 422, String(r.status));
+
+  const { recentOrdersHandler, resetRecentOrdersCache } = await import('../server/lib/recent-orders.ts');
+  const recent = async () => { resetRecentOrdersCache(); return (await recentOrdersHandler(new Request(`${H}/api/recent-orders?l=vi`), sql)).text(); };
+  await sql.query("UPDATE orders SET status = 'cancelled' WHERE phone = '0912345678'");
+  let txt = await recent();
+  const items = JSON.parse(txt).items;
+  const realPaid = (await sql.query("SELECT count(*)::int AS n FROM orders WHERE status <> 'cancelled' AND pack_price > 0")).rows[0].n;
+  ok('đơn gần đây: chỉ đơn mua thật chưa huỷ, không lẫn yêu cầu tư vấn', items.length === Math.min(12, realPaid) && items.every((x) => x.name && Number.isInteger(x.ago) && x.ago % 5 === 0),
+    `${items.length} mục / ${realPaid} đơn có giá`);
+  const leak = ['0900000', '0911222333', 'Nguyễn', 'MC-', 'order', 'phone', 'created'].filter((x) => txt.includes(x));
+  ok('đơn gần đây: không lộ tên, số, mã đơn, giờ chính xác', leak.length === 0, leak.join(',') || Object.keys(items[0] ?? {}).join(','));
+  await sql.query("UPDATE orders SET status = 'cancelled'");
+  txt = await recent();
+  ok('đơn gần đây: không có đơn thật -> danh sách rỗng (không bịa)', txt === '{"items":[]}', txt);
+
+  r = await postStore(storeForm({ phoneDisplay: '0900 111 222', 't:googleAds': 'AW-123456789', 't:googleAdsOrderLabel': 'AbC-12_xy',
+    'e:present': '1', 'e:promoPopup': '1', 'e:promoDelaySec': '6', 'e:chatDelaySec': '15', 'e:exitLead': '1', 'e:recentOrdersGapSec': '30' }));
+  const eg = (await brandNow()).engagement;
+  ok('tương tác: lưu bật/tắt + số giây (ô bỏ trống = tắt)', r.status === 200 && eg?.promoPopup === true && eg.promoDelaySec === 6
+    && eg.chatInvite === false && eg.exitLead === true && eg.recentOrders === false && eg.recentOrdersGapSec === 30, JSON.stringify(eg));
+  r = await postStore(storeForm({ phoneDisplay: '0900 111 222', 'e:present': '1', 'e:recentOrders': '1', 'e:recentOrdersGapSec': '2' }));
+  ok('tương tác: khoảng cách thông báo dưới 8 giây -> 422', r.status === 422 && (await brandNow()).engagement.recentOrdersGapSec === 30, String(r.status));
+
+  const V = `j_${'d'.repeat(22)}`, S = `j_${'e'.repeat(22)}`;
+  r = await app(new Request(`${H}/api/j`, { method: 'POST', headers: { origin: H, 'user-agent': 'Mozilla/5.0 (iPhone)' },
+    body: JSON.stringify({ v: V, s: S, e: [{ t: 'page', a: Date.now(), p: '/combo-nam/' }, { t: 'popup', a: Date.now(), p: '/combo-nam/', x: 'promo:show', b: 'Combo' }] }) }));
+  const pe = (await sql.query("SELECT count(*)::int AS n FROM journey_events WHERE session_id = $1 AND type = 'popup'", [S])).rows[0].n;
+  r = await admin('/admin/journey?days=7'); const jh2 = await r.text();
+  ok('hành trình: ghi sự kiện popup, trang quản trị có thẻ “Popup & lời mời”', pe === 1 && jh2.includes('Popup &amp; lời mời') && /Popup khuyến mãi<\/td><td>Hiện: <b>1/.test(jh2), `${pe}`);
+}
+
 r = await admin('/admin/users');
 ok('biên tập viên không vào được trang tài khoản', r.status === 403, String(r.status));
 

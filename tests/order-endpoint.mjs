@@ -44,7 +44,7 @@ const api = createServer((req, res) => {
     if (req.method === 'OPTIONS') return res.writeHead(204).end();
     received.push({ method: req.method, body });
     if (mode === 'fail') return res.writeHead(500).end('{"error":"boom"}');
-    res.writeHead(200, { 'Content-Type': 'application/json' }).end('{"ok":true}');
+    res.writeHead(200, { 'Content-Type': 'application/json' }).end('{"ok":true,"orderCode":"MC-THU-0001"}');
   });
 });
 
@@ -121,6 +121,14 @@ async function fillAndSubmit(page) {
   await page.waitForTimeout(900);
 }
 
+/* Gửi thành công = sang TRANG CẢM ƠN (mốc chuyển đổi cho quảng cáo), URL không mang mã đơn. */
+const THANKS = '/dat-hang-thanh-cong/';
+async function onThanks(page) {
+  await page.waitForURL((u) => u.pathname === THANKS, { timeout: 4000 }).catch(() => {});
+  const u = new URL(page.url());
+  return u.pathname === THANKS && !u.search && (await page.locator('main.thanks h1').isVisible());
+}
+
 // --- 1. Gửi thành công -------------------------------------------------
 {
   mode = 'ok';
@@ -135,8 +143,7 @@ async function fillAndSubmit(page) {
       received[0].method === 'POST' &&
       payload?.phone === '0912345678' &&
       payload?.name === 'Nguyễn Thu Hà' &&
-      (await page.locator('#form-success').isVisible()) &&
-      !(await page.locator('#order-form').isVisible()),
+      (await onThanks(page)),
     `${received.length} POST, trường gửi đi: ${payload ? Object.keys(payload).join(',') : '—'}`,
   ]);
   await page.close();
@@ -217,8 +224,7 @@ async function fillAndSubmit(page) {
   const errorShown = await page.locator('#form-error').isVisible();
   mode = 'ok';
   await page.click('#order-form button[type=submit]');
-  await page.waitForTimeout(900);
-  const successNow = await page.locator('#form-success').isVisible();
+  const successNow = await onThanks(page);
   const errorStill = await page.locator('#form-error').isVisible();
   results.push([
     'lỗi rồi gửi lại được',
@@ -228,15 +234,81 @@ async function fillAndSubmit(page) {
   await page.close();
 }
 
-// --- 5. Focus sau khi gửi thành công -----------------------------------
+// --- 5. Không ghi được sessionStorage: ở lại trang, focus sang thông báo --
+/* Chế độ riêng tư chặt chặn storage: không sang trang cảm ơn (không có gì để hiện mã đơn),
+   mà báo ngay trên trang như trước, kèm mã đơn, và đưa focus tới đó. */
 {
   mode = 'ok';
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await page.addInitScript(() => { Storage.prototype.setItem = () => { throw new Error('chặn'); }; });
   await page.goto(`http://localhost:${PAGE_PORT}/combo-nam/`, { waitUntil: 'networkidle' });
   await fillAndSubmit(page);
   const focused = await page.evaluate(() => document.activeElement?.id || document.activeElement?.tagName);
-  results.push(['focus chuyển sang thông báo', focused === 'form-success', `activeElement: ${focused}`]);
+  const stayed = new URL(page.url()).pathname === '/combo-nam/';
+  const code = await page.locator('#order-code').innerText().catch(() => '');
+  results.push(['không có storage: ở lại, focus thông báo', stayed && focused === 'form-success' && code === 'MC-THU-0001',
+    `ở lại: ${stayed}, activeElement: ${focused}, mã: ${code}`]);
   await page.close();
+}
+
+// --- 6. Trang cảm ơn: hiện mã đơn + gói, chuyển đổi bắn ĐÚNG MỘT lần ---------
+{
+  mode = 'ok';
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  /* Ghi lại mọi sự kiện đo lường của từng lần tải trang vào sessionStorage (sống qua chuyển trang). */
+  await page.addInitScript(() => {
+    addEventListener('mocha:event', (e) => {
+      const k = '__ev'; const a = JSON.parse(sessionStorage.getItem(k) ?? '[]');
+      a.push({ name: e.detail.name, path: location.pathname, value: e.detail.params?.value });
+      sessionStorage.setItem(k, JSON.stringify(a));
+    });
+  });
+  await page.goto(`http://localhost:${PAGE_PORT}/combo-nam/`, { waitUntil: 'networkidle' });
+  const price = await page.evaluate(() => Number(document.querySelector('input[name="pack"]:checked')?.dataset.price || 0));
+  await fillAndSubmit(page);
+  const arrived = await onThanks(page);
+  const code = await page.locator('#thanks-code').innerText().catch(() => '');
+  const pack = await page.locator('#thanks-pack').innerText().catch(() => '');
+  await page.reload({ waitUntil: 'networkidle' });
+  const ev = await page.evaluate(() => JSON.parse(sessionStorage.getItem('__ev') ?? '[]'));
+  const leads = ev.filter((x) => x.name === 'generate_lead');
+  results.push(['trang cảm ơn: mã đơn, gói, một chuyển đổi',
+    arrived && code === 'MC-THU-0001' && pack.includes('Combo') && leads.length === 1 && leads[0].path === THANKS && leads[0].value === price,
+    `tới: ${arrived}, mã: ${code}, gói: ${pack.slice(0, 30)}, generate_lead: ${leads.map((x) => `${x.path}=${x.value}`).join(' ')} (giá gói ${price})`]);
+  await page.close();
+}
+
+// --- 6b. Khách sắp rời (điện thoại, vuốt ngược lên nhanh) -> để lại số -> trang cảm ơn tư vấn --
+/* Đồng hồ giả: "12 giây xem thật" trôi trong tích tắc. Gửi về đúng đường nhận đơn với quick:true,
+   không tên; sang /da-nhan-yeu-cau-tu-van/ có mã đơn. */
+{
+  mode = 'ok';
+  received.length = 0;
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+  const page = await ctx.newPage();
+  await page.clock.install();
+  await page.goto(`http://localhost:${PAGE_PORT}/combo-nam/`, { waitUntil: 'networkidle' });
+  const hasDialog = (await page.locator('#exit-lead').count()) === 1;
+  await page.clock.fastForward(13_000);
+  /* Cuộn tức thì (trang bật scroll-behavior: smooth — lệnh cuộn bằng mã sẽ thành hoạt ảnh chậm). */
+  await page.evaluate(() => scrollTo({ top: 2400, behavior: 'instant' }));
+  await page.waitForTimeout(200);
+  for (let i = 0; i < 4; i++) { await page.evaluate(() => scrollBy({ top: -150, behavior: 'instant' })); await page.waitForTimeout(30); }
+  const opened = await page.locator('#exit-lead').evaluate((d) => d.open).catch(() => false);
+  let body = {}; let path = ''; let code = '';
+  if (opened) {
+    await page.fill('#exit-phone', '0912 000 111');
+    await page.click('#exit-form button[type=submit]');
+    await page.waitForURL((u) => u.pathname === '/da-nhan-yeu-cau-tu-van/', { timeout: 5000 }).catch(() => {});
+    try { body = JSON.parse(received[0]?.body ?? '{}'); } catch { /* báo hỏng bên dưới */ }
+    path = new URL(page.url()).pathname;
+    code = await page.locator('#thanks-code').innerText().catch(() => '');
+  }
+  results.push(['sắp rời: để lại số -> cảm ơn',
+    hasDialog && opened && received.length === 1 && body.quick === true && body.name === '' && body.phone === '0912000111'
+      && !!body.consentText && path === '/da-nhan-yeu-cau-tu-van/' && code === 'MC-THU-0001',
+    `có hộp=${hasDialog} · mở=${opened} · ${received.length} POST · quick=${body.quick} · ${path} · mã=${code}`]);
+  await ctx.close();
 }
 
 // --- 7. Gói "chỉ cần tư vấn" không bắt nhập địa chỉ giao hàng ----------
@@ -263,9 +335,11 @@ async function fillAndSubmit(page) {
   /* Sự kiện `mocha:lead` chỉ được mang gói hàng, KHÔNG mang tên/điện thoại/địa
      chỉ: pixel quảng cáo chạy cùng trang và bất kỳ script nào cũng nghe được.
      Kiểm định lần 14: thêm ba trường đó vào lại thì cả 8 kịch bản vẫn xanh. */
+  /* Trang chuyển sang trang cảm ơn ngay sau sự kiện, nên chép chi tiết vào sessionStorage
+     (sống qua chuyển trang trong cùng tab) rồi đọc ở trang sau. */
   await page.evaluate(() => {
-    window.__leadDetail = null;
-    window.addEventListener('mocha:lead', (e) => { window.__leadDetail = e.detail; });
+    sessionStorage.removeItem('__lead');
+    window.addEventListener('mocha:lead', (e) => { sessionStorage.setItem('__lead', JSON.stringify(e.detail)); });
   });
 
   await page.fill('#name', 'Nguyễn Thu Hà');
@@ -275,7 +349,7 @@ async function fillAndSubmit(page) {
   const sent = received.length === 1 && !received[0].address;
 
   const leak = await page.evaluate(() => {
-    const d = window.__leadDetail;
+    const d = JSON.parse(sessionStorage.getItem('__lead') ?? 'null');
     if (!d) return 'không có sự kiện';
     const extra = Object.keys(d).filter((k) => k !== 'pack');
     return extra.length ? `rò trường: ${extra.join(', ')}` : '';
@@ -361,10 +435,7 @@ async function fillAndSubmit(page) {
     formUsable = false;
   }
 
-  const success = await page.evaluate(() => {
-    const el = document.getElementById('form-success');
-    return !!el && !el.hidden;
-  });
+  const success = formUsable && await onThanks(page);
   results.push([
     'gửi đơn dưới CSP',
     formUsable && received.length === 1 && success && violations.length === 0 && originAllowed,

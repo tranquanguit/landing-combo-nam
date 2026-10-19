@@ -54,6 +54,7 @@ function groups(v: Viewer): { title: string; items: Item[] }[] {
     { title: 'Bán hàng', items: [
       { key: 'orders', href: '/admin/orders', label: 'Đơn hàng', badge: v.badges?.orders },
       { key: 'promotions', href: '/admin/promotions', label: 'Khuyến mãi', badge: v.badges?.promoLive },
+      { key: 'journey', href: '/admin/journey', label: 'Hành trình khách' },
     ] },
     { title: 'Nội dung', items: [
       ...['products', 'combos', 'lines', 'documents', 'testimonials', 'articles', 'guides', 'policies', 'pages']

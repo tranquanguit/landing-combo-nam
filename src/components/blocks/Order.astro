@@ -3,6 +3,7 @@ import { money } from '../../lib/format';
 import { t, type Locale } from '../../i18n/ui';
 import { richText } from '../../lib/richtext';
 import { orderEndpoint } from '../../lib/order-endpoint';
+import { thanksPath } from '../../lib/routes';
 interface Props {
   data: any; product: any; brand: any; locale: Locale;
   /** 'consult' = biểu mẫu nhận tư vấn (trang Liên hệ): không ô địa chỉ, nút và câu đồng ý nói đúng việc gọi lại. */
@@ -84,6 +85,9 @@ const wasOf = (v: any) => v.promo?.regular
         method={canOrder ? 'post' : undefined}
         data-endpoint={canOrder ? 'configured' : 'missing'}
         data-action={canOrder ? endpoint : undefined}
+        data-thanks={canOrder ? thanksPath(consult ? 'consult' : 'order', locale) : undefined}
+        data-item={canOrder && !consult ? (p.shortName ?? p.name) : undefined}
+        data-currency={canOrder ? (p.currency ?? 'VND') : undefined}
       >
         {p.variants.length > 0 && (
           <fieldset>
@@ -340,6 +344,8 @@ const wasOf = (v: any) => v.promo?.regular
   if (form) {
     /* Gắn novalidate bằng JS: bản không-JS giữ được kiểm tra của trình duyệt. */
     form.setAttribute('novalidate', '');
+    /* Khách đã bắt đầu điền: các lời mời (popup, "để lại số") không chen vào nữa — src/lib/overlay.ts. */
+    form.addEventListener('input', () => { document.documentElement.dataset.formTouched = '1'; }, { once: true });
     /* Chấp nhận cả 0912345678, +84912345678 và 84912345678 — khách hay dán
        số ở định dạng quốc tế từ Zalo. Chuẩn hóa về dạng 0xxxxxxxxx rồi mới kiểm. */
     /* CSS scroll-behavior đã tôn trọng prefers-reduced-motion, nhưng lệnh JS thì không. */
@@ -511,7 +517,29 @@ const wasOf = (v: any) => v.promo?.regular
          phát nó ra là tự mở một đường nối người xem với một đơn hàng.
          Chống trùng chuyển đổi làm ở PHÍA MÁY CHỦ, nơi `order_code` đã có sẵn
          trong bảng orders và không phải đi qua trình duyệt. */
+      /* Trang cảm ơn = mốc chuyển đổi cho quảng cáo. Mã đơn đi qua sessionStorage của CHÍNH
+         tab này, không qua URL: URL lọt vào lịch sử trình duyệt, Referer và báo cáo của bên đo
+         lường. Không ghi được storage (chế độ riêng tư chặt) thì ở lại với thông báo ngay trên
+         trang ở trên — khách vẫn thấy mã đơn, chỉ là quảng cáo không đếm được lượt này. */
+      const thanks = form.dataset.thanks;
+      let redirect = false;
+      if (thanks) {
+        try {
+          sessionStorage.setItem('mocha_last_order', JSON.stringify({
+            code: typeof data.orderCode === 'string' ? data.orderCode : '',
+            pack: String(payload.pack ?? ''),
+            price: Number(payload.packPrice) || 0,
+            currency: form.dataset.currency || 'VND',
+            item: form.dataset.item || '',
+            at: Date.now(),
+          }));
+          redirect = true;
+        } catch { /* ở lại trang */ }
+      }
+      /* Lớp đo lường đọc cờ này: sắp sang trang cảm ơn thì chuyển đổi bắn ở ĐÓ, một lần. */
+      if (redirect) document.documentElement.dataset.redirecting = '1';
       window.dispatchEvent(new CustomEvent('mocha:lead', { detail: { pack: payload.pack } }));
+      if (redirect) location.assign(thanks!);
         })
         .catch(() => {
           /* Gửi hỏng thì nói thật và đưa lối liên hệ khác, không nuốt lỗi. */

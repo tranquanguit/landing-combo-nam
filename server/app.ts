@@ -6,6 +6,8 @@
  *   /api/chat            chat — kịch bản hoặc webhook n8n (server/lib/chat.ts)
  *   /api/chat/event      sự kiện trong khung chat (mở, bấm thẻ, bấm đặt hàng) cho phân tích
  *   /api/admin/chats     xuất lịch sử chat (NDJSON) bằng Bearer ADMIN_TOKEN
+ *   /api/j               hành trình khách (server/lib/journey.ts)
+ *   /api/recent-orders   đơn thật gần đây, ẩn danh, cho thông báo góc trái (server/lib/recent-orders.ts)
  *   /admin/*             trang nhập liệu + đơn hàng + xuất bản (đăng nhập bằng tài khoản)
  *   /healthz             kiểm tra sống + CSDL
  *   mọi đường dẫn khác   file tĩnh trong dist/ với header bảo mật của public/_headers
@@ -20,6 +22,8 @@ import { createStatic } from './lib/static.ts';
 import { adminHandler } from './admin/app.ts';
 import { currentSite } from './lib/publish.ts';
 import { chatHandler, chatEventHandler, linkOrderToChat } from './lib/chat.ts';
+import { journeyHandler, linkOrderToJourney } from './lib/journey.ts';
+import { recentOrdersHandler } from './lib/recent-orders.ts';
 import { chatExportHandler } from './lib/chat-analytics.ts';
 import { annotatePromoOrder } from './lib/promo-server.ts';
 import { onRequest as ordersHandler } from '../functions/api/orders.ts';
@@ -67,6 +71,7 @@ export function createApp(opts: AppOptions) {
           const body = await res.clone().json().catch(() => null) as { orderCode?: string; deduped?: boolean } | null;
           if (body?.orderCode && !body.deduped) {
             await linkOrderToChat(sql, request, body.orderCode).catch((e) => console.error('chat_link_order_failed', (e as Error).message.slice(0, 120)));
+            await linkOrderToJourney(sql, request, body.orderCode).catch((e) => console.error('journey_link_order_failed', (e as Error).message.slice(0, 120)));
             let sent: any = null; try { sent = JSON.parse(raw); } catch { /* biểu mẫu luôn gửi JSON */ }
             if (sent) await annotatePromoOrder(sql, body.orderCode, sent).catch((e) => console.error('promo_annotate_failed', (e as Error).message.slice(0, 120)));
           }
@@ -76,6 +81,8 @@ export function createApp(opts: AppOptions) {
       if (pathname === '/api/admin/orders') return await adminOrdersHandler(ctx(request) as any);
       if (pathname === '/api/chat') return await chatHandler(request, sql, root, env as any, opts.fetch);
       if (pathname === '/api/chat/event') return await chatEventHandler(request, sql, env as any);
+      if (pathname === '/api/j') return await journeyHandler(request, sql, env as any);
+      if (pathname === '/api/recent-orders') return await recentOrdersHandler(request, sql);
       if (pathname === '/api/admin/chats') return await chatExportHandler(request, sql, env as any);
       if (isAdmin) return await adminHandler(request, { sql, root, env: env as any, fetch: opts.fetch });
       if (pathname === '/healthz') {

@@ -61,6 +61,8 @@ const urlOf = (file) => {
 const INTERNAL = [
   '404.html',        // trang lỗi
   'kien-truc/',      // tài liệu kiến trúc repo, cho người làm site
+  /* Trang cảm ơn sau khi gửi biểu mẫu: mốc chuyển đổi quảng cáo, không phải nội dung để tìm. */
+  'dat-hang-thanh-cong/', 'da-nhan-yeu-cau-tu-van/', 'en/order-received/', 'en/request-received/',
 ];
 const relOf = (file) => path.relative(DIST, file).split(path.sep).join('/');
 const isInternal = (file) => {
