@@ -41,5 +41,14 @@
       "name": "",
       "address": ""
     }
-  ]
+  ],
+  "engagement": {
+    "promoPopup": true,
+    "promoDelaySec": 4,
+    "chatInvite": true,
+    "chatDelaySec": 2,
+    "exitLead": true,
+    "recentOrders": true,
+    "recentOrdersGapSec": 20
+  }
 }
